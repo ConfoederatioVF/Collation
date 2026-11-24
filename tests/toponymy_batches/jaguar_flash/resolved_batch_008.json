@@ -1,0 +1,1453 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 8,
+  "count": 30,
+  "errors_remaining": 0,
+  "project": "JAGUAR",
+  "rounds": 1,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        22.14979,
+        -80.19908
+      ],
+      "country": "Cuba",
+      "earliest_year": 1808,
+      "existing_historical_names": [
+        {
+          "date": "1967.1.1",
+          "name": "Cumanayagua"
+        }
+      ],
+      "existing_meta_index": 3332,
+      "existing_meta_name": "Cumanayagua",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cumanayagua-Cuba",
+      "known_aliases": [
+        "Cumanayagua",
+        "cumanayagua"
+      ],
+      "latest_year": 2022,
+      "max_pop": 51289,
+      "name": "Cumanayagua",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1808,
+        1821,
+        1850,
+        1900,
+        2002,
+        2012,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Cumanayagua",
+      "historical_names": [
+        {
+          "date": "1808.1.1",
+          "name": "Cumanayagua"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        8.99424,
+        -79.66541
+      ],
+      "country": "Panama",
+      "earliest_year": 2010,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Burunga-Panama",
+      "known_aliases": [
+        "Burunga",
+        "burunga"
+      ],
+      "latest_year": 2023,
+      "max_pop": 51167,
+      "name": "Burunga",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2010,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Burunga",
+      "historical_names": [
+        {
+          "date": "2010.1.1",
+          "name": "Burunga"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.64195,
+        -86.49119
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1920.1.1",
+          "name": "Ocotal"
+        }
+      ],
+      "existing_meta_index": 2519,
+      "existing_meta_name": "Ocotal",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ocotal-Nicaragua",
+      "known_aliases": [
+        "Ocotal",
+        "ocotal"
+      ],
+      "latest_year": 2023,
+      "max_pop": 51067,
+      "name": "Ocotal",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Ocotal",
+      "historical_names": [
+        {
+          "date": "1543.1.1",
+          "name": "Nueva Segovia"
+        },
+        {
+          "date": "1847.5.14",
+          "name": "Ocotal"
+        }
+      ],
+      "other_names": [
+        "El Ocotal",
+        "Nueva Reducción de Segovia",
+        "Nueva Segovia"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        17.94882,
+        -94.91387
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Acayucan"
+        }
+      ],
+      "existing_meta_index": 2257,
+      "existing_meta_name": "Acayucan",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Acayucan-Mexico",
+      "known_aliases": [
+        "Acayucan",
+        "acayucan",
+        "los laureles",
+        "Los Laureles"
+      ],
+      "latest_year": 2020,
+      "max_pop": 50934,
+      "name": "Acayucan",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Acayucan",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Acayucan"
+        }
+      ],
+      "other_names": [
+        "Acayocan",
+        "San Martín Acayucan"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.28806,
+        -87.30972
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Marcovia-Honduras",
+      "known_aliases": [
+        "Marcovia",
+        "marcovia"
+      ],
+      "latest_year": 2024,
+      "max_pop": 50134,
+      "name": "Marcovia",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Marcovia",
+      "historical_names": [
+        {
+          "date": "1882.1.1",
+          "name": "Marcovia"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.58897,
+        -102.47468
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Los Reyes de Salgado"
+        }
+      ],
+      "existing_meta_index": 2276,
+      "existing_meta_name": "Los Reyes de Salgado",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Reyes de Salgado-Mexico",
+      "known_aliases": [
+        "Los Reyes de Salgado",
+        "los reyes de salgado"
+      ],
+      "latest_year": 2020,
+      "max_pop": 49940,
+      "name": "Los Reyes de Salgado",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Los Reyes",
+          "year": 1900
+        },
+        {
+          "name": "Los Reyes de Salgado",
+          "year": 1909
+        }
+      ],
+      "canonical_name": "Los Reyes de Salgado",
+      "historical_names": [
+        {
+          "date": "1594.5.12",
+          "name": "Los Reyes"
+        },
+        {
+          "date": "1909.1.1",
+          "name": "Los Reyes de Salgado"
+        }
+      ],
+      "other_names": [
+        "Los Reyes"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.1129,
+        -84.18588
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Cruz de Río Grande-Nicaragua",
+      "known_aliases": [
+        "La Cruz de Río Grande",
+        "la cruz de río grande"
+      ],
+      "latest_year": 2023,
+      "max_pop": 49445,
+      "name": "La Cruz de Río Grande",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "La Cruz de Río Grande",
+      "historical_names": [
+        {
+          "date": "1995.1.1",
+          "name": "La Cruz de Río Grande"
+        }
+      ],
+      "other_names": [
+        "La Cruz"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        20.54806,
+        -103.46833
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1900.10.28",
+          "name": "San Agustín"
+        }
+      ],
+      "existing_meta_index": 2308,
+      "existing_meta_name": "San Agustín",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Agustín-Mexico",
+      "known_aliases": [
+        "San Agustín",
+        "san agustín",
+        "san agustin"
+      ],
+      "latest_year": 2020,
+      "max_pop": 49402,
+      "name": "San Agustín",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "San Agustín",
+          "year": 1900
+        },
+        {
+          "name": "Nicolás R. Casillas",
+          "year": 1950
+        }
+      ],
+      "canonical_name": "San Agustín",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "San Agustín"
+        },
+        {
+          "date": "1941.1.1",
+          "name": "Nicolás R. Casillas"
+        },
+        {
+          "date": "1996.12.14",
+          "name": "San Agustín"
+        }
+      ],
+      "other_names": [
+        "Nicolás R. Casillas",
+        "San Agustin"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        20.90981,
+        -77.28454
+      ],
+      "country": "Cuba",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1967.1.1",
+          "name": "Jobabo"
+        }
+      ],
+      "existing_meta_index": 3335,
+      "existing_meta_name": "Jobabo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Jobabo-Cuba",
+      "known_aliases": [
+        "Jobabo",
+        "jobabo"
+      ],
+      "latest_year": 2022,
+      "max_pop": 49372,
+      "name": "Jobabo",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1570,
+        1742,
+        1850,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Jobabo",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Jobabo"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.64,
+        -86.26
+      ],
+      "country": "Honduras",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1967.1.1",
+          "name": "Sonaguera"
+        }
+      ],
+      "existing_meta_index": 3345,
+      "existing_meta_name": "Sonaguera",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sonaguera-Honduras",
+      "known_aliases": [
+        "Sonaguera",
+        "sonaguera"
+      ],
+      "latest_year": 2024,
+      "max_pop": 48601,
+      "name": "Sonaguera",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Sonaguera",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Sonaguera"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        21.44369,
+        -104.89974
+      ],
+      "country": "Mexico",
+      "earliest_year": 1350,
+      "existing_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Xalisco"
+        }
+      ],
+      "existing_meta_index": 559,
+      "existing_meta_name": "Xalisco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Xalisco-Mexico",
+      "known_aliases": [
+        "Xalisco",
+        "xalisco"
+      ],
+      "latest_year": 2020,
+      "max_pop": 48170,
+      "name": "Xalisco",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1350,
+        1921,
+        1980,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Jalisco",
+          "year": 1900
+        },
+        {
+          "name": "Xalisco",
+          "year": 1980
+        }
+      ],
+      "canonical_name": "Xalisco",
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Xalisco"
+        }
+      ],
+      "other_names": [
+        "Jalisco",
+        "Xalixco"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.86238,
+        -72.99077
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Abricots-Haiti",
+      "known_aliases": [
+        "Abricots",
+        "abricots"
+      ],
+      "latest_year": 2024,
+      "max_pop": 47470,
+      "name": "Abricots",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Abricots",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Abricots"
+        }
+      ],
+      "other_names": [
+        "Les Abricots"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.26937,
+        -72.66702
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Vallée-Haiti",
+      "known_aliases": [
+        "La Vallée",
+        "la vallée"
+      ],
+      "latest_year": 2024,
+      "max_pop": 47372,
+      "name": "La Vallée",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "La Vallée",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "La Vallée"
+        }
+      ],
+      "other_names": [
+        "La Vallée-de-Jacmel",
+        "La Vallée de Jacmel"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.97062,
+        -71.99625
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Savanette-Haiti",
+      "known_aliases": [
+        "Savanette",
+        "savanette"
+      ],
+      "latest_year": 2024,
+      "max_pop": 46902,
+      "name": "Savanette",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Savanette",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Savanette"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        8.89318,
+        -79.69385
+      ],
+      "country": "Panama",
+      "earliest_year": 2023,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Vacamonte-Panama",
+      "known_aliases": [
+        "Vacamonte",
+        "vacamonte"
+      ],
+      "latest_year": 2023,
+      "max_pop": 46597,
+      "name": "Vacamonte",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Vacamonte",
+      "historical_names": [
+        {
+          "date": "2023.1.1",
+          "name": "Vacamonte"
+        }
+      ],
+      "other_names": [
+        "Puerto Vacamonte"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.38564,
+        -70.62739
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Puñal-Dominican Republic",
+      "known_aliases": [
+        "Puñal",
+        "puñal"
+      ],
+      "latest_year": 2022,
+      "max_pop": 46516,
+      "name": "Puñal",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Puñal",
+      "historical_names": [
+        {
+          "date": "2002.1.1",
+          "name": "Puñal"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.21657,
+        -71.85423
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Thiotte-Haiti",
+      "known_aliases": [
+        "Thiotte",
+        "thiotte"
+      ],
+      "latest_year": 2024,
+      "max_pop": 46178,
+      "name": "Thiotte",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Thiotte",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Thiotte"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        22.90459,
+        -83.16603
+      ],
+      "country": "Cuba",
+      "earliest_year": 1790,
+      "existing_historical_names": [
+        {
+          "date": "1899.1.1",
+          "name": "Bahia Honda"
+        }
+      ],
+      "existing_meta_index": 2214,
+      "existing_meta_name": "Bahia Honda",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Bahía Honda-Cuba",
+      "known_aliases": [
+        "Bahía Honda",
+        "bahía honda",
+        "bahiahonda"
+      ],
+      "latest_year": 2022,
+      "max_pop": 46105,
+      "name": "Bahía Honda",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1790,
+        1808,
+        1821,
+        1850,
+        1900,
+        2002,
+        2012,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Bahía Honda",
+      "historical_names": [
+        {
+          "date": "1790.1.1",
+          "name": "Bahía Honda"
+        }
+      ],
+      "other_names": [
+        "Bahia Honda"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        17.06412,
+        -96.69468
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Santa Lucia del Camino"
+        }
+      ],
+      "existing_meta_index": 3082,
+      "existing_meta_name": "Santa Lucia del Camino",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Lucía del Camino-Mexico",
+      "known_aliases": [
+        "Santa Lucía del Camino",
+        "santa lucía del camino",
+        "santa cruz amilpas",
+        "santa lucia del camino",
+        "Santa Cruz Amilpas"
+      ],
+      "latest_year": 2020,
+      "max_pop": 45895,
+      "name": "Santa Lucía del Camino",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Santa Lucia del Camino",
+          "year": 1900
+        },
+        {
+          "name": "Santa Lucía del Camino",
+          "year": 2003
+        }
+      ],
+      "canonical_name": "Santa Lucía del Camino",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Santa Lucía del Camino"
+        }
+      ],
+      "other_names": [
+        "Santa Lucia del Camino"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.38398,
+        -73.41435
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "L'Asile-Haiti",
+      "known_aliases": [
+        "L'Asile",
+        "l'asile"
+      ],
+      "latest_year": 2024,
+      "max_pop": 45890,
+      "name": "L'Asile",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "L'Asile",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "L'Asile"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.21615,
+        -98.24023
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zacatelco-Mexico",
+      "known_aliases": [
+        "Zacatelco",
+        "zacatelco",
+        "san lorenzo axocomanitla",
+        "San Lorenzo Axocomanitla"
+      ],
+      "latest_year": 2020,
+      "max_pop": 45587,
+      "name": "Zacatelco",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Zacatelco",
+          "year": 1900
+        },
+        {
+          "name": "Santa Inés Zacatelco",
+          "year": 1910
+        }
+      ],
+      "canonical_name": "Zacatelco",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Zacatelco"
+        }
+      ],
+      "other_names": [
+        "Santa Inés Zacatelco"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        22.29172,
+        -83.87086
+      ],
+      "country": "Cuba",
+      "earliest_year": 1790,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "San Juan y Martínez"
+        }
+      ],
+      "existing_meta_index": 3049,
+      "existing_meta_name": "San Juan y Martínez",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan y Martínez-Cuba",
+      "known_aliases": [
+        "San Juan y Martínez",
+        "san juan y martínez",
+        "san juan y martinez"
+      ],
+      "latest_year": 2022,
+      "max_pop": 44898,
+      "name": "San Juan y Martínez",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1790,
+        1808,
+        1821,
+        1850,
+        1900,
+        2002,
+        2012,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Juan y Martínez",
+      "historical_names": [
+        {
+          "date": "1790.1.1",
+          "name": "San Juan y Martínez"
+        }
+      ],
+      "other_names": [
+        "San Juan y Martinez"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.30307,
+        -72.60965
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "L'Estère-Haiti",
+      "known_aliases": [
+        "L'Estère",
+        "l'estère"
+      ],
+      "latest_year": 2024,
+      "max_pop": 44802,
+      "name": "L'Estère",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "L'Estère",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "L'Estère"
+        }
+      ],
+      "other_names": [
+        "L'Estere"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        22.97657,
+        -82.81569
+      ],
+      "country": "Cuba",
+      "earliest_year": 1808,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Mariel"
+        }
+      ],
+      "existing_meta_index": 2940,
+      "existing_meta_name": "Mariel",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mariel-Cuba",
+      "known_aliases": [
+        "Mariel",
+        "mariel"
+      ],
+      "latest_year": 2022,
+      "max_pop": 44480,
+      "name": "Mariel",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1808,
+        1821,
+        1850,
+        1900,
+        2002,
+        2012,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Mariel",
+      "historical_names": [
+        {
+          "date": "1808.1.1",
+          "name": "Mariel"
+        }
+      ],
+      "other_names": [
+        "El Mariel"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.33333,
+        -71.08333
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San José de las Matas-Dominican Republic",
+      "known_aliases": [
+        "San José de las Matas",
+        "san josé de las matas"
+      ],
+      "latest_year": 2022,
+      "max_pop": 44475,
+      "name": "San José de las Matas",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San José de las Matas",
+      "historical_names": [
+        {
+          "date": "1810.1.1",
+          "name": "San José de las Matas"
+        }
+      ],
+      "other_names": [
+        "Sajoma"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        21.28258,
+        -89.6636
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Progreso"
+        }
+      ],
+      "existing_meta_index": 2284,
+      "existing_meta_name": "Progreso",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Progreso-Mexico",
+      "known_aliases": [
+        "Progreso",
+        "progreso"
+      ],
+      "latest_year": 2020,
+      "max_pop": 44354,
+      "name": "Progreso",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        -300,
+        1877,
+        1970,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Progreso",
+      "historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Chicxulub"
+        },
+        {
+          "date": "1871.7.1",
+          "name": "Progreso"
+        }
+      ],
+      "other_names": [
+        "Progreso de Castro",
+        "Chicxulub",
+        "Chicxulub Puerto"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.67707,
+        -72.26969
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Plaine du Nord-Haiti",
+      "known_aliases": [
+        "Plaine du Nord",
+        "plaine du nord"
+      ],
+      "latest_year": 2024,
+      "max_pop": 43982,
+      "name": "Plaine du Nord",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Plaine du Nord",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Plaine du Nord"
+        }
+      ],
+      "other_names": [
+        "Plaine-du-Nord"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        12.72461,
+        -85.79529
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Castillo-Nicaragua",
+      "known_aliases": [
+        "El Castillo",
+        "el castillo"
+      ],
+      "latest_year": 2023,
+      "max_pop": 43365,
+      "name": "El Castillo",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "El Castillo",
+      "historical_names": [
+        {
+          "date": "1995.1.1",
+          "name": "El Castillo"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.23695,
+        -85.55817
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rancho Grande-Nicaragua",
+      "known_aliases": [
+        "Rancho Grande",
+        "rancho grande"
+      ],
+      "latest_year": 2023,
+      "max_pop": 43352,
+      "name": "Rancho Grande",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Rancho Grande",
+      "historical_names": [
+        {
+          "date": "1995.1.1",
+          "name": "Rancho Grande"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        20.43179,
+        -101.72504
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Pénjamo"
+        }
+      ],
+      "existing_meta_index": 2286,
+      "existing_meta_name": "Pénjamo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pénjamo-Mexico",
+      "known_aliases": [
+        "Pénjamo",
+        "pénjamo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 43249,
+      "name": "Pénjamo",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Pénjamo",
+      "historical_names": [
+        {
+          "date": "1542.11.12",
+          "name": "Pénjamo"
+        }
+      ],
+      "other_names": [
+        "Penxamo",
+        "San Francisco de Pénjamo"
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

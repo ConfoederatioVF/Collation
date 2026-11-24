@@ -1,0 +1,4904 @@
+{
+  "Capaya-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Capaya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Capaya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Capaya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Santa Cruz de Andamarca-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Carihuaín",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Andenes de Pampayaca",
+        "Apal",
+        "Arqueológico Andenes de Llanagase",
+        "Arqueológico Chupaca",
+        "Arqueológico Terrazas de Aujallun",
+        "Chaly A",
+        "Chaly B",
+        "Corrales de Pampayaca"
+      ],
+      "region": "ca_north_coast_moche_chimu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Chauca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Santa Cruz",
+        "Santa Cruz de Andamarca"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Pacaraos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Santa Catalina"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Chauca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Santa Cruz",
+        "Santa Cruz de Andamarca"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Pacaraos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Santa Catalina"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Pacaraos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Santa Cruz de Andamarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Juncales-Ecuador": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Juncales",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Juncales",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_audiencia_quito_sierra",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    }
+  ],
+  "El Overo ( Sector Poblado )-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "El Overo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Relaciones geográficas de la Nueva Granada (siglos XVI a XIX)', en: Cespedesia 45-46, suplemento 4 (Cali 1983)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "El Overo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_antioquia_popayan_choco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Relaciones geográficas de la Nueva Granada (siglos XVI a XIX)', en: Cespedesia 45-46, suplemento 4 (Cali 1983)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "El Overo ( Sector Poblado )",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "El Overo",
+        "El Overo ( Sector La María )"
+      ],
+      "region": "col_valle_del_cauca",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "Uríbe Uríbe",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "col_valle_del_cauca",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    }
+  ],
+  "Pisuquia-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Pisuquia",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Yomblon"
+      ],
+      "region": "per_amazonas",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Santa Barbara Lame-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Santa Barbara Lame",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Santa Barbara Lame",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_antioquia_popayan_choco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    }
+  ],
+  "Zirid-Ecuador": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Zirid",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Zirid",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_audiencia_quito_sierra",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    }
+  ],
+  "Chapis-Peru_2": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Chapis",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Chapis",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "La Perla",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Huaca (vp_intendencia_lima)-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huaca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Huaca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Lomas de Pacta B-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Lomas de Pacta A",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Conchales superficiales",
+        "Lomas de Pacta B",
+        "Lomas de Pacta C",
+        "Mamay",
+        "Quebrada Cruz de Hueso",
+        "Quebraleña Alto",
+        "Quebraleña Bajo",
+        "Quebraleña Medio"
+      ],
+      "region": "ca_north_coast_moche_chimu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Lomas de Pacta B",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Conchales superficiales",
+        "Lomas de Pacta C",
+        "Quebraleña Alto",
+        "Quebraleña Bajo",
+        "Quebraleña Medio"
+      ],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    }
+  ],
+  "valle de Jimbura-Ecuador": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "valle de Jimbura",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "valle de Jimbura",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "valle de Jimbura",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_audiencia_quito_sierra",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Espindola",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_piura",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Zetaquira-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Zetaquira",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_nuevo_reino_granada",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Armando Martínez Garnica/Daniel Gutiérrez Ardila, Quién es quién en 1810. Guía de forasteros del Virreinato de Santa FenBogotá 2010)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Zetaquira",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_santafe_tunja_highlands",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Armando Martínez Garnica/Daniel Gutiérrez Ardila, Quién es quién en 1810. Guía de forasteros del Virreinato de Santa FenBogotá 2010)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "Zetaquira",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "col_boyaca",
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "years": null
+    }
+  ],
+  "Hongos-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Antapa",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Huanturo",
+        "Pulunwas"
+      ],
+      "region": "ca_north_coast_moche_chimu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Antapa",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pulunwas"
+      ],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Cacra",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Cacla",
+        "Claca"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Ongos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Cacra",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Cacla",
+        "Claca"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Ongos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Cacra",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Hongos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Ongos"
+      ],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Conchao-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Conchao",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Conchao",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_tarma",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Pampamarca (per_arequipa)-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Mungui",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Monguy"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Mungui",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Monguy"
+      ],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Pampamarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Mungui"
+      ],
+      "region": "per_arequipa",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Valencia de Jesús-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Valencia de Jesus",
+      "notes": "",
+      "foundation_year": 1590,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Ciudad de Nueva Valencia",
+        "Nombre de Jesus",
+        "Pueblo Nuevo"
+      ],
+      "region": "conq_nuevo_reino_granada",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Valencia de Jesus",
+      "notes": "",
+      "foundation_year": 1590,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Ciudad de Nueva Valencia",
+        "Nombre de Jesus",
+        "Pueblo Nuevo"
+      ],
+      "region": "vng_cartagena_santa_marta",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "Valencia de Jesús",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Valencia de Jesus"
+      ],
+      "region": "col_cesar",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    }
+  ],
+  "Yuraycoco-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Yuraycoco",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Yurayaco"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Yuraycoco",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Yurayaco"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Manugasta-Argentina": [
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "name": "Manugasta",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "crp_gobernacion_tucuman",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "José Luis Grosso, Indios muertos, negros invisiblesnCórdoba, Arg. 2008)"
+      ],
+      "years": null
+    }
+  ],
+  "Congalla-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Congalla",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Congalla",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_huamanga_huancavelica",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Congalla",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_huancavelica",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Playa Unión-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "name": "Playa Unión",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "arg_chubut",
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "years": null
+    }
+  ],
+  "Puerto Caldas-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "name": "El Farsan",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "na_magdalena_cauca_muisca",
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Cartago",
+      "notes": "",
+      "foundation_year": 1540,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Las Sabanas"
+      ],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "Tovar Pinzón et al. (1994) Convocatoria al Poder del Número (1778)",
+        "López de Velasco (1574)",
+        "Colmenares (1973)",
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Cartago",
+      "notes": "",
+      "foundation_year": 1540,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Las Sabanas"
+      ],
+      "region": "vng_antioquia_popayan_choco",
+      "sources": [
+        "Tovar Pinzón et al. (1994) Convocatoria al Poder del Número (1778)",
+        "López de Velasco (1574)",
+        "Colmenares (1973)",
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "Puerto Caldas",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "col_risaralda",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    }
+  ],
+  "Cochapeti-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Cochapeti",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Cochapati"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Cochapeti",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Cochapati"
+      ],
+      "region": "vp_intendencia_tarma",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Cochapeti",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_ancash",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Cotahuasi-Peru": [
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Cotahuasi",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Cerro Buena Vista",
+        "Ciudadela de Chalquima",
+        "Collota",
+        "Cuevas de Tenajaja Cucho",
+        "Jorowayño",
+        "Jotapuna Pampa",
+        "Maukallacta Cruspata",
+        "Morro de Acorca"
+      ],
+      "region": "inca_contisuyu",
+      "sources": [
+        "Rowe (1946) / Hyslop (1990) Contisuyu",
+        "SIGDA Qhapaq Ñan",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Cotahuasi",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Quillunsa",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Quillunza"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Cotahuasi",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Quillunsa",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Quillunza"
+      ],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Cotahuasi",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_arequipa",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Quillunza",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Quillunsa"
+      ],
+      "region": "per_arequipa",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Huangala-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huangala",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Guangala"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Lorenzo Huertas Vallejos, 'Patrones de asentamiento poblacional en Piura (1532-1850)', en: Bulletin de l'Institut Français d'études andines "
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Huangala",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Guangala"
+      ],
+      "region": "vp_intendencia_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Lorenzo Huertas Vallejos, 'Patrones de asentamiento poblacional en Piura (1532-1850)', en: Bulletin de l'Institut Français d'études andines "
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Huangala",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_piura",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "San Vicente de Piedra Rodada",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_piura",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "years": null
+    }
+  ],
+  "Huandaro-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huandaro",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Huandaro",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Colca (per_apurimac)-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Caraybamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Colca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Caraybamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Colca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Caraybamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Colca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Huaca-Ecuador": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huaca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Huaca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_audiencia_quito_sierra",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+      ],
+      "years": null
+    },
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "name": "Huaca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ecu_carchi",
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "years": null
+    }
+  ],
+  "San Juan Talaga-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "San Juan Talaga",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "San Juan Talaga",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_antioquia_popayan_choco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "Guaquiyó",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "col_cauca",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    }
+  ],
+  "Huancaya-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Evidencia Arqueologica",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Abrigo y desechos líticos"
+      ],
+      "region": "ca_north_coast_moche_chimu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Evidencia Arqueologica",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Abrigo y desechos líticos"
+      ],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huancaya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Huancaya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Huancaya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Puquian-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Puquian",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pucquian"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Puquian",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pucquian"
+      ],
+      "region": "vp_intendencia_tarma",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Somate Bajo-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Potreritos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Cerro Guaranguao"
+      ],
+      "region": "ca_north_coast_moche_chimu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Potreritos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Cerro Guaranguao"
+      ],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Somate",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Lorenzo Huertas Vallejos, 'Patrones de asentamiento poblacional en Piura (1532-1850)', en: Bulletin de l'Institut Français d'études andines "
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Somate",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Lorenzo Huertas Vallejos, 'Patrones de asentamiento poblacional en Piura (1532-1850)', en: Bulletin de l'Institut Français d'études andines "
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Centro Servicios Somate Bajo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_piura",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Maran",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_piura",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Somate Bajo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Somate"
+      ],
+      "region": "per_piura",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "years": null
+    }
+  ],
+  "Santiago de Tuna-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Tuna",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Tuna",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Santiago de Tuna",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Tuna"
+      ],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Chapimarca-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Chapimarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Chapimarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Chapimarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Huañec-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Andenería - Proy. Mejoramiento Servicio Agua Punaje",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Ampicocha",
+        "Anshahuay"
+      ],
+      "region": "ca_north_coast_moche_chimu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Andenería - Proy. Mejoramiento Servicio Agua Punaje",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Ampicocha",
+        "Anshahuay"
+      ],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huañec",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Huanic"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Quinches",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pampaquinchis"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Huañec",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Huanic"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Quinches",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pampaquinchis"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Cochas",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Huañec",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "San Joaquín"
+      ],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Quinches",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Cayapas Viejo-Ecuador": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Cayapas Viejo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Cayapas"
+      ],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Cayapas Viejo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Cayapas"
+      ],
+      "region": "vng_guayaquil_esmeraldas",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    }
+  ],
+  "El Hato-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "name": "El Hato",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ven_falcon",
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "years": null
+    }
+  ],
+  "Salabina-Argentina": [
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "name": "Salabina",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Salavina"
+      ],
+      "region": "crp_gobernacion_tucuman",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "years": null
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "name": "Villa Salavina",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "arg_santiago_del_estero",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "years": null
+    }
+  ],
+  "General Daniel Cerri-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "name": "General Daniel Cerri",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "arg_buenos_aires",
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "years": null
+    }
+  ],
+  "Espiritu Santo Caguan-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Espiritu Santo Caguan",
+      "notes": "",
+      "foundation_year": 1590,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_nuevo_reino_granada",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Antonio de Alcedo, Diccionario geográfico-histórico de las Indias Occidentales o América (Madrid 1786-1789)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Espiritu Santo Caguan",
+      "notes": "",
+      "foundation_year": 1590,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_llanos_caguan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Antonio de Alcedo, Diccionario geográfico-histórico de las Indias Occidentales o América (Madrid 1786-1789)"
+      ],
+      "years": null
+    }
+  ],
+  "Leoncio Prado-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Santa Cruz",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Santa Cruz",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Leoncio Prado",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Santa Cruz"
+      ],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Galicia Parte Alta-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Mosca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_nuevo_reino_granada",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Mosca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_antioquia_popayan_choco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "Galicia Parte Alta",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Galicia Parte Baja",
+        "Mosca"
+      ],
+      "region": "col_antioquia",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    }
+  ],
+  "San Pedro de Huacarpana-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "San Pedro de Huacarpana",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Huacar"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "San Pedro de Huacarpana",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Huacar"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "San Pedro de Huacarpana",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Vitis-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Vitis",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Vitis",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Vitis",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Pecaya-Venezuela": [
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Pecaya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Toroy"
+      ],
+      "region": "vng_capitania_caracas_maracaibo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: 'Relación y testimonio íntegro de la visita general de este obispado de Caracas y Venezuela', en: Archivo General de Indias, Caracas,959 (17",
+        "Angel Altolaguirre, Relaciones geográficas de la gobernación de Venezuela (1767-1768) (Madrid 1909)"
+      ],
+      "years": null
+    },
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "name": "Pecaya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ven_falcon",
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "years": null
+    }
+  ],
+  "Chipao-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Chipaomarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ca_central_sierra_wari_chanka",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Chipaomarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "inca_contisuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Chipao",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Chipau"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Mayobamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Moyobamba"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Chipao",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Chipau"
+      ],
+      "region": "vp_intendencia_huamanga_huancavelica",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Mayobamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Moyobamba"
+      ],
+      "region": "vp_intendencia_huamanga_huancavelica",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Chipao",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_ayacucho",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Moyobamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Mayobamba"
+      ],
+      "region": "per_ayacucho",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Malchingi-Ecuador": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Malchingi",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Malchingi",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_audiencia_quito_sierra",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "name": "Malchinguí",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ecu_pichincha",
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "years": null
+    }
+  ],
+  "Iscara-Bolivia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Iscara",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_charcas_potosi",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Iscara",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_charcas_potosi",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "years": null
+    },
+    {
+      "file": "andean_bolivia_independence_settlements.json",
+      "name": "Caipana",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Anexo Altusani"
+      ],
+      "region": "bol_oruro",
+      "sources": [
+        "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+      ],
+      "years": null
+    }
+  ],
+  "Antilla (per_apurimac)-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Antilla",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Antilla",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Antilla",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Ocoyo-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Ocobamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Ayamarca"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Ocoyo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Ayamarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Ocobamba"
+      ],
+      "region": "vp_intendencia_huamanga_huancavelica",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Ocoyo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Ocoyo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_huancavelica",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Freirina (chl_region_de_atacama)-Chile": [
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "name": "Freirina",
+      "notes": "",
+      "foundation_year": 1752,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Santa Rosa"
+      ],
+      "region": "crp_obispado_santiago",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Vicente Carvallo Goyeneche, Descripción Histórico-Geográfica del Reino de Chile (1796)"
+      ],
+      "years": null
+    },
+    {
+      "file": "chile_after_independence_settlements.json",
+      "name": "Freirina",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "chl_region_de_atacama",
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Pueblo)"
+      ],
+      "years": null
+    }
+  ],
+  "Huanza-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Carampoma",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Carampona",
+        "Huanza"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Carampoma",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Carampona",
+        "Huanza"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Huanza",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Carampoma"
+      ],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Huaycho-Peru_2": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huaycho",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Huaycho",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Cosma-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Cosma",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Aparan Punta",
+        "Lliullag Machay",
+        "Puquiopata",
+        "Taulliragra",
+        "Warichupa"
+      ],
+      "region": "ca_central_sierra_wari_chanka",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Warichupa",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pajchatuna",
+        "Patococha",
+        "Pirhua Pirhua",
+        "Puquiopata"
+      ],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Cosma",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Cosma",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_tarma",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Juan Espinoza Medrano-Peru": [
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Antabamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Anaro",
+        "Causiña"
+      ],
+      "region": "inca_contisuyu",
+      "sources": [
+        "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+        "Hyslop (1984) Inka Road System",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Mollebamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Mollobamba"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Silco",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Mollebamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Mollobamba"
+      ],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Silco",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Juan Espinoza Medrano",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Mollebamba"
+      ],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Silco",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Picamaran A-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Picamaran A",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Picamaran A",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Obrajillo-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Canta",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "Visita General del Virrey Francisco de Toledo (1570-1575; Cook 1975, 1981)",
+        "Vázquez de Espinosa (1628)",
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "San Miguel",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Obragillo"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Canta",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "Visita General del Virrey Francisco de Toledo (1570-1575; Cook 1975, 1981)",
+        "Vázquez de Espinosa (1628)",
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "San Miguel",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Obragillo"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Canta",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Obrajillo",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "San Miguel"
+      ],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Tupigachi-Ecuador": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Tupigachi",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "NN., Ytinerario Real de Correos del Reyno del Perú y Chilen1777)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Tupigachi",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_audiencia_quito_sierra",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "NN., Ytinerario Real de Correos del Reyno del Perú y Chilen1777)"
+      ],
+      "years": null
+    },
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "name": "Tupigachi",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ecu_imbabura",
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "years": null
+    }
+  ],
+  "Chamas-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Chamas",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Chamas",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_tarma",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Ignacio Briceño-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "name": "Ignacio Briceño",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ven_barinas",
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "years": null
+    }
+  ],
+  "Juan Millán-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "name": "Juan Millán",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ven_delta_amacuro",
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "years": null
+    }
+  ],
+  "Antawala - Llaqtamarka-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Antawala - Llaqtamarka",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Machu Was",
+        "Waka Wasi-Trapiche"
+      ],
+      "region": "ca_central_sierra_wari_chanka",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Antawala - Llaqtamarka",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Machu Was",
+        "Waka Wasi-Trapiche"
+      ],
+      "region": "inca_antisuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Lares",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Lares",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Lares",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_cusco",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Santiago de Chocorvos-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Santiago de Chocorvos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Santiago"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Santiago de Chocorvos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Santiago"
+      ],
+      "region": "vp_intendencia_huamanga_huancavelica",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Santiago de Chocorvos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_huancavelica",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Ihuari-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Iguari",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Iguari",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Ihuari",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Iguari"
+      ],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Malay-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Malay",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Malsay"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Malay",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Malsay"
+      ],
+      "region": "vp_intendencia_tarma",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Huamantanga-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huamantanga",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Huamantanga",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Huamantanga",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Marco-Peru_2": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Marco",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Malco"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Marco",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Malco"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Rocafuerte (ecu_esmeraldas)-Ecuador": [
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "name": "Rocafuerte",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ecu_esmeraldas",
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "years": null
+    }
+  ],
+  "Andabamba-Peru": [
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Alalajmachay",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Amorsico",
+        "Arqueológico Runawañusca",
+        "Atoq Wachana",
+        "Mulluna",
+        "Ojorohuayjo",
+        "Seqsapampa Seqses",
+        "Tanqarqasa"
+      ],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Andabamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Andabamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_huamanga_huancavelica",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Andabamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_huancavelica",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Raclla-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Raclla",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Raclla",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_tarma",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "Sarayca-Peru": [
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Quebrada Lucre",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Ccespisa",
+        "El Potrero",
+        "Jamara",
+        "Jumpe",
+        "Parancay",
+        "Plaza Pata",
+        "Plazapata - Pallqa",
+        "Pomachilla"
+      ],
+      "region": "inca_contisuyu",
+      "sources": [
+        "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+        "Hyslop (1984) Inka Road System",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Sarayca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Saraico"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Sarayca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Saraico"
+      ],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Chanta",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Tignamar-Chile": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Tignamar",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Tignabar",
+        "Tignabor"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Tignamar",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Tignabar",
+        "Tignabor"
+      ],
+      "region": "vp_intendencia_arequipa",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    }
+  ],
+  "La Salina-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "La Salina",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Las Salinas"
+      ],
+      "region": "conq_nuevo_reino_granada",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "La Salina",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Las Salinas"
+      ],
+      "region": "vng_santafe_tunja_highlands",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "La Salina",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "col_boyaca",
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "years": null
+    }
+  ],
+  "Chota-Peru_2": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "San Miguel",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Caupar",
+        "Cerro Chillin",
+        "Cerro Pacalle",
+        "Chivilato",
+        "El Corral",
+        "Los Corrales",
+        "Mispalday",
+        "San Francisco"
+      ],
+      "region": "ca_north_coast_moche_chimu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "San Miguel",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Caupar",
+        "Cerro Chillin",
+        "Cerro Pacalle",
+        "Chivilato",
+        "El Corral",
+        "Los Corrales",
+        "Mispalday",
+        "San Francisco"
+      ],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Chota",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Chota",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Mayday",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_la_libertad",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "San Vicente la Union",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Chota"
+      ],
+      "region": "per_la_libertad",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Sangalpampa Alta",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Chota"
+      ],
+      "region": "per_la_libertad",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Santa Cruz",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Chota"
+      ],
+      "region": "per_la_libertad",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "El Porvenir (col_valle_del_cauca)-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Regina",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Relaciones geográficas de la Nueva Granada (siglos XVI a XIX)', en: Cespedesia 45-46, suplemento 4 (Cali 1983)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Regina",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_antioquia_popayan_choco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Relaciones geográficas de la Nueva Granada (siglos XVI a XIX)', en: Cespedesia 45-46, suplemento 4 (Cali 1983)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "El Porvenir",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "La Palomera",
+        "Puerto Bertin",
+        "Punta Brava",
+        "Regina"
+      ],
+      "region": "col_valle_del_cauca",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    }
+  ],
+  "Pachaconas-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Pachacona",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Pachacona",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Pachaconas",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pachacona"
+      ],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Tapairihua-Peru": [
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Muyu Muyu",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "inca_contisuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Tapayrihua",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Tapairihua"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Tapayrihua",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Tapairihua"
+      ],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Tapairihua",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Tapayrihua"
+      ],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Uchuymarca-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Campana Cruz",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ca_south_coast_nazca_chincha",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Campana Cruz",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "inca_contisuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Uchuymarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Uchuymarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Uchuymarca",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_ayacucho",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Colonia-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Wichimish",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ca_north_coast_moche_chimu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Wichimish",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Colonia",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pampas"
+      ],
+      "region": "conq_peru_costa_lima_trujillo",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Colonia",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pampas"
+      ],
+      "region": "vp_intendencia_lima",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Colonia",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_lima",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Mesa de Caloto-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Toez",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Toes",
+        "Tues"
+      ],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Vuila",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Guila",
+        "Huila"
+      ],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Toez",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Toes",
+        "Tues"
+      ],
+      "region": "vng_antioquia_popayan_choco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Vuila",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Guila",
+        "Huila"
+      ],
+      "region": "vng_antioquia_popayan_choco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "Mesa de Caloto",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Vuila"
+      ],
+      "region": "col_cauca",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    }
+  ],
+  "Casabamba-Peru_2": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Casabamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Casabamba",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_huamanga_huancavelica",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Otas Bellavista",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Huanchay-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huanchay",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Huanchay",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_tarma",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Huanchay",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_ancash",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    }
+  ],
+  "Mariscal Sucre-Ecuador": [
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "name": "Mariscal Sucre",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ecu_guayas",
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "years": null
+    }
+  ],
+  "Uyumbicho-Ecuador": [
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "name": "Uyumbicho",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ecu_pichincha",
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "years": null
+    }
+  ],
+  "Coloya-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Coloya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_nuevo_reino_granada",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Coloya",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_santafe_tunja_highlands",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    }
+  ],
+  "Chapío-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "name": "Los Pinos",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "na_magdalena_cauca_muisca",
+      "sources": [
+        "COL14 Colombia Radiocarbon Database",
+        "Patiño, D., & Monsalve, M. L. (2015). Arqueologia y vulcanismo en la region del Purace, Cauca. Servicio Geologico Colomb"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Purace",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Purase"
+      ],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Purace",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Purase"
+      ],
+      "region": "vng_antioquia_popayan_choco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "Chapío",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Purace"
+      ],
+      "region": "col_cauca",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    }
+  ],
+  "Luis Cordero-Ecuador": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Bayas",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Opar",
+        "Upar"
+      ],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Luis Cordero",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "San Marcos"
+      ],
+      "region": "conq_audiencia_quito_popayan",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Bayas",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Opar",
+        "Upar"
+      ],
+      "region": "vng_audiencia_quito_sierra",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Luis Cordero",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "San Marcos"
+      ],
+      "region": "vng_audiencia_quito_sierra",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+      ],
+      "years": null
+    },
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "name": "Luis Cordero",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "ecu_canar",
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "years": null
+    }
+  ],
+  "El Pedral-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Pedral",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_nuevo_reino_granada",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "name": "Pedral",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vng_santafe_tunja_highlands",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "years": null
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "name": "El Pedral",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pedral"
+      ],
+      "region": "col_santander",
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "years": null
+    }
+  ],
+  "Pitic-Peru": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Pitij",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pitic"
+      ],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Pitij",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pitic"
+      ],
+      "region": "vp_intendencia_cusco",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Pitic",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Pitij"
+      ],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Sayhua",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_apurimac",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "years": null
+    }
+  ],
+  "Tomollo Beach-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "name": "Tomollo Beach",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Los Hornos"
+      ],
+      "region": "ca_titicaca_altiplano_tiwanaku",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Tomollo Beach",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Amapaya",
+        "Los Hornos"
+      ],
+      "region": "inca_collasuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Vila Vila",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "per_tacna",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "years": null
+    }
+  ],
+  "Huantar-Peru": [
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "name": "Huarac",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "inca_chinchaysuyu",
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "years": null
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "name": "Huantar",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "conq_peru_sierra_cusco_huamanga",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "name": "Huantar",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [],
+      "region": "vp_intendencia_tarma",
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Huantar",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Huántar"
+      ],
+      "region": "per_ancash",
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "years": null
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "name": "Huarac Pampa",
+      "notes": "",
+      "foundation_year": null,
+      "earliest_year": null,
+      "historical_names": null,
+      "other_names": [
+        "Uranchacra"
+      ],
+      "region": "per_ancash",
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "years": null
+    }
+  ]
+}

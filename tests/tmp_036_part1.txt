@@ -1,0 +1,541 @@
+=== [30] Diguillin-Chile | n=Diguillin | c=Chile | r=crp_obispado_concepcion_chiloe | ll=[-36.869, -72.33] | ey=1795 | ly=1830 | al=[] ===
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Diguillin-Chile": {
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "name": "Diguillin",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "key": "Diguillin-Chile",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Diguillin-Chile",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "name": "Diguillin",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Diguillin-Chile",
+  LOCAL: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "Diguillin-Chile": {
+  LOCAL: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "Diguillin-Chile",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Diguillin",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_arkg.json: "name": "Diguillin 1",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_acreditado.json: "name": "Diguillin 1 (08 PE 001)",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "name": "Diguillin 1 (08 PE 001)",
+  GEO: [{'title': 'Río Diguillín', 'dist': 4448}, {'title': 'Santa Clara (Chile)', 'dist': 4477}, {'title': 'Estación Santa Clara', 'dist': 4741}, {'title': 'San Luis Cerrillos', 'dist': 5722}, {'title': 'Estación General Cruz', 'dist': 7400}]
+  SRCH: [{'title': 'Provincia de Diguillín', 'snippet': 'provincia de Diguillín (del mapudungún: digelen\xa0‘punto de referencia que está a un lado’)\u200b es una provincia de la región de Ñuble, en Chile. Tiene una superficie'}, {'title': 'Bulnes (Chile)', 'snippet': 'es una ciudad de Chile, localidad y capital de la comuna homónima y de la Provincia de Diguillín, ubicada en la provincia de Diguillín, en la Región de'}, {'title': 'Quillón', 'snippet': 'Quillón. Se encuentra ubicada en la Provincia de Diguillín,\u200b\u200b Región de Ñuble,\u200b en la zona central de Chile. Su nombre deriva de la palabra Mapuche &quot;Keillun&quot;'}]
+  WIKI[Provincia de Diguillín] coords=[{'lat': -36.91666667, 'lon': -72, 'primary': '', 'globe': 'earth'}]: La provincia de Diguillín (del mapudungún: digelen ‘punto de referencia que está a un lado’)​ es una provincia de la región de Ñuble, en Chile. Tiene una superficie de 5229,5 km². Su capital es la ciudad de Bulnes.​   == Economía == En 2018, la cantidad de empresas registradas en la provincia de Diguillín fue de 6.758. El Índice de Complejidad Económica (ECI) en el mismo año fue de 0,79, mientras que las actividades económicas con mayor índice de Ventaja Comparativa Revelada (RCA) fueron Reparación de Maquinaria Agropecuaria y Forestal (102,25), Otras Actividades Relacionadas al Deporte (33,41) y Servicios de Transporte Escolar (24,04).​   == Comunas == La provincia está constituida por nueve comunas:​  Bulnes Chillán Chillán Viejo El Carmen Pemuco Pinto Quillón San Ignacio Yungay   == Autoridades == Las autoridades son nombradas directamente por el Presidente de la República y se mantienen en su cargo mientras cuenten con su confianza.   === Gobernador provincial (2018-2021) ===  Los siguientes fueron los gobernadores provinciales de Diguillín.   === Delegado presidencial provincial === Actualmente no existe una delegación en la Provincia. La delegación presidencial regional actúa
+  WIKI[Río Diguillín] coords=[{'lat': -36.8664, 'lon': -72.3799, 'primary': '', 'globe': 'earth'}]: 
+  WIKI[Santa Clara (Chile)] coords=[{'lat': -36.8288444, 'lon': -72.333626, 'primary': '', 'globe': 'earth'}]: 
+=== [31] Piedras Negras-Colombia | n=Piedras Negras | c=Colombia | r=na_magdalena_cauca_muisca | ll=[4.42956, -74.75664] | ey=500 | ly=1500 | al=['la ceiba', 'La Ceiba'] ===
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Piedras Negras-Colombia": {
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "Piedras Negras",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "Piedras Negras-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Piedras Negras-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "Piedras Negras",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'La Ceiba' into 'Piedras Negras' (0.58 km)."
+  LOCAL: _shared\settlement_sources\raw\nso_venezuela\ine_ven_ccpp_2011.json: [{"attributes": {"Codigo_Com": "01010100001", "ENTIDAD": "01", "NOMBENT": "Distrito Capital", "MUNICIPI": "01", "NOMBMUN": "Distrito Capital, Libertador", "PARROQUI": "01", "NOMBPAR": "Altagracia", "CENTROPO": "00001", "NOMBCP": "Caracas (Capital)", "SEXO_T": 47922}, "geometry": 
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "name": "Piedras Negras",
+  GEO: [{'title': 'Nariño (Cundinamarca)', 'dist': 8658}]
+  SRCH: [{'title': 'UTC−05:00', 'snippet': 'horario se encuentran 5 horas por detrás del meridiano de Greenwich. «COT – Colombia Time (Time Zone Abbreviation)». www.timeanddate.com (en inglés). Consultado'}, {'title': 'Piedras', 'snippet': '\xa0\xa0(desambiguación) Río Piedras \xa0\xa0(desambiguación) Piedras Albas \xa0\xa0(desambiguación) Piedras Blancas \xa0\xa0(desambiguación) Piedras Negras \xa0\xa0(desambiguación)'}, {'title': 'Falan', 'snippet': 'La Linda, La Noria, La Plantilla, La Rica, Lajas, Mondeco, Paraíso, Piedras Negras, Pirsa, San Antonio, Santa Rosa, Tavera y Tres Esquinas.\u200b Su economía'}]
+  WIKI[Nariño (Cundinamarca)] coords=[{'lat': 4.39805556, 'lon': -74.82805556, 'primary': '', 'globe': 'earth'}]: Nariño es un municipio colombiano del departamento de Cundinamarca, ubicado en la Provincia del Alto Magdalena, a 149 kilómetros al suroccidente de Bogotá.   == Toponimia ==   === Origen lingüístico​ === Familia lingüística: Lengua:   === Significado === Probablemente, nariño es un vocablo derivado de la expresión latina narinosus-rosus que significa "narigudo, narizotas" y manifiesta los sentidos de "sagacidad, discernimiento, espíritu crítico, burlón". Narinosus-rosus tienen su origen en la lengua sánscrita, código sagrado de la india del que nacen estos términos en las voces nas-nasá y en las formas griegas naao-nayo-ndeo-naneo que significan "fluir", "manar".   === Origen / Motivación === Inicialmente fue llamado: Remolinos, por la hacienda inicial. Cuando fue elevada a la hoy categoría de Corregimiento en 1838 se le cambio el nombre a Nariño, en honor al apellido del prócer colombiano.   == Historia == El pueblo de Nariño se fundó a orillas del río Magdalena, parte de la hacienda “Remolinos”, por pescadores y cultivadores de tabaco. Pero su permanencia allí debe ir mucho más atrás, pues la época de la Conquista este lugar estaba en uno de los caminos a Guataqui. Su comienzo fu
+  WIKI[Piedras] coords=[]: 
+  WIKI[UTC−05:00] coords=[]: 
+=== [32] El Timbó-Argentina | n=El Timbó | c=Argentina | r=arg_tucuman | ll=[-26.64289, -65.18855] | ey=1850 | ly=2022 | al=[] ===
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "El Timbó-Argentina": {
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "name": "El Timbó",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "key": "El Timbó-Argentina",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "El Timbó-Argentina",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "name": "El Timbó",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "El Timbó-Argentina",
+  LOCAL: _shared\settlement_sources\raw_setts_argentina.json: "El Timbó-Argentina": {
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades_censales.json: {"cantidad":4027,"inicio":0,"localidades_censales":[{"categoria":"Localidad simple","centroide":{"lat":-27.921401190208,"lon":-65.8379274465406},"departamento":{"id":"10007","nombre":"Ambato"},"funcion":null,"id":"10007010","municipio":{"id":"100028","nombre":"Los Varela"},"nombr
+  GEO: [{'title': 'Embarcadero El Cadillal', 'dist': 1914}, {'title': 'El Cadillal', 'dist': 2363}, {'title': 'Dique El Cadillal', 'dist': 3033}, {'title': 'Reserva natural Aguas Chiquitas', 'dist': 6266}, {'title': 'Viaducto del Saladillo', 'dist': 6508}]
+  SRCH: [{'title': 'Enterolobium contortisiliquum', 'snippet': 'El timbó colorado, timbó-pytã, guanacaste, pacará u oreja negra (Enterolobium contortisiliquum) es un árbol de regiones tropicales y subtropicales de América'}, {'title': 'Rodolfo Lehmann', 'snippet': 'B. Lehmann (Esperanza, Santa Fe, Argentina, 6 de enero de 1877 - Estancia El Timbó, Esperanza, Santa Fe, Argentina, 1 de septiembre de 1936) fue un médico'}, {'title': 'Ruta Nacional 168 (Argentina)', 'snippet': 'Paraná (Entre Ríos). Esta ruta atraviesa las islas La Guardia, Cañas, El Timbó y Santa Cándida. La importancia de esta ruta se debe a que es parte del'}]
+  WIKI[El Cadillal] coords=[{'lat': -26.6319, 'lon': -65.2089, 'primary': '', 'globe': 'earth'}]: El Cadillal es una localidad y comuna argentina ubicada en el Departamento Tafí Viejo de la Provincia de Tucumán. Es una villa turística ubicada sobre el Dique Celestino Gelsi, que permite el baño en sus playas y deportes acuáticos, además de un paisaje rodeado de selva y varios cursos de agua. La villa se encuentra en el acceso, sobre la ladera del cerro Médici y es de reciente y rápida construcción.​  Los primeros estudios para la construcción del dique comenzaron en 1889, pero tras un proyecto trunco iniciado en 1943 se cambió la ubicación y comenzó su construcción en 1962 siendo finalizado en 1965. En 1962 se construyeron las primeras 7 casas que serían las precursoras del pueblo, destinadas para los ingenieros a cargo de la construcción del dique.​   == Población == Cuenta con 865 habitantes (Indec, 2010), lo que representa un incremento del 38% frente a los 626 habitantes (Indec, 2001) del censo anterior.   == Referencias ==
+  WIKI[Embarcadero El Cadillal] coords=[{'lat': -26.630783, 'lon': -65.202237, 'primary': '', 'globe': 'earth'}]: 
+  WIKI[Enterolobium contortisiliquum] coords=[]: 
+=== [33] Leonardo Ruiz Pineda-Venezuela | n=Leonardo Ruiz Pineda | c=Venezuela | r=ven_delta_amacuro | ll=[9.25599, -61.8062] | ey=1920 | ly=2025 | al=[] ===
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "Leonardo Ruiz Pineda (Asentamiento)-Venezuela": {
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "name": "Leonardo Ruiz Pineda (Asentamiento)",
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "key": "Leonardo Ruiz Pineda (Asentamiento)-Venezuela",
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "Leonardo Ruiz Pineda-Venezuela": {
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "name": "Leonardo Ruiz Pineda",
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "key": "Leonardo Ruiz Pineda-Venezuela",
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "Leonardo Ruiz Pineda (Asentamiento)-Venezuela",
+  LOCAL: _shared\settlement_sources\raw\nso_venezuela\ine_ven_ccpp_2011.json: [{"attributes": {"Codigo_Com": "01010100001", "ENTIDAD": "01", "NOMBENT": "Distrito Capital", "MUNICIPI": "01", "NOMBMUN": "Distrito Capital, Libertador", "PARROQUI": "01", "NOMBPAR": "Altagracia", "CENTROPO": "00001", "NOMBCP": "Caracas (Capital)", "SEXO_T": 47922}, "geometry": 
+  GEO: []
+  SRCH: [{'title': 'Leonardo Ruiz Pineda', 'snippet': 'Leonardo Ruiz Pineda (Rubio, estado Táchira, 28 de septiembre de 1916 - Caracas, 21 de octubre de 1952), fue un abogado, escritor, periodista y político'}, {'title': 'Parroquia Leonardo Ruiz Pineda', 'snippet': 'La parroquia Leonardo Ruiz Pineda\u200b o simplemente Leonardo Ruiz Pineda es una de las 8 divisiones administrativas (parroquias civiles) en las que se encuentra'}, {'title': 'Ruiz Pineda (metro de Caracas)', 'snippet': 'es una estación del metro de Caracas, ubicada en la Urbanización Leonardo Ruíz Pineda, Sector UD-7 de la Parroquia Ruíz Pineda. Se encuentra en las adyacencias'}]
+  WIKI[Leonardo Ruiz Pineda] coords=[]: Leonardo Ruiz Pineda (Rubio, estado Táchira, 28 de septiembre de 1916 - Caracas, 21 de octubre de 1952), fue un abogado, escritor, periodista y político venezolano, uno de los fundadores del partido Acción Democrática (AD), su Secretario General y partícipe de la lucha clandestina entre 1949 y 1952, contra la dictadura de Marcos Pérez Jiménez.​ Fue asesinado el 21 de octubre de 1952 por agentes de la Dirección de Seguridad Nacional, policía del régimen.   == Biografía ==   === Formación académica, activismo y primeras publicaciones === Cursó sus estudios de primaria y de bachillerato en el Liceo Simón Bolívar, de Táchira, en San Cristóbal, donde fundó la revista Antena junto a Ramón J. Velásquez y  Ciro Urdaneta.​ Leonardo Ruiz Pineda estuvo vinculado desde muy joven al quehacer político en su región natal y en la ciudad de Caracas. En 1933, emprendió su viaje a Caracas para estudiar Derecho en la Universidad Central de Venezuela (UCV);​ en 1937 asume la dirección de La Voz del Estudiante, periódico en el que se plasmaban inquietudes e informaciones de la época y que sería clausurado posteriormente por el gobierno de Eleazar López Contreras. Su inquietud por el momento político que
+  WIKI[Parroquia Leonardo Ruiz Pineda] coords=[{'lat': 9.0987074, 'lon': -61.9361121, 'primary': '', 'globe': 'earth'}]: 
+=== [34] Villa los Niches-Chile | n=Villa los Niches | c=Chile | r=chl_region_del_maule | ll=[-35.06907, -71.15864] | ey=1850 | ly=2017 | al=[] ===
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "Villa los Niches-Chile": {
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "name": "Villa los Niches",
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "key": "Villa los Niches-Chile",
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "Villa los Niches-Chile",
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "name": "Villa los Niches",
+  GEO: [{'title': 'Corcolén (Maule)', 'dist': 9651}, {'title': 'Maquehua', 'dist': 9858}, {'title': 'Buena Paz', 'dist': 9898}]
+  SRCH: []
+  WIKI[Corcolén (Maule)] coords=[{'lat': -35.1486701, 'lon': -71.2009334, 'primary': '', 'globe': 'earth'}]: Corcolén es una localidad chilena. Se ubica en la comuna de Molina en la Provincia de Curicó, Región del Maule.    == Geografía == Se ubica unos 8 km al suroriente de la ciudad de Molina, al sur del río Lontué. Se encuentra sobre la ruta J-745, próxima a las localidades de San Jorge de Romeral y Tres Esquinas.​   == Historia == En el Diccionario Jeográfico de Chile (1924) de Luis Risopatrón, se describía a la localidad de la siguiente manera:​Corcolen (Caserío) 35° 08’ 71° 12'. Pequeño, se encuentra a unos 10 kilómetros hacia el NE del pueblo de Molina. 101, p. 642.   == Demografía == De acuerdo con el Censo de Población y Vivienda de 2017, cuenta con una población de 45 habitantes, desglosados en 21 hombres y 24 mujeres, así como con un total de 15 viviendas. Es una entidad rural clasificada como un caserío.​   == Referencias ==
+  WIKI[Maquehua] coords=[{'lat': -35.0177, 'lon': -71.2469, 'primary': '', 'globe': 'earth'}]: 
+=== [35] Las Torcazas-Chile | n=Las Torcazas | c=Chile | r=sc_chile_central_araucania | ll=[-39.64603, -73.09294] | ey=1350 | ly=1500 | al=['fundo san miguel', 'Fundo San Miguel'] ===
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Las Torcazas-Chile": {
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "name": "Las Torcazas",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "key": "Las Torcazas-Chile",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Las Torcazas-Chile",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "name": "Las Torcazas",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Las Torcazas-Chile",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_arkg.json: "name": "Las Torcazas 03",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_acreditado.json: "name": "Las Torcazas 03",
+  GEO: [{'title': 'Aeródromo Pichoy', 'dist': 714}, {'title': 'Tralcao', 'dist': 5476}, {'title': 'La Esperanza (Mariquina)', 'dist': 6046}, {'title': 'Río Nanihue', 'dist': 6112}, {'title': 'Paico (Valdivia)', 'dist': 6424}]
+  SRCH: [{'title': 'Pirque', 'snippet': 'Santuario de la Naturaleza Las Torcazas de Pirque (Iniciativa de Conservación Privada)\u200b Santuario de la Naturaleza Las Torcazas de Pirque (Santuario de la'}, {'title': 'Embajada de España en Chile', 'snippet': '(Calle Las Torcazas 103, Las Condes, Santiago de Chile) Oficina Económica y Comercial (Calle Nueva Providencia 1901-1, Providencia, Santiago de Chile) Residencia'}, {'title': 'Alcántara (estación)', 'snippet': '2020. «Cuando la Embajada de Turquía en Chile se suma al proceso MetroArte lo hace con la mira de donar a Chile, por intermedio de Metro, murales conformados'}]
+  WIKI[Aeródromo Pichoy] coords=[{'lat': -39.64972222, 'lon': -73.08611111, 'primary': '', 'globe': 'earth'}]: El Aeropuerto Pichoy  OACI: (SCVD), IATA:(ZAL)​ es un aeropuerto ubicado en la comuna de Mariquina, Chile, a 23 kilómetros al noreste de la ciudad de Valdivia. Conforma la principal infraestructura aeroportuaria de la Región de Los Rios, desempeñando un papel fundamental en la conectividad aérea de Valdivia. Este edificio es de carácter público​ y es administrado por la Dirección General de Aeronáutica Civil de Chile. En mayo de 2024 el Ministerio de Desarrollo Social dio el visto bueno para convertir el aeródromo en aeropuerto.​  En el reciente 2026, el aeródromo Pichoy está siendo ampliado para alcanzar una cifra de 4.828 m², más del doble que el antiguo edificio terminal.   == Historia ==   === Emplazamiento === El aeropuerto se encuentra específicamente enclavado en la localidad de Pichoy, que fue en la época colonial un importante puerto ribereño que unía la ciudad de Valdivia y San Jose de la Mariquina, uno de los tantos ríos que atraviesan la cuenca de hidrográfica de Valdivia de la Región de Los Ríos. La localidad de Pichoy fue un importante puerto ribereño durante la época colonial que conectaba Valdivia con San José de la Mariquina. En 1868 fue visitada por Francisco Vida
+  WIKI[Pirque] coords=[{'lat': -33.6352, 'lon': -70.5729, 'primary': '', 'globe': 'earth'}]: 
+  WIKI[Tralcao] coords=[{'lat': -39.69055556, 'lon': -73.12027778, 'primary': '', 'globe': 'earth'}]: 
+=== [36] Chauchamarca-Ecuador | n=Chauchamarca | c=Ecuador | r=vng_audiencia_quito_sierra | ll=[-3.11, -79.197] | ey=1525 | ly=1830 | al=[] ===
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Chauchamarca-Ecuador": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "name": "Chauchamarca",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "key": "Chauchamarca-Ecuador",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Chauchamarca-Ecuador",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "name": "Chauchamarca",
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Chauchamarca-Ecuador": {
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "Chauchamarca-Ecuador",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Chauchamarca",
+  GEO: [{'title': 'Cantón San Fernando', 'dist': 7212}, {'title': 'San Fernando (Azuay)', 'dist': 7409}, {'title': 'Cantón Girón', 'dist': 7736}, {'title': 'Girón (Ecuador)', 'dist': 7736}, {'title': 'Laguna de Busa', 'dist': 9048}]
+  SRCH: []
+  WIKI[Cantón San Fernando] coords=[{'lat': -3.1445, 'lon': -79.252, 'primary': '', 'globe': 'earth'}]: San Fernando es un cantón de la provincia de Azuay en Ecuador.   == Datos básicos == Ubicado a 62 km de Cuenca, la capital provincial de Azuay; el cantón tiene una población total de 3.961 habitantes, de los cuales 3256 se encuentran en zonas rurales. Su altitud es de 2600 metros sobre el nivel del mar y su clima es templado. Los meses más fríos van de enero a marzo, siendo frecuentes las heladas de invierno. Esta provincia del Azuay tiene una superficie de 8031,45 km² y está compuesta por 15 cantones; siendo el cantón San Fernando el que ocupa el décimo lugar en extensión con 140,51 km² (14.051 ha) representando un 1,75 % del porcentaje total de la extensión de la provincia.​   == Límites == El cantón limita de la siguiente forma:  Norte: El río Zhurucay aguas arriba, hasta su nacimiento en el cerro Pajón; la laguna de Quimsacocha, el cerro Lluchir, y el alto de la virgen hasta el río Lluchir. Sur: Los límites llegan hasta el cerro Celeste, continuando cordillera abajo hasta el cerro Sigse y el cerro Galindo, y siguiendo la quebrada Pucallpa, desde su nacimiento hasta su desembocadura en el río Rircay aguas arriba. Este: desde la unión de la quebrada Pullcay con el río Rircay agua
+  WIKI[San Fernando (Azuay)] coords=[{'lat': -3.14686, 'lon': -79.25259, 'primary': '', 'globe': 'earth'}]: 
+=== [37] Machaca-Peru | n=Machaca | c=Peru | r=vp_intendencia_tarma | ll=[-10.434, -77.316] | ey=1525 | ly=1825 | al=[] ===
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Machacala-Peru",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "name": "Machacala",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'Machacala' into 'Cerro Las Combas' (2.17 km)."
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Machacala-Peru",
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "name": "Machacala",
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "justification": "Merged co-located same-country twin 'Machacala' into 'Cerro Las Combas' (2.17 km)."
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Jesus de Machaca-Bolivia": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Jesus de Machaca-Bolivia",
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "Cruz de Machacamarca-Bolivia": {
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "Cruz de Machacamarca-Bolivia",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Machaca Isla-Peru": {
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Machaca Isla-Peru",
+  LOCAL: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "Cruz de Machacamarca-Bolivia": {
+  LOCAL: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "Cruz de Machacamarca-Bolivia",
+  LOCAL: 3.post_independence\5.andean_bolivia_independence\papers\papers_metadata.json: "Guido Machaca Benito",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Machacamarca",
+  LOCAL: _shared\settlement_sources\raw_setts_andean_bolivia.json: "Cruz de Machacamarca-Bolivia": {
+  LOCAL: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Machaca Huyo",
+  LOCAL: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "Machaca",
+  GEO: [{'title': 'Distrito de Acas', 'dist': 1782}, {'title': 'Distrito de Santiago de Chilcas', 'dist': 4718}, {'title': 'Ocros (Áncash)', 'dist': 9418}, {'title': 'Provincia de Ocros', 'dist': 9542}, {'title': 'Distrito de Ocros (Áncash)', 'dist': 9542}]
+  SRCH: []
+=== [38] CoCuChoZ4PiR-Colombia | n=CoCuChoZ4PiR | c=Colombia | r=na_orinoco_llanos_guayana | ll=[4.53962, -73.9102] | ey=1000 | ly=1500 | al=[] ===
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "CoCuChoZ4PiR-Colombia": {
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "CoCuChoZ4PiR",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "CoCuChoZ4PiR-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "CoCuChoZ4PiR-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "CoCuChoZ4PiR",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "CoCuChoZ4PiR-Colombia",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "name": "CoCuChoZ4PiR001",
+  GEO: [{'title': 'Choachí', 'dist': 1876}, {'title': 'Fómeque', 'dist': 6375}, {'title': 'Ubaque', 'dist': 6840}]
+  SRCH: []
+  WIKI[Choachí] coords=[{'lat': 4.5288034, 'lon': -73.9231943, 'primary': '', 'globe': 'earth'}]: Choachí es un municipio colombiano del departamento de Cundinamarca, ubicado en la Provincia de Oriente, a 42 km al oriente de Bogotá.  La cabecera municipal se encuentra a una altitud de 1924 m, con una temperatura media anual de 18 °C.   == Toponimia ==   === Origen lingüístico​ === Familia lingüística: Chibcha Lengua: Muysccubun   === Significado === El significado del nombre del municipio es muysca, y tiene múltiples interpretaciones dependiendo del autor. Entre otras se encuentran las siguientes:  Miguel Triana: "Chigua chía". A la ventana o agujero de la casa por donde miraban el paisaje se le dice Chigua y a la luna Chía, por lo cual el boquerón de la cordillera por donde asomaba la Luna, recibió el nombre poético de «Ventana de la Luna», «Boquerón de la Luna», del cual proviene Chiguachía, o Choachí. Joaquín Acosta Ortegón: Según este autor, no está bien significar cuando la Luna sale sobre una serranía, como si lo hiciera por una ventana. Por lo tanto, divide la palabra, a fin de darle una traducción más precisa en la lengua indígena: Chi gua chíe, lo cual quiere decir: «nuestro monte luna». También puede derivar de chigua que significa «eco» y chie que significa «nuestro»
+  WIKI[Fómeque] coords=[{'lat': 4.48472222, 'lon': -73.89361111, 'primary': '', 'globe': 'earth'}]: 
+=== [39] La Agustina (col_cauca)-Colombia | n=La Agustina | c=Colombia | r=col_cauca | ll=[2.91587, -76.54806] | ey=1525 | ly=2018 | al=['bellavista', 'la chapa', 'llanito'] ===
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "La Agustina (col_cauca)-Colombia": {
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "name": "La Agustina",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "key": "La Agustina (col_cauca)-Colombia",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "La Agustina-Colombia": {
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "name": "La Agustina",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "key": "La Agustina-Colombia",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "La Agustina (col_cauca)-Colombia",
+  LOCAL: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "La Agustina",
+  GEO: []
+  SRCH: [{'title': 'Instituto Atlético Central Córdoba', 'snippet': 'espectadores. Complejo Deportivo “La Agustina”: Desde 1974 Instituto cuenta con el complejo social y deportivo denominado “La Agustina”, luego de que en 1973 la'}, {'title': 'Zona Bananera', 'snippet': 'Anexo:Municipios de Magdalena Anexo:Municipios de Colombia Anexo:Municipios heteronominales de Colombia Municipios de Colombia Defición de la palabra cabecera en el'}, {'title': 'La Dorada (Caldas)', 'snippet': 'Centros poblados: Buenavista Camelias Doña Juana Guarinocito Horizonte La Agustina La Atarraya La Habana Prosocial La Humareda Purnio El Municipio de La'}]
+  WIKI[Instituto Atlético Central Córdoba] coords=[]: El Instituto Atlético Central Córdoba es un club deportivo de la ciudad de Córdoba, Argentina. Fue fundado el 8 de agosto de 1918. Su equipo de fútbol masculino participa de la Primera División de Argentina.​ Su actividad deportiva comenzó en 1919, con la afiliación a la Liga Cordobesa de Fútbol, empezando en la segunda división. Hasta el día de hoy, el equipo ha conseguido 12 títulos de la federación, ocho de ellos en la primera división. En 1973, inició su larga trayectoria por los Campeonatos Nacionales de la AFA. Desde entonces, acumula 23 participaciones en la primera división (contabilizando los Campeonatos Nacionales) y 25 participaciones en la B Nacional, estando en la actualidad en los puestos 27.º de las tablas históricas de cada categoría respectivamente. Su estadio es el Juan Domingo Perón, ubicado en el Barrio Alta Córdoba y con capacidad para 26.000 espectadores.​Actualmente cuenta con 29.156 socios.​ El club se coronó campeón dos veces en AFA, ambos títulos conseguidos en la B Nacional, en los torneos de 1998-99 y 2003-04. En junio de 2015, el equipo de básquet masculino se consagró campeón del Torneo Nacional de Ascenso, de la segunda división nacional, logrando el 
+  WIKI[Zona Bananera] coords=[{'lat': 10.76166667, 'lon': -74.1555, 'primary': '', 'globe': 'earth'}]: 
+=== [40] Yaulis-Peru | n=Yaulis | c=Peru | r=inca_chinchaysuyu | ll=[-12.73859, -74.50512] | ey=0 | ly=1530 | al=[] ===
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Yaulis-Peru": {
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "name": "Yaulis",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "key": "Yaulis-Peru",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Yaulis-Peru",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "name": "Yaulis",
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Yaulis-Peru": {
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Yaulis-Peru",
+  GEO: [{'title': 'Distrito de El Carmen (Churcampa)', 'dist': 2908}, {'title': 'Distrito de Locroja', 'dist': 6876}, {'title': 'Distrito de Rosario', 'dist': 8614}, {'title': 'Provincia de Churcampa', 'dist': 9267}, {'title': 'Churcampa', 'dist': 9270}]
+  SRCH: []
+  WIKI[Distrito de El Carmen (Churcampa)] coords=[{'lat': -12.7272142, 'lon': -74.4809822, 'primary': '', 'globe': 'earth'}]: El Distrito peruano de El Carmen es uno de los 11 distritos que conforman la Provincia de Churcampa, ubicada en el Departamento de Huancavelica, bajo la administración del Gobierno Regional de Huancavelica, en la zona de los Andes centrales del Perú.   Limita por el norte con el Distrito de Paucarbamba; por el sur con la Provincia de Acobamba; por el este con el Distrito de Locroja; y, por el oeste con el Distrito de Anco.​ Desde el punto de vista jerárquico de la Iglesia católica, forma parte de la Diócesis de Huancavelica.​   == Historia == La fecha de creación por ley de este distrito es el 10 de junio de 1955,​ dada en el gobierno del Presidente Manuel A. Odría.   == Geografía == El distrito con 9 anexos, Arma, Ccahuancho, Nuevo Chanchara, Pucuto, Ccahuacata, Ccochapampa, Paucapata, Palermo y su capital Paucarbambilla, San Pedro de Anccospata, Ccachona, Larcay​ La población total en este distrito es de 3 102 personas​ y tiene un área de 73,12 km².   == Autoridades ==   === Municipales ===  2019-2022​ Alcalde: Prof.HUGO GALVAN DE LA PEÑA, Movimiento Independiente Trabajando para Todos (MITPT). 2015-2018​ Alcalde: EDGAR OBREGON RUIZ, Movimiento Independiente Trabajando para Todos
+  WIKI[Distrito de Locroja] coords=[{'lat': -12.7402997, 'lon': -74.4417478, 'primary': '', 'globe': 'earth'}]: 
+=== [41] Tres Lagunas-Argentina | n=Tres Lagunas | c=Argentina | r=arg_formosa | ll=[-25.21582, -58.5132] | ey=1900 | ly=2022 | al=[] ===
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Perlamayo Tres Lagunas-Peru": {
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "name": "Perlamayo Tres Lagunas",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "key": "Perlamayo Tres Lagunas-Peru",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Perlamayo Tres Lagunas-Peru",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "name": "Perlamayo Tres Lagunas",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Tres Lagunas-Argentina": {
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Tres Lagunas-Argentina",
+  LOCAL: _shared\settlement_sources\raw_setts_argentina.json: "Tres Lagunas-Argentina": {
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades.json: {"cantidad":4037,"inicio":0,"localidades":[{"categoria":"Entidad","centroide":{"lat":-31.3968471082745,"lon":-64.0598690981123},"departamento":{"id":"14014","nombre":"Capital"},"id":"1401401002","localidad_censal":{"id":"14014010","nombre":"Córdoba"},"municipio":{"id":"140077","n
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades_censales.json: {"cantidad":4027,"inicio":0,"localidades_censales":[{"categoria":"Localidad simple","centroide":{"lat":-27.921401190208,"lon":-65.8379274465406},"departamento":{"id":"10007","nombre":"Ambato"},"funcion":null,"id":"10007010","municipio":{"id":"100028","nombre":"Los Varela"},"nombr
+  LOCAL: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Perlamayo Tres Lagunas",
+  GEO: [{'title': 'Tres Lagunas', 'dist': 211}]
+  SRCH: [{'title': '9 de Julio (Buenos Aires)', 'snippet': 'la frontera oeste de los fortines de Bragado y Veinticinco de Mayo. Tres Lagunas era el nombre primitivo de la región que hoy ocupa la ciudad de 9 de'}, {'title': 'Tres Lagunas', 'snippet': 'Tres Lagunas es una localidad argentina del Departamento Pilagás, en la provincia de Formosa. Se encuentra en el km 1321 de la RP 3. Coord. geográficas'}, {'title': 'Estación Tres Lagunas', 'snippet': 'Tres Lagunas es una estación ferroviaria del Ferrocarril Domingo Faustino Sarmiento de la Red ferroviaria argentina, ubicada en el paraje Tres Lagunas'}]
+  WIKI[9 de Julio (Buenos Aires)] coords=[{'lat': -35.45, 'lon': -60.88333333, 'primary': '', 'globe': 'earth'}]: 9 de Julio es una ciudad argentina del interior de la provincia de Buenos Aires, cabecera del partido homónimo. Se encuentra en el km 262 de la ruta nacional 5, en el noroeste de la provincia de Buenos Aires. Es una de las ciudades más relevantes del noroeste de la Provincia de Buenos Aires por su ubicación geográfica, su producción agropecuaria, su comercio e industria. Es frecuentemente visitada por los fanáticos del Turismo Carretera, porque allí se encuentra el Autódromo Ciudad de Nueve de Julio, uno de los más grandes de la máxima categoría del TC de la Argentina. El 42.5 % de la población tiene red cloacal, y el 36.5 % tiene red de gas natural. Todavía no cuenta con servicio de transporte público al interior de la ciudad.   == Historia ==   === Fundación ===   ==== Antecedentes ==== Hallazgos de material lítico (rederas, raspadores, hacha de mano e instrumentos de corte) realizados en superficie, dan la pauta de asentamientos primitivos temporarios en la zona. Bandas nómadas de cazadores recolectores eligieron la zona instalándose sobre las riberas lacustres el tiempo necesario para proveerse de alimentos. Estos habitantes prehistóricos serían los antecesores de los tehuelche
+  WIKI[Tres Lagunas] coords=[{'lat': -25.2158, 'lon': -58.5111, 'primary': '', 'globe': 'earth'}]: 
+=== [42] Cruceta-Peru | n=Cruceta | c=Peru | r=per_piura | ll=[-4.8383, -80.2649] | ey=1850 | ly=2017 | al=[] ===
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Cruceta-Peru": {
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "name": "Cruceta",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "key": "Cruceta-Peru",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Cruceta-Peru",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "name": "Cruceta",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Cruceta",
+  GEO: [{'title': 'Cruceta (Perú)', 'dist': 385}, {'title': 'La Libertad CP 15', 'dist': 1997}, {'title': 'Santa Rosa de Yaranche', 'dist': 2860}, {'title': 'San Francisco (Piura)', 'dist': 3609}, {'title': 'San Francisco de Yaranche', 'dist': 3682}]
+  SRCH: []
+=== [43] Markapuchungo-Peru | n=Markapuchungo | c=Peru | r=inca_contisuyu | ll=[-14.11645, -72.25822] | ey=0 | ly=1530 | al=['acjchiñacha', 'amayccasa a', 'amayccasa b'] ===
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Markapuchungo-Peru": {
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "name": "Markapuchungo",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "key": "Markapuchungo-Peru",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Markapuchungo-Peru",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "name": "Markapuchungo",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'Llactapata' into 'Markapuchungo' (5.02 km)."
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Markapuchungo-Peru": {
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Markapuchungo-Peru",
+  GEO: [{'title': 'Distrito de Chalhuahuacho', 'dist': 888}, {'title': 'Chalhuahuacho', 'dist': 1289}, {'title': 'Nueva Fuerabamba', 'dist': 3239}, {'title': 'Mina Las Bambas', 'dist': 6916}]
+  SRCH: [{'title': 'Provincia de Cotabambas', 'snippet': '19 de noviembre de 2014.\xa0 Mincetur (ed.). «Complejo Arqueológico De Markapuchungo». Archivado desde el original el 29 de noviembre de 2014. Consultado'}]
+  WIKI[Chalhuahuacho] coords=[{'lat': -14.1186616, 'lon': -72.2464821, 'primary': '', 'globe': 'earth'}]: Chalhuahuacho es una localidad peruana, capital del distrito de Chalhuahuacho ubicado en la provincia de Cotabambas en el departamento de Apurímac. Se encuentra a aproximadamente 200 kilómetros de la ciudad de Abancay. Está a una altitud de 3.698 m s.n.m.   == Clima ==   == Referencias ==
+  WIKI[Distrito de Chalhuahuacho] coords=[{'lat': -14.11694444, 'lon': -72.25, 'primary': '', 'globe': 'earth'}]: 
+  WIKI[Provincia de Cotabambas] coords=[{'lat': -13.94611111, 'lon': -72.17444444, 'primary': '', 'globe': 'earth'}]: 
+=== [44] Tlp-Colombia | n=Tlp | c=Colombia | r=na_magdalena_cauca_muisca | ll=[4.47, -75.77] | ey=791 | ly=1500 | al=['city gate', 'nuevo sol', 'City Gate'] ===
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Tlp-Colombia": {
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "Tlp",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "Tlp-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Tlp-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "Tlp",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'Nuevo Sol' into 'Tlp' (2.25 km)."
+  GEO: [{'title': 'Aeropuerto Internacional El Edén', 'dist': 1987}, {'title': 'La Tebaida', 'dist': 2706}, {'title': 'Terremoto del eje cafetero de 1999', 'dist': 5197}, {'title': 'Barcelona (Quindío)', 'dist': 7407}, {'title': 'Río Quindío', 'dist': 9033}]
+  SRCH: []
+=== [45] Rosario-Chile | n=Rosario | c=Chile | r=chl_region_del_libertador_bernardo_o_higgins | ll=[-34.34986, -70.83914] | ey=1850 | ly=2017 | al=[] ===
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "El Rosario (na_magdalena_cauca_muisca)-Colombia": {
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "El Rosario",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "El Rosario (na_magdalena_cauca_muisca)-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "El Rosario-Colombia": {
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "El Rosario",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "El Rosario-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "El Rosario (na_magdalena_cauca_muisca)-Colombia",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Cerro de los Rosarios-Peru": {
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Cerro de los Rosarios-Peru",
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Cerro de los Rosarios-Peru": {
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Cerro de los Rosarios-Peru",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Rosario-Chile": {
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Rosario-Chile",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Alto del Rosario-Colombia": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Alto del Rosario-Colombia",
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "Rosario Salinas-Bolivia": {
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "Rosario Salinas-Bolivia",
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Alto del Rosario-Colombia": {
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "Alto del Rosario-Colombia",
+  LOCAL: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "Rosario de Piedra Blanca",
+  LOCAL: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "Rosario (crp_gobernacion_tucuman)-Argentina",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "Altos Del Rosario-Colombia": {
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Altos Del Rosario-Colombia",
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "Rosario Altamira"
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "Campo Rosario-Venezuela",
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "El Rosario (ecu_el_oro)-Ecuador": {
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "El Rosario (ecu_el_oro)-Ecuador",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "El Rosario"
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "El Rosario-Peru",
+  LOCAL: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "Carcaje Rosario-Bolivia": {
+  LOCAL: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "Carcaje Rosario-Bolivia",
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "El Rosario (chl_region_de_la_araucania)-Chile": {
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "El Rosario (chl_region_de_la_araucania)-Chile",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Balde del Rosario-Argentina": {
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Balde del Rosario-Argentina",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_summary.json: "name": "Gran Rosario (Metro)",
+  LOCAL: 3.post_independence\7.argentina_after_independence\papers\papers_metadata.json: "title": "El Área Metropolitana de Rosario y sus municipios a 2070: aplicación del método de componentes para la proyección de población de áreas menores",
+  LOCAL: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_settlements.json: "Boca del Rosario-Uruguay": {
+  LOCAL: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_source_ledger.json5: "settlement_key": "Boca del Rosario-Uruguay",
+  LOCAL: _shared\quipu_chapter_summaries.json: "name": "Gran Rosario (Metro)",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Rosario Casigua",
+  LOCAL: _shared\settlement_sources\raw_setts_andean_bolivia.json: "Rosario del Ingre-Bolivia": {
+  LOCAL: _shared\settlement_sources\raw_setts_argentina.json: "Rosario del Saladillo-Argentina": {
+  LOCAL: _shared\settlement_sources\raw_setts_colombia.json: "Altos Del Rosario-Colombia": {
+  LOCAL: _shared\settlement_sources\raw_setts_peru.json: "Rosario-Peru": {
+  LOCAL: _shared\settlement_sources\raw_setts_uruguay.json: "Rosario-Uruguay": {
+  LOCAL: _shared\settlement_sources\raw_setts_venezuela.json: "Rosario de Perijá-Venezuela": {
+  LOCAL: _shared\settlement_sources\raw\hdx_cod_ps\ven_admpop_adm2_2011_v3.csv: VE,Venezuela (República Bolivariana de),VE23,Zulia,Zulia,VE2316,Rosario de Perijá,Rosario De Perija,85006,40546,44460,8957,8594,8820,9058,8852,7617,6406,5267,5064,4149,3710,2882,2213,3417,4319,4254,4231,4384,4246,3566,2901,2488,2338,1979,1745,1403,1019,1673,4638,4340,4589,4674,46
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_departamentos.json: {"cantidad":529,"departamentos":[{"centroide":{"lat":-37.9646159068483,"lon":-60.2482821323384},"id":"06014","nombre":"Adolfo Gonzales Chaves","provincia":{"id":"06","nombre":"Buenos Aires"}},{"centroide":{"lat":-31.2902983724746,"lon":-58.2378696898985},"id":"30015","nombre":"Co
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades.json: {"cantidad":4037,"inicio":0,"localidades":[{"categoria":"Entidad","centroide":{"lat":-31.3968471082745,"lon":-64.0598690981123},"departamento":{"id":"14014","nombre":"Capital"},"id":"1401401002","localidad_censal":{"id":"14014010","nombre":"Córdoba"},"municipio":{"id":"140077","n
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades_censales.json: {"cantidad":4027,"inicio":0,"localidades_censales":[{"categoria":"Localidad simple","centroide":{"lat":-27.921401190208,"lon":-65.8379274465406},"departamento":{"id":"10007","nombre":"Ambato"},"funcion":null,"id":"10007010","municipio":{"id":"100028","nombre":"Los Varela"},"nombr
+  LOCAL: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Altos del Rosario",
+  LOCAL: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Bellavista - El Rosario - San Lorenzo",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Virgen del Rosario - Estacion de Uchumayo",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_censos_2007_2025.json: {"meta":[{"id":"POB","cat":"Población y hogares","label":"Población censada","long":"la población censada","dir":0,"unit":"count","den":"","cu":"personas","years":[2007,2017,2025],"cmp":{"2007-2017":true,"2017-2025":true,"2007-2025":true},"def_":"Población censada","notes":{"2007
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 090208,080208,HUANCAVELICA,ACOBAMBA,ROSARIO,HUANCAVELICA,CENTRO,MACROREGION CENTRO,PE-HUV,09,Rosario,97.07,64.056866179046096,3687,-12.7208333333333,-74.5825,0.72885823249816895,0.221526504690506,44.56379,16.21646
+  LOCAL: _shared\settlement_sources\raw\nso_venezuela\ine_ven_2001_2011.json: "name": "Rosario de Perijá",
+  LOCAL: _shared\settlement_sources\raw\nso_venezuela\ine_ven_ccpp_2011.json: [{"attributes": {"Codigo_Com": "01010100001", "ENTIDAD": "01", "NOMBENT": "Distrito Capital", "MUNICIPI": "01", "NOMBMUN": "Distrito Capital, Libertador", "PARROQUI": "01", "NOMBPAR": "Altagracia", "CENTROPO": "00001", "NOMBCP": "Caracas (Capital)", "SEXO_T": 47922}, "geometry": 
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_idacor_ariadne.json: "Rosario",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_ign_wfs.json: "reference": "IDE Rosario",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "name": "Casa  y Parque del Instituto Cultural de las Condes, ex Chacra el Rosario",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_radiocarbon.json: "name": "Rosario 2",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_cadb_regional.json: "name": "CADB San Agustín-Isnos Monuments - Regional Classic Monumental - El Rosario",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_col14.json: "citation": "Llanos Vargas, H. (1998). Viviendas y tumbas en los Altos de Lavaderos del Valle del rio Granadillos San Agustin (El Rosario). Fundacion de Investigaciones Arqueologicas Nacionales. Banco de la Republica.",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "citation": "Roberto Lleras P. (2015). Monitoreo arqueológico en el proyecto de mejoramiento del espacio público en el centro de Bogotá, plaza de armas de las Cruces, parque Santander, plaza de los Mártires, parque de los periodistas, plazoleta del Rosario y eje ambiental, inform
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/MapServer", "harvested_at_utc": "2026-11-23T13:54:37.644850+00:00", "total_records": 7215, "caminos_prehispanicos_count": 5379, "proyec
+  LOCAL: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "Rosario",
+  GEO: [{'title': 'Estación Rosario (Chile)', 'dist': 135}, {'title': 'Rosario (Chile)', 'dist': 556}, {'title': 'El Bosque (Rengo)', 'dist': 3600}, {'title': 'Estero Tipaume', 'dist': 3618}, {'title': 'Chuchunco (Rengo)', 'dist': 3881}]
+  SRCH: []
+=== [46] San Lorenzo (arg_corrientes)-Argentina | n=San Lorenzo | c=Argentina | r=arg_corrientes | ll=[-28.13812, -58.76824] | ey=1536 | ly=2022 | al=[] ===
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "San Lorenzo-Colombia": {
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "San Lorenzo",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "San Lorenzo-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "San Lorenzo-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "San Lorenzo",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'Vivero' into 'San Lorenzo' (0.00 km)."
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Isla San Lorenzo"
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Isla San Lorenzo-Peru",
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Isla San Lorenzo"
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Isla San Lorenzo-Peru",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Vega de San Lorenzo"
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "San Lorenzo (conq_audiencia_quito_popayan)-Colombia",
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "San Lorenzo (vp_intendencia_lima)-Peru": {
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "San Lorenzo (vp_intendencia_lima)-Peru",
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Vega de San Lorenzo"
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "San Lorenzo (vng_antioquia_popayan_choco)-Colombia",
+  LOCAL: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "Guardia de San Lorenzo",
+  LOCAL: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "San Lorenzo (crp_obispado_santiago)-Chile",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "San Lorenzo Abajo",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "San Lorenzo (col_arauca)-Colombia",
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "San Lorenzo Guere"
+  LOCAL: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "San Lorenzo de Tiznados-Venezuela",
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "San Lorenzo (ecu_bolivar)-Ecuador": {
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "San Lorenzo (ecu_bolivar)-Ecuador",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "San Lorenzo"
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Isla San Lorenzo-Peru",
+  LOCAL: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "San Lorenzo",
+  LOCAL: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "San Lorenzo (bol_cochabamba)-Bolivia",
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "San Lorenzo-Chile": {
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "San Lorenzo-Chile",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "San Lorenzo",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "San Lorenzo (arg_cordoba)-Argentina",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "San Lorenzo Caranapuey",
+  LOCAL: _shared\settlement_sources\raw_setts_argentina.json: "San Lorenzo-Argentina": {
+  LOCAL: _shared\settlement_sources\raw_setts_colombia.json: "San Lorenzo-Colombia": {
+  LOCAL: _shared\settlement_sources\raw_setts_ecuador.json: "San Lorenzo-Ecuador": {
+  LOCAL: _shared\settlement_sources\raw_setts_peru.json: "San Lorenzo-Peru": {
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_departamentos.json: {"cantidad":529,"departamentos":[{"centroide":{"lat":-37.9646159068483,"lon":-60.2482821323384},"id":"06014","nombre":"Adolfo Gonzales Chaves","provincia":{"id":"06","nombre":"Buenos Aires"}},{"centroide":{"lat":-31.2902983724746,"lon":-58.2378696898985},"id":"30015","nombre":"Co
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades.json: {"cantidad":4037,"inicio":0,"localidades":[{"categoria":"Entidad","centroide":{"lat":-31.3968471082745,"lon":-64.0598690981123},"departamento":{"id":"14014","nombre":"Capital"},"id":"1401401002","localidad_censal":{"id":"14014010","nombre":"Córdoba"},"municipio":{"id":"140077","n
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades_censales.json: {"cantidad":4027,"inicio":0,"localidades_censales":[{"categoria":"Localidad simple","centroide":{"lat":-27.921401190208,"lon":-65.8379274465406},"departamento":{"id":"10007","nombre":"Ambato"},"funcion":null,"id":"10007010","municipio":{"id":"100028","nombre":"Los Varela"},"nombr
+  LOCAL: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "San Lorenzo",
+  LOCAL: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Bellavista - El Rosario - San Lorenzo",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "San Lorenzo",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_censos_2007_2025.json: {"meta":[{"id":"POB","cat":"Población y hogares","label":"Población censada","long":"la población censada","dir":0,"unit":"count","den":"","cu":"personas","years":[2007,2017,2025],"cmp":{"2007-2017":true,"2017-2025":true,"2007-2025":true},"def_":"Población censada","notes":{"2007
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 120428,110326,JUNIN,JAUJA,SAN LORENZO,JUNIN,CENTRO,MACROREGION CENTRO,PE-JUN,12,San Lorenzo,22.15,117.29119638826199,3337,-11.8463888888889,-75.3816666666667,0.31035739183425898,0.50701618428959405,16.692441,2.533658
+  LOCAL: _shared\settlement_sources\raw\nso_venezuela\ine_ven_2001_2011.json: "name": "San Lorenzo",
+  LOCAL: _shared\settlement_sources\raw\nso_venezuela\ine_ven_ccpp_2011.json: [{"attributes": {"Codigo_Com": "01010100001", "ENTIDAD": "01", "NOMBENT": "Distrito Capital", "MUNICIPI": "01", "NOMBMUN": "Distrito Capital, Libertador", "PARROQUI": "01", "NOMBPAR": "Altagracia", "CENTROPO": "00001", "NOMBCP": "Caracas (Capital)", "SEXO_T": 47922}, "geometry": 
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "name": "Iglesia y Campanario San Lorenzo de Tarapacá",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_radiocarbon.json: "name": "San Lorenzo 1",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_cadb_regional.json: "name": "CADB San Agustín-Isnos Monuments - Regional Classic Monumental - San Lorenzo",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_col14.json: "name": "San Lorenzo",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "name": "Cementerio San Lorenzo",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_loreto_figshare.json: {"source": "Archaeological sites in the Department of Loreto, Peruvian Amazon", "doi": "10.6084/m9.figshare.13547684.v1", "url": "https://figshare.com/articles/dataset/Archaeological_sites_in_the_Department_of_Loreto_Peruvian_Amazon/13547684", "download_url": "https://ndownloader
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/MapServer", "harvested_at_utc": "2026-11-23T13:54:37.644850+00:00", "total_records": 7215, "caminos_prehispanicos_count": 5379, "proyec
+  LOCAL: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "San Lorenzo Tarapaca",
+  GEO: []
+  SRCH: []
+=== [47] Tunquiri-Bolivia | n=Tunquiri | c=Bolivia | r=vp_intendencia_charcas_potosi | ll=[-18.34, -67.682] | ey=1525 | ly=1825 | al=[] ===
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Tunquiri-Bolivia": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "name": "Tunquiri",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "key": "Tunquiri-Bolivia",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Tunquiri-Bolivia",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "name": "Tunquiri",
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "Tunquiri-Bolivia": {
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "Tunquiri-Bolivia",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Tunquiri",
+  GEO: []
+  SRCH: []
+=== [48] Barranca Vieja-Colombia | n=Barranca Vieja | c=Colombia | r=col_bolivar | ll=[10.14981, -74.94973] | ey=1525 | ly=2018 | al=[] ===
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Barranca Vieja-Colombia": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "name": "Barranca Vieja",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "key": "Barranca Vieja-Colombia",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Barranca Vieja-Colombia",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "name": "Barranca Vieja",
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Barranca Vieja-Colombia": {
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "Barranca Vieja-Colombia",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "Barranca Vieja-Colombia": {
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Barranca Vieja-Colombia",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Barranca Vieja",
+  LOCAL: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Barranca Vieja",
+  GEO: []
+  SRCH: []
+=== [49] Chinga (vng_santafe_tunja_highlands)-Colombia | n=Chinga | c=Colombia | r=vng_santafe_tunja_highlands | ll=[5.607, -74.128] | ey=1525 | ly=1830 | al=[] ===
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Chinga (conq_nuevo_reino_granada)-Colombia": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "name": "Chinga",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "key": "Chinga (conq_nuevo_reino_granada)-Colombia",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Chinga-Colombia": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "name": "Chinga",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "key": "Chinga-Colombia",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Chinga (conq_nuevo_reino_granada)-Colombia",
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Chinga (vng_santafe_tunja_highlands)-Colombia": {
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "Chinga (vng_santafe_tunja_highlands)-Colombia",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "Chingale-Colombia": {
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Chingale-Colombia",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Boca Chinganaza-Peru": {
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Boca Chinganaza-Peru",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "San Juan de La Vega y Chinga Caliente|"
+  LOCAL: _shared\settlement_sources\raw_setts_peru.json: "Chingas-Peru": {
+  LOCAL: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Chingale",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Boca Chinganaza",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_censos_2007_2025.json: {"meta":[{"id":"POB","cat":"Población y hogares","label":"Población censada","long":"la población censada","dir":0,"unit":"count","den":"","cu":"personas","years":[2007,2017,2025],"cmp":{"2007-2017":true,"2017-2025":true,"2007-2025":true},"def_":"Población censada","notes":{"2007
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 020304,021604,ANCASH,ANTONIO RAYMONDI,CHINGAS,ANCASH,CENTRO,MACROREGION NORTE,PE-ANC,02,Chingas,48.95,41.5730337078652,2866,-9.11861111111111,-76.9919444444445,0.52791893482208296,0.36489651814103802,31.88595,21.93497
+  GEO: []
+  SRCH: []
+=== [50] Barranca Nueva-Colombia | n=Barranca Nueva | c=Colombia | r=col_bolivar | ll=[10.19571, -74.93502] | ey=1525 | ly=2018 | al=['barranca', 'barranca del rey', 'Barranca'] ===
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "Barranca Nueva-Colombia": {
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "name": "Barranca Nueva",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "key": "Barranca Nueva-Colombia",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Barranca Nueva-Colombia",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "name": "Barranca Nueva",
+  LOCAL: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Barranca Nueva",
+  GEO: []
+  SRCH: []
+=== [51] Lourdes-Colombia | n=Lourdes | c=Colombia | r=col_norte_de_santander | ll=[7.94563, -72.83238] | ey=1850 | ly=2025 | al=[] ===
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Lourdes-Colombia": {
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "Lourdes",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "Lourdes-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Lourdes-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "Lourdes",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'Hacienda Bellavista' into 'Lourdes' (1.56 km)."
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Quebrada Virgen de Lourdes-Peru",
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Quebrada Virgen de Lourdes"
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Quebrada Virgen de Lourdes-Peru",
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "Lourdes (col_cauca)-Colombia": {
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Lourdes (col_cauca)-Colombia",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "San José de Lourdes-Peru": {
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "San José de Lourdes-Peru",
+  LOCAL: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "Quivi Quivi Lourdes",
+  LOCAL: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "Quivi Quivi Lourdes-Bolivia",
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "Lourdes (chl_region_de_coquimbo)-Chile": {
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "Lourdes (chl_region_de_coquimbo)-Chile",
+  LOCAL: _shared\settlement_sources\raw_setts_colombia.json: "Lourdes-Colombia": {
+  LOCAL: _shared\settlement_sources\raw_setts_peru.json: "San José de Lourdes-Peru": {
+  LOCAL: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Lourdes",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "El Rejo [ in: San José de Lourdes district ]",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_censos_2007_2025.json: {"meta":[{"id":"POB","cat":"Población y hogares","label":"Población censada","long":"la población censada","dir":0,"unit":"count","den":"","cu":"personas","years":[2007,2017,2025],"cmp":{"2007-2017":true,"2017-2025":true,"2007-2025":true},"def_":"Población censada","notes":{"2007
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 060906,061106,CAJAMARCA,SAN IGNACIO,SAN JOSE DE LOURDES,CAJAMARCA,NORTE,MACROREGION NORTE,PE-CAJ,06,San José de Lourdes,1482.75,13.9443601416287,1134,-5.10305555555555,-78.9141666666667,0.66424942016601596,0.32301960734976598,48.337739,23.06691
+  LOCAL: _shared\settlement_sources\raw\nso_venezuela\ine_ven_ccpp_2011.json: [{"attributes": {"Codigo_Com": "01010100001", "ENTIDAD": "01", "NOMBENT": "Distrito Capital", "MUNICIPI": "01", "NOMBMUN": "Distrito Capital, Libertador", "PARROQUI": "01", "NOMBPAR": "Altagracia", "CENTROPO": "00001", "NOMBCP": "Caracas (Capital)", "SEXO_T": 47922}, "geometry": 
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_acreditado.json: "name": "La Puntilla Cueva (Gruta de Lourdes)",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "name": "La Puntilla Cueva (Gruta de Lourdes)",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "name": "Lourdes",
+  GEO: []
+  SRCH: []
+=== [52] Pedro Pablo Gómez-Ecuador | n=Pedro Pablo Gómez | c=Ecuador | r=ecu_santa_elena | ll=[-1.66716, -80.58502] | ey=1850 | ly=2025 | al=[] ===
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "Pedro Pablo Gómez-Ecuador": {
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "name": "Pedro Pablo Gómez",
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "key": "Pedro Pablo Gómez-Ecuador",
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "Pedro Pablo Gómez-Ecuador",
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "name": "Pedro Pablo Gómez",
+  LOCAL: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Pedro Pablo Gómez",
+  GEO: []
+  SRCH: []
+=== [53] Letira-Peru | n=Letira | c=Peru | r=per_piura | ll=[-5.4397, -80.8069] | ey=1850 | ly=2017 | al=['becara', 'Becara'] ===
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Letira-Peru": {
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "name": "Letira",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "key": "Letira-Peru",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Letira-Peru",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "name": "Letira",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "justification": "Merged co-located modern twin 'Becara' into 'Letira' (1.49 km)."
+  LOCAL: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Letira",
+  GEO: []
+  SRCH: []
+=== [54] Camarones-Ecuador | n=Camarones | c=Ecuador | r=ecu_esmeraldas | ll=[0.96173, -79.52363] | ey=1850 | ly=2025 | al=[] ===
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Camarones Cave-Chile": {
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "name": "Camarones Cave",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Camarones 15-B",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Camarones 15-D",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Camarones Pta Norte",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Camarones Sur"
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Camarones Cave-Chile",
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Camarones-Chile": {
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Camarones-Chile",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Camarones",
+  LOCAL: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Camarones 15-D-Chile",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Camarones-Chile": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Camarones-Chile",
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "Camarones-Chile": {
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "Camarones-Chile",
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Camarones-Colombia": {
+  LOCAL: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "Camarones-Colombia",
+  LOCAL: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "Los Camarones"
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "Camarones (col_cauca)-Colombia": {
+  LOCAL: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Camarones (col_cauca)-Colombia",
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "Camarones-Ecuador": {
+  LOCAL: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "Camarones-Ecuador",
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "Caleta Camarones-Chile": {
+  LOCAL: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "Caleta Camarones-Chile",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Camarones-Argentina": {
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Camarones-Argentina",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Camarones",
+  LOCAL: _shared\settlement_sources\raw_setts_argentina.json: "Camarones-Argentina": {
+  LOCAL: _shared\settlement_sources\raw_setts_chile.json: "Camarones-Chile": {
+  LOCAL: _shared\settlement_sources\raw\hdx_cod_ps\chl_admpop_adm3_2022.csv: 2022,CHL,Chile,CL,Región de Arica y Parinacota,Arica y Parinacota,CL15,Arica,Arica,CL151,Camarones,Camarones,CL15102,604,638,1242,27,30,34,18,23,38,45,42,37,37,43,46,50,52,38,14,30,27,34,32,23,28,38,41,35,57,40,51,58,51,42,33,25,23,54,64,66,41,51,76,86,77,94,77,94,104,101,94,71,3
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades.json: {"cantidad":4037,"inicio":0,"localidades":[{"categoria":"Entidad","centroide":{"lat":-31.3968471082745,"lon":-64.0598690981123},"departamento":{"id":"14014","nombre":"Capital"},"id":"1401401002","localidad_censal":{"id":"14014010","nombre":"Córdoba"},"municipio":{"id":"140077","n
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades_censales.json: {"cantidad":4027,"inicio":0,"localidades_censales":[{"categoria":"Localidad simple","centroide":{"lat":-27.921401190208,"lon":-65.8379274465406},"departamento":{"id":"10007","nombre":"Ambato"},"funcion":null,"id":"10007010","municipio":{"id":"100028","nombre":"Los Varela"},"nombr
+  LOCAL: _shared\settlement_sources\raw\nso_chile\chile_ine_proyecciones_comuna_2002_2035.csv: "10949";15;"Arica y Parinacota";151;"Arica";15102;"Camarones";2002;1173
+  LOCAL: _shared\settlement_sources\raw\nso_chile\chile_ine_proyeccion_2024.csv: "323";15;"Arica y Parinacota";151;"Arica";15102;"Camarones";1246
+  LOCAL: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Camarones",
+  LOCAL: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Camarones",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_acreditado.json: "commune": "Camarones",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "commune": "Camarones",
+  LOCAL: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_radiocarbon.json: "name": "Camarones Pta Norte",
+  LOCAL: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "Camarones",
+  GEO: []
+  SRCH: []
+=== [55] Tres de Diciembre-Peru | n=Tres de Diciembre | c=Peru | r=per_junin | ll=[-12.10972, -75.24583] | ey=1850 | ly=2025 | al=[] ===
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Tres de Diciembre-Peru": {
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "name": "Tres de Diciembre",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "key": "Tres de Diciembre-Peru",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Tres de Diciembre-Peru",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "name": "Tres de Diciembre",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Tres de Diciembre-Peru",
+  LOCAL: _shared\settlement_sources\raw_setts_peru.json: "Tres de Diciembre-Peru": {
+  LOCAL: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Tres de Diciembre",
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_censos_2007_2025.json: {"meta":[{"id":"POB","cat":"Población y hogares","label":"Población censada","long":"la población censada","dir":0,"unit":"count","den":"","cu":"personas","years":[2007,2017,2025],"cmp":{"2007-2017":true,"2017-2025":true,"2007-2025":true},"def_":"Población censada","notes":{"2007
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 120908,110908,JUNIN,CHUPACA,TRES DE DICIEMBRE,JUNIN,CENTRO,MACROREGION CENTRO,PE-JUN,12,Tres de Diciembre,14.66,206.68485675306999,3193,-12.1097222222222,-75.2458333333333,0.35757434368133501,0.50335171523676903,18.76017,2.019314
+  GEO: []
+  SRCH: []
+=== [56] La Mendieta-Argentina | n=La Mendieta | c=Argentina | r=arg_jujuy | ll=[-24.31434, -64.96663] | ey=1850 | ly=2022 | al=[] ===
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "La Mendieta-Argentina": {
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "name": "La Mendieta",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "key": "La Mendieta-Argentina",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "La Mendieta-Argentina",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "name": "La Mendieta",
+  LOCAL: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "La Mendieta-Argentina",
+  LOCAL: _shared\settlement_sources\raw_setts_argentina.json: "La Mendieta-Argentina": {
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades.json: {"cantidad":4037,"inicio":0,"localidades":[{"categoria":"Entidad","centroide":{"lat":-31.3968471082745,"lon":-64.0598690981123},"departamento":{"id":"14014","nombre":"Capital"},"id":"1401401002","localidad_censal":{"id":"14014010","nombre":"Córdoba"},"municipio":{"id":"140077","n
+  LOCAL: _shared\settlement_sources\raw\nso_argentina\georef_localidades_censales.json: {"cantidad":4027,"inicio":0,"localidades_censales":[{"categoria":"Localidad simple","centroide":{"lat":-27.921401190208,"lon":-65.8379274465406},"departamento":{"id":"10007","nombre":"Ambato"},"funcion":null,"id":"10007010","municipio":{"id":"100028","nombre":"Los Varela"},"nombr
+  GEO: []
+  SRCH: []
+=== [57] Huachon-Peru | n=Huachon | c=Peru | r=per_pasco | ll=[-10.63639, -75.95111] | ey=1850 | ly=2025 | al=['huachón', 'Huachón'] ===
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Huachon (conq_peru_costa_lima_trujillo)-Peru": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "name": "Huachon",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "key": "Huachon (conq_peru_costa_lima_trujillo)-Peru",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Huachon-Peru": {
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "name": "Huachon",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "key": "Huachon-Peru",
+  LOCAL: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Huachon (conq_peru_costa_lima_trujillo)-Peru",
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "Huachon (vp_intendencia_lima)-Peru": {
+  LOCAL: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "Huachon (vp_intendencia_lima)-Peru",
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Huachon-Peru": {
+  LOCAL: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Huachon-Peru",
+  LOCAL: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Huachon",
+  LOCAL: _shared\settlement_sources\raw_setts_peru.json: "Huachon-Peru": {
+  LOCAL: _shared\settlement_sources\raw\nso_peru\peru_censos_2007_2025.json: {"meta":[{"id":"POB","cat":"Población y hogares","label":"Población censada","long":"la población censada","dir":0,"unit":"count","den":"","cu":"personas","years":[2007,2017,2025],"cmp":{"2007-2017":true,"2017-2025":true,"2007-2025":true},"def_":"Población censada","notes":{"2007
+  GEO: []
+  SRCH: []
+=== [58] Complejo Santa Maria-Peru | n=Complejo Santa Maria | c=Peru | r=inca_chinchaysuyu | ll=[-7.11635, -79.55545] | ey=-1000 | ly=1532 | al=['monticulo', 'montículo', 'santa rosa'] ===
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Complejo Santa Maria-Peru": {
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "name": "Complejo Santa Maria",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "key": "Complejo Santa Maria-Peru",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Complejo Santa Maria-Peru",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "name": "Complejo Santa Maria",
+  LOCAL: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'El Potrero' into 'Complejo Santa Maria' (4.25 km)."
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Complejo Santa Maria-Peru": {
+  LOCAL: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Complejo Santa Maria-Peru",
+  GEO: []
+  SRCH: []
+=== [59] Sa-Tm-Colombia | n=Sa-Tm | c=Colombia | r=na_magdalena_cauca_muisca | ll=[4.44102, -74.82597] | ey=1000 | ly=1500 | al=[] ===
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Sa-Tm-Colombia": {
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "Sa-Tm",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "Sa-Tm-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Sa-Tm-Colombia",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "Sa-Tm",
+  LOCAL: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Sa-Tm-Colombia",
+  GEO: []
+  SRCH: []

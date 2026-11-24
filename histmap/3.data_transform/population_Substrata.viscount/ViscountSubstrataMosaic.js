@@ -749,10 +749,10 @@ let ViscountSubstrataSeamBlend = global.ViscountSubstrataSeamBlend || require(se
           let r_keys = Object.keys(m_json.regions || {});
           for (let x = 0; x < r_keys.length; x++) {
             let zc = m_json.regions[r_keys[x]];
-            let col = zc.colour || zc.color;
+            let col = zc.colour || zc.color || zc.rgb;
             if (Array.isArray(col) && col.length >= 3) {
               col_map.set(`${col[0]},${col[1]},${col[2]}`, zones.length);
-              zones.push({ colour: col, domain: zc.domain || null, domain_fraction: 1.0, key: r_keys[x], pixels: [], population: zc.population || {} });
+              zones.push({ colour: col, domain: zc.domain || null, domain_fraction: 1.0, key: zc.id || r_keys[x], pixels: [], population: zc.population || {} });
             }
           }
           for (let idx = 0; idx < n_pixels; idx++) {

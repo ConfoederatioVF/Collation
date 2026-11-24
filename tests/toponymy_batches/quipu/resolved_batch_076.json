@@ -1,0 +1,1388 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 76,
+  "count": 30,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        9.60833,
+        -69.98111
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1538,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Humocaro Alto-Venezuela",
+      "known_aliases": [
+        "Humocaro Alto",
+        "humocaro alto",
+        "san antonio de los naranjos humocaro alto",
+        "humucaro alto",
+        "san antonio de padua",
+        "San Antonio de los Naranjos Humocaro alto",
+        "Humucaro alto",
+        "San Antonio de Padua"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15776,
+      "name": "Humocaro Alto",
+      "reason": "missing_entry",
+      "region": "ven_trujillo",
+      "sample_years": [
+        1538,
+        1806,
+        1880,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Humocaro Alto",
+      "historical_names": [
+        {
+          "date": "1610.1.1",
+          "date_source_note": "Early colonial Omocaro-Gayón settlement horizon",
+          "name": "Humocaro"
+        },
+        {
+          "date": "1620.6.6",
+          "date_source_note": "Spanish doctrina founded by order of Hoz Berrío",
+          "name": "San Antonio de los Naranjos de Humocaro Alto"
+        },
+        {
+          "date": "1830.1.1",
+          "date_source_note": "Republican civil parish shortened name",
+          "name": "Humocaro Alto"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.71788,
+        -74.92933
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Venadillo-Colombia",
+      "known_aliases": [
+        "Venadillo",
+        "venadillo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15733,
+      "name": "Venadillo",
+      "reason": "missing_entry",
+      "region": "col_tolima",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Venadillo",
+      "historical_names": [
+        {
+          "date": "1560.9.2",
+          "date_source_note": "Founded on 2 September 1560 in Tolima; later erected as a colonial parish in 1778.",
+          "name": "Venadillo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.78975,
+        -75.7855
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Jericó-Colombia",
+      "known_aliases": [
+        "Jericó",
+        "jericó"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15727,
+      "name": "Jericó",
+      "reason": "missing_entry",
+      "region": "col_antioquia",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Jericó",
+      "historical_names": [
+        {
+          "date": "1850.9.28",
+          "date_source_note": "Founded on 28 September 1850 by Santiago Santamaría Bermúdez under the name Aldea de Piedras.",
+          "name": "Aldea de Piedras"
+        },
+        {
+          "date": "1851.9.1",
+          "date_source_note": "Renamed Jericó in 1851 upon administrative consolidation as a district.",
+          "name": "Jericó"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.03074,
+        -74.88444
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1968.1.1",
+          "name": "Armero"
+        }
+      ],
+      "existing_meta_index": 25,
+      "existing_meta_name": "Armero",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Armero-Colombia",
+      "known_aliases": [
+        "Armero",
+        "armero",
+        "armero-guayabal",
+        "guayabal",
+        "Armero-Guayabal",
+        "Guayabal"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15724,
+      "name": "Armero",
+      "reason": "under_covered_history",
+      "region": "col_tolima",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Armero",
+      "historical_names": [
+        {
+          "date": "1895.2.19",
+          "date_source_note": "Founded in Guayabal district after Lagunilla flood",
+          "name": "San Lorenzo"
+        },
+        {
+          "date": "1930.1.1",
+          "date_source_note": "Renamed for José León Armero; destroyed 1985.11.13",
+          "name": "Armero"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.17649,
+        -74.53197
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Icononzo-Colombia",
+      "known_aliases": [
+        "Icononzo",
+        "icononzo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15724,
+      "name": "Icononzo",
+      "reason": "missing_entry",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Icononzo",
+      "historical_names": [
+        {
+          "date": "1915.4.19",
+          "date_source_note": "Official founding of Icononzo municipality (19 April 1915)",
+          "name": "Icononzo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.10197,
+        -65.22864
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sucre (ven_anzoategui)-Venezuela",
+      "known_aliases": [
+        "Sucre",
+        "sucre"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15696,
+      "name": "Sucre",
+      "reason": "missing_entry",
+      "region": "ven_anzoategui",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sucre",
+      "historical_names": [
+        {
+          "date": "1700.7.16",
+          "date_source_note": "Coastal fishing settlement in Unare isthmus",
+          "name": "El Hatillo"
+        },
+        {
+          "date": "1989.1.1",
+          "date_source_note": "Civil parish of Fernando de Peñalver municipality",
+          "name": "Sucre"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.11861,
+        -72.24667
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Challhuahuacho-Peru",
+      "known_aliases": [
+        "Challhuahuacho",
+        "challhuahuacho"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15684,
+      "name": "Challhuahuacho",
+      "reason": "missing_entry",
+      "region": "per_apurimac",
+      "sample_years": [
+        1850,
+        1950,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Challhuahuacho",
+      "historical_names": [
+        {
+          "date": "1994.11.18",
+          "date_source_note": "Created as Distrito de Challhuahuacho by Peruvian Law No. 26391 on 18 November 1994; Quechua endonym Challwawachu.",
+          "name": "Challhuahuacho"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.3654,
+        -66.31656
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chamical-Argentina",
+      "known_aliases": [
+        "Chamical",
+        "chamical"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15666,
+      "name": "Chamical",
+      "reason": "missing_entry",
+      "region": "arg_la_rioja",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Chamical",
+      "historical_names": [
+        {
+          "date": "1898.1.1",
+          "date_source_note": "Modern urban centre of Chamical consolidated with the arrival of the railway station in 1898 (preceded by the 19th-century paraje El Chamical; elevated to city on 21 August 1955).",
+          "name": "Chamical"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -37.37478,
+        -70.27647
+      ],
+      "country": "Argentina",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chos Malal-Argentina",
+      "known_aliases": [
+        "Chos Malal",
+        "chos malal"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15655,
+      "name": "Chos Malal",
+      "reason": "missing_entry",
+      "region": "arg_neuquen",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Chos Malal",
+      "historical_names": [
+        {
+          "date": "1887.8.4",
+          "date_source_note": "Founded on 4 August 1887 by Colonel Manuel José Olascoaga as the first capital of Neuquén Territory (1887–1904); name from Mapudungun Chos Malal ('yellow corral').",
+          "name": "Chos Malal"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -1.85883,
+        -78.77057
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Columbe-Ecuador",
+      "known_aliases": [
+        "Columbe",
+        "columbe"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15644,
+      "name": "Columbe",
+      "reason": "missing_entry",
+      "region": "ecu_chimborazo",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Columbe",
+      "historical_names": [
+        {
+          "date": "1525.1.1",
+          "date_source_note": "Pre-colonial Puruhá settlement; colonial reducción 16th century",
+          "name": "Columbe"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7,
+        -78.85
+      ],
+      "country": "Peru",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Miguel (per_cajamarca)-Peru",
+      "known_aliases": [
+        "San Miguel",
+        "san miguel",
+        "san miguel de pallaques",
+        "san miguel de pallazquez",
+        "lanchipampa",
+        "la arteza",
+        "la succha",
+        "quebrada honda",
+        "cerro blanco",
+        "cerro ilan",
+        "chuad",
+        "cruz pampa",
+        "la ramada",
+        "nintisuyo bajo",
+        "ventanillas",
+        "castillo de cochán",
+        "coshpe",
+        "el castillo de cochan",
+        "elemento arqueológico aislado espejo de agua",
+        "lancheloma",
+        "tambo militar",
+        "ventanillas de tumbaden",
+        "ventanillas de ventanilla",
+        "ventanillas de jangala",
+        "San Miguel de Pallaques",
+        "San Miguel de Pallazquez",
+        "La Arteza",
+        "La Succha",
+        "Quebrada Honda",
+        "San Miguel De Pallaques",
+        "Cerro Blanco",
+        "Cerro Ilan",
+        "Chuad",
+        "Cruz Pampa",
+        "La Ramada",
+        "Nintisuyo Bajo",
+        "Ventanillas",
+        "Coshpe",
+        "El Castillo de Cochan",
+        "Elemento Arqueológico Aislado Espejo de Agua",
+        "Lancheloma",
+        "Tambo Militar",
+        "Ventanillas de Tumbaden",
+        "Ventanillas de Ventanilla",
+        "Ventanillas de Jangala"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15641,
+      "name": "San Miguel",
+      "reason": "missing_entry",
+      "region": "per_cajamarca",
+      "sample_years": [
+        0,
+        1525,
+        1779,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Miguel",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial indigenous settlement of Pallaques in the Cajamarca highlands.",
+          "name": "Pallaques"
+        },
+        {
+          "date": "1572.1.1",
+          "date_source_note": "Spanish colonial reducción and doctrina of San Miguel de Pallaques established in the 1570s.",
+          "name": "San Miguel de Pallaques"
+        },
+        {
+          "date": "1964.9.29",
+          "date_source_note": "Designated provincial capital San Miguel upon creation of San Miguel Province by Law No. 15152 on 29 September 1964.",
+          "name": "San Miguel"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.67499,
+        -75.77979
+      ],
+      "country": "Colombia",
+      "earliest_year": 1791,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Alcalá-Colombia",
+      "known_aliases": [
+        "Alcalá",
+        "alcalá",
+        "alcala",
+        "san sebastian de la balsa",
+        "Alcala",
+        "San Sebastian de la Balsa"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15615,
+      "name": "Alcalá",
+      "reason": "missing_entry",
+      "region": "col_risaralda",
+      "sample_years": [
+        1791,
+        1920,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Alcalá",
+      "historical_names": [
+        {
+          "date": "1791.1.1",
+          "date_source_note": "Settled in 1791 by Sebastián de Marisancena as San Sebastián de la Balsa (La Balsa).",
+          "name": "San Sebastián de la Balsa"
+        },
+        {
+          "date": "1919.1.1",
+          "date_source_note": "Renamed Alcalá upon elevation to municipality in 1919.",
+          "name": "Alcalá"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.90606,
+        -76.04278
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Águila-Colombia",
+      "known_aliases": [
+        "El Águila",
+        "el águila"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15582,
+      "name": "El Águila",
+      "reason": "missing_entry",
+      "region": "col_valle_del_cauca",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "El Águila",
+      "historical_names": [
+        {
+          "date": "1905.1.1",
+          "date_source_note": "Founded in 1905 during Antioquian colonisation; constituted as a municipality in Valle del Cauca in 1950.",
+          "name": "El Águila"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.02231,
+        -68.60774
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1573,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Caquiaviri-Bolivia",
+      "known_aliases": [
+        "Caquiaviri",
+        "caquiaviri",
+        "pacajes",
+        "Pacajes"
+      ],
+      "latest_year": 2026,
+      "max_pop": 15570,
+      "name": "Caquiaviri",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1573,
+        1890,
+        1980,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Caquiaviri",
+      "historical_names": [
+        {
+          "date": "1200.1.1",
+          "date_source_note": "Pre-colonial Aymara marka of Qaqyawiri, principal centre of the Pakajaqi (Pacajes) polity.",
+          "name": "Qaqyawiri"
+        },
+        {
+          "date": "1572.1.1",
+          "date_source_note": "Spanish colonial reducción of Caquiaviri established in Pacajes under Viceroy Toledo (c. 1572).",
+          "name": "Caquiaviri"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.81147,
+        -67.19931
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cajuata-Bolivia",
+      "known_aliases": [
+        "Cajuata",
+        "cajuata",
+        "bella vista",
+        "la union",
+        "lacayotini",
+        "licoma",
+        "Bella Vista",
+        "La Union",
+        "Lacayotini",
+        "Licoma"
+      ],
+      "latest_year": 2026,
+      "max_pop": 15565,
+      "name": "Cajuata",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1750,
+        1890,
+        1980,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cajuata",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Aymara settlement of Qawata in the Yungas valleys of Sicasica.",
+          "name": "Qawata"
+        },
+        {
+          "date": "1782.1.28",
+          "date_source_note": "Hispanicised toponym Cajuata in colonial Sicasica Partido (Intendency of La Paz, created 28 January 1782; Bolivian canton from 1825).",
+          "name": "Cajuata"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.81543,
+        -63.89856
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Caraparí-Bolivia",
+      "known_aliases": [
+        "Caraparí",
+        "caraparí",
+        "carapari",
+        "Carapari"
+      ],
+      "latest_year": 2026,
+      "max_pop": 15559,
+      "name": "Caraparí",
+      "reason": "missing_entry",
+      "region": "bol_tarija",
+      "sample_years": [
+        1750,
+        1890,
+        1980,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Caraparí",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Guaraní (Chiriguano) toponym Karapari in the Chaco foothills.",
+          "name": "Karapari"
+        },
+        {
+          "date": "1658.8.20",
+          "date_source_note": "Traditional colonial founding date of Caraparí (20 August 1658).",
+          "name": "Caraparí"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.87396,
+        -55.13483
+      ],
+      "country": "Argentina",
+      "earliest_year": 1629,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Javier (arg_misiones)-Argentina",
+      "known_aliases": [
+        "San Javier",
+        "san javier"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15557,
+      "name": "San Javier",
+      "reason": "missing_entry",
+      "region": "arg_misiones",
+      "sample_years": [
+        1629,
+        1744,
+        1802,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Javier",
+      "historical_names": [
+        {
+          "date": "1629.12.3",
+          "date_source_note": "Jesuit reduction of San Francisco Javier founded among the Guaraní on 3 December 1629.",
+          "name": "San Francisco Javier"
+        },
+        {
+          "date": "1877.10.10",
+          "date_source_note": "Modern town re-established under the shortened name San Javier on 10 October 1877.",
+          "name": "San Javier"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.80833,
+        -63.325
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Toscana-Venezuela",
+      "known_aliases": [
+        "La Toscana",
+        "la toscana"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15550,
+      "name": "La Toscana",
+      "reason": "missing_entry",
+      "region": "ven_monagas",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Toscana",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Rural hacienda settlement; Piar civil parish 1989",
+          "name": "La Toscana"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.82111,
+        -63.61278
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1731,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Caicara de Maturín-Venezuela",
+      "known_aliases": [
+        "Caicara de Maturín",
+        "caicara de maturín",
+        "santo domingo guzman caicara de maturin",
+        "Santo Domingo Guzman Caicara de Maturin"
+      ],
+      "latest_year": 2011,
+      "max_pop": 15548,
+      "name": "Caicara de Maturín",
+      "reason": "missing_entry",
+      "region": "ven_monagas",
+      "sample_years": [
+        1731,
+        1786,
+        1920,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Caicara de Maturín",
+      "historical_names": [
+        {
+          "date": "1731.4.20",
+          "date_source_note": "Capuchin mission founded by Fray Antonio de Blesa",
+          "name": "Santo Domingo de Guzmán de Caycuar"
+        },
+        {
+          "date": "1856.1.1",
+          "date_source_note": "Mid-19th-century administrative name in Maturín jurisdiction",
+          "name": "Caicara de Maturín"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -42.31278,
+        -73.79048
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Dalcahue-Chile",
+      "known_aliases": [
+        "Dalcahue",
+        "dalcahue"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15546,
+      "name": "Dalcahue",
+      "reason": "missing_entry",
+      "region": "chl_region_de_los_lagos",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Dalcahue",
+      "historical_names": [
+        {
+          "date": "1891.12.22",
+          "date_source_note": "Commune established 22 December 1891; pre-colonial Huilliche/Chono settlement attested in colonial Chiloé since the 16th century",
+          "name": "Dalcahue"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.95601,
+        -74.07791
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Hatillo De Loba-Colombia",
+      "known_aliases": [
+        "Hatillo De Loba",
+        "hatillo de loba"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15545,
+      "name": "Hatillo De Loba",
+      "reason": "missing_entry",
+      "region": "col_magdalena",
+      "sample_years": [
+        1850,
+        1970,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Hatillo de Loba",
+      "historical_names": [
+        {
+          "date": "1745.1.1",
+          "date_source_note": "Settled in 1745 on the Brazo de Loba; constituted as an independent municipality of Bolívar in 1988.",
+          "name": "Hatillo de Loba"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.62467,
+        -62.50897
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Antonio de Irapa-Venezuela",
+      "known_aliases": [
+        "San Antonio de Irapa",
+        "san antonio de irapa"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15544,
+      "name": "San Antonio de Irapa",
+      "reason": "missing_entry",
+      "region": "ven_sucre",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Antonio de Irapa",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest dataset horizon for rural caserío near Irapa",
+          "name": "San Antonio de Irapa"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.28211,
+        -74.77286
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ricaurte (col_cundinamarca)-Colombia",
+      "known_aliases": [
+        "Ricaurte",
+        "ricaurte"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15535,
+      "name": "Ricaurte",
+      "reason": "missing_entry",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Ricaurte",
+      "historical_names": [
+        {
+          "date": "1857.1.1",
+          "date_source_note": "Year of municipal founding and naming after Antonio Ricaurte on the earlier site of Peñalisa; exact month and day unverified",
+          "name": "Ricaurte"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -37.37821,
+        -64.60424
+      ],
+      "country": "Argentina",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "General Acha-Argentina",
+      "known_aliases": [
+        "General Acha",
+        "general acha"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15522,
+      "name": "General Acha",
+      "reason": "missing_entry",
+      "region": "arg_la_pampa",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "General Acha",
+      "historical_names": [
+        {
+          "date": "1882.8.12",
+          "date_source_note": "Founded 12 August 1882 by Manuel Jorge Campos",
+          "name": "General Acha"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.457,
+        -71.782
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rauquen-Chile",
+      "known_aliases": [
+        "Rauquen",
+        "rauquen",
+        "raugen",
+        "Raugen"
+      ],
+      "latest_year": 1830,
+      "max_pop": 15521,
+      "name": "Rauquen",
+      "reason": "missing_entry",
+      "region": "crp_obispado_santiago",
+      "sample_years": [
+        1525,
+        1600,
+        1779,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Rauquén",
+      "historical_names": [
+        {
+          "date": "1779.1.1",
+          "date_source_note": "Mapudungun-derived settlement attested in the 1779 Obispado de Santiago census",
+          "name": "Rauquén"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -1.4478,
+        -79.27372
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Echeandía-Ecuador",
+      "known_aliases": [
+        "Echeandía",
+        "echeandía"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15511,
+      "name": "Echeandía",
+      "reason": "missing_entry",
+      "region": "ecu_bolivar",
+      "sample_years": [
+        1850,
+        1950,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Echeandía",
+      "historical_names": [
+        {
+          "date": "1906.1.1",
+          "date_source_note": "Parish of Echeandía established c. 1906 (cantonized 5 January 1984); exact month and day unverified",
+          "name": "Echeandía"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.20076,
+        -65.55153
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tacobamba-Bolivia",
+      "known_aliases": [
+        "Tacobamba",
+        "tacobamba"
+      ],
+      "latest_year": 2026,
+      "max_pop": 15506,
+      "name": "Tacobamba",
+      "reason": "missing_entry",
+      "region": "bol_potosi",
+      "sample_years": [
+        1525,
+        1846,
+        1960,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tacobamba",
+      "historical_names": [
+        {
+          "date": "1825.1.1",
+          "date_source_note": "Attested at Bolivian independence (1825); colonial-era Quechua settlement (Takupampa/Taqupampa)",
+          "name": "Tacobamba"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.01577,
+        -68.37204
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sabaya-Bolivia",
+      "known_aliases": [
+        "Sabaya",
+        "sabaya"
+      ],
+      "latest_year": 2026,
+      "max_pop": 15504,
+      "name": "Sabaya",
+      "reason": "missing_entry",
+      "region": "bol_oruro",
+      "sample_years": [
+        1525,
+        1846,
+        1960,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sabaya",
+      "historical_names": [
+        {
+          "date": "1825.1.1",
+          "date_source_note": "Attested at Bolivian independence (1825); colonial Carangas/Aymara settlement (Sawaya)",
+          "name": "Sabaya"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        0.08425,
+        -78.08436
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San José De Ayora-Ecuador",
+      "known_aliases": [
+        "San José De Ayora",
+        "san josé de ayora"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15496,
+      "name": "San José De Ayora",
+      "reason": "missing_entry",
+      "region": "ecu_imbabura",
+      "sample_years": [
+        1850,
+        1950,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San José de Ayora",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Anejo San José attested prior to 1927 parish creation",
+          "name": "San José"
+        },
+        {
+          "date": "1927.5.12",
+          "date_source_note": "Rural parish created and named for President Isidro Ayora",
+          "name": "San José de Ayora"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.7873,
+        -75.53348
+      ],
+      "country": "Colombia",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San José De Uré-Colombia",
+      "known_aliases": [
+        "San José De Uré",
+        "san josé de uré",
+        "ure",
+        "Ure"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15495,
+      "name": "San José De Uré",
+      "reason": "missing_entry",
+      "region": "col_cordoba",
+      "sample_years": [
+        1750,
+        1880,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San José de Uré",
+      "historical_names": [
+        {
+          "date": "2007.1.1",
+          "date_source_note": "Elevated to municipality in 2007 (formerly corregimiento of Montelíbano and earlier settlement of Uré); exact month and day unverified",
+          "name": "San José de Uré"
+        }
+      ]
+    }
+  ]
+}

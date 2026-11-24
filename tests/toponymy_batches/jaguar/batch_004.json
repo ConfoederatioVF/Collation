@@ -1,0 +1,1198 @@
+{
+  "batch_index": 4,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        16.92978,
+        -89.89146
+      ],
+      "country": "Guatemala",
+      "earliest_year": -650,
+      "existing_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Nojpetén"
+        },
+        {
+          "date": "1697.3.13",
+          "name": "Remedios del Petén"
+        },
+        {
+          "date": "1831.5.2",
+          "name": "Flores"
+        }
+      ],
+      "existing_meta_index": 3220,
+      "existing_meta_name": "Flores",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Nojpeten-Guatemala",
+      "known_aliases": [
+        "Nojpeten",
+        "nojpeten"
+      ],
+      "latest_year": 1200,
+      "max_pop": 554,
+      "name": "Nojpeten",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -650,
+        -500,
+        1,
+        300,
+        500,
+        750,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.62907,
+        -87.07587
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [
+        {
+          "date": "601.1.1",
+          "name": "Xcaret"
+        }
+      ],
+      "existing_meta_index": 4838,
+      "existing_meta_name": "Xcaret",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Xcaret-Mexico",
+      "known_aliases": [
+        "Xcaret",
+        "xcaret"
+      ],
+      "latest_year": 1519,
+      "max_pop": 535,
+      "name": "Xcaret",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -300,
+        1,
+        500,
+        800,
+        1000,
+        1350,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.62778,
+        -101.57861
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Tzintzuntzan"
+        }
+      ],
+      "existing_meta_index": 4586,
+      "existing_meta_name": "Tzintzuntzan",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Santa Maria Tzintzuntzan-Mexico",
+      "known_aliases": [
+        "Santa Maria Tzintzuntzan",
+        "santa maria tzintzuntzan"
+      ],
+      "latest_year": 1821,
+      "max_pop": 526,
+      "name": "Santa Maria Tzintzuntzan",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.75057,
+        -94.76169
+      ],
+      "country": "Mexico",
+      "earliest_year": -600,
+      "existing_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "San Lorenzo Tenochtitlán"
+        }
+      ],
+      "existing_meta_index": 3924,
+      "existing_meta_name": "San Lorenzo Tenochtitlán",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "San Lorenzo Tenochtitlan-Mexico",
+      "known_aliases": [
+        "San Lorenzo Tenochtitlan",
+        "san lorenzo tenochtitlan"
+      ],
+      "latest_year": 1519,
+      "max_pop": 519,
+      "name": "San Lorenzo Tenochtitlan",
+      "reason": "under_covered_history",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        -600,
+        300,
+        1350,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.32107,
+        -91.46949
+      ],
+      "country": "Guatemala",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "401.1.1",
+          "name": "Zaculeu"
+        }
+      ],
+      "existing_meta_index": 4912,
+      "existing_meta_name": "Zaculeu",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Concepcion Huehuetenango-Guatemala",
+      "known_aliases": [
+        "Concepcion Huehuetenango",
+        "concepcion huehuetenango"
+      ],
+      "latest_year": 1821,
+      "max_pop": 514,
+      "name": "Concepcion Huehuetenango",
+      "reason": "under_covered_history",
+      "region": "captaincy_general_guatemala",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.8602,
+        -90.92876
+      ],
+      "country": "Guatemala",
+      "earliest_year": -550,
+      "existing_historical_names": [
+        {
+          "date": "359.7.23",
+          "name": "Yaxchilan"
+        }
+      ],
+      "existing_meta_index": 4877,
+      "existing_meta_name": "Yaxchilan",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Arroyo Yaxchilan-Guatemala",
+      "known_aliases": [
+        "Arroyo Yaxchilan",
+        "arroyo yaxchilan"
+      ],
+      "latest_year": 1200,
+      "max_pop": 495,
+      "name": "Arroyo Yaxchilan",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -550,
+        -500,
+        1,
+        300,
+        500,
+        750,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        13.97959,
+        -89.75815
+      ],
+      "country": "El Salvador",
+      "earliest_year": -1050,
+      "existing_historical_names": [
+        {
+          "date": "-600.1.1",
+          "name": "Chalchuapa"
+        }
+      ],
+      "existing_meta_index": 1306,
+      "existing_meta_name": "Chalchuapa",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Chalchuapa-El Salvador_2",
+      "known_aliases": [
+        "Chalchuapa",
+        "chalchuapa"
+      ],
+      "latest_year": 1200,
+      "max_pop": 466,
+      "name": "Chalchuapa",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1050,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.66667,
+        -88.255
+      ],
+      "country": "Belize",
+      "earliest_year": -400,
+      "existing_historical_names": [
+        {
+          "date": "1650.1.1",
+          "name": "Belize Town"
+        },
+        {
+          "date": "1943.1.1",
+          "name": "Belize City"
+        }
+      ],
+      "existing_meta_index": 554,
+      "existing_meta_name": "Belize City",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Little Rocky Point - Belize-Belize",
+      "known_aliases": [
+        "Little Rocky Point - Belize",
+        "little rocky point - belize"
+      ],
+      "latest_year": 1200,
+      "max_pop": 445,
+      "name": "Little Rocky Point - Belize",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -400,
+        1,
+        300,
+        500,
+        750,
+        800,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.26335,
+        -97.35074
+      ],
+      "country": "Mexico",
+      "earliest_year": -600,
+      "existing_historical_names": [
+        {
+          "date": "-99.1.1",
+          "name": "Tilantongo"
+        }
+      ],
+      "existing_meta_index": 4461,
+      "existing_meta_name": "Tilantongo",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Monte Negro (mixtec_zapotec_oaxaca)-Mexico",
+      "known_aliases": [
+        "Monte Negro",
+        "monte negro"
+      ],
+      "latest_year": 1519,
+      "max_pop": 445,
+      "name": "Monte Negro",
+      "reason": "under_covered_history",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        -600,
+        300,
+        1350,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        24.15118,
+        -110.46413
+      ],
+      "country": "Mexico",
+      "earliest_year": 1742,
+      "existing_historical_names": [
+        {
+          "date": "1985.1.1",
+          "name": "La Paz"
+        }
+      ],
+      "existing_meta_index": 2481,
+      "existing_meta_name": "La Paz",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Pilar La Paz Airapi-Mexico",
+      "known_aliases": [
+        "Pilar La Paz Airapi",
+        "pilar la paz airapi"
+      ],
+      "latest_year": 1742,
+      "max_pop": 433,
+      "name": "Pilar La Paz Airapi",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1742
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.52665,
+        -87.21011
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [
+        {
+          "date": "601.1.1",
+          "name": "Xcaret"
+        }
+      ],
+      "existing_meta_index": 4838,
+      "existing_meta_name": "Xcaret",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Xcaret (northern_yucatan_karst)-Mexico",
+      "known_aliases": [
+        "Xcaret",
+        "xcaret"
+      ],
+      "latest_year": 1519,
+      "max_pop": 417,
+      "name": "Xcaret",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -300,
+        1,
+        500,
+        800,
+        1000,
+        1350,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.4892,
+        -62.97411
+      ],
+      "country": "Netherlands",
+      "earliest_year": 75,
+      "existing_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Golden Rock"
+        },
+        {
+          "date": "1636.4.25",
+          "name": "Fort Oranje"
+        },
+        {
+          "date": "1636.4.25",
+          "name": "Oranjestad"
+        }
+      ],
+      "existing_meta_index": 3318,
+      "existing_meta_name": "Golden Rock",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Golden Rock-Netherlands",
+      "known_aliases": [
+        "Golden Rock",
+        "golden rock"
+      ],
+      "latest_year": 865,
+      "max_pop": 345,
+      "name": "Golden Rock",
+      "reason": "under_covered_history",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        75,
+        470,
+        500,
+        865
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        23.1136,
+        -82.3666
+      ],
+      "country": "Cuba",
+      "earliest_year": 1519,
+      "existing_historical_names": [
+        {
+          "date": "1600.1.1",
+          "name": "La Habana"
+        }
+      ],
+      "existing_meta_index": 1375,
+      "existing_meta_name": "La Habana",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Habana-Cuba",
+      "known_aliases": [
+        "La Habana",
+        "la habana"
+      ],
+      "latest_year": 2022,
+      "max_pop": 2201610,
+      "name": "La Habana",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1519,
+        1808,
+        1900,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.67639,
+        -103.34222
+      ],
+      "country": "Mexico",
+      "earliest_year": 1548,
+      "existing_historical_names": [
+        {
+          "date": "1542.2.14",
+          "name": "Guadalajara"
+        }
+      ],
+      "existing_meta_index": 1234,
+      "existing_meta_name": "Guadalajara",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guadalajara-Mexico",
+      "known_aliases": [
+        "Guadalajara",
+        "guadalajara"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1650042,
+      "name": "Guadalajara",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1548,
+        1808,
+        1900,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.6349,
+        -90.5069
+      ],
+      "country": "Guatemala",
+      "earliest_year": 1778,
+      "existing_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Ciudad de Guatemala"
+        }
+      ],
+      "existing_meta_index": 909,
+      "existing_meta_name": "Ciudad de Guatemala",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ciudad de Guatemala-Guatemala",
+      "known_aliases": [
+        "Ciudad de Guatemala",
+        "ciudad de guatemala"
+      ],
+      "latest_year": 2023,
+      "max_pop": 1221739,
+      "name": "Ciudad de Guatemala",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1778,
+        1850,
+        1973,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        25.42166,
+        -100.99972
+      ],
+      "country": "Mexico",
+      "earliest_year": 1580,
+      "existing_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Guachichil"
+        }
+      ],
+      "existing_meta_index": 568,
+      "existing_meta_name": "Guachichil",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Saltillo-Mexico",
+      "known_aliases": [
+        "Saltillo",
+        "saltillo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 864431,
+      "name": "Saltillo",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1580,
+        1808,
+        1950,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.5042,
+        -88.025
+      ],
+      "country": "Honduras",
+      "earliest_year": 1540,
+      "existing_historical_names": [
+        {
+          "date": "1571.1.1",
+          "name": "San Pedro Sula"
+        }
+      ],
+      "existing_meta_index": 1325,
+      "existing_meta_name": "San Pedro Sula",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Pedro Sula-Honduras",
+      "known_aliases": [
+        "San Pedro Sula",
+        "san pedro sula"
+      ],
+      "latest_year": 2024,
+      "max_pop": 845588,
+      "name": "San Pedro Sula",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1540,
+        1790,
+        1930,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        25.67732,
+        -100.2599
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Guadalupe"
+        }
+      ],
+      "existing_meta_index": 2267,
+      "existing_meta_name": "Guadalupe",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guadalupe-Mexico",
+      "known_aliases": [
+        "Guadalupe",
+        "guadalupe"
+      ],
+      "latest_year": 2020,
+      "max_pop": 691434,
+      "name": "Guadalupe",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        25.54175,
+        -103.45306
+      ],
+      "country": "Mexico",
+      "earliest_year": 1895,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Torreón"
+        }
+      ],
+      "existing_meta_index": 2302,
+      "existing_meta_name": "Torreón",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Torreón-Mexico",
+      "known_aliases": [
+        "Torreón",
+        "torreón"
+      ],
+      "latest_year": 2020,
+      "max_pop": 690193,
+      "name": "Torreón",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1895,
+        1940,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.63861,
+        -103.30722
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Tlaquepaque"
+        }
+      ],
+      "existing_meta_index": 3121,
+      "existing_meta_name": "Tlaquepaque",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tlaquepaque-Mexico",
+      "known_aliases": [
+        "Tlaquepaque",
+        "tlaquepaque"
+      ],
+      "latest_year": 2020,
+      "max_pop": 650123,
+      "name": "Tlaquepaque",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1480,
+        1877,
+        1970,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        25.75525,
+        -100.28959
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "San Nicolás de los Garza"
+        }
+      ],
+      "existing_meta_index": 3063,
+      "existing_meta_name": "San Nicolás de los Garza",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Nicolás de los Garza-Mexico",
+      "known_aliases": [
+        "San Nicolás de los Garza",
+        "san nicolás de los garza",
+        "san nicolas de los garza"
+      ],
+      "latest_year": 2020,
+      "max_pop": 496878,
+      "name": "San Nicolás de los Garza",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.466,
+        -66.106
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 1548,
+      "existing_historical_names": [
+        {
+          "date": "1975.1.1",
+          "name": "Bayamón [San Juan]"
+        }
+      ],
+      "existing_meta_index": 3643,
+      "existing_meta_name": "Bayamón [San Juan]",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan-Puerto Rico",
+      "known_aliases": [
+        "San Juan",
+        "san juan",
+        "san juan antiguo",
+        "San Juan Antiguo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 452749,
+      "name": "San Juan",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1548,
+        1808,
+        1920,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.52339,
+        -70.03279
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Alcarrizos-Dominican Republic",
+      "known_aliases": [
+        "Los Alcarrizos",
+        "los alcarrizos"
+      ],
+      "latest_year": 2022,
+      "max_pop": 336307,
+      "name": "Los Alcarrizos",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        25.57011,
+        -103.49642
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Gómez Palacio"
+        }
+      ],
+      "existing_meta_index": 2269,
+      "existing_meta_name": "Gómez Palacio",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Gómez Palacio-Mexico",
+      "known_aliases": [
+        "Gómez Palacio",
+        "gómez palacio"
+      ],
+      "latest_year": 2020,
+      "max_pop": 301742,
+      "name": "Gómez Palacio",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.46218,
+        -97.392
+      ],
+      "country": "Mexico",
+      "earliest_year": 1250,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Tehuacán"
+        }
+      ],
+      "existing_meta_index": 2298,
+      "existing_meta_name": "Tehuacán",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tehuacán-Mexico",
+      "known_aliases": [
+        "Tehuacán",
+        "tehuacán",
+        "san pedro acoquiaco",
+        "tehuacan",
+        "San Pedro Acoquiaco"
+      ],
+      "latest_year": 2020,
+      "max_pop": 293825,
+      "name": "Tehuacán",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1250,
+        1910,
+        1980,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.1104,
+        -72.65162
+      ],
+      "country": "Haiti",
+      "earliest_year": 1730,
+      "existing_historical_names": [
+        {
+          "date": "1695.1.1",
+          "name": "Saint-Marc"
+        }
+      ],
+      "existing_meta_index": 1526,
+      "existing_meta_name": "Saint-Marc",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Saint-Marc-Haiti",
+      "known_aliases": [
+        "Saint-Marc",
+        "saint-marc"
+      ],
+      "latest_year": 2024,
+      "max_pop": 281577,
+      "name": "Saint-Marc",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1730,
+        1789,
+        1824,
+        1860,
+        1890,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.9617,
+        -76.9511
+      ],
+      "country": "Cuba",
+      "earliest_year": 1790,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Las Tunas"
+        }
+      ],
+      "existing_meta_index": 2923,
+      "existing_meta_name": "Las Tunas",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Las Tunas-Cuba",
+      "known_aliases": [
+        "Las Tunas",
+        "las tunas"
+      ],
+      "latest_year": 2022,
+      "max_pop": 214939,
+      "name": "Las Tunas",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1790,
+        1808,
+        1821,
+        1850,
+        1900,
+        2002,
+        2012,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.8627,
+        -72.93385
+      ],
+      "country": "Haiti",
+      "earliest_year": 1685,
+      "existing_historical_names": [
+        {
+          "date": "1665.1.1",
+          "name": "Port-de-Paix"
+        }
+      ],
+      "existing_meta_index": 1474,
+      "existing_meta_name": "Port-de-Paix",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Port-de-Paix-Haiti",
+      "known_aliases": [
+        "Port-de-Paix",
+        "port-de-paix"
+      ],
+      "latest_year": 2024,
+      "max_pop": 210942,
+      "name": "Port-de-Paix",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1685,
+        1750,
+        1789,
+        1824,
+        1890,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.1933,
+        -73.7461
+      ],
+      "country": "Haiti",
+      "earliest_year": 1730,
+      "existing_historical_names": [
+        {
+          "date": "1503.1.1",
+          "name": "Salvatierra de la Sabana"
+        }
+      ],
+      "existing_meta_index": 931,
+      "existing_meta_name": "Salvatierra de la Sabana",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Les Cayes-Haiti",
+      "known_aliases": [
+        "Les Cayes",
+        "les cayes"
+      ],
+      "latest_year": 2024,
+      "max_pop": 207439,
+      "name": "Les Cayes",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1730,
+        1789,
+        1824,
+        1860,
+        1890,
+        1950,
+        1971,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        22.89702,
+        -109.92519
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cabo San Lucas-Mexico",
+      "known_aliases": [
+        "Cabo San Lucas",
+        "cabo san lucas"
+      ],
+      "latest_year": 2020,
+      "max_pop": 202694,
+      "name": "Cabo San Lucas",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

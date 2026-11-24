@@ -1,0 +1,1040 @@
+{
+  "batch_index": 517,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        20.95502,
+        -97.49925
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Higueral-Mexico",
+      "known_aliases": [
+        "Higueral",
+        "higueral",
+        "buenos aires",
+        "Buenos Aires"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1181,
+      "name": "Higueral",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.64792,
+        -98.16537
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Antonio Ocotlán-Mexico",
+      "known_aliases": [
+        "San Antonio Ocotlán",
+        "san antonio ocotlán"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1181,
+      "name": "San Antonio Ocotlán",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.85374,
+        -91.64911
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Bilil-Guatemala",
+      "known_aliases": [
+        "Bilil",
+        "bilil"
+      ],
+      "latest_year": 2018,
+      "max_pop": 1181,
+      "name": "Bilil",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.34399,
+        -91.68351
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chiquela-Guatemala",
+      "known_aliases": [
+        "Chiquela",
+        "chiquela"
+      ],
+      "latest_year": 2018,
+      "max_pop": 1181,
+      "name": "Chiquela",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.80459,
+        -89.8198
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Piedras Negras (ca_guatemala)-Guatemala",
+      "known_aliases": [
+        "Piedras Negras",
+        "piedras negras"
+      ],
+      "latest_year": 2018,
+      "max_pop": 1181,
+      "name": "Piedras Negras",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.00722,
+        -100.0875
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [
+        {
+          "date": "1778.1.1",
+          "name": "Coyuca"
+        },
+        {
+          "date": "1876.5.4",
+          "name": "Coyuca de Benítez"
+        }
+      ],
+      "existing_meta_index": 1987,
+      "existing_meta_name": "Coyuca de Benítez",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Coyuca-Mexico",
+      "known_aliases": [
+        "Coyuca",
+        "coyuca"
+      ],
+      "latest_year": 1778,
+      "max_pop": 1181,
+      "name": "Coyuca",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646,
+        1778
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.9829,
+        -98.4836
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tazotuhco-Mexico",
+      "known_aliases": [
+        "Tazotuhco",
+        "tazotuhco"
+      ],
+      "latest_year": 1646,
+      "max_pop": 1181,
+      "name": "Tazotuhco",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.76995,
+        -91.23154
+      ],
+      "country": "Mexico",
+      "earliest_year": -650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "A Lagartero-Mexico",
+      "known_aliases": [
+        "A Lagartero",
+        "a lagartero"
+      ],
+      "latest_year": 1200,
+      "max_pop": 1181,
+      "name": "A Lagartero",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -650,
+        -500,
+        1,
+        300,
+        500,
+        750,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.36556,
+        -91.72329
+      ],
+      "country": "Mexico",
+      "earliest_year": -650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cantarena-Mexico",
+      "known_aliases": [
+        "Cantarena",
+        "cantarena"
+      ],
+      "latest_year": 1200,
+      "max_pop": 1181,
+      "name": "Cantarena",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -650,
+        -500,
+        1,
+        300,
+        500,
+        750,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.55142,
+        -89.28134
+      ],
+      "country": "Guatemala",
+      "earliest_year": -650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Rosa-Guatemala_2",
+      "known_aliases": [
+        "Santa Rosa",
+        "santa rosa"
+      ],
+      "latest_year": 1200,
+      "max_pop": 1181,
+      "name": "Santa Rosa",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -650,
+        -500,
+        1,
+        300,
+        500,
+        750,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.4017,
+        -100.72657
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santo Domingo 3-Mexico",
+      "known_aliases": [
+        "Santo Domingo",
+        "santo domingo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1180,
+      "name": "Santo Domingo",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.19129,
+        -97.92664
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Colonia Francisco Javier Mina (mx_valley_central_core)-Mexico",
+      "known_aliases": [
+        "Colonia Francisco Javier Mina",
+        "colonia francisco javier mina"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1180,
+      "name": "Colonia Francisco Javier Mina",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.23779,
+        -93.48273
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Poza Redonda 2da. Sección-Mexico",
+      "known_aliases": [
+        "Poza Redonda 2da. Sección",
+        "poza redonda 2da. sección"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1180,
+      "name": "Poza Redonda 2da. Sección",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.87417,
+        -99.7096
+      ],
+      "country": "Mexico",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Segunda Manzana del Pueblo de Morelos-Mexico",
+      "known_aliases": [
+        "Segunda Manzana del Pueblo de Morelos",
+        "segunda manzana del pueblo de morelos",
+        "segunda manzana de barrio morelos",
+        "Segunda Manzana de Barrio Morelos"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1180,
+      "name": "Segunda Manzana del Pueblo de Morelos",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1921,
+        1960,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.34041,
+        -101.41255
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Yoricostio-Mexico",
+      "known_aliases": [
+        "Yoricostio",
+        "yoricostio",
+        "el rincón de caricho",
+        "El Rincón de Caricho"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1180,
+      "name": "Yoricostio",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1960,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.76661,
+        -96.31607
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Fe y la Mar-Mexico",
+      "known_aliases": [
+        "Santa Fe y la Mar",
+        "santa fe y la mar",
+        "san mateo yetla",
+        "San Mateo Yetla"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1180,
+      "name": "Santa Fe y la Mar",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.70985,
+        -93.01071
+      ],
+      "country": "Mexico",
+      "earliest_year": 1930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Andrés Quintana Roo-Mexico",
+      "known_aliases": [
+        "Andrés Quintana Roo",
+        "andrés quintana roo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 1180,
+      "name": "Andrés Quintana Roo",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1930,
+        1980,
+        2000,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.3378,
+        -90.95684
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Las Palmas 3-Guatemala",
+      "known_aliases": [
+        "Las Palmas",
+        "las palmas"
+      ],
+      "latest_year": 2018,
+      "max_pop": 1180,
+      "name": "Las Palmas",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.2031,
+        -90.99705
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guayacan-Guatemala",
+      "known_aliases": [
+        "Guayacan",
+        "guayacan"
+      ],
+      "latest_year": 2018,
+      "max_pop": 1180,
+      "name": "Guayacan",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.67215,
+        -88.61843
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Las Palmeras-Guatemala",
+      "known_aliases": [
+        "Las Palmeras",
+        "las palmeras"
+      ],
+      "latest_year": 2018,
+      "max_pop": 1180,
+      "name": "Las Palmeras",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.20067,
+        -76.9335
+      ],
+      "country": "Jamaica",
+      "earliest_year": 2022,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Troja-Jamaica",
+      "known_aliases": [
+        "Troja",
+        "troja"
+      ],
+      "latest_year": 2022,
+      "max_pop": 1180,
+      "name": "Troja",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.19383,
+        -77.7861
+      ],
+      "country": "Jamaica",
+      "earliest_year": 2022,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Retirement (ga_jamaica)-Jamaica",
+      "known_aliases": [
+        "Retirement",
+        "retirement"
+      ],
+      "latest_year": 2022,
+      "max_pop": 1180,
+      "name": "Retirement",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.97444,
+        -89.62139
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Ana (int_merida_yucatan)-Mexico",
+      "known_aliases": [
+        "Santa Ana",
+        "santa ana"
+      ],
+      "latest_year": 1821,
+      "max_pop": 1180,
+      "name": "Santa Ana",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.4273,
+        -87.30641
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Akumal-Mexico_2",
+      "known_aliases": [
+        "Akumal",
+        "akumal"
+      ],
+      "latest_year": 1519,
+      "max_pop": 1180,
+      "name": "Akumal",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -300,
+        1,
+        500,
+        800,
+        1000,
+        1350,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.97468,
+        -89.20136
+      ],
+      "country": "Guatemala",
+      "earliest_year": -400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Las Palmas-Guatemala_2",
+      "known_aliases": [
+        "Las Palmas",
+        "las palmas"
+      ],
+      "latest_year": 1200,
+      "max_pop": 1180,
+      "name": "Las Palmas",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -400,
+        1,
+        300,
+        500,
+        750,
+        800,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        28.185,
+        -115.221
+      ],
+      "country": "Mexico",
+      "earliest_year": -9000,
+      "existing_historical_names": [
+        {
+          "date": "-9000.1.1",
+          "name": "Huamalgua"
+        }
+      ],
+      "existing_meta_index": 2,
+      "existing_meta_name": "Huamalgua",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Isla Cedros Settlement-Mexico",
+      "known_aliases": [
+        "Isla Cedros Settlement",
+        "isla cedros settlement"
+      ],
+      "latest_year": 1500,
+      "max_pop": 1180,
+      "name": "Isla Cedros Settlement",
+      "reason": "under_covered_history",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        -9000,
+        -5000,
+        -1500,
+        500,
+        1100,
+        1300,
+        1500
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        12.241,
+        -83.748
+      ],
+      "country": "Nicaragua",
+      "earliest_year": -1200,
+      "existing_historical_names": [
+        {
+          "date": "-1200.1.1",
+          "name": "Kukra Hill Site"
+        }
+      ],
+      "existing_meta_index": 52,
+      "existing_meta_name": "Kukra Hill Site",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Kukra Hill Site-Nicaragua",
+      "known_aliases": [
+        "Kukra Hill Site",
+        "kukra hill site"
+      ],
+      "latest_year": 1050,
+      "max_pop": 1180,
+      "name": "Kukra Hill Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_lower_central_america",
+      "sample_years": [
+        -1200,
+        200,
+        1050
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.752,
+        -84.534
+      ],
+      "country": "Honduras",
+      "earliest_year": 1000,
+      "existing_historical_names": [
+        {
+          "date": "1720.1.1",
+          "name": "Brewer's Lagoon"
+        },
+        {
+          "date": "1859.11.28",
+          "name": "Brus Laguna"
+        }
+      ],
+      "existing_meta_index": 1571,
+      "existing_meta_name": "Brus Laguna",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Brus Laguna Settlement-Honduras",
+      "known_aliases": [
+        "Brus Laguna Settlement",
+        "brus laguna settlement"
+      ],
+      "latest_year": 1450,
+      "max_pop": 1180,
+      "name": "Brus Laguna Settlement",
+      "reason": "under_covered_history",
+      "region": "precolumbian_lower_central_america",
+      "sample_years": [
+        1000,
+        1450
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        12.19382,
+        -68.97131
+      ],
+      "country": "Curaï¿½ao",
+      "earliest_year": -2660,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rooi Rincon-Curaï¿½ao",
+      "known_aliases": [
+        "Rooi Rincon",
+        "rooi rincon"
+      ],
+      "latest_year": -1920,
+      "max_pop": 1180,
+      "name": "Rooi Rincon",
+      "reason": "missing_entry",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        -2660,
+        -2290,
+        -2000,
+        -1920
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.263,
+        -61.22
+      ],
+      "country": "Guadeloupe",
+      "earliest_year": 600,
+      "existing_historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "Anse à la Gourde Site"
+        }
+      ],
+      "existing_meta_index": 281,
+      "existing_meta_name": "Anse à la Gourde Site",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Anse a la Gourde Site-Guadeloupe",
+      "known_aliases": [
+        "Anse a la Gourde Site",
+        "anse a la gourde site"
+      ],
+      "latest_year": 1350,
+      "max_pop": 1180,
+      "name": "Anse a la Gourde Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        600,
+        1100,
+        1350
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1026 @@
+{
+  "batch_index": 239,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        18.50416,
+        -97.08107
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Xopilapa-Mexico",
+      "known_aliases": [
+        "Xopilapa",
+        "xopilapa"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2128,
+      "name": "Xopilapa",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1980,
+        2000,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.69429,
+        -91.80017
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Nueva Esperanza-Guatemala",
+      "known_aliases": [
+        "Nueva Esperanza",
+        "nueva esperanza",
+        "el porvenir",
+        "El Porvenir"
+      ],
+      "latest_year": 2018,
+      "max_pop": 2128,
+      "name": "Nueva Esperanza",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.26925,
+        -95.91022
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mamaltepec-Mexico",
+      "known_aliases": [
+        "Mamaltepec",
+        "mamaltepec"
+      ],
+      "latest_year": 1646,
+      "max_pop": 2128,
+      "name": "Mamaltepec",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.61889,
+        -100.31833
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tlacocoxpan-Mexico",
+      "known_aliases": [
+        "Tlacocoxpan",
+        "tlacocoxpan"
+      ],
+      "latest_year": 1646,
+      "max_pop": 2128,
+      "name": "Tlacocoxpan",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.13858,
+        -93.00334
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Taxco-Mexico",
+      "known_aliases": [
+        "Taxco",
+        "taxco"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2127,
+      "name": "Taxco",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.40823,
+        -99.96429
+      ],
+      "country": "Mexico",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Isabel del Monte-Mexico",
+      "known_aliases": [
+        "Santa Isabel del Monte",
+        "santa isabel del monte"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2127,
+      "name": "Santa Isabel del Monte",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        1995,
+        2000,
+        2005,
+        2010,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.67603,
+        -91.05422
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Xeatzan Bajo-Guatemala",
+      "known_aliases": [
+        "Xeatzan Bajo",
+        "xeatzan bajo",
+        "chipiacul",
+        "Chipiacul"
+      ],
+      "latest_year": 2018,
+      "max_pop": 2127,
+      "name": "Xeatzan Bajo",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.35997,
+        -96.24984
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa Talea de Castro-Mexico",
+      "known_aliases": [
+        "Villa Talea de Castro",
+        "villa talea de castro"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2126,
+      "name": "Villa Talea de Castro",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.82476,
+        -92.68485
+      ],
+      "country": "Mexico",
+      "earliest_year": 1930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Francisco I. Madero (mx_south_oaxaca_guerrero_chiapas)-Mexico",
+      "known_aliases": [
+        "Francisco I. Madero",
+        "francisco i. madero"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2126,
+      "name": "Francisco I. Madero",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1930,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.45473,
+        -91.51475
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Soledad-Guatemala",
+      "known_aliases": [
+        "La Soledad",
+        "la soledad"
+      ],
+      "latest_year": 2018,
+      "max_pop": 2126,
+      "name": "La Soledad",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.64854,
+        -89.20195
+      ],
+      "country": "Guatemala",
+      "earliest_year": -650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chiquibul 1-Guatemala",
+      "known_aliases": [
+        "Chiquibul 1",
+        "chiquibul 1"
+      ],
+      "latest_year": 1200,
+      "max_pop": 2126,
+      "name": "Chiquibul 1",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -650,
+        -500,
+        1,
+        300,
+        500,
+        750,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.5614,
+        -101.52039
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Estación Joaquín-Mexico",
+      "known_aliases": [
+        "Estación Joaquín",
+        "estación joaquín"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2125,
+      "name": "Estación Joaquín",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.91776,
+        -97.61916
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Bartolomé Coscomaya-Mexico",
+      "known_aliases": [
+        "San Bartolomé Coscomaya",
+        "san bartolomé coscomaya",
+        "san cayetano",
+        "ejido palmarito",
+        "San Cayetano",
+        "Ejido Palmarito"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2125,
+      "name": "San Bartolomé Coscomaya",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.82822,
+        -92.45244
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Yashanal-Mexico",
+      "known_aliases": [
+        "Yashanal",
+        "yashanal"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2125,
+      "name": "Yashanal",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        23.44096,
+        -99.27414
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Rosa-Mexico_2",
+      "known_aliases": [
+        "Santa Rosa",
+        "santa rosa"
+      ],
+      "latest_year": 1742,
+      "max_pop": 2125,
+      "name": "Santa Rosa",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.09386,
+        -99.34666
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Francisco Bojay Pueblo-Mexico",
+      "known_aliases": [
+        "San Francisco Bojay Pueblo",
+        "san francisco bojay pueblo",
+        "san francisco bojay colonia",
+        "San Francisco Bojay Colonia"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2124,
+      "name": "San Francisco Bojay Pueblo",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.88733,
+        -100.34348
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Apeo-Mexico",
+      "known_aliases": [
+        "Apeo",
+        "apeo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2124,
+      "name": "Apeo",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.83004,
+        -99.28366
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Agustín Tetlama-Mexico",
+      "known_aliases": [
+        "San Agustín Tetlama",
+        "san agustín tetlama",
+        "san agustin tetlama"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2124,
+      "name": "San Agustín Tetlama",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1808,
+        1980,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.86979,
+        -91.05456
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Xepol-Guatemala",
+      "known_aliases": [
+        "Xepol",
+        "xepol"
+      ],
+      "latest_year": 2018,
+      "max_pop": 2124,
+      "name": "Xepol",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.168,
+        -89.111
+      ],
+      "country": "Belize",
+      "earliest_year": 2010,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Bullet Tree Falls-Belize",
+      "known_aliases": [
+        "Bullet Tree Falls",
+        "bullet tree falls"
+      ],
+      "latest_year": 2010,
+      "max_pop": 2124,
+      "name": "Bullet Tree Falls",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2010
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.14806,
+        -99.88472
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Miguel de los Ranchos Oxtotilpan-Mexico",
+      "known_aliases": [
+        "San Miguel de los Ranchos Oxtotilpan",
+        "san miguel de los ranchos oxtotilpan"
+      ],
+      "latest_year": 1821,
+      "max_pop": 2124,
+      "name": "San Miguel de los Ranchos Oxtotilpan",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.24194,
+        -98.99472
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan Ixtayopan-Mexico",
+      "known_aliases": [
+        "San Juan Ixtayopan",
+        "san juan ixtayopan"
+      ],
+      "latest_year": 1821,
+      "max_pop": 2124,
+      "name": "San Juan Ixtayopan",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.21111,
+        -101.12778
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Yurirapundaro-Mexico",
+      "known_aliases": [
+        "Yurirapundaro",
+        "yurirapundaro"
+      ],
+      "latest_year": 1646,
+      "max_pop": 2124,
+      "name": "Yurirapundaro",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.25194,
+        -98.29215
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Bartolomé Tenango-Mexico",
+      "known_aliases": [
+        "San Bartolomé Tenango",
+        "san bartolomé tenango",
+        "san bartolome tenango"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2123,
+      "name": "San Bartolomé Tenango",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1821,
+        1940,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.59887,
+        -93.35171
+      ],
+      "country": "Mexico",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ignacio Zaragoza 3-Mexico",
+      "known_aliases": [
+        "Ignacio Zaragoza",
+        "ignacio zaragoza"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2123,
+      "name": "Ignacio Zaragoza",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1950,
+        1980,
+        2000,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.33567,
+        -78.26933
+      ],
+      "country": "Jamaica",
+      "earliest_year": 2022,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "March Town-Jamaica",
+      "known_aliases": [
+        "March Town",
+        "march town"
+      ],
+      "latest_year": 2022,
+      "max_pop": 2123,
+      "name": "March Town",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.10745,
+        -88.65847
+      ],
+      "country": "Belize",
+      "earliest_year": -550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Silver Creek-Belize_2",
+      "known_aliases": [
+        "Silver Creek",
+        "silver creek"
+      ],
+      "latest_year": 1200,
+      "max_pop": 2123,
+      "name": "Silver Creek",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -550,
+        -500,
+        1,
+        300,
+        500,
+        750,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        21.77217,
+        -102.97202
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Huanusco-Mexico",
+      "known_aliases": [
+        "Huanusco",
+        "huanusco"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2122,
+      "name": "Huanusco",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.51667,
+        -99.73333
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Gabriel Xaloztoc-Mexico",
+      "known_aliases": [
+        "San Gabriel Xaloztoc",
+        "san gabriel xaloztoc"
+      ],
+      "latest_year": 1646,
+      "max_pop": 2122,
+      "name": "San Gabriel Xaloztoc",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.214,
+        -96.93921
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tetetlan-Mexico",
+      "known_aliases": [
+        "Tetetlan",
+        "tetetlan"
+      ],
+      "latest_year": 1646,
+      "max_pop": 2122,
+      "name": "Tetetlan",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

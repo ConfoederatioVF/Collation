@@ -1,0 +1,348 @@
+=== [1] Las Lajas-Colombia ===
+INPUT: n=Las Lajas | c=Colombia | r=na_pacific_equatorial_valdivia | ll=[1.58273, -78.70609] | ey=1000 | ly=1500 | al=['cajapí', 'franco', 'juan domingo']
+GAZ(0.0): pre_columbian_northern_andes | k=Las Lajas-Colombia | name=Las Lajas | sub=None | alt=['Cajapí', 'Franco', 'Juan Domingo', 'Trinidad', 'Villarica'] | src=None | notes=None | desc=None | pops=['1000', '1200', '1300', '1400', '1500']
+GAZ(0.00985): colombia_after_independence | k=Alto Villarica-Colombia | name=Alto Villarica | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1950', '1970', '1980', '1990', '2000', '2005', '2018']
+GAZ(0.01508): colombia_after_independence | k=Cajapí-Colombia | name=Cajapí | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1920', '1950', '1970', '1980', '1990', '2000', '2005', '2018']
+ARCH_RAW(raw_colombia_icanh_sitios.json): {"name": "Cajapí", "period": "Prehispanic / Archaeological (unspecified)"}
+ARCH_RAW(raw_colombia_icanh_sitios.json): {"name": "Franco", "period": "Prehispanic / Archaeological (unspecified)"}
+ARCH_RAW(raw_colombia_icanh_sitios.json): {"name": "Juan Domingo", "period": "Prehispanic / Archaeological (unspecified)"}
+
+=== [2] Tarapoa-Ecuador ===
+INPUT: n=Tarapoa | c=Ecuador | r=ecu_sucumbios | ll=[-0.1247, -76.34551] | ey=1920 | ly=2025 | al=None
+GAZ(0.0): ecuador_after_independence | k=Tarapoa-Ecuador | name=Tarapoa | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1920', '1950', '1970', '1980', '1990', '2001', '2010', '2015', '2020', '2022']
+WD: Tarapoa Airport (airport in Ecuador) | adm=Sucumbíos | inc= | es= | en=https://en.wikipedia.org/wiki/Tarapoa_Airport
+  ENWIKI[Tarapoa Airport]: Tarapoa Airport (Spanish: Aeropuerto Tarapoa) (IATA: TPC, ICAO: SETR) is an airport serving Tarapoa, a town in the Sucumbíos Province of Ecuador. The runway length does not include 88 metres (289 ft) overruns at each end of the runway. The Tarapoa non-directional beacon (Ident: TRP) is located 0.5 nautical miles (0.93 km) off the approach threshold of Runway 30.
+WD: Tarapoa (parroquia) (place and urban parish of Sucumbíos Province, Ecuador) | adm=Cantón Cuyabeno | inc= | es=https://es.wikipedia.org/wiki/Tarapoa_(parroquia) | en=https://en.wikipedia.org/wiki/Tarapoa
+  ESWIKI[Tarapoa (parroquia)]: Tarapoa es una localidad y la única Parroquia urbana del cantón Cuyabeno de la provincia ecuatoriana de Sucumbíos. La Parroquia tiene una superficie de 1146,53 km². El censo de 2024 contó 6999 habitantes. De estos, 999 residentes vivían en la ciudad principal. Hay un aeródromo en Tarapoa.
+  ENWIKI[Tarapoa]: Tarapoa is a location in the province of Sucumbíos in Ecuador and the seat of the canton of Cuyabeno.
+
+=== [3] Choquecancha-Peru ===
+INPUT: n=Choquecancha | c=Peru | r=per_cusco | ll=[-13.0397, -72.036] | ey=1525 | ly=2017 | al=['chuquicancha', 'chuquicocha', 'Chuquicancha']
+GAZ(0.0): peru_after_independence | k=Choquecancha-Peru | name=Choquecancha | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2007']
+GAZ(0.00288): spanish_conquest_andes_collapse | k=Choquecancha-Peru | name=Choquecancha | sub=None | alt=['Chuquicancha', 'Chuquicocha'] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.00288): viceroyalty_peru_upper_peru | k=Choquecancha-Peru | name=Choquecancha | sub=None | alt=['Chuquicancha', 'Chuquicocha'] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+HGIS: Cachin (mod=Cachin) | var=[] | cat=Pueblo | prov=Cuzco | part=Calca y Lares | yrs=1111-9999 | coords=[-13.034, -72.057]
+HGIS: Choquecancha (mod=Choquecancha) | var=['Chuquicocha| Chuquicancha|'] | cat=Pueblo | prov=Cuzco | part=Calca y Lares | yrs=1111-9999 | coords=[-13.037, -72.035]
+WD: Cerro Choquecancha (montaña en Perú) | adm=departamento de Cusco | inc= | es= | en=
+WD: Choquecancha (localidad en Perú) | adm=departamento de Cusco | inc= | es= | en=
+
+=== [4] La Libertad-Peru ===
+INPUT: n=La Libertad | c=Peru | r=per_ancash | ll=[-9.63306, -77.74139] | ey=1525 | ly=2025 | al=['cajamarquilla', 'Cajamarquilla']
+RAW_SETT: admin1=Áncash | admin2=HUARAZ | other=['Cajamarquilla'] | src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+GAZ(0.0): peru_after_independence | k=La Libertad-Peru | name=La Libertad | sub=None | alt=['Cajamarquilla'] | src=None | notes=None | desc=None | pops=['1920', '1950', '1970', '1980', '1990', '2000', '2007', '2017', '2025']
+GAZ(0.00034): inca_empire_tawantinsuyu | k=Cochayan-Peru | name=Cochayan | sub=None | alt=['Yanahuaran - Proy. AGRORURAL', 'Yunkos'] | src=None | notes=None | desc=None | pops=['1438', '1470', '1500', '1525', '1530']
+GAZ(0.00039): spanish_conquest_andes_collapse | k=Cajamarquilla (conq_peru_sierra_cusco_huamanga)-Peru | name=Cajamarquilla | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+HGIS: Cajamarquilla (mod=Cajamarquilla) | var=[] | cat=Pueblo | prov=Tarma | part=Huaylas | yrs=1111-9999 | coords=[-9.633, -77.741]
+WD: Distrito de La Libertad (distrito en Áncash, Perú) | adm=provincia de Huaraz | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_La_Libertad | en=https://en.wikipedia.org/wiki/La_Libertad_District
+  ESWIKI[Distrito de La Libertad]: El distrito de La Libertad es uno de los doce distritos de la provincia de Huaraz, ubicado en el departamento de Ancash, en el Perú. Limita por el norte con el distrito de Pira; por el este con el distrito de Huaraz; por el sur con la provincia de Aija; y por el oeste con el distrito de Huanchay, el distrito de Pampas Grande y el distrito de Colcabamba. 
+  ENWIKI[La Libertad District]: La Libertad District is one of twelve districts of the province Huaraz in Peru. 
+
+=== [5] Moretecocha-Ecuador_2 ===
+INPUT: n=Moretecocha | c=Ecuador | r=ca_equatorial_sierra_canari | ll=[-1.61, -77.35] | ey=357 | ly=1438 | al=None
+GAZ(0.0): pre_columbian_central_andes | k=Moretecocha-Ecuador | name=Moretecocha | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1000', '1200', '1300', '1400', '1438', '357', '500', '800']
+ARCH_RAW(raw_ecuador_radiocarbon_syntheses.json): {"name": "Moretecocha", "period": "1280 +/- 140 BP"}
+ARCH_RAW(raw_ecuador_radiocarbon_syntheses.json): {"name": "Moretecocha", "period": "1100 +/- 160 BP"}
+ARCH_RAW(raw_ecuador_radiocarbon_syntheses.json): {"name": "Moretecocha", "period": "Unclassified (1280 +/- 140 BP", "culture": "Unclassified"}
+
+=== [6] Alto Jahuel-Chile ===
+INPUT: n=Alto Jahuel | c=Chile | r=chl_region_metropolitana_de_santiago | ll=[-33.73753, -70.68519] | ey=1850 | ly=2017 | al=None
+GAZ(0.0): chile_after_independence | k=Alto Jahuel-Chile | name=Alto Jahuel | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2010']
+GAZ(0.02339): chile_after_independence | k=Las Camelias-Chile | name=Las Camelias | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1970', '1980', '1990', '2000', '2010', '2017']
+ARCH_RAW(raw_chile_cmn_registros_complementarios.json): {"name": "El Parque de la Viña Santa Rita", "period": "Monumento Histórico"}
+ARCH_RAW(raw_chile_cmn_registros_complementarios.json): {"name": "El Parque de la Viña Santa Rita", "period": "Monumento Histórico"}
+ARCH_RAW(raw_chile_cmn_registros_complementarios.json): {"name": "El Parque de la Viña Santa Rita", "period": "Monumento Histórico"}
+WD: Viña Santa Rita (monumento nacional de Chile) | adm=Buin | inc= | es=https://es.wikipedia.org/wiki/Vi%C3%B1a_Santa_Rita | en=
+WD: Alto Jahuel () | adm=Maipo | inc= | es=https://es.wikipedia.org/wiki/Alto_Jahuel | en=
+  ESWIKI[Alto Jahuel]: Alto Jahuel, en mapudungun "charcos o pozas", es una ciudad de Chile, que pertenece administrativamente a la comuna de Buin, en la Provincia de Maipo, Región Metropolitana de Santiago. 
+WD: Buin Zoo (bioparque Zoológico de Chile) | adm=Buin | inc= | es=https://es.wikipedia.org/wiki/Buin_Zoo | en=
+  ESWIKI[Buin Zoo]: El Bioparque Buin Zoo es un bioparque ubicado en la comuna de Buin, Región Metropolitana de Chile. Forma parte de la Asociación Latinoamericana de Parques Zoológicos y Acuarios (ALPZA). Con más de 3000 ejemplares de 450 especies diferentes, Buin Zoo ha logrado una gran reputación por su iniciativa de conservación, alto cuidado de especies en peligro y programas de mejoramiento para la óptima salud de los animales. El parque cuenta con 18 hectáreas construidas. Todas las especies que se encuentran en Buin Zoo están organizadas dentro del parque de acuerdo a la zona geográfica a la que pertenecen: Zonas Americana, Chilena, Asia-Oceanía, Europea y Africana. Además de estas zonas, cuenta con edificios cerrados dedicados a ciertos animales con características especiales: aves, artrópodos, reptiles, anfibios, animales de granja y animales nocturnos. Tras un censo de especies en 2013, se obtuvo un total de más de 400 especies en el zoológico. Han llegado seis especies de serpientes venenosas y más recientemente dos ejemplares de rinoceronte blanco y un macho de orangután, siendo estas dos ú
+WD: Estación Buin (estación de ferrocarril de Chile) | adm=Buin | inc= | es=https://es.wikipedia.org/wiki/Estaci%C3%B3n_Buin | en=
+WD: Estación Buin Zoo (estación de ferrocarril de Chile) | adm=Buin | inc= | es=https://es.wikipedia.org/wiki/Estaci%C3%B3n_Buin_Zoo | en=
+WD: Iglesia del Tránsito de la Santísima Virgen María (monumento nacional de Chile) | adm=Paine | inc= | es=https://es.wikipedia.org/wiki/Iglesia_del_Tr%C3%A1nsito_de_la_Sant%C3%ADsima_Virgen_Mar%C3%ADa | en=
+
+=== [7] Toro-Peru ===
+INPUT: n=Toro | c=Peru | r=per_arequipa | ll=[-15.26444, -72.92833] | ey=1525 | ly=2025 | al=None
+RAW_SETT: admin1=Arequipa | admin2=LA UNION | other=[] | src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+GAZ(0.0): peru_after_independence | k=Toro-Peru | name=Toro | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2007']
+GAZ(0.0008): spanish_conquest_andes_collapse | k=Toro-Peru | name=Toro | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.0008): viceroyalty_peru_upper_peru | k=Toro-Peru | name=Toro | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1792', '1800', '1825']
+HGIS: Toro (mod=Toro) | var=[] | cat=Pueblo | prov=Cuzco | part=Chumbivilcas | yrs=1111-9999 | coords=[-15.264, -72.929]
+WD: Toro (pueblo en Arequipa, Perú) | adm=Distrito de Toro | inc= | es= | en=
+WD: Distrito de Toro (distrito en Arequipa, Perú) | adm=Provincia de La Unión | inc=1835-05-04T00:00:00Z | es=https://es.wikipedia.org/wiki/Distrito_de_Toro | en=https://en.wikipedia.org/wiki/Toro_District
+  ESWIKI[Distrito de Toro]: El distrito de Toro es un distrito de la provincia de La Unión, ubicada en el departamento de Arequipa, Perú.​ Según el censo de 2017, tiene una población de 556 habitantes.​ Desde el punto de vista jerárquico de la Iglesia católica forma parte de la Prelatura de Chuquibamba en la Arquidiócesis de Arequipa.​ 
+  ENWIKI[Toro District]: Toro District is one of eleven districts of the province La Unión in Peru.
+WD: Iglesia Santa Catalina de Toro (cultural heritage site in Peru) | adm=Provincia de La Unión | inc= | es= | en=
+
+=== [8] Tumbabarreto-Colombia ===
+INPUT: n=Tumbabarreto | c=Colombia | r=col_caldas | ll=[5.43811, -75.70027] | ey=1525 | ly=2018 | al=['quiebralomo', 'san sebastian quiebralomo', 'barrio de sevilla']
+GAZ(0.0): colombia_after_independence | k=Tumbabarreto-Colombia | name=Tumbabarreto | sub=None | alt=['Quiebralomo', 'San Sebastian Quiebralomo'] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2005']
+GAZ(0.01272): viceroyalty_new_granada | k=San Sebastian Quiebralomo-Colombia | name=San Sebastian Quiebralomo | sub=None | alt=['Barrio de Sevilla'] | src=None | notes=None | desc=None | pops=['1538', '1550', '1600', '1650', '1700', '1750', '1780', '1782', '1786', '1800']
+GAZ(0.01456): colombia_after_independence | k=Riosucio (col_caldas)-Colombia | name=Riosucio | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1985', '1990', '1993']
+HGIS: San Sebastian Quiebralomo (mod=San Sebastian Quiebralomo) | var=[] | cat=Poblacion | prov=Popayan | part=Vega de Supia | yrs=1111-9999 | coords=[5.444, -75.689]
+HGIS: San Lorenzo (mod=San Lorenzo) | var=[] | cat=Poblacion | prov=Popayan | part=Vega de Supia | yrs=1111-9999 | coords=[5.464, -75.694]
+HGIS: Cañamomo (mod=Cañamomo) | var=[] | cat=Pueblo | prov=Popayan | part=Vega de Supia | yrs=1111-9999 | coords=[5.429, -75.721]
+HGIS: Barrio de Sevilla (mod=Barrio de Sevilla) | var=[] | cat=Poblacion | prov=Popayan | part=Vega de Supia | yrs=1111-9999 | coords=[5.447, -75.677]
+ARCH_RAW(raw_colombia_icanh_sitios.json): {"name": "Yacimiento 0103", "period": "Prehispanic / Archaeological (unspecified)"}
+WD: Riosucio (Municipio colombiano del departamento de Caldas) | adm=Caldas | inc=1819-08-07T00:00:00Z | es=https://es.wikipedia.org/wiki/Riosucio_(Caldas) | en=https://en.wikipedia.org/wiki/Riosucio,_Caldas
+  ESWIKI[Riosucio (Caldas)]: Riosucio es un municipio colombiano ubicado en el Eje cafetero y en la región paisa, y reconocido por su carnaval y su gran número de festividades típicas. Está localizado al occidente del departamento de Caldas en el Alto Occidente y con la mayor área y población municipal de esa región por encima de municipios como Supia y Filadelfia. Está ubicado en los límites departamentales de Caldas, Antioquia y Risaralda. 
+  ENWIKI[Riosucio, Caldas]: Riosucio is a town and municipality in the department of Caldas in Colombia. It is best known for its biennial carnival, officially called the Carnival of Riosucio but commonly known by its former name of the "Carnival of the Devil", and is one of the biggest and most popular carnivals in Colombia. Located along the Colombian coffee growing axis, the municipality was made part of the "Coffee Cultural Landscape" UNESCO World Heritage Site in 2011.
+WD: Café de Colombia (producción y cultivo de café en Colombia) | adm= | inc= | es=https://es.wikipedia.org/wiki/Caf%C3%A9_de_Colombia | en=https://en.wikipedia.org/wiki/Coffee_production_in_Colombia
+  ESWIKI[Café de Colombia]: El café de Colombia es una indicación geográfica protegida, reconocida en forma oficial por la Unión Europea el 27 de septiembre de 2007.​​ Dicha denominación se le otorga al café 100 % arábigo (coffea arabica) producido en las regiones cafeteras de Colombia, delimitadas entre la latitud Norte 1° a 11°15', longitud Oeste 72° a 78° y rangos específicos de altitud que pueden superar los 2000 metros sobre el nivel del mar. El término café de Colombia también es una marca de certificación registrada en Estados Unidos el 7 de julio de 1981,​ y en Canadá el 6 de julio de 1990.​ Así mismo, está reconocido como Denominación de Origen Protegida en otros países del mundo,​ como Ecuador,​ Bolivia​ y Perú.​ Colombia es el tercer país productor de café​ y el mayor productor de café suave en el mundo.​ Los principales países importadores del café de Colombia son Estados Unidos, Alemania, Japón, Países Bajos y Suecia. El café fue el producto primordial dentro de las actividades comerciales colombianas, registrando exportaciones de hasta 2560 sacos. Desde los años veinte, Colombia ocupó el primer lu
+  ENWIKI[Coffee production in Colombia]: Coffee production in Colombia has a reputation for producing mild, well-balanced coffee beans. Colombia's average annual coffee production of 11.5 million bags is the third total highest in the world, after Brazil and Vietnam, though highest in terms of the arabica bean. The beans are exported to the United States, Germany, France, Japan, and Italy. Most coffee is grown in the Colombian coffee growing axis region, while other regions focus on quality instead of volumes, such as Sierra Nevada de Santa Marta. In 2007, the European Union granted Colombian coffee a protected designation of origin status. In 2011, UNESCO declared the "Coffee Cultural Landscape" of Colombia a World Heritage Site. The coffee plant had spread to Colombia by 1790. The oldest written testimony of the presence of coffee in Colombia is attributed to a Jesuit priest, José Gumilla. In his book The Orinoco Illustrated 
+WD: Riosucio (Municipio colombiano del departamento de Caldas) | adm=Alto Occidente Caldense | inc=1819-08-07T00:00:00Z | es=https://es.wikipedia.org/wiki/Riosucio_(Caldas) | en=https://en.wikipedia.org/wiki/Riosucio,_Caldas
+
+=== [9] Maucallacta-Peru ===
+INPUT: n=Maucallacta | c=Peru | r=per_apurimac | ll=[-13.5601, -73.4934] | ey=1525 | ly=2017 | al=['ataccara', 'piscobamba', 'Ataccara']
+GAZ(0.0): peru_after_independence | k=Maucallacta-Peru | name=Maucallacta | sub=None | alt=['Ataccara', 'Piscobamba'] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2010']
+GAZ(0.01248): spanish_conquest_andes_collapse | k=Piscobamba (conq_peru_sierra_cusco_huamanga)-Peru | name=Piscobamba | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.01248): viceroyalty_peru_upper_peru | k=Piscobamba-Peru | name=Piscobamba | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+HGIS: Piscobamba (mod=Piscobamba) | var=[] | cat=Pueblo | prov=Huamanga | part=Andahuaylas | yrs=1111-9999 | coords=[-13.567, -73.483]
+
+=== [10] Tocmoche-Peru ===
+INPUT: n=Tocmoche | c=Peru | r=per_lambayeque | ll=[-6.41278, -79.36083] | ey=1525 | ly=2025 | al=None
+RAW_SETT: admin1=Cajamarca | admin2=CHOTA | other=[] | src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+GAZ(0.0): peru_after_independence | k=Tocmoche-Peru | name=Tocmoche | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2007']
+GAZ(0.0008): spanish_conquest_andes_collapse | k=Tocmoche-Peru | name=Tocmoche | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.0008): viceroyalty_peru_upper_peru | k=Tocmoche-Peru | name=Tocmoche | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+HGIS: Tocmoche (mod=Tocmoche) | var=[] | cat=Pueblo | prov=Trujillo | part=Huambos | yrs=1111-9999 | coords=[-6.412, -79.361]
+WD: Tocmoche (pueblo en Cajamarca, Perú) | adm=Distrito de Tocmoche | inc= | es= | en=
+WD: Distrito de Tocmoche (distrito en Cajamarca, Perú) | adm=Provincia de Chota | inc=1942-09-18T00:00:00Z | es=https://es.wikipedia.org/wiki/Distrito_de_Tocmoche | en=https://en.wikipedia.org/wiki/Tocmoche_District
+  ESWIKI[Distrito de Tocmoche]: El distrito de Tocmoche es un distrito de la provincia de Chota, en el departamento de Cajamarca (Perú), situado en el extremo noroeste de la provincia. 
+  ENWIKI[Tocmoche District]: Tocmoche District is one of nineteen districts of the province Chota in Peru. 
+
+=== [11] Andajes-Peru ===
+INPUT: n=Andajes | c=Peru | r=per_lima | ll=[-10.79278, -76.90917] | ey=1000 | ly=2025 | al=['chimba', 'antashuay', 'antashuay-poac guaranga']
+RAW_SETT: admin1=Lima Provincias | admin2=OYON | other=[] | src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+GAZ(0.0): peru_after_independence | k=Andajes-Peru | name=Andajes | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2007']
+GAZ(0.00028): spanish_conquest_andes_collapse | k=Andajes-Peru | name=Andajes | sub=None | alt=['Chimba'] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.00028): viceroyalty_peru_upper_peru | k=Andajes-Peru | name=Andajes | sub=None | alt=['Chimba'] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1792', '1800', '1825']
+HGIS: Andajes (mod=Andajes) | var=[] | cat=Pueblo | prov=Tarma | part=Cajatambo | yrs=1111-9999 | coords=[-10.793, -76.909]
+HGIS: Chimba (mod=Chimba) | var=[] | cat=Pueblo | prov=Tarma | part=Cajatambo | yrs=1111-9999 | coords=[-10.797, -76.914]
+WD: Andajes (caserío en Lima, Perú) | adm=Distrito de Andajes | inc= | es= | en=
+WD: Distrito de Andajes (distrito en Lima, Perú) | adm=provincia de Oyón | inc=1857-01-02T00:00:00Z | es=https://es.wikipedia.org/wiki/Distrito_de_Andajes | en=https://en.wikipedia.org/wiki/Andajes_District
+  ESWIKI[Distrito de Andajes]: El Distrito de Andajes es uno de los seis distritos de la provincia de Oyón, ubicada en el Departamento de Lima, bajo la administración del Gobierno Regional de Lima-Provincias, Perú. Dentro de la división eclesiástica de la Iglesia Católica del Perú, pertenece a la diócesis de Huacho​
+  ENWIKI[Andajes District]: Andajes District is one of six districts of the province Oyón in Peru. It is located in the northern highlands of the department of Lima Province Oyón 23 km to the NW of the town of Churín at an altitud of 3,487 meters. Andajes historic village the land of "Martyrs of Democracy" cradle of delicacies called by the investigator Antonio Raimondi "Balcony of the Andes". It was created politically January 2, 1857, by General Ramón Castilla. Currently there are annexes: La Chimba and San Benito. Etymologically the term Andajes place names comer from two Quechua. "Anta" means copper and "Jaja" or "casha" which means thorn. Another version is that it was named by Spanish Andaxes and eventually led to Andajes.
+WD: Distrito de Pachangara (distrito en Lima, Perú) | adm=provincia de Oyón | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_Pachangara | en=https://en.wikipedia.org/wiki/Pachangara_District
+WD: Churín (pueblo en Lima, Perú) | adm=Distrito de Pachangara | inc= | es=https://es.wikipedia.org/wiki/Chur%C3%ADn | en=https://en.wikipedia.org/wiki/Churin
+  ESWIKI[Churín]: Churín es una localidad peruana capital del distrito de Pachangara, ubicado en la provincia de Oyón en el departamento de Lima. Es famosa por sus aguas termales que constituyen su principal atractivo turístico. Está ubicada sobre la margen izquierda del río Huaura a 2258 m s.n.m. a unos 207 km al noroeste de Lima. 
+  ENWIKI[Churin]: Churin is a town in Oyon Province, Peru. In Proto-Quechuan, the word churin means "your child". The city holds two annual festivals. The Annual Maca Festival celebrates maca, an aphrodisiac food. The town also has an annual festival revolving around the food and cultural icon of the cuy, or guinea pig. The festivities involve dressing the guinea pigs in elaborate costumes for a competition. Churin is also well known for its hot springs.
+
+=== [12] Quípama-Colombia ===
+INPUT: n=Quípama | c=Colombia | r=col_cundinamarca | ll=[5.52055, -74.18003] | ey=1525 | ly=2025 | al=['quipama', 'Quipama']
+RAW_SETT: admin1=Boyacá | admin2=None | other=[] | src=['DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)']
+GAZ(0.0): colombia_after_independence | k=Quípama-Colombia | name=Quípama | sub=None | alt=['Quipama'] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1985', '1990', '1993']
+GAZ(0.00264): spanish_conquest_andes_collapse | k=Quipama-Colombia | name=Quipama | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.00264): viceroyalty_new_granada | k=Quipama-Colombia | name=Quipama | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1538', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825', '1830']
+HGIS: Quipama (mod=Quipama) | var=[] | cat=Pueblo | prov=Tunja | part=Muzo | yrs=1111-1804 | coords=[5.523, -74.181]
+HGIS: Topo (mod=Topo) | var=[] | cat=Poblacion | prov=Tunja | part=Muzo | yrs=1111-9999 | coords=[5.5, -74.173]
+WD: Quípama () | adm=Quípama | inc= | es= | en=
+WD: SKFR (airport in Boyacá Department, Colombia) | adm=Boyacá | inc= | es= | en=https://en.wikipedia.org/wiki/Furatena_Airport
+  ENWIKI[Furatena Airport]: Furatena Airport (ICAO: SKFR) is an airport serving the emerald region of the western emerald belt and town of Quípama in the Boyacá Department of Colombia. The airport is four nautical miles west of Muzo Airport. The town and airport are on the side of a steep mountain slope, 2,200 feet (670 m) above the Quebrada Sonadora in the Eastern Ranges of the Colombian Andes. The runway sits on a narrow shelf next to the town, with dropoffs on both ends and the west side. Mountainous terrain exists in all quadrants. 
+WD: Quípama (municipio colombiano del departamento de Boyacá) | adm=Provincia de Occidente | inc= | es=https://es.wikipedia.org/wiki/Qu%C3%ADpama | en=https://en.wikipedia.org/wiki/Qu%C3%ADpama
+  ESWIKI[Quípama]: Quípama es un municipio colombiano ubicado en el departamento de Boyacá, en la provincia de Occidente. Su extensión aproximada es de 182 km² (0.79% del departamento), su altitud es de 1200 m s. n. m. y su temperatura promedio de 24 °C, la cual presenta precipitaciones altas que oscilan entre 2000 y 4000 mm. Limita con los municipios de Muzo, Otanche y La Victoria (Boyacá), y con Paime y Yacopí (Cundinamarca). Se localiza a 170 km de Tunja, la capital del departamento. Cuenta con uno de los pocos aeropuertos operativos del departamento y único de la zona esmeraldifera, El aeropuerto FURATENA fue otra de las obras de Gilberto Molina para el pueblo, construyó el aeropuerto para conectar a sus habitantes con Bogotá a solo 20 minutos de vuelo. 
+WD: Quípama (municipio colombiano del departamento de Boyacá) | adm=Boyacá | inc= | es=https://es.wikipedia.org/wiki/Qu%C3%ADpama | en=https://en.wikipedia.org/wiki/Qu%C3%ADpama
+
+=== [13] La Punta-Chile ===
+INPUT: n=La Punta | c=Chile | r=chl_region_del_libertador_bernardo_o_higgins | ll=[-34.01085, -70.64988] | ey=1525 | ly=2017 | al=None
+GAZ(0.0): chile_after_independence | k=La Punta-Chile | name=La Punta | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2010']
+GAZ(0.00443): spanish_conquest_andes_collapse | k=La Punta-Chile | name=La Punta | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.00443): chile_rio_plata_banda_oriental | k=La Punta-Chile | name=La Punta | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1536', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825', '1830']
+HGIS: La Punta (mod=La Punta) | var=[] | cat=Poblacion | prov=Santiago | part=Rancagua | yrs=1111-9999 | coords=[-34.014, -70.653]
+HGIS: Codigua (mod=Codegua) | var=[] | cat=Poblacion | prov=Santiago | part=Rancagua | yrs=1111-9999 | coords=[-34.038, -70.656]
+HGIS: Estancilla (mod=Estancilla) | var=[] | cat=Poblacion | prov=Santiago | part=Rancagua | yrs=1111-9999 | coords=[-34.033, -70.667]
+WD: El Arrayán (localidad de Chile en la región de O'Higgins) | adm=Mostazal | inc= | es=https://es.wikipedia.org/wiki/El_Array%C3%A1n_(Cachapoal) | en=
+WD: Autódromo Internacional de Codegua (race track in Codehua, Chile) | adm= | inc= | es=https://es.wikipedia.org/wiki/Aut%C3%B3dromo_Internacional_de_Codegua | en=https://en.wikipedia.org/wiki/Aut%C3%B3dromo_Internacional_de_Codegua
+  ENWIKI[Autódromo Internacional de Codegua]: The Autódromo Internacional de Codegua is a 4.388 km (2.727 mi) race track located in Codegua, O'Higgins Region, Chile, 18 km (11 mi) northeast of the city of Rancagua, and 72 km (45 mi) south of Santiago. It is one of the main race tracks in Chile, regularly hosting Chilean national race competitions, as well as being open for private use. It hosted the prestigious Argentinian category Súper TC 2000 in 2014, and there were some chances to host a MotoGP race in the past. 
+WD: Codegua (comuna de Chile) | adm=Cachapoal | inc= | es=https://es.wikipedia.org/wiki/Codegua | en=https://en.wikipedia.org/wiki/Codegua
+  ESWIKI[Codegua]: Codegua es una comuna de Chile, ubicada en la región del Libertador General Bernardo O'Higgins, específicamente en la provincia de Cachapoal, en la zona central de Chile. Se ubica 19 km al norte de la ciudad de Rancagua. La superficie de la comuna abarca 287 km². En conjunto a las comunas de Graneros y Mostazal, Codegua integra la zona del Cono Norte de la Región del Libertador General Bernardo O'Higgins. 
+WD: Estadio Municipal de Codegua (estadio de Chile) | adm=Codegua | inc= | es=https://es.wikipedia.org/wiki/Estadio_Municipal_de_Codegua | en=
+WD: Iglesia de Nuestra Señora de la Merced (iglesia de Chile) | adm=Codegua | inc= | es=https://es.wikipedia.org/wiki/Iglesia_de_Nuestra_Se%C3%B1ora_de_la_Merced_(Codegua) | en=
+WD: La Punta (ciudad de Chile) | adm=Mostazal | inc= | es=https://es.wikipedia.org/wiki/La_Punta_(Chile) | en=
+
+=== [14] Otoca-Peru ===
+INPUT: n=Otoca | c=Peru | r=per_ayacucho | ll=[-14.49, -74.68667] | ey=1525 | ly=2025 | al=None
+RAW_SETT: admin1=Ayacucho | admin2=LUCANAS | other=[] | src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+GAZ(0.0): peru_after_independence | k=Otoca-Peru | name=Otoca | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2007']
+GAZ(0.0012): spanish_conquest_andes_collapse | k=Otoca-Peru | name=Otoca | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.0012): viceroyalty_peru_upper_peru | k=Otoca-Peru | name=Otoca | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1792', '1800', '1825']
+HGIS: Otoca (mod=Otoca) | var=[] | cat=Pueblo | prov=Huamanga | part=Lucanas | yrs=1111-9999 | coords=[-14.489, -74.686]
+WD: Distrito de Otoca (distrito en Ayacucho, Perú) | adm=Lucanas | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_Otoca | en=https://en.wikipedia.org/wiki/Otoca_District
+  ESWIKI[Distrito de Otoca]: El Distrito de Otoca es uno de los veintiún distritos que conforman la Provincia de Lucanas, ubicada en el Departamento de Ayacucho (Perú).​ 
+  ENWIKI[Otoca District]: Otoca District is one of twenty-one districts of the Lucanas Province in Peru.
+WD: Otoca (pueblo en Ayacucho, Perú) | adm=Distrito de Otoca | inc= | es= | en=
+
+=== [15] Tangui-Peru ===
+INPUT: n=Tangui | c=Peru | r=vp_intendencia_lima | ll=[-12.383, -76.383] | ey=1525 | ly=1825 | al=['tanqui', 'Tanqui']
+GAZ(0.0): spanish_conquest_andes_collapse | k=Tangui-Peru | name=Tangui | sub=None | alt=['Tanqui'] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.0): viceroyalty_peru_upper_peru | k=Tangui-Peru | name=Tangui | sub=None | alt=['Tanqui'] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+GAZ(0.02071): pre_columbian_central_andes | k=Yerbabuena-Peru | name=Yerbabuena | sub=None | alt=['Huayata'] | src=None | notes=None | desc=None | pops=['-1000', '-500', '0', '1000', '1200', '1300', '1400', '1438', '500', '800']
+HGIS: Tangui (mod=Tangui) | var=['Tanqui|'] | cat=Pueblo | prov=Lima | part=Cañete | yrs=1111-9999 | coords=[-12.383, -76.383]
+WD: Antahualla (localidad peruana del distrito de Calango, Cañete, Lima) | adm=Distrito de Calango | inc= | es=https://es.wikipedia.org/wiki/Antahualla_(Calango) | en=
+WD: Coñec (localidad del departamento de Lima, Perú) | adm=Distrito de Calango | inc= | es=https://es.wikipedia.org/wiki/Co%C3%B1ec | en=
+  ESWIKI[Coñec]: Coñec es una localidad peruana ubicada en el distrito de Calango, perteneciente a la provincia de Cañete del departamento de Lima, al suroeste del Perú.
+WD: Huallinta (localidad del departamento de Lima, Perú) | adm=Distrito de Calango | inc= | es=https://es.wikipedia.org/wiki/Huallinta | en=
+  ESWIKI[Huallinta]: Huallinta es una localidad peruana ubicada en el distrito de Calango, perteneciente a la provincia de Cañete del departamento de Lima, al suroeste del Perú. 
+WD: San Juan de Checas (localidad del departamento de Lima, Perú) | adm=Distrito de Calango | inc= | es=https://es.wikipedia.org/wiki/San_Juan_de_Checas | en=
+
+=== [16] Aquia-Peru ===
+INPUT: n=Aquia | c=Peru | r=per_ancash | ll=[-10.07444, -77.145] | ey=1525 | ly=2025 | al=None
+RAW_SETT: admin1=Áncash | admin2=BOLOGNESI | other=[] | src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+GAZ(0.0): peru_after_independence | k=Aquia-Peru | name=Aquia | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2007']
+GAZ(0.00056): spanish_conquest_andes_collapse | k=Aquia-Peru | name=Aquia | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.00056): viceroyalty_peru_upper_peru | k=Aquia-Peru | name=Aquia | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+HGIS: Aquia (mod=Aquia) | var=[] | cat=Pueblo | prov=Tarma | part=Cajatambo | yrs=1111-9999 | coords=[-10.075, -77.145]
+WD: Distrito de Aquia (distrito en Áncash, Perú) | adm=Bolognesi | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_Aquia | en=https://en.wikipedia.org/wiki/Aquia_District
+  ESWIKI[Distrito de Aquia]: El distrito de Aquia es una subdivisión administrativa de la provincia de Bolognesi, ubicada en el departamento de Áncash, en el Perú. Según el censo de 2017, tiene una población de 1795 habitantes.​ Limita por el norte con la provincia de Huari, por el este con el distrito de Huallanca y el distrito de Huasta, por el sur con el distrito de Chiquián y por el oeste con la provincia de Recuay. 
+  ENWIKI[Aquia District]: Aquia District is one of fifteen districts of the province Bolognesi in Peru.
+WD: Iglesia colonial de Aquia (cultural heritage site in Peru) | adm=Bolognesi | inc= | es= | en=
+
+=== [17] Pampas (vp_intendencia_lima)-Peru ===
+INPUT: n=Pampas | c=Peru | r=vp_intendencia_lima | ll=[-11.314, -76.777] | ey=1525 | ly=1825 | al=None
+GAZ(0.0): spanish_conquest_andes_collapse | k=Pampas (conq_peru_costa_lima_trujillo)-Peru | name=Pampas | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.0): viceroyalty_peru_upper_peru | k=Pampas (vp_intendencia_lima)-Peru | name=Pampas | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+GAZ(0.01844): inca_empire_tawantinsuyu | k=Rupak-Peru | name=Rupak | sub=None | alt=['Añay', 'Chiprac'] | src=None | notes=None | desc=None | pops=['1438', '1470', '1500', '1525', '1530']
+HGIS: Huascoy (mod=Huascoy) | var=[] | cat=Pueblo | prov=Lima | part=Canta | yrs=1111-9999 | coords=[-11.29, -76.761]
+HGIS: San Juan (mod=San Juan) | var=[] | cat=Pueblo | prov=Lima | part=Canta | yrs=1111-9999 | coords=[-11.285, -76.775]
+HGIS: Pampas (mod=Pampas) | var=[] | cat=Pueblo | prov=Lima | part=Canta | yrs=1111-9999 | coords=[-11.314, -76.777]
+WD: Rúpac (sitio arqueológico en Lima, Perú) | adm=provincia de Huaral | inc= | es=https://es.wikipedia.org/wiki/R%C3%BApac | en=
+  ESWIKI[Rúpac]: Rúpac, también conocido como Rupak,​ es un sitio arqueológico perteneciente a la cultura de los Atavillos.​ Está situado en la Región Lima, provincia de Huaral, distrito de Atavillos Bajo. La construcción data alrededor del año 1200 d. C.. Las edificaciones fueron construidas de piedra.​​​​ Fue declarado Patrimonio Cultural de la Nación mediante Resolución Directoral Nacional N° 283/INC en el año 1999. 
+WD: Rúpac (sitio arqueológico en Lima, Perú) | adm=Departamento de Lima | inc= | es=https://es.wikipedia.org/wiki/R%C3%BApac | en=
+WD: La Florida (caserío peruano del distrito de Atavillos Bajo, Huaral, Lima) | adm=Distrito de Atavillos Bajo | inc= | es=https://es.wikipedia.org/wiki/La_Florida_(Atavillos_Bajo) | en=
+WD: Chiprac (sitio arqueológico en la región Lima, Perú) | adm=Distrito de San Miguel de Acos | inc= | es=https://es.wikipedia.org/wiki/Chiprac | en=
+WD: Pampas (caserío peruano del distrito de Atavillos Bajo, Huaral, Lima) | adm=Distrito de Atavillos Bajo | inc= | es=https://es.wikipedia.org/wiki/Pampas_(Atavillos_Bajo) | en=
+  ESWIKI[Pampas (Atavillos Bajo)]: Pampas es un caserio peruano ubicado en el distrito de Atavillos Bajo, perteneciente a la provincia de Huaral del departamento de Lima, en la costa central del Perú.
+
+=== [18] San Juan de Viscas-Peru ===
+INPUT: n=San Juan de Viscas | c=Peru | r=per_lima | ll=[-12.3273, -76.2787] | ey=1525 | ly=2017 | al=['viscas', 'Viscas']
+GAZ(0.0): peru_after_independence | k=San Juan de Viscas-Peru | name=San Juan de Viscas | sub=None | alt=['Viscas'] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2010']
+GAZ(0.00099): spanish_conquest_andes_collapse | k=Viscas-Peru | name=Viscas | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.00099): viceroyalty_peru_upper_peru | k=Viscas (vp_intendencia_lima)-Peru | name=Viscas | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+HGIS: Viscas (mod=Viscas) | var=[] | cat=Pueblo | prov=Lima | part=Yauyos | yrs=1111-9999 | coords=[-12.328, -76.278]
+
+=== [19] Chibunga-Ecuador ===
+INPUT: n=Chibunga | c=Ecuador | r=ecu_manabi | ll=[-0.03782, -79.74084] | ey=1850 | ly=2025 | al=None
+GAZ(0.0): ecuador_after_independence | k=Chibunga-Ecuador | name=Chibunga | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2001', '2010']
+
+=== [20] Páez (ven_barinas)-Venezuela ===
+INPUT: n=Páez | c=Venezuela | r=ven_barinas | ll=[8.03111, -70.00667] | ey=1850 | ly=2025 | al=None
+GAZ(0.0): venezuela_after_independence | k=Páez (ven_barinas)-Venezuela | name=Páez | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2005']
+
+=== [21] Condormarca-Peru ===
+INPUT: n=Condormarca | c=Peru | r=per_la_libertad | ll=[-7.54667, -77.59972] | ey=1440 | ly=2025 | al=['cundurmarca', 'condromarca', 'cundarmarca']
+RAW_SETT: admin1=La Libertad | admin2=BOLIVAR | other=[] | src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+GAZ(0.0): peru_after_independence | k=Condormarca-Peru | name=Condormarca | sub=None | alt=['Cundurmarca'] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2007']
+GAZ(0.01324): spanish_conquest_andes_collapse | k=Cundurmarca-Peru | name=Cundurmarca | sub=None | alt=['Condormarca', 'Condromarca', 'Cundarmarca'] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.01324): viceroyalty_peru_upper_peru | k=Cundurmarca-Peru | name=Cundurmarca | sub=None | alt=['Condormarca', 'Condromarca', 'Cundarmarca'] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+HGIS: Cundurmarca (mod=Cundurmarca) | var=['Cundarmarca| Condormarca| Condromarca|'] | cat=Pueblo | prov=Trujillo | part=Pataz | yrs=1111-9999 | coords=[-7.543, -77.587]
+WD: Condormarca (caserío en La Libertad, Perú) | adm=Distrito de Condormarca | inc= | es=https://es.wikipedia.org/wiki/Condormarca | en=
+  ESWIKI[Condormarca]: Condormarca es una localidad peruana capital del Distrito de Condormarca en la Provincia de Bolívar de la Región La Libertad. Se ubica aproximadamente a unos 340 kilómetros al noreste de la ciudad de Trujillo.
+WD: Distrito de Condormarca (distrito en La Libertad, Perú) | adm=provincia de Bolívar | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_Condormarca | en=https://en.wikipedia.org/wiki/Condormarca_District
+  ESWIKI[Distrito de Condormarca]: El distrito de Condormarca es uno de los que conforman la provincia de Bolívar, bajo la administración del gobierno regional de La Libertad, al norte del Perú. Desde el punto de vista jerárquico de la Iglesia católica forma parte de la prelatura de Huamachuco.​ 
+  ENWIKI[Condormarca District]: Condormarca or Kunturmarka (Quechua kuntur condor, marka village) is one of six districts of the province of Bolívar in Peru. The district was created in 1916 in the same law that created Bolívar province (named Cajamarquilla until 1925). The district had a population of 1,914 in the 2017 Peruvian census. The district capital of Condormarca had a population of 175.
+
+=== [22] Buena Vista (ven_lara)-Venezuela ===
+INPUT: n=Buena Vista | c=Venezuela | r=ven_lara | ll=[9.88667, -69.48111] | ey=1850 | ly=2025 | al=None
+GAZ(0.0): venezuela_after_independence | k=Buena Vista (ven_lara)-Venezuela | name=Buena Vista | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2005']
+WD: Buena Vista (human settlement in Venezuela) | adm=Parroquia Buena Vista | inc= | es= | en=
+
+=== [23] Viraco-Peru ===
+INPUT: n=Viraco | c=Peru | r=per_arequipa | ll=[-15.65833, -72.525] | ey=1525 | ly=2025 | al=None
+RAW_SETT: admin1=Arequipa | admin2=CASTILLA | other=[] | src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+GAZ(0.0): peru_after_independence | k=Viraco-Peru | name=Viraco | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2007']
+GAZ(0.00133): spanish_conquest_andes_collapse | k=Viraco-Peru | name=Viraco | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.00133): viceroyalty_peru_upper_peru | k=Viraco-Peru | name=Viraco | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1792', '1800', '1825']
+HGIS: Viraco (mod=Viraco) | var=[] | cat=Pueblo | prov=Arequipa | part=Condesuyos | yrs=1111-9999 | coords=[-15.657, -72.525]
+HGIS: Machahuay (mod=Machahuay) | var=[] | cat=Pueblo | prov=Arequipa | part=Condesuyos | yrs=1111-9999 | coords=[-15.649, -72.505]
+WD: Distrito de Machaguay (distrito en Arequipa, Perú) | adm=Provincia de Castilla | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_Machaguay | en=https://en.wikipedia.org/wiki/Machaguay_District
+  ESWIKI[Distrito de Machaguay]: El distrito de Machaguay es uno de los catorce que conforman la provincia de Castilla, ubicada en el departamento de Arequipa, en el Sur del Perú.​ Limita por el norte con los distritos de Andagua y Salamanca; por el sur con los de Uñón y Tipán; por el Este con el de Ayo; y por el oeste con el de Viraco. Su capital es Machaguay. Desde el punto de vista jerárquico de la Iglesia católica forma parte de la Prelatura de Chuquibamba en la arquidiócesis de Arequipa.​ 
+  ENWIKI[Machaguay District]: Machaguay District is one of fourteen districts of the province Castilla in Peru.
+WD: Distrito de Viraco (distrito en Arequipa, Perú) | adm=Provincia de Castilla | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_Viraco | en=https://en.wikipedia.org/wiki/Viraco_District
+  ESWIKI[Distrito de Viraco]: El distrito de Viraco es uno de los catorce que conforman la provincia de Castilla, ubicada en el departamento de Arequipa, en el Sur del Perú.​ Desde el punto de vista jerárquico de la Iglesia católica forma parte de la Prelatura de Chuquibamba en la arquidiócesis de Arequipa.​ 
+  ENWIKI[Viraco District]: Viraco District is one of fourteen districts of the province Castilla in Peru. 
+WD: Iglesia matriz de Viraco (cultural heritage site in Peru) | adm=Provincia de Castilla | inc= | es= | en=
+WD: Portada de la iglesia matriz de Viraco (cultural heritage site in Peru) | adm=Provincia de Castilla | inc= | es= | en=
+
+=== [24] San Francisco Socoroma-Chile ===
+INPUT: n=San Francisco Socoroma | c=Chile | r=vp_intendencia_arequipa | ll=[-18.264, -69.602] | ey=1525 | ly=1825 | al=None
+GAZ(0.0): spanish_conquest_andes_collapse | k=San Francisco Socoroma-Chile | name=San Francisco Socoroma | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.0): viceroyalty_peru_upper_peru | k=San Francisco Socoroma-Chile | name=San Francisco Socoroma | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+GAZ(0.00875): pre_columbian_southern_cone | k=Socoroma Norte-Chile | name=Socoroma Norte | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1000', '1200', '1300', '1400', '1500', '900']
+HGIS: San Francisco Socoroma (mod=San Francisco Socoroma) | var=[] | cat=Pueblo | prov=Arequipa | part=Arica | yrs=1111-9999 | coords=[-18.264, -69.602]
+ARCH_RAW(raw_chile_cmn_acreditado.json): {"name": "Socoroma Norte 1", "period": "Prehispánico: Alfarero Intermedio; Alfarero Tardío; No"}
+ARCH_RAW(raw_chile_cmn_acreditado.json): {"name": "Socoroma Norte 2", "period": "Prehispánico: Alfarero Intermedio; Alfarero Tardío; No"}
+ARCH_RAW(raw_chile_cmn_acreditado.json): {"name": "Campamento-Taller Lítico", "period": "Prehispánico: Alfarero Intermedio; Alfarero Tardío; No"}
+WD: iglesia de Socoroma (monumento nacional de Chile) | adm=Putre | inc= | es=https://es.wikipedia.org/wiki/Iglesia_de_San_Francisco_de_As%C3%ADs_(Socoroma) | en=
+WD: Río Socoroma (afluente del río Lluta, en la Región de Arica y Parinacota de Chile) | adm=Región de Arica y Parinacota | inc= | es=https://es.wikipedia.org/wiki/Quebrada_Socoroma | en=
+  ESWIKI[Quebrada Socoroma]: La quebrada Socoroma o río Aroma es un curso natural de agua que nace en las laderas del cordón de montañas sin nieve que separa las hoyas del río Lluta de las del río San José de Azapa hasta desembocar en el río Lluta.
+WD: iglesia de Socoroma (monumento nacional de Chile) | adm=Socoroma | inc= | es=https://es.wikipedia.org/wiki/Iglesia_de_San_Francisco_de_As%C3%ADs_(Socoroma) | en=
+WD: Socoroma (caserío de la Región de Arica y Parinacota, Chile) | adm=Putre | inc= | es=https://es.wikipedia.org/wiki/Socoroma | en=https://en.wikipedia.org/wiki/Socoroma
+  ESWIKI[Socoroma]: Socoroma (del aimara: chukuruma ‘agua que corre’) es una localidad ubicada a 3060 metros de altura, a 30 km de Putre y a 125 km de Arica. Socoroma pertenece a la comuna de Putre, Provincia de Parinacota que forma parte de la Región de Arica y Parinacota, en el norte grande de Chile.​ Es una localidad de origen precolombino que fue ocupado por españoles al servicio de la senda Arica-Potosí. Tiene una capilla que data de 1560. Su traza colonial se conserva casi intacta, con sus calles, algunas empedradas con canalón de agua al centro. Destaca la calle más ancha, donde llegaba un camino tropero de Putre y que servía para las cabalgaduras de arrieros.​ En la periferia del poblado se realiza la siembra en andenes con orégano como uno de los cultivos reconocidos de la localidad , la cual se realiza dos veces al año dejando su aroma en todo el lugar y es parte de la gastronomía local. A su vez, realizan ganadería de camélidos, junto a la agricultura y los trabajos textiles, actividades que se dedican cerca de los yo habitantes.​ 
+WD: Qhapaq Ñan (sistema de caminos del Imperio incaico) | adm= | inc= | es=https://es.wikipedia.org/wiki/Red_vial_del_Tahuantinsuyo | en=https://en.wikipedia.org/wiki/Inca_road_system
+WD: Qhapac Ñan (eje de la red vial inca) | adm= | inc= | es= | en=https://en.wikipedia.org/wiki/Qhapaq_%C3%91an
+
+=== [25] La Capilla-Colombia ===
+INPUT: n=La Capilla | c=Colombia | r=col_cundinamarca | ll=[5.09569, -73.44435] | ey=1793 | ly=2025 | al=['la capilla de tenza', 'La Capilla de Tenza']
+RAW_SETT: admin1=Boyacá | admin2=None | other=[] | src=['DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)']
+GAZ(0.0): colombia_after_independence | k=La Capilla-Colombia | name=La Capilla | sub=None | alt=['La Capilla de Tenza'] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1985', '1990', '1993']
+GAZ(0.00136): viceroyalty_new_granada | k=La Capilla de Tenza-Colombia | name=La Capilla de Tenza | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1793', '1800', '1825', '1830']
+GAZ(0.02297): pre_columbian_northern_andes | k=Aposentos-Colombia | name=Aposentos | sub=None | alt=['Barroblanco', 'Pachavita'] | src=None | notes=None | desc=None | pops=['-1000', '-2000', '-3000', '-500', '0', '1000', '1200', '1300', '1400', '1500']
+HGIS: La Capilla de Tenza (mod=La Capilla de Tenza) | var=[] | cat=Poblacion | prov=Tunja | part=Tensa | yrs=1793-9999 | coords=[5.097, -73.444]
+ARCH_RAW(raw_colombia_icanh_sitios.json): {"name": "Barroblanco", "period": "Prehispanic / Archaeological (unspecified)"}
+WD: La Capilla (Municipio colombiano del departamento de Boyacá) | adm=Boyacá | inc=1793-11-13T00:00:00Z | es=https://es.wikipedia.org/wiki/La_Capilla_(Boyac%C3%A1) | en=https://en.wikipedia.org/wiki/La_Capilla
+  ESWIKI[La Capilla (Boyacá)]: La Capilla es un municipio del departamento de Boyacá fundado por Juan de la Cruz Aguirre y localizado en el extremo norte de la Provincia del Oriente; es parte integral del Valle de Tenza. Fue fundado en 1793 durante el virreinato de José de Ezpeleta y Galdeano con el nombre de La Capilla de Tenza. 
+  ENWIKI[La Capilla]: La Capilla is a town and municipality in the Eastern Boyacá Province, part of the Colombian department of Boyacá. The urban centre is situated at an altitude of 1,600 metres (5,200 ft) in the Tenza Valley.
+WD: Tenza (Municipio colombiano del departamento de Boyacá) | adm=Provincia del Oriente | inc=1537-01-01T00:00:00Z | es=https://es.wikipedia.org/wiki/Tenza | en=https://en.wikipedia.org/wiki/Tenza
+  ESWIKI[Tenza]: Tenza es un municipio colombiano situado en el departamento de Boyacá. Según el censo de 2018, tiene una población de 3851 habitantes.​ Está ubicado en el centro-oriente de Colombia, en la región del Valle de Tenza, a unos 83 kilómetros de la ciudad de Tunja. Se ubica en la provincia del Oriente. 
+WD: Valle de Tenza (valle interandino en Colombia) | adm= | inc= | es=https://es.wikipedia.org/wiki/Valle_de_Tenza | en=https://en.wikipedia.org/wiki/Tenza_Valley
+WD: Tenza (Municipio colombiano del departamento de Boyacá) | adm=Boyacá | inc=1537-01-01T00:00:00Z | es=https://es.wikipedia.org/wiki/Tenza | en=https://en.wikipedia.org/wiki/Tenza
+WD: La Capilla (Municipio colombiano del departamento de Boyacá) | adm=Provincia del Oriente | inc=1793-11-13T00:00:00Z | es=https://es.wikipedia.org/wiki/La_Capilla_(Boyac%C3%A1) | en=https://en.wikipedia.org/wiki/La_Capilla
+
+=== [26] Anaica-Peru ===
+INPUT: n=Anaica | c=Peru | r=vp_intendencia_lima | ll=[-11.583, -76.67] | ey=1525 | ly=1825 | al=['pampacocha', 'Pampacocha']
+GAZ(0.0): spanish_conquest_andes_collapse | k=Anaica-Peru | name=Anaica | sub=None | alt=['Pampacocha'] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.0): viceroyalty_peru_upper_peru | k=Anaica-Peru | name=Anaica | sub=None | alt=['Pampacocha'] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+GAZ(0.0214): spanish_conquest_andes_collapse | k=Biscas-Peru | name=Biscas | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+HGIS: Biscas (mod=Biscas) | var=[] | cat=Pueblo | prov=Lima | part=Canta | yrs=1111-9999 | coords=[-11.566, -76.657]
+HGIS: Pampacocha (mod=Pampacocha) | var=[] | cat=Pueblo | prov=Lima | part=Canta | yrs=1111-9999 | coords=[-11.581, -76.674]
+HGIS: Anaica (mod=Anaica) | var=[] | cat=Pueblo | prov=Lima | part=Canta | yrs=1111-9999 | coords=[-11.583, -76.67]
+WD: Cerro Anaica (montaña en Perú) | adm=Departamento de Lima | inc= | es= | en=
+WD: Arahuay (caserío en Lima, Perú) | adm=Distrito de Arahuay | inc= | es=https://es.wikipedia.org/wiki/Arahuay | en=https://en.wikipedia.org/wiki/Arahuay
+  ESWIKI[Arahuay]: Arahuay es un caserío peruano, capital del distrito homónimo, ubicado en la provincia de Canta en el departamento de Lima. Se halla a 2.533 m s. n. m. y, de acuerdo a los datos del censo de 2007, posee 319 viviendas. 
+WD: Distrito de Arahuay (distrito en Lima, Perú) | adm=provincia de Canta | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_Arahuay | en=https://en.wikipedia.org/wiki/Arahuay_District
+  ENWIKI[Arahuay District]: Arahuay District is one of seven districts of the province Canta in Peru.
+WD: Ansa (localidad del departamento de Lima, Perú) | adm=Distrito de Lachaqui | inc= | es=https://es.wikipedia.org/wiki/Ansa_(Per%C3%BA) | en=
+WD: San Lorenzo de Cochabamba (caserío del departamento de Lima, Perú) | adm=Distrito de Lachaqui | inc= | es=https://es.wikipedia.org/wiki/San_Lorenzo_de_Cochabamba_(Lima) | en=
+  ESWIKI[San Lorenzo de Cochabamba (Lima)]: San Lorenzo de Cochabamba es un caserío peruano ubicado en el distrito de Lachaqui, perteneciente a la provincia de Canta del departamento de Lima, al centro oeste del Perú.
+
+=== [27] Cantagallo-Venezuela ===
+INPUT: n=Cantagallo | c=Venezuela | r=ven_carabobo | ll=[9.78852, -67.43191] | ey=1850 | ly=2025 | al=None
+GAZ(0.0): venezuela_after_independence | k=Cantagallo-Venezuela | name=Cantagallo | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2005']
+WD: Parroquia Cantagallo (división administrativa de tercer nivel del Municipio Roscio, Estado Guárico, Venezuela) | adm=Municipio Roscio | inc= | es= | en=
+WD: Parroquia Cantagallo (división administrativa de tercer nivel del Municipio Roscio, Estado Guárico, Venezuela) | adm=Guárico | inc= | es= | en=
+
+=== [28] Auquimarca-Peru_2 ===
+INPUT: n=Auquimarca | c=Peru | r=vp_intendencia_lima | ll=[-10.951, -76.914] | ey=1525 | ly=1825 | al=['anquimarca', 'Anquimarca']
+GAZ(0.0): spanish_conquest_andes_collapse | k=Auquimarca-Peru | name=Auquimarca | sub=None | alt=['Anquimarca'] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.0): viceroyalty_peru_upper_peru | k=Auquimarca-Peru | name=Auquimarca | sub=None | alt=['Anquimarca'] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+GAZ(0.01897): spanish_conquest_andes_collapse | k=Paccho-Peru | name=Paccho | sub=None | alt=['Pacho'] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+HGIS: Paccho (mod=Paccho) | var=['Pacho|'] | cat=Pueblo | prov=Lima | part=Chancay | yrs=1111-9999 | coords=[-10.957, -76.932]
+HGIS: Auquimarca (mod=Auquimarca) | var=['Anquimarca'] | cat=Pueblo | prov=Lima | part=Chancay | yrs=1111-9999 | coords=[-10.951, -76.914]
+WD: Distrito de Paccho (distrito en Lima, Perú) | adm=provincia de Huaura | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_Paccho | en=https://en.wikipedia.org/wiki/Paccho_District
+  ESWIKI[Distrito de Paccho]: El Distrito de Paccho es uno de los doce que conforman la Provincia de Huaura, ubicada en el Departamento de Lima, bajo la administración del Gobierno Regional de Lima-Provincias, Perú. Dentro de la división eclesiástica de la Iglesia Católica del Perú, pertenece a la Diócesis de Huacho​ 
+  ENWIKI[Paccho District]: Paccho District is one of twelve districts of the province Huaura in Peru. 
+
+=== [29] San Ignacio (per_la_libertad)-Peru ===
+INPUT: n=San Ignacio | c=Peru | r=per_la_libertad | ll=[-7.8312, -78.7152] | ey=1525 | ly=2017 | al=['chuite', 'Chuite']
+GAZ(0.0): peru_after_independence | k=San Ignacio (per_la_libertad)-Peru | name=San Ignacio | sub=None | alt=['Chuite'] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2010']
+GAZ(0.00028): spanish_conquest_andes_collapse | k=San Ignacio-Peru | name=San Ignacio | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1525', '1550', '1575', '1600', '1625', '1650']
+GAZ(0.00028): viceroyalty_peru_upper_peru | k=San Ignacio-Peru | name=San Ignacio | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1542', '1550', '1600', '1650', '1700', '1750', '1780', '1800', '1825']
+HGIS: San Ignacio (mod=San Ignacio) | var=[] | cat=Pueblo | prov=Trujillo | part=Huamachuco | yrs=1111-9999 | coords=[-7.831, -78.715]
+WD: Sinsicap (caserío en La Libertad, Perú) | adm=Distrito de Sinsicap | inc= | es=https://es.wikipedia.org/wiki/Sinsicap | en=
+  ESWIKI[Sinsicap]: Sinsicap es una localidad peruana capital del Distrito de Sinsicap de la Provincia de Otuzco en el Departamento de La Libertad, está bajo la administración del Gobierno regional. Su ubicación se encuentra aproximadamente a unos 51 kilómetros al este de la ciudad de Trujillo.
+WD: Distrito de Sinsicap (distrito en La Libertad, Perú) | adm=provincia de Otuzco | inc= | es=https://es.wikipedia.org/wiki/Distrito_de_Sinsicap | en=https://en.wikipedia.org/wiki/Sinsicap_District
+  ESWIKI[Distrito de Sinsicap]: El Distrito de Sinsicap es uno de los diez distritos que conforman la Provincia de Otuzco, ubicada en el Departamento de La Libertad, bajo la administración del Gobierno regional de La Libertad, en el Perú. Desde el punto de vista jerárquico de la Iglesia católica forma parte de la arquidiócesis de Trujillo.​ 
+  ENWIKI[Sinsicap District]: Sinsicap District is one of ten districts of the province Otuzco in Peru.
+
+=== [30] Juan Pablo Peñaloza-Venezuela ===
+INPUT: n=Juan Pablo Peñaloza | c=Venezuela | r=ven_tachira | ll=[8.03722, -71.85444] | ey=1850 | ly=2025 | al=None
+GAZ(0.0): venezuela_after_independence | k=Juan Pablo Peñaloza-Venezuela | name=Juan Pablo Peñaloza | sub=None | alt=[] | src=None | notes=None | desc=None | pops=['1850', '1880', '1900', '1920', '1950', '1970', '1980', '1990', '2000', '2005']

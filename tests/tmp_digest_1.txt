@@ -1,0 +1,197 @@
+=== [0] Saquena-Peru | n=Saquena | c=Peru | r=per_loreto | ll=[-4.725, -73.53306] | ey=1900 ly=2025 | al=['bagazan', 'Bagazan'] | ex=[] ===
+  LOCAL(peru_after_independence_settlements.json): key=Saquena-Peru name=Saquena other=['Bagazan'] fy=None notes=None src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [1] Junín (ven_trujillo)-Venezuela | n=Junín | c=Venezuela | r=ven_trujillo | ll=[9.48222, -70.86667] | ey=1850 ly=2025 | al=[] | ex=[] ===
+  LOCAL(venezuela_after_independence_settlements.json): key=Junín (ven_trujillo)-Venezuela name=Junín other=[] fy=None notes=None src=['INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)', 'INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [2] Pilar de Macapillo-Argentina | n=Pilar de Macapillo | c=Argentina | r=crp_gobernacion_tucuman | ll=[-25.403, -63.982] | ey=1715 ly=1830 | al=['columna', 'mecapillo', 'Columna'] | ex=[] ===
+  LOCAL(chile_rio_plata_banda_oriental_settlements.json): key=Pilar de Macapillo-Argentina name=Pilar de Macapillo other=['Columna', 'Mecapillo'] fy=1715 notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', 'Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)']
+  LOCAL(argentina_after_independence_settlements.json): key=Macapillo-Argentina name=Macapillo other=[] fy=None notes=None src=['INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)', 'INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [3] Juctacancha-Peru | n=Juctacancha | c=Peru | r=inca_chinchaysuyu | ll=[-10.2658, -76.45889] | ey=0 ly=1530 | al=['calapa', 'chogya', 'golgayana punta'] | ex=[] ===
+  LOCAL(pre_columbian_central_andes_settlements.json): key=Juctacancha-Peru name=Juctacancha other=['Calapa', 'Chogya', 'Golgayana Punta', 'Huari Punta', 'Huarichuchu', 'Ichipira', 'Ishcay Sanga', 'Jircan Corral'] fy=None notes=None src=['SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)']
+  LOCAL(inca_empire_tawantinsuyu_settlements.json): key=Juctacancha-Peru name=Juctacancha other=['Calapa', 'Chogya', 'Golgayana Punta', 'Huari Punta', 'Huarichuchu', 'Ichipira', 'Ishcay Sanga', 'Jircan Corral'] fy=None notes=None src=['SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [4] La Coquera-Colombia | n=La Coquera | c=Colombia | r=na_magdalena_cauca_muisca | ll=[5.78056, -74.67139] | ey=1300 ly=1500 | al=[] | ex=[] ===
+  LOCAL(pre_columbian_northern_andes_settlements.json): key=La Coquera-Colombia name=La Coquera other=[] fy=None notes=None src=['ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)']
+  LOCAL(colombia_after_independence_settlements.json): key=Buenavista (col_antioquia)-Colombia name=Buenavista other=[] fy=None notes=None src=['DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)', 'DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [5] Doradal-Colombia | n=Doradal | c=Colombia | r=col_antioquia | ll=[5.8999, -74.73523] | ey=1850 ly=2018 | al=[] | ex=[] ===
+  LOCAL(colombia_after_independence_settlements.json): key=Doradal-Colombia name=Doradal other=[] fy=None notes=None src=['DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)', 'DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [6] Siete De Julio-Ecuador | n=Siete De Julio | c=Ecuador | r=ecu_sucumbios | ll=[-0.18619, -76.7807] | ey=1920 ly=2025 | al=[] | ex=[] ===
+  LOCAL(ecuador_after_independence_settlements.json): key=Siete De Julio-Ecuador name=Siete De Julio other=[] fy=None notes=None src=['INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)', 'INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [7] Chumbicha-Argentina | n=Chumbicha | c=Argentina | r=arg_catamarca | ll=[-28.85348, -66.23744] | ey=1536 ly=2010 | al=['chumbica', 'Chumbica'] | ex=[] ===
+  LOCAL(chile_rio_plata_banda_oriental_settlements.json): key=Chumbicha-Argentina name=Chumbicha other=['Chumbica'] fy=None notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', 'Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)']
+  LOCAL(argentina_after_independence_settlements.json): key=Chumbicha-Argentina name=Chumbicha other=[] fy=None notes=None src=['INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [8] El Trebol-Colombia | n=El Trebol | c=Colombia | r=na_nw_amazon_foothills | ll=[0.93193, -76.40319] | ey=-1000 ly=1500 | al=[] | ex=[] ===
+  LOCAL(pre_columbian_northern_andes_settlements.json): key=El Trebol-Colombia name=El Trebol other=[] fy=None notes=None src=['ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)']
+  LOCAL(pre_columbian_central_andes_settlements.json): key=El Trebol-Colombia name=El Trebol other=[] fy=None notes=None src=['ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [9] Sobreancho Torre-Colombia | n=Sobreancho Torre | c=Colombia | r=na_orinoco_llanos_guayana | ll=[3.89784, -73.65714] | ey=500 ly=1500 | al=[] | ex=[] ===
+  LOCAL(pre_columbian_northern_andes_settlements.json): key=Sobreancho Torre-Colombia name=Sobreancho Torre other=[] fy=None notes=None src=['ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)']
+  LOCAL(colombia_after_independence_settlements.json): key=Santa Rosa (col_meta)-Colombia name=Santa Rosa other=[] fy=None notes=None src=['DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)', 'DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [10] Anisacate-Argentina_2 | n=Anisacate | c=Argentina | r=sc_nw_andes_sierras_cuyo | ll=[-31.71191, -64.4137] | ey=80 ly=1500 | al=[] | ex=[] ===
+  LOCAL(pre_columbian_southern_cone_settlements.json): key=Anisacate-Argentina name=Anisacate other=[] fy=None notes=None src=['IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus']
+  LOCAL(argentina_after_independence_settlements.json): key=Anisacate-Argentina name=Anisacate other=['Costa Azul'] fy=None notes=None src=['INDEC Argentina Censo 2022 (Total del país por gobierno local)', 'INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [11] La Caldera-Argentina | n=La Caldera | c=Argentina | r=arg_salta | ll=[-24.60268, -65.38066] | ey=1850 ly=2022 | al=[] | ex=[] ===
+  LOCAL(argentina_after_independence_settlements.json): key=La Caldera-Argentina name=La Caldera other=[] fy=None notes=None src=['INDEC Argentina Censo 2022 (Total del país por gobierno local)', 'INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [12] Norberto de la Riestra-Argentina | n=Norberto de la Riestra | c=Argentina | r=arg_buenos_aires | ll=[-35.27332, -59.77564] | ey=1850 ly=2010 | al=[] | ex=[] ===
+  LOCAL(argentina_after_independence_settlements.json): key=Norberto de la Riestra-Argentina name=Norberto de la Riestra other=[] fy=None notes=None src=['INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [13] Michac-Colombia | n=Michac | c=Colombia | r=vng_antioquia_popayan_choco | ll=[1.253, -77.679] | ey=1525 ly=1830 | al=['manchay', 'Manchay'] | ex=[] ===
+  LOCAL(spanish_conquest_andes_collapse_settlements.json): key=Michac-Colombia name=Michac other=['Manchay'] fy=None notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', 'Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)']
+  LOCAL(viceroyalty_new_granada_settlements.json): key=Michac-Colombia name=Michac other=['Manchay'] fy=None notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', 'Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [14] Arnoldo Gabaldon (ven_trujillo)-Venezuela | n=Arnoldo Gabaldon | c=Venezuela | r=ven_trujillo | ll=[9.36826, -70.07833] | ey=1850 ly=2025 | al=[] | ex=[] ===
+  LOCAL(venezuela_after_independence_settlements.json): key=Arnoldo Gabaldon (ven_trujillo)-Venezuela name=Arnoldo Gabaldon other=[] fy=None notes=None src=['INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)', 'INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [15] La Cruz-Argentina_2 | n=La Cruz | c=Argentina | r=sc_parana_uruguay_charrua | ll=[-32.3134, -64.42343] | ey=80 ly=1500 | al=[] | ex=[] ===
+  LOCAL(pre_columbian_southern_cone_settlements.json): key=La Cruz-Argentina name=La Cruz other=[] fy=None notes=None src=['IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [16] Raco-Argentina | n=Raco | c=Argentina | r=arg_tucuman | ll=[-26.67781, -65.42952] | ey=1850 ly=2022 | al=[] | ex=[] ===
+  LOCAL(argentina_after_independence_settlements.json): key=Raco-Argentina name=Raco other=[] fy=None notes=None src=['INDEC Argentina Censo 2022 (Total del país por gobierno local)', 'INDEC Argentina Censo Nacional 2022 (Localidades Censales Georef + Radios Censales)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [17] Chiapa-Chile | n=Chiapa | c=Chile | r=vp_intendencia_arequipa | ll=[-19.537, -69.204] | ey=1525 ly=1825 | al=[] | ex=[] ===
+  LOCAL(spanish_conquest_andes_collapse_settlements.json): key=Chiapa-Chile name=Chiapa other=[] fy=None notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', "Jorge Hidalgo, 'CIVILIZACIÓN Y FOMENTO: LA DESCRIPCIÓN DE TARAPACÁ DE ANTONIO OBRIEN, 1765', en: Chungara, Revista de Antropología Chilena 4"]
+  LOCAL(viceroyalty_peru_upper_peru_settlements.json): key=Chiapa-Chile name=Chiapa other=[] fy=None notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', "Jorge Hidalgo, 'CIVILIZACIÓN Y FOMENTO: LA DESCRIPCIÓN DE TARAPACÁ DE ANTONIO OBRIEN, 1765', en: Chungara, Revista de Antropología Chilena 4"]
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [18] Chacance-Chile | n=Chacance | c=Chile | r=inca_collasuyu | ll=[-22.39556, -69.52756] | ey=761 ly=1500 | al=[] | ex=[] ===
+  LOCAL(pre_columbian_central_andes_settlements.json): key=Chacance-Chile name=Chacance other=[] fy=None notes=None src=['Chile Radiocarbon Synthesis (Campbell/Mendez)', 'Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.', 'Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.; p3k14c']
+  LOCAL(inca_empire_tawantinsuyu_settlements.json): key=Chacance-Chile name=Chacance other=[] fy=None notes=None src=['Chile Radiocarbon Synthesis (Campbell/Mendez)', 'Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.', 'Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.; p3k14c']
+  LOCAL(pre_columbian_southern_cone_settlements.json): key=Chacance-Chile name=Chacance other=[] fy=None notes=None src=['Chile Radiocarbon Synthesis (Campbell/Mendez)', 'Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.', 'Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.; p3k14c']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [19] Villalonga-Argentina | n=Villalonga | c=Argentina | r=arg_buenos_aires | ll=[-39.91747, -62.6189] | ey=1850 ly=2010 | al=[] | ex=[] ===
+  LOCAL(argentina_after_independence_settlements.json): key=Villalonga-Argentina name=Villalonga other=[] fy=None notes=None src=['INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [20] Gochacalla-Peru | n=Gochacalla | c=Peru | r=inca_chinchaysuyu | ll=[-9.84741, -75.9086] | ey=-1000 ly=1530 | al=['arqueológico letra machay', 'letra machay', 'silla'] | ex=[] ===
+  LOCAL(pre_columbian_central_andes_settlements.json): key=Gochacalla-Peru name=Gochacalla other=['Arqueológico Letra Machay', 'Letra Machay'] fy=None notes=None src=['SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)']
+  LOCAL(inca_empire_tawantinsuyu_settlements.json): key=Gochacalla-Peru name=Gochacalla other=['Arqueológico Letra Machay', 'Letra Machay'] fy=None notes=None src=['SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)']
+  LOCAL(viceroyalty_peru_upper_peru_settlements.json): key=Chaglla-Peru name=Chaglla other=[] fy=1711 notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', "'Plan del curso de los ríos Huallaga y Ucayali y de la Pampa del Sacramento', en: Archivo General de Indias, MP-PERU_CHILE,123 (Mapa, 1791)"]
+  LOCAL(peru_after_independence_settlements.json): key=Chaglla-Peru name=Chaglla other=[] fy=None notes=None src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [21] San Antonio (per_lima)-Peru | n=San Antonio | c=Peru | r=per_lima | ll=[-11.74361, -76.65] | ey=1850 ly=2025 | al=['chaclla', 'Chaclla'] | ex=[] ===
+  LOCAL(peru_after_independence_settlements.json): key=San Antonio (per_lima)-Peru name=San Antonio other=['Chaclla'] fy=None notes=None src=['INEI Peru Censuses 2007, 2017 & 2025 (all districts)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [22] Karajía-Peru | n=Karajía | c=Peru | r=inca_chinchaysuyu | ll=[-6.16178, -78.02438] | ey=-2000 ly=1530 | al=['caverna de quiocta', 'valle alto del utcubamba', 'Caverna de Quiocta'] | ex=[] ===
+  LOCAL(pre_columbian_central_andes_settlements.json): key=Karajía-Peru name=Karajía other=['Caverna de Quiocta', 'Valle alto del Utcubamba'] fy=None notes=None src=['SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)']
+  LOCAL(inca_empire_tawantinsuyu_settlements.json): key=Karajía-Peru name=Karajía other=['Caverna de Quiocta', 'Valle alto del Utcubamba'] fy=None notes=None src=['SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)']
+  LOCAL(peru_after_independence_settlements.json): key=Chocta-Peru name=Chocta other=['San Miguel de Cruz Pata'] fy=None notes=None src=['INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)', 'INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [23] Sarayacu-Ecuador | n=Sarayacu | c=Ecuador | r=ecu_pastaza | ll=[-1.7323, -77.48711] | ey=1920 ly=2025 | al=[] | ex=[] ===
+  LOCAL(ecuador_after_independence_settlements.json): key=Sarayacu-Ecuador name=Sarayacu other=[] fy=None notes=None src=['INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)', 'INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [24] Santa Elena-Ecuador_2 | n=Santa Elena | c=Ecuador | r=vng_guayaquil_esmeraldas | ll=[-2.227, -80.857] | ey=1538 ly=1830 | al=[] | ex=[{'date': '1962.1.1', 'name': 'Santa Elena'}] ===
+  LOCAL(spanish_conquest_andes_collapse_settlements.json): key=Santa Elena-Ecuador name=Santa Elena other=[] fy=None notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', 'HGIS Primary: Martin Volland, Indianische Bevölkerungsgeschichte im Corregimiento Guayaquil (1548-1765)nBonn 1994)']
+  LOCAL(viceroyalty_new_granada_settlements.json): key=Santa Elena-Ecuador name=Santa Elena other=[] fy=None notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', 'HGIS Primary: Martin Volland, Indianische Bevölkerungsgeschichte im Corregimiento Guayaquil (1548-1765)nBonn 1994)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [25] Seguí-Argentina | n=Seguí | c=Argentina | r=arg_entre_rios | ll=[-31.95435, -60.12566] | ey=1850 ly=2022 | al=[] | ex=[] ===
+  LOCAL(argentina_after_independence_settlements.json): key=Seguí-Argentina name=Seguí other=[] fy=None notes=None src=['INDEC Argentina Censo 2022 (Total del país por gobierno local)', 'INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [26] El Carmen De Pijilí-Ecuador | n=El Carmen De Pijilí | c=Ecuador | r=ecu_azuay | ll=[-2.97945, -79.54823] | ey=1850 ly=2025 | al=[] | ex=[] ===
+  LOCAL(ecuador_after_independence_settlements.json): key=El Carmen De Pijilí-Ecuador name=El Carmen De Pijilí other=[] fy=None notes=None src=['INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)', 'INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [27] La Arenosa-Colombia | n=La Arenosa | c=Colombia | r=na_magdalena_cauca_muisca | ll=[10.93, -74.76] | ey=-774 ly=1500 | al=['microplanta gnl- la arenosa', 'Microplanta GNL- La Arenosa'] | ex=[] ===
+  LOCAL(pre_columbian_northern_andes_settlements.json): key=La Arenosa-Colombia name=La Arenosa other=['Microplanta GNL- La Arenosa'] fy=None notes=None src=['COL14 Colombia Radiocarbon Database', 'Perez, P. F. (2015). Propuesta intervencion arqueologica (rescate) microplanta de gas natural licuado (GNL) la Arenosa M', 'ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [28] Agua Caliente-Venezuela | n=Agua Caliente | c=Venezuela | r=ven_trujillo | ll=[9.63944, -70.62278] | ey=1850 ly=2025 | al=[] | ex=[] ===
+  LOCAL(venezuela_after_independence_settlements.json): key=Agua Caliente-Venezuela name=Agua Caliente other=[] fy=None notes=None src=['INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)', 'INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None
+
+=== [29] La Aguada-Bolivia | n=La Aguada | c=Bolivia | r=vp_intendencia_cochabamba | ll=[-17.983, -65.283] | ey=1525 ly=1825 | al=[] | ex=[] ===
+  LOCAL(spanish_conquest_andes_collapse_settlements.json): key=La Aguada-Bolivia name=La Aguada other=[] fy=None notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', 'Francisco de Viedma, Descripción geográfica y estadística de la provincia de Santa Cruz de la Sierra (1793)']
+  LOCAL(viceroyalty_peru_upper_peru_settlements.json): key=La Aguada-Bolivia name=La Aguada other=[] fy=None notes=None src=['HGIS de las Indias (Stangl 2020/2023; 1701-1808)', 'Francisco de Viedma, Descripción geográfica y estadística de la provincia de Santa Cruz de la Sierra (1793)']
+  ES_GEO: None
+  ES_SEARCH: []
+  EN_GEO: None

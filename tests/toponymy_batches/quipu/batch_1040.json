@@ -1,0 +1,1047 @@
+{
+  "batch_index": 1040,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -31.11729,
+        -63.60008
+      ],
+      "country": "Argentina",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Alcalde-Argentina",
+      "known_aliases": [
+        "El Alcalde",
+        "el alcalde"
+      ],
+      "latest_year": 2022,
+      "max_pop": 154,
+      "name": "El Alcalde",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.96295,
+        -58.50821
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Hambis-Argentina",
+      "known_aliases": [
+        "Hambis",
+        "hambis"
+      ],
+      "latest_year": 2022,
+      "max_pop": 154,
+      "name": "Hambis",
+      "reason": "missing_entry",
+      "region": "arg_entre_rios",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -42.7422,
+        -69.14881
+      ],
+      "country": "Argentina",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Lagunita Salada-Argentina",
+      "known_aliases": [
+        "Lagunita Salada",
+        "lagunita salada"
+      ],
+      "latest_year": 2022,
+      "max_pop": 154,
+      "name": "Lagunita Salada",
+      "reason": "missing_entry",
+      "region": "arg_chubut",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.95668,
+        -64.81379
+      ],
+      "country": "Argentina",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa Alpina-Argentina",
+      "known_aliases": [
+        "Villa Alpina",
+        "villa alpina"
+      ],
+      "latest_year": 2010,
+      "max_pop": 154,
+      "name": "Villa Alpina",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.36745,
+        -57.46915
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Paraje Minuano-Uruguay",
+      "known_aliases": [
+        "Paraje Minuano",
+        "paraje minuano"
+      ],
+      "latest_year": 2023,
+      "max_pop": 154,
+      "name": "Paraje Minuano",
+      "reason": "missing_entry",
+      "region": "ury_colonia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.05751,
+        -69.96821
+      ],
+      "country": "Chile",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Kilo.ata (inca_collasuyu_10)-Chile",
+      "known_aliases": [
+        "Kilo.ata",
+        "kilo.ata"
+      ],
+      "latest_year": 1530,
+      "max_pop": 154,
+      "name": "Kilo.ata",
+      "reason": "missing_entry",
+      "region": "inca_collasuyu",
+      "sample_years": [
+        0,
+        1200,
+        1470,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.852,
+        -69.888
+      ],
+      "country": "Peru",
+      "earliest_year": -6268,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Quelcatan-Peru",
+      "known_aliases": [
+        "Quelcatan",
+        "quelcatan"
+      ],
+      "latest_year": -32,
+      "max_pop": 154,
+      "name": "Quelcatan",
+      "reason": "missing_entry",
+      "region": "ca_titicaca_altiplano_tiwanaku",
+      "sample_years": [
+        -6268,
+        -5000,
+        -3000,
+        -2000,
+        -1000,
+        -500,
+        -32
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.29976,
+        -73.93846
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cascajero-Colombia",
+      "known_aliases": [
+        "Cascajero",
+        "cascajero"
+      ],
+      "latest_year": 2018,
+      "max_pop": 153,
+      "name": "Cascajero",
+      "reason": "missing_entry",
+      "region": "col_santander",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.33079,
+        -75.51644
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Llano (col_antioquia)-Colombia",
+      "known_aliases": [
+        "El Llano",
+        "el llano"
+      ],
+      "latest_year": 2018,
+      "max_pop": 153,
+      "name": "El Llano",
+      "reason": "missing_entry",
+      "region": "col_antioquia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        2.6498,
+        -78.33142
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Naranjo (col_narino)-Colombia",
+      "known_aliases": [
+        "El Naranjo",
+        "el naranjo"
+      ],
+      "latest_year": 2018,
+      "max_pop": 153,
+      "name": "El Naranjo",
+      "reason": "missing_entry",
+      "region": "col_narino",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.16185,
+        -72.50371
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Plomo-Colombia",
+      "known_aliases": [
+        "El Plomo",
+        "el plomo"
+      ],
+      "latest_year": 2018,
+      "max_pop": 153,
+      "name": "El Plomo",
+      "reason": "missing_entry",
+      "region": "col_norte_de_santander",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.71124,
+        -74.57307
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Botica-Colombia",
+      "known_aliases": [
+        "La Botica",
+        "la botica"
+      ],
+      "latest_year": 2018,
+      "max_pop": 153,
+      "name": "La Botica",
+      "reason": "missing_entry",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.99489,
+        -75.90631
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Playa Rica-Colombia",
+      "known_aliases": [
+        "Playa Rica",
+        "playa rica"
+      ],
+      "latest_year": 2018,
+      "max_pop": 153,
+      "name": "Playa Rica",
+      "reason": "missing_entry",
+      "region": "col_risaralda",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.58071,
+        -75.75277
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pueblo Rico (col_quindio)-Colombia",
+      "known_aliases": [
+        "Pueblo Rico",
+        "pueblo rico"
+      ],
+      "latest_year": 2018,
+      "max_pop": 153,
+      "name": "Pueblo Rico",
+      "reason": "missing_entry",
+      "region": "col_quindio",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.92407,
+        -75.69276
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Resina-Colombia",
+      "known_aliases": [
+        "Resina",
+        "resina"
+      ],
+      "latest_year": 2018,
+      "max_pop": 153,
+      "name": "Resina",
+      "reason": "missing_entry",
+      "region": "col_huila",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.84532,
+        -75.78578
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Marino-Colombia",
+      "known_aliases": [
+        "San Marino",
+        "san marino"
+      ],
+      "latest_year": 2018,
+      "max_pop": 153,
+      "name": "San Marino",
+      "reason": "missing_entry",
+      "region": "col_risaralda",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.43778,
+        -66.4175
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tío Pedrote-Venezuela",
+      "known_aliases": [
+        "Tío Pedrote",
+        "tío pedrote"
+      ],
+      "latest_year": 2011,
+      "max_pop": 153,
+      "name": "Tío Pedrote",
+      "reason": "missing_entry",
+      "region": "ven_la_guaira",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        0.04983,
+        -77.36645
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Paraiso (ecu_sucumbios)-Ecuador",
+      "known_aliases": [
+        "El Paraiso",
+        "el paraiso"
+      ],
+      "latest_year": 2010,
+      "max_pop": 153,
+      "name": "El Paraiso",
+      "reason": "missing_entry",
+      "region": "ecu_sucumbios",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -1.29021,
+        -90.42819
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Isla Santa María Floreana-Ecuador",
+      "known_aliases": [
+        "Isla Santa María Floreana",
+        "isla santa maría floreana"
+      ],
+      "latest_year": 2025,
+      "max_pop": 153,
+      "name": "Isla Santa María Floreana",
+      "reason": "missing_entry",
+      "region": "ecu_galapagos",
+      "sample_years": [
+        1980,
+        1990,
+        2001,
+        2010,
+        2015,
+        2020,
+        2022,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.93499,
+        -77.74881
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Luis (ecu_napo)-Ecuador",
+      "known_aliases": [
+        "San Luis",
+        "san luis"
+      ],
+      "latest_year": 2010,
+      "max_pop": 153,
+      "name": "San Luis",
+      "reason": "missing_entry",
+      "region": "ecu_napo",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.68623,
+        -75.67981
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Vicente (ecu_orellana)-Ecuador",
+      "known_aliases": [
+        "San Vicente",
+        "san vicente"
+      ],
+      "latest_year": 2010,
+      "max_pop": 153,
+      "name": "San Vicente",
+      "reason": "missing_entry",
+      "region": "ecu_orellana",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -4.7595,
+        -80.5441
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Maran-Peru",
+      "known_aliases": [
+        "Maran",
+        "maran"
+      ],
+      "latest_year": 2017,
+      "max_pop": 153,
+      "name": "Maran",
+      "reason": "missing_entry",
+      "region": "per_piura",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.2985,
+        -77.6509
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rampac Chico-Peru",
+      "known_aliases": [
+        "Rampac Chico",
+        "rampac chico"
+      ],
+      "latest_year": 2017,
+      "max_pop": 153,
+      "name": "Rampac Chico",
+      "reason": "missing_entry",
+      "region": "per_ancash",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.4833,
+        -78.4507
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Clara (per_cajamarca_2)-Peru",
+      "known_aliases": [
+        "Santa Clara",
+        "santa clara"
+      ],
+      "latest_year": 2017,
+      "max_pop": 153,
+      "name": "Santa Clara",
+      "reason": "missing_entry",
+      "region": "per_cajamarca",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -37.41875,
+        -72.07876
+      ],
+      "country": "Chile",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Diuto-Chile",
+      "known_aliases": [
+        "Diuto",
+        "diuto"
+      ],
+      "latest_year": 2017,
+      "max_pop": 153,
+      "name": "Diuto",
+      "reason": "missing_entry",
+      "region": "chl_region_del_bio_bio",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -40.13418,
+        -72.22011
+      ],
+      "country": "Chile",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Cerrillos (chl_region_de_los_rios)-Chile",
+      "known_aliases": [
+        "Los Cerrillos",
+        "los cerrillos"
+      ],
+      "latest_year": 2017,
+      "max_pop": 153,
+      "name": "Los Cerrillos",
+      "reason": "missing_entry",
+      "region": "chl_region_de_los_rios",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.76766,
+        -71.46494
+      ],
+      "country": "Chile",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Maitenes (chl_region_de_valparaiso)-Chile",
+      "known_aliases": [
+        "Los Maitenes",
+        "los maitenes"
+      ],
+      "latest_year": 2017,
+      "max_pop": 153,
+      "name": "Los Maitenes",
+      "reason": "missing_entry",
+      "region": "chl_region_de_valparaiso",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -37.63346,
+        -72.51586
+      ],
+      "country": "Chile",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Rosa (chl_region_del_bio_bio)-Chile",
+      "known_aliases": [
+        "Santa Rosa",
+        "santa rosa"
+      ],
+      "latest_year": 2017,
+      "max_pop": 153,
+      "name": "Santa Rosa",
+      "reason": "missing_entry",
+      "region": "chl_region_del_bio_bio",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -39.71761,
+        -72.41111
+      ],
+      "country": "Chile",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ñancul (chl_region_de_los_rios)-Chile",
+      "known_aliases": [
+        "Ñancul",
+        "ñancul"
+      ],
+      "latest_year": 2017,
+      "max_pop": 153,
+      "name": "Ñancul",
+      "reason": "missing_entry",
+      "region": "chl_region_de_los_rios",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.57566,
+        -61.78318
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Eustolia-Argentina",
+      "known_aliases": [
+        "Eustolia",
+        "eustolia"
+      ],
+      "latest_year": 2022,
+      "max_pop": 153,
+      "name": "Eustolia",
+      "reason": "missing_entry",
+      "region": "arg_santa_fe",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    }
+  ]
+}

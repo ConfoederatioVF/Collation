@@ -1,0 +1,1030 @@
+{
+  "batch_index": 1079,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -23.94406,
+        -65.23222
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ocloyas-Argentina",
+      "known_aliases": [
+        "Ocloyas",
+        "ocloyas"
+      ],
+      "latest_year": 2022,
+      "max_pop": 92,
+      "name": "Ocloyas",
+      "reason": "missing_entry",
+      "region": "arg_jujuy",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.71842,
+        -62.11428
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Esteban (arg_buenos_aires)-Argentina",
+      "known_aliases": [
+        "San Esteban",
+        "san esteban"
+      ],
+      "latest_year": 2010,
+      "max_pop": 92,
+      "name": "San Esteban",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -41.34955,
+        -71.50904
+      ],
+      "country": "Argentina",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa Mascardi-Argentina",
+      "known_aliases": [
+        "Villa Mascardi",
+        "villa mascardi"
+      ],
+      "latest_year": 2022,
+      "max_pop": 92,
+      "name": "Villa Mascardi",
+      "reason": "missing_entry",
+      "region": "arg_rio_negro",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.39124,
+        -55.79822
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Costa De Pedernal-Uruguay",
+      "known_aliases": [
+        "Costa De Pedernal",
+        "costa de pedernal",
+        "Costa de Pedernal"
+      ],
+      "latest_year": 2023,
+      "max_pop": 92,
+      "name": "Costa De Pedernal",
+      "reason": "missing_entry",
+      "region": "ury_canelones",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.45478,
+        -56.38386
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pepe Nuñez-Uruguay",
+      "known_aliases": [
+        "Pepe Nuñez",
+        "pepe nuñez"
+      ],
+      "latest_year": 2023,
+      "max_pop": 92,
+      "name": "Pepe Nuñez",
+      "reason": "missing_entry",
+      "region": "ury_salto",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.58082,
+        -76.7125
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Chilcal-Colombia",
+      "known_aliases": [
+        "El Chilcal",
+        "el chilcal"
+      ],
+      "latest_year": 2018,
+      "max_pop": 91,
+      "name": "El Chilcal",
+      "reason": "missing_entry",
+      "region": "col_valle_del_cauca",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.53343,
+        -74.95988
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Pomos-Colombia",
+      "known_aliases": [
+        "Los Pomos",
+        "los pomos"
+      ],
+      "latest_year": 2018,
+      "max_pop": 91,
+      "name": "Los Pomos",
+      "reason": "missing_entry",
+      "region": "col_caldas",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.48986,
+        -73.3968
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Piedecuesta (col_norte_de_santander)-Colombia",
+      "known_aliases": [
+        "Piedecuesta",
+        "piedecuesta"
+      ],
+      "latest_year": 2018,
+      "max_pop": 91,
+      "name": "Piedecuesta",
+      "reason": "missing_entry",
+      "region": "col_norte_de_santander",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -1.00649,
+        -77.44817
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sumino Alto-Ecuador",
+      "known_aliases": [
+        "Sumino Alto",
+        "sumino alto"
+      ],
+      "latest_year": 2010,
+      "max_pop": 91,
+      "name": "Sumino Alto",
+      "reason": "missing_entry",
+      "region": "ecu_napo",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.33938,
+        -71.02778
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Cerrito de Rinconada-Chile",
+      "known_aliases": [
+        "El Cerrito de Rinconada",
+        "el cerrito de rinconada"
+      ],
+      "latest_year": 2017,
+      "max_pop": 91,
+      "name": "El Cerrito de Rinconada",
+      "reason": "missing_entry",
+      "region": "chl_region_del_libertador_bernardo_o_higgins",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -37.21895,
+        -73.24809
+      ],
+      "country": "Chile",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Horcones Playa-Chile",
+      "known_aliases": [
+        "Horcones Playa",
+        "horcones playa"
+      ],
+      "latest_year": 2017,
+      "max_pop": 91,
+      "name": "Horcones Playa",
+      "reason": "missing_entry",
+      "region": "chl_region_del_bio_bio",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.9333,
+        -70.80871
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Cumbre-Chile",
+      "known_aliases": [
+        "La Cumbre",
+        "la cumbre"
+      ],
+      "latest_year": 2017,
+      "max_pop": 91,
+      "name": "La Cumbre",
+      "reason": "missing_entry",
+      "region": "chl_region_metropolitana_de_santiago",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.61441,
+        -71.23663
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Silleta-Chile",
+      "known_aliases": [
+        "La Silleta",
+        "la silleta"
+      ],
+      "latest_year": 2017,
+      "max_pop": 91,
+      "name": "La Silleta",
+      "reason": "missing_entry",
+      "region": "chl_region_de_coquimbo",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.15747,
+        -71.22252
+      ],
+      "country": "Chile",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Helechos-Chile",
+      "known_aliases": [
+        "Los Helechos",
+        "los helechos"
+      ],
+      "latest_year": 2017,
+      "max_pop": 91,
+      "name": "Los Helechos",
+      "reason": "missing_entry",
+      "region": "chl_region_del_maule",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -42.61438,
+        -73.49633
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Ángeles-Chile",
+      "known_aliases": [
+        "Los Ángeles",
+        "los ángeles"
+      ],
+      "latest_year": 2017,
+      "max_pop": 91,
+      "name": "Los Ángeles",
+      "reason": "missing_entry",
+      "region": "chl_region_de_los_lagos",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -37.80188,
+        -73.32614
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Antonio (chl_region_del_bio_bio)-Chile",
+      "known_aliases": [
+        "San Antonio",
+        "san antonio"
+      ],
+      "latest_year": 2017,
+      "max_pop": 91,
+      "name": "San Antonio",
+      "reason": "missing_entry",
+      "region": "chl_region_del_bio_bio",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -36.07178,
+        -71.78089
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Ignacio Arriba-Chile",
+      "known_aliases": [
+        "San Ignacio Arriba",
+        "san ignacio arriba"
+      ],
+      "latest_year": 2017,
+      "max_pop": 91,
+      "name": "San Ignacio Arriba",
+      "reason": "missing_entry",
+      "region": "chl_region_del_maule",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.15778,
+        -66.01222
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Bajada (arg_san_luis)-Argentina",
+      "known_aliases": [
+        "La Bajada",
+        "la bajada"
+      ],
+      "latest_year": 2010,
+      "max_pop": 91,
+      "name": "La Bajada",
+      "reason": "missing_entry",
+      "region": "arg_san_luis",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.45927,
+        -61.84011
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Nena-Argentina",
+      "known_aliases": [
+        "La Nena",
+        "la nena"
+      ],
+      "latest_year": 2010,
+      "max_pop": 91,
+      "name": "La Nena",
+      "reason": "missing_entry",
+      "region": "arg_santiago_del_estero",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.54878,
+        -65.38753
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Llulluchayoc-Argentina",
+      "known_aliases": [
+        "Llulluchayoc",
+        "llulluchayoc"
+      ],
+      "latest_year": 2010,
+      "max_pop": 91,
+      "name": "Llulluchayoc",
+      "reason": "missing_entry",
+      "region": "arg_jujuy",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.51988,
+        -64.25339
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Pozos-Argentina",
+      "known_aliases": [
+        "Los Pozos",
+        "los pozos"
+      ],
+      "latest_year": 2010,
+      "max_pop": 91,
+      "name": "Los Pozos",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.58131,
+        -61.52479
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mauricio Hirsch-Argentina",
+      "known_aliases": [
+        "Mauricio Hirsch",
+        "mauricio hirsch"
+      ],
+      "latest_year": 2022,
+      "max_pop": 91,
+      "name": "Mauricio Hirsch",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -37.66191,
+        -64.13801
+      ],
+      "country": "Argentina",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Perú-Argentina",
+      "known_aliases": [
+        "Perú",
+        "perú"
+      ],
+      "latest_year": 2022,
+      "max_pop": 91,
+      "name": "Perú",
+      "reason": "missing_entry",
+      "region": "arg_la_pampa",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.19676,
+        -60.27909
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pueblo Luis Berli-Argentina",
+      "known_aliases": [
+        "Pueblo Luis Berli",
+        "pueblo luis berli"
+      ],
+      "latest_year": 2022,
+      "max_pop": 91,
+      "name": "Pueblo Luis Berli",
+      "reason": "missing_entry",
+      "region": "arg_santa_fe",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -24.463,
+        -65.369
+      ],
+      "country": "Argentina",
+      "earliest_year": 1536,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tres Cruces-Argentina_2",
+      "known_aliases": [
+        "Tres Cruces",
+        "tres cruces"
+      ],
+      "latest_year": 1830,
+      "max_pop": 91,
+      "name": "Tres Cruces",
+      "reason": "missing_entry",
+      "region": "crp_gobernacion_tucuman",
+      "sample_years": [
+        1536,
+        1650,
+        1780,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.45899,
+        -75.15429
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Palmilla-Colombia",
+      "known_aliases": [
+        "La Palmilla",
+        "la palmilla"
+      ],
+      "latest_year": 2018,
+      "max_pop": 90,
+      "name": "La Palmilla",
+      "reason": "missing_entry",
+      "region": "col_tolima",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.21947,
+        -72.51856
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Las Vacas-Colombia",
+      "known_aliases": [
+        "Las Vacas",
+        "las vacas"
+      ],
+      "latest_year": 2018,
+      "max_pop": 90,
+      "name": "Las Vacas",
+      "reason": "missing_entry",
+      "region": "col_norte_de_santander",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.60026,
+        -72.91206
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Llano de Alarcón-Colombia",
+      "known_aliases": [
+        "Llano de Alarcón",
+        "llano de alarcón"
+      ],
+      "latest_year": 2018,
+      "max_pop": 90,
+      "name": "Llano de Alarcón",
+      "reason": "missing_entry",
+      "region": "col_boyaca",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.68456,
+        -77.97687
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Salí-Colombia",
+      "known_aliases": [
+        "Salí",
+        "salí"
+      ],
+      "latest_year": 2018,
+      "max_pop": 90,
+      "name": "Salí",
+      "reason": "missing_entry",
+      "region": "col_narino",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.03185,
+        -75.74241
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Miguel (col_tolima_2)-Colombia",
+      "known_aliases": [
+        "San Miguel",
+        "san miguel"
+      ],
+      "latest_year": 2018,
+      "max_pop": 90,
+      "name": "San Miguel",
+      "reason": "missing_entry",
+      "region": "col_tolima",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    }
+  ]
+}

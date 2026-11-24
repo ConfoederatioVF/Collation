@@ -1,0 +1,1339 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 43,
+  "count": 30,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -17.56667,
+        -66.01667
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Arbieto-Bolivia",
+      "known_aliases": [
+        "Arbieto",
+        "arbieto",
+        "achamoco",
+        "santa rosa",
+        "Achamoco",
+        "Santa Rosa"
+      ],
+      "latest_year": 2026,
+      "max_pop": 29375,
+      "name": "Arbieto",
+      "reason": "missing_entry",
+      "region": "bol_cochabamba",
+      "sample_years": [
+        1750,
+        1890,
+        1980,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Arbieto",
+      "historical_names": [
+        {
+          "date": "1825.1.1",
+          "date_source_note": "Attested settlement in Cochabamba's Valle Alto at Bolivian independence (1825)",
+          "name": "Arbieto"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.84583,
+        -74.94389
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Vista Alegre-Peru",
+      "known_aliases": [
+        "Vista Alegre",
+        "vista alegre"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29334,
+      "name": "Vista Alegre",
+      "reason": "missing_entry",
+      "region": "per_ica",
+      "sample_years": [
+        1850,
+        1950,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Vista Alegre",
+      "historical_names": [
+        {
+          "date": "1984.9.20",
+          "date_source_note": "Creation of Vista Alegre District (Law No. 23927) in Nasca Province",
+          "name": "Vista Alegre"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.21639,
+        -73.5957
+      ],
+      "country": "Colombia",
+      "earliest_year": 1773,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villapinzón-Colombia",
+      "known_aliases": [
+        "Villapinzón",
+        "villapinzón",
+        "hatoviejo",
+        "Hatoviejo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29315,
+      "name": "Villapinzón",
+      "reason": "missing_entry",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1773,
+        1920,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Villapinzón",
+      "historical_names": [
+        {
+          "date": "1776.10.14",
+          "date_source_note": "Founded on 14 October 1776 as Hatoviejo in Cundinamarca",
+          "name": "Hatoviejo"
+        },
+        {
+          "date": "1904.1.1",
+          "date_source_note": "Renamed Villapinzón in 1904 in honour of General Próspero Pinzón",
+          "name": "Villapinzón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.57837,
+        -75.35205
+      ],
+      "country": "Colombia",
+      "earliest_year": 1576,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cáceres-Colombia",
+      "known_aliases": [
+        "Cáceres",
+        "cáceres",
+        "san martin caceres",
+        "San Martin Caceres"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29307,
+      "name": "Cáceres",
+      "reason": "missing_entry",
+      "region": "col_antioquia",
+      "sample_years": [
+        1576,
+        1830,
+        1993,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cáceres",
+      "historical_names": [
+        {
+          "date": "1576.1.1",
+          "date_source_note": "Founded in 1576 by Gaspar de Rodas",
+          "name": "San Martín de Cáceres"
+        },
+        {
+          "date": "1819.12.17",
+          "date_source_note": "Republican-era shortened official name following Gran Colombia foundation",
+          "name": "Cáceres"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.58013,
+        -75.40141
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tarazá-Colombia",
+      "known_aliases": [
+        "Tarazá",
+        "tarazá"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29298,
+      "name": "Tarazá",
+      "reason": "missing_entry",
+      "region": "col_antioquia",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tarazá",
+      "historical_names": [
+        {
+          "date": "1953.1.1",
+          "date_source_note": "Modern settlement founded in 1953 along the Troncal de Occidente; municipality created in 1979",
+          "name": "Tarazá"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.09593,
+        -64.64232
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Naricual-Venezuela",
+      "known_aliases": [
+        "Naricual",
+        "naricual"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29261,
+      "name": "Naricual",
+      "reason": "missing_entry",
+      "region": "ven_anzoategui",
+      "sample_years": [
+        1850,
+        1970,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Naricual",
+      "historical_names": [
+        {
+          "date": "1848.1.1",
+          "date_source_note": "Coal-mining settlement established 1848 along Naricual River",
+          "name": "Naricual"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -36.73055,
+        -71.54726
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Coihueco-Chile",
+      "known_aliases": [
+        "Coihueco",
+        "coihueco"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29222,
+      "name": "Coihueco",
+      "reason": "missing_entry",
+      "region": "chl_region_de_nuble",
+      "sample_years": [
+        1850,
+        1960,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Coihueco",
+      "historical_names": [
+        {
+          "date": "1868.8.16",
+          "date_source_note": "Founded as Villa de Coihueco on 16 August 1868 (from Mapudungun Koyweko)",
+          "name": "Coihueco"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.47675,
+        -73.9246
+      ],
+      "country": "Colombia",
+      "earliest_year": 1790,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Pablo-Colombia",
+      "known_aliases": [
+        "San Pablo",
+        "san pablo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29198,
+      "name": "San Pablo",
+      "reason": "missing_entry",
+      "region": "col_bolivar",
+      "sample_years": [
+        1790,
+        1920,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Pablo",
+      "historical_names": [
+        {
+          "date": "1770.1.1",
+          "date_source_note": "Colonial settlement founded around 1770 on the Magdalena River; became a municipality in 1968",
+          "name": "San Pablo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.57867,
+        -71.22952
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Montalbán-Venezuela",
+      "known_aliases": [
+        "Montalbán",
+        "montalbán"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29198,
+      "name": "Montalbán",
+      "reason": "missing_entry",
+      "region": "ven_merida",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Montalbán",
+      "historical_names": [
+        {
+          "date": "1732.1.17",
+          "date_source_note": "Founded on 17 January 1732 as the colonial parish of La Pura y Limpia Concepción de Montalbán",
+          "name": "La Pura y Limpia Concepción de Montalbán"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Shortened civil name Montalbán in independent Venezuela (dated from Venezuelan independence)",
+          "name": "Montalbán"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.47453,
+        -70.98792
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Ceiba-Venezuela",
+      "known_aliases": [
+        "La Ceiba",
+        "la ceiba"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29197,
+      "name": "La Ceiba",
+      "reason": "missing_entry",
+      "region": "ven_trujillo",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Ceiba",
+      "historical_names": [
+        {
+          "date": "2011.1.1",
+          "date_source_note": "2011 Venezuelan INE census municipal entry (Municipio La Ceiba, Trujillo)",
+          "name": "La Ceiba"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.51622,
+        -76.97437
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Alto Baudó-Colombia",
+      "known_aliases": [
+        "Alto Baudó",
+        "alto baudó"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29176,
+      "name": "Alto Baudó",
+      "reason": "missing_entry",
+      "region": "col_choco",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Alto Baudó",
+      "historical_names": [
+        {
+          "date": "1958.11.25",
+          "date_source_note": "Municipality created by Chocó Departmental Ordinance No. 13 of 25 November 1958",
+          "name": "Alto Baudó"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.32529,
+        -79.84535
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Flavio Alfaro-Ecuador",
+      "known_aliases": [
+        "Flavio Alfaro",
+        "flavio alfaro"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29175,
+      "name": "Flavio Alfaro",
+      "reason": "missing_entry",
+      "region": "ecu_manabi",
+      "sample_years": [
+        1850,
+        1950,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Flavio Alfaro",
+      "historical_names": [
+        {
+          "date": "1898.1.1",
+          "date_source_note": "Original settlement name on the Pescadillo River prior to parish elevation",
+          "name": "Pescadillo"
+        },
+        {
+          "date": "1940.9.23",
+          "date_source_note": "Elevated to rural parish of Chone Canton and renamed after General Flavio Alfaro",
+          "name": "Flavio Alfaro"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        2.54918,
+        -76.0635
+      ],
+      "country": "Colombia",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Inzá-Colombia",
+      "known_aliases": [
+        "Inzá",
+        "inzá",
+        "inza",
+        "yuissa",
+        "Inza",
+        "Yuissa"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29161,
+      "name": "Inzá",
+      "reason": "missing_entry",
+      "region": "col_cauca",
+      "sample_years": [
+        -3000,
+        1550,
+        1950,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Inzá",
+      "historical_names": [
+        {
+          "date": "1783.1.1",
+          "date_source_note": "Establishment of Inzá at its current site (succeeding the 1577 colonial foundation near Guanacas)",
+          "name": "Inzá"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.51944,
+        -73.82917
+      ],
+      "country": "Peru",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pichari-Peru",
+      "known_aliases": [
+        "Pichari",
+        "pichari"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29157,
+      "name": "Pichari",
+      "reason": "missing_entry",
+      "region": "per_ayacucho",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017,
+        2022,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Pichari",
+      "historical_names": [
+        {
+          "date": "1995.8.7",
+          "date_source_note": "Creation of Pichari District (Law No. 26521) on 7 August 1995",
+          "name": "Pichari"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.61667,
+        -65.06667
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tiraque-Bolivia",
+      "known_aliases": [
+        "Tiraque",
+        "tiraque"
+      ],
+      "latest_year": 2026,
+      "max_pop": 29138,
+      "name": "Tiraque",
+      "reason": "missing_entry",
+      "region": "bol_cochabamba",
+      "sample_years": [
+        1750,
+        1890,
+        1980,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tiraque",
+      "historical_names": [
+        {
+          "date": "1825.8.6",
+          "date_source_note": "Attested settlement in Cochabamba at Bolivian independence (canton formalized in 1826)",
+          "name": "Tiraque"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.92912,
+        -74.17277
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Subachoque-Colombia",
+      "known_aliases": [
+        "Subachoque",
+        "subachoque"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29119,
+      "name": "Subachoque",
+      "reason": "missing_entry",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Subachoque",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Muisca settlement and toponym on the Bogotá savanna; formalised as a Spanish colonial parish on 16 March 1774",
+          "name": "Subachoque"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.42858,
+        -70.74627
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sabana de Mendoza-Venezuela",
+      "known_aliases": [
+        "Sabana de Mendoza",
+        "sabana de mendoza"
+      ],
+      "latest_year": 2019,
+      "max_pop": 29100,
+      "name": "Sabana de Mendoza",
+      "reason": "missing_entry",
+      "region": "ven_trujillo",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sabana de Mendoza",
+      "historical_names": [
+        {
+          "date": "1888.1.1",
+          "date_source_note": "Railway settlement established around 1888 along the Gran Ferrocarril de La Ceiba",
+          "name": "Sabana de Mendoza"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.79804,
+        -75.19386
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Coyaima-Colombia",
+      "known_aliases": [
+        "Coyaima",
+        "coyaima",
+        "coyaimas",
+        "Coyaimas"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29071,
+      "name": "Coyaima",
+      "reason": "missing_entry",
+      "region": "col_tolima",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Coyaima",
+      "historical_names": [
+        {
+          "date": "1621.3.29",
+          "date_source_note": "Colonial reducción of the indigenous Coyaima (Pijao) people established in 1621",
+          "name": "Coyaima"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.50952,
+        -66.40563
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Libertad de Orituco-Venezuela",
+      "known_aliases": [
+        "Libertad de Orituco",
+        "libertad de orituco"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29066,
+      "name": "Libertad de Orituco",
+      "reason": "missing_entry",
+      "region": "ven_guarico",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Libertad de Orituco",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest census horizon; rural parish in Orituco valley",
+          "name": "Libertad de Orituco"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.90965,
+        -75.0775
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Amalfi-Colombia",
+      "known_aliases": [
+        "Amalfi",
+        "amalfi",
+        "san martin",
+        "san martin cancan",
+        "San Martin",
+        "San Martin Cancan"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29054,
+      "name": "Amalfi",
+      "reason": "missing_entry",
+      "region": "col_antioquia",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Amalfi",
+      "historical_names": [
+        {
+          "date": "1838.1.1",
+          "date_source_note": "Founded in 1838 as Nueva Población de Cancán",
+          "name": "Cancán"
+        },
+        {
+          "date": "1843.1.1",
+          "date_source_note": "Renamed Amalfi in 1843",
+          "name": "Amalfi"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.61776,
+        -75.63653
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Circasia-Colombia",
+      "known_aliases": [
+        "Circasia",
+        "circasia"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29024,
+      "name": "Circasia",
+      "reason": "missing_entry",
+      "region": "col_quindio",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Circasia",
+      "historical_names": [
+        {
+          "date": "1884.8.10",
+          "date_source_note": "Founded on 10 August 1884 during the Antioqueño colonization",
+          "name": "Circasia"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        2.34746,
+        -78.32581
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Olaya Herrera-Colombia",
+      "known_aliases": [
+        "Olaya Herrera",
+        "olaya herrera"
+      ],
+      "latest_year": 2025,
+      "max_pop": 29009,
+      "name": "Olaya Herrera",
+      "reason": "missing_entry",
+      "region": "col_narino",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Olaya Herrera",
+      "historical_names": [
+        {
+          "date": "1975.11.28",
+          "date_source_note": "Municipality created by Nariño Ordinance No. 23 of 28 November 1975 (seat at Bocas de Satinga)",
+          "name": "Olaya Herrera"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.77529,
+        -74.72002
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sitionuevo-Colombia",
+      "known_aliases": [
+        "Sitionuevo",
+        "sitionuevo",
+        "sitio nuevo",
+        "Sitio Nuevo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 28971,
+      "name": "Sitionuevo",
+      "reason": "missing_entry",
+      "region": "col_atlantico",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sitionuevo",
+      "historical_names": [
+        {
+          "date": "1751.6.24",
+          "date_source_note": "Founded in 1751 by José Fernando de Mier y Guerra on the Magdalena River",
+          "name": "Sitionuevo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        2.77759,
+        -75.25875
+      ],
+      "country": "Colombia",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rivera-Colombia",
+      "known_aliases": [
+        "Rivera",
+        "rivera"
+      ],
+      "latest_year": 2025,
+      "max_pop": 28966,
+      "name": "Rivera",
+      "reason": "missing_entry",
+      "region": "col_huila",
+      "sample_years": [
+        1880,
+        1985,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Rivera",
+      "historical_names": [
+        {
+          "date": "1888.8.14",
+          "date_source_note": "Founded in 1888 as the settlement of San Mateo",
+          "name": "San Mateo"
+        },
+        {
+          "date": "1943.5.17",
+          "date_source_note": "Elevated to municipality in 1943 and renamed in honour of José Eustasio Rivera",
+          "name": "Rivera"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.73472,
+        -79.30333
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1961.1.1",
+          "name": "Paiján"
+        }
+      ],
+      "existing_meta_index": 490,
+      "existing_meta_name": "Paiján",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Paijan-Peru",
+      "known_aliases": [
+        "Paijan",
+        "paijan",
+        "paiján",
+        "Paiján"
+      ],
+      "latest_year": 2025,
+      "max_pop": 28951,
+      "name": "Paijan",
+      "reason": "under_covered_history",
+      "region": "per_la_libertad",
+      "sample_years": [
+        1525,
+        1750,
+        1920,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Paiján",
+      "historical_names": [
+        {
+          "date": "1572.1.1",
+          "date_source_note": "Colonial reducción established in the Chicama Valley in the late 16th century",
+          "name": "San Salvador de Paiján"
+        },
+        {
+          "date": "1821.7.28",
+          "date_source_note": "Shortened official name in independent Peru (retaining the Muchik toponym)",
+          "name": "Paiján"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.22001,
+        -65.8229
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tinguipaya-Bolivia",
+      "known_aliases": [
+        "Tinguipaya",
+        "tinguipaya",
+        "colocaquina",
+        "tinquipaya",
+        "Colocaquina",
+        "Tinquipaya"
+      ],
+      "latest_year": 2026,
+      "max_pop": 28942,
+      "name": "Tinguipaya",
+      "reason": "missing_entry",
+      "region": "bol_potosi",
+      "sample_years": [
+        1525,
+        1846,
+        1960,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tinguipaya",
+      "historical_names": [
+        {
+          "date": "1574.1.1",
+          "date_source_note": "Colonial reducción of the Qaraqara indigenous territory established under Viceroy Toledo (1570s)",
+          "name": "Tinguipaya"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.40791,
+        -77.39077
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Tambo (col_narino)-Colombia",
+      "known_aliases": [
+        "El Tambo",
+        "el tambo",
+        "tambo pintado",
+        "calchagui",
+        "Tambo pintado",
+        "Calchagui"
+      ],
+      "latest_year": 2025,
+      "max_pop": 28928,
+      "name": "El Tambo",
+      "reason": "missing_entry",
+      "region": "col_narino",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "El Tambo",
+      "historical_names": [
+        {
+          "date": "1573.1.1",
+          "date_source_note": "Colonial settlement established around 1573 (historically known as El Tambo Pintado)",
+          "name": "El Tambo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.13833,
+        -71.25667
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Venezuela-Venezuela",
+      "known_aliases": [
+        "Venezuela",
+        "venezuela"
+      ],
+      "latest_year": 2025,
+      "max_pop": 28919,
+      "name": "Venezuela",
+      "reason": "missing_entry",
+      "region": "ven_zulia",
+      "sample_years": [
+        1850,
+        1970,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Venezuela",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Coastal settlement of Tasajeras in Lagunillas prior to 1989 parish",
+          "name": "Tasajeras"
+        },
+        {
+          "date": "1989.7.21",
+          "date_source_note": "Parroquia Venezuela created 21 July 1989 in Lagunillas municipality",
+          "name": "Venezuela"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.79928,
+        -75.6988
+      ],
+      "country": "Colombia",
+      "earliest_year": 1745,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Carlos-Colombia",
+      "known_aliases": [
+        "San Carlos",
+        "san carlos",
+        "san carlos colosina",
+        "hf-colombiamovil_vda_santahelena_crg_callemar_mcpiosancarlos_cordoba",
+        "San Carlos Colosina"
+      ],
+      "latest_year": 2025,
+      "max_pop": 28909,
+      "name": "San Carlos",
+      "reason": "missing_entry",
+      "region": "col_cordoba",
+      "sample_years": [
+        1745,
+        1880,
+        1995,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Carlos",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Zenú indigenous settlement and territory of Colosiná prior to 1777 Spanish congregation (year approximate)",
+          "name": "Colosiná"
+        },
+        {
+          "date": "1777.5.3",
+          "date_source_note": "Founded by Antonio de la Torre y Miranda on 3 May 1777 as San Carlos de Colosiná",
+          "name": "San Carlos de Colosiná"
+        },
+        {
+          "date": "1923.1.1",
+          "date_source_note": "Shortened official name San Carlos upon municipal creation in 1923 (exact month and day unverified)",
+          "name": "San Carlos"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.289,
+        -66.83583
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Huanuni-Bolivia",
+      "known_aliases": [
+        "Huanuni",
+        "huanuni",
+        "villa de huanuni",
+        "guanuni",
+        "Villa de Huanuni",
+        "Guanuni"
+      ],
+      "latest_year": 2026,
+      "max_pop": 28854,
+      "name": "Huanuni",
+      "reason": "missing_entry",
+      "region": "bol_oruro",
+      "sample_years": [
+        1525,
+        1846,
+        1960,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Huanuni",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Aymara/Quechua toponym Wanuni in Sora/Paria territory (year approximate)",
+          "name": "Wanuni"
+        },
+        {
+          "date": "1745.1.1",
+          "date_source_note": "Colonial mining settlement attested as Huanuni from the mid-18th century (pre-1825 independence; exact month and day unverified)",
+          "name": "Huanuni"
+        }
+      ]
+    }
+  ]
+}

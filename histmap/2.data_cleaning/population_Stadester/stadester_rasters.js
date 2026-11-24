@@ -421,13 +421,58 @@
     let city = arg0_city;
     let year = Number(arg1_year);
 
+    //Guard clauses
+    if (!city || !Number.isFinite(year)) return 0;
+
+    //Fast compact TypedArray path (saves ~5 GB V8 heap across 500k+ cities)
+    if (city._py && city._pv) {
+      let py = city._py;
+      let pv = city._pv;
+      let n = py.length;
+      if (n === 0) return 0;
+      let min_yr = py[0];
+      let max_yr = py[n - 1];
+      if (year < min_yr) return 0;
+      if (year > max_yr) {
+        if (max_yr >= 1975 && year >= 1975 && (year - max_yr) <= 200)
+          return pv[n - 1] || 0;
+        return 0;
+      }
+      //Binary search for greatest index lo with py[lo] <= year
+      let lo = 0;
+      let hi = n - 1;
+      while (lo < hi) {
+        let mid = (lo + hi + 1) >> 1;
+        if (py[mid] <= year) lo = mid;
+        else hi = mid - 1;
+      }
+      if (py[lo] === year) return pv[lo] || 0;
+      if (lo + 1 >= n) return 0;
+      let y0 = py[lo];
+      let y1 = py[lo + 1];
+      let gap = y1 - y0;
+      let max_gap = 200;
+      if (typeof population_Stadester !== "undefined" && population_Stadester.getMaxTemporalProximityGap) {
+        max_gap = population_Stadester.getMaxTemporalProximityGap(y0, y1);
+      } else {
+        let hyde_int = (y1 <= 0 || y0 < 0) ? 1000 : ((y1 <= 1700 || y0 < 1700) ? 100 : 10);
+        max_gap = Math.max(200, hyde_int);
+      }
+      if (gap <= max_gap && gap > 0) {
+        let v0 = pv[lo] || 0;
+        let v1 = pv[lo + 1] || 0;
+        return v0 + ((year - y0)/gap)*(v1 - v0);
+      }
+      return 0;
+    }
+
     //Declare local instance variables
     let max_yr = 0;
     let min_yr = 0;
     let p_keys = [];
 
     //Guard clauses
-    if (!city || !city.population || !Number.isFinite(year)) return 0;
+    if (!city.population) return 0;
     if (city.population[year] !== undefined)
       return parseFloat(city.population[year]) || 0;
 
@@ -537,8 +582,25 @@
               let city = shard_obj[shard_keys[y]];
               if (!city || !city.coords || !city.population) continue;
               let px = population_Stadester_rasters.getCoordsPixel(city.coords);
-              lite_list.push({ _px: px, coords: city.coords, population: city.population });
+              let raw_keys = Object.keys(city.population);
+              let pairs = [];
+              for (let k = 0; k < raw_keys.length; k++) {
+                let yn = parseInt(raw_keys[k], 10);
+                let vn = parseFloat(city.population[raw_keys[k]]);
+                if (Number.isFinite(yn) && yn >= -32000 && yn <= 32000 && Number.isFinite(vn))
+                  pairs.push([yn, vn]);
+              }
+              if (pairs.length === 0) continue;
+              pairs.sort(function (arg0_a, arg1_b) { return arg0_a[0] - arg1_b[0]; });
+              let py_arr = new Int16Array(pairs.length);
+              let pv_arr = new Float32Array(pairs.length);
+              for (let k = 0; k < pairs.length; k++) {
+                py_arr[k] = pairs[k][0];
+                pv_arr[k] = pairs[k][1];
+              }
+              lite_list.push({ _px: px, _pv: pv_arr, _py: py_arr });
             }
+            shard_obj = null;
           }
         }
         global._cached_stadester_lite = lite_list;

@@ -628,8 +628,14 @@
     if (do_not_flatten_metros) return stadester_obj;
 
     //Use the unified 3-Phase Spatiotemporally Agnostic Metropolitan Reconciler
-    let { StadesterMetroReconciler } = require("./StadesterMetroReconciler.js");
-    let reconciler = new StadesterMetroReconciler({ use_trailing_carry: true });
+    let MetroRec = global.StadesterMetroReconciler;
+    if (!MetroRec) {
+      let rec_p = (typeof __dirname !== "undefined" && fs.existsSync(path.join(__dirname, "StadesterMetroReconciler.js"))) ?
+        path.join(__dirname, "StadesterMetroReconciler.js") :
+        path.resolve(process.cwd(), "histmap/2.data_cleaning/population_Stadester/StadesterMetroReconciler.js");
+      MetroRec = require(rec_p).StadesterMetroReconciler;
+    }
+    let reconciler = new MetroRec({ use_trailing_carry: true });
     let recon_res = reconciler.reconcile(stadester_obj);
     if (recon_res && recon_res.stats && recon_res.stats.metros_inspected > 0) {
       console.log(
@@ -834,7 +840,8 @@
       let lat = Number(city.coords[0]).toFixed(3);
       let lng = Number(city.coords[1]).toFixed(3);
 
-      let is_agg = (city.is_agglomeration || (city.name && (city.name.toLowerCase().includes("agglomeration") || city.name.toLowerCase().includes("greater")))) ? "agg" : "city";
+      let is_agg = (city.population_scope === "city_proper" || city.population_scope === "suburb") ? "city" :
+        ((city.population_scope === "metro" || city.extent_type === "metro" || city.is_agglomeration || (city.name && (city.name.toLowerCase().includes("agglomeration") || city.name.toLowerCase().includes("(metro)") || city.name.toLowerCase().includes("greater")))) ? "agg" : "city");
       let group_key = `${lat},${lng},${is_agg}`;
 
       if (!grouped[group_key]) grouped[group_key] = [];
@@ -991,7 +998,7 @@
         let rd = global.StadesterPartitionIO.assignCityToViscountRegion(ac, ak);
         if (rd && rd.key) a_proj = String(rd.key).toUpperCase();
       }
-      if (a_proj !== "PRETA" && a_proj !== "CENTAUR" && a_proj !== "INDUS" && a_proj !== "CASTLE" && a_proj !== "JADE" && a_proj !== "SARAY" && a_proj !== "MANDALA") continue;
+      if (a_proj !== "PRETA" && a_proj !== "CENTAUR" && a_proj !== "INDUS" && a_proj !== "CASTLE" && a_proj !== "JADE" && a_proj !== "SARAY" && a_proj !== "MANDALA" && a_proj !== "JAGUAR") continue;
       let base_name = String(ac.name || "").replace(/\s*\(agglomeration\)\s*/gi, "").trim();
       let base_key = `${base_name}-${ac.country}`;
       let target = stadester_obj[base_key];
@@ -1109,7 +1116,8 @@
                 a.proj_key === "CASTLE" || b.proj_key === "CASTLE" ||
                 a.proj_key === "JADE" || b.proj_key === "JADE" ||
                 a.proj_key === "SARAY" || b.proj_key === "SARAY" ||
-                a.proj_key === "MANDALA" || b.proj_key === "MANDALA"
+                a.proj_key === "MANDALA" || b.proj_key === "MANDALA" ||
+                a.proj_key === "JAGUAR" || b.proj_key === "JAGUAR"
               );
 
               if (!touches_viscount) continue;
@@ -1158,6 +1166,199 @@
     }
     if (merged_count > 0)
       console.log(`- Reconciled ${merged_count} close same-country CENTAUR twin record(s).`);
+
+    //JAGUAR: Reconcile same-country/same-stem historical-to-modern variant duplicates (<= 25 km for variant spellings / suffixes, <= 5 km for identical names)
+    let jaguar_by_country = {};
+    let jaguar_keys = Object.keys(stadester_obj);
+    let jaguar_merged = 0;
+    let jaguar_suffixes = [
+      "Puerto Rico", "Cuba", "Jamaica", "St. Lucia", "Saint Lucia", "Guadeloupe",
+      "Martinique", "Barbados", "Cayman Islands", "Cayman", "Marie-Galante", "Dominica",
+      "Barbuda", "Antigua", "Harbour Island", "The Bahamas", "Bahamas", "Sint Maarten",
+      "St. Maarten", "Saint Martin", "Trinidad", "Tobago", "Grenada", "St. Vincent",
+      "St. Kitts", "Nevis", "Montserrat", "Aruba", "Curaçao", "Curacao", "Bonaire",
+      "Bermuda", "Haiti", "Nicaragua", "Costa Rica", "El Salvador", "Honduras",
+      "Guatemala", "Belize", "Panama", "Dominican Republic", "Mexico"
+    ];
+
+    let normaliseJaguarStem = function (arg0_name, arg1_country) {
+      let s = String(arg0_name || "").trim();
+
+      s = s.replace(/^(.+?)\s*\(\s*(Le|La|Les|L'|El|Los|Las)\s*-\s*\)\s*$/i, "$2 $1");
+      s = s.split(";")[0].split("(")[0].trim();
+
+      let suffix_list = (arg1_country) ? [String(arg1_country).trim()].concat(jaguar_suffixes) : jaguar_suffixes;
+      for (let si = 0; si < suffix_list.length; si++) {
+        let suf = suffix_list[si];
+        if (!suf) continue;
+        let esc = suf.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        let re = new RegExp(`\\s+${esc}$`, "i");
+        if (re.test(s)) {
+          let stripped = s.replace(re, "").trim();
+          if (stripped.length >= 3) {
+            s = stripped;
+            break;
+          }
+        }
+      }
+
+      let base = s.toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/ł/g, "l")
+        .replace(/đ/g, "d")
+        .replace(/ø/g, "o")
+        .replace(/ß/g, "ss")
+        .replace(/æ/g, "ae")
+        .replace(/œ/g, "oe");
+      base = base.replace(/^(?:st\.?|saint|san|santa|sao|al-|el-)\s+/i, "saint ");
+      base = base.replace(/kh/g, "k");
+      base = base.replace(/gh/g, "g");
+      base = base.replace(/ph/g, "f");
+      base = base.replace(/dj/g, "j");
+      base = base.replace(/ou/g, "u");
+      base = base.replace(/[jy]/g, "i");
+      base = base.replace(/ts/g, "c");
+      base = base.replace(/[cq]/g, "k");
+      base = base.replace(/[^a-z0-9]+/g, "");
+
+      return base;
+    };
+
+    for (let i = 0; i < jaguar_keys.length; i++) {
+      let key = jaguar_keys[i];
+      let city = stadester_obj[key];
+      if (!city || !Array.isArray(city.coords) || city.coords.length < 2 || !city.population) continue;
+
+      let proj_key = String(city.viscount_project || "").toUpperCase();
+      if (!proj_key && typeof global.StadesterPartitionIO !== "undefined" && typeof global.StadesterPartitionIO.assignCityToViscountRegion === "function") {
+        let reg_desc = global.StadesterPartitionIO.assignCityToViscountRegion(city, key);
+        if (reg_desc && reg_desc.key) proj_key = String(reg_desc.key).toUpperCase();
+      }
+      if (proj_key !== "JAGUAR") continue;
+
+      let country_str = String(city.country || "").trim();
+      let ctry = country_str.toLowerCase();
+      if (ctry === "netherlands antilles" || ctry === "saba" || ctry === "bonaire" || ctry === "sint eustatius")
+        ctry = "caribbean netherlands";
+      if (!ctry) continue;
+
+      let is_metro = Boolean(
+        city.population_scope === "metro" ||
+        city.extent_type === "metro" ||
+        city.is_agglomeration === true ||
+        /\(metro\)|agglomeration|metropolitan/i.test(String(city.name || ""))
+      );
+      let max_pop = 0;
+      let max_yr = -99999;
+      let yr_keys = Object.keys(city.population);
+      for (let x = 0; x < yr_keys.length; x++) {
+        let yi = Number(yr_keys[x]);
+        let pv = Number(city.population[yr_keys[x]]);
+        if (Number.isFinite(yi) && Number.isFinite(pv) && pv > 0) {
+          if (yi > max_yr) max_yr = yi;
+          if (pv > max_pop) max_pop = pv;
+        }
+      }
+      if (max_yr === -99999) continue;
+
+      let display_nm = String(city.name || key).trim();
+      let stem = normaliseJaguarStem(display_nm, country_str);
+      if (!stem) continue;
+
+      let raw_stem = normaliseJaguarStem(display_nm, "");
+      let has_accent = /[^\x00-\x7F]/.test(display_nm);
+      let has_country_suf = (stem !== raw_stem) || /\s+(?:Puerto Rico|Cuba|Jamaica|St\.\s*Lucia|Saint Lucia|Guadeloupe|Martinique|Barbados|Cayman|Marie-Galante|Dominica|Barbuda|Harbour Island|Sint Maarten|Nicaragua|Costa Rica|El Salvador|Honduras|Bonaire)$/i.test(display_nm);
+      let is_dup_key = /_\d+$/.test(key);
+      let is_inverted = /\(\s*(?:Le|La|Les|L'|El|Los|Las)\s*-\s*\)/i.test(display_nm);
+      let score = (max_yr >= 1975 ? 1e11 : 0) +
+        (population_Stadester_uud.hasCitySource(city, "JAGUAR") ? 5e10 : 0) +
+        (has_country_suf ? -5e10 : 0) +
+        (is_inverted ? -1e10 : 0) +
+        (has_accent ? 2e10 : 0) +
+        (is_dup_key ? -1e9 : 0) +
+        max_pop;
+
+      if (!jaguar_by_country[ctry]) jaguar_by_country[ctry] = [];
+      jaguar_by_country[ctry].push({
+        city: city,
+        dropped: false,
+        is_metro: is_metro,
+        key: key,
+        name: display_nm,
+        score: score,
+        stem: stem
+      });
+    }
+
+    let jaguar_countries = Object.keys(jaguar_by_country);
+    for (let c = 0; c < jaguar_countries.length; c++) {
+      let arr = jaguar_by_country[jaguar_countries[c]];
+      if (arr.length < 2) continue;
+      arr.sort(function (arg0_a, arg1_b) { return arg1_b.score - arg0_a.score; });
+
+      let by_stem = new Map();
+      for (let i = 0; i < arr.length; i++) {
+        let sk = `${arr[i].stem}|${arr[i].is_metro ? "m" : "c"}`;
+        if (!by_stem.has(sk)) by_stem.set(sk, []);
+        by_stem.get(sk).push(arr[i]);
+      }
+
+      by_stem.forEach(function (arg0_group) {
+        if (arg0_group.length < 2) return;
+        for (let i = 0; i < arg0_group.length; i++) {
+          let a = arg0_group[i];
+          if (a.dropped) continue;
+          for (let x = i + 1; x < arg0_group.length; x++) {
+            let b = arg0_group[x];
+            if (b.dropped) continue;
+            if (Math.abs(a.city.coords[0] - b.city.coords[0]) > 0.25 || Math.abs(a.city.coords[1] - b.city.coords[1]) > 0.45) continue;
+            let d_km = haversineKm(a.city.coords, b.city.coords);
+            let max_d_km = (a.name.toLowerCase() !== b.name.toLowerCase()) ? 25.0 : 5.0;
+            if (d_km > max_d_km) continue;
+
+            if (!Array.isArray(a.city.other_names)) a.city.other_names = [];
+            if (b.city.name && b.city.name !== a.city.name && !a.city.other_names.includes(b.city.name))
+              a.city.other_names.push(b.city.name);
+            if (Array.isArray(b.city.other_names)) {
+              for (let k = 0; k < b.city.other_names.length; k++)
+                if (b.city.other_names[k] && b.city.other_names[k] !== a.city.name && !a.city.other_names.includes(b.city.other_names[k]))
+                  a.city.other_names.push(b.city.other_names[k]);
+            }
+
+            let b_yrs = Object.keys(b.city.population);
+            for (let y = 0; y < b_yrs.length; y++) {
+              let yk = b_yrs[y];
+              let yv = Number(b.city.population[yk]);
+              let yi = Number(yk);
+              if (Number.isFinite(yv) && yv > 0 && !(Number(a.city.population[yk]) > 0)) {
+                a.city.population[yk] = yv;
+                if (Number.isFinite(yi) && Number.isFinite(Number(a.city.foundation_year)) && yi < Number(a.city.foundation_year))
+                  delete a.city.foundation_year;
+                if (Number.isFinite(yi) && Number.isFinite(Number(a.city["found.yr"])) && yi < Number(a.city["found.yr"]))
+                  delete a.city["found.yr"];
+              }
+            }
+
+            if (Number.isFinite(b.city._raw_min_year)) {
+              a.city._raw_min_year = Number.isFinite(a.city._raw_min_year) ?
+                Math.min(a.city._raw_min_year, b.city._raw_min_year) : b.city._raw_min_year;
+            }
+            if (Number.isFinite(b.city._raw_max_year)) {
+              a.city._raw_max_year = Number.isFinite(a.city._raw_max_year) ?
+                Math.max(a.city._raw_max_year, b.city._raw_max_year) : b.city._raw_max_year;
+            }
+
+            population_Stadester_uud.appendCitySources(a.city, b.city.sources || b.city.type);
+            delete stadester_obj[b.key];
+            b.dropped = true;
+            jaguar_merged++;
+          }
+        }
+      });
+    }
+    if (jaguar_merged > 0)
+      console.log(`- Reconciled ${jaguar_merged} JAGUAR same-country same-stem variant/twin record(s).`);
 
     //Return statement
     return stadester_obj;

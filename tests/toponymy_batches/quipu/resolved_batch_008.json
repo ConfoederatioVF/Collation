@@ -1,0 +1,1509 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 8,
+  "count": 30,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        9.99433,
+        -69.23461
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Palavecino-Venezuela",
+      "known_aliases": [
+        "Palavecino",
+        "palavecino"
+      ],
+      "latest_year": 2025,
+      "max_pop": 174099,
+      "name": "Palavecino",
+      "reason": "missing_entry",
+      "region": "ven_lara",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Palavecino",
+      "historical_names": [
+        {
+          "date": "1844.3.13",
+          "date_source_note": "Created as Cantón Cabudare by the Congress of Venezuela on 13 March 1844 (effective 1 May 1844)",
+          "name": "Cabudare"
+        },
+        {
+          "date": "1936.9.19",
+          "date_source_note": "Renamed Distrito Palavicini by the Legislative Assembly of Lara State on 19 September 1936",
+          "name": "Palavicini"
+        },
+        {
+          "date": "1945.1.24",
+          "date_source_note": "Corrected to Distrito Palavecino by legislative decree on 24 January 1945 (became Municipio Palavecino in 1989)",
+          "name": "Palavecino"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.86651,
+        -74.05
+      ],
+      "country": "Colombia",
+      "earliest_year": 1000,
+      "existing_historical_names": [
+        {
+          "date": "1973.1.1",
+          "name": "Chía"
+        }
+      ],
+      "existing_meta_index": 157,
+      "existing_meta_name": "Chía",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chía-Colombia",
+      "known_aliases": [
+        "Chía",
+        "chía",
+        "chia",
+        "el rocío",
+        "la maria",
+        "los cerezos",
+        "plan parcial",
+        "plan parcial chía",
+        "saldarriaga concha",
+        "Chia",
+        "El Rocío",
+        "La Maria",
+        "Los Cerezos",
+        "Plan Parcial",
+        "Plan Parcial Chía",
+        "Saldarriaga Concha"
+      ],
+      "latest_year": 2025,
+      "max_pop": 173728,
+      "name": "Chía",
+      "reason": "under_covered_history",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1000,
+        1750,
+        1980,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Chía",
+      "historical_names": [
+        {
+          "date": "1000.1.1",
+          "date_source_note": "Pre-Hispanic Muisca cacicazgo and Moon sanctuary",
+          "name": "Chía"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.22389,
+        -70.90721
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Curicó-Chile",
+      "known_aliases": [
+        "Curicó",
+        "curicó"
+      ],
+      "latest_year": 2025,
+      "max_pop": 173473,
+      "name": "Curicó",
+      "reason": "missing_entry",
+      "region": "chl_region_del_maule",
+      "sample_years": [
+        1850,
+        1930,
+        2002,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Curicó",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Mapudungun (Picunche-Promaucae) toponym meaning black water prior to Spanish settlement",
+          "name": "Kuriko"
+        },
+        {
+          "date": "1743.10.9",
+          "date_source_note": "Colonial villa founded by Governor José Antonio Manso de Velasco on 9 October 1743 (relocated in 1747)",
+          "name": "San José de Buena Vista"
+        },
+        {
+          "date": "1818.2.12",
+          "date_source_note": "Official republican city name following Chilean independence (12 February 1818)",
+          "name": "Curicó"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.10806,
+        -77.61028
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Huacho"
+        }
+      ],
+      "existing_meta_index": 292,
+      "existing_meta_name": "Huacho",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Huacho-Peru",
+      "known_aliases": [
+        "Huacho",
+        "huacho",
+        "hualmay",
+        "Hualmay"
+      ],
+      "latest_year": 2025,
+      "max_pop": 172700,
+      "name": "Huacho",
+      "reason": "under_covered_history",
+      "region": "per_lima",
+      "sample_years": [
+        1525,
+        1750,
+        1920,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Huacho",
+      "historical_names": [
+        {
+          "date": "1450.1.1",
+          "date_source_note": "Pre-colonial Chancay and Inca ayllu settlement named after curaca Huachu (colonial spelling Guacho) prior to 1571 reduction",
+          "name": "Huachu"
+        },
+        {
+          "date": "1571.8.24",
+          "date_source_note": "Toledan indigenous reduction established on 24 August 1571 under the patronage of Saint Bartholomew",
+          "name": "San Bartolomé de Huacho"
+        },
+        {
+          "date": "1821.7.28",
+          "date_source_note": "Republican city and district name following Peruvian independence (28 July 1821)",
+          "name": "Huacho"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -6.48944,
+        -76.36028
+      ],
+      "country": "Peru",
+      "earliest_year": 1782,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tarapoto-Peru",
+      "known_aliases": [
+        "Tarapoto",
+        "tarapoto"
+      ],
+      "latest_year": 2025,
+      "max_pop": 169800,
+      "name": "Tarapoto",
+      "reason": "missing_entry",
+      "region": "per_san_martin",
+      "sample_years": [
+        1782,
+        1900,
+        1993,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tarapoto",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial and pre-1782 indigenous settlement of the Suchiches (Motilones-Lamistas / Cumbazas) around Laguna Suchiche",
+          "name": "Suchiche"
+        },
+        {
+          "date": "1782.8.20",
+          "date_source_note": "Colonial reduction founded on 20 August 1782 by Bishop Baltasar Jaime Martínez Compañón",
+          "name": "Santa Cruz de los Motilones de Tarapoto"
+        },
+        {
+          "date": "1857.1.2",
+          "date_source_note": "Shortened official district name established under the Ley Transitoria de Municipalidades of 2 January 1857",
+          "name": "Tarapoto"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.35611,
+        -70.20056
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rio Seco-Venezuela",
+      "known_aliases": [
+        "Rio Seco",
+        "rio seco"
+      ],
+      "latest_year": 2025,
+      "max_pop": 167244,
+      "name": "Rio Seco",
+      "reason": "missing_entry",
+      "region": "ven_falcon",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Río Seco",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest census horizon for Miranda coastal parish, Falcón",
+          "name": "Río Seco"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.72111,
+        -66.39167
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1538,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Lezama-Venezuela",
+      "known_aliases": [
+        "Lezama",
+        "lezama"
+      ],
+      "latest_year": 2025,
+      "max_pop": 167100,
+      "name": "Lezama",
+      "reason": "missing_entry",
+      "region": "ven_guarico",
+      "sample_years": [
+        1538,
+        1804,
+        1900,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Lezama",
+      "historical_names": [
+        {
+          "date": "1688.1.1",
+          "date_source_note": "Franciscan mission founded by Fray Manuel de Alesón",
+          "name": "San Francisco Javier de Lezama"
+        },
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Shortened modern name in Venezuelan census records",
+          "name": "Lezama"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.02548,
+        -73.99444
+      ],
+      "country": "Colombia",
+      "earliest_year": 1538,
+      "existing_historical_names": [
+        {
+          "date": "1902.1.1",
+          "name": "Zipaquirá"
+        }
+      ],
+      "existing_meta_index": 866,
+      "existing_meta_name": "Zipaquirá",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zipaquirá-Colombia",
+      "known_aliases": [
+        "Zipaquirá",
+        "zipaquirá",
+        "zipaquira",
+        "Zipaquira"
+      ],
+      "latest_year": 2025,
+      "max_pop": 166810,
+      "name": "Zipaquirá",
+      "reason": "under_covered_history",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1538,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Zipaquirá",
+      "historical_names": [
+        {
+          "date": "1538.1.1",
+          "date_source_note": "Pre-Hispanic Muisca salt-mining settlement; Spanish town 1600",
+          "name": "Zipaquirá"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.885,
+        -67.476
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1788,
+      "existing_historical_names": [
+        {
+          "date": "1873.1.1",
+          "name": "San Fernando"
+        }
+      ],
+      "existing_meta_index": 664,
+      "existing_meta_name": "San Fernando",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Fernando de Apure-Venezuela",
+      "known_aliases": [
+        "San Fernando de Apure",
+        "san fernando de apure"
+      ],
+      "latest_year": 2019,
+      "max_pop": 166400,
+      "name": "San Fernando de Apure",
+      "reason": "under_covered_history",
+      "region": "ven_barinas",
+      "sample_years": [
+        1788,
+        1825,
+        1950,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Fernando de Apure",
+      "historical_names": [
+        {
+          "date": "1788.2.28",
+          "date_source_note": "Founded on 28 February 1788 under Barinas Governor Fernando Miyares y González with local indigenous and llanero settlers",
+          "name": "Villa de San Fernando del Paso Real de Apure"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Republican city name following Venezuelan independence (5 July 1811)",
+          "name": "San Fernando de Apure"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.05028,
+        -75.22139
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Tambo-Peru",
+      "known_aliases": [
+        "El Tambo",
+        "el tambo",
+        "huayocachi",
+        "guayocachi",
+        "huayocchi",
+        "Huayocachi",
+        "Guayocachi",
+        "Huayocchi"
+      ],
+      "latest_year": 2025,
+      "max_pop": 166359,
+      "name": "El Tambo",
+      "reason": "missing_entry",
+      "region": "per_junin",
+      "sample_years": [
+        1525,
+        1750,
+        1950,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "El Tambo",
+      "historical_names": [
+        {
+          "date": "1460.1.1",
+          "date_source_note": "Inca royal waystation (tampu) along the Qhapaq Ñan in Huanca territory (later colonial Ayllo Tambo)",
+          "name": "Tampu"
+        },
+        {
+          "date": "1943.11.13",
+          "date_source_note": "Created as District of El Tambo on 13 November 1943 under Peruvian Law No. 9847",
+          "name": "El Tambo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.05553,
+        -68.13244
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Libertador (ven_carabobo)-Venezuela",
+      "known_aliases": [
+        "Libertador",
+        "libertador"
+      ],
+      "latest_year": 2011,
+      "max_pop": 166166,
+      "name": "Libertador",
+      "reason": "missing_entry",
+      "region": "ven_carabobo",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Libertador",
+      "historical_names": [
+        {
+          "date": "1994.1.14",
+          "date_source_note": "Autonomous Municipality Libertador created on 14 January 1994 by Carabobo State Territorial Division Law, merging Tocuyito and Independencia parishes",
+          "name": "Libertador"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.165,
+        -66.892
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1538,
+      "existing_historical_names": [
+        {
+          "date": "1995.1.1",
+          "name": "Cúa"
+        }
+      ],
+      "existing_meta_index": 202,
+      "existing_meta_name": "Cúa",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cúa-Venezuela",
+      "known_aliases": [
+        "Cúa",
+        "cúa",
+        "rosario de marin",
+        "incl. nueva cúa",
+        "cua",
+        "Rosario de Marin",
+        "incl. Nueva Cúa",
+        "Cua"
+      ],
+      "latest_year": 2019,
+      "max_pop": 165600,
+      "name": "Cúa",
+      "reason": "under_covered_history",
+      "region": "ven_miranda",
+      "sample_years": [
+        1538,
+        1805,
+        1850,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cúa",
+      "historical_names": [
+        {
+          "date": "1577.1.1",
+          "date_source_note": "Quiriquire (Carib) indigenous territory in the Tuy valleys associated with 16th-century cacica Apacuana (etymon of Cúa)",
+          "name": "Cuana"
+        },
+        {
+          "date": "1690.10.6",
+          "date_source_note": "Ecclesiastical foundation documented on 6 October 1690 (originally Santa Rosa de Marín, consolidated under Nuestra Señora del Rosario)",
+          "name": "Nuestra Señora del Rosario de Cúa"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Shortened republican municipal name following Venezuelan independence (5 July 1811)",
+          "name": "Cúa"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.81335,
+        -74.35009
+      ],
+      "country": "Colombia",
+      "earliest_year": 1000,
+      "existing_historical_names": [
+        {
+          "date": "1905.1.1",
+          "name": "Facatativá"
+        }
+      ],
+      "existing_meta_index": 243,
+      "existing_meta_name": "Facatativá",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Facatativá-Colombia",
+      "known_aliases": [
+        "Facatativá",
+        "facatativá",
+        "facatativa",
+        "co cu fac-par r",
+        "co cu fac-tap r",
+        "piedra la guapucha",
+        "piedras del tunjo",
+        "área 1 bama facatativá",
+        "área 2 bama facatativá",
+        "área 3 bama facatativá",
+        "Facatativa",
+        "Co Cu Fac-par R",
+        "Co Cu Fac-tap R",
+        "Co cu Fac-par R",
+        "Piedra La Guapucha",
+        "Piedras del Tunjo",
+        "Área 1 BAMA Facatativá",
+        "Área 2 BAMA Facatativá",
+        "Área 3 BAMA Facatativá"
+      ],
+      "latest_year": 2025,
+      "max_pop": 165243,
+      "name": "Facatativá",
+      "reason": "under_covered_history",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1000,
+        1761,
+        1980,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Facatativá",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Muisca (Chibcha) fortified settlement and Zipa sanctuary (Cercado de Piedra) prior to 1537 Spanish conquest",
+          "name": "Tocatativá"
+        },
+        {
+          "date": "1600.7.3",
+          "date_source_note": "Colonial pueblo de indios congregated at Teuta by Oidor Diego Gómez de Mena on 3 July 1600",
+          "name": "San Antonio de Facatativá"
+        },
+        {
+          "date": "1819.12.17",
+          "date_source_note": "Republican municipal name following Colombian independence (17 December 1819)",
+          "name": "Facatativá"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.5437,
+        -66.94459
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Fernando-Venezuela",
+      "known_aliases": [
+        "San Fernando",
+        "san fernando"
+      ],
+      "latest_year": 2025,
+      "max_pop": 165135,
+      "name": "San Fernando",
+      "reason": "missing_entry",
+      "region": "ven_apure",
+      "sample_years": [
+        1850,
+        1950,
+        2001,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Fernando",
+      "historical_names": [
+        {
+          "date": "1788.2.28",
+          "date_source_note": "Colonial villa founded on 28 February 1788 on the Apure River (seat of the modern municipality)",
+          "name": "Villa de San Fernando del Paso Real de Apure"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Republican municipal and canton name following Venezuelan independence (5 July 1811)",
+          "name": "San Fernando"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.40406,
+        -70.73115
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1952.1.1",
+          "name": "Renca"
+        }
+      ],
+      "existing_meta_index": 610,
+      "existing_meta_name": "Renca",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Renca-Chile",
+      "known_aliases": [
+        "Renca",
+        "renca"
+      ],
+      "latest_year": 2025,
+      "max_pop": 163267,
+      "name": "Renca",
+      "reason": "under_covered_history",
+      "region": "chl_region_metropolitana_de_santiago",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Renca",
+      "historical_names": [
+        {
+          "date": "1525.1.1",
+          "date_source_note": "Pre-Hispanic Inca-Picunche settlement under Quilacanta in Mapocho",
+          "name": "Renca"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.64169,
+        -66.01312
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Leonardo Infante-Venezuela",
+      "known_aliases": [
+        "Leonardo Infante",
+        "leonardo infante"
+      ],
+      "latest_year": 2025,
+      "max_pop": 163166,
+      "name": "Leonardo Infante",
+      "reason": "missing_entry",
+      "region": "ven_guarico",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Leonardo Infante",
+      "historical_names": [
+        {
+          "date": "1989.6.15",
+          "date_source_note": "Autonomous municipality of Guárico State (capital Valle de la Pascua), formalised under Venezuela's Ley Orgánica de Régimen Municipal of 15 June 1989, succeeding the former Distrito Infante (named for Independence hero Colonel Leonardo Infante).",
+          "name": "Leonardo Infante"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.70755,
+        -69.8753
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Morán-Venezuela",
+      "known_aliases": [
+        "Morán",
+        "morán"
+      ],
+      "latest_year": 2025,
+      "max_pop": 160627,
+      "name": "Morán",
+      "reason": "missing_entry",
+      "region": "ven_lara",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Morán",
+      "historical_names": [
+        {
+          "date": "1989.6.15",
+          "date_source_note": "Autonomous municipality of Lara State (capital El Tocuyo), formalised under Venezuela's Ley Orgánica de Régimen Municipal of 15 June 1989, succeeding the earlier Distrito Morán (named for Independence hero José Trinidad Morán).",
+          "name": "Morán"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.33343,
+        -60.21087
+      ],
+      "country": "Argentina",
+      "earliest_year": 1748,
+      "existing_historical_names": [
+        {
+          "date": "1869.1.1",
+          "name": "San Nicolás de los Arroyes"
+        }
+      ],
+      "existing_meta_index": 696,
+      "existing_meta_name": "San Nicolás de los Arroyes",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Nicolás de los Arroyos-Argentina",
+      "known_aliases": [
+        "San Nicolás de los Arroyos",
+        "san nicolás de los arroyos",
+        "san nicolas",
+        "san vicente ferrer",
+        "San Nicolas",
+        "San Vicente Ferrer"
+      ],
+      "latest_year": 2022,
+      "max_pop": 160350,
+      "name": "San Nicolás de los Arroyos",
+      "reason": "under_covered_history",
+      "region": "arg_santa_fe",
+      "sample_years": [
+        1748,
+        1895,
+        1970,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Nicolás de los Arroyos",
+      "historical_names": [
+        {
+          "date": "1748.4.14",
+          "date_source_note": "Founded on 14 April 1748 by Rafael de Aguiar in the Pago de los Arroyos",
+          "name": "San Nicolás de Bari y de los Arroyos"
+        },
+        {
+          "date": "1819.11.23",
+          "date_source_note": "Officially declared a city by the Constituent General Congress on 23 November 1819 under the name San Nicolás de los Arroyos",
+          "name": "San Nicolás de los Arroyos"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.33672,
+        -74.37543
+      ],
+      "country": "Colombia",
+      "earliest_year": 1000,
+      "existing_historical_names": [
+        {
+          "date": "1968.1.1",
+          "name": "Fusagasugá"
+        }
+      ],
+      "existing_meta_index": 263,
+      "existing_meta_name": "Fusagasugá",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Fusagasugá-Colombia",
+      "known_aliases": [
+        "Fusagasugá",
+        "fusagasugá",
+        "fusagasuga",
+        "altagracia de suma paz",
+        "altagracia de sumapaz",
+        "altagracia de los sutagaos",
+        "sutagao",
+        "Fusagasuga",
+        "Altagracia de Suma Paz",
+        "Altagracia de Sumapaz",
+        "Altagracia de los Sutagaos",
+        "Sutagao"
+      ],
+      "latest_year": 2025,
+      "max_pop": 159944,
+      "name": "Fusagasugá",
+      "reason": "under_covered_history",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1000,
+        1650,
+        1993,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Fusagasugá",
+      "historical_names": [
+        {
+          "date": "1000.1.1",
+          "date_source_note": "Pre-Hispanic Sutagao settlement; Spanish reducción founded 1592",
+          "name": "Fusagasugá"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.08921,
+        -62.08466
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Rafael-Venezuela",
+      "known_aliases": [
+        "San Rafael",
+        "san rafael"
+      ],
+      "latest_year": 2025,
+      "max_pop": 159784,
+      "name": "San Rafael",
+      "reason": "missing_entry",
+      "region": "ven_delta_amacuro",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Rafael",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest census horizon for Tucupita parish, Delta Amacuro",
+          "name": "San Rafael"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.33611,
+        -67.20556
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sosa-Venezuela",
+      "known_aliases": [
+        "Sosa",
+        "sosa"
+      ],
+      "latest_year": 2025,
+      "max_pop": 159429,
+      "name": "Sosa",
+      "reason": "missing_entry",
+      "region": "ven_guarico",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sosa",
+      "historical_names": [
+        {
+          "date": "1937.1.1",
+          "date_source_note": "Codification of Distrito (now Municipio) Sosa in Barinas State (1937)",
+          "name": "Sosa"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.24907,
+        -66.83162
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cristóbal Rojas-Venezuela",
+      "known_aliases": [
+        "Cristóbal Rojas",
+        "cristóbal rojas"
+      ],
+      "latest_year": 2025,
+      "max_pop": 157944,
+      "name": "Cristóbal Rojas",
+      "reason": "missing_entry",
+      "region": "ven_miranda",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cristóbal Rojas",
+      "historical_names": [
+        {
+          "date": "1989.6.15",
+          "date_source_note": "Autonomous municipality of Miranda State (capital Charallave), formalised under Venezuela's Ley Orgánica de Régimen Municipal of 15 June 1989, succeeding the former Distrito Cristóbal Rojas (named for Venezuelan painter Cristóbal Rojas).",
+          "name": "Cristóbal Rojas"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.46168,
+        -68.91784
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1930.1.1",
+          "name": "Calama"
+        }
+      ],
+      "existing_meta_index": 78,
+      "existing_meta_name": "Calama",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Calama (chl_region_de_antofagasta)-Chile",
+      "known_aliases": [
+        "Calama",
+        "calama"
+      ],
+      "latest_year": 2017,
+      "max_pop": 157575,
+      "name": "Calama",
+      "reason": "under_covered_history",
+      "region": "chl_region_de_antofagasta",
+      "sample_years": [
+        1525,
+        1700,
+        1920,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Calama",
+      "historical_names": [
+        {
+          "date": "1525.1.1",
+          "date_source_note": "Pre-Hispanic Atacameño oasis and Inca tambo on Qhapaq Ñan",
+          "name": "Calama"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.28486,
+        -68.06884
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Naguanagua-Venezuela",
+      "known_aliases": [
+        "Naguanagua",
+        "naguanagua"
+      ],
+      "latest_year": 2011,
+      "max_pop": 157437,
+      "name": "Naguanagua",
+      "reason": "missing_entry",
+      "region": "ven_carabobo",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Naguanagua",
+      "historical_names": [
+        {
+          "date": "1547.1.1",
+          "date_source_note": "Pre-colonial Carib/Arawak indigenous valley under Cacique Nagoanagoa attested at Spanish contact (1547)",
+          "name": "Nagoanagoa"
+        },
+        {
+          "date": "1782.5.14",
+          "date_source_note": "Ecclesiastical parish erected by Bishop Mariano Martí on 14 May 1782",
+          "name": "Nuestra Señora de Begoña de Naguanagua"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Republican municipal name following Venezuelan independence (5 July 1811)",
+          "name": "Naguanagua"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.36806,
+        -74.54333
+      ],
+      "country": "Peru",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Calleria-Peru",
+      "known_aliases": [
+        "Calleria",
+        "calleria",
+        "pucallpa",
+        "Pucallpa"
+      ],
+      "latest_year": 2025,
+      "max_pop": 156665,
+      "name": "Calleria",
+      "reason": "missing_entry",
+      "region": "per_ucayali",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Callería",
+      "historical_names": [
+        {
+          "date": "1900.10.13",
+          "date_source_note": "Created as District of Callería on 13 October 1900 (seat initially San Jerónimo, transferred to Pucallpa in 1912)",
+          "name": "Callería"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.62234,
+        -67.36219
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Calabozo-Venezuela",
+      "known_aliases": [
+        "Calabozo",
+        "calabozo",
+        "francisco de miranda",
+        "Francisco De Miranda"
+      ],
+      "latest_year": 2019,
+      "max_pop": 155200,
+      "name": "Calabozo",
+      "reason": "missing_entry",
+      "region": "ven_guarico",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Calabozo",
+      "historical_names": [
+        {
+          "date": "1723.3.1",
+          "date_source_note": "Capuchin indigenous mission settlement founded in March 1723 for Guaiquerí, Otomaco, Mapoy, and Tamanaco groups",
+          "name": "La Santísima Trinidad de Calabozo"
+        },
+        {
+          "date": "1724.2.1",
+          "date_source_note": "Spanish villa formally founded on 1 February 1724 by Fray Salvador de Cádiz",
+          "name": "Villa de Todos los Santos de Calabozo"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Republican city name following Venezuelan independence (5 July 1811)",
+          "name": "Calabozo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -36.89271,
+        -73.10009
+      ],
+      "country": "Chile",
+      "earliest_year": 1603,
+      "existing_historical_names": [
+        {
+          "date": "2010.1.1",
+          "name": "San Pedro de la Paz"
+        }
+      ],
+      "existing_meta_index": 703,
+      "existing_meta_name": "San Pedro de la Paz",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Pedro de la Paz-Chile",
+      "known_aliases": [
+        "San Pedro de la Paz",
+        "san pedro de la paz",
+        "san pedro",
+        "San Pedro"
+      ],
+      "latest_year": 2025,
+      "max_pop": 155071,
+      "name": "San Pedro de la Paz",
+      "reason": "under_covered_history",
+      "region": "chl_region_del_bio_bio",
+      "sample_years": [
+        1603,
+        1800,
+        2002,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Pedro de la Paz",
+      "historical_names": [
+        {
+          "date": "1595.1.1",
+          "date_source_note": "Original Spanish fort on southern bank of Biobío River",
+          "name": "Fuerte de La Candelaria"
+        },
+        {
+          "date": "1603.1.1",
+          "date_source_note": "Rebuilt by Governor Alonso de Ribera as San Pedro",
+          "name": "Fuerte de San Pedro"
+        },
+        {
+          "date": "1995.12.29",
+          "date_source_note": "Independent commune created under Chilean Ley 19.436",
+          "name": "San Pedro de la Paz"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.13329,
+        -63.69239
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Francisco (ven_sucre)-Venezuela",
+      "known_aliases": [
+        "San Francisco",
+        "san francisco"
+      ],
+      "latest_year": 2025,
+      "max_pop": 154232,
+      "name": "San Francisco",
+      "reason": "missing_entry",
+      "region": "ven_sucre",
+      "sample_years": [
+        1900,
+        1980,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Francisco",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "date_source_note": "Earliest census horizon for Turimiquire sector, Sucre",
+          "name": "San Francisco"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.14715,
+        -75.37732
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1902.1.1",
+          "name": "Rionegro"
+        }
+      ],
+      "existing_meta_index": 619,
+      "existing_meta_name": "Rionegro",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rionegro-Colombia",
+      "known_aliases": [
+        "Rionegro",
+        "rionegro",
+        "san nicolas de rionegro",
+        "San Nicolas de Rionegro"
+      ],
+      "latest_year": 2025,
+      "max_pop": 154192,
+      "name": "Rionegro",
+      "reason": "under_covered_history",
+      "region": "col_antioquia",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Rionegro",
+      "historical_names": [
+        {
+          "date": "1581.1.1",
+          "date_source_note": "Spanish settlement established at Chachafruto in the Tahamí Valle de San Nicolás after Álvaro de Mendoza named the river Río Negro (1541)",
+          "name": "Río Negro"
+        },
+        {
+          "date": "1669.1.1",
+          "date_source_note": "Parish of San Nicolás de Rionegro erected by Bishop Melchor de Liñán y Cisneros in 1669",
+          "name": "San Nicolás de Rionegro"
+        },
+        {
+          "date": "1786.1.1",
+          "date_source_note": "Granted city title by Governor Francisco Silvestre in 1786 incorporating Santiago de Arma",
+          "name": "Santiago de Arma de Rionegro"
+        },
+        {
+          "date": "1819.12.17",
+          "date_source_note": "Republican municipal name following Colombian independence (17 December 1819)",
+          "name": "Rionegro"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.30296,
+        -64.49213
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1724,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Anaco"
+        }
+      ],
+      "existing_meta_index": 9,
+      "existing_meta_name": "Anaco",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Anaco-Venezuela",
+      "known_aliases": [
+        "Anaco",
+        "anaco",
+        "san joaquin parire",
+        "San Joaquin Parire"
+      ],
+      "latest_year": 2025,
+      "max_pop": 153897,
+      "name": "Anaco",
+      "reason": "under_covered_history",
+      "region": "ven_anzoategui",
+      "sample_years": [
+        1724,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Anaco",
+      "historical_names": [
+        {
+          "date": "1724.1.1",
+          "date_source_note": "Franciscan mission founded in Mesa de Guanipa",
+          "name": "San Joaquín de Parire"
+        },
+        {
+          "date": "1944.5.7",
+          "date_source_note": "Modern oil town established by Socony Vacuum Oil Company",
+          "name": "Anaco"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1058 @@
+{
+  "batch_index": 26,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        19.39014,
+        -98.88953
+      ],
+      "country": "Mexico",
+      "earliest_year": 650,
+      "existing_historical_names": [
+        {
+          "date": "1318.1.1",
+          "name": "Tetzcoco"
+        },
+        {
+          "date": "1551.9.9",
+          "name": "Texcoco"
+        },
+        {
+          "date": "1861.1.1",
+          "name": "Texcoco de Mora"
+        }
+      ],
+      "existing_meta_index": 533,
+      "existing_meta_name": "Texcoco de Mora",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Texcoco TX-ET-18-Mexico",
+      "known_aliases": [
+        "Texcoco TX-ET-18",
+        "texcoco tx-et-18"
+      ],
+      "latest_year": 900,
+      "max_pop": 12692,
+      "name": "Texcoco TX-ET-18",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        650,
+        775,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        21.19972,
+        -101.67056
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Castillos-Mexico",
+      "known_aliases": [
+        "Los Castillos",
+        "los castillos"
+      ],
+      "latest_year": 1990,
+      "max_pop": 12683,
+      "name": "Los Castillos",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1930,
+        1960,
+        1990
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.12869,
+        -88.56812
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Gualcince-Honduras",
+      "known_aliases": [
+        "Gualcince",
+        "gualcince"
+      ],
+      "latest_year": 2024,
+      "max_pop": 12641,
+      "name": "Gualcince",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.7225,
+        -103.44083
+      ],
+      "country": "Mexico",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Valle Real-Mexico",
+      "known_aliases": [
+        "Valle Real",
+        "valle real",
+        "VALLE REAL"
+      ],
+      "latest_year": 2005,
+      "max_pop": 12603,
+      "name": "Valle Real",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1995,
+        2000,
+        2005
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.29348,
+        -70.54499
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 1496,
+      "existing_historical_names": [
+        {
+          "date": "1975.1.1",
+          "name": "La Vega"
+        }
+      ],
+      "existing_meta_index": 3650,
+      "existing_meta_name": "La Vega",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Concepcion de la Vega-Dominican Republic",
+      "known_aliases": [
+        "Concepcion de la Vega",
+        "concepcion de la vega",
+        "concepción de la vega",
+        "Concepción de la Vega"
+      ],
+      "latest_year": 1893,
+      "max_pop": 12589,
+      "name": "Concepcion de la Vega",
+      "reason": "under_covered_history",
+      "region": "colonial_caribbean_plantation",
+      "sample_years": [
+        1496,
+        1606,
+        1782,
+        1893
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.87995,
+        -91.25513
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Tapiales-Guatemala",
+      "known_aliases": [
+        "Los Tapiales",
+        "los tapiales"
+      ],
+      "latest_year": 1200,
+      "max_pop": 12567,
+      "name": "Los Tapiales",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.48395,
+        -89.71338
+      ],
+      "country": "Mexico",
+      "earliest_year": 1548,
+      "existing_historical_names": [
+        {
+          "date": "1549.1.1",
+          "name": "Muna"
+        }
+      ],
+      "existing_meta_index": 1269,
+      "existing_meta_name": "Muna",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Muna-Mexico",
+      "known_aliases": [
+        "Muna",
+        "muna"
+      ],
+      "latest_year": 2020,
+      "max_pop": 12553,
+      "name": "Muna",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1548,
+        1910,
+        1980,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        13.67755,
+        -86.31486
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Fernando-Nicaragua",
+      "known_aliases": [
+        "San Fernando",
+        "san fernando"
+      ],
+      "latest_year": 2023,
+      "max_pop": 12550,
+      "name": "San Fernando",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.26904,
+        -87.91164
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa María-Honduras",
+      "known_aliases": [
+        "Santa María",
+        "santa maría"
+      ],
+      "latest_year": 2024,
+      "max_pop": 12548,
+      "name": "Santa María",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.49379,
+        -88.93761
+      ],
+      "country": "Honduras",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sensenti-Honduras",
+      "known_aliases": [
+        "Sensenti",
+        "sensenti"
+      ],
+      "latest_year": 2024,
+      "max_pop": 12547,
+      "name": "Sensenti",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        13.50908,
+        -88.48811
+      ],
+      "country": "El Salvador",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Alegría-El Salvador",
+      "known_aliases": [
+        "Alegría",
+        "alegría"
+      ],
+      "latest_year": 2024,
+      "max_pop": 12524,
+      "name": "Alegría",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.51854,
+        -83.44753
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Puerto Jimenez-Costa Rica",
+      "known_aliases": [
+        "Puerto Jimenez",
+        "puerto jimenez"
+      ],
+      "latest_year": 2021,
+      "max_pop": 12519,
+      "name": "Puerto Jimenez",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.6608,
+        -99.67734
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [
+        {
+          "date": "1900.10.28",
+          "name": "Chichihualco"
+        }
+      ],
+      "existing_meta_index": 2314,
+      "existing_meta_name": "Chichihualco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chichihualco-Mexico",
+      "known_aliases": [
+        "Chichihualco",
+        "chichihualco"
+      ],
+      "latest_year": 2020,
+      "max_pop": 12483,
+      "name": "Chichihualco",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1480,
+        1910,
+        1980,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        12.08554,
+        -86.02207
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tisma-Nicaragua",
+      "known_aliases": [
+        "Tisma",
+        "tisma"
+      ],
+      "latest_year": 2023,
+      "max_pop": 12453,
+      "name": "Tisma",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.629,
+        -61.335
+      ],
+      "country": "Trinidad and Tobago",
+      "earliest_year": 1783,
+      "existing_historical_names": [
+        {
+          "date": "1960.1.1",
+          "name": "Arouca"
+        }
+      ],
+      "existing_meta_index": 3196,
+      "existing_meta_name": "Arouca",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Arouca-Trinidad and Tobago",
+      "known_aliases": [
+        "Arouca",
+        "arouca",
+        "bon air development",
+        "Bon Air Development"
+      ],
+      "latest_year": 2011,
+      "max_pop": 12400,
+      "name": "Arouca",
+      "reason": "under_covered_history",
+      "region": "lesser_antilles_bahamas_bermuda",
+      "sample_years": [
+        1783,
+        1821,
+        1970,
+        2011
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.907,
+        -98.969
+      ],
+      "country": "Mexico",
+      "earliest_year": 1300,
+      "existing_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Huaxtepec"
+        },
+        {
+          "date": "1528.1.1",
+          "name": "Oaxtepec"
+        }
+      ],
+      "existing_meta_index": 660,
+      "existing_meta_name": "Oaxtepec",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Huaxtepec-Mexico",
+      "known_aliases": [
+        "Huaxtepec",
+        "huaxtepec"
+      ],
+      "latest_year": 1519,
+      "max_pop": 12400,
+      "name": "Huaxtepec",
+      "reason": "under_covered_history",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1300,
+        1450,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.64076,
+        -92.11119
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Jobo-Guatemala",
+      "known_aliases": [
+        "El Jobo",
+        "el jobo"
+      ],
+      "latest_year": 1200,
+      "max_pop": 12384,
+      "name": "El Jobo",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        21.01105,
+        -88.30682
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [
+        {
+          "date": "1549.1.1",
+          "name": "Espita"
+        }
+      ],
+      "existing_meta_index": 1270,
+      "existing_meta_name": "Espita",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Espita-Mexico",
+      "known_aliases": [
+        "Espita",
+        "espita"
+      ],
+      "latest_year": 2020,
+      "max_pop": 12320,
+      "name": "Espita",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        -300,
+        1877,
+        1970,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.32289,
+        -71.44224
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa Los Almácigos-Dominican Republic",
+      "known_aliases": [
+        "Villa Los Almácigos",
+        "villa los almácigos"
+      ],
+      "latest_year": 2022,
+      "max_pop": 12312,
+      "name": "Villa Los Almácigos",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.16667,
+        -86.96667
+      ],
+      "country": "Honduras",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa de San Francisco-Honduras",
+      "known_aliases": [
+        "Villa de San Francisco",
+        "villa de san francisco"
+      ],
+      "latest_year": 2024,
+      "max_pop": 12308,
+      "name": "Villa de San Francisco",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.90433,
+        -89.44257
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Blanca (belize_caribbean_maya)-Guatemala",
+      "known_aliases": [
+        "La Blanca",
+        "la blanca"
+      ],
+      "latest_year": 1200,
+      "max_pop": 12295,
+      "name": "La Blanca",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.35027,
+        -91.9834
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Alejos-Guatemala",
+      "known_aliases": [
+        "Alejos",
+        "alejos"
+      ],
+      "latest_year": 1200,
+      "max_pop": 12245,
+      "name": "Alejos",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.39508,
+        -87.71577
+      ],
+      "country": "Honduras",
+      "earliest_year": 1808,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ajuterique-Honduras",
+      "known_aliases": [
+        "Ajuterique",
+        "ajuterique"
+      ],
+      "latest_year": 2024,
+      "max_pop": 12223,
+      "name": "Ajuterique",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1808,
+        1821,
+        1850,
+        1900,
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.41571,
+        -77.17456
+      ],
+      "country": "Jamaica",
+      "earliest_year": 2022,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Steer Town-Jamaica",
+      "known_aliases": [
+        "Steer Town",
+        "steer town"
+      ],
+      "latest_year": 2022,
+      "max_pop": 12216,
+      "name": "Steer Town",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.3784,
+        -84.67861
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Peñas Blancas-Costa Rica",
+      "known_aliases": [
+        "Peñas Blancas",
+        "peñas blancas"
+      ],
+      "latest_year": 2021,
+      "max_pop": 12212,
+      "name": "Peñas Blancas",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.12435,
+        -84.20261
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sabanilla (ca_costa_rica)-Costa Rica",
+      "known_aliases": [
+        "Sabanilla",
+        "sabanilla"
+      ],
+      "latest_year": 2021,
+      "max_pop": 12193,
+      "name": "Sabanilla",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1700,
+        1821,
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.835,
+        -103.73
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [
+        {
+          "date": "1520.1.1",
+          "name": "Amatitán"
+        }
+      ],
+      "existing_meta_index": 1067,
+      "existing_meta_name": "Amatitán",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Amatitán-Mexico",
+      "known_aliases": [
+        "Amatitán",
+        "amatitán",
+        "la cantera",
+        "amatitan",
+        "La Cantera"
+      ],
+      "latest_year": 2020,
+      "max_pop": 12180,
+      "name": "Amatitán",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1480,
+        1877,
+        1970,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        13.70361,
+        -89.71278
+      ],
+      "country": "El Salvador",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Nahulingo-El Salvador",
+      "known_aliases": [
+        "Nahulingo",
+        "nahulingo"
+      ],
+      "latest_year": 2024,
+      "max_pop": 12174,
+      "name": "Nahulingo",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.98023,
+        -90.02757
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Jose Apantes-Guatemala",
+      "known_aliases": [
+        "San Jose Apantes",
+        "san jose apantes"
+      ],
+      "latest_year": 1200,
+      "max_pop": 12170,
+      "name": "San Jose Apantes",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.6811,
+        -88.728
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Talgua-Honduras",
+      "known_aliases": [
+        "Talgua",
+        "talgua"
+      ],
+      "latest_year": 2024,
+      "max_pop": 12154,
+      "name": "Talgua",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

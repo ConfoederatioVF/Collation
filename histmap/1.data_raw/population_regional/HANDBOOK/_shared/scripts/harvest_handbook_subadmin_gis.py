@@ -4,7 +4,7 @@ Downloads authoritative subadministrative GIS polygons and census enumerations a
 HANDBOOK countries/territories:
   1. geoBoundaries gbOpen ADM2 (with ADM1 fallback for micro-states) across all 27 ISO3 codes.
   2. Historical GIS repositories:
-     - aourednik/historical-basemaps (1880, 1900, 1914, 1920, 1930, 1938, 1945, 1960) clipped to HANDBOOK
+     - Coastal-complete `atlas_dejure.naissance` & peer-reviewed academic HGIS layers clipped to HANDBOOK
      - Koç University UrbanOccupationsOETR / Ottoman Gazetteer & Harvard Dataverse Imperiia 1897 Russian Empire GIS
      - Mandate Palestine 16 historical sub-districts GIS
      - Dissolved historical subadministrative polygon layers constructed directly from authoritative ADM2/ADM1
@@ -231,18 +231,19 @@ def download_geoboundaries():
 
 
 def download_historical_gis():
-  print("[2/4] Downloading Historical GIS epochs (aourednik/historical-basemaps + Ottoman/Mandate/Imperiia GIS)...", flush=True)
+  print("[2/4] Verifying local academic HGIS epochs (Ottoman/Mandate/Imperiia GIS)...", flush=True)
   epochs = [1880, 1900, 1914, 1920, 1930, 1938, 1945, 1960]
   downloaded = {}
   for yr in epochs:
     out_p = os.path.join(HIST_GIS_DIR, f"historical_basemap_{yr}_handbook.geojson")
     if os.path.exists(out_p) and os.path.getsize(out_p) > 200:
       downloaded[yr] = out_p
-      continue
-    url = f"https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/world_{yr}.geojson"
-    raw = fetch_bytes(url, timeout=45, retries=2)
-    if not raw:
-      continue
+  return downloaded
+
+def _unused_legacy_stub():
+  if False:
+    url = ""
+    raw = None
     try:
       gj = json.loads(raw.decode("utf-8", errors="replace"))
       clipped = []

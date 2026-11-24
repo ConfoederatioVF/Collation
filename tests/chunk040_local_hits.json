@@ -1,0 +1,1711 @@
+{
+  "Tambería del Inca-Argentina": [],
+  "San Jose Pelarco-Chile": [
+    {
+      "file": "raw_chile_cmn_registros_complementarios.json",
+      "data": {
+        "name": "Templo Parroquial San José de Pelarco",
+        "lat": -35.383973,
+        "lon": -71.445776,
+        "country": "Chile",
+        "period": "Monumento Histórico",
+        "source": "CMN Chile - Puntos_Oficiales_Monumentos_Nacionales_(Vista)",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "Puntos_Oficiales_Monumentos_Nacionales_(Vista)/FeatureServer/0 (Puntos_Oficiales_MN)",
+        "record_id": "00819_MH_07106",
+        "site_type": "Monumento Histórico",
+        "category": "Monumento Histórico",
+        "region": "Maule",
+        "province": "Talca",
+        "commune": "Pelarco",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/Puntos_Oficiales_Monumentos_Nacionales_%28Vista%29/FeatureServer/0"
+      }
+    },
+    {
+      "file": "raw_chile_cmn_registros_complementarios.json",
+      "data": {
+        "name": "Templo Parroquial San José de Pelarco",
+        "lat": -35.383888,
+        "lon": -71.445941,
+        "country": "Chile",
+        "period": "Monumento Histórico",
+        "source": "CMN Chile - Polígonos_Oficiales_Monumentos_Nacionales_1",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "Polígonos_Oficiales_Monumentos_Nacionales_1/FeatureServer/0 (Poligonos_Oficiales_MN)",
+        "record_id": "00819_MH_07106",
+        "site_type": "Monumento Histórico",
+        "category": "Monumento Histórico",
+        "region": "Maule",
+        "province": "Talca",
+        "commune": "Pelarco",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/Pol%C3%ADgonos_Oficiales_Monumentos_Nacionales_1/FeatureServer/0"
+      }
+    }
+  ],
+  "Picún Leufú-Argentina": [],
+  "Quemú Quemú-Argentina": [],
+  "Loma-Bolivia": [],
+  "El Hoyo-Argentina": [],
+  "RG02 - Jarana-Peru": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_3/base/MapServer/7",
+        "layer_tag": "delimited_referenciales",
+        "oid": 4168766,
+        "id_map_sec": 25086,
+        "cue": 8792,
+        "rna": null,
+        "cod_plano": "PP-02(RG02)-PIA (160)-2019",
+        "cod_ubigeo": "040606",
+        "name": "RG02 - Jarana",
+        "name_norm": "rg02 jarana",
+        "classification": "Sitio Arqueológico",
+        "legal_status": "Referencial",
+        "resolution": "Ninguno",
+        "resolution_or_campaign_date": null,
+        "department": "",
+        "province": "",
+        "district": "",
+        "area_m2_or_ha": 336552.13,
+        "lat": -15.934777,
+        "lon": -73.10793,
+        "bbox": [
+          -73.112354,
+          -15.938461,
+          -73.105032,
+          -15.931953
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": [
+          "undated_no_resolution_or_campaign_year"
+        ]
+      }
+    }
+  ],
+  "Los Andes (col_magdalena)-Colombia": [],
+  "Relleno Sanitario de Girardot-Colombia": [
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Relleno Sanitario de Girardot",
+        "lat": 4.326853,
+        "lon": -74.859353,
+        "country": "Colombia",
+        "department": "CUNDINAMARCA",
+        "municipality": "GIRARDOT",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Flórez Olaya, David G. (2005). Prospección arqueológica para el relleno sanitario de Girardot (Cundinamarca).  s.e., Bogotá.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    }
+  ],
+  "Jatun Ushco-Peru": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_3/base/MapServer/2",
+        "layer_tag": "delimited_en_proceso",
+        "oid": 4169853,
+        "id_map_sec": 23571,
+        "cue": 7289,
+        "rna": "AD-0618",
+        "cod_plano": "PP-056-MC_DGPA/DSFL-2013 WGS84",
+        "cod_ubigeo": "100201",
+        "name": "Jatun Ushco",
+        "name_norm": "jatun ushco",
+        "classification": "Sitio Arqueológico",
+        "legal_status": "En Proceso de Aprobación",
+        "resolution": "Ninguno",
+        "resolution_or_campaign_date": null,
+        "department": "",
+        "province": "",
+        "district": "",
+        "area_m2_or_ha": 210646.87,
+        "lat": -10.133167,
+        "lon": -76.200721,
+        "bbox": [
+          -76.2038,
+          -10.135872,
+          -76.198171,
+          -10.130811
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": [
+          "undated_no_resolution_or_campaign_year"
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_4/registrado_v4/MapServer/0",
+        "layer_tag": "registrado_ref",
+        "oid": 3846,
+        "id_map_sec": null,
+        "cue": null,
+        "rna": null,
+        "cod_plano": null,
+        "cod_ubigeo": null,
+        "name": "Jatun Ushco",
+        "name_norm": "jatun ushco",
+        "classification": "",
+        "legal_status": "registrado_ref",
+        "resolution": "",
+        "resolution_or_campaign_date": null,
+        "department": "Huánuco",
+        "province": "AMBO",
+        "district": "Ambo",
+        "area_m2_or_ha": null,
+        "lat": -10.134897,
+        "lon": -76.204138,
+        "bbox": [
+          -76.204138,
+          -10.134897,
+          -76.204138,
+          -10.134897
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": [
+          "undated_no_resolution_or_campaign_year",
+          "duplicate_exact_coord_cluster",
+          "coord_collision_distinct_names"
+        ],
+        "raw_attributes": {
+          "objectid": 3846,
+          "nombre": "Jatun Ushco",
+          "clasificac": null,
+          "prov": "AMBO",
+          "distrito": "Ambo",
+          "dpto": "Huánuco",
+          "anio_campan": null,
+          "este": 368077.49,
+          "norte": 8879428.7632
+        }
+      }
+    },
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_4/registrado_v4/MapServer/0",
+        "layer_tag": "registrado_ref",
+        "oid": 13351,
+        "id_map_sec": null,
+        "cue": null,
+        "rna": null,
+        "cod_plano": null,
+        "cod_ubigeo": null,
+        "name": "Cueva Jatunshuco",
+        "name_norm": "cueva jatunshuco",
+        "classification": "Sitio Arqueológico",
+        "legal_status": "registrado_ref",
+        "resolution": "",
+        "resolution_or_campaign_date": null,
+        "department": "Huanuco",
+        "province": "AMBO",
+        "district": "Ambo",
+        "area_m2_or_ha": null,
+        "lat": -10.134897,
+        "lon": -76.204138,
+        "bbox": [
+          -76.204138,
+          -10.134897,
+          -76.204138,
+          -10.134897
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": [
+          "undated_no_resolution_or_campaign_year",
+          "duplicate_exact_coord_cluster",
+          "coord_collision_distinct_names"
+        ],
+        "raw_attributes": {
+          "objectid": 13351,
+          "nombre": "Cueva Jatunshuco",
+          "clasificac": "Sitio Arqueológico",
+          "prov": "AMBO",
+          "distrito": "Ambo",
+          "dpto": "Huanuco",
+          "anio_campan": null,
+          "este": 368300,
+          "norte": 8879800
+        }
+      }
+    }
+  ],
+  "San José de Tocomita-Venezuela": [],
+  "San Pedro (ven_zulia)-Venezuela": [],
+  "Sacháyoj-Argentina": [],
+  "Obonuco-Colombia": [],
+  "Mámbita-Colombia": [],
+  "Curaco de Vélez-Chile": [],
+  "Contratación-Colombia": [],
+  "Lita-Ecuador": [],
+  "Ch´acco Kunca-Peru": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_4/declarados_v4/MapServer/0",
+        "layer_tag": "declarados_bip",
+        "oid": 62345,
+        "id_map_sec": 4721,
+        "cue": null,
+        "rna": null,
+        "cod_plano": null,
+        "cod_ubigeo": null,
+        "name": "SITIO ARQUEOLÓGICO CH´ACCO KUNCA",
+        "name_norm": "sitio arqueologico ch acco kunca",
+        "classification": "DECLARATORIA DE MAP",
+        "legal_status": "declarados_bip",
+        "resolution": "RDN-522",
+        "resolution_or_campaign_date": "2010-03-15",
+        "department": "PUNO",
+        "province": "AZÁNGARO",
+        "district": "ASILLO",
+        "area_m2_or_ha": null,
+        "lat": -14.776835,
+        "lon": -70.2869,
+        "bbox": [
+          -70.2869,
+          -14.776835,
+          -70.2869,
+          -14.776835
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": []
+      }
+    }
+  ],
+  "Sitios Las Águilas-Colombia": [
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Sitio Las Margaritas",
+        "lat": 10.329056,
+        "lon": -75.454111,
+        "country": "Colombia",
+        "department": "BOLÍVAR",
+        "municipality": "TURBACO",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Silvia H. Botero Arcila, Diana Patricia Mu?oz, Gloria Stella Álvarez, Juan Carlos Forero (2008). Informe de prospección arqueológica Proyecto Columbus.  Argos, Cartagena.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    },
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Sitio Reforestación de Teca Santa Ana",
+        "lat": 10.318556,
+        "lon": -75.449556,
+        "country": "Colombia",
+        "department": "BOLÍVAR",
+        "municipality": "TURBANA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Silvia H. Botero Arcila, Diana Patricia Mu?oz, Gloria Stella Álvarez, Juan Carlos Forero (2008). Informe de prospección arqueológica Proyecto Columbus.  Argos, Cartagena.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    },
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Sitio Reforestación de Teca Santa Ana",
+        "lat": 10.318556,
+        "lon": -75.449556,
+        "country": "Colombia",
+        "department": "BOLÍVAR",
+        "municipality": "TURBANA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Silvia H. Botero Arcila, Diana Patricia Mu?oz, Gloria Stella Álvarez, Juan Carlos Forero (2008). Informe de prospección arqueológica Proyecto Columbus.  Argos, Cartagena.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    },
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Sitios Las Águilas",
+        "lat": 10.325528,
+        "lon": -75.459667,
+        "country": "Colombia",
+        "department": "BOLÍVAR",
+        "municipality": "TURBACO",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Silvia H. Botero Arcila, Diana Patricia Mu?oz, Gloria Stella Álvarez, Juan Carlos Forero (2008). Informe de prospección arqueológica Proyecto Columbus.  Argos, Cartagena.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    }
+  ],
+  "Caunapí-Colombia_2": [
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Caunapí",
+        "lat": 1.440892,
+        "lon": -78.614994,
+        "country": "Colombia",
+        "department": "NARI?O",
+        "municipality": "TUMACO",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Bouchard, Jean F. (1984). Recherches archéologiques dans la région de Tumaco, Colombie.  Recherche Sur les Civilisations, París.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    }
+  ],
+  "San Agustin de Huaychao-Peru": [],
+  "Sausal-Peru": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_4/declarados_v4/MapServer/0",
+        "layer_tag": "declarados_bip",
+        "oid": 56784,
+        "id_map_sec": 18994,
+        "cue": null,
+        "rna": null,
+        "cod_plano": null,
+        "cod_ubigeo": null,
+        "name": "SITIO ARQUEOLÓGICO SAUSAL I",
+        "name_norm": "sitio arqueologico sausal i",
+        "classification": "DECLARATORIA DE MAP",
+        "legal_status": "declarados_bip",
+        "resolution": "RDN-637",
+        "resolution_or_campaign_date": "2010-03-23",
+        "department": "LA LIBERTAD",
+        "province": "ASCOPE",
+        "district": "CHICAMA",
+        "area_m2_or_ha": null,
+        "lat": -7.732807,
+        "lon": -79.014719,
+        "bbox": [
+          -79.014719,
+          -7.732807,
+          -79.014719,
+          -7.732807
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": []
+      }
+    }
+  ],
+  "Sayani-Peru": [],
+  "Guaqui-Bolivia": [],
+  "Palma Real-Ecuador": [],
+  "San Isidro-Argentina_2": [
+    {
+      "file": "raw_argentina_idacor_ariadne.json",
+      "data": {
+        "name": "San Isidro",
+        "lat": -31.822828,
+        "lon": -64.390658,
+        "country": "Argentina",
+        "period": "80 to 1620",
+        "source": "IDACOR (CONICET/UNC) - BADACOR & Collections via ARIADNEplus",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "cecc01b57b5754c953af5d4709c1c65a53623ffad87609c7802a146875969fc1",
+        "place_names": [
+          "Argentina",
+          "Córdoba",
+          "San Isidro",
+          "Santa Maria"
+        ],
+        "site_type": "archaeological sites; prehistoric sites",
+        "publisher": "IDACOR (CONICET/UNC)",
+        "url": "https://portal.ariadne-infrastructure.eu/resource/cecc01b57b5754c953af5d4709c1c65a53623ffad87609c7802a146875969fc1"
+      }
+    }
+  ],
+  "Sicaya-Bolivia": [],
+  "Granja La Fabiola-Colombia": [
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Granja La Fabiola",
+        "lat": 4.703103,
+        "lon": -75.856147,
+        "country": "Colombia",
+        "department": "VALLE DEL CAUCA",
+        "municipality": "CARTAGO",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Sory Morales Torres (2019). Prospección y plan de manejo arqueológico en La Granja porcícola La Fabiola, municipio de Cartago, Valle del Cauca, informe final.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    }
+  ],
+  "Santa Rosalía-Colombia": [],
+  "Llica-Bolivia": [],
+  "Huertos Familiares-Chile": [],
+  "Chinavita-Colombia": [],
+  "Pasto Grande-Peru": [
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 141377,
+        "tramnomb": "Cusco - Raqchi",
+        "stranomb": "Urcos - Raqchi",
+        "seccnomb": "Pasto Grande - Raqchi",
+        "segmnomb": "03",
+        "department": "Cusco",
+        "province": "Canchis",
+        "district": "Combopata",
+        "suyu": "<Null>",
+        "camano": "2022",
+        "lat": -14.094058,
+        "lon": -71.439803,
+        "bbox": [
+          -71.440934,
+          -14.09515,
+          -71.438632,
+          -14.092834
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 141378,
+        "tramnomb": "Cusco - Raqchi",
+        "stranomb": "Urcos - Raqchi",
+        "seccnomb": "Pasto Grande - Raqchi",
+        "segmnomb": "04",
+        "department": "Cusco",
+        "province": "Canchis",
+        "district": "Combopata",
+        "suyu": "<Null>",
+        "camano": "2022",
+        "lat": -14.095435,
+        "lon": -71.438129,
+        "bbox": [
+          -71.438632,
+          -14.095554,
+          -71.437793,
+          -14.09515
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/1",
+        "layer_tag": "proyeccion_caminos",
+        "oid": 141375,
+        "tramnomb": "Cusco - Raqchi",
+        "stranomb": "Urcos - Raqchi",
+        "seccnomb": "Pasto Grande - Raqchi",
+        "segmnomb": "01",
+        "department": "Cusco",
+        "province": "Canchis",
+        "district": "Combopata",
+        "suyu": "<Null>",
+        "camano": "2022",
+        "lat": -14.082047,
+        "lon": -71.438083,
+        "bbox": [
+          -71.438636,
+          -14.083805,
+          -71.437724,
+          -14.079902
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/1",
+        "layer_tag": "proyeccion_caminos",
+        "oid": 141376,
+        "tramnomb": "Cusco - Raqchi",
+        "stranomb": "Urcos - Raqchi",
+        "seccnomb": "Pasto Grande - Raqchi",
+        "segmnomb": "02",
+        "department": "Cusco",
+        "province": "Canchis",
+        "district": "Combopata",
+        "suyu": "<Null>",
+        "camano": "2022",
+        "lat": -14.088401,
+        "lon": -71.440714,
+        "bbox": [
+          -71.44227,
+          -14.092834,
+          -71.438636,
+          -14.083805
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/1",
+        "layer_tag": "proyeccion_caminos",
+        "oid": 141379,
+        "tramnomb": "Cusco - Raqchi",
+        "stranomb": "Urcos - Raqchi",
+        "seccnomb": "Pasto Grande - Raqchi",
+        "segmnomb": "05",
+        "department": "Cusco",
+        "province": "Canchis",
+        "district": "Combopata",
+        "suyu": "<Null>",
+        "camano": "2022",
+        "lat": -14.0954,
+        "lon": -71.437527,
+        "bbox": [
+          -71.437793,
+          -14.095458,
+          -71.437255,
+          -14.095346
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/1",
+        "layer_tag": "proyeccion_caminos",
+        "oid": 141380,
+        "tramnomb": "Cusco - Raqchi",
+        "stranomb": "Urcos - Raqchi",
+        "seccnomb": "Pasto Grande - Raqchi",
+        "segmnomb": "06",
+        "department": "Cusco",
+        "province": "Canchis",
+        "district": "Combopata",
+        "suyu": "<Null>",
+        "camano": "2022",
+        "lat": -14.096058,
+        "lon": -71.436926,
+        "bbox": [
+          -71.437142,
+          -14.096271,
+          -71.436695,
+          -14.095825
+        ]
+      }
+    }
+  ],
+  "Huancarum-Peru": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_3/base/MapServer/6",
+        "layer_tag": "delimited_propuestas",
+        "oid": 4166507,
+        "id_map_sec": 25648,
+        "cue": 9352,
+        "rna": "BR-1351",
+        "cod_plano": "PP-009-PC(227)-DSFL-DGPA-MC-2020-WGS84",
+        "cod_ubigeo": "100201",
+        "name": "Huancarumi",
+        "name_norm": "huancarumi",
+        "classification": "Sitio Arqueológico",
+        "legal_status": "Propuesta",
+        "resolution": "Ninguno",
+        "resolution_or_campaign_date": null,
+        "department": "",
+        "province": "",
+        "district": "",
+        "area_m2_or_ha": 163126.76,
+        "lat": -10.167352,
+        "lon": -76.108601,
+        "bbox": [
+          -76.112061,
+          -10.169718,
+          -76.106431,
+          -10.165787
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": [
+          "undated_no_resolution_or_campaign_year"
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_4/declarados_v4/MapServer/0",
+        "layer_tag": "declarados_bip",
+        "oid": 57943,
+        "id_map_sec": 9294,
+        "cue": null,
+        "rna": null,
+        "cod_plano": null,
+        "cod_ubigeo": null,
+        "name": "SITIO ARQUEOLÓGICO HUANCARUMI",
+        "name_norm": "sitio arqueologico huancarumi",
+        "classification": "DECLARATORIA DE MAP",
+        "legal_status": "declarados_bip",
+        "resolution": "RVM-468",
+        "resolution_or_campaign_date": "2011-04-25",
+        "department": "HUÁNUCO",
+        "province": "AMBO",
+        "district": "AMBO",
+        "area_m2_or_ha": null,
+        "lat": -10.1674,
+        "lon": -76.107605,
+        "bbox": [
+          -76.107605,
+          -10.1674,
+          -76.107605,
+          -10.1674
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": []
+      }
+    }
+  ],
+  "Rio Segundo-Argentina": [],
+  "Loreto - Molino-Chile": [],
+  "Ayapata-Peru_2": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_3/base/MapServer/7",
+        "layer_tag": "delimited_referenciales",
+        "oid": 4169919,
+        "id_map_sec": 26779,
+        "cue": 10489,
+        "rna": null,
+        "cod_plano": "SP-02",
+        "cod_ubigeo": "050602",
+        "name": "Ayapata",
+        "name_norm": "ayapata",
+        "classification": "Sitio Arqueológico",
+        "legal_status": "Referencial",
+        "resolution": "Ninguno",
+        "resolution_or_campaign_date": null,
+        "department": "",
+        "province": "",
+        "district": "",
+        "area_m2_or_ha": 323372.17,
+        "lat": -14.241091,
+        "lon": -74.027903,
+        "bbox": [
+          -74.031491,
+          -14.245953,
+          -74.024952,
+          -14.237559
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": [
+          "undated_no_resolution_or_campaign_year"
+        ]
+      }
+    }
+  ],
+  "Caimani-Bolivia": [],
+  "Churidó-Colombia": [],
+  "Ascensión-Argentina": [],
+  "La Peaña-Ecuador": [],
+  "San Antonio Bebara-Colombia": [],
+  "Singapur-Colombia": [
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Singapur",
+        "lat": 5.758889,
+        "lon": -74.718333,
+        "country": "Colombia",
+        "department": "ANTIOQUIA",
+        "municipality": "SONSÓN",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "CISH",
+        "citation": "López Bonilla, Luis G. (2003). El patrimonio arqueológico de Sonson: experiencias, estudio y propuesta.  Tesis de pregrado inédita, Departamento de Antropología, Universidad de Antioquia, Medellín.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    }
+  ],
+  "San José de Unare-Venezuela": [],
+  "Tahuamanu-Peru": [],
+  "Santa Rosa Chica-Chile": [
+    {
+      "file": "raw_chile_arkg.json",
+      "data": {
+        "name": "Santa Rosa Chica 1",
+        "lat": -40.179187,
+        "lon": -72.562723,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S001899",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q51069"
+        ],
+        "url": "https://arkg.cl/"
+      }
+    },
+    {
+      "file": "raw_chile_cmn_acreditado.json",
+      "data": {
+        "name": "Santa Rosa Chica 1",
+        "lat": -40.179187,
+        "lon": -72.562723,
+        "country": "Chile",
+        "period": "Prehispánico e Histórico: Alfarero Tardío; No",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "Registro_Arqueológico_Acreditado/FeatureServer/0 (MA_PUNTO)",
+        "record_id": "001655_MA_14",
+        "site_type": "Doméstico / habitacional",
+        "category": "Sitio Arqueológico",
+        "validation_status": "Validado",
+        "region": "Los Ríos",
+        "province": "Valdivia",
+        "commune": "Paillaco",
+        "author": "Leonor Adán Alfaro",
+        "reference": "Proyecto Fondecyt N° 1130730 Arqueología histórica de la ciudad de Valdivia y su jurisdicción en el Período Colonial. Informe técnico prospección Nodo 3 Lago Ranco.",
+        "year": "2017",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/Registro_Arqueol%C3%B3gico_Acreditado/FeatureServer/0"
+      }
+    },
+    {
+      "file": "raw_chile_cmn_registros_complementarios.json",
+      "data": {
+        "name": "Santa Rosa Chica 1",
+        "lat": -40.179187,
+        "lon": -72.562723,
+        "country": "Chile",
+        "period": "Prehispánico e Histórico: Alfarero Tardío; No",
+        "source": "CMN Chile - 1_REGISTRO_NACIONAL_MONUMENTOS_ARQUEOLOGICOS_PUNTOS",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "1_REGISTRO_NACIONAL_MONUMENTOS_ARQUEOLOGICOS_PUNTOS/FeatureServer/0 (PUNTO_MA)",
+        "record_id": "001655_MA_14",
+        "site_type": "Doméstico / habitacional",
+        "category": "Sitio Arqueológico",
+        "validation_status": "Validado",
+        "region": "Los Ríos",
+        "province": "Valdivia",
+        "commune": "Paillaco",
+        "author": "Leonor Adán Alfaro",
+        "reference": "Proyecto Fondecyt N° 1130730 Arqueología histórica de la ciudad de Valdivia y su jurisdicción en el Período Colonial. Informe técnico prospección Nodo 3 Lago Ranco.",
+        "year": "2017",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/1_REGISTRO_NACIONAL_MONUMENTOS_ARQUEOLOGICOS_PUNTOS/FeatureServer/0"
+      }
+    },
+    {
+      "file": "raw_chile_cmn_registros_complementarios.json",
+      "data": {
+        "name": "Santa Rosa Chica 1",
+        "lat": -40.179187,
+        "lon": -72.562723,
+        "country": "Chile",
+        "period": "Prehispánico e Histórico: Alfarero Tardío; No",
+        "source": "CMN Chile - monumentos_arqueo_2025",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "monumentos_arqueo_2025/FeatureServer/0 (Monumento Arqueológico)",
+        "record_id": "001655_MA_14",
+        "site_type": "Doméstico / habitacional",
+        "category": "Sitio Arqueológico",
+        "validation_status": "Validado",
+        "region": "Los Ríos",
+        "province": "Valdivia",
+        "commune": "Paillaco",
+        "author": "Leonor Adán Alfaro",
+        "reference": "Proyecto Fondecyt N° 1130730 Arqueología histórica de la ciudad de Valdivia y su jurisdicción en el Período Colonial. Informe técnico prospección Nodo 3 Lago Ranco.",
+        "year": "2017",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/monumentos_arqueo_2025/FeatureServer/0"
+      }
+    }
+  ],
+  "José Manuel Quiroz-Peru": [
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 136949,
+        "tramnomb": "En Proceso",
+        "stranomb": "En Proceso",
+        "seccnomb": "--",
+        "segmnomb": "--",
+        "department": "Cajamarca",
+        "province": "San Marcos",
+        "district": "Jose Manuel Quiroz",
+        "suyu": "<Null>",
+        "camano": "2004",
+        "lat": -7.360129,
+        "lon": -78.050521,
+        "bbox": [
+          -78.052243,
+          -7.3708,
+          -78.048227,
+          -7.35133
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 137783,
+        "tramnomb": "En Proceso",
+        "stranomb": "En Proceso",
+        "seccnomb": "--",
+        "segmnomb": "--",
+        "department": "Cajamarca",
+        "province": "San Marcos",
+        "district": "Jose Manuel Quiroz",
+        "suyu": "<Null>",
+        "camano": "2004",
+        "lat": -7.34989,
+        "lon": -78.047914,
+        "bbox": [
+          -78.048588,
+          -7.35133,
+          -78.047278,
+          -7.348261
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 137967,
+        "tramnomb": "En Proceso",
+        "stranomb": "En Proceso",
+        "seccnomb": "--",
+        "segmnomb": "--",
+        "department": "Cajamarca",
+        "province": "San Marcos",
+        "district": "Jose Manuel Quiroz",
+        "suyu": "<Null>",
+        "camano": "2004",
+        "lat": -7.349006,
+        "lon": -78.038457,
+        "bbox": [
+          -78.047278,
+          -7.351706,
+          -78.024699,
+          -7.346934
+        ]
+      }
+    }
+  ],
+  "Aji-Colombia": [],
+  "Tambillo (per_la_libertad)-Peru": [],
+  "Huanifaya-Bolivia": [],
+  "Hda La Cristalina-Colombia": [
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Hda La Cristalina",
+        "lat": 5.901,
+        "lon": -75.729083,
+        "country": "Colombia",
+        "department": "ANTIOQUIA",
+        "municipality": "FREDONIA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Universidad de Antioquia",
+        "citation": "Pertuz Angarita, Joyce E., Yezid Vélez Carvajal y Martha C. Cano Echeverri (2002). Estudio comparativo entre la cerámica localizada en la casa de la cultura Julio Cesar García del municipio de Fredonia y los estilos cerámicos reportados para la región.  Tesis de pregrado inédita, Departamento de Antropología, Universidad de Antioquia, Medellín.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    }
+  ],
+  "Carpintería-Argentina": [],
+  "Altagracia Pedraza-Venezuela": [],
+  "San Lucas de Amboca-Ecuador": [],
+  "Manchac 2 - Pirushto-Peru": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_3/base/MapServer/1",
+        "layer_tag": "delimited_proteccion_provisional",
+        "oid": 4171394,
+        "id_map_sec": 28660,
+        "cue": 12009,
+        "rna": null,
+        "cod_plano": "PP-1-MAN 2-PIR-DDC HCO-2024 WGS84",
+        "cod_ubigeo": "100403",
+        "name": "Manchac 2 - Pirushto",
+        "name_norm": "manchac 2 pirushto",
+        "classification": "Sitio Arqueológico",
+        "legal_status": "Con Protección Provisional",
+        "resolution": "RD N° 263",
+        "resolution_or_campaign_date": "29-09-2026",
+        "department": "",
+        "province": "",
+        "district": "",
+        "area_m2_or_ha": 556181.21,
+        "lat": -9.067477,
+        "lon": -76.886474,
+        "bbox": [
+          -76.894386,
+          -9.073629,
+          -76.881978,
+          -9.062631
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": []
+      }
+    },
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_3/base/MapServer/1",
+        "layer_tag": "delimited_proteccion_provisional",
+        "oid": 4171658,
+        "id_map_sec": 28923,
+        "cue": 12262,
+        "rna": null,
+        "cod_plano": "PP-01-MANCHAC-DDC HCO-2026 WGS84",
+        "cod_ubigeo": "100403",
+        "name": "Manchac",
+        "name_norm": "manchac",
+        "classification": "Complejo Arqueológico Monumental",
+        "legal_status": "Con Protección Provisional",
+        "resolution": "RD N° 50",
+        "resolution_or_campaign_date": "11-03-2026",
+        "department": "",
+        "province": "",
+        "district": "",
+        "area_m2_or_ha": 372758.41,
+        "lat": -9.05893,
+        "lon": -76.883066,
+        "bbox": [
+          -76.888138,
+          -9.062471,
+          -76.878196,
+          -9.055095
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": []
+      }
+    }
+  ],
+  "Tres De Noviembre-Ecuador": [],
+  "La Francia-Argentina": [],
+  "Duanga-Colombia": [],
+  "El Riacho-Argentina": [
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "El Riacho",
+        "lat": -42.202239,
+        "lon": -64.917231,
+        "country": "Argentina",
+        "period": "2640 ± 70 BP",
+        "c14_bp": 2640.0,
+        "c14_sd": 70.0,
+        "lab_id": "LP-494",
+        "material": "charcoal",
+        "reference": "Pallo 2015",
+        "sub_source": "Goldberg_2016",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7"
+      }
+    },
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "El Riacho",
+        "lat": -42.202239,
+        "lon": -64.917231,
+        "country": "Argentina",
+        "period": "3220 ± 70 BP",
+        "c14_bp": 3220.0,
+        "c14_sd": 70.0,
+        "lab_id": "LP-515",
+        "material": "charcoal",
+        "reference": "Martinez et al 2015",
+        "sub_source": "Goldberg_2016",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7"
+      }
+    },
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "El Riacho",
+        "lat": -42.202239,
+        "lon": -64.917231,
+        "country": "Argentina",
+        "period": "2450 ± 60 BP",
+        "c14_bp": 2450.0,
+        "c14_sd": 60.0,
+        "lab_id": "LP-805",
+        "material": "charcoal",
+        "reference": "Aldazabal et al 2004",
+        "sub_source": "Goldberg_2016",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7"
+      }
+    },
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "El Riacho",
+        "lat": -42.202239,
+        "lon": -64.917231,
+        "country": "Argentina",
+        "period": "2640 ± 70 BP",
+        "c14_bp": 2640.0,
+        "c14_sd": 70.0,
+        "lab_id": "LP-494",
+        "material": "charcoal",
+        "reference": "Pallo 2015; p3k14c",
+        "record_id": "276424",
+        "source": "XRONOS Chronological Database (xronos.ch)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://xronos.ch/api/v1/data?query_country=AR"
+      }
+    },
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "El Riacho",
+        "lat": -42.202239,
+        "lon": -64.917231,
+        "country": "Argentina",
+        "period": "3220 ± 70 BP",
+        "c14_bp": 3220.0,
+        "c14_sd": 70.0,
+        "lab_id": "LP-515",
+        "material": "charcoal",
+        "reference": "Martinez et al 2015; p3k14c",
+        "record_id": "276427",
+        "source": "XRONOS Chronological Database (xronos.ch)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://xronos.ch/api/v1/data?query_country=AR"
+      }
+    },
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "El Riacho",
+        "lat": -42.202239,
+        "lon": -64.917231,
+        "country": "Argentina",
+        "period": "2450 ± 60 BP",
+        "c14_bp": 2450.0,
+        "c14_sd": 60.0,
+        "lab_id": "LP-805",
+        "material": "charcoal",
+        "reference": "Aldazabal et al 2004; p3k14c",
+        "record_id": "276446",
+        "source": "XRONOS Chronological Database (xronos.ch)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://xronos.ch/api/v1/data?query_country=AR"
+      }
+    },
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "El Riacho",
+        "lat": -42.202239,
+        "lon": -64.917231,
+        "country": "Argentina",
+        "period": "2450 ± 60 BP",
+        "c14_bp": 2450.0,
+        "c14_sd": 60.0,
+        "lab_id": "LP-805",
+        "material": "charcoal",
+        "dating_method": "14C",
+        "reference": "Gomez Otrero 2007",
+        "record_id": "4171",
+        "source": "SAAD South American Arid Diagonal (Timpson, Barberena, Méndez et al. 2021, Phil Trans B)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://github.com/UCL/ADMUR/blob/master/data/SAAD.RData"
+      }
+    },
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "El Riacho",
+        "lat": -42.202239,
+        "lon": -64.917231,
+        "country": "Argentina",
+        "period": "2640 ± 70 BP",
+        "c14_bp": 2640.0,
+        "c14_sd": 70.0,
+        "lab_id": "LP-494",
+        "material": "charcoal",
+        "dating_method": "14C",
+        "reference": "Gomez Otrero 2007",
+        "record_id": "4172",
+        "source": "SAAD South American Arid Diagonal (Timpson, Barberena, Méndez et al. 2021, Phil Trans B)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://github.com/UCL/ADMUR/blob/master/data/SAAD.RData"
+      }
+    },
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "El Riacho",
+        "lat": -42.202239,
+        "lon": -64.917231,
+        "country": "Argentina",
+        "period": "3220 ± 70 BP",
+        "c14_bp": 3220.0,
+        "c14_sd": 70.0,
+        "lab_id": "LP-515",
+        "material": "charcoal",
+        "dating_method": "14C",
+        "reference": "Gomez Otrero 2007",
+        "record_id": "4173",
+        "source": "SAAD South American Arid Diagonal (Timpson, Barberena, Méndez et al. 2021, Phil Trans B)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://github.com/UCL/ADMUR/blob/master/data/SAAD.RData"
+      }
+    }
+  ],
+  "Chala Viejo-Peru": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_3/base/MapServer/7",
+        "layer_tag": "delimited_referenciales",
+        "oid": 4168554,
+        "id_map_sec": 23193,
+        "cue": 6221,
+        "rna": "CC-0155",
+        "cod_plano": "06-PER-CHALAVIEJO-IF.PMQ-2014",
+        "cod_ubigeo": "040307",
+        "name": "Chala Viejo",
+        "name_norm": "chala viejo",
+        "classification": "Sitio Arqueológico",
+        "legal_status": "Referencial",
+        "resolution": "Ninguno",
+        "resolution_or_campaign_date": null,
+        "department": "",
+        "province": "",
+        "district": "",
+        "area_m2_or_ha": 695347.6673,
+        "lat": -15.764543,
+        "lon": -74.20481,
+        "bbox": [
+          -74.208483,
+          -15.771116,
+          -74.199246,
+          -15.757623
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": [
+          "undated_no_resolution_or_campaign_year"
+        ]
+      }
+    }
+  ],
+  "Chulumani Yungas-Bolivia": [],
+  "Pajchiri-Bolivia": [],
+  "Gorgor-Peru": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_3/base/MapServer/1",
+        "layer_tag": "delimited_proteccion_provisional",
+        "oid": 4170198,
+        "id_map_sec": 7958,
+        "cue": 6529,
+        "rna": "BR-1351",
+        "cod_plano": "PP-028-MC-DGPA-DSFL-2016 WGS84",
+        "cod_ubigeo": "150303",
+        "name": "Gorgorjirca",
+        "name_norm": "gorgorjirca",
+        "classification": "Sitio Arqueológico",
+        "legal_status": "Con Protección Provisional",
+        "resolution": "RD N° 124",
+        "resolution_or_campaign_date": "16-08-2024",
+        "department": "",
+        "province": "",
+        "district": "",
+        "area_m2_or_ha": 108657.06,
+        "lat": -10.620995,
+        "lon": -77.04514,
+        "bbox": [
+          -77.046756,
+          -10.622696,
+          -77.043298,
+          -10.619282
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": []
+      }
+    },
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_4/declarados_v4/MapServer/0",
+        "layer_tag": "declarados_bip",
+        "oid": 62242,
+        "id_map_sec": 7956,
+        "cue": null,
+        "rna": null,
+        "cod_plano": null,
+        "cod_ubigeo": null,
+        "name": "SITIO ARQUEOLÓGICO GORGOR",
+        "name_norm": "sitio arqueologico gorgor",
+        "classification": "DECLARATORIA DE MAP",
+        "legal_status": "declarados_bip",
+        "resolution": "RDN-430",
+        "resolution_or_campaign_date": "2010-03-04",
+        "department": "LIMA",
+        "province": "CAJATAMBO",
+        "district": "GORGOR",
+        "area_m2_or_ha": null,
+        "lat": -10.60944,
+        "lon": -77.036657,
+        "bbox": [
+          -77.036657,
+          -10.60944,
+          -77.036657,
+          -10.60944
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": []
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 137747,
+        "tramnomb": "En Proceso",
+        "stranomb": "Cajatambo - Ambar",
+        "seccnomb": "--",
+        "segmnomb": "--",
+        "department": "Lima",
+        "province": "Cajatambo",
+        "district": "Gorgor",
+        "suyu": "<Null>",
+        "camano": "2004",
+        "lat": -10.622979,
+        "lon": -77.051742,
+        "bbox": [
+          -77.060741,
+          -10.624565,
+          -77.041495,
+          -10.620904
+        ]
+      }
+    }
+  ],
+  "Huatasani-Peru": [
+    {
+      "file": "raw_peru_sigda.json",
+      "data": {
+        "source_layer": "v_4/declarados_v4/MapServer/0",
+        "layer_tag": "declarados_bip",
+        "oid": 57329,
+        "id_map_sec": 9508,
+        "cue": null,
+        "rna": null,
+        "cod_plano": null,
+        "cod_ubigeo": null,
+        "name": "SITIO ARQUEOLÓGICO HUATASANI",
+        "name_norm": "sitio arqueologico huatasani",
+        "classification": "DECLARATORIA DE MAP",
+        "legal_status": "declarados_bip",
+        "resolution": "RDN-1936",
+        "resolution_or_campaign_date": "2010-09-03",
+        "department": "PUNO",
+        "province": "HUANCANÉ",
+        "district": "HUATASANI",
+        "area_m2_or_ha": null,
+        "lat": -15.060605,
+        "lon": -69.799487,
+        "bbox": [
+          -69.799487,
+          -15.060605,
+          -69.799487,
+          -15.060605
+        ],
+        "in_peru_bbox": true,
+        "is_retired": false,
+        "audit_flags": []
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/1",
+        "layer_tag": "proyeccion_caminos",
+        "oid": 138473,
+        "tramnomb": "Huancané - Sandia",
+        "stranomb": "Huancané - Putina",
+        "seccnomb": "Intersección Huatasani - Río Putina",
+        "segmnomb": "--",
+        "department": "Puno",
+        "province": "Huancane",
+        "district": "Huancane",
+        "suyu": "<Null>",
+        "camano": "2008",
+        "lat": -15.056126,
+        "lon": -69.800025,
+        "bbox": [
+          -69.802635,
+          -15.065359,
+          -69.793497,
+          -15.046456
+        ]
+      }
+    }
+  ],
+  "Cibaya-Chile": [],
+  "Uia (na_magdalena_cauca_muisca_2)-Colombia": [
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "UIA 14-Y1",
+        "lat": 7.018172,
+        "lon": -73.681814,
+        "country": "Colombia",
+        "department": "SANTANDER",
+        "municipality": "BARRANCABERMEJA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Huver Andrés Barrientos Marín (2015). Reconocimiento y prospección arqueológica en cuatro zonas de explotación (16.8 hectáreas) de arcilla y demás concesibles para el contrato de concesión HBL-151 (349 hectáreas). Municipio de Barrancabermeja, Santander: Informe final",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    }
+  ],
+  "Atahualpa (ecu_santa_elena)-Ecuador": [],
+  "Huayrapata-Peru": [],
+  "La Clotilde-Argentina": [],
+  "Capiñata-Bolivia": [],
+  "Timusi-Bolivia": [],
+  "Sativanorte-Colombia": [],
+  "Tingo-Ecuador": [],
+  "El Dorado-Colombia": [],
+  "El Pedregal-Colombia": [],
+  "Tambo del Collao-Peru": [
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 136656,
+        "tramnomb": "Vilcahuasi - Paredones de Nazca",
+        "stranomb": "Tambo del Collao - Paredones de Nazca",
+        "seccnomb": "--",
+        "segmnomb": "--",
+        "department": "Ica",
+        "province": "Nasca",
+        "district": "Nasca",
+        "suyu": "<Null>",
+        "camano": "2004",
+        "lat": -14.767503,
+        "lon": -75.038947,
+        "bbox": [
+          -75.086607,
+          -14.810709,
+          -74.989581,
+          -14.720696
+        ]
+      }
+    }
+  ],
+  "Pueblo Andino-Argentina": [],
+  "Inkavado-Peru": [
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 140851,
+        "tramnomb": "Pumpu - Huánuco Pampa",
+        "stranomb": "Huarautambo - Tunsucancha",
+        "seccnomb": "Inkavado - Shinga",
+        "segmnomb": "05",
+        "department": "Huánuco",
+        "province": "Lauricocha",
+        "district": "San Miguel De Cauri",
+        "suyu": "<Null>",
+        "camano": "2023",
+        "lat": -10.240142,
+        "lon": -76.653498,
+        "bbox": [
+          -76.653867,
+          -10.242529,
+          -76.653022,
+          -10.237628
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 140852,
+        "tramnomb": "Pumpu - Huánuco Pampa",
+        "stranomb": "Huarautambo - Tunsucancha",
+        "seccnomb": "Inkavado - Shinga",
+        "segmnomb": "06",
+        "department": "Huánuco",
+        "province": "Lauricocha",
+        "district": "San Miguel De Cauri",
+        "suyu": "<Null>",
+        "camano": "2023",
+        "lat": -10.236001,
+        "lon": -76.6538,
+        "bbox": [
+          -76.653993,
+          -10.237628,
+          -76.653516,
+          -10.234202
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 140853,
+        "tramnomb": "Pumpu - Huánuco Pampa",
+        "stranomb": "Huarautambo - Tunsucancha",
+        "seccnomb": "Inkavado - Shinga",
+        "segmnomb": "07",
+        "department": "Huánuco",
+        "province": "Lauricocha",
+        "district": "San Miguel De Cauri",
+        "suyu": "<Null>",
+        "camano": "2023",
+        "lat": -10.231223,
+        "lon": -76.65346,
+        "bbox": [
+          -76.653524,
+          -10.234202,
+          -76.653422,
+          -10.228321
+        ]
+      }
+    },
+    {
+      "file": "raw_peru_sigda_qhapaq_nan.json",
+      "data": {
+        "source_layer": "v_4/pqn_v4/MapServer/0",
+        "layer_tag": "caminos_prehispanicos",
+        "oid": 140854,
+        "tramnomb": "Pumpu - Huánuco Pampa",
+        "stranomb": "Huarautambo - Tunsucancha",
+        "seccnomb": "Inkavado - Shinga",
+        "segmnomb": "08",
+        "department": "Huánuco",
+        "province": "Lauricocha",
+        "district": "San Miguel De Cauri",
+        "suyu": "<Null>",
+        "camano": "2023",
+        "lat": -10.222792,
+        "lon": -76.653698,
+        "bbox": [
+          -76.654427,
+          -10.228321,
+          -76.652801,
+          -10.21691
+        ]
+      }
+    }
+  ],
+  "Campo-Colombia": [
+    {
+      "file": "raw_colombia_icanh_sitios.json",
+      "data": {
+        "name": "Campo 23",
+        "lat": 6.865439,
+        "lon": -73.766833,
+        "country": "Colombia",
+        "department": "SANTANDER",
+        "municipality": "BARRANCABERMEJA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Pe?a Rairan, Guillermo (2015). Ala programa de arqueología preventiva, plan de manejo arqueológico para el campo La Cira - Infantas, campa?a 2014, Barrancabermeja, Santander.: Informe final",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay"
+      }
+    }
+  ],
+  "Daniel Córdova Toral-Ecuador": [],
+  "La Esperanza-Chile_2": [
+    {
+      "file": "raw_chile_arkg.json",
+      "data": {
+        "name": "La Esperanza 1",
+        "lat": -40.144416,
+        "lon": -72.525419,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S001882",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q13062"
+        ],
+        "url": "https://arkg.cl/"
+      }
+    },
+    {
+      "file": "raw_chile_cmn_acreditado.json",
+      "data": {
+        "name": "La Esperanza 1",
+        "lat": -40.144416,
+        "lon": -72.525419,
+        "country": "Chile",
+        "period": "Prehispánico: Alfarero General; No",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "Registro_Arqueológico_Acreditado/FeatureServer/0 (MA_PUNTO)",
+        "record_id": "001638_MA_14",
+        "site_type": "Doméstico / habitacional",
+        "category": "Sitio Arqueológico",
+        "validation_status": "Validado",
+        "region": "Los Ríos",
+        "province": "Ranco",
+        "commune": "Futrono",
+        "author": "Leonor Adán Alfaro",
+        "reference": "Proyecto Fondecyt N° 1130730 Arqueología histórica de la ciudad de Valdivia y su jurisdicción en el Período Colonial. Informe técnico prospección Nodo 3 Lago Ranco.",
+        "year": "2017",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/Registro_Arqueol%C3%B3gico_Acreditado/FeatureServer/0"
+      }
+    },
+    {
+      "file": "raw_chile_cmn_registros_complementarios.json",
+      "data": {
+        "name": "La Esperanza 1",
+        "lat": -40.144416,
+        "lon": -72.525419,
+        "country": "Chile",
+        "period": "Prehispánico: Alfarero General; No",
+        "source": "CMN Chile - 1_REGISTRO_NACIONAL_MONUMENTOS_ARQUEOLOGICOS_PUNTOS",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "1_REGISTRO_NACIONAL_MONUMENTOS_ARQUEOLOGICOS_PUNTOS/FeatureServer/0 (PUNTO_MA)",
+        "record_id": "001638_MA_14",
+        "site_type": "Doméstico / habitacional",
+        "category": "Sitio Arqueológico",
+        "validation_status": "Validado",
+        "region": "Los Ríos",
+        "province": "Ranco",
+        "commune": "Futrono",
+        "author": "Leonor Adán Alfaro",
+        "reference": "Proyecto Fondecyt N° 1130730 Arqueología histórica de la ciudad de Valdivia y su jurisdicción en el Período Colonial. Informe técnico prospección Nodo 3 Lago Ranco.",
+        "year": "2017",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/1_REGISTRO_NACIONAL_MONUMENTOS_ARQUEOLOGICOS_PUNTOS/FeatureServer/0"
+      }
+    },
+    {
+      "file": "raw_chile_cmn_registros_complementarios.json",
+      "data": {
+        "name": "La Esperanza 1",
+        "lat": -40.144416,
+        "lon": -72.525419,
+        "country": "Chile",
+        "period": "Prehispánico: Alfarero General; No",
+        "source": "CMN Chile - monumentos_arqueo_2025",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "monumentos_arqueo_2025/FeatureServer/0 (Monumento Arqueológico)",
+        "record_id": "001638_MA_14",
+        "site_type": "Doméstico / habitacional",
+        "category": "Sitio Arqueológico",
+        "validation_status": "Validado",
+        "region": "Los Ríos",
+        "province": "Ranco",
+        "commune": "Futrono",
+        "author": "Leonor Adán Alfaro",
+        "reference": "Proyecto Fondecyt N° 1130730 Arqueología histórica de la ciudad de Valdivia y su jurisdicción en el Período Colonial. Informe técnico prospección Nodo 3 Lago Ranco.",
+        "year": "2017",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/monumentos_arqueo_2025/FeatureServer/0"
+      }
+    }
+  ],
+  "San Rafael de Palo Alzado-Venezuela": [],
+  "Cem. A. Paicarabi y Fredes-Argentina": [
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "Cem. A. Paicarabi y Fredes",
+        "lat": -34.2289,
+        "lon": -58.5924,
+        "country": "Argentina",
+        "period": "421 ± 45 BP (Tupiguarani (Guarani))",
+        "c14_bp": 421.0,
+        "c14_sd": 45.0,
+        "lab_id": "AA-103896",
+        "material": "Charcoal",
+        "reference": "Bonomo et al. 2015; rxpand",
+        "record_id": "167413",
+        "source": "XRONOS Chronological Database (xronos.ch)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://xronos.ch/api/v1/data?query_country=AR"
+      }
+    },
+    {
+      "file": "raw_argentina_radiocarbon.json",
+      "data": {
+        "name": "Cem. A. Paicarabi y Fredes",
+        "lat": -34.2289,
+        "lon": -58.5924,
+        "country": "Argentina",
+        "period": "421 ± 45 BP (Tupiguarani)",
+        "c14_bp": 421.0,
+        "c14_sd": 45.0,
+        "lab_id": "AA-103896",
+        "material": "Charcoal",
+        "site_type": "Tupiguarani",
+        "reference": "Bonomo, Mariano, Rodrigo C Angrizani, Eduardo Apolinaire, and Francisco Silva Noelli. 2015. ?A Model for the Guaran? Expansion in the La Plata Basin and Littoral Zone of Southern Brazil.? Quaternary International 356: 54?73.",
+        "source": "Riris & Silva (2021, Zenodo 4434387) Lowland South America Tupiguarani",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.5281/zenodo.4434387"
+      }
+    }
+  ],
+  "Colonia Valdense-Uruguay": [],
+  "Herradura-Argentina": [],
+  "Santiago (col_norte_de_santander)-Colombia": [],
+  "María Teresa-Argentina": [],
+  "San Salvador del Rio de la Plata-Uruguay": [],
+  "Santa Rosa Calamuchita-Argentina": []
+}

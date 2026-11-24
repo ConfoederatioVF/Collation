@@ -1,0 +1,161 @@
+{
+  "batch_index": 1486,
+  "count": 4,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        19.29101,
+        -98.80583
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LTAzI-2-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LTAzI-2",
+        "chalco survey ch-ltazi-2"
+      ],
+      "latest_year": 1200,
+      "max_pop": 26,
+      "name": "Chalco Survey CH-LTAzI-2",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1050,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.25568,
+        -98.9862
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LTAzI-52-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LTAzI-52",
+        "chalco survey ch-ltazi-52"
+      ],
+      "latest_year": 1200,
+      "max_pop": 25,
+      "name": "Chalco Survey CH-LTAzI-52",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1025,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.13234,
+        -98.83501
+      ],
+      "country": "Mexico",
+      "earliest_year": 100,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-CL-33-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-CL-33",
+        "chalco survey ch-cl-33"
+      ],
+      "latest_year": 650,
+      "max_pop": 25,
+      "name": "Chalco Survey CH-CL-33",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        100,
+        375,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.474,
+        -64.531
+      ],
+      "country": "British Virgin Islands",
+      "earliest_year": 2010,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Great Camanoe-British Virgin Islands",
+      "known_aliases": [
+        "Great Camanoe",
+        "great camanoe"
+      ],
+      "latest_year": 2010,
+      "max_pop": 6,
+      "name": "Great Camanoe",
+      "reason": "missing_entry",
+      "region": "lesser_antilles_bahamas_bermuda",
+      "sample_years": [
+        2010
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

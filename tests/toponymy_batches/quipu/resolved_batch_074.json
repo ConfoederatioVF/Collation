@@ -1,0 +1,1430 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 74,
+  "count": 30,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        9.33267,
+        -66.33124
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1729,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chaguaramas (ven_guarico)-Venezuela",
+      "known_aliases": [
+        "Chaguaramas",
+        "chaguaramas",
+        "belen",
+        "chaguaramal",
+        "chaguarani",
+        "piragua",
+        "Belen",
+        "Chaguaramal",
+        "Chaguarani",
+        "Piragua"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16303,
+      "name": "Chaguaramas",
+      "reason": "missing_entry",
+      "region": "ven_guarico",
+      "sample_years": [
+        1729,
+        1808,
+        1980,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Chaguaramas",
+      "historical_names": [
+        {
+          "date": "1653.1.1",
+          "date_source_note": "Initial ranching settlement founded by Bartolomé Belisario",
+          "name": "Las Palmas"
+        },
+        {
+          "date": "1728.1.1",
+          "date_source_note": "Consolidated colonial mission village and first chapel",
+          "name": "San Lorenzo de Chaguaramas"
+        },
+        {
+          "date": "1830.1.1",
+          "date_source_note": "Republican civil parish shortened name",
+          "name": "Chaguaramas"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.32762,
+        -71.58896
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Algarrobo-Chile",
+      "known_aliases": [
+        "Algarrobo",
+        "algarrobo",
+        "algarrobe",
+        "Algarrobe"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16296,
+      "name": "Algarrobo",
+      "reason": "missing_entry",
+      "region": "chl_region_de_valparaiso",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Algarrobo",
+      "historical_names": [
+        {
+          "date": "1945.1.1",
+          "date_source_note": "Creation of the commune of Algarrobo (Law 8224, 1945)",
+          "name": "Algarrobo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.13389,
+        -75.26806
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chongos Bajo-Peru",
+      "known_aliases": [
+        "Chongos Bajo",
+        "chongos bajo",
+        "chongos",
+        "Chongos"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16293,
+      "name": "Chongos Bajo",
+      "reason": "missing_entry",
+      "region": "per_junin",
+      "sample_years": [
+        1525,
+        1750,
+        1920,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Chongos Bajo",
+      "historical_names": [
+        {
+          "date": "1525.1.1",
+          "date_source_note": "Pre-colonial Wanka settlement in Mantaro Valley",
+          "name": "Hatun Shoncco"
+        },
+        {
+          "date": "1534.7.25",
+          "date_source_note": "Spanish colonial town founded in Huanca territory",
+          "name": "Santiago León de Chongos"
+        },
+        {
+          "date": "1854.10.5",
+          "date_source_note": "Elevated to district in Junín department",
+          "name": "Chongos Bajo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.75262,
+        -78.62019
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tanicuchí-Ecuador",
+      "known_aliases": [
+        "Tanicuchí",
+        "tanicuchí",
+        "tanicuchi",
+        "Tanicuchi"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16286,
+      "name": "Tanicuchí",
+      "reason": "missing_entry",
+      "region": "ecu_cotopaxi",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tanicuchí",
+      "historical_names": [
+        {
+          "date": "1525.1.1",
+          "date_source_note": "Pre-colonial Panzaleo settlement horizon prior to Spanish conquest",
+          "name": "Tanicuchí"
+        },
+        {
+          "date": "1540.1.1",
+          "date_source_note": "Colonial doctrina established c. 1540 under Latacunga corregimiento",
+          "name": "San Lorenzo de Tanicuchí"
+        },
+        {
+          "date": "1861.5.29",
+          "date_source_note": "Civil rural parish of Latacunga canton",
+          "name": "Tanicuchí"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.07889,
+        -63.60556
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1729,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guanaguana-Venezuela",
+      "known_aliases": [
+        "Guanaguana",
+        "guanaguana",
+        "san miguel arcangel guanaguana",
+        "San Miguel Arcangel Guanaguana"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16274,
+      "name": "Guanaguana",
+      "reason": "missing_entry",
+      "region": "ven_monagas",
+      "sample_years": [
+        1729,
+        1800,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Guanaguana",
+      "historical_names": [
+        {
+          "date": "1729.5.1",
+          "date_source_note": "Capuchin mission founded among Chaima indigenous people",
+          "name": "San Miguel Arcángel de Guanaguana"
+        },
+        {
+          "date": "1830.1.1",
+          "date_source_note": "Republican parish shortened name",
+          "name": "Guanaguana"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.53304,
+        -66.7191
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Arauco-Argentina",
+      "known_aliases": [
+        "Arauco",
+        "arauco"
+      ],
+      "latest_year": 2022,
+      "max_pop": 16257,
+      "name": "Arauco",
+      "reason": "missing_entry",
+      "region": "arg_la_rioja",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Arauco",
+      "historical_names": [
+        {
+          "date": "1855.3.23",
+          "date_source_note": "Formal organization of Arauco Department in La Rioja Province under the Provincial Constitution of 23 March 1855 (head town Aimogasta, encompassing the colonial olive-growing settlement of Arauco).",
+          "name": "Arauco"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.62496,
+        -58.50509
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Salvador-Argentina",
+      "known_aliases": [
+        "San Salvador",
+        "san salvador"
+      ],
+      "latest_year": 2022,
+      "max_pop": 16251,
+      "name": "San Salvador",
+      "reason": "missing_entry",
+      "region": "arg_entre_rios",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Salvador",
+      "historical_names": [
+        {
+          "date": "1889.12.25",
+          "date_source_note": "Founded on 25 December 1889 by Colonel Miguel Pedro Atanasio Malarín in Entre Ríos Province.",
+          "name": "San Salvador"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.76797,
+        -80.42814
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Charapotó-Ecuador",
+      "known_aliases": [
+        "Charapotó",
+        "charapotó"
+      ],
+      "latest_year": 2022,
+      "max_pop": 16236,
+      "name": "Charapotó",
+      "reason": "missing_entry",
+      "region": "ecu_manabi",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Charapotó",
+      "historical_names": [
+        {
+          "date": "1200.1.1",
+          "date_source_note": "Pre-Columbian Manteño cacicazgo of Charapotó on the Manabí coast (Integration Period, attested upon Spanish arrival in 1534).",
+          "name": "Charapotó"
+        },
+        {
+          "date": "1534.9.21",
+          "date_source_note": "Established on 21 September 1534 (feast of Saint Matthew) by Spanish expeditionaries as San Mateo de Charapotó atop the Manteño cacicazgo.",
+          "name": "San Mateo de Charapotó"
+        },
+        {
+          "date": "1861.5.29",
+          "date_source_note": "Formally constituted as the civil rural parish of Charapotó under Ecuador's Ley de División Territorial of 29 May 1861, dropping the colonial hagiographic prefix.",
+          "name": "Charapotó"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.51218,
+        -77.27995
+      ],
+      "country": "Colombia",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Acandí-Colombia",
+      "known_aliases": [
+        "Acandí",
+        "acandí",
+        "cabeza maya",
+        "Cabeza Maya"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16200,
+      "name": "Acandí",
+      "reason": "missing_entry",
+      "region": "col_choco",
+      "sample_years": [
+        -1000,
+        1500,
+        1993,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Acandí",
+      "historical_names": [
+        {
+          "date": "1887.1.1",
+          "date_source_note": "Original coastal settlement founded in 1887 on the Darién coast of Chocó under the name San Nicolás de Titumate.",
+          "name": "San Nicolás de Titumate"
+        },
+        {
+          "date": "1896.1.1",
+          "date_source_note": "Relocated in 1896 due to flooding and adopted the name Acandí (from Guna/Dulegaya Acantí, 'stone river'); formally erected as a municipality on 30 October 1908.",
+          "name": "Acandí"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.20026,
+        -76.91781
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sibundoy-Colombia",
+      "known_aliases": [
+        "Sibundoy",
+        "sibundoy",
+        "sebondoy",
+        "sobondoy",
+        "Sebondoy",
+        "Sobondoy"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16194,
+      "name": "Sibundoy",
+      "reason": "missing_entry",
+      "region": "col_putumayo",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sibundoy",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Kamëntsá (Camsá) indigenous homeland and settlement in the Valley of Sibundoy prior to Spanish contact (1542).",
+          "name": "Tabanok"
+        },
+        {
+          "date": "1547.1.1",
+          "date_source_note": "Spanish colonial doctrina and settlement established in the mid-16th century (ca. 1547; also spelled Sebondoy/Sobondoy in colonial records), retained as the official municipal name in Putumayo.",
+          "name": "Sibundoy"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.86441,
+        -69.30748
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Papelón-Venezuela",
+      "known_aliases": [
+        "Papelón",
+        "papelón"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16191,
+      "name": "Papelón",
+      "reason": "missing_entry",
+      "region": "ven_portuguesa",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Papelón",
+      "historical_names": [
+        {
+          "date": "1778.2.19",
+          "date_source_note": "Visited on 19 February 1778 by Bishop Mariano Martí during his pastoral visitation of the Llanos of Portuguesa; then a cattle hato and chapel settlement known as Sabana Dulce within the jurisdiction of Guanare.",
+          "name": "Sabana Dulce"
+        },
+        {
+          "date": "1785.8.20",
+          "date_source_note": "Formally erected as the ecclesiastical parish of San Pedro de Papelón by Bishop Mariano Martí on 20 August 1785 (with civil parish decree by Captain General Juan Guillelmi on 25 August 1785), detached from Guanare.",
+          "name": "San Pedro de Papelón"
+        },
+        {
+          "date": "1988.1.1",
+          "date_source_note": "Shortened in republican civil usage to Papelón; formally elevated to an autonomous municipality of Portuguesa State in 1988 (with first elected authorities taking office in 1989).",
+          "name": "Papelón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.56854,
+        -65.76883
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1793,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Arani-Bolivia",
+      "known_aliases": [
+        "Arani",
+        "arani",
+        "arachaca",
+        "Arachaca"
+      ],
+      "latest_year": 2026,
+      "max_pop": 16191,
+      "name": "Arani",
+      "reason": "missing_entry",
+      "region": "bol_cochabamba",
+      "sample_years": [
+        1793,
+        1900,
+        1980,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Arani",
+      "historical_names": [
+        {
+          "date": "1610.1.1",
+          "date_source_note": "Colonial settlement in the Valle Alto of Cochabamba, where construction of the Temple of San Bartolomé de Arani began ca. 1610; formally elevated from viceparroquia of Punata to the autonomous parish of San Bartolomé de Arani on 12 May 1780 by Bishop Juan Domingo González de la Reguera.",
+          "name": "San Bartolomé de Arani"
+        },
+        {
+          "date": "1914.11.24",
+          "date_source_note": "Simplified to Arani in late colonial and republican civil usage (recorded in Francisco de Viedma's 1788 survey and the 1793 census); formally constituted as capital of Arani Province by Bolivian Law of 24 November 1914.",
+          "name": "Arani"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.79174,
+        -71.39477
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Chépica"
+        }
+      ],
+      "existing_meta_index": 156,
+      "existing_meta_name": "Chépica",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chépica-Chile",
+      "known_aliases": [
+        "Chépica",
+        "chépica",
+        "chepica"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16189,
+      "name": "Chépica",
+      "reason": "under_covered_history",
+      "region": "chl_region_del_libertador_bernardo_o_higgins",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Chépica",
+      "historical_names": [
+        {
+          "date": "1525.1.1",
+          "date_source_note": "Mapudungun place name prior to colonial estates",
+          "name": "Chépica"
+        },
+        {
+          "date": "1824.1.1",
+          "date_source_note": "Parish established in Colchagua valley",
+          "name": "San Antonio de Colchagua"
+        },
+        {
+          "date": "1875.1.11",
+          "date_source_note": "Formal town foundation; autonomous commune 1891",
+          "name": "Chépica"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.28139,
+        -77.64667
+      ],
+      "country": "Peru",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Carhuaz-Peru",
+      "known_aliases": [
+        "Carhuaz",
+        "carhuaz",
+        "cerro hishpe",
+        "cotu eccana",
+        "elemento arqueológico aislado piedra del diablo o supe qaqa",
+        "elemento arqueológico aislado piedra del mono o monu qaqa",
+        "elemento arqueológico aislado piedra del padre o padre qaqa",
+        "huaraz",
+        "huaullanca",
+        "pampa hirca",
+        "turuc punta",
+        "occotunan",
+        "Cerro Hishpe",
+        "Cotu Eccana",
+        "Elemento Arqueológico Aislado Piedra del Diablo o Supe Qaqa",
+        "Elemento Arqueológico Aislado Piedra del Mono o Monu Qaqa",
+        "Elemento Arqueológico Aislado Piedra del Padre o Padre Qaqa",
+        "Huaraz",
+        "Huaullanca",
+        "Pampa Hirca",
+        "Occotunan"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16173,
+      "name": "Carhuaz",
+      "reason": "missing_entry",
+      "region": "per_ancash",
+      "sample_years": [
+        0,
+        1530,
+        1825,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Carhuaz",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Ancash Quechua settlement in the Callejón de Huaylas (Huaylas señorío and Inca Empire) prior to the Spanish Toledan reductions.",
+          "name": "Qarwash"
+        },
+        {
+          "date": "1574.1.1",
+          "date_source_note": "Colonial pueblo de indios established during Viceroy Francisco de Toledo's reducciones in the Corregimiento de Huaylas (ca. 1572–1574).",
+          "name": "San Pedro de Carhuaz"
+        },
+        {
+          "date": "1821.7.28",
+          "date_source_note": "Peruvian independence; republican district and later capital of Carhuaz Province (created 14 December 1934).",
+          "name": "Carhuaz"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.28434,
+        -73.14687
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Charalá-Colombia",
+      "known_aliases": [
+        "Charalá",
+        "charalá",
+        "charala",
+        "chavalao",
+        "Charala",
+        "Chavalao"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16161,
+      "name": "Charalá",
+      "reason": "missing_entry",
+      "region": "col_santander",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Charalá",
+      "historical_names": [
+        {
+          "date": "1540.7.23",
+          "date_source_note": "Spanish colonial founding traditionally dated to 23 July 1540 during Martín Galeano's expedition into Guane indigenous territory (seat of Cacique Chalalá).",
+          "name": "Charalá"
+        },
+        {
+          "date": "1702.1.1",
+          "date_source_note": "Ecclesiastical parish formally erected in 1702 under the colonial title Nuestra Señora de Monguí de Charalá.",
+          "name": "Nuestra Señora de Monguí de Charalá"
+        },
+        {
+          "date": "1824.1.1",
+          "date_source_note": "Constituted as Villa de Charalá in 1824 in the Republic of Colombia (later formally established as a municipality in 1887).",
+          "name": "Charalá"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.7573,
+        -64.86345
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pojo-Bolivia",
+      "known_aliases": [
+        "Pojo",
+        "pojo"
+      ],
+      "latest_year": 2026,
+      "max_pop": 16153,
+      "name": "Pojo",
+      "reason": "missing_entry",
+      "region": "bol_cochabamba",
+      "sample_years": [
+        1750,
+        1890,
+        1980,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Pojo",
+      "historical_names": [
+        {
+          "date": "1788.1.1",
+          "date_source_note": "Documented colonial parish and valley settlement explicitly surveyed in Governor-Intendant Francisco de Viedma's 1788 survey of the Intendancy of Santa Cruz de la Sierra / Cochabamba (name derived from Quechua pukyu, 'spring'); later incorporated as a canton/municipality of Totora (now José Carrasco) Province by Supreme Decree of 24 June 1876.",
+          "name": "Pojo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.72278,
+        -64.88478
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa Charcas-Bolivia",
+      "known_aliases": [
+        "Villa Charcas",
+        "villa charcas",
+        "centro villa charcas",
+        "san antonio",
+        "Centro Villa Charcas",
+        "San Antonio"
+      ],
+      "latest_year": 2026,
+      "max_pop": 16150,
+      "name": "Villa Charcas",
+      "reason": "missing_entry",
+      "region": "bol_chuquisaca",
+      "sample_years": [
+        1750,
+        1890,
+        1980,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Villa Charcas",
+      "historical_names": [
+        {
+          "date": "1953.8.2",
+          "date_source_note": "Founded on 2 August 1953 in Nor Cinti Province, Chuquisaca (coinciding with Bolivia's Agrarian Reform Decree) under the name Marcelino Mamani, honouring the local peasant leader killed in Sucre in 1948 during agrarian struggles in Cinti.",
+          "name": "Marcelino Mamani"
+        },
+        {
+          "date": "1955.1.1",
+          "date_source_note": "Renamed La Central in the mid-1950s (ca. 1955–1960) during regional agrarian-union headquarters disputes (Federación de Campesinos) with neighbouring Culpina.",
+          "name": "La Central"
+        },
+        {
+          "date": "1960.1.1",
+          "date_source_note": "Adopted the name Villa Charcas in 1960 (at the suggestion of a local priest); later constituted as Cantón Villa Charcas within Incahuasi and elevated to the autonomous Municipality of Villa Charcas (Fourth Municipal Section of Nor Cinti Province, Chuquisaca) by Bolivian Law No. 4127 of 4 December 2009.",
+          "name": "Villa Charcas"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.13372,
+        -75.0958
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Luis-Colombia",
+      "known_aliases": [
+        "San Luis",
+        "san luis"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16128,
+      "name": "San Luis",
+      "reason": "missing_entry",
+      "region": "col_tolima",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Luis",
+      "historical_names": [
+        {
+          "date": "1780.10.9",
+          "date_source_note": "Colonial foundation on the feast of San Luis Beltrán (9 October 1780)",
+          "name": "San Luis"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.37429,
+        -64.05374
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Malvinas Argentinas (arg_cordoba)-Argentina",
+      "known_aliases": [
+        "Malvinas Argentinas",
+        "malvinas argentinas"
+      ],
+      "latest_year": 2022,
+      "max_pop": 16122,
+      "name": "Malvinas Argentinas",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Malvinas Argentinas",
+      "historical_names": [
+        {
+          "date": "2022.1.1",
+          "date_source_note": "2022 Argentine national census (INDEC)",
+          "name": "Malvinas Argentinas"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.34984,
+        -67.68185
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Corque-Bolivia",
+      "known_aliases": [
+        "Corque",
+        "corque",
+        "corque carangas",
+        "san miguel",
+        "corquemarca",
+        "Corquemarca"
+      ],
+      "latest_year": 2026,
+      "max_pop": 16101,
+      "name": "Corque",
+      "reason": "missing_entry",
+      "region": "bol_oruro",
+      "sample_years": [
+        1525,
+        1800,
+        1950,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Corque",
+      "historical_names": [
+        {
+          "date": "1450.1.1",
+          "date_source_note": "Pre-colonial Aymara marka of the Carangas confederation",
+          "name": "Qurqi"
+        },
+        {
+          "date": "1573.1.1",
+          "date_source_note": "Toledo colonial reduction and repartimiento of Carangas (c. 1573)",
+          "name": "Corque"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.56745,
+        -75.32847
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Clemencia-Colombia",
+      "known_aliases": [
+        "Clemencia",
+        "clemencia"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16097,
+      "name": "Clemencia",
+      "reason": "missing_entry",
+      "region": "col_bolivar",
+      "sample_years": [
+        1850,
+        1970,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Clemencia",
+      "historical_names": [
+        {
+          "date": "1994.1.1",
+          "date_source_note": "Creation of the municipality of Clemencia in Bolívar (1994)",
+          "name": "Clemencia"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.94944,
+        -76.38278
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Quilmana-Peru",
+      "known_aliases": [
+        "Quilmana",
+        "quilmana"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16091,
+      "name": "Quilmana",
+      "reason": "missing_entry",
+      "region": "per_lima",
+      "sample_years": [
+        1850,
+        1950,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Quilmaná",
+      "historical_names": [
+        {
+          "date": "1944.9.15",
+          "date_source_note": "Creation of Quilmaná District in Cañete (Law 9962, 15 September 1944)",
+          "name": "Quilmaná"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.89361,
+        -70.12788
+      ],
+      "country": "Chile",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mejillones-Chile",
+      "known_aliases": [
+        "Mejillones",
+        "mejillones"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16087,
+      "name": "Mejillones",
+      "reason": "missing_entry",
+      "region": "chl_region_de_antofagasta",
+      "sample_years": [
+        1880,
+        1970,
+        2012,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Mejillones",
+      "historical_names": [
+        {
+          "date": "1879.10.8",
+          "date_source_note": "Traditional Chilean municipal foundation date of Mejillones following the Battle of Angamos (preceded by 1842/1862 Bolivian guano port settlement of Mejillones).",
+          "name": "Mejillones"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.32479,
+        -73.73756
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Gamarra-Colombia",
+      "known_aliases": [
+        "Gamarra",
+        "gamarra",
+        "concepcion puerto real",
+        "Concepcion Puerto Real"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16073,
+      "name": "Gamarra",
+      "reason": "missing_entry",
+      "region": "col_cesar",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Gamarra",
+      "historical_names": [
+        {
+          "date": "1878.1.1",
+          "date_source_note": "Establishment of the Magdalena River port of Gamarra (1878)",
+          "name": "Gamarra"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.24964,
+        -69.32231
+      ],
+      "country": "Chile",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sierra Gorda-Chile",
+      "known_aliases": [
+        "Sierra Gorda",
+        "sierra gorda"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16061,
+      "name": "Sierra Gorda",
+      "reason": "missing_entry",
+      "region": "chl_region_de_antofagasta",
+      "sample_years": [
+        1900,
+        1970,
+        2012,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sierra Gorda",
+      "historical_names": [
+        {
+          "date": "1888.1.1",
+          "date_source_note": "Establishment of Sierra Gorda subdelegation in Antofagasta (1888)",
+          "name": "Sierra Gorda"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.62549,
+        -66.80424
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Peñalver-Venezuela",
+      "known_aliases": [
+        "Peñalver",
+        "peñalver"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16054,
+      "name": "Peñalver",
+      "reason": "missing_entry",
+      "region": "ven_guarico",
+      "sample_years": [
+        1850,
+        1970,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Peñalver",
+      "historical_names": [
+        {
+          "date": "1774.1.1",
+          "date_source_note": "Capuchin mission founded with Otomaco and Guamo peoples",
+          "name": "Arichuna"
+        },
+        {
+          "date": "1938.1.1",
+          "date_source_note": "Apure civil parish named for Fernando de Peñalver",
+          "name": "Peñalver"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.53633,
+        -75.39608
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Bayunca-Colombia",
+      "known_aliases": [
+        "Bayunca",
+        "bayunca"
+      ],
+      "latest_year": 2018,
+      "max_pop": 16051,
+      "name": "Bayunca",
+      "reason": "missing_entry",
+      "region": "col_bolivar",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Bayunca",
+      "historical_names": [
+        {
+          "date": "1835.1.1",
+          "date_source_note": "Free settlement formed on subdivided hacienda; corregimiento 1946",
+          "name": "Bayunca"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.30583,
+        -78.89833
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chirinos-Peru",
+      "known_aliases": [
+        "Chirinos",
+        "chirinos"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16050,
+      "name": "Chirinos",
+      "reason": "missing_entry",
+      "region": "per_cajamarca",
+      "sample_years": [
+        1525,
+        1750,
+        1920,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Chirinos",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Chirinú (Bracamoro) indigenous settlement recorded in 1549 crónica",
+          "name": "Chirinú"
+        },
+        {
+          "date": "1550.1.1",
+          "date_source_note": "Spanish colonial settlement in the Gobernación de Jaén de Bracamoros (c. 1550)",
+          "name": "Chirinos"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -38.92936,
+        -69.20528
+      ],
+      "country": "Argentina",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Plaza Huincul-Argentina",
+      "known_aliases": [
+        "Plaza Huincul",
+        "plaza huincul"
+      ],
+      "latest_year": 2022,
+      "max_pop": 16046,
+      "name": "Plaza Huincul",
+      "reason": "missing_entry",
+      "region": "arg_neuquen",
+      "sample_years": [
+        1920,
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Plaza Huincul",
+      "historical_names": [
+        {
+          "date": "1966.4.24",
+          "date_source_note": "Official municipal foundation of Plaza Huincul (24 April 1966)",
+          "name": "Plaza Huincul"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.575,
+        -75.40472
+      ],
+      "country": "Peru",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Oxapampa-Peru",
+      "known_aliases": [
+        "Oxapampa",
+        "oxapampa"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16023,
+      "name": "Oxapampa",
+      "reason": "missing_entry",
+      "region": "per_pasco",
+      "sample_years": [
+        1900,
+        1970,
+        2007,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Oxapampa",
+      "historical_names": [
+        {
+          "date": "1891.8.30",
+          "date_source_note": "Foundation by Austro-German colonists led by Enrique Böttger (30 August 1891)",
+          "name": "Oxapampa"
+        }
+      ]
+    }
+  ]
+}

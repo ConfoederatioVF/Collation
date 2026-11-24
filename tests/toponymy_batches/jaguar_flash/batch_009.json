@@ -1,0 +1,1060 @@
+{
+  "batch_index": 9,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        20.13187,
+        -101.18921
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Moroleón"
+        }
+      ],
+      "existing_meta_index": 2280,
+      "existing_meta_name": "Moroleón",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Moroleón-Mexico",
+      "known_aliases": [
+        "Moroleón",
+        "moroleón"
+      ],
+      "latest_year": 2020,
+      "max_pop": 43200,
+      "name": "Moroleón",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.77876,
+        -88.5902
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Lepaera-Honduras",
+      "known_aliases": [
+        "Lepaera",
+        "lepaera"
+      ],
+      "latest_year": 2024,
+      "max_pop": 42710,
+      "name": "Lepaera",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        12.92344,
+        -85.83898
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1646,
+      "existing_historical_names": [
+        {
+          "date": "1920.1.1",
+          "name": "San Ramón"
+        }
+      ],
+      "existing_meta_index": 2522,
+      "existing_meta_name": "San Ramón",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Ramón-Nicaragua",
+      "known_aliases": [
+        "San Ramón",
+        "san ramón",
+        "san ramon"
+      ],
+      "latest_year": 2023,
+      "max_pop": 42585,
+      "name": "San Ramón",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1646,
+        1808,
+        1995,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.56065,
+        -97.24407
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Perote"
+        }
+      ],
+      "existing_meta_index": 2283,
+      "existing_meta_name": "Perote",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Perote-Mexico",
+      "known_aliases": [
+        "Perote",
+        "perote",
+        "el sabinal",
+        "El Sabinal"
+      ],
+      "latest_year": 2020,
+      "max_pop": 42451,
+      "name": "Perote",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1480,
+        1877,
+        1970,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        13.48339,
+        -88.97185
+      ],
+      "country": "El Salvador",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1941.1.1",
+          "name": "Santiago Nonualco"
+        }
+      ],
+      "existing_meta_index": 2710,
+      "existing_meta_name": "Santiago Nonualco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santiago Nonualco-El Salvador",
+      "known_aliases": [
+        "Santiago Nonualco",
+        "santiago nonualco"
+      ],
+      "latest_year": 2024,
+      "max_pop": 42357,
+      "name": "Santiago Nonualco",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1700,
+        1821,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.71446,
+        -86.01932
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1963.1.1",
+          "name": "Nandaime"
+        }
+      ],
+      "existing_meta_index": 3295,
+      "existing_meta_name": "Nandaime",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Nandaime-Nicaragua",
+      "known_aliases": [
+        "Nandaime",
+        "nandaime"
+      ],
+      "latest_year": 2023,
+      "max_pop": 42045,
+      "name": "Nandaime",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.89335,
+        -72.60254
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Roseaux-Haiti",
+      "known_aliases": [
+        "Roseaux",
+        "roseaux"
+      ],
+      "latest_year": 2024,
+      "max_pop": 41589,
+      "name": "Roseaux",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.20169,
+        -73.88957
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chantal-Haiti",
+      "known_aliases": [
+        "Chantal",
+        "chantal"
+      ],
+      "latest_year": 2024,
+      "max_pop": 41237,
+      "name": "Chantal",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.53532,
+        -72.13569
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Dame Marie-Haiti",
+      "known_aliases": [
+        "Dame Marie",
+        "dame marie"
+      ],
+      "latest_year": 2024,
+      "max_pop": 41207,
+      "name": "Dame Marie",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.58333,
+        -70.16667
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Gaspar Hernández-Dominican Republic",
+      "known_aliases": [
+        "Gaspar Hernández",
+        "gaspar hernández"
+      ],
+      "latest_year": 2022,
+      "max_pop": 40781,
+      "name": "Gaspar Hernández",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.5,
+        -71.41667
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 1790,
+      "existing_historical_names": [
+        {
+          "date": "1970.1.1",
+          "name": "Neiba"
+        }
+      ],
+      "existing_meta_index": 3475,
+      "existing_meta_name": "Neiba",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Neiba-Dominican Republic",
+      "known_aliases": [
+        "Neiba",
+        "neiba"
+      ],
+      "latest_year": 2022,
+      "max_pop": 40644,
+      "name": "Neiba",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1790,
+        1808,
+        1821,
+        1850,
+        1900,
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        13.98333,
+        -89.75
+      ],
+      "country": "El Salvador",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1933.1.1",
+          "name": "Atiquizaya"
+        }
+      ],
+      "existing_meta_index": 2608,
+      "existing_meta_name": "Atiquizaya",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Atiquizaya-El Salvador",
+      "known_aliases": [
+        "Atiquizaya",
+        "atiquizaya"
+      ],
+      "latest_year": 2024,
+      "max_pop": 40558,
+      "name": "Atiquizaya",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1700,
+        1821,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.72406,
+        -69.14621
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Mata-Dominican Republic",
+      "known_aliases": [
+        "La Mata",
+        "la mata"
+      ],
+      "latest_year": 2022,
+      "max_pop": 40556,
+      "name": "La Mata",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.73916,
+        -70.07482
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Consuelo-Dominican Republic",
+      "known_aliases": [
+        "Consuelo",
+        "consuelo"
+      ],
+      "latest_year": 2022,
+      "max_pop": 40547,
+      "name": "Consuelo",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.36885,
+        -71.98243
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mombin Crochu-Haiti",
+      "known_aliases": [
+        "Mombin Crochu",
+        "mombin crochu"
+      ],
+      "latest_year": 2024,
+      "max_pop": 40343,
+      "name": "Mombin Crochu",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.71378,
+        -99.22351
+      ],
+      "country": "Mexico",
+      "earliest_year": -600,
+      "existing_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Tepotzotlán"
+        }
+      ],
+      "existing_meta_index": 605,
+      "existing_meta_name": "Tepotzotlán",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tepotzotlán-Mexico",
+      "known_aliases": [
+        "Tepotzotlán",
+        "tepotzotlán",
+        "barrio de texcacoa",
+        "tepotzotlan",
+        "Barrio de Texcacoa"
+      ],
+      "latest_year": 2020,
+      "max_pop": 40279,
+      "name": "Tepotzotlán",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        -600,
+        1492,
+        1950,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.15,
+        -88.18333
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Macuelizo-Honduras",
+      "known_aliases": [
+        "Macuelizo",
+        "macuelizo"
+      ],
+      "latest_year": 2024,
+      "max_pop": 40229,
+      "name": "Macuelizo",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        22.79688,
+        -82.50651
+      ],
+      "country": "Cuba",
+      "earliest_year": 1790,
+      "existing_historical_names": [
+        {
+          "date": "1919.1.1",
+          "name": "Guïra de Melena"
+        }
+      ],
+      "existing_meta_index": 2496,
+      "existing_meta_name": "Guïra de Melena",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Güira de Melena-Cuba",
+      "known_aliases": [
+        "Güira de Melena",
+        "güira de melena",
+        "guira de melena"
+      ],
+      "latest_year": 2022,
+      "max_pop": 40219,
+      "name": "Güira de Melena",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1790,
+        1808,
+        1821,
+        1850,
+        1900,
+        2002,
+        2012,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        12.51152,
+        -85.20982
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Camoapa-Nicaragua",
+      "known_aliases": [
+        "Camoapa",
+        "camoapa"
+      ],
+      "latest_year": 2023,
+      "max_pop": 40077,
+      "name": "Camoapa",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.76667,
+        -86.51667
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Jutiapa-Honduras",
+      "known_aliases": [
+        "Jutiapa",
+        "jutiapa"
+      ],
+      "latest_year": 2024,
+      "max_pop": 39848,
+      "name": "Jutiapa",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.10012,
+        -87.5302
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Victoria-Honduras",
+      "known_aliases": [
+        "Victoria",
+        "victoria"
+      ],
+      "latest_year": 2024,
+      "max_pop": 39684,
+      "name": "Victoria",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.52432,
+        -72.37596
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Marmelade-Haiti",
+      "known_aliases": [
+        "Marmelade",
+        "marmelade"
+      ],
+      "latest_year": 2024,
+      "max_pop": 39659,
+      "name": "Marmelade",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.61667,
+        -71.33333
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guayubín-Dominican Republic",
+      "known_aliases": [
+        "Guayubín",
+        "guayubín"
+      ],
+      "latest_year": 2022,
+      "max_pop": 39653,
+      "name": "Guayubín",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        13.37562,
+        -86.14285
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Sebastián de Yalí-Nicaragua",
+      "known_aliases": [
+        "San Sebastián de Yalí",
+        "san sebastián de yalí"
+      ],
+      "latest_year": 2023,
+      "max_pop": 39563,
+      "name": "San Sebastián de Yalí",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        13.88333,
+        -84.4
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rosita-Nicaragua",
+      "known_aliases": [
+        "Rosita",
+        "rosita"
+      ],
+      "latest_year": 2023,
+      "max_pop": 39527,
+      "name": "Rosita",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        12.20028,
+        -86.62465
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1963.1.1",
+          "name": "Nagarote"
+        }
+      ],
+      "existing_meta_index": 3294,
+      "existing_meta_name": "Nagarote",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Nagarote-Nicaragua",
+      "known_aliases": [
+        "Nagarote",
+        "nagarote"
+      ],
+      "latest_year": 2023,
+      "max_pop": 39500,
+      "name": "Nagarote",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.93237,
+        -97.96024
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Zacatlán"
+        }
+      ],
+      "existing_meta_index": 2306,
+      "existing_meta_name": "Zacatlán",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zacatlán-Mexico",
+      "known_aliases": [
+        "Zacatlán",
+        "zacatlán",
+        "cuautilulco",
+        "zacatlan",
+        "Cuautilulco"
+      ],
+      "latest_year": 2020,
+      "max_pop": 39203,
+      "name": "Zacatlán",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1480,
+        1877,
+        1970,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.38407,
+        -66.0216
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sabana Llana Sur-Puerto Rico",
+      "known_aliases": [
+        "Sabana Llana Sur",
+        "sabana llana sur"
+      ],
+      "latest_year": 2020,
+      "max_pop": 38986,
+      "name": "Sabana Llana Sur",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.832,
+        -89.048
+      ],
+      "country": "Belize",
+      "earliest_year": -1150,
+      "existing_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "La Milpa"
+        }
+      ],
+      "existing_meta_index": 223,
+      "existing_meta_name": "La Milpa",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Milpa-Belize",
+      "known_aliases": [
+        "La Milpa",
+        "la milpa"
+      ],
+      "latest_year": 1200,
+      "max_pop": 38800,
+      "name": "La Milpa",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        1,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        12.9006,
+        -86.09029
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1971.1.1",
+          "name": "Sébaco"
+        }
+      ],
+      "existing_meta_index": 3613,
+      "existing_meta_name": "Sébaco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sébaco-Nicaragua",
+      "known_aliases": [
+        "Sébaco",
+        "sébaco",
+        "sebaco"
+      ],
+      "latest_year": 2023,
+      "max_pop": 38588,
+      "name": "Sébaco",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

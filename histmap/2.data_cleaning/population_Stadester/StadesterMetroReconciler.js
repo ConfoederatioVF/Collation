@@ -148,6 +148,8 @@ class StadesterMetroReconciler {
     if (!city || typeof city !== "object") return false;
 
     //Function body
+    if (city.population_scope === "city_proper" || city.population_scope === "suburb")
+      return false;
     if (city.population_scope === "metro" || city.extent_type === "metro" || city.is_agglomeration === true)
       return true;
     let nm = String(city.name || "").toLowerCase();
@@ -155,7 +157,7 @@ class StadesterMetroReconciler {
 
     //Return statement
     return nm.includes("agglomeration") || nm.startsWith("greater ") || nm.includes("metropolitan") ||
-      ky.includes("(agglomeration)") || ky.includes("greater ");
+      nm.includes("(metro)") || ky.includes("(agglomeration)") || ky.includes("(metro)") || ky.includes("greater ");
   }
 
   /**
@@ -295,10 +297,14 @@ class StadesterMetroReconciler {
         if (!Number.isFinite(p_metro) || p_metro <= 0) continue;
 
         let radius_km = this.computeTransportEnvelopeKm(p_metro, yr);
-        let max_search_km = Math.max(radius_km, 25.0);
+        let max_search_km = Math.max(radius_km, 85.0);
         let gx = Math.floor(Number(metro.coords[0])/cell_deg);
         let gy = Math.floor(Number(metro.coords[1])/cell_deg);
         let deg_rad = Math.max(1, Math.ceil(max_search_km/80.0));
+        let metro_link_norm = String(metro.key || "")
+          .replace(/\b(?:metro|colonial|modern|agglomeration|metropolitan)\b/gi, "")
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase().replace(/[^a-z0-9]+/g, "");
         let members = [];
 
         for (let dx = -deg_rad; dx <= deg_rad; dx++) {
@@ -313,7 +319,16 @@ class StadesterMetroReconciler {
               let d_km = this.haversineKm(metro.coords, cand.coords);
               if (d_km > max_search_km) continue;
 
-              let explicit_link = (cand.metro_parent_key === metro.key || cand.metro_key === metro.key);
+              let cand_parent_norm = (cand.metro_parent_key || cand.metro_key) ?
+                String(cand.metro_parent_key || cand.metro_key)
+                  .replace(/\b(?:metro|colonial|modern|agglomeration|metropolitan)\b/gi, "")
+                  .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                  .toLowerCase().replace(/[^a-z0-9]+/g, "") : "";
+              let explicit_link = Boolean(
+                cand.metro_parent_key === metro.key ||
+                cand.metro_key === metro.key ||
+                (cand_parent_norm && metro_link_norm && cand_parent_norm === metro_link_norm && d_km <= 85.0)
+              );
               let is_core = this.matchesMetroCoreName(cand, metro) && d_km <= 25.0;
               let same_country = (!metro.country || !cand.country || String(metro.country).toLowerCase() === String(cand.country).toLowerCase());
               let same_uc = Boolean(metro._ghsl_uc_id && cand._ghsl_uc_id && metro._ghsl_uc_id === cand._ghsl_uc_id);

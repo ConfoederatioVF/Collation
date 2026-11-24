@@ -452,10 +452,15 @@
     
     function isAgglomeration(city) {
       if (!city) return false;
-      if (city.is_agglomeration) return true;
+      if (city.population_scope === "city_proper" || city.population_scope === "suburb") return false;
+      if (city.population_scope === "metro" || city.extent_type === "metro" || city.is_agglomeration) return true;
+      if (city.key) {
+        let lower_k = String(city.key).toLowerCase();
+        if (lower_k.includes("(agglomeration)") || lower_k.includes("agglomeration") || lower_k.includes("(metro)") || lower_k.startsWith("greater ")) return true;
+      }
       if (city.name) {
         let lower = city.name.toLowerCase();
-        if (lower.includes("agglomeration") || lower.includes("greater")) return true;
+        if (lower.includes("agglomeration") || lower.includes("(metro)") || lower.includes("greater")) return true;
       }
       return false;
     }
@@ -546,7 +551,7 @@
           
           for (let y = 0; y < candidate_array.length; y++) {
             let local_uud_city = return_obj[candidate_array[y]];
-            if (local_db.is_polaris && !local_db.is_metro && isAgglomeration(local_uud_city))
+            if (local_db.is_polaris && isAgglomeration(local_city) !== isAgglomeration(local_uud_city))
               continue;
             if (
               local_db.is_polaris &&
@@ -864,6 +869,11 @@
             actual_city.viscount_order = local_city.viscount_order;
             actual_city.viscount_project = local_city.viscount_project;
             actual_city.viscount_z_priority = local_city.viscount_z_priority;
+            if (local_city.population_scope) actual_city.population_scope = local_city.population_scope;
+            if (local_city.extent_type) actual_city.extent_type = local_city.extent_type;
+            if (local_city.is_agglomeration) actual_city.is_agglomeration = local_city.is_agglomeration;
+            if (local_city.metro_parent_key) actual_city.metro_parent_key = local_city.metro_parent_key;
+            if (local_city.metro_key) actual_city.metro_key = local_city.metro_key;
           }
           let merged_sources = local_db.is_polaris ?
             (local_city.sources || local_city.viscount_project) :
@@ -1089,7 +1099,13 @@
       local_city.key = all_cities[i];
       if (!local_city.name) local_city.name = all_cities[i];
       population_Stadester_uud.repairGHSLCityName(local_city);
-      if (local_city.name && (local_city.name.toLowerCase().includes("agglomeration") || local_city.name.toLowerCase().includes("greater")) && !local_city.is_agglomeration_of)
+      if (
+        local_city.population_scope !== "city_proper" &&
+        local_city.population_scope !== "suburb" &&
+        local_city.name &&
+        (local_city.name.toLowerCase().includes("agglomeration") || local_city.name.toLowerCase().includes("(metro)") || local_city.name.toLowerCase().includes("greater")) &&
+        !local_city.is_agglomeration_of
+      )
         local_city.is_agglomeration_of = population_Stadester_uud.processCityName(local_city.name);
       if (local_city.name && local_city.name.includes(":")) continue;
       if (typeof population_Stadester_uud.appendCitySources === "function") {

@@ -1,0 +1,1302 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 107,
+  "count": 30,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -31.86502,
+        -55.4412
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pueblo De Arriba-Uruguay",
+      "known_aliases": [
+        "Pueblo De Arriba",
+        "pueblo de arriba",
+        "Pueblo de Arriba"
+      ],
+      "latest_year": 2023,
+      "max_pop": 191,
+      "name": "Pueblo De Arriba",
+      "reason": "missing_entry",
+      "region": "ury_rivera",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Pueblo de Arriba",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest attested horizon for rural locality on Route 44",
+          "name": "Pueblo de Arriba"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.715,
+        -66.282
+      ],
+      "country": "Argentina",
+      "earliest_year": 1735,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalanta-Argentina",
+      "known_aliases": [
+        "Chalanta",
+        "chalanta",
+        "carlone",
+        "Carlone"
+      ],
+      "latest_year": 1830,
+      "max_pop": 191,
+      "name": "Chalanta",
+      "reason": "missing_entry",
+      "region": "crp_corregimiento_cuyo",
+      "sample_years": [
+        1735,
+        1750,
+        1780,
+        1800,
+        1825,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Chalanta",
+      "historical_names": [
+        {
+          "date": "1735.1.1",
+          "date_source_note": "Earliest colonial attestation in San Luis frontier records",
+          "name": "Chalanta"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -4.75252,
+        -79.75677
+      ],
+      "country": "Peru",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cujaca-Peru",
+      "known_aliases": [
+        "Cujaca",
+        "cujaca"
+      ],
+      "latest_year": 1530,
+      "max_pop": 191,
+      "name": "Cujaca",
+      "reason": "missing_entry",
+      "region": "inca_chinchaysuyu",
+      "sample_years": [
+        500,
+        1200,
+        1470,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cujaca",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "date_source_note": "Earliest attested pre-Inca occupation horizon in SIGDA",
+          "name": "Cujaca"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.69,
+        -74.33
+      ],
+      "country": "Colombia",
+      "earliest_year": -603,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "LT Bacatá - Nueva Esperanza T-Colombia",
+      "known_aliases": [
+        "LT Bacatá - Nueva Esperanza T",
+        "lt bacatá - nueva esperanza t",
+        "alto de cubia",
+        "la mesa",
+        "plazuela de cubia",
+        "Alto de Cubia",
+        "La Mesa",
+        "Plazuela de Cubia"
+      ],
+      "latest_year": 97,
+      "max_pop": 191,
+      "name": "LT Bacatá - Nueva Esperanza T",
+      "reason": "missing_entry",
+      "region": "na_magdalena_cauca_muisca",
+      "sample_years": [
+        -603,
+        -500,
+        0,
+        97
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Alto de Cubia",
+      "historical_names": [
+        {
+          "date": "-603.1.1",
+          "date_source_note": "Earliest Herrera-period radiocarbon horizon in COL14/ICANH",
+          "name": "Alto de Cubia"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.75333,
+        -75.65278
+      ],
+      "country": "Colombia",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Aldea-Colombia",
+      "known_aliases": [
+        "La Aldea",
+        "la aldea",
+        "las termópilas",
+        "Las Termópilas"
+      ],
+      "latest_year": 1500,
+      "max_pop": 191,
+      "name": "La Aldea",
+      "reason": "missing_entry",
+      "region": "na_magdalena_cauca_muisca",
+      "sample_years": [
+        -2000,
+        0,
+        1200,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Aldea",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "date_source_note": "Earliest attested pre-Hispanic occupation horizon in ICANH",
+          "name": "La Aldea"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.5325,
+        -76.13167
+      ],
+      "country": "Colombia",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Terraza (na_magdalena_cauca_muisca_4)-Colombia",
+      "known_aliases": [
+        "Terraza",
+        "terraza",
+        "potrero el salado",
+        "Potrero El Salado"
+      ],
+      "latest_year": 1500,
+      "max_pop": 191,
+      "name": "Terraza",
+      "reason": "missing_entry",
+      "region": "na_magdalena_cauca_muisca",
+      "sample_years": [
+        -1000,
+        500,
+        1200,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Potrero El Salado",
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "date_source_note": "Earliest attested pre-Hispanic terrace occupation in ICANH",
+          "name": "Potrero El Salado"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.2297,
+        -66.4561
+      ],
+      "country": "Argentina",
+      "earliest_year": -9096,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Hornillos-Argentina",
+      "known_aliases": [
+        "Hornillos",
+        "hornillos",
+        "hornillos 2 rockshelter",
+        "Hornillos 2 Rockshelter"
+      ],
+      "latest_year": -5574,
+      "max_pop": 191,
+      "name": "Hornillos",
+      "reason": "missing_entry",
+      "region": "sc_gran_chaco_pilcomayo",
+      "sample_years": [
+        -9096,
+        -9000,
+        -7000,
+        -5574
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Hornillos 2",
+      "historical_names": [
+        {
+          "date": "-9096.1.1",
+          "date_source_note": "Earliest Pleistocene-Holocene rockshelter radiocarbon horizon in Jujuy",
+          "name": "Hornillos 2"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.8469,
+        -65.9833
+      ],
+      "country": "Argentina",
+      "earliest_year": -7199,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Intihuas-Argentina",
+      "known_aliases": [
+        "Intihuas",
+        "intihuas"
+      ],
+      "latest_year": -6196,
+      "max_pop": 191,
+      "name": "Intihuas",
+      "reason": "missing_entry",
+      "region": "sc_pampas_salado_colorado",
+      "sample_years": [
+        -7199,
+        -7000,
+        -6196
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Intihuasi",
+      "historical_names": [
+        {
+          "date": "-7199.1.1",
+          "date_source_note": "Earliest Early Holocene cave occupation radiocarbon horizon",
+          "name": "Intihuasi"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.97917,
+        -70.25472
+      ],
+      "country": "Chile",
+      "earliest_year": -9562,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Piuquenes-Chile",
+      "known_aliases": [
+        "Piuquenes",
+        "piuquenes"
+      ],
+      "latest_year": -3834,
+      "max_pop": 191,
+      "name": "Piuquenes",
+      "reason": "missing_entry",
+      "region": "sc_chile_central_araucania",
+      "sample_years": [
+        -9562,
+        -9000,
+        -7000,
+        -5000,
+        -3834
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Piuquenes",
+      "historical_names": [
+        {
+          "date": "-9562.1.1",
+          "date_source_note": "Earliest Late Pleistocene Andean cave radiocarbon horizon",
+          "name": "Piuquenes"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -53.68195,
+        -70.97473
+      ],
+      "country": "Chile",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Río Santa María-Chile",
+      "known_aliases": [
+        "Río Santa María",
+        "río santa maría"
+      ],
+      "latest_year": 1500,
+      "max_pop": 191,
+      "name": "Río Santa María",
+      "reason": "missing_entry",
+      "region": "sc_patagonia_tierra_del_fuego",
+      "sample_years": [
+        1300,
+        1400,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Río Santa María",
+      "historical_names": [
+        {
+          "date": "1300.1.1",
+          "date_source_note": "Earliest attested Late Holocene occupation in Magallanes",
+          "name": "Río Santa María"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -6.95,
+        -79.24
+      ],
+      "country": "Peru",
+      "earliest_year": -6808,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cemetario de Nanchoc-Peru",
+      "known_aliases": [
+        "Cemetario de Nanchoc",
+        "cemetario de nanchoc",
+        "cerro el pato",
+        "cruz verde",
+        "huaca el chino",
+        "huaca el cuy",
+        "huaca la mala muerte",
+        "nanchoc",
+        "paulina",
+        "san jose",
+        "Cerro el Pato",
+        "Cruz Verde",
+        "Huaca El Chino",
+        "Huaca El Cuy",
+        "Huaca La Mala Muerte",
+        "Nanchoc",
+        "Paulina",
+        "San Jose"
+      ],
+      "latest_year": -5678,
+      "max_pop": 191,
+      "name": "Cemetario de Nanchoc",
+      "reason": "missing_entry",
+      "region": "ca_north_coast_moche_chimu",
+      "sample_years": [
+        -6808,
+        -5678
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cementerio de Nanchoc",
+      "historical_names": [
+        {
+          "date": "-6808.1.1",
+          "date_source_note": "Earliest Middle Preceramic radiocarbon horizon in Zaña valley",
+          "name": "Cementerio de Nanchoc"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.10768,
+        -73.08315
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Bellavista (col_santander)-Colombia",
+      "known_aliases": [
+        "Bellavista",
+        "bellavista"
+      ],
+      "latest_year": 2018,
+      "max_pop": 190,
+      "name": "Bellavista",
+      "reason": "missing_entry",
+      "region": "col_santander",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Bellavista",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in Santander",
+          "name": "Bellavista"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.8236,
+        -75.8327
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Cedrón-Colombia",
+      "known_aliases": [
+        "El Cedrón",
+        "el cedrón"
+      ],
+      "latest_year": 2018,
+      "max_pop": 190,
+      "name": "El Cedrón",
+      "reason": "missing_entry",
+      "region": "col_antioquia",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "El Cedrón",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in Antioquia",
+          "name": "El Cedrón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.99212,
+        -73.91683
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Porvenir (col_cundinamarca)-Colombia",
+      "known_aliases": [
+        "El Porvenir",
+        "el porvenir"
+      ],
+      "latest_year": 2018,
+      "max_pop": 190,
+      "name": "El Porvenir",
+      "reason": "missing_entry",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "El Porvenir",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in Cundinamarca",
+          "name": "El Porvenir"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.06377,
+        -75.48213
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Tigre (col_cordoba)-Colombia",
+      "known_aliases": [
+        "El Tigre",
+        "el tigre"
+      ],
+      "latest_year": 2018,
+      "max_pop": 190,
+      "name": "El Tigre",
+      "reason": "missing_entry",
+      "region": "col_cordoba",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "El Tigre",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in Córdoba",
+          "name": "El Tigre"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.35476,
+        -74.75177
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Manuel Sur-Colombia",
+      "known_aliases": [
+        "Manuel Sur",
+        "manuel sur"
+      ],
+      "latest_year": 2018,
+      "max_pop": 190,
+      "name": "Manuel Sur",
+      "reason": "missing_entry",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Manuel Sur",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in Cundinamarca",
+          "name": "Manuel Sur"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.39102,
+        -75.11079
+      ],
+      "country": "Colombia",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Francisco (col_sucre_2)-Colombia",
+      "known_aliases": [
+        "San Francisco",
+        "san francisco"
+      ],
+      "latest_year": 2018,
+      "max_pop": 190,
+      "name": "San Francisco",
+      "reason": "missing_entry",
+      "region": "col_sucre",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Francisco",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in Sucre",
+          "name": "San Francisco"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.19064,
+        -72.25604
+      ],
+      "country": "Colombia",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Rosa (col_la_guajira)-Colombia",
+      "known_aliases": [
+        "Santa Rosa",
+        "santa rosa"
+      ],
+      "latest_year": 2018,
+      "max_pop": 190,
+      "name": "Santa Rosa",
+      "reason": "missing_entry",
+      "region": "col_la_guajira",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Santa Rosa",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in La Guajira",
+          "name": "Santa Rosa"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.18623,
+        -75.21144
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa Nueva (col_sucre)-Colombia",
+      "known_aliases": [
+        "Villa Nueva",
+        "villa nueva"
+      ],
+      "latest_year": 2018,
+      "max_pop": 190,
+      "name": "Villa Nueva",
+      "reason": "missing_entry",
+      "region": "col_sucre",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Villa Nueva",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in Sucre",
+          "name": "Villa Nueva"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.59234,
+        -75.25728
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zapato # 2 Pijiguay-Colombia",
+      "known_aliases": [
+        "Zapato # 2 Pijiguay",
+        "zapato # 2 pijiguay"
+      ],
+      "latest_year": 2018,
+      "max_pop": 190,
+      "name": "Zapato # 2 Pijiguay",
+      "reason": "missing_entry",
+      "region": "col_sucre",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "El Zapato",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "date_source_note": "Earliest attested rural vereda horizon in Ovejas, Sucre",
+          "name": "El Zapato"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.0129,
+        -78.8432
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Jancala-Peru",
+      "known_aliases": [
+        "Jancala",
+        "jancala"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "Jancala",
+      "reason": "missing_entry",
+      "region": "per_cajamarca",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Jancala",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest attested rural caserío horizon in San Miguel",
+          "name": "Jancala"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.2945,
+        -77.5419
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Llampa-Peru",
+      "known_aliases": [
+        "Llampa",
+        "llampa",
+        "colquioc",
+        "Colquioc"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "Llampa",
+      "reason": "missing_entry",
+      "region": "per_ancash",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Llampa",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in Áncash",
+          "name": "Llampa"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.3056,
+        -70.1035
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pillujo-Peru",
+      "known_aliases": [
+        "Pillujo",
+        "pillujo"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "Pillujo",
+      "reason": "missing_entry",
+      "region": "per_puno",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Pillujo",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest attested rural settlement horizon in Azángaro, Puno",
+          "name": "Pillujo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.63025,
+        -71.41564
+      ],
+      "country": "Chile",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Camino Viejo-Chile",
+      "known_aliases": [
+        "Camino Viejo",
+        "camino viejo",
+        "el bosque",
+        "El Bosque"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "Camino Viejo",
+      "reason": "missing_entry",
+      "region": "chl_region_del_maule",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Camino Viejo",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "date_source_note": "Earliest attested rural locality horizon in Maule",
+          "name": "Camino Viejo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.51545,
+        -70.18865
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Alfalfal-Chile",
+      "known_aliases": [
+        "El Alfalfal",
+        "el alfalfal"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "El Alfalfal",
+      "reason": "missing_entry",
+      "region": "chl_region_metropolitana_de_santiago",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "El Alfalfal",
+      "historical_names": [
+        {
+          "date": "1784.1.1",
+          "date_source_note": "Thermal springs documented in Cajón del Maipo",
+          "name": "El Alfalfal"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.97963,
+        -71.60375
+      ],
+      "country": "Chile",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Caña-Chile",
+      "known_aliases": [
+        "La Caña",
+        "la caña"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "La Caña",
+      "reason": "missing_entry",
+      "region": "chl_region_del_maule",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Caña",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "date_source_note": "Earliest attested rural locality horizon in Maule",
+          "name": "La Caña"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.66834,
+        -71.34484
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Granja (chl_region_del_libertador_bernardo_o_higgins)-Chile",
+      "known_aliases": [
+        "La Granja",
+        "la granja"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "La Granja",
+      "reason": "missing_entry",
+      "region": "chl_region_del_libertador_bernardo_o_higgins",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Granja",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest attested rural locality horizon in O'Higgins",
+          "name": "La Granja"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -41.41003,
+        -73.18655
+      ],
+      "country": "Chile",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Las Quemas-Chile",
+      "known_aliases": [
+        "Las Quemas",
+        "las quemas"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "Las Quemas",
+      "reason": "missing_entry",
+      "region": "chl_region_de_los_lagos",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Las Quemas",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "date_source_note": "Earliest attested rural locality horizon in Los Lagos",
+          "name": "Las Quemas"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -39.30997,
+        -72.08048
+      ],
+      "country": "Chile",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Loncotraro-Chile",
+      "known_aliases": [
+        "Loncotraro",
+        "loncotraro",
+        "molco medio",
+        "Molco Medio"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "Loncotraro",
+      "reason": "missing_entry",
+      "region": "chl_region_de_la_araucania",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Loncotraro",
+      "historical_names": [
+        {
+          "date": "1980.1.1",
+          "date_source_note": "Earliest attested rural locality horizon near Villarrica",
+          "name": "Loncotraro"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -36.68755,
+        -71.88799
+      ],
+      "country": "Chile",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rosario (chl_region_de_nuble)-Chile",
+      "known_aliases": [
+        "Rosario",
+        "rosario"
+      ],
+      "latest_year": 2017,
+      "max_pop": 190,
+      "name": "Rosario",
+      "reason": "missing_entry",
+      "region": "chl_region_de_nuble",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Rosario",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "date_source_note": "Earliest attested rural locality horizon in Ñuble",
+          "name": "Rosario"
+        }
+      ]
+    }
+  ]
+}

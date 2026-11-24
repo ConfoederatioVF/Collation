@@ -1,0 +1,1582 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 5,
+  "count": 30,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -34.47215,
+        -58.51097
+      ],
+      "country": "Argentina",
+      "earliest_year": 1798,
+      "existing_historical_names": [
+        {
+          "date": "1895.1.1",
+          "name": "San Isidro"
+        }
+      ],
+      "existing_meta_index": 673,
+      "existing_meta_name": "San Isidro",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Isidro-Argentina",
+      "known_aliases": [
+        "San Isidro",
+        "san isidro",
+        "costa",
+        "monte grande",
+        "Costa",
+        "Monte Grande"
+      ],
+      "latest_year": 2022,
+      "max_pop": 297282,
+      "name": "San Isidro",
+      "reason": "under_covered_history",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1798,
+        1880,
+        1960,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Isidro",
+      "historical_names": [
+        {
+          "date": "1706.10.14",
+          "date_source_note": "Chapel founded by Domingo de Acassuso in Monte Grande",
+          "name": "San Isidro"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.74955,
+        -70.11374
+      ],
+      "country": "Chile",
+      "earliest_year": 2017,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Gran Iquique (Metro)-Chile",
+      "known_aliases": [
+        "Gran Iquique (Metro)",
+        "gran iquique",
+        "iquique",
+        "Iquique Agglomeration"
+      ],
+      "latest_year": 2017,
+      "max_pop": 294949,
+      "name": "Gran Iquique (Metro)",
+      "reason": "missing_entry",
+      "region": "chl_region_de_tarapaca",
+      "sample_years": [
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Gran Iquique",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Aymara/Changos coastal settlement endonym (Iki-Iki / Ique-Ique) prior to Spanish contact",
+          "name": "Ique-Ique"
+        },
+        {
+          "date": "1866.7.11",
+          "date_source_note": "Peruvian supreme decree of 11 July 1866 officially declaring Iquique a city (following Puerto Mayor status on 26 June 1855)",
+          "name": "Iquique"
+        },
+        {
+          "date": "2017.4.19",
+          "date_source_note": "INE 2017 Chilean Census metropolitan conurbation designation (Censo 2017, 19 April 2017)",
+          "name": "Gran Iquique"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.598,
+        -71.145
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1562,
+      "existing_historical_names": [
+        {
+          "date": "1873.1.1",
+          "name": "Mérida"
+        }
+      ],
+      "existing_meta_index": 458,
+      "existing_meta_name": "Mérida",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mérida-Venezuela",
+      "known_aliases": [
+        "Mérida",
+        "mérida",
+        "merida",
+        "santiago de los caballeros",
+        "Merida",
+        "Santiago de los Caballeros"
+      ],
+      "latest_year": 2019,
+      "max_pop": 289800,
+      "name": "Mérida",
+      "reason": "under_covered_history",
+      "region": "ven_merida",
+      "sample_years": [
+        1562,
+        1881,
+        1950,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Mérida",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial indigenous Timoto-Cuica terrace and settlement endonym in the Chama River valley",
+          "name": "Tatuy"
+        },
+        {
+          "date": "1558.10.9",
+          "date_source_note": "Founded on 9 October 1558 by Juan Rodríguez Suárez (relocated by Juan de Maldonado in 1559)",
+          "name": "Santiago de los Caballeros de Mérida"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Venezuelan Declaration of Independence (5 July 1811); republican official name",
+          "name": "Mérida"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.08267,
+        -78.41672
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Calderón-Ecuador",
+      "known_aliases": [
+        "Calderón",
+        "calderón"
+      ],
+      "latest_year": 2025,
+      "max_pop": 286784,
+      "name": "Calderón",
+      "reason": "missing_entry",
+      "region": "ecu_pichincha",
+      "sample_years": [
+        1850,
+        1950,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Calderón",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Quitu-Cara and Kichwa settlement of Carapungo prior to 1897 parish renaming.",
+          "name": "Carapungo"
+        },
+        {
+          "date": "1897.8.9",
+          "date_source_note": "Elevated to civil parish and renamed Calderón on 9 August 1897 in honour of Abdón Calderón under President Eloy Alfaro.",
+          "name": "Calderón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.73887,
+        -72.17897
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1561,
+      "existing_historical_names": [
+        {
+          "date": "1873.1.1",
+          "name": "San Cristóbal"
+        }
+      ],
+      "existing_meta_index": 659,
+      "existing_meta_name": "San Cristóbal",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Cristóbal-Venezuela",
+      "known_aliases": [
+        "San Cristóbal",
+        "san cristóbal",
+        "san cristobal"
+      ],
+      "latest_year": 2019,
+      "max_pop": 284600,
+      "name": "San Cristóbal",
+      "reason": "under_covered_history",
+      "region": "ven_tachira",
+      "sample_years": [
+        1561,
+        1881,
+        1950,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Cristóbal",
+      "historical_names": [
+        {
+          "date": "1561.3.31",
+          "date_source_note": "Villa founded by Juan Maldonado in Santiago Valley",
+          "name": "San Cristóbal"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -41.51379,
+        -72.58088
+      ],
+      "country": "Chile",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Puerto Montt-Chile",
+      "known_aliases": [
+        "Puerto Montt",
+        "puerto montt"
+      ],
+      "latest_year": 2025,
+      "max_pop": 283552,
+      "name": "Puerto Montt",
+      "reason": "missing_entry",
+      "region": "chl_region_de_los_lagos",
+      "sample_years": [
+        1865,
+        1930,
+        2002,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Puerto Montt",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Mapudungun/Huilliche indigenous toponym ('four hills') prior to Chilean colonization",
+          "name": "Melipulli"
+        },
+        {
+          "date": "1853.2.12",
+          "date_source_note": "Founded on 12 February 1853 by Vicente Pérez Rosales and named after President Manuel Montt",
+          "name": "Puerto Montt"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.22562,
+        -71.33052
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Coquimbo-Chile",
+      "known_aliases": [
+        "Coquimbo",
+        "coquimbo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 280153,
+      "name": "Coquimbo",
+      "reason": "missing_entry",
+      "region": "chl_region_de_coquimbo",
+      "sample_years": [
+        1850,
+        1930,
+        2002,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Coquimbo",
+      "historical_names": [
+        {
+          "date": "1867.5.5",
+          "date_source_note": "Municipality of Coquimbo formally established on 5 May 1867 (city status granted 4 September 1879); name derives from Quechua Qullqi Tampu / indigenous coastal toponym.",
+          "name": "Coquimbo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.07871,
+        -66.71
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Lander-Venezuela",
+      "known_aliases": [
+        "Lander",
+        "lander"
+      ],
+      "latest_year": 2025,
+      "max_pop": 277861,
+      "name": "Lander",
+      "reason": "missing_entry",
+      "region": "ven_miranda",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Lander",
+      "historical_names": [
+        {
+          "date": "1873.11.7",
+          "date_source_note": "Attested as Distrito Ocumare (Distrito Ocumare del Tuy, capital Ocumare del Tuy) in Estado Bolívar (present-day Miranda State) in the First National Census of Venezuela conducted on 7–9 November 1873 and in 1870s–1880s territorial divisions.",
+          "name": "Distrito Ocumare"
+        },
+        {
+          "date": "1891.1.3",
+          "date_source_note": "Reorganisation and renaming of Distrito Ocumare to Distrito Lander (Distrito Tomás Lander, capital Ocumare del Tuy) by decree of the Miranda State Legislative Assembly on 3 January 1891 (formally constituted on 2 February 1891).",
+          "name": "Distrito Lander"
+        },
+        {
+          "date": "1989.6.15",
+          "date_source_note": "Reorganisation of Distrito Lander into the autonomous Municipio Tomás Lander (Lander) under Venezuela's Ley Orgánica de Régimen Municipal of 15 June 1989.",
+          "name": "Lander"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.83198,
+        -71.91272
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Colón-Venezuela",
+      "known_aliases": [
+        "Colón",
+        "colón"
+      ],
+      "latest_year": 2025,
+      "max_pop": 276588,
+      "name": "Colón",
+      "reason": "missing_entry",
+      "region": "ven_zulia",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Colón",
+      "historical_names": [
+        {
+          "date": "1873.10.6",
+          "date_source_note": "Creation of Distrito Fraternidad (capital San Carlos del Zulia) in Zulia State on 6 October 1873, detached from Distrito Perijá (following Cantón Fraternidad of 1864).",
+          "name": "Distrito Fraternidad"
+        },
+        {
+          "date": "1881.1.1",
+          "date_source_note": "Official renaming of Distrito Fraternidad to Distrito Colón (capital San Carlos del Zulia) in 1881 during the territorial reorganization of Estado Falcón-Zulia (attested in the January 1891 Third National Census).",
+          "name": "Distrito Colón"
+        },
+        {
+          "date": "1989.6.15",
+          "date_source_note": "Reorganization of Distrito Colón into the autonomous Municipio Colón under Venezuela's Ley Orgánica de Régimen Municipal of 15 June 1989.",
+          "name": "Colón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.12197,
+        -70.82049
+      ],
+      "country": "Chile",
+      "earliest_year": 1743,
+      "existing_historical_names": [
+        {
+          "date": "1875.1.1",
+          "name": "Rancagua"
+        }
+      ],
+      "existing_meta_index": 605,
+      "existing_meta_name": "Rancagua",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rancagua-Chile",
+      "known_aliases": [
+        "Rancagua",
+        "rancagua",
+        "santa cruz de triana",
+        "Santa Cruz de Triana"
+      ],
+      "latest_year": 2025,
+      "max_pop": 276470,
+      "name": "Rancagua",
+      "reason": "under_covered_history",
+      "region": "chl_region_del_libertador_bernardo_o_higgins",
+      "sample_years": [
+        1743,
+        1907,
+        1992,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Rancagua",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Picunche/Mapudungun toponym Rangkawe, attested on the Rancagua estate prior to Spanish town foundation.",
+          "name": "Rangkawe"
+        },
+        {
+          "date": "1743.10.5",
+          "date_source_note": "Founded as Villa Santa Cruz de Triana on 5 October 1743 by Governor José Antonio Manso de Velasco.",
+          "name": "Santa Cruz de Triana"
+        },
+        {
+          "date": "1818.2.12",
+          "date_source_note": "Chilean Independence and official city charter granted in 1818 under the restored indigenous-derived name Rancagua.",
+          "name": "Rancagua"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.8074,
+        -78.76407
+      ],
+      "country": "Colombia",
+      "earliest_year": 1615,
+      "existing_historical_names": [
+        {
+          "date": "1902.1.1",
+          "name": "Tumaco"
+        }
+      ],
+      "existing_meta_index": 801,
+      "existing_meta_name": "Tumaco",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Andrés De Tumaco-Colombia",
+      "known_aliases": [
+        "San Andrés De Tumaco",
+        "san andrés de tumaco",
+        "san andres tumaco",
+        "tumaco colonial",
+        "San Andres Tumaco"
+      ],
+      "latest_year": 2025,
+      "max_pop": 274765,
+      "name": "San Andrés De Tumaco",
+      "reason": "under_covered_history",
+      "region": "col_narino",
+      "sample_years": [
+        1615,
+        1950,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Andrés de Tumaco",
+      "historical_names": [
+        {
+          "date": "1640.11.30",
+          "date_source_note": "Colonial coastal town established by Jesuit Francisco Ruggi",
+          "name": "San Andrés de Tumaco"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -36.8451,
+        -72.95924
+      ],
+      "country": "Chile",
+      "earliest_year": 1555,
+      "existing_historical_names": [
+        {
+          "date": "1825.1.1",
+          "name": "Concepción"
+        }
+      ],
+      "existing_meta_index": 179,
+      "existing_meta_name": "Concepción",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Concepción-Chile",
+      "known_aliases": [
+        "Concepción",
+        "concepción",
+        "concepcion",
+        "penco",
+        "Concepcion",
+        "Penco"
+      ],
+      "latest_year": 2025,
+      "max_pop": 272679,
+      "name": "Concepción",
+      "reason": "under_covered_history",
+      "region": "chl_region_del_bio_bio",
+      "sample_years": [
+        1555,
+        1885,
+        1982,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Concepción",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Mapudungun coastal settlement of Penko (Penco) on Concepción Bay prior to Spanish foundation.",
+          "name": "Penko"
+        },
+        {
+          "date": "1550.10.5",
+          "date_source_note": "Official Spanish foundation by Pedro de Valdivia on 5 October 1550 as Concepción de María Purísima del Nuevo Extremo (relocated inland to Valle de la Mocha in 1765).",
+          "name": "Concepción de María Purísima del Nuevo Extremo"
+        },
+        {
+          "date": "1818.1.1",
+          "date_source_note": "Proclamation of Chilean Independence at Concepción/Talca in 1818; modern republican short form Concepción.",
+          "name": "Concepción"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.45447,
+        -70.60062
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1952.1.1",
+          "name": "Nuñoa"
+        }
+      ],
+      "existing_meta_index": 476,
+      "existing_meta_name": "Nuñoa",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ñuñoa-Chile",
+      "known_aliases": [
+        "Ñuñoa",
+        "ñuñoa",
+        "rosario",
+        "la chacra",
+        "La Chacra"
+      ],
+      "latest_year": 2025,
+      "max_pop": 270521,
+      "name": "Ñuñoa",
+      "reason": "under_covered_history",
+      "region": "chl_region_metropolitana_de_santiago",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Ñuñoa",
+      "historical_names": [
+        {
+          "date": "1525.1.1",
+          "date_source_note": "Pre-Hispanic Inca-Picunche agricultural settlement in Mapocho Valley",
+          "name": "Ñuñohue"
+        },
+        {
+          "date": "1541.2.12",
+          "date_source_note": "Hispanicized colonial estate name after Santiago founding",
+          "name": "Ñuñoa"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.8128,
+        -66.14979
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sección Capital Cedeño-Venezuela",
+      "known_aliases": [
+        "Sección Capital Cedeño",
+        "sección capital cedeño"
+      ],
+      "latest_year": 2025,
+      "max_pop": 269412,
+      "name": "Sección Capital Cedeño",
+      "reason": "missing_entry",
+      "region": "ven_bolivar",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sección Capital Cedeño",
+      "historical_names": [
+        {
+          "date": "1771.4.20",
+          "date_source_note": "Founded on Orinoco River under Guayana Governor Manuel Centurión",
+          "name": "Villa de Caicara"
+        },
+        {
+          "date": "1909.1.1",
+          "date_source_note": "Capital of Cedeño District upon Bolívar State restoration",
+          "name": "Caicara del Orinoco"
+        },
+        {
+          "date": "1995.12.27",
+          "date_source_note": "INE capital parish designation under Bolívar territorial division law",
+          "name": "Sección Capital Cedeño"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.16669,
+        -75.58219
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1902.1.1",
+          "name": "Envigado"
+        }
+      ],
+      "existing_meta_index": 238,
+      "existing_meta_name": "Envigado",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Envigado-Colombia",
+      "known_aliases": [
+        "Envigado",
+        "envigado",
+        "embigado",
+        "embigao",
+        "Embigado",
+        "Embigao"
+      ],
+      "latest_year": 2025,
+      "max_pop": 264637,
+      "name": "Envigado",
+      "reason": "under_covered_history",
+      "region": "col_antioquia",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Envigado",
+      "historical_names": [
+        {
+          "date": "1775.7.14",
+          "date_source_note": "Ecclesiastical parish erected under Popayán Diocese",
+          "name": "Santa Gertrudis del Envigado"
+        },
+        {
+          "date": "1814.1.1",
+          "date_source_note": "Shortened republican municipal name in Antioquia",
+          "name": "Envigado"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.45611,
+        -71.42056
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pueblo Nuevo del Sur-Venezuela",
+      "known_aliases": [
+        "Pueblo Nuevo del Sur",
+        "pueblo nuevo del sur"
+      ],
+      "latest_year": 2025,
+      "max_pop": 260385,
+      "name": "Pueblo Nuevo del Sur",
+      "reason": "missing_entry",
+      "region": "ven_merida",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Pueblo Nuevo del Sur",
+      "historical_names": [
+        {
+          "date": "1761.1.1",
+          "date_source_note": "Earliest attested colonial parish and church record in Mérida",
+          "name": "Pueblo Nuevo del Sur"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.47564,
+        -69.99235
+      ],
+      "country": "Chile",
+      "earliest_year": 1885,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Arica-Chile",
+      "known_aliases": [
+        "Arica",
+        "arica"
+      ],
+      "latest_year": 2025,
+      "max_pop": 259064,
+      "name": "Arica",
+      "reason": "missing_entry",
+      "region": "chl_region_de_arica_y_parinacota",
+      "sample_years": [
+        1885,
+        1952,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Arica",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Aymara coastal settlement Ariqa prior to Spanish arrival.",
+          "name": "Ariqa"
+        },
+        {
+          "date": "1541.4.25",
+          "date_source_note": "Founded by Spanish captain Lucas Martínez de Begazo on 25 April 1541 (city status 1570) as San Marcos de Arica.",
+          "name": "San Marcos de Arica"
+        },
+        {
+          "date": "1821.7.28",
+          "date_source_note": "Peruvian Independence (28 July 1821; transferred to Chile under the Treaty of Ancón in 1883); republican name Arica.",
+          "name": "Arica"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -4.09231,
+        -79.19403
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1550,
+      "existing_historical_names": [
+        {
+          "date": "1885.1.1",
+          "name": "Loja"
+        }
+      ],
+      "existing_meta_index": 382,
+      "existing_meta_name": "Loja",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Loja-Ecuador",
+      "known_aliases": [
+        "Loja",
+        "loja",
+        "san juan del valle",
+        "san sebastian de indios",
+        "San Juan del Valle",
+        "San Sebastian de Indios"
+      ],
+      "latest_year": 2025,
+      "max_pop": 258514,
+      "name": "Loja",
+      "reason": "under_covered_history",
+      "region": "ecu_loja",
+      "sample_years": [
+        1550,
+        1900,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Loja",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Palta/Kichwa valley name Cuxibamba prior to Spanish conquest.",
+          "name": "Cuxibamba"
+        },
+        {
+          "date": "1546.1.1",
+          "date_source_note": "Initial Spanish settlement of La Zarza established by Alonso de Mercadillo in the Garrochamba valley.",
+          "name": "La Zarza"
+        },
+        {
+          "date": "1548.12.8",
+          "date_source_note": "Definitive Spanish foundation by Alonso de Mercadillo on 8 December 1548 in the Cuxibamba Valley as Inmaculada Concepción de Loja.",
+          "name": "Inmaculada Concepción de Loja"
+        },
+        {
+          "date": "1820.11.18",
+          "date_source_note": "Independence of Loja proclaimed on 18 November 1820; modern republican name Loja.",
+          "name": "Loja"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.33546,
+        -69.85985
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Miranda-Venezuela",
+      "known_aliases": [
+        "Miranda",
+        "miranda"
+      ],
+      "latest_year": 2025,
+      "max_pop": 256255,
+      "name": "Miranda",
+      "reason": "missing_entry",
+      "region": "ven_falcon",
+      "sample_years": [
+        1850,
+        1970,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Coro",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Arawak/Caquetío settlement of Curiana; municipal capital of Municipio Miranda, Falcón State.",
+          "name": "Curiana"
+        },
+        {
+          "date": "1527.7.26",
+          "date_source_note": "Founded on 26 July 1527 by Juan de Ampíes as Santa Ana de Coro (briefly Neu-Augsburg under Welser concession 1528–1546).",
+          "name": "Santa Ana de Coro"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Venezuelan Independence era; modern republican short form Coro.",
+          "name": "Coro"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.24776,
+        -66.99966
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guaicaipuro-Venezuela",
+      "known_aliases": [
+        "Guaicaipuro",
+        "guaicaipuro"
+      ],
+      "latest_year": 2011,
+      "max_pop": 252242,
+      "name": "Guaicaipuro",
+      "reason": "missing_entry",
+      "region": "ven_miranda",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Los Teques",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Carib/Aractoeques indigenous territory (Teques) prior to Spanish parish foundation.",
+          "name": "Teques"
+        },
+        {
+          "date": "1777.10.21",
+          "date_source_note": "Founded on 21 October 1777; municipal capital of Municipio Guaicaipuro, Miranda State.",
+          "name": "Los Teques"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.81103,
+        -58.72031
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Isidro (arg_corrientes)-Argentina",
+      "known_aliases": [
+        "San Isidro",
+        "san isidro"
+      ],
+      "latest_year": 2022,
+      "max_pop": 250008,
+      "name": "San Isidro",
+      "reason": "missing_entry",
+      "region": "arg_corrientes",
+      "sample_years": [
+        1850,
+        1914,
+        1980,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Isidro",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest census horizon for Goya rural paraje, Corrientes",
+          "name": "San Isidro"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.18113,
+        -78.75911
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Calderón (ecu_esmeraldas)-Ecuador",
+      "known_aliases": [
+        "Calderón",
+        "calderón"
+      ],
+      "latest_year": 2022,
+      "max_pop": 249941,
+      "name": "Calderón",
+      "reason": "missing_entry",
+      "region": "ecu_esmeraldas",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Calderón",
+      "historical_names": [
+        {
+          "date": "1955.9.15",
+          "date_source_note": "Rural parish officially constituted in San Lorenzo Canton",
+          "name": "Calderón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -36.70513,
+        -73.13376
+      ],
+      "country": "Chile",
+      "earliest_year": 1779,
+      "existing_historical_names": [
+        {
+          "date": "1895.1.1",
+          "name": "Talcahuano"
+        }
+      ],
+      "existing_meta_index": 768,
+      "existing_meta_name": "Talcahuano",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Talcahuano-Chile",
+      "known_aliases": [
+        "Talcahuano",
+        "talcahuano"
+      ],
+      "latest_year": 2025,
+      "max_pop": 248543,
+      "name": "Talcahuano",
+      "reason": "under_covered_history",
+      "region": "chl_region_del_bio_bio",
+      "sample_years": [
+        1779,
+        1895,
+        1982,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Talcahuano",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Mapudungun coastal area named after lonko Talcahueñu (Tralkawenu) prior to 1764 port declaration.",
+          "name": "Tralkawenu"
+        },
+        {
+          "date": "1764.11.5",
+          "date_source_note": "Officially declared an open port (puerto habilitado) on 5 November 1764 by Governor Antonio de Guill y Gonzaga.",
+          "name": "Talcahuano"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.78362,
+        -72.05798
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cárdenas-Venezuela",
+      "known_aliases": [
+        "Cárdenas",
+        "cárdenas"
+      ],
+      "latest_year": 2025,
+      "max_pop": 247131,
+      "name": "Cárdenas",
+      "reason": "missing_entry",
+      "region": "ven_tachira",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cárdenas",
+      "historical_names": [
+        {
+          "date": "1989.6.15",
+          "date_source_note": "Autonomous municipality of Táchira State (capital Táriba), formalised under Venezuela's Ley Orgánica de Régimen Municipal of 15 June 1989, succeeding the 19th-century Distrito Cárdenas.",
+          "name": "Cárdenas"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.16872,
+        -64.53489
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Juan Antonio Sotillo-Venezuela",
+      "known_aliases": [
+        "Juan Antonio Sotillo",
+        "juan antonio sotillo"
+      ],
+      "latest_year": 2011,
+      "max_pop": 244728,
+      "name": "Juan Antonio Sotillo",
+      "reason": "missing_entry",
+      "region": "ven_anzoategui",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Puerto La Cruz",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Cumanagoto/Carib indigenous settlement area of Anaopra on Pozuelos Bay.",
+          "name": "Anaopra"
+        },
+        {
+          "date": "1780.1.1",
+          "date_source_note": "Capuchin mission of Pozuelos founded in 1780; coastal fishermen settled Pozuelos Bay in 1862.",
+          "name": "Pozuelos"
+        },
+        {
+          "date": "1870.1.1",
+          "date_source_note": "Rebuilt after the 1868 fire as Puerto de la Santa Cruz / Puerto La Cruz; municipal capital of Municipio Juan Antonio Sotillo.",
+          "name": "Puerto La Cruz"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.475,
+        -66.6
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1538,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Guarenas"
+        }
+      ],
+      "existing_meta_index": 286,
+      "existing_meta_name": "Guarenas",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guarenas-Venezuela",
+      "known_aliases": [
+        "Guarenas",
+        "guarenas"
+      ],
+      "latest_year": 2019,
+      "max_pop": 244600,
+      "name": "Guarenas",
+      "reason": "under_covered_history",
+      "region": "ven_la_guaira",
+      "sample_years": [
+        1538,
+        1803,
+        1880,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Guarenas",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Mariche/Chagaragoto (Carib) valley name Guarenas prior to 1621 Spanish mission foundation.",
+          "name": "Guarenas"
+        },
+        {
+          "date": "1621.2.14",
+          "date_source_note": "Established as a pueblo de doctrina on 14 February 1621 under the name Nuestra Señora de Copacabana de los Guarenas.",
+          "name": "Nuestra Señora de Copacabana de los Guarenas"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Venezuelan Independence (5 July 1811); modern republican short form Guarenas.",
+          "name": "Guarenas"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.42152,
+        -71.60334
+      ],
+      "country": "Chile",
+      "earliest_year": 1742,
+      "existing_historical_names": [
+        {
+          "date": "1865.1.1",
+          "name": "Talca"
+        }
+      ],
+      "existing_meta_index": 767,
+      "existing_meta_name": "Talca",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Talca-Chile",
+      "known_aliases": [
+        "Talca",
+        "talca",
+        "san antonio poniente",
+        "san agustin de talca",
+        "san agustín de talca",
+        "San Antonio Poniente",
+        "San Agustin de Talca",
+        "San Agustín de Talca"
+      ],
+      "latest_year": 2025,
+      "max_pop": 243586,
+      "name": "Talca",
+      "reason": "under_covered_history",
+      "region": "chl_region_del_maule",
+      "sample_years": [
+        1742,
+        1907,
+        1992,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Talca",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Mapudungun toponym Tralka prior to Spanish colonial foundation.",
+          "name": "Tralka"
+        },
+        {
+          "date": "1742.5.12",
+          "date_source_note": "Founded on 12 May 1742 as Villa San Agustín de Talca by Governor José Antonio Manso de Velasco.",
+          "name": "San Agustín de Talca"
+        },
+        {
+          "date": "1818.2.12",
+          "date_source_note": "Chilean Independence (12 February 1818, signed/proclaimed in Talca); modern republican name Talca.",
+          "name": "Talca"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.22722,
+        -66.46056
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1761,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Araguita-Venezuela",
+      "known_aliases": [
+        "Araguita",
+        "araguita"
+      ],
+      "latest_year": 2025,
+      "max_pop": 241829,
+      "name": "Araguita",
+      "reason": "missing_entry",
+      "region": "ven_miranda",
+      "sample_years": [
+        1761,
+        1811,
+        1950,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Aragüita",
+      "historical_names": [
+        {
+          "date": "1584.1.1",
+          "date_source_note": "Colonial settlement founded by Sebastián Díaz de Alfaro",
+          "name": "San Juan de La Paz"
+        },
+        {
+          "date": "1761.1.1",
+          "date_source_note": "Erected as ecclesiastical parish in Barlovento",
+          "name": "San Francisco Javier de Aragüita"
+        },
+        {
+          "date": "1880.1.1",
+          "date_source_note": "Shortened modern parish name in Miranda state",
+          "name": "Aragüita"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.16028,
+        -74.22528
+      ],
+      "country": "Peru",
+      "earliest_year": 1545,
+      "existing_historical_names": [
+        {
+          "date": "1574.1.1",
+          "name": "Ayacucho"
+        }
+      ],
+      "existing_meta_index": 30,
+      "existing_meta_name": "Ayacucho",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ayacucho-Peru",
+      "known_aliases": [
+        "Ayacucho",
+        "ayacucho",
+        "andrés avelino cáceres dorregaray",
+        "jardín",
+        "san juan bautista",
+        "san juan de la frontera de huamanga",
+        "huamanga",
+        "santa ana",
+        "santa maria magdalena",
+        "cerro pijoy",
+        "compañia de jesus",
+        "conchopata",
+        "condormarka",
+        "ira qata",
+        "muyo orqo",
+        "pukaray",
+        "san cristobal",
+        "condormarca",
+        "cueva de pikimachay",
+        "huamanguilla",
+        "huar",
+        "lagunillas",
+        "leqles pampa",
+        "quebrada huamanhura",
+        "quebrada patampampa",
+        "Andrés Avelino Cáceres Dorregaray",
+        "Jardín",
+        "San Juan Bautista",
+        "San Juan de la Frontera de Huamanga",
+        "Huamanga",
+        "Santa Ana",
+        "Santa Maria Magdalena",
+        "Cerro Pijoy",
+        "Compañia de Jesus",
+        "Conchopata",
+        "Condormarka",
+        "Ira Qata",
+        "Muyo Orqo",
+        "Pukaray",
+        "San Cristobal",
+        "Condormarca",
+        "Cueva de Pikimachay",
+        "Huamanguilla",
+        "Huar",
+        "Lagunillas",
+        "Leqles Pampa",
+        "Quebrada Huamanhura",
+        "Quebrada Patampampa"
+      ],
+      "latest_year": 2025,
+      "max_pop": 240100,
+      "name": "Ayacucho",
+      "reason": "under_covered_history",
+      "region": "per_huancavelica",
+      "sample_years": [
+        1545,
+        1876,
+        1980,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Ayacucho",
+      "historical_names": [
+        {
+          "date": "1450.1.1",
+          "date_source_note": "Pre-colonial Quechua toponym Wamanqa (Huamanga) prior to 1539 Spanish foundation.",
+          "name": "Wamanqa"
+        },
+        {
+          "date": "1539.1.29",
+          "date_source_note": "First founded on 29 January 1539 by Francisco Pizarro (relocated to Puccaray on 25 April 1540) as San Juan de la Frontera de Huamanga.",
+          "name": "San Juan de la Frontera de Huamanga"
+        },
+        {
+          "date": "1825.2.15",
+          "date_source_note": "Renamed Ayacucho on 15 February 1825 by decree of Simón Bolívar to commemorate the Battle of Ayacucho.",
+          "name": "Ayacucho"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.53549,
+        -64.72956
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1575,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tarija-Bolivia",
+      "known_aliases": [
+        "Tarija",
+        "tarija",
+        "san bernardo de la frontera",
+        "villa de san bernardo",
+        "San Bernardo de la Frontera",
+        "Villa de San Bernardo"
+      ],
+      "latest_year": 2026,
+      "max_pop": 238749,
+      "name": "Tarija",
+      "reason": "missing_entry",
+      "region": "bol_tarija",
+      "sample_years": [
+        1575,
+        1890,
+        1980,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tarija",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-Hispanic Tomata/Churumata valley toponym Tarixa prior to 1574 Spanish foundation.",
+          "name": "Tarixa"
+        },
+        {
+          "date": "1574.7.4",
+          "date_source_note": "Founded on 4 July 1574 by Luis de Fuentes y Vargas as Villa de San Bernardo de la Frontera de Tarixa.",
+          "name": "San Bernardo de la Frontera de Tarixa"
+        },
+        {
+          "date": "1826.9.24",
+          "date_source_note": "Incorporation of Tarija into the Republic of Bolivia (24 September 1826); modern republican name Tarija.",
+          "name": "Tarija"
+        }
+      ]
+    }
+  ]
+}

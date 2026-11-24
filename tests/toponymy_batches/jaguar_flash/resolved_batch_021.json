@@ -1,0 +1,1349 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 21,
+  "count": 30,
+  "errors_remaining": 0,
+  "project": "JAGUAR",
+  "rounds": 1,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        15.12214,
+        -90.81219
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pueblo Viejo Chichaj-Guatemala",
+      "known_aliases": [
+        "Pueblo Viejo Chichaj",
+        "pueblo viejo chichaj"
+      ],
+      "latest_year": 1200,
+      "max_pop": 16445,
+      "name": "Pueblo Viejo Chichaj",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Chichaj",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Chichaj"
+        }
+      ],
+      "other_names": [
+        "Pueblo Viejo Chichaj"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.04923,
+        -76.81308
+      ],
+      "country": "Jamaica",
+      "earliest_year": 2022,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Meadowbrook-Jamaica",
+      "known_aliases": [
+        "Meadowbrook",
+        "meadowbrook",
+        "whitehall gardens",
+        "Whitehall Gardens"
+      ],
+      "latest_year": 2022,
+      "max_pop": 16444,
+      "name": "Meadowbrook",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Meadowbrook",
+      "historical_names": [
+        {
+          "date": "2022.1.1",
+          "name": "Meadowbrook"
+        }
+      ],
+      "other_names": [
+        "Whitehall Gardens"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        8.11466,
+        -80.95359
+      ],
+      "country": "Panama",
+      "earliest_year": 2010,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Martín de Porres-Panama",
+      "known_aliases": [
+        "San Martín de Porres",
+        "san martín de porres"
+      ],
+      "latest_year": 2023,
+      "max_pop": 16406,
+      "name": "San Martín de Porres",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2010,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Martín de Porres",
+      "historical_names": [
+        {
+          "date": "2010.1.1",
+          "name": "San Martín de Porres"
+        }
+      ],
+      "other_names": [
+        "San Martin de Porres"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19,
+        -69.96667
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cevicos-Dominican Republic",
+      "known_aliases": [
+        "Cevicos",
+        "cevicos"
+      ],
+      "latest_year": 2022,
+      "max_pop": 16311,
+      "name": "Cevicos",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Cevicos",
+      "historical_names": [
+        {
+          "date": "2002.1.1",
+          "name": "Cevicos"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        17.169,
+        -91.26217
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Piedras Negras"
+        }
+      ],
+      "existing_meta_index": 332,
+      "existing_meta_name": "Piedras Negras",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "PIEDRAS NEGRAS-Guatemala",
+      "known_aliases": [
+        "PIEDRAS NEGRAS",
+        "piedras negras",
+        "Piedras Negras"
+      ],
+      "latest_year": 1200,
+      "max_pop": 16210,
+      "name": "PIEDRAS NEGRAS",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        300,
+        850,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Piedras Negras",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Yo'k'ib'"
+        }
+      ],
+      "other_names": [
+        "Yo'k'ib'",
+        "Yokib",
+        "Piedras Negras"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.42127,
+        -88.41953
+      ],
+      "country": "Honduras",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan-Honduras",
+      "known_aliases": [
+        "San Juan",
+        "san juan"
+      ],
+      "latest_year": 2024,
+      "max_pop": 16207,
+      "name": "San Juan",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Juan",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "San Juan"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        16.845,
+        -96.678
+      ],
+      "country": "Mexico",
+      "earliest_year": 400,
+      "existing_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Jalieza"
+        }
+      ],
+      "existing_meta_index": 224,
+      "existing_meta_name": "Jalieza",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Jalieza Site-Mexico",
+      "known_aliases": [
+        "Jalieza Site",
+        "jalieza site"
+      ],
+      "latest_year": 1150,
+      "max_pop": 16200,
+      "name": "Jalieza Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        400,
+        650,
+        950,
+        1150
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Jalieza",
+      "historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Jalieza"
+        }
+      ],
+      "other_names": [
+        "Jalieza Site"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.65924,
+        -88.89827
+      ],
+      "country": "Honduras",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Union (ca_honduras)-Honduras",
+      "known_aliases": [
+        "La Union",
+        "la union"
+      ],
+      "latest_year": 2024,
+      "max_pop": 16189,
+      "name": "La Union",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "La Unión",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "La Unión"
+        }
+      ],
+      "other_names": [
+        "La Union"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        17.93927,
+        -77.06471
+      ],
+      "country": "Jamaica",
+      "earliest_year": 2022,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Bushy Park-Jamaica",
+      "known_aliases": [
+        "Bushy Park",
+        "bushy park"
+      ],
+      "latest_year": 2022,
+      "max_pop": 16180,
+      "name": "Bushy Park",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Bushy Park",
+      "historical_names": [
+        {
+          "date": "2022.1.1",
+          "name": "Bushy Park"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        10.31944,
+        -84.22455
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rio Cuarto-Costa Rica",
+      "known_aliases": [
+        "Rio Cuarto",
+        "rio cuarto"
+      ],
+      "latest_year": 2021,
+      "max_pop": 16160,
+      "name": "Rio Cuarto",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Río Cuarto",
+      "historical_names": [
+        {
+          "date": "2021.1.1",
+          "name": "Río Cuarto"
+        }
+      ],
+      "other_names": [
+        "Rio Cuarto"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.7,
+        -86.95
+      ],
+      "country": "Honduras",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Orica-Honduras",
+      "known_aliases": [
+        "Orica",
+        "orica"
+      ],
+      "latest_year": 2024,
+      "max_pop": 16154,
+      "name": "Orica",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Orica",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Orica"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.31634,
+        -71.59451
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Duvergé-Dominican Republic",
+      "known_aliases": [
+        "Duvergé",
+        "duvergé"
+      ],
+      "latest_year": 2022,
+      "max_pop": 16141,
+      "name": "Duvergé",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Duvergé",
+      "historical_names": [
+        {
+          "date": "2002.1.1",
+          "name": "Duvergé"
+        }
+      ],
+      "other_names": [
+        "Las Damas",
+        "Duverge"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        10.43858,
+        -84.09153
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Virgen-Costa Rica",
+      "known_aliases": [
+        "La Virgen",
+        "la virgen"
+      ],
+      "latest_year": 2021,
+      "max_pop": 16074,
+      "name": "La Virgen",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "La Virgen",
+      "historical_names": [
+        {
+          "date": "2021.1.1",
+          "name": "La Virgen"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.92193,
+        -89.97367
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guaytan-Guatemala",
+      "known_aliases": [
+        "Guaytan",
+        "guaytan"
+      ],
+      "latest_year": 1200,
+      "max_pop": 16002,
+      "name": "Guaytan",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Guaytán",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Guaytán"
+        }
+      ],
+      "other_names": [
+        "Guaytan"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        20.37123,
+        -90.05074
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Calkiní"
+        }
+      ],
+      "existing_meta_index": 2789,
+      "existing_meta_name": "Calkiní",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Calkiní-Mexico",
+      "known_aliases": [
+        "Calkiní",
+        "calkiní",
+        "calkini"
+      ],
+      "latest_year": 2020,
+      "max_pop": 15949,
+      "name": "Calkiní",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        -300,
+        1577,
+        1950,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Calkiní",
+          "year": 1900
+        },
+        {
+          "name": "Kalkiní",
+          "year": 1930
+        }
+      ],
+      "canonical_name": "Calkiní",
+      "historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Calkiní"
+        }
+      ],
+      "other_names": [
+        "Kalkiní",
+        "Calkini"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.35108,
+        -66.12698
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Rosa-Puerto Rico",
+      "known_aliases": [
+        "Santa Rosa",
+        "santa rosa"
+      ],
+      "latest_year": 2020,
+      "max_pop": 15927,
+      "name": "Santa Rosa",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Santa Rosa",
+      "historical_names": [
+        {
+          "date": "2020.1.1",
+          "name": "Santa Rosa"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        10.0297,
+        -83.22883
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Carrandi-Costa Rica",
+      "known_aliases": [
+        "Carrandi",
+        "carrandi"
+      ],
+      "latest_year": 2021,
+      "max_pop": 15913,
+      "name": "Carrandi",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Carrandí",
+      "historical_names": [
+        {
+          "date": "2021.1.1",
+          "name": "Carrandí"
+        }
+      ],
+      "other_names": [
+        "Carrandi"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.37795,
+        -71.8303
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Carice-Haiti",
+      "known_aliases": [
+        "Carice",
+        "carice"
+      ],
+      "latest_year": 2024,
+      "max_pop": 15825,
+      "name": "Carice",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Carice",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Carice"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.46564,
+        -95.30175
+      ],
+      "country": "Mexico",
+      "earliest_year": 1548,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Santiago Tuxtla"
+        }
+      ],
+      "existing_meta_index": 3087,
+      "existing_meta_name": "Santiago Tuxtla",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santiago Tuxtla-Mexico",
+      "known_aliases": [
+        "Santiago Tuxtla",
+        "santiago tuxtla"
+      ],
+      "latest_year": 2020,
+      "max_pop": 15733,
+      "name": "Santiago Tuxtla",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1548,
+        1821,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Santiago Tuxtla",
+          "year": 1900
+        },
+        {
+          "name": "Juan de la Luz Enríquez",
+          "year": 1932
+        }
+      ],
+      "canonical_name": "Santiago Tuxtla",
+      "historical_names": [
+        {
+          "date": "1548.1.1",
+          "name": "Santiago Tuxtla"
+        },
+        {
+          "date": "1932.1.1",
+          "name": "Juan de la Luz Enríquez"
+        },
+        {
+          "date": "1936.1.1",
+          "name": "Santiago Tuxtla"
+        }
+      ],
+      "other_names": [
+        "Tochtlan",
+        "Tuxtla"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        9.84455,
+        -84.08295
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Salitrillos-Costa Rica",
+      "known_aliases": [
+        "Salitrillos",
+        "salitrillos"
+      ],
+      "latest_year": 2021,
+      "max_pop": 15711,
+      "name": "Salitrillos",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Salitrillos",
+      "historical_names": [
+        {
+          "date": "2021.1.1",
+          "name": "Salitrillos"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.50228,
+        -71.34271
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Galván-Dominican Republic",
+      "known_aliases": [
+        "Galván",
+        "galván"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15702,
+      "name": "Galván",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Galván",
+      "historical_names": [
+        {
+          "date": "2002.1.1",
+          "name": "Galván"
+        }
+      ],
+      "other_names": [
+        "Cambronal",
+        "Galvan"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.30056,
+        -87.11389
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Ana de Yusguare-Honduras",
+      "known_aliases": [
+        "Santa Ana de Yusguare",
+        "santa ana de yusguare"
+      ],
+      "latest_year": 2024,
+      "max_pop": 15642,
+      "name": "Santa Ana de Yusguare",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Santa Ana de Yusguare",
+      "historical_names": [
+        {
+          "date": "2001.1.1",
+          "name": "Santa Ana de Yusguare"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.06667,
+        -88.46667
+      ],
+      "country": "Honduras",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Piraera-Honduras",
+      "known_aliases": [
+        "Piraera",
+        "piraera"
+      ],
+      "latest_year": 2024,
+      "max_pop": 15639,
+      "name": "Piraera",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Piraera",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Piraera"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.12274,
+        -89.04833
+      ],
+      "country": "El Salvador",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Rafael-El Salvador",
+      "known_aliases": [
+        "San Rafael",
+        "san rafael"
+      ],
+      "latest_year": 2024,
+      "max_pop": 15628,
+      "name": "San Rafael",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Rafael",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "San Rafael"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.37548,
+        -90.36714
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chichen-Guatemala",
+      "known_aliases": [
+        "Chichen",
+        "chichen"
+      ],
+      "latest_year": 1200,
+      "max_pop": 15613,
+      "name": "Chichen",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Chichen",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Chichen"
+        }
+      ],
+      "other_names": [
+        "Chichén"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.804,
+        -99.297
+      ],
+      "country": "Mexico",
+      "earliest_year": 650,
+      "existing_historical_names": [
+        {
+          "date": "650.1.1",
+          "name": "Xochicalco"
+        }
+      ],
+      "existing_meta_index": 294,
+      "existing_meta_name": "Xochicalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Xochicalco Site-Mexico",
+      "known_aliases": [
+        "Xochicalco Site",
+        "xochicalco site"
+      ],
+      "latest_year": 900,
+      "max_pop": 15600,
+      "name": "Xochicalco Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        650,
+        800,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Xochicalco",
+      "historical_names": [
+        {
+          "date": "650.1.1",
+          "name": "Xochicalco"
+        }
+      ],
+      "other_names": [
+        "Xochicalco Site"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.46689,
+        -89.48541
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sepila-Guatemala",
+      "known_aliases": [
+        "Sepila",
+        "sepila"
+      ],
+      "latest_year": 1200,
+      "max_pop": 15576,
+      "name": "Sepila",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Sepila",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Sepila"
+        }
+      ],
+      "other_names": [
+        "Sepilá"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.86462,
+        -99.98248
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1531.1.1",
+          "name": "Sultepec"
+        }
+      ],
+      "existing_meta_index": 1203,
+      "existing_meta_name": "Sultepec",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sultepec-Mexico",
+      "known_aliases": [
+        "Sultepec",
+        "sultepec"
+      ],
+      "latest_year": 1821,
+      "max_pop": 15541,
+      "name": "Sultepec",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1700,
+        1790,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Sultepec",
+      "historical_names": [
+        {
+          "date": "1531.1.1",
+          "name": "Sultepec"
+        }
+      ],
+      "other_names": [
+        "Zoltepec",
+        "Zultepec",
+        "Real de Minas de Sultepec"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.33529,
+        -66.02488
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Carraízo-Puerto Rico",
+      "known_aliases": [
+        "Carraízo",
+        "carraízo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 15533,
+      "name": "Carraízo",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Carraízo",
+      "historical_names": [
+        {
+          "date": "2020.1.1",
+          "name": "Carraízo"
+        }
+      ],
+      "other_names": [
+        "Carraizo"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.45566,
+        -86.40622
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Palacagüina-Nicaragua",
+      "known_aliases": [
+        "Palacagüina",
+        "palacagüina",
+        "palacaguina"
+      ],
+      "latest_year": 2023,
+      "max_pop": 15514,
+      "name": "Palacagüina",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Palacagüina",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Palacagüina"
+        }
+      ],
+      "other_names": [
+        "Palacaguina"
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

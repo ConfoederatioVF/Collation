@@ -1,0 +1,139 @@
+=== [30] Samanco-Peru | n=Samanco | c=Peru | r=per_ancash | ll=[-9.26222, -78.49583] | ey=1850 ly=2025 | al=None | ex=None ===
+  RAW_SETT: {"name": "Samanco", "other_names": [], "admin1": "Áncash", "admin2": "SANTA", "sources": ["INEI Peru Censuses 2007, 2017 & 2025 (all districts)"], "coord_source": "INEI_UBIGEO"}
+  HGIS (7.78km): name=Huambacho mod=Huambacho var=[] 1111..9999 cat=Pueblo prov=Lima part=Santa obs=
+
+=== [31] La Cabuya G-Ecuador | n=La Cabuya G | c=Ecuador | r=ca_equatorial_sierra_canari | ll=[-1.58, -80.46] | ey=-1802 ly=-348 | al=['buena vista', 'Buena Vista'] | ex=None ===
+  ARCH (0.0km, raw_ecuador_radiocarbon_syntheses.json): {"name": "La Cabuya G-110", "period": "3320 +/- 170 BP"}
+  ARCH (0.0km, raw_ecuador_radiocarbon_syntheses.json): {"name": "La Cabuya G-110", "period": "2980 +/- 160 BP"}
+  ARCH (0.0km, raw_ecuador_radiocarbon_syntheses.json): {"name": "La Cabuya G-110", "period": "2830 +/- 45 BP"}
+
+=== [32] Guale-Ecuador | n=Guale | c=Ecuador | r=ecu_manabi | ll=[-1.63115, -80.27145] | ey=1850 ly=2025 | al=None | ex=None ===
+
+=== [33] Azara-Argentina | n=Azara | c=Argentina | r=arg_misiones | ll=[-28.05725, -55.6768] | ey=1900 ly=2022 | al=None | ex=None ===
+  RAW_SETT: {"name": "Azara", "other_names": [], "admin1": "Misiones", "sources": ["INDEC Argentina Censo 2022 (Total del país por gobierno local)"], "coord_source": "IGN_INDEC_Georef"}
+
+=== [34] Chinchipe-Peru | n=Chinchipe | c=Peru | r=vng_audiencia_quito_sierra | ll=[-5.395, -78.635] | ey=1525 ly=1830 | al=['san fernando', 'San Fernando'] | ex=None ===
+  HGIS (0.0km): name=Chinchipe mod=Chinchipe var=[] 1111..9999 cat=Pueblo prov=Jaen part=Jaen obs=
+  HGIS (0.78km): name=San Fernando mod=San Fernando var=[] 1111..9999 cat=Poblacion prov=Jaen part=Jaen obs=
+  HGIS (7.85km): name=Jaen mod=Jaen var=[] 1549..1804 cat=Ciudad prov=Jaen part=Jaen obs=
+
+=== [35] Llano de Alegrías-Colombia | n=Llano de Alegrías | c=Colombia | r=col_cauca | ll=[2.98561, -76.50563] | ey=1525 ly=2018 | al=['alegrias', 'el tajo', 'la capilla'] | ex=None ===
+  HGIS (0.06km): name=Alegria mod=Alegrias var=[] 1111..9999 cat=Poblacion prov=Popayan part=Caloto obs=
+  HGIS (1.74km): name=Quinamayo mod=Quinamayo var=[] 1111..9999 cat=Poblacion prov=Popayan part=Caloto obs=
+  HGIS (3.38km): name=Asiento de San Antonio de Quilichao mod=Santander de Quilichao var=['Jamaica|'] 1762..9999 cat=Poblacion prov=Popayan part=Caloto obs=
+
+=== [36] El Algarrobal-Peru | n=El Algarrobal | c=Peru | r=per_moquegua | ll=[-17.62278, -71.26833] | ey=1850 ly=2025 | al=None | ex=None ===
+  RAW_SETT: {"name": "El Algarrobal", "other_names": [], "admin1": "Moquegua", "admin2": "ILO", "sources": ["INEI Peru Censuses 2007, 2017 & 2025 (all districts)"], "coord_source": "INEI_UBIGEO"}
+  HGIS (1.81km): name=Chaspaya mod=Chaspaya var=[] 1111..9999 cat=Pueblo prov=Arequipa part=Arica obs=
+  HGIS (7.17km): name=Puerto de Ilo mod=Puerto de Ilo var=[] 1111..9999 cat=Pueblo prov=Arequipa part=Arica obs=
+  ARCH (1.029km, raw_peru_sigda.json): {"name": "Chiribaya Baja - Sector 1"}
+  ARCH (1.347km, raw_peru_sigda.json): {"name": "Chiribaya Baja Sector 2"}
+  ARCH (2.092km, raw_peru_sigda.json): {"name": "S.H. HACIENDA CHIRIBAYA"}
+
+=== [37] Durania-Colombia | n=Durania | c=Colombia | r=col_norte_de_santander | ll=[7.7148, -72.65849] | ey=1850 ly=2025 | al=None | ex=None ===
+  RAW_SETT: {"name": "Durania", "other_names": [], "admin1": "Norte De Santander", "sources": ["DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"], "coord_source": "DANE_DIVIPOLA"}
+  HGIS (11.5km): name=Bochalema mod=Bochalema var=[] 1111..1755 cat=Poblacion prov=Pamplona part=Servita obs=
+  HGIS (13.47km): name=Chinacota mod=Chinacota var=[] 1111..9999 cat=Pueblo prov=Pamplona part=Servita obs=
+  ARCH (1.585km, raw_colombia_icanh_sitios.json): {"name": "SA-DRN-005", "period": "Prehispanic / Archaeological (unspecified)"}
+  ARCH (1.604km, raw_colombia_icanh_sitios.json): {"name": "SA-DRN-003", "period": "Prehispanic / Archaeological (unspecified)"}
+  ARCH (1.645km, raw_colombia_icanh_sitios.json): {"name": "SA-DRN-004", "period": "Prehispanic / Archaeological (unspecified)"}
+
+=== [38] El Llano-Colombia_2 | n=El Llano | c=Colombia | r=na_pacific_equatorial_valdivia | ll=[1.65645, -78.65391] | ey=1000 ly=1500 | al=None | ex=None ===
+  HGIS (5.61km): name=Bogota mod=Bogota var=[] 1111..9999 cat=Poblacion prov=Esmeraldas part=Esmeraldas obs=
+  HGIS (5.87km): name=Rios mod=Rios var=[] 1111..9999 cat=Poblacion prov=Esmeraldas part=Esmeraldas obs=
+  HGIS (6.23km): name=Tulalbi mod=Tulalbi var=[] 1111..9999 cat=Poblacion prov=Esmeraldas part=Esmeraldas obs=
+  ARCH (0.0km, raw_colombia_icanh_sitios.json): {"name": "El Llano", "period": "Prehispanic / Archaeological (unspecified)"}
+  ARCH (1.338km, raw_colombia_icanh_sitios.json): {"name": "Nueva Creación", "period": "Prehispanic / Archaeological (unspecified)"}
+  ARCH (1.864km, raw_colombia_icanh_sitios.json): {"name": "Delicias", "period": "Prehispanic / Archaeological (unspecified)"}
+
+=== [39] San Miguel-Argentina_3 | n=San Miguel | c=Argentina | r=sc_nw_andes_sierras_cuyo | ll=[-30.34705, -64.47988] | ey=80 ly=1500 | al=['san miguel sitio', 'San Miguel Sitio'] | ex=None ===
+  HGIS (14.91km): name=Quilino mod=Quilino var=['quinilones|'] 1111..1795 cat=Pueblo prov=Tucuman part=Cordoba obs=
+  HGIS (14.91km): name=Quilino mod=Quilino var=[] 1796..9999 cat=Poblacion prov=Tucuman part=Cordoba obs=
+  ARCH (0.001km, raw_argentina_idacor_ariadne.json): {"name": "San Miguel", "period": "80 to 1620"}
+  ARCH (0.001km, raw_argentina_idacor_ariadne.json): {"name": "San Miguel Sitio 4", "period": "80 to 1620"}
+
+=== [40] El Rincón (ven_sucre)-Venezuela | n=El Rincón | c=Venezuela | r=ven_sucre | ll=[10.59722, -63.19611] | ey=1850 ly=2025 | al=None | ex=None ===
+  HGIS (3.97km): name=Pilar Chuparipar mod=Pilar Chuparipar var=['Chupampa|'] 1712..1753 cat=Pueblo prov=Cumana part=Cumana obs=
+  HGIS (5.25km): name=San Pedro y San Pablo del Rincon mod=San Pedro y San Pablo del Rincon var=[] 1712..1760 cat=Pueblo prov=Cumana part=Cumana obs=
+  HGIS (5.61km): name=Canchunchu mod=Canchunchu var=[] 1111..9999 cat=Pueblo prov=Cumana part=Cumana obs=
+
+=== [41] Rio La Cruz-Argentina | n=Rio La Cruz | c=Argentina | r=sc_parana_uruguay_charrua | ll=[-32.31042, -64.47716] | ey=80 ly=1500 | al=None | ex=None ===
+  ARCH (0.0km, raw_argentina_idacor_ariadne.json): {"name": "Rio La Cruz", "period": "80 to 1620"}
+
+=== [42] General Leonidas Plaza Gutiérrez-Ecuador | n=General Leonidas Plaza Gutiérrez | c=Ecuador | r=ecu_morona_santiago | ll=[-2.96629, -78.43294] | ey=1920 ly=2025 | al=None | ex=None ===
+
+=== [43] Cáceres del Perú-Peru | n=Cáceres del Perú | c=Peru | r=per_ancash | ll=[-9.01306, -78.13806] | ey=1525 ly=2025 | al=['jimbe', 'Jimbe'] | ex=None ===
+  RAW_SETT: {"name": "Cáceres del Perú", "other_names": ["Jimbe"], "admin1": "Áncash", "admin2": "SANTA", "sources": ["INEI Peru Censuses 2007, 2017 & 2025 (all districts)"], "coord_source": "INEI_UBIGEO"}
+  HGIS (0.01km): name=Jimbe mod=Jimbe var=[] 1111..9999 cat=Pueblo prov=Lima part=Santa obs=
+  HGIS (14.85km): name=Moro mod=Moro var=[] 1111..9999 cat=Pueblo prov=Lima part=Santa obs=
+  ARCH (2.075km, raw_peru_sigda.json): {"name": "Cerro Naranjo"}
+
+=== [44] Juan Guerra-Peru | n=Juan Guerra | c=Peru | r=per_san_martin | ll=[-6.58417, -76.33083] | ey=1900 ly=2025 | al=None | ex=None ===
+  RAW_SETT: {"name": "Juan Guerra", "other_names": [], "admin1": "San Martín", "admin2": "SAN MARTIN", "sources": ["INEI Peru Censuses 2007, 2017 & 2025 (all districts)"], "coord_source": "INEI_UBIGEO"}
+  HGIS (8.29km): name=San Pedro Cumbaza mod=San Pedro Cumbaza var=[] 1111..1788 cat=Pueblo prov=Trujillo part=Lamas obs=
+  HGIS (11.91km): name=Tarapoto mod=Tarapoto var=[] 1789..9999 cat=Pueblo prov=Trujillo part=Lamas obs=
+  ARCH (0.569km, raw_peru_sigda.json): {"name": "Urito Wasi"}
+  ARCH (0.793km, raw_peru_sigda.json): {"name": "SITIO ARQUEOLÓGICO URNAS DE JUAN GUERRA"}
+
+=== [45] Chuquichambi-Bolivia | n=Chuquichambi | c=Bolivia | r=bol_oruro | ll=[-17.90852, -67.80698] | ey=1525 ly=2024 | al=None | ex=None ===
+  HGIS (0.22km): name=Chuquichambi mod=Chuquichambi var=[] 1111..9999 cat=Pueblo prov=Charcas part=Carangas obs=
+
+=== [46] Guajaro-Colombia | n=Guajaro | c=Colombia | r=na_caribbean_maracaibo_tairona | ll=[10.28455, -75.24545] | ey=-2785 ly=1500 | al=['rotinet', 'Rotinet'] | ex=None ===
+  HGIS (8.43km): name=Mahates mod=Mahates var=[] 1533..9999 cat=Poblacion prov=Cartagena part=Mahates obs=
+  HGIS (11.1km): name=Arjona mod=Arjona var=[] 1775..9999 cat=Poblacion prov=Cartagena part=Mahates obs=
+  HGIS (13.38km): name=Santa Cruz de Mahates mod=Santa Cruz de Mahates var=[] 1111..9999 cat=Rural prov=Cartagena part=Mahates obs=
+  ARCH (0.0km, raw_colombia_col14.json): {"name": "Guajaro", "period": "670 +/- 90 BP"}
+  ARCH (0.0km, raw_colombia_col14.json): {"name": "Rotinet", "period": "4190 +/- 120 BP"}
+  ARCH (0.0km, raw_colombia_col14.json): {"name": "Rotinet", "period": "3800 +/- 110 BP"}
+
+=== [47] Manchari-Peru | n=Manchari | c=Peru | r=inca_chinchaysuyu | ll=[-3.81433, -76.51491] | ey=-1000 ly=1530 | al=['puerto alegre', 'Puerto Alegre'] | ex=None ===
+  ARCH (0.0km, raw_peru_sigda.json): {"name": "Manchari 6"}
+  ARCH (0.0km, raw_peru_sigda.json): {"name": "Manchari 6"}
+  ARCH (0.654km, raw_peru_sigda.json): {"name": "Puerto Alegre"}
+
+=== [48] Río Grande-Peru | n=Río Grande | c=Peru | r=per_arequipa | ll=[-15.94, -73.13111] | ey=1950 ly=2025 | al=['iquipi', 'Iquipi'] | ex=None ===
+  RAW_SETT: {"name": "Río Grande", "other_names": ["Iquipi"], "admin1": "Arequipa", "admin2": "CONDESUYOS", "sources": ["INEI Peru Censuses 2007, 2017 & 2025 (all districts)"], "coord_source": "INEI_UBIGEO"}
+  HGIS (9.7km): name=Chorunga mod=Chorunga var=[] 1111..9999 cat=Pueblo prov=Arequipa part=Condesuyos obs=
+  ARCH (0.376km, raw_peru_sigda.json): {"name": "RG10 - Iquipi"}
+  ARCH (1.436km, raw_peru_sigda.json): {"name": "RG01 - Corral Redondo"}
+  ARCH (1.771km, raw_peru_sigda.json): {"name": "RG09 - Río Chorunga"}
+
+=== [49] Lucas González-Argentina | n=Lucas González | c=Argentina | r=arg_entre_rios | ll=[-32.38436, -59.53089] | ey=1850 ly=2022 | al=None | ex=None ===
+  RAW_SETT: {"name": "Lucas González", "other_names": [], "admin1": "Entre Ríos", "sources": ["INDEC Argentina Censo 2022 (Total del país por gobierno local)"], "coord_source": "IGN_INDEC_Georef"}
+
+=== [50] Santa Catalina Holmberg-Argentina | n=Santa Catalina Holmberg | c=Argentina | r=arg_cordoba | ll=[-33.20529, -64.43791] | ey=1850 ly=2022 | al=None | ex=None ===
+  RAW_SETT: {"name": "Santa Catalina Holmberg", "other_names": [], "admin1": "Córdoba", "sources": ["INDEC Argentina Censo 2022 (Total del país por gobierno local)"], "coord_source": "IGN_INDEC_Georef"}
+  HGIS (1.07km): name=Santa Catalina mod=Santa Catalina var=[] 1111..9999 cat=Fuerte prov=Tucuman part=Cordoba obs=
+  HGIS (12.32km): name=Concepcion Rio Cuarto mod=Concepcion Rio Cuarto var=[] 1798..9999 cat=Villa prov=Tucuman part=Cordoba obs=
+  ARCH (1.045km, raw_argentina_idacor_ariadne.json): {"name": "Paradero Indigena", "period": "80 to 1620"}
+
+=== [51] Tres Tomas-Peru | n=Tres Tomas | c=Peru | r=inca_chinchaysuyu | ll=[-6.6469, -79.72964] | ey=1438 ly=1530 | al=['cerro el refugio', 'luya', 'Cerro El Refugio'] | ex=None ===
+  HGIS (6.71km): name=Ferreñafe mod=Ferreñafe var=[] 1111..9999 cat=Pueblo prov=Trujillo part=Saña obs=
+  HGIS (9.03km): name=San Miguel Pice mod=Picse var=['Picsi'] 1111..9999 cat=Pueblo prov=Trujillo part=Saña obs=
+  ARCH (0.0km, raw_peru_sigda.json): {"name": "Tres Tomas"}
+
+=== [52] La Villegas-Ecuador | n=La Villegas | c=Ecuador | r=ecu_santo_domingo_de_los_tsachilas | ll=[-0.07176, -79.45257] | ey=1850 ly=2025 | al=None | ex=None ===
+
+=== [53] Misión Tacaaglé-Argentina | n=Misión Tacaaglé | c=Argentina | r=arg_formosa | ll=[-24.98097, -58.82519] | ey=1900 ly=2022 | al=None | ex=None ===
+  RAW_SETT: {"name": "Misión Tacaaglé", "other_names": [], "admin1": "Formosa", "sources": ["INDEC Argentina Censo 2022 (Total del país por gobierno local)"], "coord_source": "IGN_INDEC_Georef"}
+
+=== [54] Murca-Colombia | n=Murca | c=Colombia | r=vng_santafe_tunja_highlands | ll=[5.39, -74.352] | ey=1525 ly=1830 | al=None | ex=None ===
+  HGIS (0.0km): name=Murca mod=Murca var=[] 1805..9999 cat=Pueblo prov=Mariquita part=La Palma obs=
+  HGIS (5.52km): name=La Palma mod=La Palma var=[] 1581..9999 cat=Ciudad prov=Mariquita part=La Palma obs=
+  HGIS (7.83km): name=Yacopi mod=Yacopi var=[] 1743..9999 cat=Pueblo prov=Mariquita part=La Palma obs=
+  ARCH (1.134km, raw_colombia_icanh_sitios.json): {"name": "Bacatá Sitio torre 254", "period": "Prehispanic / Archaeological (unspecified)"}
+
+=== [55] Acheral-Argentina | n=Acheral | c=Argentina | r=arg_tucuman | ll=[-27.12072, -65.47056] | ey=1850 ly=2022 | al=None | ex=None ===
+  RAW_SETT: {"name": "Acheral", "other_names": [], "admin1": "Tucumán", "sources": ["INDEC Argentina Censo 2022 (Total del país por gobierno local)"], "coord_source": "IGN_INDEC_Georef"}
+  HGIS (10.08km): name=Famailla mod=Famailla var=[] 1111..9999 cat=Pueblo prov=Tucuman part=San Miguel obs=
+
+=== [56] Santa Cruz Mamo-Colombia | n=Santa Cruz Mamo | c=Colombia | r=vng_antioquia_popayan_choco | ll=[0.463, -76.5] | ey=1737 ly=1754 | al=['santa cruz de los encabellados', 'Santa Cruz de los Encabellados'] | ex=None ===
+  HGIS (0.0km): name=Santa Cruz Mamo mod=Santa Cruz Mamo var=['Santa Cruz de los Encabellados'] 1737..1754 cat=Pueblo prov=Popayan part=Sucumbios obs=
+
+=== [57] Chumundé-Ecuador | n=Chumundé | c=Ecuador | r=ecu_esmeraldas | ll=[0.72221, -79.39746] | ey=1850 ly=2025 | al=None | ex=None ===
+
+=== [58] Inquiliguala-Argentina | n=Inquiliguala | c=Argentina | r=crp_gobernacion_tucuman | ll=[-28.302, -63.173] | ey=1536 ly=1830 | al=None | ex=None ===
+  HGIS (0.0km): name=Inquiliguala mod=Inquiliguala var=[] 1111..9999 cat=Pueblo prov=Tucuman part=Estero obs=
+  HGIS (14.52km): name=Mopa mod=Mopa var=[] 1111..1790 cat=Pueblo prov=Tucuman part=Estero obs=
+
+=== [59] Supte San Jorge-Peru | n=Supte San Jorge | c=Peru | r=per_huanuco | ll=[-9.2875, -75.975] | ey=1850 ly=2017 | al=None | ex=None ===

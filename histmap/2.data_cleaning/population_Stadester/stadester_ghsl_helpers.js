@@ -472,6 +472,15 @@
     //Guard clauses
     if (!entry_a || !entry_b || !entry_a.city || !entry_b.city || !(dist_km <= 50)) return false;
     if (!population_Stadester_ghsl.areCompatibleTwinCountries(entry_a.city.country, entry_b.city.country)) return false;
+    let scope_a = String(entry_a.city.population_scope || entry_a.city.extent_type || "");
+    let scope_b = String(entry_b.city.population_scope || entry_b.city.extent_type || "");
+    if (
+      entry_a.city.viscount_project &&
+      entry_b.city.viscount_project &&
+      ((scope_a === "metro" && scope_b === "city_proper") || (scope_a === "city_proper" && scope_b === "metro"))
+    ) {
+      return false;
+    }
     
     //Function body
     c_a = String(entry_a.city.country || "");

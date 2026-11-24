@@ -1,0 +1,1187 @@
+{
+  "batch_index": 1469,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        23.40515,
+        -105.86934
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1760.1.1",
+          "name": "Carrizal"
+        }
+      ],
+      "existing_meta_index": 1879,
+      "existing_meta_name": "El Carrizal",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Carrizal (int_arizpe_sonora_californias)-Mexico",
+      "known_aliases": [
+        "Carrizal",
+        "carrizal"
+      ],
+      "latest_year": 1821,
+      "max_pop": 78,
+      "name": "Carrizal",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1700,
+        1790,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.18643,
+        -112.07563
+      ],
+      "country": "Mexico",
+      "earliest_year": 1790,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Concepcion Cadegomo-Mexico",
+      "known_aliases": [
+        "Concepcion Cadegomo",
+        "concepcion cadegomo"
+      ],
+      "latest_year": 1808,
+      "max_pop": 78,
+      "name": "Concepcion Cadegomo",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1790,
+        1798,
+        1808
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.69478,
+        -99.2767
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-39-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-39",
+        "basin of mexico cu-az-39"
+      ],
+      "latest_year": 1519,
+      "max_pop": 78,
+      "name": "Basin of Mexico CU-AZ-39",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.77957,
+        -98.95227
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico TM-AZ-39-Mexico",
+      "known_aliases": [
+        "Basin of Mexico TM-AZ-39",
+        "basin of mexico tm-az-39"
+      ],
+      "latest_year": 1519,
+      "max_pop": 78,
+      "name": "Basin of Mexico TM-AZ-39",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.77345,
+        -98.83772
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico TE-AZ-50-Mexico",
+      "known_aliases": [
+        "Basin of Mexico TE-AZ-50",
+        "basin of mexico te-az-50"
+      ],
+      "latest_year": 1519,
+      "max_pop": 78,
+      "name": "Basin of Mexico TE-AZ-50",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.39372,
+        -98.84698
+      ],
+      "country": "Mexico",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "1318.1.1",
+          "name": "Tetzcoco"
+        },
+        {
+          "date": "1551.9.9",
+          "name": "Texcoco"
+        },
+        {
+          "date": "1861.1.1",
+          "name": "Texcoco de Mora"
+        }
+      ],
+      "existing_meta_index": 533,
+      "existing_meta_name": "Texcoco de Mora",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Texcoco Survey TX-LF-TF-1-Mexico",
+      "known_aliases": [
+        "Texcoco Survey TX-LF-TF-1",
+        "texcoco survey tx-lf-tf-1"
+      ],
+      "latest_year": 100,
+      "max_pop": 78,
+      "name": "Texcoco Survey TX-LF-TF-1",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -200,
+        -150,
+        -100,
+        1,
+        100
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.93683,
+        -99.1744
+      ],
+      "country": "Mexico",
+      "earliest_year": 150,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-CL-26-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-CL-26",
+        "zumpango zu-cl-26"
+      ],
+      "latest_year": 650,
+      "max_pop": 78,
+      "name": "Zumpango ZU-CL-26",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        150,
+        400,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.57028,
+        -99.04767
+      ],
+      "country": "Mexico",
+      "earliest_year": 150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-CL-43-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-CL-43",
+        "basin of mexico cu-cl-43"
+      ],
+      "latest_year": 650,
+      "max_pop": 78,
+      "name": "Basin of Mexico CU-CL-43",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        150,
+        400,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.63296,
+        -99.21937
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-138-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-138",
+        "basin of mexico cu-az-138"
+      ],
+      "latest_year": 1519,
+      "max_pop": 77,
+      "name": "Basin of Mexico CU-AZ-138",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.61753,
+        -99.20028
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-158-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-158",
+        "basin of mexico cu-az-158"
+      ],
+      "latest_year": 1519,
+      "max_pop": 77,
+      "name": "Basin of Mexico CU-AZ-158",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.55536,
+        -99.07627
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-297-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-297",
+        "basin of mexico cu-az-297"
+      ],
+      "latest_year": 1519,
+      "max_pop": 77,
+      "name": "Basin of Mexico CU-AZ-297",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.29749,
+        -98.86627
+      ],
+      "country": "Mexico",
+      "earliest_year": -1150,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco CH-MF-3-Mexico",
+      "known_aliases": [
+        "Chalco CH-MF-3",
+        "chalco ch-mf-3"
+      ],
+      "latest_year": -650,
+      "max_pop": 77,
+      "name": "Chalco CH-MF-3",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -1150,
+        -900,
+        -650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.27694,
+        -99.25222
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Francisco Texcatepec-Mexico",
+      "known_aliases": [
+        "San Francisco Texcatepec",
+        "san francisco texcatepec"
+      ],
+      "latest_year": 1821,
+      "max_pop": 76,
+      "name": "San Francisco Texcatepec",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.14175,
+        -98.82497
+      ],
+      "country": "Mexico",
+      "earliest_year": 950,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LTAzI-83-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LTAzI-83",
+        "chalco survey ch-ltazi-83"
+      ],
+      "latest_year": 1200,
+      "max_pop": 76,
+      "name": "Chalco Survey CH-LTAzI-83",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        950,
+        1100,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.16716,
+        -98.84699
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LTAzI-23-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LTAzI-23",
+        "chalco survey ch-ltazi-23"
+      ],
+      "latest_year": 1200,
+      "max_pop": 76,
+      "name": "Chalco Survey CH-LTAzI-23",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1025,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.91772,
+        -99.10462
+      ],
+      "country": "Mexico",
+      "earliest_year": 150,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-CL-34-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-CL-34",
+        "zumpango zu-cl-34"
+      ],
+      "latest_year": 650,
+      "max_pop": 76,
+      "name": "Zumpango ZU-CL-34",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        150,
+        400,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.89285,
+        -99.13308
+      ],
+      "country": "Mexico",
+      "earliest_year": 150,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-CL-55-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-CL-55",
+        "zumpango zu-cl-55"
+      ],
+      "latest_year": 650,
+      "max_pop": 76,
+      "name": "Zumpango ZU-CL-55",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        150,
+        400,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.81006,
+        -99.148
+      ],
+      "country": "Mexico",
+      "earliest_year": 150,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-CL-66-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-CL-66",
+        "zumpango zu-cl-66"
+      ],
+      "latest_year": 650,
+      "max_pop": 76,
+      "name": "Zumpango ZU-CL-66",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        150,
+        400,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.87976,
+        -99.11415
+      ],
+      "country": "Mexico",
+      "earliest_year": 650,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-ET-17-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-ET-17",
+        "zumpango zu-et-17"
+      ],
+      "latest_year": 900,
+      "max_pop": 76,
+      "name": "Zumpango ZU-ET-17",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        650,
+        775,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.84708,
+        -99.18175
+      ],
+      "country": "Mexico",
+      "earliest_year": 650,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-ET-20-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-ET-20",
+        "zumpango zu-et-20"
+      ],
+      "latest_year": 900,
+      "max_pop": 76,
+      "name": "Zumpango ZU-ET-20",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        650,
+        775,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.75842,
+        -99.06109
+      ],
+      "country": "Mexico",
+      "earliest_year": 650,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-ET-28-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-ET-28",
+        "zumpango zu-et-28"
+      ],
+      "latest_year": 900,
+      "max_pop": 76,
+      "name": "Zumpango ZU-ET-28",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        650,
+        775,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.91058,
+        -99.21067
+      ],
+      "country": "Mexico",
+      "earliest_year": 900,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-LT-81-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-LT-81",
+        "zumpango zu-lt-81"
+      ],
+      "latest_year": 1150,
+      "max_pop": 76,
+      "name": "Zumpango ZU-LT-81",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        900,
+        1025,
+        1150
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.91383,
+        -99.11676
+      ],
+      "country": "Mexico",
+      "earliest_year": 900,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-LT-93-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-LT-93",
+        "zumpango zu-lt-93"
+      ],
+      "latest_year": 1150,
+      "max_pop": 76,
+      "name": "Zumpango ZU-LT-93",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        900,
+        1025,
+        1150
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.8506,
+        -99.06752
+      ],
+      "country": "Mexico",
+      "earliest_year": 900,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-LT-121-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-LT-121",
+        "zumpango zu-lt-121"
+      ],
+      "latest_year": 1150,
+      "max_pop": 76,
+      "name": "Zumpango ZU-LT-121",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        900,
+        1025,
+        1150
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.85128,
+        -99.13639
+      ],
+      "country": "Mexico",
+      "earliest_year": 900,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-LT-151-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-LT-151",
+        "zumpango zu-lt-151"
+      ],
+      "latest_year": 1150,
+      "max_pop": 76,
+      "name": "Zumpango ZU-LT-151",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        900,
+        1025,
+        1150
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.78344,
+        -99.2022
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [
+        {
+          "date": "1168.1.1",
+          "name": "Tzompanco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Zumpango de la Laguna"
+        },
+        {
+          "date": "1861.7.31",
+          "name": "Zumpango de Ocampo"
+        }
+      ],
+      "existing_meta_index": 421,
+      "existing_meta_name": "Zumpango de Ocampo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zumpango ZU-TF-5-Mexico",
+      "known_aliases": [
+        "Zumpango ZU-TF-5",
+        "zumpango zu-tf-5"
+      ],
+      "latest_year": 100,
+      "max_pop": 76,
+      "name": "Zumpango ZU-TF-5",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -300,
+        -100,
+        100
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.70963,
+        -98.96183
+      ],
+      "country": "Mexico",
+      "earliest_year": 650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico TM-ET-5-Mexico",
+      "known_aliases": [
+        "Basin of Mexico TM-ET-5",
+        "basin of mexico tm-et-5"
+      ],
+      "latest_year": 900,
+      "max_pop": 76,
+      "name": "Basin of Mexico TM-ET-5",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        650,
+        775,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.22833,
+        -99.89222
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santiago Taxhie-Mexico",
+      "known_aliases": [
+        "Santiago Taxhie",
+        "santiago taxhie"
+      ],
+      "latest_year": 1821,
+      "max_pop": 75,
+      "name": "Santiago Taxhie",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.15722,
+        -98.80194
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Agustin Totomixtlahuaca-Mexico",
+      "known_aliases": [
+        "San Agustin Totomixtlahuaca",
+        "san agustin totomixtlahuaca"
+      ],
+      "latest_year": 1821,
+      "max_pop": 75,
+      "name": "San Agustin Totomixtlahuaca",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.60445,
+        -99.17165
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-166-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-166",
+        "basin of mexico cu-az-166"
+      ],
+      "latest_year": 1519,
+      "max_pop": 75,
+      "name": "Basin of Mexico CU-AZ-166",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

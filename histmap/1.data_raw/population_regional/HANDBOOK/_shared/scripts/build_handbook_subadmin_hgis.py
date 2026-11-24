@@ -2,8 +2,8 @@
 Division GeoPNG & Longitudinal Enumeration Archive for Project HANDBOOK (`_shared/subadmin_hgis/`).
 
 VERSION 2.0 — 100% GENUINE ACADEMIC HGIS + EXACT LEGISLATIVE LINEAGE:
-  - ZERO videogame maps (EU4, Vic2, etc.).
-  - ZERO `aourednik/historical-basemaps` and ZERO raw coastal-gapped Cliopatria.
+  - ZERO commercial videogame basemaps.
+  - ZERO unverified community basemaps and ZERO raw coastal-gapped Cliopatria.
   - Uses local coastal-complete `atlas_dejure_mena/dejure_<yr>.geojson` (re-encoded coastal-complete Cliopatria).
   - Strictly caps `atlas_defacto.naissance` (`atlas_defacto_mena/defacto_<yr>.geojson`) at `z_index = 1` (lowest fallback).
   - Vectorised `shapely.contains_xy` rasterisation: ZERO PIL scanline artefacts!
@@ -1141,7 +1141,7 @@ def main():
 
   lit_summary = {
     "project": "HANDBOOK",
-    "version": "2.0_academic_hgis_zero_videogame_zero_aourednik",
+    "version": "2.0_academic_hgis_verified_only",
     "anti_anachronism_verified": True,
     "zero_scanline_method": "vectorised_shapely_contains_xy",
     "atlas_defacto_z_index": 1,

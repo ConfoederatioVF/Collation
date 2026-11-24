@@ -1,0 +1,902 @@
+[
+  {
+    "key": "Caja-Colombia",
+    "n": "Caja",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1300,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Zazarida (ven_falcon)-Venezuela",
+    "n": "Zazarida",
+    "c": "Venezuela",
+    "r": "ven_falcon",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Buenos Aires (per_san_martin)-Peru",
+    "n": "Buenos Aires",
+    "c": "Peru",
+    "r": "per_san_martin",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "General Guido-Argentina",
+    "n": "General Guido",
+    "c": "Argentina",
+    "r": "arg_buenos_aires",
+    "ey": 1850,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Huancano-Peru_2",
+    "n": "Huancano",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -1000,
+    "ly": 1532,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Cuesta-Chile",
+    "n": "Cuesta",
+    "c": "Chile",
+    "r": "crp_obispado_santiago",
+    "ey": 1525,
+    "ly": 1830,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Galerazamba-Colombia",
+    "n": "Galerazamba",
+    "c": "Colombia",
+    "r": "col_atlantico",
+    "ey": 1601,
+    "ly": 2018,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "Villa Clara-Argentina",
+    "n": "Villa Clara",
+    "c": "Argentina",
+    "r": "arg_entre_rios",
+    "ey": 1850,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Carrillo-Colombia",
+    "n": "Carrillo",
+    "c": "Colombia",
+    "r": "col_cordoba",
+    "ey": 1850,
+    "ly": 2018,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "José Galvez-Peru",
+    "n": "José Galvez",
+    "c": "Peru",
+    "r": "per_cajamarca",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "<urlopen error _ssl.c:980: The handshake operation timed out>",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "La Filomena-Colombia",
+    "n": "La Filomena",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": -824,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "San Antonio de Obligado-Argentina",
+    "n": "San Antonio de Obligado",
+    "c": "Argentina",
+    "r": "arg_santa_fe",
+    "ey": 1850,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Rosario de Pucalan-Chile",
+    "n": "Rosario de Pucalan",
+    "c": "Chile",
+    "r": "crp_obispado_santiago",
+    "ey": 1525,
+    "ly": 1830,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Aconquija-Argentina",
+    "n": "Aconquija",
+    "c": "Argentina",
+    "r": "arg_catamarca",
+    "ey": 1536,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Río Mayo-Argentina",
+    "n": "Río Mayo",
+    "c": "Argentina",
+    "r": "arg_chubut",
+    "ey": 1900,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "San Antonio Clarines-Venezuela",
+    "n": "San Antonio Clarines",
+    "c": "Venezuela",
+    "r": "vng_capitania_caracas_maracaibo",
+    "ey": 1538,
+    "ly": 1830,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Chayala-Bolivia",
+    "n": "Chayala",
+    "c": "Bolivia",
+    "r": "vp_intendencia_charcas_potosi",
+    "ey": 1525,
+    "ly": 1825,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "Pampa Afuera-Peru",
+    "n": "Pampa Afuera",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": 1440,
+    "ly": 1532,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Chacaracual-Venezuela",
+    "n": "Chacaracual",
+    "c": "Venezuela",
+    "r": "ven_sucre",
+    "ey": 1850,
+    "ly": 2011,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "Alto Checua-Colombia",
+    "n": "Alto Checua",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 500,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "Embarcadero-Colombia",
+    "n": "Embarcadero",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1000,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Playa Las Lisas-Argentina",
+    "n": "Playa Las Lisas",
+    "c": "Argentina",
+    "r": "sc_patagonia_tierra_del_fuego",
+    "ey": -988,
+    "ly": -88,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Chilete-Peru",
+    "n": "Chilete",
+    "c": "Peru",
+    "r": "per_cajamarca",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "La Floresta-Uruguay",
+    "n": "La Floresta",
+    "c": "Uruguay",
+    "r": "ury_canelones",
+    "ey": 1850,
+    "ly": 2023,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Ruyrupata-Peru",
+    "n": "Ruyrupata",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -1000,
+    "ly": 1530,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Libertador (ven_monagas)-Venezuela",
+    "n": "Libertador",
+    "c": "Venezuela",
+    "r": "ven_monagas",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Brea Pozo-Argentina",
+    "n": "Brea Pozo",
+    "c": "Argentina",
+    "r": "arg_santiago_del_estero",
+    "ey": 1850,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Buesaquillo-Colombia",
+    "n": "Buesaquillo",
+    "c": "Colombia",
+    "r": "col_narino",
+    "ey": 1525,
+    "ly": 2018,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Alero Sin designacion-Argentina",
+    "n": "Alero Sin designacion",
+    "c": "Argentina",
+    "r": "sc_nw_andes_sierras_cuyo",
+    "ey": 80,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Shashatambo-Peru",
+    "n": "Shashatambo",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": 1438,
+    "ly": 1530,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Estancia Jesuitica San Ignacio-Argentina",
+    "n": "Estancia Jesuitica San Ignacio",
+    "c": "Argentina",
+    "r": "sc_parana_uruguay_charrua",
+    "ey": 1000,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Panul-Chile",
+    "n": "Panul",
+    "c": "Chile",
+    "r": "sc_chile_central_araucania",
+    "ey": 1350,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Muestreo RS-Colombia",
+    "n": "Muestreo RS",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1000,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Pedregal-Colombia_2",
+    "n": "Pedregal",
+    "c": "Colombia",
+    "r": "vng_antioquia_popayan_choco",
+    "ey": 1525,
+    "ly": 1830,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Sacapalca-Ecuador",
+    "n": "Sacapalca",
+    "c": "Ecuador",
+    "r": "ecu_loja",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "El Potrero-Argentina",
+    "n": "El Potrero",
+    "c": "Argentina",
+    "r": "arg_salta",
+    "ey": 1850,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Santa Clara de Buena Vista-Argentina",
+    "n": "Santa Clara de Buena Vista",
+    "c": "Argentina",
+    "r": "arg_santa_fe",
+    "ey": 1850,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Potrero de Vera-Argentina",
+    "n": "Potrero de Vera",
+    "c": "Argentina",
+    "r": "crp_intendencia_buenos_aires",
+    "ey": 1774,
+    "ly": 1830,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Icaño (arg_santiago_del_estero)-Argentina",
+    "n": "Icaño",
+    "c": "Argentina",
+    "r": "arg_santiago_del_estero",
+    "ey": 1850,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Arajuno-Ecuador_2",
+    "n": "Arajuno",
+    "c": "Ecuador",
+    "r": "inca_chinchaysuyu",
+    "ey": -16,
+    "ly": 1532,
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "José Vidal Marcano-Venezuela",
+    "n": "José Vidal Marcano",
+    "c": "Venezuela",
+    "r": "ven_delta_amacuro",
+    "ey": 1920,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Tunapuicito-Venezuela",
+    "n": "Tunapuicito",
+    "c": "Venezuela",
+    "r": "ven_sucre",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Culebras-Peru",
+    "n": "Culebras",
+    "c": "Peru",
+    "r": "per_ancash",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "Asiento de San Antonio-Colombia",
+    "n": "Asiento de San Antonio",
+    "c": "Colombia",
+    "r": "vng_antioquia_popayan_choco",
+    "ey": 1780,
+    "ly": 1830,
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "La Verde-Argentina",
+    "n": "La Verde",
+    "c": "Argentina",
+    "r": "arg_chaco",
+    "ey": 1900,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Reconocimiento superficial-Colombia",
+    "n": "Reconocimiento superficial",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1000,
+    "ly": 1500,
+    "es_geo_err": "<urlopen error _ssl.c:980: The handshake operation timed out>",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "San Luis de Pitos-Argentina",
+    "n": "San Luis de Pitos",
+    "c": "Argentina",
+    "r": "crp_gobernacion_tucuman",
+    "ey": 1750,
+    "ly": 1830,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Machosillota o Pucara Sillocota-Peru",
+    "n": "Machosillota o Pucara Sillocota",
+    "c": "Peru",
+    "r": "inca_collasuyu",
+    "ey": 1300,
+    "ly": 1530,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Cuchaentza-Ecuador",
+    "n": "Cuchaentza",
+    "c": "Ecuador",
+    "r": "ecu_morona_santiago",
+    "ey": 1920,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "San Antonio Mayaral-Colombia",
+    "n": "San Antonio Mayaral",
+    "c": "Colombia",
+    "r": "vng_llanos_caguan",
+    "ey": 1702,
+    "ly": 1789,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "<urlopen error _ssl.c:980: The handshake operation timed out>"
+  },
+  {
+    "key": "Cerro Pariaque-Peru",
+    "n": "Cerro Pariaque",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -1000,
+    "ly": 1530,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Samaipata Pre-Inca-Bolivia",
+    "n": "Samaipata Pre-Inca",
+    "c": "Bolivia",
+    "r": "ca_eastern_montana_yungas",
+    "ey": 400,
+    "ly": 1400,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Viento Fresco-Venezuela",
+    "n": "Viento Fresco",
+    "c": "Venezuela",
+    "r": "ven_monagas",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_sr_err": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "Santa Rosa de Alto Yanajanca-Peru",
+    "n": "Santa Rosa de Alto Yanajanca",
+    "c": "Peru",
+    "r": "per_huanuco",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Membrillal-Colombia",
+    "n": "Membrillal",
+    "c": "Colombia",
+    "r": "col_bolivar",
+    "ey": 1850,
+    "ly": 2018,
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "La Viña (inca_chinchaysuyu)-Peru",
+    "n": "La Viña",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": 1440,
+    "ly": 1532,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "<urlopen error _ssl.c:980: The handshake operation timed out>"
+  },
+  {
+    "key": "Apu Timan-Peru",
+    "n": "Apu Timan",
+    "c": "Peru",
+    "r": "inca_contisuyu",
+    "ey": -2000,
+    "ly": 1530,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "Toropalca-Bolivia",
+    "n": "Toropalca",
+    "c": "Bolivia",
+    "r": "bol_potosi",
+    "ey": 1525,
+    "ly": 2024,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Santa Barbara de la Mulata-Venezuela",
+    "n": "Santa Barbara de la Mulata",
+    "c": "Venezuela",
+    "r": "vng_santafe_tunja_highlands",
+    "ey": 1525,
+    "ly": 1830,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Cristóbal Colón-Ecuador",
+    "n": "Cristóbal Colón",
+    "c": "Ecuador",
+    "r": "ecu_carchi",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Punta Entrada-Chile",
+    "n": "Punta Entrada",
+    "c": "Chile",
+    "r": "sc_patagonia_tierra_del_fuego",
+    "ey": 1000,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Tirapata-Peru",
+    "n": "Tirapata",
+    "c": "Peru",
+    "r": "per_puno",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Chile Chico (chl_region_de_aysen_del_gral_ibanez_del_campo)-Chile",
+    "n": "Chile Chico",
+    "c": "Chile",
+    "r": "chl_region_de_aysen_del_gral_ibanez_del_campo",
+    "ey": 1920,
+    "ly": 2017,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Yorongos-Peru",
+    "n": "Yorongos",
+    "c": "Peru",
+    "r": "per_san_martin",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "<urlopen error _ssl.c:980: The handshake operation timed out>",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Milagros-Ecuador",
+    "n": "Milagros",
+    "c": "Ecuador",
+    "r": "ecu_loja",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "En Proceso (inca_collasuyu_2)-Peru",
+    "n": "En Proceso",
+    "c": "Peru",
+    "r": "inca_collasuyu",
+    "ey": 500,
+    "ly": 1532,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Carr-Colombia",
+    "n": "Carr",
+    "c": "Colombia",
+    "r": "na_caribbean_maracaibo_tairona",
+    "ey": 1000,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Chumuch-Peru",
+    "n": "Chumuch",
+    "c": "Peru",
+    "r": "per_cajamarca",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "La Playosa-Argentina",
+    "n": "La Playosa",
+    "c": "Argentina",
+    "r": "arg_cordoba",
+    "ey": 1850,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "Bolívar (ecu_esmeraldas)-Ecuador",
+    "n": "Bolívar",
+    "c": "Ecuador",
+    "r": "ecu_esmeraldas",
+    "ey": 1850,
+    "ly": 2025,
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "La Esperanza-Peru_2",
+    "n": "La Esperanza",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -1000,
+    "ly": 1530,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Genoy-Colombia",
+    "n": "Genoy",
+    "c": "Colombia",
+    "r": "col_narino",
+    "ey": 1525,
+    "ly": 2018,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Urmiri-Bolivia",
+    "n": "Urmiri",
+    "c": "Bolivia",
+    "r": "bol_potosi",
+    "ey": 1542,
+    "ly": 2026,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Jiguales-Colombia",
+    "n": "Jiguales",
+    "c": "Colombia",
+    "r": "na_pacific_equatorial_valdivia",
+    "ey": 54,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Laguna Tromen-Co-Argentina",
+    "n": "Laguna Tromen-Co",
+    "c": "Argentina",
+    "r": "sc_pampas_salado_colorado",
+    "ey": -2250,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Inkarakay-Bolivia",
+    "n": "Inkarakay",
+    "c": "Bolivia",
+    "r": "inca_antisuyu",
+    "ey": 1475,
+    "ly": 1530,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Mocoa Piedmont-Colombia",
+    "n": "Mocoa Piedmont",
+    "c": "Colombia",
+    "r": "na_nw_amazon_foothills",
+    "ey": -1000,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Angualasto-Argentina_2",
+    "n": "Angualasto",
+    "c": "Argentina",
+    "r": "sc_nw_andes_sierras_cuyo",
+    "ey": 1000,
+    "ly": 1450,
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Caral-Peru_2",
+    "n": "Caral",
+    "c": "Peru",
+    "r": "ca_north_coast_moche_chimu",
+    "ey": -2600,
+    "ly": -1800,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "El Barne-Colombia",
+    "n": "El Barne",
+    "c": "Colombia",
+    "r": "col_boyaca",
+    "ey": 1850,
+    "ly": 2018,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Estancia Grande-Argentina",
+    "n": "Estancia Grande",
+    "c": "Argentina",
+    "r": "arg_entre_rios",
+    "ey": 1780,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "San Martín II-Argentina",
+    "n": "San Martín II",
+    "c": "Argentina",
+    "r": "arg_formosa",
+    "ey": 1920,
+    "ly": 2010,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Mataca-Bolivia",
+    "n": "Mataca",
+    "c": "Bolivia",
+    "r": "vp_intendencia_charcas_potosi",
+    "ey": 1525,
+    "ly": 1825,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Santa Lucia-Bolivia_2",
+    "n": "Santa Lucia",
+    "c": "Bolivia",
+    "r": "vp_intendencia_la_paz",
+    "ey": 1525,
+    "ly": 1825,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Pitayo-Colombia",
+    "n": "Pitayo",
+    "c": "Colombia",
+    "r": "col_cauca",
+    "ey": 1525,
+    "ly": 2018,
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "San Rafael (ven_tachira)-Venezuela",
+    "n": "San Rafael",
+    "c": "Venezuela",
+    "r": "ven_tachira",
+    "ey": 1850,
+    "ly": 2011,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Cerro Pueblo-Peru",
+    "n": "Cerro Pueblo",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -2000,
+    "ly": 1530,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Piedra Blancas-Colombia",
+    "n": "Piedra Blancas",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1300,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "Las Mulas-Argentina",
+    "n": "Las Mulas",
+    "c": "Argentina",
+    "r": "sc_gran_chaco_pilcomayo",
+    "ey": 740,
+    "ly": 1500,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  {
+    "key": "San Jerónimo Sud-Argentina",
+    "n": "San Jerónimo Sud",
+    "c": "Argentina",
+    "r": "arg_santa_fe",
+    "ey": 1850,
+    "ly": 2022,
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_sr_err": "HTTP Error 429: Too many requests (f061ab2)"
+  }
+]

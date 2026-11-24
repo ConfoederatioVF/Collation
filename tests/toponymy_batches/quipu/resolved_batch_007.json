@@ -1,0 +1,1482 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 7,
+  "count": 30,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -17.39228,
+        -66.27838
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1793,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Quillacollo-Bolivia",
+      "known_aliases": [
+        "Quillacollo",
+        "quillacollo",
+        "ciudad quillacollo",
+        "ciudad de quillacollo",
+        "kijakolo",
+        "Ciudad Quillacollo",
+        "Ciudad de quillacollo",
+        "Kijakolo"
+      ],
+      "latest_year": 2026,
+      "max_pop": 199716,
+      "name": "Quillacollo",
+      "reason": "missing_entry",
+      "region": "bol_cochabamba",
+      "sample_years": [
+        1793,
+        1900,
+        1990,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Quillacollo",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Quechua toponym prior to Spanish foundation",
+          "name": "Killaqullu"
+        },
+        {
+          "date": "1593.9.14",
+          "date_source_note": "Spanish colonial foundation on 14 September 1593",
+          "name": "Quillacollo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.64444,
+        -61.78333
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Salom-Venezuela",
+      "known_aliases": [
+        "Salom",
+        "salom"
+      ],
+      "latest_year": 2025,
+      "max_pop": 198879,
+      "name": "Salom",
+      "reason": "missing_entry",
+      "region": "ven_bolivar",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Salom",
+      "historical_names": [
+        {
+          "date": "1748.1.1",
+          "date_source_note": "Catalan Capuchin mission founded in January 1748 on Miamo River",
+          "name": "Nuestra Señora de Montserrat de Miamo"
+        },
+        {
+          "date": "1830.1.1",
+          "date_source_note": "Secularised post-mission settlement in Upata Canton, Guayana",
+          "name": "El Miamo"
+        },
+        {
+          "date": "1994.9.27",
+          "date_source_note": "Civil parish created within autonomous Roscio Municipality, Bolívar",
+          "name": "Salom"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.08659,
+        -80.52005
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Elena-Ecuador",
+      "known_aliases": [
+        "Santa Elena",
+        "santa elena"
+      ],
+      "latest_year": 2025,
+      "max_pop": 198016,
+      "name": "Santa Elena",
+      "reason": "missing_entry",
+      "region": "ecu_santa_elena",
+      "sample_years": [
+        1850,
+        1950,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Santa Elena",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial indigenous name for the Santa Elena peninsula",
+          "name": "Sumpa"
+        },
+        {
+          "date": "1531.8.18",
+          "date_source_note": "Named Santa Elena by Francisco Pizarro upon landing on 18 August 1531",
+          "name": "Santa Elena"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.1026,
+        -68.52023
+      ],
+      "country": "Chile",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Calama-Chile",
+      "known_aliases": [
+        "Calama",
+        "calama"
+      ],
+      "latest_year": 2025,
+      "max_pop": 196820,
+      "name": "Calama",
+      "reason": "missing_entry",
+      "region": "chl_region_de_antofagasta",
+      "sample_years": [
+        1880,
+        1952,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Calama",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Lickan-antay (Kunza) oasis toponym",
+          "name": "Ckara-ama"
+        },
+        {
+          "date": "1536.1.1",
+          "date_source_note": "Hispanized spelling attested following Spanish arrival in 1536",
+          "name": "Calama"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.3271,
+        -72.39613
+      ],
+      "country": "Colombia",
+      "earliest_year": 1700,
+      "existing_historical_names": [
+        {
+          "date": "1968.1.1",
+          "name": "Yopal"
+        }
+      ],
+      "existing_meta_index": 855,
+      "existing_meta_name": "Yopal",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Yopal-Colombia",
+      "known_aliases": [
+        "Yopal",
+        "yopal",
+        "concepcion de crabo",
+        "cravo",
+        "santa barbara",
+        "santa barbara cravo",
+        "Concepcion de Crabo",
+        "Cravo",
+        "Santa Barbara",
+        "Santa Barbara Cravo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 195600,
+      "name": "Yopal",
+      "reason": "under_covered_history",
+      "region": "col_casanare",
+      "sample_years": [
+        1700,
+        1920,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Yopal",
+      "historical_names": [
+        {
+          "date": "1915.2.22",
+          "date_source_note": "Settled by Boyacá pioneer Elías Granados",
+          "name": "La Estancia de Don Elías"
+        },
+        {
+          "date": "1936.1.1",
+          "date_source_note": "Elevated to corregimiento under name Yopal",
+          "name": "Yopal"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -1.87613,
+        -79.50651
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1885.1.1",
+          "name": "Babahoyo"
+        }
+      ],
+      "existing_meta_index": 34,
+      "existing_meta_name": "Babahoyo",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Babahoyo-Ecuador",
+      "known_aliases": [
+        "Babahoyo",
+        "babahoyo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 193677,
+      "name": "Babahoyo",
+      "reason": "under_covered_history",
+      "region": "ecu_los_rios",
+      "sample_years": [
+        1525,
+        1765,
+        1950,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Babahoyo",
+      "historical_names": [
+        {
+          "date": "1550.1.1",
+          "date_source_note": "Colonial royal customs and river transshipment depot",
+          "name": "Bodegas"
+        },
+        {
+          "date": "1869.5.27",
+          "date_source_note": "Re-founded at current site by decree of Gabriel García Moreno",
+          "name": "Babahoyo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.04056,
+        -66.74389
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Democracia-Venezuela",
+      "known_aliases": [
+        "La Democracia",
+        "la democracia"
+      ],
+      "latest_year": 2025,
+      "max_pop": 193676,
+      "name": "La Democracia",
+      "reason": "missing_entry",
+      "region": "ven_miranda",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Democracia",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest census horizon for Tomás Lander rural parish, Miranda",
+          "name": "La Democracia"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.25875,
+        -76.53847
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1973.1.1",
+          "name": "Jamundí"
+        }
+      ],
+      "existing_meta_index": 314,
+      "existing_meta_name": "Jamundí",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Jamundí-Colombia",
+      "known_aliases": [
+        "Jamundí",
+        "jamundí",
+        "jamundi",
+        "jaumundi",
+        "Jamundi",
+        "Jaumundi"
+      ],
+      "latest_year": 2025,
+      "max_pop": 193630,
+      "name": "Jamundí",
+      "reason": "under_covered_history",
+      "region": "col_valle_del_cauca",
+      "sample_years": [
+        1525,
+        1781,
+        1985,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Jamundí",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial indigenous settlement named after Cacique Xamundí",
+          "name": "Xamundí"
+        },
+        {
+          "date": "1536.3.23",
+          "date_source_note": "Founded on 23 March 1536 by Juan de Ampudia and Pedro de Añasco as Villa de Ampudia",
+          "name": "Villa de Ampudia"
+        },
+        {
+          "date": "1778.1.1",
+          "date_source_note": "Attested under its restored indigenous-rooted name Jamundí by the 1778 colonial census",
+          "name": "Jamundí"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.99725,
+        -73.05479
+      ],
+      "country": "Colombia",
+      "earliest_year": 1763,
+      "existing_historical_names": [
+        {
+          "date": "1902.1.1",
+          "name": "Piédecuesta"
+        }
+      ],
+      "existing_meta_index": 539,
+      "existing_meta_name": "Piédecuesta",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Piedecuesta-Colombia",
+      "known_aliases": [
+        "Piedecuesta",
+        "piedecuesta",
+        "pie de la cuesta",
+        "Pie de la Cuesta"
+      ],
+      "latest_year": 2025,
+      "max_pop": 191588,
+      "name": "Piedecuesta",
+      "reason": "under_covered_history",
+      "region": "col_santander",
+      "sample_years": [
+        1763,
+        1850,
+        1993,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Piedecuesta",
+      "historical_names": [
+        {
+          "date": "1763.1.1",
+          "date_source_note": "Earliest attested colonial settlement in Girón jurisdiction",
+          "name": "Pie de la Cuesta"
+        },
+        {
+          "date": "1774.10.17",
+          "date_source_note": "Parish formally erected by New Granada authorities",
+          "name": "San Francisco Javier del Pie de la Cuesta"
+        },
+        {
+          "date": "1824.6.25",
+          "date_source_note": "Designated cantonal seat under Gran Colombia law",
+          "name": "Piedecuesta"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.20139,
+        -80.62278
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Castilla-Peru",
+      "known_aliases": [
+        "Castilla",
+        "castilla"
+      ],
+      "latest_year": 2025,
+      "max_pop": 191177,
+      "name": "Castilla",
+      "reason": "missing_entry",
+      "region": "per_piura",
+      "sample_years": [
+        1850,
+        1950,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Castilla",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Tallán settlement on the eastern bank of the Piura River",
+          "name": "Tacalá"
+        },
+        {
+          "date": "1861.3.30",
+          "date_source_note": "Renamed Castilla by decree on 30 March 1861 under President Ramón Castilla",
+          "name": "Castilla"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.08806,
+        -78.99778
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Porvenir-Peru",
+      "known_aliases": [
+        "El Porvenir",
+        "el porvenir"
+      ],
+      "latest_year": 2025,
+      "max_pop": 190461,
+      "name": "El Porvenir",
+      "reason": "missing_entry",
+      "region": "per_la_libertad",
+      "sample_years": [
+        1850,
+        1950,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "El Porvenir",
+      "historical_names": [
+        {
+          "date": "1934.1.1",
+          "date_source_note": "Earliest informal settlement along the La Mochica canal in 1934",
+          "name": "Tiro al Blanco"
+        },
+        {
+          "date": "1965.1.8",
+          "date_source_note": "Established as El Porvenir District by Law No. 15368 on 8 January 1965",
+          "name": "El Porvenir"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.53988,
+        -73.35554
+      ],
+      "country": "Colombia",
+      "earliest_year": 1540,
+      "existing_historical_names": [
+        {
+          "date": "1851.1.1",
+          "name": "Tunja"
+        }
+      ],
+      "existing_meta_index": 803,
+      "existing_meta_name": "Tunja",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tunja-Colombia",
+      "known_aliases": [
+        "Tunja",
+        "tunja",
+        "parroquia nieves",
+        "nieves",
+        "santa barbara",
+        "hunza",
+        "a2 - laboratorio metalurgia",
+        "cercado grande de los santuarios",
+        "el establo- universidad uptc",
+        "estudio arqueológico claustro san agustín",
+        "la muela",
+        "los cojines del zaque",
+        "uptc",
+        "Parroquia Nieves",
+        "Nieves",
+        "Santa Barbara",
+        "A2 - Laboratorio Metalurgia",
+        "Cercado Grande de los Santuarios",
+        "El Establo- Universidad UPTC",
+        "Estudio Arqueológico Claustro San Agustín",
+        "La Muela",
+        "Los Cojines del Zaque",
+        "Uptc"
+      ],
+      "latest_year": 2025,
+      "max_pop": 189660,
+      "name": "Tunja",
+      "reason": "under_covered_history",
+      "region": "col_boyaca",
+      "sample_years": [
+        1540,
+        1912,
+        1995,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tunja",
+      "historical_names": [
+        {
+          "date": "1000.1.1",
+          "date_source_note": "Pre-colonial northern Muisca capital ruled by the Zaque",
+          "name": "Hunza"
+        },
+        {
+          "date": "1539.8.6",
+          "date_source_note": "Spanish colonial city founded on 6 August 1539 by Gonzalo Suárez Rendón",
+          "name": "Tunja"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.81722,
+        -72.19556
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1770,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Amenodoro Rangel Lamus-Venezuela",
+      "known_aliases": [
+        "Amenodoro Rangel Lamus",
+        "amenodoro rangel lamus",
+        "san antonio otopun",
+        "san miguel",
+        "oropun",
+        "santa catalina otopun",
+        "San Antonio Otopun",
+        "Oropun",
+        "Santa Catalina Otopun"
+      ],
+      "latest_year": 2025,
+      "max_pop": 188531,
+      "name": "Amenodoro Rangel Lamus",
+      "reason": "missing_entry",
+      "region": "ven_tachira",
+      "sample_years": [
+        1770,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Amenodoro Rangel Lamus",
+      "historical_names": [
+        {
+          "date": "1873.1.1",
+          "date_source_note": "Earliest Venezuelan national census horizon for Cárdenas rural settlement",
+          "name": "Palo Gordo"
+        },
+        {
+          "date": "1995.1.25",
+          "date_source_note": "Civil parish created posthumously in Cárdenas Municipality, Táchira",
+          "name": "Amenodoro Rangel Lamus"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.43653,
+        -66.49949
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zamora-Venezuela",
+      "known_aliases": [
+        "Zamora",
+        "zamora"
+      ],
+      "latest_year": 2011,
+      "max_pop": 187075,
+      "name": "Zamora",
+      "reason": "missing_entry",
+      "region": "ven_la_guaira",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Zamora",
+      "historical_names": [
+        {
+          "date": "1874.1.1",
+          "date_source_note": "Distrito Zamora established in 1874 (seat: Guatire)",
+          "name": "Zamora"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.6182,
+        -75.60983
+      ],
+      "country": "Colombia",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Florencia-Colombia",
+      "known_aliases": [
+        "Florencia",
+        "florencia"
+      ],
+      "latest_year": 2025,
+      "max_pop": 186497,
+      "name": "Florencia",
+      "reason": "missing_entry",
+      "region": "col_caqueta",
+      "sample_years": [
+        1920,
+        1990,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Florencia",
+      "historical_names": [
+        {
+          "date": "1902.12.25",
+          "date_source_note": "Founded on 25 December 1902 by Capuchin friar Doroteo de Pupiales",
+          "name": "Florencia"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.16399,
+        -70.1882
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Torres-Venezuela",
+      "known_aliases": [
+        "Torres",
+        "torres"
+      ],
+      "latest_year": 2025,
+      "max_pop": 186264,
+      "name": "Torres",
+      "reason": "missing_entry",
+      "region": "ven_lara",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Torres",
+      "historical_names": [
+        {
+          "date": "1881.9.9",
+          "date_source_note": "Distrito Torres created on 9 September 1881 (seat: Carora)",
+          "name": "Torres"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.59012,
+        -58.62815
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Hurlingham-Argentina",
+      "known_aliases": [
+        "Hurlingham",
+        "hurlingham"
+      ],
+      "latest_year": 2022,
+      "max_pop": 185641,
+      "name": "Hurlingham",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Hurlingham",
+      "historical_names": [
+        {
+          "date": "1888.11.22",
+          "date_source_note": "Settlement originated with the founding of the Hurlingham Club on 22 November 1888",
+          "name": "Hurlingham"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.17167,
+        -69.66833
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Curimagua-Venezuela",
+      "known_aliases": [
+        "Curimagua",
+        "curimagua"
+      ],
+      "latest_year": 2025,
+      "max_pop": 183317,
+      "name": "Curimagua",
+      "reason": "missing_entry",
+      "region": "ven_falcon",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Curimagua",
+      "historical_names": [
+        {
+          "date": "1673.6.26",
+          "date_source_note": "Earliest attested colonial ecclesiastical record in Falcón Sierra",
+          "name": "Curimagua"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.11111,
+        -69.73333
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Peña-Venezuela",
+      "known_aliases": [
+        "La Peña",
+        "la peña"
+      ],
+      "latest_year": 2025,
+      "max_pop": 182558,
+      "name": "La Peña",
+      "reason": "missing_entry",
+      "region": "ven_falcon",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Peña",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Earliest census horizon for Bolívar parish, Falcón Sierra",
+          "name": "La Peña"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.43658,
+        -66.55159
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guatire-Venezuela",
+      "known_aliases": [
+        "Guatire",
+        "guatire"
+      ],
+      "latest_year": 2019,
+      "max_pop": 180500,
+      "name": "Guatire",
+      "reason": "missing_entry",
+      "region": "ven_la_guaira",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Guatire",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Chagaragoto indigenous valley toponym",
+          "name": "Pacairigua"
+        },
+        {
+          "date": "1680.3.23",
+          "date_source_note": "Ecclesiastical parish of Santa Cruz de Pacairigua established on 23 March 1680",
+          "name": "Santa Cruz de Pacairigua"
+        },
+        {
+          "date": "1874.1.1",
+          "date_source_note": "Designated seat of Distrito Zamora in 1874 under the modern name Guatire",
+          "name": "Guatire"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.6579,
+        -58.66101
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ituzaingó-Argentina",
+      "known_aliases": [
+        "Ituzaingó",
+        "ituzaingó"
+      ],
+      "latest_year": 2022,
+      "max_pop": 180232,
+      "name": "Ituzaingó",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1850,
+        1920,
+        1991,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Ituzaingó",
+      "historical_names": [
+        {
+          "date": "1872.10.24",
+          "date_source_note": "Founded on 24 October 1872 by Manuel Rodríguez Fragio as Pueblo Santa Rosa",
+          "name": "Santa Rosa"
+        },
+        {
+          "date": "1874.1.4",
+          "date_source_note": "Adopted the name Ituzaingó after the Ferrocarril Oeste station entered regular passenger service on 4 January 1874",
+          "name": "Ituzaingó"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.85277,
+        -69.99056
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Falcón-Venezuela",
+      "known_aliases": [
+        "Falcón",
+        "falcón"
+      ],
+      "latest_year": 2025,
+      "max_pop": 178225,
+      "name": "Falcón",
+      "reason": "missing_entry",
+      "region": "ven_falcon",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Falcón",
+      "historical_names": [
+        {
+          "date": "1758.1.1",
+          "date_source_note": "Colonial administrative centre of the Paraguaná Peninsula in Caquetío territory (church built 1758, parish 1773; capital of Cantón Paraguaná from 1829)",
+          "name": "Pueblo Nuevo"
+        },
+        {
+          "date": "1874.5.24",
+          "date_source_note": "Created as Distrito Falcón under the State Constitution of 24 May 1874 with Pueblo Nuevo as its capital (converted to Municipio Autónomo on 2 January 1990)",
+          "name": "Falcón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.42461,
+        -69.85498
+      ],
+      "country": "Chile",
+      "earliest_year": 1854,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Copiapó-Chile",
+      "known_aliases": [
+        "Copiapó",
+        "copiapó"
+      ],
+      "latest_year": 2025,
+      "max_pop": 176921,
+      "name": "Copiapó",
+      "reason": "missing_entry",
+      "region": "chl_region_de_atacama",
+      "sample_years": [
+        1854,
+        1930,
+        2002,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Copiapó",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Diaguita and Inca (Tawantinsuyu) oasis settlement in the Copiapó valley",
+          "name": "Copayapu"
+        },
+        {
+          "date": "1744.12.8",
+          "date_source_note": "Official colonial villa founded by Francisco Cortés y Cartabio under Governor Manso de Velasco on 8 December 1744",
+          "name": "San Francisco de la Selva de Copiapó"
+        },
+        {
+          "date": "1843.10.31",
+          "date_source_note": "Shortened official city name upon creation of Atacama Province with Copiapó as capital (31 October 1843)",
+          "name": "Copiapó"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -40.60429,
+        -73.12334
+      ],
+      "country": "Chile",
+      "earliest_year": 1560,
+      "existing_historical_names": [
+        {
+          "date": "1895.1.1",
+          "name": "Osorno"
+        }
+      ],
+      "existing_meta_index": 484,
+      "existing_meta_name": "Osorno",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Osorno-Chile",
+      "known_aliases": [
+        "Osorno",
+        "osorno",
+        "san mateo de osorno",
+        "San Mateo de Osorno"
+      ],
+      "latest_year": 2025,
+      "max_pop": 176896,
+      "name": "Osorno",
+      "reason": "under_covered_history",
+      "region": "chl_region_de_los_lagos",
+      "sample_years": [
+        1560,
+        1895,
+        1992,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Osorno",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Huilliche (Mapudungun) territory and gathering valley (castellanised Chauracaví) prior to Spanish arrival",
+          "name": "Chaurakawin"
+        },
+        {
+          "date": "1553.1.1",
+          "date_source_note": "Initial Spanish settlement attempt ordered by Pedro de Valdivia in 1553",
+          "name": "Santa María de Gaete"
+        },
+        {
+          "date": "1558.3.27",
+          "date_source_note": "Formal Spanish foundation by Governor García Hurtado de Mendoza on 27 March 1558",
+          "name": "San Mateo de Osorno"
+        },
+        {
+          "date": "1796.1.13",
+          "date_source_note": "Official refoundation and repopulation decree by Ambrosio O'Higgins on 13 January 1796 following the 1793 Treaty of Las Canoas",
+          "name": "Osorno"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.07043,
+        -73.16683
+      ],
+      "country": "Colombia",
+      "earliest_year": 1631,
+      "existing_historical_names": [
+        {
+          "date": "1973.1.1",
+          "name": "Girón"
+        }
+      ],
+      "existing_meta_index": 272,
+      "existing_meta_name": "Girón",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Girón-Colombia",
+      "known_aliases": [
+        "Girón",
+        "girón",
+        "giron",
+        "san juan de girón",
+        "Giron",
+        "San Juan de Girón"
+      ],
+      "latest_year": 2025,
+      "max_pop": 176444,
+      "name": "Girón",
+      "reason": "under_covered_history",
+      "region": "col_santander",
+      "sample_years": [
+        1631,
+        1825,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Girón",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Guane (Chibcha) indigenous settlement in the Macaregua / Río de Oro valley prior to Spanish conquest",
+          "name": "Macaregua"
+        },
+        {
+          "date": "1631.1.15",
+          "date_source_note": "Founded on 15 January 1631 by Captain Francisco Mantilla de los Ríos",
+          "name": "San Juan Bautista de Borja de Girón"
+        },
+        {
+          "date": "1638.12.30",
+          "date_source_note": "Relocated to the Macaregua valley on 30 December 1638 as San Juan de Girón",
+          "name": "San Juan de Girón"
+        },
+        {
+          "date": "1857.5.13",
+          "date_source_note": "Shortened municipal name in republican Santander following creation of the Estado Soberano de Santander (13 May 1857)",
+          "name": "Girón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.71252,
+        -71.31182
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Miranda (ven_zulia)-Venezuela",
+      "known_aliases": [
+        "Miranda",
+        "miranda"
+      ],
+      "latest_year": 2025,
+      "max_pop": 176333,
+      "name": "Miranda",
+      "reason": "missing_entry",
+      "region": "ven_zulia",
+      "sample_years": [
+        1850,
+        1970,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Miranda",
+      "historical_names": [
+        {
+          "date": "1529.9.8",
+          "date_source_note": "Colonial ferry crossing and port on the eastern shore of the Lake Maracaibo strait established on 8 September 1529 by Ambrosio Alfinger, known in early colonial records as El Pasaje (or El Puerto).",
+          "name": "El Pasaje"
+        },
+        {
+          "date": "1627.12.26",
+          "date_source_note": "Transition to Los Puertos de Altagracia following the introduction of the Marian devotion to Nuestra Señora de Altagracia in 1627 (feast day 26 December; later styled Villa de Nuestra Señora de Altagracia).",
+          "name": "Los Puertos de Altagracia"
+        },
+        {
+          "date": "1890.4.3",
+          "date_source_note": "Territorial jurisdiction of Miranda (Distrito Miranda, modern Municipio Miranda, capital Los Puertos de Altagracia) confirmed upon the restoration of autonomous Estado Zulia by Venezuelan Congressional Decree of 3 April 1890, honouring Francisco de Miranda.",
+          "name": "Miranda"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.45722,
+        -69.31333
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pueblo Cumarebo-Venezuela",
+      "known_aliases": [
+        "Pueblo Cumarebo",
+        "pueblo cumarebo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 175928,
+      "name": "Pueblo Cumarebo",
+      "reason": "missing_entry",
+      "region": "ven_falcon",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Pueblo Cumarebo",
+      "historical_names": [
+        {
+          "date": "1773.5.6",
+          "date_source_note": "Established colonial parish seat attested during Bishop Mariano Martí's visit",
+          "name": "Pueblo Cumarebo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.72126,
+        -67.42331
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Autónomo Atures-Venezuela",
+      "known_aliases": [
+        "Autónomo Atures",
+        "autónomo atures"
+      ],
+      "latest_year": 2025,
+      "max_pop": 175867,
+      "name": "Autónomo Atures",
+      "reason": "missing_entry",
+      "region": "ven_amazonas",
+      "sample_years": [
+        1900,
+        1980,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Atures",
+      "historical_names": [
+        {
+          "date": "1748.1.1",
+          "date_source_note": "Jesuit mission of San Juan Nepomuceno de Atures founded in 1748 near the Atures Rapids",
+          "name": "San Juan Nepomuceno de Atures"
+        },
+        {
+          "date": "1992.12.1",
+          "date_source_note": "Constituted as Municipio Autónomo Atures in late 1992 following the elevation of Amazonas to statehood, with seat at Puerto Ayacucho (founded 9 December 1924)",
+          "name": "Atures"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.0842,
+        -63.61774
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Francisco (ven_bolivar)-Venezuela",
+      "known_aliases": [
+        "San Francisco",
+        "san francisco"
+      ],
+      "latest_year": 2025,
+      "max_pop": 175140,
+      "name": "San Francisco",
+      "reason": "missing_entry",
+      "region": "ven_bolivar",
+      "sample_years": [
+        1900,
+        1980,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Francisco",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "date_source_note": "Earliest census horizon for Angostura parish, Bolívar",
+          "name": "San Francisco"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.034,
+        -68.88837
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Luján de Cuyo-Argentina",
+      "known_aliases": [
+        "Luján de Cuyo",
+        "luján de cuyo"
+      ],
+      "latest_year": 2022,
+      "max_pop": 175056,
+      "name": "Luján de Cuyo",
+      "reason": "missing_entry",
+      "region": "arg_mendoza",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Luján de Cuyo",
+      "historical_names": [
+        {
+          "date": "1855.5.11",
+          "date_source_note": "Established on 11 May 1855 by Governor Pedro Pascual Segura as Villa de Luján (Department of Luján)",
+          "name": "Villa de Luján"
+        },
+        {
+          "date": "1964.10.28",
+          "date_source_note": "Renamed Luján de Cuyo on 28 October 1964 under Mendoza Provincial Law No. 3.075 (Ley N° 3.075)",
+          "name": "Luján de Cuyo"
+        }
+      ]
+    }
+  ]
+}

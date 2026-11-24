@@ -1,0 +1,2315 @@
+[
+  {
+    "key": "La Cueva de Ya-Argentina",
+    "n": "La Cueva de Ya",
+    "c": "Argentina",
+    "r": "sc_gran_chaco_pilcomayo",
+    "ey": -9948,
+    "ly": -6598,
+    "al": [],
+    "hits": [
+      {
+        "name": "La Cueva de Yavi",
+        "period": "9760 ± 160 BP",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "_src_file": "raw_argentina_radiocarbon.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "La Cueva de Yavi",
+        "period": "9480 ± 220 BP",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "_src_file": "raw_argentina_radiocarbon.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "La Cueva de Yavi",
+        "period": "8420 ± 70 BP",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "_src_file": "raw_argentina_radiocarbon.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Fundo Ainilebu-Chile",
+    "n": "Fundo Ainilebu",
+    "c": "Chile",
+    "r": "sc_chile_central_araucania",
+    "ey": 0,
+    "ly": 1500,
+    "al": [
+      "rancul",
+      "tres montes",
+      "Rancul"
+    ],
+    "hits": [
+      {
+        "name": "Fundo Ainilebu 1",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "_src_file": "raw_chile_arkg.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Fundo Ainilebu 1",
+        "region": "Los Ríos",
+        "province": "Valdivia",
+        "commune": "Los Lagos",
+        "period": "Prehispánico: Alfarero General; No",
+        "category": "Sitio Arqueológico",
+        "site_type": "Doméstico / habitacional",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "_src_file": "raw_chile_cmn_acreditado.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Rancul 1",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "_src_file": "raw_chile_arkg.json",
+        "_dist_km": 1.482
+      }
+    ]
+  },
+  {
+    "key": "La Milagrosa-Colombia",
+    "n": "La Milagrosa",
+    "c": "Colombia",
+    "r": "col_cauca",
+    "ey": 1525,
+    "ly": 2018,
+    "al": [
+      "san pedro guanacas",
+      "San Pedro Guanacas"
+    ],
+    "hits": [
+      {
+        "name": "San Pedro Guanacas",
+        "modern_name": "San Pedro Guanacas",
+        "start_year": 1111,
+        "colonial_province": "Neiva",
+        "colonial_partido": "Paeces",
+        "sources": [
+          "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)",
+          "'Padrones de Guanacas en 1780, 1782', en: Archivo Histórico Cipriano Rodríguez Santa María, Fondo David Mejia Velilla 1. Archivo Santiago Arroyo y Valencia 1.3. Provincia de Popayán 1.3.3. Gobierno 1.3.3.2. Censos"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 1.342
+      },
+      {
+        "name": "Sitio 31",
+        "department": "CAUCA",
+        "municipality": "INZÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Alexander Clavijo Sánchez (2010). Programa de arqueología preventiva Proyecto vial transversal El Libertador, carretera existente entre Gabriel López-Inza-Guadualejo, PR 42 al PR 109, de la ruta 2602. Municipios de Totoro-Inza, Cauca",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 2.081
+      },
+      {
+        "name": "Inzá 77",
+        "department": "CAUCA",
+        "municipality": "INZÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Cuellar, Andrea M. (1997). Comparación de dos plataformas arqueológicas en un sitio de habitación prehispánica en Inza, Cauca: Inzá 77.  Tesis de pregrado inédita, Departamento de Antropología, Universidad de los Andes, Bogotá.",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 2.486
+      }
+    ]
+  },
+  {
+    "key": "Santa Clara-Peru",
+    "n": "Santa Clara",
+    "c": "Peru",
+    "r": "per_loreto",
+    "ey": 1920,
+    "ly": 2017,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Santa Isabel-Argentina",
+    "n": "Santa Isabel",
+    "c": "Argentina",
+    "r": "arg_santa_fe",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [],
+    "hits": [
+      {
+        "name": "Santa Isabel",
+        "admin1": "Santa Fe",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.001
+      }
+    ]
+  },
+  {
+    "key": "Pueblo Nuevo (col_arauca)-Colombia",
+    "n": "Pueblo Nuevo",
+    "c": "Colombia",
+    "r": "col_arauca",
+    "ey": 1920,
+    "ly": 2018,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Santa Clara-Ecuador",
+    "n": "Santa Clara",
+    "c": "Ecuador",
+    "r": "ecu_napo",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": [
+      {
+        "name": "Santa Clara",
+        "admin1": "Pastaza",
+        "sources": [
+          "INEC Ecuador Censo 2010 & 2022 / Revision 2024 (via pobecu)"
+        ],
+        "_src_file": "raw_setts_ecuador.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Puán-Argentina",
+    "n": "Puán",
+    "c": "Argentina",
+    "r": "arg_buenos_aires",
+    "ey": 1850,
+    "ly": 2010,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Pica-Chile_2",
+    "n": "Pica",
+    "c": "Chile",
+    "r": "vp_intendencia_arequipa",
+    "ey": 590,
+    "ly": 1825,
+    "al": [],
+    "hits": [
+      {
+        "name": "Pica",
+        "modern_name": "Pica",
+        "start_year": 1111,
+        "colonial_province": "Arequipa",
+        "colonial_partido": "Tarapaca",
+        "sources": [
+          "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Iglesia de Pica",
+        "region": "Tarapacá",
+        "province": "Tamarugal",
+        "commune": "Pica",
+        "period": "Monumento Histórico",
+        "category": "Monumento Histórico",
+        "site_type": "Monumento Histórico",
+        "source": "CMN Chile - Puntos_Oficiales_Monumentos_Nacionales_(Vista)",
+        "_src_file": "raw_chile_cmn_registros_complementarios.json",
+        "_dist_km": 0.201
+      },
+      {
+        "name": "Inmueble ubicado en calle Balmaceda s/n°",
+        "region": "Tarapacá",
+        "province": "Tamarugal",
+        "commune": "Pica",
+        "period": "Monumento Histórico",
+        "category": "Monumento Histórico",
+        "site_type": "Monumento Histórico",
+        "source": "CMN Chile - Puntos_Oficiales_Monumentos_Nacionales_(Vista)",
+        "_src_file": "raw_chile_cmn_registros_complementarios.json",
+        "_dist_km": 0.242
+      }
+    ]
+  },
+  {
+    "key": "Cerro Chillin-Peru",
+    "n": "Cerro Chillin",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": 500,
+    "ly": 1530,
+    "al": [
+      "cerro alto quisquipampa",
+      "cerro marcachugo",
+      "las piedras grandes"
+    ],
+    "hits": [
+      {
+        "name": "Cerro Chillin",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.001
+      },
+      {
+        "name": "Las Pircas 2",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.977
+      },
+      {
+        "name": "Las Pircas 1",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 2.014
+      }
+    ]
+  },
+  {
+    "key": "Saisa-Peru",
+    "n": "Saisa",
+    "c": "Peru",
+    "r": "per_ayacucho",
+    "ey": 1525,
+    "ly": 2025,
+    "al": [
+      "cayza",
+      "layza",
+      "Cayza"
+    ],
+    "hits": [
+      {
+        "name": "Saisa",
+        "admin1": "Ayacucho",
+        "admin2": "LUCANAS",
+        "sources": [
+          "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+        ],
+        "_src_file": "raw_setts_peru.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Saisa",
+        "modern_name": "Saisa",
+        "variants": [
+          "Layza| Cayza|"
+        ],
+        "start_year": 1111,
+        "colonial_province": "Huamanga",
+        "colonial_partido": "Lucanas",
+        "sources": [
+          "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 1.051
+      }
+    ]
+  },
+  {
+    "key": "Nuestra Señora del Rosario de Caá Catí-Argentina",
+    "n": "Nuestra Señora del Rosario de Caá Catí",
+    "c": "Argentina",
+    "r": "arg_corrientes",
+    "ey": 1850,
+    "ly": 2010,
+    "al": [],
+    "hits": [
+      {
+        "name": "Rosario Caa Cati",
+        "modern_name": "Rosario Caa Cati",
+        "start_year": 1757,
+        "colonial_province": "Buenos Aires",
+        "colonial_partido": "Corrientes",
+        "sources": [
+          "Pablo Birolo, 'Política y movilizaciones militares en Corrientes. Un episodio de insubordinación miliciana, 1764-1766', en: Foros de Historia Política (2013)",
+          "Felix de Azara, Descripción e historia de Paraguay y del Río de la Plata (Buenos Aires 1943)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.121
+      }
+    ]
+  },
+  {
+    "key": "Puntos 16 a-Colombia",
+    "n": "Puntos 16 a",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1000,
+    "ly": 1500,
+    "al": [],
+    "hits": [
+      {
+        "name": "Puntos 16 a 21",
+        "department": "BOYACÁ",
+        "municipality": "PUERTO BOYACÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Janneth Panche Rodríguez (2010). Estudio para el plan de manejo ambiental para la perforación de los clusteres BS, AE y AZ, Campo Moriche, Puerto Boyacá. Geocol consultores S.A..Licencia N° 1704. 2010",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 0.001
+      },
+      {
+        "name": "Torre 9 - (RS)",
+        "department": "BOYACÁ",
+        "municipality": "PUERTO BOYACÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Sneider Hernán Rojas Mora (2011). Interventoría arqueológica para evaluar el potencial arqueológico y adelantar la prospección el área destinada a la construcción de la línea de trasmisión eléctrica en: Línea de Trasmisión Jazmín-Girasol (Puerto Boyacá), línea de Trasmisión Puerto Nare (Antioquia) – Moriche (Boyacá), Servicios Ambientales y Geográficos S.A. y EPM, Bogotá",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 0.586
+      },
+      {
+        "name": "Torre 8",
+        "department": "BOYACÁ",
+        "municipality": "PUERTO BOYACÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Rojas Mora, Sneider H. (2011). Intervención arqueológica para evaluar el potencial arqueológico y adelantar la prospección del área destinada a la construcción de la línea de transmisión eléctrica en: línea de transmisión Jazmín-Girasol (Puerto Boyacá), línea de transmisión Puerto Nare (Antioquia)-Moriche (Boyacá). Servicios ambientales y geográficos S.A..E.P.M.. 2011",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 0.728
+      }
+    ]
+  },
+  {
+    "key": "Villa Sarmiento-Argentina",
+    "n": "Villa Sarmiento",
+    "c": "Argentina",
+    "r": "arg_cordoba",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [],
+    "hits": [
+      {
+        "name": "Villa Sarmiento",
+        "admin1": "Córdoba",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Villa Sarmiento",
+        "admin1": "Córdoba",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Fray Luis Beltrán (arg_mendoza)-Argentina",
+    "n": "Fray Luis Beltrán",
+    "c": "Argentina",
+    "r": "arg_mendoza",
+    "ey": 1850,
+    "ly": 2010,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Santa Ana de los Guácaras-Argentina",
+    "n": "Santa Ana de los Guácaras",
+    "c": "Argentina",
+    "r": "arg_corrientes",
+    "ey": 1798,
+    "ly": 2022,
+    "al": [
+      "santa ana de los guacaras"
+    ],
+    "hits": [
+      {
+        "name": "Santa Ana de los Guácaras",
+        "admin1": "Corrientes",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Siswa-Peru",
+    "n": "Siswa",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -1000,
+    "ly": 1530,
+    "al": [
+      "ancomarca",
+      "cruz punta huarichaca",
+      "elemento arqueológico aislado huarichaca"
+    ],
+    "hits": [
+      {
+        "name": "Siswa",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "SITIO ARQUEOLÓGICO SISWA",
+        "department": "HUÁNUCO",
+        "province": "PACHITEA",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.107
+      },
+      {
+        "name": "Marcajananda",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.331
+      }
+    ]
+  },
+  {
+    "key": "El Chical-Ecuador",
+    "n": "El Chical",
+    "c": "Ecuador",
+    "r": "ecu_carchi",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "San Bartolome de Buena vista-Colombia",
+    "n": "San Bartolome de Buena vista",
+    "c": "Colombia",
+    "r": "vng_antioquia_popayan_choco",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [],
+    "hits": [
+      {
+        "name": "San Bartolome de Buena vista",
+        "modern_name": "San Bartolome de Buena vista",
+        "start_year": 1111,
+        "colonial_province": "Antioquia",
+        "colonial_partido": "Remedios",
+        "sources": [
+          "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Duna Grande-Peru",
+    "n": "Duna Grande",
+    "c": "Peru",
+    "r": "inca_contisuyu",
+    "ey": 0,
+    "ly": 1530,
+    "al": [],
+    "hits": [
+      {
+        "name": "Duna Grande",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Sabana de La Plata-Venezuela",
+    "n": "Sabana de La Plata",
+    "c": "Venezuela",
+    "r": "ven_zulia",
+    "ey": 1850,
+    "ly": 2011,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Sapse-Bolivia",
+    "n": "Sapse",
+    "c": "Bolivia",
+    "r": "vp_intendencia_charcas_potosi",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [
+      "sapci",
+      "sapsi",
+      "Sapci"
+    ],
+    "hits": [
+      {
+        "name": "Sapsi",
+        "modern_name": "Sapse",
+        "variants": [
+          "Sapci|"
+        ],
+        "start_year": 1111,
+        "colonial_province": "Charcas",
+        "colonial_partido": "Yamparaez",
+        "sources": [
+          "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Sipisa-Chile",
+    "n": "Sipisa",
+    "c": "Chile",
+    "r": "vp_intendencia_arequipa",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [],
+    "hits": [
+      {
+        "name": "Sipisa",
+        "modern_name": "Sipisa",
+        "start_year": 1111,
+        "colonial_province": "Arequipa",
+        "colonial_partido": "Tarapaca",
+        "sources": [
+          "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Paclín-Argentina",
+    "n": "Paclín",
+    "c": "Argentina",
+    "r": "arg_catamarca",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [],
+    "hits": [
+      {
+        "name": "Paclín",
+        "admin1": "Catamarca",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Pacl�n",
+        "admin1": "Catamarca",
+        "sources": [
+          "CONICET Base Cartográfica de Departamentos 1869-2022 (Handle: 11336/149867)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 1.986
+      }
+    ]
+  },
+  {
+    "key": "Paccha (per_piura)-Peru",
+    "n": "Paccha",
+    "c": "Peru",
+    "r": "per_piura",
+    "ey": 1850,
+    "ly": 2017,
+    "al": [
+      "rinconada",
+      "Rinconada"
+    ],
+    "hits": []
+  },
+  {
+    "key": "Pobreza Baudo-Colombia",
+    "n": "Pobreza Baudo",
+    "c": "Colombia",
+    "r": "vng_antioquia_popayan_choco",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [],
+    "hits": [
+      {
+        "name": "N.S. de la Pobreza Baudo",
+        "modern_name": "N.S. de la Pobreza Baudo",
+        "start_year": 1111,
+        "colonial_province": "Choco",
+        "colonial_partido": "Baudo",
+        "sources": [
+          "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)",
+          "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)",
+          "'Censo población', en: Archivo General de la Nación (Colombia), MISCELANEA:SC.39,129,D.19"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Chimpay-Argentina",
+    "n": "Chimpay",
+    "c": "Argentina",
+    "r": "arg_rio_negro",
+    "ey": 1900,
+    "ly": 2022,
+    "al": [],
+    "hits": [
+      {
+        "name": "Chimpay",
+        "admin1": "Río Negro",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Abdón Calderón (ecu_azuay)-Ecuador",
+    "n": "Abdón Calderón",
+    "c": "Ecuador",
+    "r": "ecu_azuay",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "La Ramada-Peru",
+    "n": "La Ramada",
+    "c": "Peru",
+    "r": "per_cajamarca",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": [
+      {
+        "name": "La Ramada",
+        "admin1": "Cajamarca",
+        "admin2": "CUTERVO",
+        "sources": [
+          "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+        ],
+        "_src_file": "raw_setts_peru.json",
+        "_dist_km": 0.001
+      },
+      {
+        "department": "Cajamarca",
+        "province": "Cutervo",
+        "_src_file": "raw_peru_sigda_qhapaq_nan.json",
+        "_dist_km": 1.009
+      },
+      {
+        "department": "Cajamarca",
+        "province": "Cutervo",
+        "_src_file": "raw_peru_sigda_qhapaq_nan.json",
+        "_dist_km": 1.039
+      }
+    ]
+  },
+  {
+    "key": "Santiago de Vado-Peru",
+    "n": "Santiago de Vado",
+    "c": "Peru",
+    "r": "per_ayacucho",
+    "ey": 1525,
+    "ly": 2017,
+    "al": [
+      "vado",
+      "Vado"
+    ],
+    "hits": [
+      {
+        "name": "Vado",
+        "modern_name": "Vado",
+        "start_year": 1111,
+        "colonial_province": "Huamanga",
+        "colonial_partido": "Lucanas",
+        "sources": [
+          "NN., Ytinerario Real de Correos del Reyno del Perú y Chilen1777)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.06
+      },
+      {
+        "name": "San Vicente 2",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.255
+      },
+      {
+        "name": "San Vicente 1",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.327
+      }
+    ]
+  },
+  {
+    "key": "Pomán-Argentina",
+    "n": "Pomán",
+    "c": "Argentina",
+    "r": "arg_catamarca",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [],
+    "hits": [
+      {
+        "name": "Pomán",
+        "admin1": "Catamarca",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.001
+      },
+      {
+        "name": "Poman de Londres",
+        "modern_name": "Poman de Londres",
+        "start_year": 1111,
+        "colonial_province": "Tucuman",
+        "colonial_partido": "Catamarca",
+        "sources": [
+          "Gabriela de la Orden Peracca, 'Indio y población rural en el oeste de Catamarca,en la transición al estado-nación (1812-1895)', en: Revista Eletrônica da ANPHLAC 14 (2013)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.198
+      }
+    ]
+  },
+  {
+    "key": "Pozo Hondo-Argentina",
+    "n": "Pozo Hondo",
+    "c": "Argentina",
+    "r": "arg_santiago_del_estero",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [],
+    "hits": [
+      {
+        "name": "Pozo Hondo",
+        "admin1": "Santiago del Estero",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Coronel Juan Solá-Argentina",
+    "n": "Coronel Juan Solá",
+    "c": "Argentina",
+    "r": "arg_salta",
+    "ey": 1850,
+    "ly": 2010,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Chalgayaco-Colombia",
+    "n": "Chalgayaco",
+    "c": "Colombia",
+    "r": "vng_antioquia_popayan_choco",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [
+      "vueltas",
+      "Vueltas"
+    ],
+    "hits": [
+      {
+        "name": "Chalgayaco",
+        "modern_name": "Chalgayaco",
+        "start_year": 1111,
+        "colonial_province": "Popayan",
+        "colonial_partido": "Almaguer",
+        "sources": [
+          "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Vueltas",
+        "modern_name": "Vueltas",
+        "start_year": 1111,
+        "colonial_province": "Popayan",
+        "colonial_partido": "Almaguer",
+        "sources": [
+          "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 1.112
+      },
+      {
+        "name": "Sangandinga",
+        "modern_name": "Sangandinga",
+        "start_year": 1111,
+        "colonial_province": "Popayan",
+        "colonial_partido": "Almaguer",
+        "sources": [
+          "'Relaciones geográficas de la Nueva Granada (siglos XVI a XIX)', en: Cespedesia 45-46, suplemento 4 (Cali 1983)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 2.468
+      }
+    ]
+  },
+  {
+    "key": "Mopora-Colombia",
+    "n": "Mopora",
+    "c": "Colombia",
+    "r": "vng_santafe_tunja_highlands",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [],
+    "hits": [
+      {
+        "name": "Mopora",
+        "modern_name": "Mopora",
+        "start_year": 1111,
+        "colonial_province": "Tunja",
+        "colonial_partido": "Muzo",
+        "sources": [
+          "'Relaciones geográficas de la Nueva Granada (siglos XVI a XIX)', en: Cespedesia 45-46, suplemento 4 (Cali 1983)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "San Juan de Oro-Argentina",
+    "n": "San Juan de Oro",
+    "c": "Argentina",
+    "r": "crp_gobernacion_tucuman",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [
+      "rio de san juan",
+      "Rio de San Juan"
+    ],
+    "hits": [
+      {
+        "name": "Rio de San Juan",
+        "modern_name": "San Juan de Oro",
+        "start_year": 1111,
+        "colonial_province": "Tucuman",
+        "colonial_partido": "La Puna",
+        "sources": [
+          "Miguel Ángel Vergara, Estudios sobre historia eclesiástica de JujuynTucumán 1942)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "El Retiro-Ecuador",
+    "n": "El Retiro",
+    "c": "Ecuador",
+    "r": "ecu_el_oro",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Lomas Blancas-Chile",
+    "n": "Lomas Blancas",
+    "c": "Chile",
+    "r": "sc_chile_central_araucania",
+    "ey": 1350,
+    "ly": 1500,
+    "al": [],
+    "hits": [
+      {
+        "name": "Lomas Blancas 4",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "_src_file": "raw_chile_arkg.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Lomas Blancas 4",
+        "region": "Los Ríos",
+        "province": "Valdivia",
+        "commune": "Los Lagos",
+        "period": "Prehispánico e Histórico: Alfarero Tardío; Colonial; Republicano; No",
+        "category": "Sitio Arqueológico",
+        "site_type": "Doméstico / habitacional",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "_src_file": "raw_chile_cmn_acreditado.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Lomas Blancas 6",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "_src_file": "raw_chile_arkg.json",
+        "_dist_km": 0.176
+      }
+    ]
+  },
+  {
+    "key": "Inambari-Peru_2",
+    "n": "Inambari",
+    "c": "Peru",
+    "r": "vp_intendencia_puno",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [],
+    "hits": [
+      {
+        "name": "Inambari",
+        "modern_name": "Inambari",
+        "start_year": 1111,
+        "colonial_province": "Puno",
+        "colonial_partido": "Carabaya",
+        "sources": [
+          "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Chura-Ecuador",
+    "n": "Chura",
+    "c": "Ecuador",
+    "r": "ecu_esmeraldas",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Altarani Llavinipunko-Peru",
+    "n": "Altarani Llavinipunko",
+    "c": "Peru",
+    "r": "inca_collasuyu",
+    "ey": 1300,
+    "ly": 1530,
+    "al": [
+      "añutan",
+      "ccoroskan",
+      "chocchon"
+    ],
+    "hits": [
+      {
+        "name": "Altarani Llavinipunko",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "SITIO ARQUEOLÓGICO ALTARANI LLAVINIPUNKO",
+        "department": "PUNO",
+        "province": "EL COLLAO",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.056
+      },
+      {
+        "name": "SITIO ARQUEOLÓGICO ISTUYO",
+        "department": "PUNO",
+        "province": "EL COLLAO",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.395
+      }
+    ]
+  },
+  {
+    "key": "San Simón-Ecuador",
+    "n": "San Simón",
+    "c": "Ecuador",
+    "r": "ecu_bolivar",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Torre 301 Yacimiento-Colombia",
+    "n": "Torre 301 Yacimiento",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1215,
+    "ly": 1500,
+    "al": [],
+    "hits": [
+      {
+        "name": "Torre 301 Yacimiento 35",
+        "period": "200 +/- 80 BP",
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "citation": "Moreno, M. C., Diaz, C., Briceno, P., & Quintana, L. (1999). Arqueologia de rescate linea de transmision electrica a 500kv San Carlos-San Marcos.  Informe final fase de rescate arqueologico.",
+        "_src_file": "raw_colombia_col14.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Torre 301 Yacimiento 35",
+        "period": "480 +/- 60 BP",
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "citation": "Moreno, M. C., Diaz, C., Briceno, P., & Quintana, L. (1999). Arqueologia de rescate linea de transmision electrica a 500kv San Carlos-San Marcos.  Informe final fase de rescate arqueologico.",
+        "_src_file": "raw_colombia_col14.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "YACIMIENTO 35",
+        "period": "450 +/- 60 BP",
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "citation": "Moreno, M. C., Diaz, C., Briceno, P., & Quintana, L. (1999). Arqueologia de rescate linea de transmision electrica a 500kv San Carlos-San Marcos. Informe final fase de rescate arqueologico.",
+        "_src_file": "raw_colombia_col14.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Chanabaya-Chile",
+    "n": "Chanabaya",
+    "c": "Chile",
+    "r": "vp_intendencia_arequipa",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [],
+    "hits": [
+      {
+        "name": "Chanabaya",
+        "modern_name": "Chanabaya",
+        "start_year": 1111,
+        "colonial_province": "Arequipa",
+        "colonial_partido": "Tarapaca",
+        "sources": [
+          "Jorge Hidalgo L., '“Civilización y fomento: La ‚descripción de Tarapacá’ de Antonio O’Brien, 1765”.', en: Chungará. Revista de Antropología Chilena 41, 1, pp. 5-44 (2009)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Pabellon de Pica 1E1U",
+        "period": "600 ± 50 BP",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "_src_file": "raw_chile_radiocarbon.json",
+        "_dist_km": 2.427
+      },
+      {
+        "name": "Pabellon de Pica 1E1U",
+        "period": "600 ± 50 BP",
+        "source": "XRONOS Chronological Database (xronos.ch)",
+        "_src_file": "raw_chile_radiocarbon.json",
+        "_dist_km": 2.427
+      }
+    ]
+  },
+  {
+    "key": "Abelardo Pardo Lezameta-Peru",
+    "n": "Abelardo Pardo Lezameta",
+    "c": "Peru",
+    "r": "per_ancash",
+    "ey": 1525,
+    "ly": 2025,
+    "al": [
+      "llaclla",
+      "pacllon",
+      "Llaclla"
+    ],
+    "hits": [
+      {
+        "name": "Abelardo Pardo Lezameta",
+        "other_names": [
+          "Llaclla"
+        ],
+        "admin1": "Áncash",
+        "admin2": "BOLOGNESI",
+        "sources": [
+          "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+        ],
+        "_src_file": "raw_setts_peru.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Pacllon",
+        "modern_name": "Pacllon",
+        "start_year": 1111,
+        "colonial_province": "Tarma",
+        "colonial_partido": "Cajatambo",
+        "sources": [
+          "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.361
+      },
+      {
+        "department": "Ancash",
+        "province": "Bolognesi",
+        "_src_file": "raw_peru_sigda_qhapaq_nan.json",
+        "_dist_km": 0.788
+      }
+    ]
+  },
+  {
+    "key": "Sa-Sls-Colombia",
+    "n": "Sa-Sls",
+    "c": "Colombia",
+    "r": "na_orinoco_llanos_guayana",
+    "ey": 500,
+    "ly": 1500,
+    "al": [],
+    "hits": [
+      {
+        "name": "SA-SLS-050",
+        "department": "NORTE DE SANTANDER",
+        "municipality": "CHITAGÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Edwin Orlando Carrillo Duarte,  Javier Enrique Gutiérrez Olano (2007). Inventario arqueológico, paleontológico y de arte rupestre de Norte de Santander, Colombia",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Sama Grande-Peru",
+    "n": "Sama Grande",
+    "c": "Peru",
+    "r": "inca_collasuyu",
+    "ey": 1440,
+    "ly": 1532,
+    "al": [
+      "aahh virgen de la candelaria",
+      "alto poquera",
+      "alto poquera s"
+    ],
+    "hits": [
+      {
+        "department": "Tacna",
+        "province": "Tacna",
+        "_src_file": "raw_peru_sigda_qhapaq_nan.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Sama Grande - Pampa del Pedregal",
+        "department": "Tacna",
+        "province": "Tacna",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.104
+      },
+      {
+        "name": "Sama N° 028-029 (S-028 S-029)",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.148
+      }
+    ]
+  },
+  {
+    "key": "Bachillero-Ecuador",
+    "n": "Bachillero",
+    "c": "Ecuador",
+    "r": "ecu_manabi",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Guantajaya-Chile",
+    "n": "Guantajaya",
+    "c": "Chile",
+    "r": "vp_intendencia_arequipa",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [
+      "real asiento de guantajaya",
+      "Real Asiento de Guantajaya"
+    ],
+    "hits": [
+      {
+        "name": "Guantajaya",
+        "modern_name": "Guantajaya",
+        "variants": [
+          "Real Asiento de Guantajaya"
+        ],
+        "start_year": 1111,
+        "colonial_province": "Arequipa",
+        "colonial_partido": "Tarapaca",
+        "sources": [
+          "Antonio de Alcedo, Diccionario geográfico-histórico de las Indias Occidentales o América (Madrid 1786-1789)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "C4_04",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "_src_file": "raw_chile_arkg.json",
+        "_dist_km": 1.578
+      },
+      {
+        "name": "C4_04",
+        "region": "Tarapacá",
+        "province": "Iquique",
+        "commune": "Alto Hospicio",
+        "period": "Histórico: Republicano; No",
+        "category": "Sitio Arqueológico",
+        "site_type": "Vialidad / transporte histórico o prehispánico",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "_src_file": "raw_chile_cmn_acreditado.json",
+        "_dist_km": 1.578
+      }
+    ]
+  },
+  {
+    "key": "Bss-Chile",
+    "n": "Bss",
+    "c": "Chile",
+    "r": "sc_patagonia_tierra_del_fuego",
+    "ey": 0,
+    "ly": 1500,
+    "al": [
+      "chpe"
+    ],
+    "hits": [
+      {
+        "name": "BSS1",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "_src_file": "raw_chile_arkg.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "BSS1",
+        "region": "Magallanes y de la Antártica Chilena",
+        "province": "Tierra del Fuego",
+        "commune": "Porvenir",
+        "period": "No",
+        "category": "Sitio Arqueológico",
+        "site_type": "Sitio Arqueológico",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "_src_file": "raw_chile_cmn_acreditado.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "BSS1",
+        "region": "Magallanes y de la Antártica Chilena",
+        "province": "Antártica Chilena",
+        "commune": "Porvenir",
+        "period": "No",
+        "category": "Sitio Arqueológico",
+        "site_type": "Sitio Arqueológico",
+        "source": "CMN Chile - 1_REGISTRO_NACIONAL_MONUMENTOS_ARQUEOLOGICOS_PUNTOS",
+        "_src_file": "raw_chile_cmn_registros_complementarios.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Campo Scodellaro-Argentina",
+    "n": "Campo Scodellaro",
+    "c": "Argentina",
+    "r": "sc_nw_andes_sierras_cuyo",
+    "ey": 80,
+    "ly": 1500,
+    "al": [
+      "campo aguirre",
+      "campo aguirre- oc",
+      "Campo Aguirre"
+    ],
+    "hits": [
+      {
+        "name": "Campo Scodellaro",
+        "period": "80 to 1620",
+        "site_type": "archaeological sites; prehistoric sites",
+        "source": "IDACOR (CONICET/UNC) - BADACOR & Collections via ARIADNEplus",
+        "_src_file": "raw_argentina_idacor_ariadne.json",
+        "_dist_km": 0.001
+      },
+      {
+        "name": "Sugar",
+        "period": "450 to 1650",
+        "site_type": "archaeological sites; burials; burial sites; prehistoric sites",
+        "source": "IDACOR (CONICET/UNC) - BADACOR & Collections via ARIADNEplus",
+        "_src_file": "raw_argentina_idacor_ariadne.json",
+        "_dist_km": 0.735
+      },
+      {
+        "name": "O.T. I",
+        "period": "450 to 1650",
+        "site_type": "archaeological sites; prehistoric sites",
+        "source": "IDACOR (CONICET/UNC) - BADACOR & Collections via ARIADNEplus",
+        "_src_file": "raw_argentina_idacor_ariadne.json",
+        "_dist_km": 0.813
+      }
+    ]
+  },
+  {
+    "key": "Las Piedras-Colombia",
+    "n": "Las Piedras",
+    "c": "Colombia",
+    "r": "col_bolivar",
+    "ey": 1850,
+    "ly": 2018,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Arpichillo-Peru",
+    "n": "Arpichillo",
+    "c": "Peru",
+    "r": "inca_contisuyu",
+    "ey": 0,
+    "ly": 1530,
+    "al": [
+      "condoya",
+      "los batanes de surcuña",
+      "surcuña"
+    ],
+    "hits": [
+      {
+        "name": "Arpichillo Sector A",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.0
+      },
+      {
+        "department": "Ica",
+        "province": "NAZCA",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.058
+      },
+      {
+        "department": "Ica",
+        "province": "NAZCA",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.229
+      }
+    ]
+  },
+  {
+    "key": "Francisco Bolognesi (per_piura)-Peru",
+    "n": "Francisco Bolognesi",
+    "c": "Peru",
+    "r": "per_piura",
+    "ey": 1525,
+    "ly": 2017,
+    "al": [
+      "cumbicos",
+      "el naranjo",
+      "cambicos"
+    ],
+    "hits": [
+      {
+        "name": "Bolognesi",
+        "department": "Piura",
+        "province": "MORROPON",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.059
+      },
+      {
+        "name": "Cumbicos",
+        "modern_name": "Cumbicos",
+        "variants": [
+          "Cumbitos| Cambicos|"
+        ],
+        "start_year": 1111,
+        "colonial_province": "Trujillo",
+        "colonial_partido": "Piura",
+        "sources": [
+          "Lorenzo Huertas Vallejos, 'Patrones de asentamiento poblacional en Piura (1532-1850)', en: Bulletin de l'Institut Français d'études andines 25, 1 (1996)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.833
+      }
+    ]
+  },
+  {
+    "key": "Huasco Bajo-Chile",
+    "n": "Huasco Bajo",
+    "c": "Chile",
+    "r": "chl_region_de_atacama",
+    "ey": 1525,
+    "ly": 2017,
+    "al": [],
+    "hits": [
+      {
+        "name": "Huasco bajo",
+        "modern_name": "Huasco bajo",
+        "start_year": 1752,
+        "colonial_province": "Santiago",
+        "colonial_partido": "Huasco",
+        "sources": [
+          "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.304
+      }
+    ]
+  },
+  {
+    "key": "Puerto Rondón-Colombia",
+    "n": "Puerto Rondón",
+    "c": "Colombia",
+    "r": "col_arauca",
+    "ey": 1900,
+    "ly": 2025,
+    "al": [],
+    "hits": [
+      {
+        "name": "Puerto Rondón",
+        "admin1": "Arauca",
+        "sources": [
+          "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+        ],
+        "_src_file": "raw_setts_colombia.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Copequén-Chile",
+    "n": "Copequén",
+    "c": "Chile",
+    "r": "chl_region_metropolitana_de_santiago",
+    "ey": 1525,
+    "ly": 2017,
+    "al": [
+      "copequen"
+    ],
+    "hits": [
+      {
+        "name": "Copequen",
+        "modern_name": "Copequen",
+        "start_year": 1111,
+        "colonial_province": "Santiago",
+        "colonial_partido": "Colchagua",
+        "sources": [
+          "Vicente Carvallo Goyeneche, Descripción Histórico-Geográfica del Reino de Chile (1796)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.551
+      }
+    ]
+  },
+  {
+    "key": "Pampa Soledad-Chile",
+    "n": "Pampa Soledad",
+    "c": "Chile",
+    "r": "inca_collasuyu",
+    "ey": 1300,
+    "ly": 1530,
+    "al": [],
+    "hits": [
+      {
+        "name": "Pampa Soledad-1",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "_src_file": "raw_chile_arkg.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Pampa Soledad-1",
+        "region": "Tarapacá",
+        "province": "Tamarugal",
+        "commune": "Pozo Almonte",
+        "period": "Prehispánico e Histórico: No",
+        "category": "Sitio Arqueológico",
+        "site_type": "Vialidad / transporte histórico o prehispánico",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "_src_file": "raw_chile_cmn_acreditado.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Pampa Soledad-1",
+        "region": "Tarapacá",
+        "province": "Tamarugal",
+        "commune": "Pozo Almonte",
+        "period": "Prehispánico e Histórico: No",
+        "category": "Sitio Arqueológico",
+        "site_type": "Vialidad / transporte histórico o prehispánico",
+        "source": "CMN Chile - 1_REGISTRO_NACIONAL_MONUMENTOS_ARQUEOLOGICOS_PUNTOS",
+        "_src_file": "raw_chile_cmn_registros_complementarios.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Buenos Aires-Colombia_2",
+    "n": "Buenos Aires",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1000,
+    "ly": 1500,
+    "al": [
+      "campo alegre",
+      "Campo Alegre"
+    ],
+    "hits": [
+      {
+        "name": "Buenos Aires",
+        "department": "TOLIMA",
+        "municipality": "SUÁREZ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Yuri Romero Picón y Angelica Vivas (2006). Programa de exploración sísmica Pechui 2D - Fase II. informe final de prospección y monitoreo",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Campo Alegre",
+        "department": "TOLIMA",
+        "municipality": "SUÁREZ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Yuri Romero Picón y Angelica Vivas (2006). Programa de exploración sísmica Pechui 2D - Fase II. informe final de prospección y monitoreo",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 2.295
+      }
+    ]
+  },
+  {
+    "key": "Chontaduro-Ecuador",
+    "n": "Chontaduro",
+    "c": "Ecuador",
+    "r": "ecu_esmeraldas",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "La Capuera-Uruguay",
+    "n": "La Capuera",
+    "c": "Uruguay",
+    "r": "ury_maldonado",
+    "ey": 1850,
+    "ly": 2023,
+    "al": [
+      "chihuahua",
+      "Chihuahua"
+    ],
+    "hits": [
+      {
+        "name": "La Capuera",
+        "admin1": "Maldonado",
+        "sources": [
+          "INE Uruguay Censo 2023 (Cuadro 11 Localidades)",
+          "INE Uruguay Censo 2011 (Localidades Censales)",
+          "INE Uruguay Censo 2004 (Localidades Censales)"
+        ],
+        "_src_file": "raw_setts_uruguay.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Potrero",
+        "modern_name": "Potrero",
+        "start_year": 1769,
+        "colonial_province": "Banda oriental",
+        "colonial_partido": "Maldonado",
+        "sources": [
+          "'Mapa de las estafetas y postas de la Administración de Correos de Montevideo', en: Archivo General de Indias, MP-Buenos Aires,253 (Mapa, 1804)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 2.067
+      },
+      {
+        "name": "Chihuahua",
+        "admin1": "Maldonado",
+        "sources": [
+          "INE Uruguay Censo 2023 (Cuadro 11 Localidades)",
+          "INE Uruguay Censo 2011 (Localidades Censales)",
+          "INE Uruguay Censo 2004 (Localidades Censales)"
+        ],
+        "_src_file": "raw_setts_uruguay.json",
+        "_dist_km": 2.32
+      }
+    ]
+  },
+  {
+    "key": "Chiguirip-Peru",
+    "n": "Chiguirip",
+    "c": "Peru",
+    "r": "per_cajamarca",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": [
+      {
+        "name": "Chiguirip",
+        "admin1": "Cajamarca",
+        "admin2": "CHOTA",
+        "sources": [
+          "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+        ],
+        "_src_file": "raw_setts_peru.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "SITIO ARQUEOLÓGICO LA TORRE",
+        "department": "CAJAMARCA",
+        "province": "CHOTA",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.374
+      },
+      {
+        "name": "SITIO ARQUEOLÓGICO LA TORRE CHIGUIRIP",
+        "department": "CAJAMARCA",
+        "province": "CHOTA",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.595
+      }
+    ]
+  },
+  {
+    "key": "Buenavista (col_norte_de_santander)-Colombia",
+    "n": "Buenavista",
+    "c": "Colombia",
+    "r": "col_norte_de_santander",
+    "ey": 1525,
+    "ly": 2018,
+    "al": [
+      "candelaria buenavista",
+      "san andres",
+      "Candelaria Buenavista"
+    ],
+    "hits": [
+      {
+        "name": "Candelaria Buenavista",
+        "modern_name": "Candelaria Buenavista",
+        "start_year": 1111,
+        "colonial_province": "Santa Marta",
+        "colonial_partido": "Ocaña",
+        "sources": [
+          "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)",
+          "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.072
+      },
+      {
+        "name": "San Andres",
+        "modern_name": "San Andres",
+        "start_year": 1111,
+        "colonial_province": "Santa Marta",
+        "colonial_partido": "Ocaña",
+        "sources": [
+          "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 1.007
+      }
+    ]
+  },
+  {
+    "key": "Villa General Manuel Belgrano-Argentina",
+    "n": "Villa General Manuel Belgrano",
+    "c": "Argentina",
+    "r": "arg_formosa",
+    "ey": 1920,
+    "ly": 2010,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Villa Kilómetro 213-Argentina",
+    "n": "Villa Kilómetro 213",
+    "c": "Argentina",
+    "r": "arg_formosa",
+    "ey": 1920,
+    "ly": 2010,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Simón Bolívar (ecu_santa_elena)-Ecuador",
+    "n": "Simón Bolívar",
+    "c": "Ecuador",
+    "r": "ecu_santa_elena",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Gallipavo-Chile",
+    "n": "Gallipavo",
+    "c": "Chile",
+    "r": "sc_chile_central_araucania",
+    "ey": 0,
+    "ly": 1500,
+    "al": [],
+    "hits": [
+      {
+        "name": "Gallipavo 4",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "_src_file": "raw_chile_arkg.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Gallipavo 4 (08 SI015)",
+        "region": "Ñuble",
+        "province": "Diguillín",
+        "commune": "San Ignacio",
+        "period": "Prehispánico e Histórico: Alfarero General; No",
+        "category": "Sitio Arqueológico",
+        "site_type": "Doméstico / habitacional",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "_src_file": "raw_chile_cmn_acreditado.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Gallipavo 4 (08 SI015)",
+        "region": "Ñuble",
+        "province": "Diguillín",
+        "commune": "San Ignacio",
+        "period": "Prehispánico e Histórico: Alfarero General; No",
+        "category": "Sitio Arqueológico",
+        "site_type": "Doméstico / habitacional",
+        "source": "CMN Chile - 1_REGISTRO_NACIONAL_MONUMENTOS_ARQUEOLOGICOS_PUNTOS",
+        "_src_file": "raw_chile_cmn_registros_complementarios.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Campo Elías (ven_trujillo)-Venezuela",
+    "n": "Campo Elías",
+    "c": "Venezuela",
+    "r": "ven_trujillo",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "La Lagunita (ven_yaracuy)-Venezuela",
+    "n": "La Lagunita",
+    "c": "Venezuela",
+    "r": "ven_yaracuy",
+    "ey": 1625,
+    "ly": 2011,
+    "al": [
+      "lagunita",
+      "nirgua",
+      "Lagunita"
+    ],
+    "hits": [
+      {
+        "name": "Nirgua",
+        "modern_name": "Nirgua",
+        "start_year": 1624,
+        "colonial_province": "Caracas",
+        "colonial_partido": "Nirgua",
+        "sources": [
+          "John Lombardi, People and Places in Colonial VenezuelanBloomington 1976)",
+          "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html",
+          "'Estados de población de las ciudades de Caracas, Valencia, Nirgua, Puerto de Cabello y de los valles y pueblos sujetos a sus jurisdicciones por Francisco Fermín de Gazzara y otros', en: Museo Naval de Madrid, Ms.0566_001 (1769)",
+          "'Relación y testimonio íntegro de la visita general de este obispado de Caracas y Venezuela', en: Archivo General de Indias, Caracas,959 (1771)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.605
+      }
+    ]
+  },
+  {
+    "key": "Loma de Arena-Colombia",
+    "n": "Loma de Arena",
+    "c": "Colombia",
+    "r": "col_atlantico",
+    "ey": 1850,
+    "ly": 2018,
+    "al": [
+      "pueblo nuevo",
+      "Pueblo Nuevo"
+    ],
+    "hits": []
+  },
+  {
+    "key": "Mutiscua-Colombia",
+    "n": "Mutiscua",
+    "c": "Colombia",
+    "r": "col_norte_de_santander",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": [
+      {
+        "name": "Mutiscua",
+        "admin1": "Norte De Santander",
+        "sources": [
+          "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+        ],
+        "_src_file": "raw_setts_colombia.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "SA-MTS-004",
+        "department": "NORTE DE SANTANDER",
+        "municipality": "MUTISCUA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Edwin Orlando Carrillo Duarte,  Javier Enrique Gutiérrez Olano (2007). Inventario arqueológico, paleontológico y de arte rupestre de Norte de Santander, Colombia",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 0.439
+      },
+      {
+        "name": "SA-MTS-003",
+        "department": "NORTE DE SANTANDER",
+        "municipality": "MUTISCUA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Edwin Orlando Carrillo Duarte,  Javier Enrique Gutiérrez Olano (2007). Inventario arqueológico, paleontológico y de arte rupestre de Norte de Santander, Colombia",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 1.659
+      }
+    ]
+  },
+  {
+    "key": "Cavari-Bolivia",
+    "n": "Cavari",
+    "c": "Bolivia",
+    "r": "bol_cochabamba",
+    "ey": 1525,
+    "ly": 2024,
+    "al": [
+      "cabari",
+      "usungani",
+      "Usungani"
+    ],
+    "hits": [
+      {
+        "name": "Cabari",
+        "modern_name": "Cabari",
+        "variants": [
+          "Cavari|"
+        ],
+        "start_year": 1111,
+        "colonial_province": "La Paz",
+        "colonial_partido": "Sicasica",
+        "sources": [
+          "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.219
+      },
+      {
+        "name": "Usungani",
+        "modern_name": "Usungani",
+        "start_year": 1111,
+        "colonial_province": "La Paz",
+        "colonial_partido": "Sicasica",
+        "sources": [
+          "Francisco de Viedma, Descripción geográfica y estadística de la provincia de Santa Cruz de la Sierra (1793)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.847
+      }
+    ]
+  },
+  {
+    "key": "Zona A - Sinifaná - Yacimiento 18 - Cuevas de Santa Catalina-Colombia",
+    "n": "Zona A - Sinifaná - Yacimiento 18 - Cuevas de Santa Catalina",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1175,
+    "ly": 1500,
+    "al": [],
+    "hits": [
+      {
+        "name": "Y18",
+        "period": "520 +/- 150 BP",
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "citation": "Aristizabal Espinosa, P., & Santos Vecino, G. A. (2002). Prospeccion arqueologica en los alrededores de Cerro Tusa municipio de Venecia Antioquia.",
+        "_src_file": "raw_colombia_col14.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Zona A - Sinifaná - Yacimiento 18 - Cuevas de Santa Catalina",
+        "period": "520 +/- 150 BP",
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "citation": "Aristizabal Espinosa, P. (2002). Prospeccion arqueologica en los alrededores del Cerro de Tusa. Municipio de Venecia Antioquia. Universidad de Antioquia.",
+        "_src_file": "raw_colombia_col14.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "Y18",
+        "department": "ANTIOQUIA",
+        "municipality": "VENECIA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "citation": "Aristizabal Espinosa, Pablo y Gustavo A. Santos Vecino (2002). Prospección arqueológica en los alrededores de Cerro Tusa, municipio de Venecia, Antioquia.  s.e., Medellín.",
+        "_src_file": "raw_colombia_icanh_sitios.json",
+        "_dist_km": 0.566
+      }
+    ]
+  },
+  {
+    "key": "Agua Santa-Venezuela",
+    "n": "Agua Santa",
+    "c": "Venezuela",
+    "r": "ven_trujillo",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Viviate-Peru",
+    "n": "Viviate",
+    "c": "Peru",
+    "r": "per_piura",
+    "ey": 1850,
+    "ly": 2017,
+    "al": [],
+    "hits": []
+  },
+  {
+    "key": "Tres Unidos-Peru",
+    "n": "Tres Unidos",
+    "c": "Peru",
+    "r": "per_san_martin",
+    "ey": 1900,
+    "ly": 2025,
+    "al": [],
+    "hits": [
+      {
+        "name": "Tres Unidos",
+        "admin1": "San Martín",
+        "admin2": "PICOTA",
+        "sources": [
+          "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+        ],
+        "_src_file": "raw_setts_peru.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Campos Elevados-Peru",
+    "n": "Campos Elevados",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -3000,
+    "ly": 1532,
+    "al": [
+      "cerro blanco",
+      "cerro mongon",
+      "puerto pobre"
+    ],
+    "hits": [
+      {
+        "name": "Campos Elevados",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.0
+      },
+      {
+        "name": "SITIO ARQUEOLÓGICO SANTA CRISTINA",
+        "department": "ÁNCASH",
+        "province": "CASMA",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.779
+      }
+    ]
+  },
+  {
+    "key": "Taganga-Colombia",
+    "n": "Taganga",
+    "c": "Colombia",
+    "r": "col_magdalena",
+    "ey": 1525,
+    "ly": 2018,
+    "al": [
+      "san francisco taganga",
+      "San Francisco Taganga"
+    ],
+    "hits": [
+      {
+        "name": "San Francisco Taganga",
+        "modern_name": "San Francisco Taganga",
+        "start_year": 1111,
+        "colonial_province": "Santa Marta",
+        "colonial_partido": "Santa Marta",
+        "sources": [
+          "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+        ],
+        "_src_file": "hgis_indias_colonial_raw.json",
+        "_dist_km": 0.273
+      }
+    ]
+  },
+  {
+    "key": "Santa Cruz (per_loreto)-Peru",
+    "n": "Santa Cruz",
+    "c": "Peru",
+    "r": "per_loreto",
+    "ey": 1900,
+    "ly": 2025,
+    "al": [],
+    "hits": [
+      {
+        "name": "Santa Cruz",
+        "admin1": "Loreto",
+        "admin2": "ALTO AMAZONAS",
+        "sources": [
+          "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+        ],
+        "_src_file": "raw_setts_peru.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "San Genaro Norte-Argentina",
+    "n": "San Genaro Norte",
+    "c": "Argentina",
+    "r": "arg_santa_fe",
+    "ey": 1850,
+    "ly": 2010,
+    "al": [],
+    "hits": [
+      {
+        "name": "San Genaro",
+        "admin1": "Santa Fe",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 2.285
+      }
+    ]
+  },
+  {
+    "key": "Simbila-Peru",
+    "n": "Simbila",
+    "c": "Peru",
+    "r": "per_piura",
+    "ey": 1850,
+    "ly": 2017,
+    "al": [],
+    "hits": [
+      {
+        "name": "Huaca Alto La Cruz - Sector 2",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.133
+      },
+      {
+        "name": "Huaca Alto La Cruz - Sector 1",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.207
+      }
+    ]
+  },
+  {
+    "key": "Jaiva-Peru",
+    "n": "Jaiva",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -2000,
+    "ly": 1530,
+    "al": [
+      "cerro arara",
+      "otro",
+      "raywa"
+    ],
+    "hits": [
+      {
+        "name": "Jaiva",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.001
+      },
+      {
+        "name": "Otro",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.96
+      },
+      {
+        "name": "Capilla",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.36
+      }
+    ]
+  },
+  {
+    "key": "Villa Pasco-Peru",
+    "n": "Villa Pasco",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": 0,
+    "ly": 1532,
+    "al": [
+      "huachuacaja",
+      "marcapunta",
+      "ricran"
+    ],
+    "hits": [
+      {
+        "department": "Pasco",
+        "province": "Pasco",
+        "_src_file": "raw_peru_sigda_qhapaq_nan.json",
+        "_dist_km": 0.0
+      },
+      {
+        "department": "Pasco",
+        "province": "Pasco",
+        "_src_file": "raw_peru_sigda_qhapaq_nan.json",
+        "_dist_km": 1.132
+      },
+      {
+        "name": "Marcapunta",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 1.952
+      }
+    ]
+  },
+  {
+    "key": "Los Antiguos-Argentina",
+    "n": "Los Antiguos",
+    "c": "Argentina",
+    "r": "arg_santa_cruz",
+    "ey": 1900,
+    "ly": 2022,
+    "al": [],
+    "hits": [
+      {
+        "name": "Los Antiguos",
+        "admin1": "Santa Cruz",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Ayallaqta-Peru",
+    "n": "Ayallaqta",
+    "c": "Peru",
+    "r": "inca_collasuyu",
+    "ey": 1000,
+    "ly": 1530,
+    "al": [
+      "hatun qero",
+      "Hatun Qero"
+    ],
+    "hits": [
+      {
+        "name": "Ayallaqta",
+        "_src_file": "raw_peru_sigda.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Marta-Colombia",
+    "n": "Marta",
+    "c": "Colombia",
+    "r": "na_caribbean_maracaibo_tairona",
+    "ey": -501,
+    "ly": 793,
+    "al": [
+      "yacimiento",
+      "Yacimiento"
+    ],
+    "hits": [
+      {
+        "name": "Marta",
+        "period": "2010 +/- 50 BP",
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "citation": "Van Zweden, R. (1994). Geomorfologia de un yacimiento arqueologico: el sitio Marta, Golfo de Morrosquillo, Colombia.",
+        "_src_file": "raw_colombia_col14.json",
+        "_dist_km": 0.001
+      },
+      {
+        "name": "Marta",
+        "period": "2080 +/- 140 BP",
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "citation": "Van Zweden, R. R. (1994). Geomofología de un yacimiento arqueológico: El sitio Marta. golfo de Morrosquillo, Colombia. Boletin de Antropologia, Universidad de Antioquia, 8(24), 25-42.",
+        "_src_file": "raw_colombia_col14.json",
+        "_dist_km": 0.001
+      },
+      {
+        "name": "Marta",
+        "period": "1740 +/- 50 BP",
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "citation": "Van Zweden, R. (1994). Geomorfologia de un yacimiento arqueologico: el sitio Marta, Golfo de Morrosquillo, Colombia.",
+        "_src_file": "raw_colombia_col14.json",
+        "_dist_km": 0.001
+      }
+    ]
+  },
+  {
+    "key": "Quilanga-Ecuador",
+    "n": "Quilanga",
+    "c": "Ecuador",
+    "r": "ecu_loja",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hits": [
+      {
+        "name": "Quilanga",
+        "admin1": "Loja",
+        "sources": [
+          "INEC Ecuador Censo 2010 & 2022 / Revision 2024 (via pobecu)"
+        ],
+        "_src_file": "raw_setts_ecuador.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Gobernador Martínez-Argentina",
+    "n": "Gobernador Martínez",
+    "c": "Argentina",
+    "r": "arg_corrientes",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [
+      "gobernador juan e. martínez",
+      "Gobernador Juan E. Martínez"
+    ],
+    "hits": [
+      {
+        "name": "Gobernador Martínez",
+        "admin1": "Corrientes",
+        "sources": [
+          "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+        ],
+        "_src_file": "raw_setts_argentina.json",
+        "_dist_km": 0.0
+      }
+    ]
+  },
+  {
+    "key": "Chairama-Colombia",
+    "n": "Chairama",
+    "c": "Colombia",
+    "r": "na_caribbean_maracaibo_tairona",
+    "ey": 900,
+    "ly": 1500,
+    "al": [
+      "pueblito",
+      "Pueblito"
+    ],
+    "hits": []
+  },
+  {
+    "key": "Catavi-Bolivia",
+    "n": "Catavi",
+    "c": "Bolivia",
+    "r": "bol_potosi",
+    "ey": 1850,
+    "ly": 2024,
+    "al": [],
+    "hits": [
+      {
+        "name": "Llallagua",
+        "department": "Potosí",
+        "region": "bol_potosi",
+        "sources": [
+          "PRETA"
+        ],
+        "_src_file": "raw_setts_andean_bolivia.json",
+        "_dist_km": 1.703
+      }
+    ]
+  }
+]

@@ -1,0 +1,1032 @@
+{
+  "batch_index": 1103,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -30.38469,
+        -70.60408
+      ],
+      "country": "Chile",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villorrio San Antonio-Chile",
+      "known_aliases": [
+        "Villorrio San Antonio",
+        "villorrio san antonio"
+      ],
+      "latest_year": 2017,
+      "max_pop": 60,
+      "name": "Villorrio San Antonio",
+      "reason": "missing_entry",
+      "region": "chl_region_de_coquimbo",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.29861,
+        -65.03833
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Ramada (arg_cordoba)-Argentina",
+      "known_aliases": [
+        "La Ramada",
+        "la ramada"
+      ],
+      "latest_year": 2010,
+      "max_pop": 60,
+      "name": "La Ramada",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.30415,
+        -63.23298
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Las Mojarras (arg_cordoba)-Argentina",
+      "known_aliases": [
+        "Las Mojarras",
+        "las mojarras"
+      ],
+      "latest_year": 2010,
+      "max_pop": 60,
+      "name": "Las Mojarras",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -36.50155,
+        -61.02565
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Paula-Argentina",
+      "known_aliases": [
+        "Paula",
+        "paula"
+      ],
+      "latest_year": 2022,
+      "max_pop": 60,
+      "name": "Paula",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.84254,
+        -64.09828
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ranqueles-Argentina",
+      "known_aliases": [
+        "Ranqueles",
+        "ranqueles"
+      ],
+      "latest_year": 2022,
+      "max_pop": 60,
+      "name": "Ranqueles",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.93721,
+        -56.75361
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Gregorio-Uruguay",
+      "known_aliases": [
+        "San Gregorio",
+        "san gregorio"
+      ],
+      "latest_year": 2023,
+      "max_pop": 60,
+      "name": "San Gregorio",
+      "reason": "missing_entry",
+      "region": "ury_san_jose",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.566,
+        -64.722
+      ],
+      "country": "Argentina",
+      "earliest_year": 1765,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Lorenzo - Rio Seco-Argentina",
+      "known_aliases": [
+        "San Lorenzo - Rio Seco",
+        "san lorenzo - rio seco"
+      ],
+      "latest_year": 1830,
+      "max_pop": 60,
+      "name": "San Lorenzo - Rio Seco",
+      "reason": "missing_entry",
+      "region": "crp_gobernacion_tucuman",
+      "sample_years": [
+        1765,
+        1780,
+        1800,
+        1825,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -41.99597,
+        -65.29357
+      ],
+      "country": "Argentina",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Arroyo Verde-Argentina",
+      "known_aliases": [
+        "Arroyo Verde",
+        "arroyo verde"
+      ],
+      "latest_year": 2010,
+      "max_pop": 59,
+      "name": "Arroyo Verde",
+      "reason": "missing_entry",
+      "region": "arg_rio_negro",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.70548,
+        -64.33521
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cerro Negro (arg_cordoba)-Argentina",
+      "known_aliases": [
+        "Cerro Negro",
+        "cerro negro"
+      ],
+      "latest_year": 2022,
+      "max_pop": 59,
+      "name": "Cerro Negro",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.28944,
+        -67.1225
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Pueblito-Argentina",
+      "known_aliases": [
+        "El Pueblito",
+        "el pueblito"
+      ],
+      "latest_year": 2010,
+      "max_pop": 58,
+      "name": "El Pueblito",
+      "reason": "missing_entry",
+      "region": "arg_catamarca",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.4109,
+        -59.41856
+      ],
+      "country": "Argentina",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Estación General Obligado-Argentina",
+      "known_aliases": [
+        "Estación General Obligado",
+        "estación general obligado"
+      ],
+      "latest_year": 2022,
+      "max_pop": 58,
+      "name": "Estación General Obligado",
+      "reason": "missing_entry",
+      "region": "arg_chaco",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.12619,
+        -66.05317
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Ana de la Puna-Argentina",
+      "known_aliases": [
+        "Santa Ana de la Puna",
+        "santa ana de la puna"
+      ],
+      "latest_year": 2022,
+      "max_pop": 58,
+      "name": "Santa Ana de la Puna",
+      "reason": "missing_entry",
+      "region": "arg_jujuy",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.18666,
+        -61.18172
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santurce-Argentina",
+      "known_aliases": [
+        "Santurce",
+        "santurce"
+      ],
+      "latest_year": 2022,
+      "max_pop": 58,
+      "name": "Santurce",
+      "reason": "missing_entry",
+      "region": "arg_santa_fe",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.06575,
+        -57.72301
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cerro De Las Armas-Uruguay",
+      "known_aliases": [
+        "Cerro De Las Armas",
+        "cerro de las armas",
+        "Cerro de las Armas"
+      ],
+      "latest_year": 2023,
+      "max_pop": 58,
+      "name": "Cerro De Las Armas",
+      "reason": "missing_entry",
+      "region": "ury_colonia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -51.5019,
+        -58.9958
+      ],
+      "country": "Falkland Islands",
+      "earliest_year": 1881,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Carlos-Falkland Islands",
+      "known_aliases": [
+        "San Carlos",
+        "san carlos",
+        "jb's",
+        "port san carlos",
+        "JB's",
+        "Port San Carlos"
+      ],
+      "latest_year": 2021,
+      "max_pop": 58,
+      "name": "San Carlos",
+      "reason": "missing_entry",
+      "region": "flk_east_falkland",
+      "sample_years": [
+        1881,
+        1911,
+        1921,
+        1953,
+        1986,
+        2012,
+        2021
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.99015,
+        -68.49361
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Curitero Barotal-Venezuela",
+      "known_aliases": [
+        "Curitero Barotal",
+        "curitero barotal"
+      ],
+      "latest_year": 2011,
+      "max_pop": 57,
+      "name": "Curitero Barotal",
+      "reason": "missing_entry",
+      "region": "ven_barinas",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -37.12628,
+        -59.10576
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "De la Canal-Argentina",
+      "known_aliases": [
+        "De la Canal",
+        "de la canal"
+      ],
+      "latest_year": 2022,
+      "max_pop": 57,
+      "name": "De la Canal",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -43.28393,
+        -67.76126
+      ],
+      "country": "Argentina",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Mirasol-Argentina",
+      "known_aliases": [
+        "El Mirasol",
+        "el mirasol"
+      ],
+      "latest_year": 2022,
+      "max_pop": 57,
+      "name": "El Mirasol",
+      "reason": "missing_entry",
+      "region": "arg_chubut",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -40.50425,
+        -66.56331
+      ],
+      "country": "Argentina",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Nahuel Niyeu-Argentina",
+      "known_aliases": [
+        "Nahuel Niyeu",
+        "nahuel niyeu"
+      ],
+      "latest_year": 2022,
+      "max_pop": 57,
+      "name": "Nahuel Niyeu",
+      "reason": "missing_entry",
+      "region": "arg_rio_negro",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.53286,
+        -60.79356
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Norumbega-Argentina",
+      "known_aliases": [
+        "Norumbega",
+        "norumbega"
+      ],
+      "latest_year": 2010,
+      "max_pop": 57,
+      "name": "Norumbega",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.49288,
+        -63.10205
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ramón J. Cárcano-Argentina",
+      "known_aliases": [
+        "Ramón J. Cárcano",
+        "ramón j. cárcano"
+      ],
+      "latest_year": 2010,
+      "max_pop": 57,
+      "name": "Ramón J. Cárcano",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.58411,
+        -63.58574
+      ],
+      "country": "Argentina",
+      "earliest_year": 1980,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Trebolares-Argentina",
+      "known_aliases": [
+        "Trebolares",
+        "trebolares"
+      ],
+      "latest_year": 2022,
+      "max_pop": 57,
+      "name": "Trebolares",
+      "reason": "missing_entry",
+      "region": "arg_la_pampa",
+      "sample_years": [
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.56712,
+        -64.40428
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa Colimba-Argentina",
+      "known_aliases": [
+        "Villa Colimba",
+        "villa colimba"
+      ],
+      "latest_year": 2022,
+      "max_pop": 57,
+      "name": "Villa Colimba",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -4.95475,
+        -79.05047
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Laurel (ecu_zamora_chinchipe)-Ecuador",
+      "known_aliases": [
+        "Laurel",
+        "laurel"
+      ],
+      "latest_year": 2010,
+      "max_pop": 56,
+      "name": "Laurel",
+      "reason": "missing_entry",
+      "region": "ecu_zamora_chinchipe",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.45419,
+        -64.44585
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Pedro de Toyos-Argentina",
+      "known_aliases": [
+        "San Pedro de Toyos",
+        "san pedro de toyos"
+      ],
+      "latest_year": 2010,
+      "max_pop": 56,
+      "name": "San Pedro de Toyos",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -38.17651,
+        -60.17153
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Vásquez-Argentina",
+      "known_aliases": [
+        "Vásquez",
+        "vásquez"
+      ],
+      "latest_year": 2022,
+      "max_pop": 56,
+      "name": "Vásquez",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.99695,
+        -57.74386
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Araujo-Uruguay",
+      "known_aliases": [
+        "Araujo",
+        "araujo"
+      ],
+      "latest_year": 2023,
+      "max_pop": 56,
+      "name": "Araujo",
+      "reason": "missing_entry",
+      "region": "ury_paysandu",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.69,
+        -53.539
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1734,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Miguel-Uruguay",
+      "known_aliases": [
+        "San Miguel",
+        "san miguel"
+      ],
+      "latest_year": 1830,
+      "max_pop": 56,
+      "name": "San Miguel",
+      "reason": "missing_entry",
+      "region": "crp_banda_oriental_misiones",
+      "sample_years": [
+        1734,
+        1750,
+        1780,
+        1798,
+        1800,
+        1825,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.69,
+        -67.285
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Layero-Venezuela",
+      "known_aliases": [
+        "El Layero",
+        "el layero"
+      ],
+      "latest_year": 2011,
+      "max_pop": 55,
+      "name": "El Layero",
+      "reason": "missing_entry",
+      "region": "ven_guarico",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.56667,
+        -66.93056
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1538,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Las Flores (ven_distrito_capital)-Venezuela",
+      "known_aliases": [
+        "Las Flores",
+        "las flores",
+        "dos aguadas",
+        "Dos Aguadas"
+      ],
+      "latest_year": 2011,
+      "max_pop": 55,
+      "name": "Las Flores",
+      "reason": "missing_entry",
+      "region": "ven_distrito_capital",
+      "sample_years": [
+        1538,
+        1780,
+        1920,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    }
+  ]
+}

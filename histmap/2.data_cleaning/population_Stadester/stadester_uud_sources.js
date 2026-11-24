@@ -1060,9 +1060,10 @@
       let key_lower = String(all_keys[i] || "").toLowerCase();
       let name_lower = String(city.name || "").toLowerCase();
       let is_agglom = Boolean(city.is_agglomeration) || key_lower.includes("agglomeration") || name_lower.includes("agglomeration");
+      let is_viscount_city = Boolean(typeof population_Stadester_uud.hasViscountSource === "function" && population_Stadester_uud.hasViscountSource(city));
       let in_complete_viscount_city = polaris_countries.includes(city.country) ||
         (typeof population_Stadester_uud.isCompleteViscountCountry === "function" && population_Stadester_uud.isCompleteViscountCountry(city.country, city));
-      if (is_agglom && in_complete_viscount_city) {
+      if (is_agglom && in_complete_viscount_city && !is_viscount_city) {
         let has_core_city = false;
         if (Array.isArray(city.coords) && city.coords.length >= 2) {
           let lat0 = Number(city.coords[0]);

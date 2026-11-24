@@ -1,0 +1,1038 @@
+{
+  "batch_index": 1059,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -31.34898,
+        -56.39371
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Quintana-Uruguay",
+      "known_aliases": [
+        "Quintana",
+        "quintana"
+      ],
+      "latest_year": 2023,
+      "max_pop": 125,
+      "name": "Quintana",
+      "reason": "missing_entry",
+      "region": "ury_salto",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.74791,
+        -71.21908
+      ],
+      "country": "Peru",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chaupiorqopuqro-Peru",
+      "known_aliases": [
+        "Chaupiorqopuqro",
+        "chaupiorqopuqro",
+        "corral en qomercocha-.machuhuas",
+        "machuhuas",
+        "Corral En Qomercocha-.Machuhuas",
+        "Machuhuas"
+      ],
+      "latest_year": 1530,
+      "max_pop": 125,
+      "name": "Chaupiorqopuqro",
+      "reason": "missing_entry",
+      "region": "inca_antisuyu",
+      "sample_years": [
+        1000,
+        1400,
+        1500,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.38072,
+        -77.13234
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Barco-Colombia",
+      "known_aliases": [
+        "Barco",
+        "barco"
+      ],
+      "latest_year": 2018,
+      "max_pop": 124,
+      "name": "Barco",
+      "reason": "missing_entry",
+      "region": "col_valle_del_cauca",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.30231,
+        -74.83715
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Caliente-Colombia",
+      "known_aliases": [
+        "La Caliente",
+        "la caliente"
+      ],
+      "latest_year": 2018,
+      "max_pop": 124,
+      "name": "La Caliente",
+      "reason": "missing_entry",
+      "region": "col_antioquia",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.16039,
+        -75.36409
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Selva (col_tolima)-Colombia",
+      "known_aliases": [
+        "La Selva",
+        "la selva"
+      ],
+      "latest_year": 2018,
+      "max_pop": 124,
+      "name": "La Selva",
+      "reason": "missing_entry",
+      "region": "col_tolima",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.55722,
+        -62.45833
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Canela-Venezuela",
+      "known_aliases": [
+        "La Canela",
+        "la canela"
+      ],
+      "latest_year": 2011,
+      "max_pop": 124,
+      "name": "La Canela",
+      "reason": "missing_entry",
+      "region": "ven_sucre",
+      "sample_years": [
+        1850,
+        1920,
+        1980,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.91628,
+        -71.22095
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Callejón Santa Isabel-Chile",
+      "known_aliases": [
+        "Callejón Santa Isabel",
+        "callejón santa isabel"
+      ],
+      "latest_year": 2017,
+      "max_pop": 124,
+      "name": "Callejón Santa Isabel",
+      "reason": "missing_entry",
+      "region": "chl_region_del_libertador_bernardo_o_higgins",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -41.99002,
+        -72.69236
+      ],
+      "country": "Chile",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Estero (chl_region_de_los_lagos)-Chile",
+      "known_aliases": [
+        "El Estero",
+        "el estero"
+      ],
+      "latest_year": 2017,
+      "max_pop": 124,
+      "name": "El Estero",
+      "reason": "missing_entry",
+      "region": "chl_region_de_los_lagos",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.97083,
+        -71.47608
+      ],
+      "country": "Chile",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Peñasco-Chile",
+      "known_aliases": [
+        "El Peñasco",
+        "el peñasco"
+      ],
+      "latest_year": 2017,
+      "max_pop": 124,
+      "name": "El Peñasco",
+      "reason": "missing_entry",
+      "region": "chl_region_del_maule",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -41.85411,
+        -73.50553
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Patos-Chile",
+      "known_aliases": [
+        "Los Patos",
+        "los patos"
+      ],
+      "latest_year": 2017,
+      "max_pop": 124,
+      "name": "Los Patos",
+      "reason": "missing_entry",
+      "region": "chl_region_de_los_lagos",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.30613,
+        -71.14453
+      ],
+      "country": "Chile",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Maitenes (chl_region_del_maule)-Chile",
+      "known_aliases": [
+        "Maitenes",
+        "maitenes"
+      ],
+      "latest_year": 2017,
+      "max_pop": 124,
+      "name": "Maitenes",
+      "reason": "missing_entry",
+      "region": "chl_region_del_maule",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -35.79679,
+        -71.42386
+      ],
+      "country": "Chile",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Termas de Quinamávida-Chile",
+      "known_aliases": [
+        "Termas de Quinamávida",
+        "termas de quinamávida"
+      ],
+      "latest_year": 2017,
+      "max_pop": 124,
+      "name": "Termas de Quinamávida",
+      "reason": "missing_entry",
+      "region": "chl_region_del_maule",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.09795,
+        -70.74824
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tuniche (chl_region_del_libertador_bernardo_o_higgins)-Chile",
+      "known_aliases": [
+        "Tuniche",
+        "tuniche"
+      ],
+      "latest_year": 2017,
+      "max_pop": 124,
+      "name": "Tuniche",
+      "reason": "missing_entry",
+      "region": "chl_region_del_libertador_bernardo_o_higgins",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.29168,
+        -71.61123
+      ],
+      "country": "Chile",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Viluco (chl_region_del_libertador_bernardo_o_higgins_2)-Chile",
+      "known_aliases": [
+        "Viluco",
+        "viluco"
+      ],
+      "latest_year": 2017,
+      "max_pop": 124,
+      "name": "Viluco",
+      "reason": "missing_entry",
+      "region": "chl_region_del_libertador_bernardo_o_higgins",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.78309,
+        -61.918
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Colonia San Pedro-Argentina",
+      "known_aliases": [
+        "Colonia San Pedro",
+        "colonia san pedro"
+      ],
+      "latest_year": 2022,
+      "max_pop": 124,
+      "name": "Colonia San Pedro",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -37.48389,
+        -62.10435
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Curamalal-Argentina",
+      "known_aliases": [
+        "Curamalal",
+        "curamalal"
+      ],
+      "latest_year": 2022,
+      "max_pop": 124,
+      "name": "Curamalal",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.07515,
+        -61.11721
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Eugenio-Argentina",
+      "known_aliases": [
+        "San Eugenio",
+        "san eugenio"
+      ],
+      "latest_year": 2022,
+      "max_pop": 124,
+      "name": "San Eugenio",
+      "reason": "missing_entry",
+      "region": "arg_santa_fe",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -24.50443,
+        -64.7107
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan de Dios-Argentina",
+      "known_aliases": [
+        "San Juan de Dios",
+        "san juan de dios"
+      ],
+      "latest_year": 2022,
+      "max_pop": 124,
+      "name": "San Juan de Dios",
+      "reason": "missing_entry",
+      "region": "arg_jujuy",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.59177,
+        -66.55639
+      ],
+      "country": "Argentina",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Termas de Santa Teresita-Argentina",
+      "known_aliases": [
+        "Termas de Santa Teresita",
+        "termas de santa teresita"
+      ],
+      "latest_year": 2010,
+      "max_pop": 124,
+      "name": "Termas de Santa Teresita",
+      "reason": "missing_entry",
+      "region": "arg_la_rioja",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.77792,
+        -55.69472
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cuchilla del Ombu-Uruguay",
+      "known_aliases": [
+        "Cuchilla del Ombu",
+        "cuchilla del ombu"
+      ],
+      "latest_year": 2023,
+      "max_pop": 124,
+      "name": "Cuchilla del Ombu",
+      "reason": "missing_entry",
+      "region": "ury_tacuarembo",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2004,
+        2011,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.73212,
+        -56.09087
+      ],
+      "country": "Uruguay",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rincon de la Aldea-Uruguay",
+      "known_aliases": [
+        "Rincon de la Aldea",
+        "rincon de la aldea"
+      ],
+      "latest_year": 2023,
+      "max_pop": 124,
+      "name": "Rincon de la Aldea",
+      "reason": "missing_entry",
+      "region": "ury_tacuarembo",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2023
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.007,
+        -64.222
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1769,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa de la Carolina-Venezuela",
+      "known_aliases": [
+        "Villa de la Carolina",
+        "villa de la carolina"
+      ],
+      "latest_year": 1830,
+      "max_pop": 124,
+      "name": "Villa de la Carolina",
+      "reason": "missing_entry",
+      "region": "vng_cumana_guayana_margarita",
+      "sample_years": [
+        1769,
+        1770,
+        1773,
+        1780,
+        1800,
+        1825,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -36.366,
+        -72.551
+      ],
+      "country": "Chile",
+      "earliest_year": 1601,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Esteban-Chile_2",
+      "known_aliases": [
+        "San Esteban",
+        "san esteban"
+      ],
+      "latest_year": 1830,
+      "max_pop": 124,
+      "name": "San Esteban",
+      "reason": "missing_entry",
+      "region": "crp_obispado_concepcion_chiloe",
+      "sample_years": [
+        1601,
+        1700,
+        1800,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.21377,
+        -77.65978
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Balalaika-Colombia",
+      "known_aliases": [
+        "Balalaika",
+        "balalaika"
+      ],
+      "latest_year": 2018,
+      "max_pop": 123,
+      "name": "Balalaika",
+      "reason": "missing_entry",
+      "region": "col_narino",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.89046,
+        -74.05702
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Rubí (col_santander)-Colombia",
+      "known_aliases": [
+        "El Rubí",
+        "el rubí"
+      ],
+      "latest_year": 2018,
+      "max_pop": 123,
+      "name": "El Rubí",
+      "reason": "missing_entry",
+      "region": "col_santander",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.83852,
+        -76.79338
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Salto (col_valle_del_cauca)-Colombia",
+      "known_aliases": [
+        "El Salto",
+        "el salto"
+      ],
+      "latest_year": 2018,
+      "max_pop": 123,
+      "name": "El Salto",
+      "reason": "missing_entry",
+      "region": "col_valle_del_cauca",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.3322,
+        -73.59524
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Campana-Colombia",
+      "known_aliases": [
+        "La Campana",
+        "la campana"
+      ],
+      "latest_year": 2018,
+      "max_pop": 123,
+      "name": "La Campana",
+      "reason": "missing_entry",
+      "region": "col_cesar",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.42984,
+        -74.90667
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Pradera (col_caldas)-Colombia",
+      "known_aliases": [
+        "La Pradera",
+        "la pradera"
+      ],
+      "latest_year": 2018,
+      "max_pop": 123,
+      "name": "La Pradera",
+      "reason": "missing_entry",
+      "region": "col_caldas",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.74287,
+        -75.76099
+      ],
+      "country": "Colombia",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Selva-Colombia",
+      "known_aliases": [
+        "La Selva",
+        "la selva"
+      ],
+      "latest_year": 2018,
+      "max_pop": 123,
+      "name": "La Selva",
+      "reason": "missing_entry",
+      "region": "col_risaralda",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.11926,
+        -73.49459
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Benito Nuevo-Colombia",
+      "known_aliases": [
+        "San Benito Nuevo",
+        "san benito nuevo"
+      ],
+      "latest_year": 2018,
+      "max_pop": 123,
+      "name": "San Benito Nuevo",
+      "reason": "missing_entry",
+      "region": "col_santander",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    }
+  ]
+}

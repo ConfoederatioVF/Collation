@@ -1,0 +1,6202 @@
+{
+  "Saquena-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Saquena-Peru",
+      "name": "Saquena",
+      "other_names": [
+        "Bagazan"
+      ],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    }
+  ],
+  "Junín (ven_trujillo)-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Junín (ven_trujillo)-Venezuela",
+      "name": "Junín",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2001",
+        "2005",
+        "2010",
+        "2011",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    },
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 2.83,
+      "key": "Sucre (ven_trujillo_2)-Venezuela",
+      "name": "Sucre",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Censo 2011 (via OCHA/HDX COD-PS ven_admpop_adm2_2011_v3)",
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)"
+      ],
+      "provenance": "INE Venezuela Censo 2011 (via OCHA/HDX COD-PS ven_admpop_adm2_2011_v3)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2001",
+        "2011",
+        "2025"
+      ]
+    }
+  ],
+  "Pilar de Macapillo-Argentina": [
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "dist": 0.0,
+      "key": "Pilar de Macapillo-Argentina",
+      "name": "Pilar de Macapillo",
+      "other_names": [
+        "Columna",
+        "Mecapillo"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1715",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.15,
+      "key": "Macapillo-Argentina",
+      "name": "Macapillo",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "Juctacancha-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Juctacancha-Peru",
+      "name": "Juctacancha",
+      "other_names": [
+        "Calapa",
+        "Chogya",
+        "Golgayana Punta",
+        "Huari Punta",
+        "Huarichuchu",
+        "Ichipira",
+        "Ishcay Sanga",
+        "Jircan Corral"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Juctacancha-Peru",
+      "name": "Juctacancha",
+      "other_names": [
+        "Calapa",
+        "Chogya",
+        "Golgayana Punta",
+        "Huari Punta",
+        "Huarichuchu",
+        "Ichipira",
+        "Ishcay Sanga",
+        "Jircan Corral"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 2.28,
+      "key": "Llamor-Peru",
+      "name": "Llamor",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "dist": 2.28,
+      "key": "Llamor-Peru",
+      "name": "Llamor",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1542",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825"
+      ]
+    }
+  ],
+  "La Coquera-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "La Coquera-Colombia",
+      "name": "La Coquera",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 1.54,
+      "key": "Buenavista (col_antioquia)-Colombia",
+      "name": "Buenavista",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2018"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 3.42,
+      "key": "La Sonadora-Colombia",
+      "name": "La Sonadora",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 3.56,
+      "key": "Puerto Gutiérrez-Colombia",
+      "name": "Puerto Gutiérrez",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2018"
+      ]
+    }
+  ],
+  "Doradal-Colombia": [
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Doradal-Colombia",
+      "name": "Doradal",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    }
+  ],
+  "Siete De Julio-Ecuador": [
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Siete De Julio-Ecuador",
+      "name": "Siete De Julio",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "provenance": "INEC_Ecuador_Parroquias_1990_2025",
+      "years": [
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2001",
+        "2010",
+        "2015",
+        "2020",
+        "2022",
+        "2025"
+      ]
+    }
+  ],
+  "Chumbicha-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Chumbicha-Argentina",
+      "name": "Chumbicha",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010"
+      ]
+    },
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "dist": 0.08,
+      "key": "Chumbicha-Argentina",
+      "name": "Chumbicha",
+      "other_names": [
+        "Chumbica"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1536",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ],
+  "El Trebol-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "El Trebol-Colombia",
+      "name": "El Trebol",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "El Trebol-Colombia",
+      "name": "El Trebol",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "-1000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 3.47,
+      "key": "Puerto Guzmán-Colombia",
+      "name": "Puerto Guzmán",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "provenance": "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1993",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2018",
+        "2020",
+        "2023",
+        "2025"
+      ]
+    }
+  ],
+  "Sobreancho Torre-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Sobreancho Torre-Colombia",
+      "name": "Sobreancho Torre",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 2.3,
+      "key": "Santa Rosa (col_meta)-Colombia",
+      "name": "Santa Rosa",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2018"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 3.05,
+      "key": "Clúster-Colombia",
+      "name": "Clúster",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 3.77,
+      "key": "Yacimiento (na_orinoco_llanos_guayana)-Colombia",
+      "name": "Yacimiento",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    }
+  ],
+  "Anisacate-Argentina_2": [
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 0.0,
+      "key": "Anisacate-Argentina",
+      "name": "Anisacate",
+      "other_names": [],
+      "sources": [
+        "IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus"
+      ],
+      "provenance": "IDACOR_CONICET_Argentina",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "80",
+        "800"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.9,
+      "key": "Anisacate-Argentina",
+      "name": "Anisacate",
+      "other_names": [
+        "Costa Azul"
+      ],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 2.48,
+      "key": "Valle de Anisacate-Argentina",
+      "name": "Valle de Anisacate",
+      "other_names": [
+        "Villa La Bolsa"
+      ],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 4.01,
+      "key": "Villa Los Aromos-Argentina",
+      "name": "Villa Los Aromos",
+      "other_names": [
+        "La Serranita"
+      ],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "La Caldera-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "La Caldera-Argentina",
+      "name": "La Caldera",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 4.23,
+      "key": "La Calderilla-Argentina",
+      "name": "La Calderilla",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2022 (Localidades Censales Georef + Radios Censales)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2022_Radios_Localidades",
+      "years": [
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "Norberto de la Riestra-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Norberto de la Riestra-Argentina",
+      "name": "Norberto de la Riestra",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010"
+      ]
+    }
+  ],
+  "Michac-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "Michac-Colombia",
+      "name": "Michac",
+      "other_names": [
+        "Manchay"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 0.0,
+      "key": "Michac-Colombia",
+      "name": "Michac",
+      "other_names": [
+        "Manchay"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 1.99,
+      "key": "Manchag-Colombia",
+      "name": "Manchag",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 3.39,
+      "key": "Santacruz-Colombia",
+      "name": "Santacruz",
+      "other_names": [
+        "Guachaves"
+      ],
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "provenance": "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1985",
+        "1990",
+        "1993",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2018",
+        "2020",
+        "2023",
+        "2025"
+      ]
+    }
+  ],
+  "Arnoldo Gabaldon (ven_trujillo)-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Arnoldo Gabaldon (ven_trujillo)-Venezuela",
+      "name": "Arnoldo Gabaldon",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    },
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 3.48,
+      "key": "Campo Elías (ven_trujillo)-Venezuela",
+      "name": "Campo Elías",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2001",
+        "2005",
+        "2010",
+        "2011",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    }
+  ],
+  "La Cruz-Argentina_2": [
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 0.0,
+      "key": "La Cruz-Argentina",
+      "name": "La Cruz",
+      "other_names": [],
+      "sources": [
+        "IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus"
+      ],
+      "provenance": "IDACOR_CONICET_Argentina",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "80",
+        "800"
+      ]
+    }
+  ],
+  "Raco-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Raco-Argentina",
+      "name": "Raco",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2022 (Localidades Censales Georef + Radios Censales)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "Chiapa-Chile": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "Chiapa-Chile",
+      "name": "Chiapa",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Jorge Hidalgo, 'CIVILIZACIÓN Y FOMENTO: LA DESCRIPCIÓN DE TARAPACÁ DE ANTONIO OBRIEN, 1765', en: Chungara, Revista de Antropología Chilena 4"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "dist": 0.0,
+      "key": "Chiapa-Chile",
+      "name": "Chiapa",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Jorge Hidalgo, 'CIVILIZACIÓN Y FOMENTO: LA DESCRIPCIÓN DE TARAPACÁ DE ANTONIO OBRIEN, 1765', en: Chungara, Revista de Antropología Chilena 4"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1542",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825"
+      ]
+    }
+  ],
+  "Chacance-Chile": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Chacance-Chile",
+      "name": "Chacance",
+      "other_names": [],
+      "sources": [
+        "Chile Radiocarbon Synthesis (Campbell/Mendez)",
+        "Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.",
+        "Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.; p3k14c"
+      ],
+      "provenance": "radiocarbon_primary_synthesis",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "761",
+        "800"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Chacance-Chile",
+      "name": "Chacance",
+      "other_names": [],
+      "sources": [
+        "Chile Radiocarbon Synthesis (Campbell/Mendez)",
+        "Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.",
+        "Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.; p3k14c"
+      ],
+      "provenance": "radiocarbon_primary_synthesis",
+      "years": [
+        "1438",
+        "1470",
+        "1500"
+      ]
+    },
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 0.0,
+      "key": "Chacance-Chile",
+      "name": "Chacance",
+      "other_names": [],
+      "sources": [
+        "Chile Radiocarbon Synthesis (Campbell/Mendez)",
+        "Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.",
+        "Straus L.G. 2002. Last Glacial Human Settlement in Eastern Cantabria. JAS 29: 1403-1414.; p3k14c"
+      ],
+      "provenance": "radiocarbon_primary_synthesis",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "761",
+        "800"
+      ]
+    }
+  ],
+  "Villalonga-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Villalonga-Argentina",
+      "name": "Villalonga",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010"
+      ]
+    }
+  ],
+  "Gochacalla-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Gochacalla-Peru",
+      "name": "Gochacalla",
+      "other_names": [
+        "Arqueológico Letra Machay",
+        "Letra Machay"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "-1000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Gochacalla-Peru",
+      "name": "Gochacalla",
+      "other_names": [
+        "Arqueológico Letra Machay",
+        "Letra Machay"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.7,
+      "key": "Chaglla-Peru",
+      "name": "Chaglla",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "dist": 0.98,
+      "key": "Chaglla-Peru",
+      "name": "Chaglla",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Plan del curso de los ríos Huallaga y Ucayali y de la Pampa del Sacramento', en: Archivo General de Indias, MP-PERU_CHILE,123 (Mapa, 1791)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1711",
+        "1750",
+        "1780",
+        "1800",
+        "1825"
+      ]
+    }
+  ],
+  "San Antonio (per_lima)-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "San Antonio (per_lima)-Peru",
+      "name": "San Antonio",
+      "other_names": [
+        "Chaclla"
+      ],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 2.9,
+      "key": "Quilcamachay - Jicamarca - Huaycoloro-Peru",
+      "name": "Quilcamachay - Jicamarca - Huaycoloro",
+      "other_names": [
+        "Paucasha"
+      ],
+      "sources": [
+        "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+        "Hyslop (1984) Inka Road System",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Qhapaq_Nan_Peru",
+      "years": [
+        "1440",
+        "1470",
+        "1500",
+        "1525",
+        "1530",
+        "1532"
+      ]
+    }
+  ],
+  "Karajía-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Karajía-Peru",
+      "name": "Karajía",
+      "other_names": [
+        "Caverna de Quiocta",
+        "Valle alto del Utcubamba"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "-1000",
+        "-2000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Karajía-Peru",
+      "name": "Karajía",
+      "other_names": [
+        "Caverna de Quiocta",
+        "Valle alto del Utcubamba"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 1.18,
+      "key": "Chocta-Peru",
+      "name": "Chocta",
+      "other_names": [
+        "San Miguel de Cruz Pata"
+      ],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 1.92,
+      "key": "Shipata-Peru",
+      "name": "Shipata",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017"
+      ]
+    }
+  ],
+  "Sarayacu-Ecuador": [
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Sarayacu-Ecuador",
+      "name": "Sarayacu",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "provenance": "INEC_Ecuador_Parroquias_1990_2025",
+      "years": [
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2001",
+        "2010",
+        "2015",
+        "2020",
+        "2022",
+        "2025"
+      ]
+    }
+  ],
+  "Santa Elena-Ecuador_2": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "Santa Elena-Ecuador",
+      "name": "Santa Elena",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Martin Volland, Indianische Bevölkerungsgeschichte im Corregimiento Guayaquil (1548-1765)nBonn 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 0.0,
+      "key": "Santa Elena-Ecuador",
+      "name": "Santa Elena",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Martin Volland, Indianische Bevölkerungsgeschichte im Corregimiento Guayaquil (1548-1765)nBonn 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1765",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 3.61,
+      "key": "La Libertad-Ecuador",
+      "name": "La Libertad",
+      "other_names": [
+        "Punta Concepcion"
+      ],
+      "sources": [
+        "Druss 1977",
+        "Ecuador Radiocarbon Syntheses",
+        "Ziolkowski et al 1994",
+        "Fawcett 1988; Syms 1977: 85; Reeves 1983: 262; Neuman 1967: 479 1975; Wood and Johnson 1973",
+        "Stothert et al 2003"
+      ],
+      "provenance": "radiocarbon_primary_synthesis",
+      "years": [
+        "-1000",
+        "-1508",
+        "-529"
+      ]
+    },
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "dist": 4.61,
+      "key": "La Libertad-Ecuador",
+      "name": "La Libertad",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revision 2024 (via pobecu)",
+        "INEC Ecuador Censuses 1982-2022 (via citypopulation.de)"
+      ],
+      "provenance": "INEC Ecuador Censo 2010 & 2022 / Revision 2024 (via pobecu)",
+      "years": [
+        "1920",
+        "1950",
+        "1970",
+        "1982",
+        "1990",
+        "2001",
+        "2010",
+        "2015",
+        "2020",
+        "2022",
+        "2025"
+      ]
+    }
+  ],
+  "Seguí-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Seguí-Argentina",
+      "name": "Seguí",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "El Carmen De Pijilí-Ecuador": [
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "El Carmen De Pijilí-Ecuador",
+      "name": "El Carmen De Pijilí",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "provenance": "INEC_Ecuador_Parroquias_1990_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2015",
+        "2020",
+        "2022",
+        "2025"
+      ]
+    },
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "dist": 2.79,
+      "key": "Camilo Ponce Enríquez-Ecuador",
+      "name": "Camilo Ponce Enríquez",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revision 2024 (via pobecu)",
+        "INEC Ecuador Censuses 1982-2022 (via citypopulation.de)"
+      ],
+      "provenance": "INEC Ecuador Censo 2010 & 2022 / Revision 2024 (via pobecu)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2015",
+        "2020",
+        "2022",
+        "2025"
+      ]
+    }
+  ],
+  "La Arenosa-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "La Arenosa-Colombia",
+      "name": "La Arenosa",
+      "other_names": [
+        "Microplanta GNL- La Arenosa"
+      ],
+      "sources": [
+        "COL14 Colombia Radiocarbon Database",
+        "Perez, P. F. (2015). Propuesta intervencion arqueologica (rescate) microplanta de gas natural licuado (GNL) la Arenosa M",
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "radiocarbon_primary_synthesis",
+      "years": [
+        "-500",
+        "-774",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 3.09,
+      "key": "Magisterios Etapa-Colombia",
+      "name": "Magisterios Etapa",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 3.12,
+      "key": "San Antonio de Padua Soledad-Colombia",
+      "name": "San Antonio de Padua Soledad",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 3.12,
+      "key": "San Antonio de Padua Soledad-Colombia",
+      "name": "San Antonio de Padua Soledad",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1779",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ],
+  "Agua Caliente-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Agua Caliente-Venezuela",
+      "name": "Agua Caliente",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2010",
+        "2011",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    }
+  ],
+  "La Aguada-Bolivia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "La Aguada-Bolivia",
+      "name": "La Aguada",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Francisco de Viedma, Descripción geográfica y estadística de la provincia de Santa Cruz de la Sierra (1793)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "dist": 0.0,
+      "key": "La Aguada-Bolivia",
+      "name": "La Aguada",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Francisco de Viedma, Descripción geográfica y estadística de la provincia de Santa Cruz de la Sierra (1793)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1542",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825"
+      ]
+    }
+  ],
+  "Punta Teatinos-Chile": [
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 0.0,
+      "key": "Punta Teatinos-Chile",
+      "name": "Punta Teatinos",
+      "other_names": [],
+      "sources": [
+        "Chile Radiocarbon Synthesis (Campbell/Mendez)",
+        "Miller 1996-Jornada Radiocarbon",
+        "Schiappacasse & Niemeyer 1986",
+        "Simms 1999",
+        "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)",
+        "Orquera 1987"
+      ],
+      "provenance": "radiocarbon_primary_synthesis",
+      "years": [
+        "-1000",
+        "-2000",
+        "-3000",
+        "-3593",
+        "-540"
+      ]
+    },
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 1.8,
+      "key": "Comunidad Santa Elvira-Chile",
+      "name": "Comunidad Santa Elvira",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Caserío)"
+      ],
+      "provenance": "INE_Chile_CPAC_2017",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 3.08,
+      "key": "Serena Golf-Chile",
+      "name": "Serena Golf",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Caserío)"
+      ],
+      "provenance": "INE_Chile_CPAC_2017",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 4.8,
+      "key": "Monterrey-Chile",
+      "name": "Monterrey",
+      "other_names": [
+        "La Recoleta",
+        "Loma Alta",
+        "Monte Rey",
+        "Poya"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Archivo Nacional, Censo de 1813 (Santiago de Chile 1953)",
+        "Vicente Carvallo Goyeneche, Descripción Histórico-Geográfica del Reino de Chile (1796)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    }
+  ],
+  "Cañasgordas y Abriaqu-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Cañasgordas y Abriaqu-Colombia",
+      "name": "Cañasgordas y Abriaqu",
+      "other_names": [
+        "Umg"
+      ],
+      "sources": [
+        "COL14 Colombia Radiocarbon Database",
+        "Piazzini, C. E. (2004). Arqueologi­a en la cuenca del ri­o La Herradura: municipios de Frontino Cañasgordas y Abriaqui­ ",
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "radiocarbon_primary_synthesis",
+      "years": [
+        "-170",
+        "-500",
+        "-870"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 3.84,
+      "key": "Frontino-Colombia",
+      "name": "Frontino",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "provenance": "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1985",
+        "1990",
+        "1993",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2018",
+        "2020",
+        "2023",
+        "2025"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 4.12,
+      "key": "Umg-Colombia",
+      "name": "Umg",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 4.97,
+      "key": "Umg 12 la Maria-Colombia",
+      "name": "Umg 12 la Maria",
+      "other_names": [
+        "La Oliva",
+        "La Timotea",
+        "Quimulá",
+        "Santa Teresa",
+        "Umg",
+        "Umg 1 la Vuelta Parte Alta"
+      ],
+      "sources": [
+        "COL14 Colombia Radiocarbon Database",
+        "Piazzini, C. E. (2004). Arqueologi­a en la cuenca del ri­o La Herradura: municipios de Frontino Cañasgordas y Abriaqui­ ",
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "radiocarbon_primary_synthesis",
+      "years": [
+        "155",
+        "500",
+        "800",
+        "855"
+      ]
+    }
+  ],
+  "Tomay Kichwa-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Tomay Kichwa-Peru",
+      "name": "Tomay Kichwa",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 1.93,
+      "key": "Quicacan-Peru",
+      "name": "Quicacan",
+      "other_names": [
+        "Magapash"
+      ],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 2.43,
+      "key": "Andahuaylla-Peru",
+      "name": "Andahuaylla",
+      "other_names": [
+        "Ayancocha (juan Jose Crespo y Castillo)",
+        "Huancahuasi"
+      ],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017"
+      ]
+    },
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 3.78,
+      "key": "Pariapata-Peru",
+      "name": "Pariapata",
+      "other_names": [
+        "Acush",
+        "Shupra",
+        "Shupra ó Vichaycoto",
+        "Vichaycoto"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    }
+  ],
+  "La Morada-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "La Morada-Peru",
+      "name": "La Morada",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017",
+        "2025"
+      ]
+    }
+  ],
+  "Dichato-Chile": [
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Dichato-Chile",
+      "name": "Dichato",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Pueblo)"
+      ],
+      "provenance": "INE_Chile_CPAC_2017",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.78,
+      "key": "Dichato-Chile",
+      "name": "Dichato",
+      "other_names": [
+        "Dichaco"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Vicente Carvallo Goyeneche, Descripción Histórico-Geográfica del Reino de Chile (1796)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "dist": 0.78,
+      "key": "Dichato-Chile",
+      "name": "Dichato",
+      "other_names": [
+        "Dichaco"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Vicente Carvallo Goyeneche, Descripción Histórico-Geográfica del Reino de Chile (1796)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1536",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 2.37,
+      "key": "Vegas de Coliumo Norte-Chile",
+      "name": "Vegas de Coliumo Norte",
+      "other_names": [
+        "Los Cerezos"
+      ],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Caserío)"
+      ],
+      "provenance": "INE_Chile_CPAC_2017",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    }
+  ],
+  "Anchihuay-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Anchihuay-Peru",
+      "name": "Anchihuay",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 2.31,
+      "key": "Bethell-Peru",
+      "name": "Bethell",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 3.68,
+      "key": "Nueva Betania (per_cusco)-Peru",
+      "name": "Nueva Betania",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 3.75,
+      "key": "San Jose (per_ayacucho)-Peru",
+      "name": "San Jose",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017"
+      ]
+    }
+  ],
+  "Corani-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Corani-Peru",
+      "name": "Corani",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.41,
+      "key": "Corani-Peru",
+      "name": "Corani",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "dist": 0.41,
+      "key": "Corani-Peru",
+      "name": "Corani",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1542",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825"
+      ]
+    }
+  ],
+  "Retiro de los Indios-Colombia": [
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Retiro de los Indios-Colombia",
+      "name": "Retiro de los Indios",
+      "other_names": [
+        "Buenavista del Retiro"
+      ],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 1.52,
+      "key": "El Quemado-Colombia",
+      "name": "El Quemado",
+      "other_names": [
+        "Buenavista El Quemado"
+      ],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 1.8,
+      "key": "Mateo Gómez-Colombia",
+      "name": "Mateo Gómez",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 2.42,
+      "key": "La Esmeralda (col_cordoba)-Colombia",
+      "name": "La Esmeralda",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2018"
+      ]
+    }
+  ],
+  "El Pintor-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "El Pintor-Peru",
+      "name": "El Pintor",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.33,
+      "key": "El Pintor-Peru",
+      "name": "El Pintor",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Descripción corográfica de la provincia de Chachapoyas', en: Mercurio Peruano, tomo V (no.165-166) (1792)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "dist": 0.33,
+      "key": "El Pintor-Peru",
+      "name": "El Pintor",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Descripción corográfica de la provincia de Chachapoyas', en: Mercurio Peruano, tomo V (no.165-166) (1792)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1542",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 0.33,
+      "key": "El Pintor-Peru",
+      "name": "El Pintor",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Descripción corográfica de la provincia de Chachapoyas', en: Mercurio Peruano, tomo V (no.165-166) (1792)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ],
+  "Burbusay-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Burbusay-Venezuela",
+      "name": "Burbusay",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2010",
+        "2011",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 0.82,
+      "key": "Burbusay-Venezuela",
+      "name": "Burbusay",
+      "other_names": [
+        "Burusai",
+        "Burusay"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Relación y testimonio íntegro de la visita general de este obispado de Caracas y Venezuela', en: Archivo General de Indias, Caracas,959 (17"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 4.0,
+      "key": "Cabimbu (ven_trujillo)-Venezuela",
+      "name": "Cabimbu",
+      "other_names": [
+        "Piedra Gorda"
+      ],
+      "sources": [
+        "INE Venezuela XIV Censo Nacional de Población y Vivienda 2011 (Centros Poblados)"
+      ],
+      "provenance": "INE_Venezuela_Censo_2011_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2011"
+      ]
+    }
+  ],
+  "Camaná Inca-Peru": [
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Camaná Inca-Peru",
+      "name": "Camaná Inca",
+      "other_names": [
+        "Bodeguillas",
+        "Conjunto Arqueologico Pacaesitos",
+        "Conjunto Arqueológico Pacaesitos - Huacapuy",
+        "Conjunto Arqueológico Pacaesitos - Pacaesitos",
+        "El Castillo",
+        "Huacapuy"
+      ],
+      "sources": [
+        "Rowe (1946) / Hyslop (1990) Contisuyu",
+        "SIGDA Qhapaq Ñan",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "Rowe (1946) / Hyslop (1990) Contisuyu",
+      "years": [
+        "1460",
+        "1500",
+        "1530"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "Camaná-Peru",
+      "name": "Camaná",
+      "other_names": [
+        "Camana"
+      ],
+      "sources": [
+        "Visita General del Virrey Francisco de Toledo (1570-1575; Cook 1975, 1981)",
+        "Vázquez de Espinosa (1628)",
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "provenance": "Visita General del Virrey Francisco de Toledo (1570-1575; Cook 1975, 1981)",
+      "years": [
+        "1573",
+        "1628"
+      ]
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "dist": 0.0,
+      "key": "Camaná-Peru",
+      "name": "Camaná",
+      "other_names": [
+        "Camana"
+      ],
+      "sources": [
+        "Visita General del Virrey Francisco de Toledo (1570-1575; Cook 1975, 1981)",
+        "Vázquez de Espinosa (1628)",
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "provenance": "Visita General del Virrey Francisco de Toledo (1570-1575; Cook 1975, 1981)",
+      "years": [
+        "1573",
+        "1628",
+        "1791"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.2,
+      "key": "Camaná-Peru",
+      "name": "Camaná",
+      "other_names": [
+        "Camana"
+      ],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+        "INEI Peru Censuses 1993-2022 (via citypopulation.de)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1993",
+        "2007",
+        "2017",
+        "2022",
+        "2025"
+      ]
+    }
+  ],
+  "Santa Cruz-Colombia": [
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Santa Cruz-Colombia",
+      "name": "Santa Cruz",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 3.9,
+      "key": "Las Caras-Colombia",
+      "name": "Las Caras",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 4.01,
+      "key": "Cien Pesos-Colombia",
+      "name": "Cien Pesos",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    }
+  ],
+  "Codpa-Chile": [
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Codpa-Chile",
+      "name": "Codpa",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Caserío)"
+      ],
+      "provenance": "INE_Chile_CPAC_2017",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 1.85,
+      "key": "Guatanave-Chile",
+      "name": "Guatanave",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Caserío)"
+      ],
+      "provenance": "INE_Chile_CPAC_2017",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 1.85,
+      "key": "Guañacagua-Chile",
+      "name": "Guañacagua",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Caserío)"
+      ],
+      "provenance": "INE_Chile_CPAC_2017",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 3.16,
+      "key": "Codpa-Chile",
+      "name": "Codpa",
+      "other_names": [
+        "Copta"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    }
+  ],
+  "La Clarita-Colombia": [
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "La Clarita-Colombia",
+      "name": "La Clarita",
+      "other_names": [
+        "La Ferreira"
+      ],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.66,
+      "key": "UMGP 5 - Yacimiento-Colombia",
+      "name": "UMGP 5 - Yacimiento",
+      "other_names": [
+        "UMGP 1 - Yacimiento",
+        "UMGP 2 - Yacimiento",
+        "Umgp 5 - Yacimiento"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "-1000",
+        "-2000",
+        "-3000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 1.65,
+      "key": "Piedecuesta - Mani de las Casas-Colombia",
+      "name": "Piedecuesta - Mani de las Casas",
+      "other_names": [
+        "La Gualí"
+      ],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2018"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 1.78,
+      "key": "La Estación (col_antioquia)-Colombia",
+      "name": "La Estación",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2018"
+      ]
+    }
+  ],
+  "Torre (na_magdalena_cauca_muisca)-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Torre (na_magdalena_cauca_muisca)-Colombia",
+      "name": "Torre",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 1.04,
+      "key": "Torno Rojo ( San Pedro )-Colombia",
+      "name": "Torno Rojo ( San Pedro )",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 2.59,
+      "key": "Yacimiento (na_magdalena_cauca_muisca_6)-Colombia",
+      "name": "Yacimiento",
+      "other_names": [
+        "Tumulo de Puerto Lopez"
+      ],
+      "sources": [
+        "COL14 Colombia Radiocarbon Database",
+        "Santos, G. A., Vergara Castaneda, F. A. & Quintero Zapata, O. D. (1999). Ocupaciones tempranas (Holoceno medio) y desarr",
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "radiocarbon_primary_synthesis",
+      "years": [
+        "-98",
+        "0",
+        "500",
+        "602"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 3.17,
+      "key": "Villa Carminia-Colombia",
+      "name": "Villa Carminia",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2018"
+      ]
+    }
+  ],
+  "Macuira-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "Macuira-Colombia",
+      "name": "Macuira",
+      "other_names": [
+        "Macuisa"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 0.0,
+      "key": "Macuira-Colombia",
+      "name": "Macuira",
+      "other_names": [
+        "Macuisa"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1775"
+      ]
+    }
+  ],
+  "Minipi-Colombia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "Minipi-Colombia",
+      "name": "Minipi",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 0.0,
+      "key": "Minipi-Colombia",
+      "name": "Minipi",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 3.48,
+      "key": "Nimaima-Colombia",
+      "name": "Nimaima",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "provenance": "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1985",
+        "1990",
+        "1993",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2018",
+        "2020",
+        "2023",
+        "2025"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 3.63,
+      "key": "Nimaima-Colombia",
+      "name": "Nimaima",
+      "other_names": [
+        "Nimayma"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    }
+  ],
+  "Boca Toma-Argentina": [
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 0.0,
+      "key": "Boca Toma-Argentina",
+      "name": "Boca Toma",
+      "other_names": [],
+      "sources": [
+        "IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus"
+      ],
+      "provenance": "IDACOR_CONICET_Argentina",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "80",
+        "800"
+      ]
+    },
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 4.27,
+      "key": "Campo Scodellaro-Argentina",
+      "name": "Campo Scodellaro",
+      "other_names": [
+        "Campo Aguirre",
+        "Campo Aguirre- Oc"
+      ],
+      "sources": [
+        "IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus"
+      ],
+      "provenance": "IDACOR_CONICET_Argentina",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "80",
+        "800"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 4.79,
+      "key": "Río Segundo-Argentina",
+      "name": "Río Segundo",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censuses 1991-2022 (via citypopulation.de)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1991",
+        "2001",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "Villa El Salvador - Villa Sefair-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Villa El Salvador - Villa Sefair-Argentina",
+      "name": "Villa El Salvador - Villa Sefair",
+      "other_names": [
+        "Villa del Salvador"
+      ],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 4.6,
+      "key": "Dos Acequias-Argentina",
+      "name": "Dos Acequias",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "Coro-Bolivia": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "Coro-Bolivia",
+      "name": "Coro",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1527",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "dist": 0.0,
+      "key": "Coro-Bolivia",
+      "name": "Coro",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1542",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825"
+      ]
+    },
+    {
+      "file": "andean_bolivia_independence_settlements.json",
+      "dist": 2.38,
+      "key": "Corque-Bolivia",
+      "name": "Corque",
+      "other_names": [],
+      "sources": [
+        "PRETA",
+        "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+      ],
+      "provenance": "PRETA",
+      "years": [
+        "1825",
+        "1846",
+        "1850",
+        "1860",
+        "1870",
+        "1880",
+        "1890",
+        "1900",
+        "1910",
+        "1920",
+        "1930",
+        "1940",
+        "1950",
+        "1960",
+        "1970",
+        "1976",
+        "1980",
+        "1990",
+        "1992",
+        "2000",
+        "2001",
+        "2010",
+        "2012",
+        "2020",
+        "2024",
+        "2026"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 2.42,
+      "key": "San Miguel-Bolivia",
+      "name": "San Miguel",
+      "other_names": [
+        "Corque",
+        "Corquemarca"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    }
+  ],
+  "San Pedro (arg_cordoba)-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "San Pedro (arg_cordoba)-Argentina",
+      "name": "San Pedro",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2022 (Localidades Censales Georef + Radios Censales)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    },
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 0.26,
+      "key": "San Pedro-Argentina",
+      "name": "San Pedro",
+      "other_names": [
+        "San Pedro Dique Los Molinos"
+      ],
+      "sources": [
+        "IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus"
+      ],
+      "provenance": "IDACOR_CONICET_Argentina",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "80",
+        "800"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 3.03,
+      "key": "Pampa Alta-Argentina",
+      "name": "Pampa Alta",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2022 (Localidades Censales Georef + Radios Censales)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2022_Radios_Localidades",
+      "years": [
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 4.63,
+      "key": "San Clemente-Argentina",
+      "name": "San Clemente",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "Río Verde-Chile_2": [
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 0.0,
+      "key": "Río Verde-Chile",
+      "name": "Río Verde",
+      "other_names": [
+        "Ponsonby"
+      ],
+      "sources": [
+        "CMN Chile — Registro Arqueológico Acreditado",
+        "CMN Chile — Registros Arqueológicos Complementarios",
+        "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+      ],
+      "provenance": "CMN Chile — Registro Arqueológico Acredi",
+      "years": [
+        "-1000",
+        "-2000",
+        "-3000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 4.46,
+      "key": "Bird-Chile",
+      "name": "Bird",
+      "other_names": [],
+      "sources": [
+        "CMN Chile — Registro Arqueológico Acreditado",
+        "CMN Chile — Registros Arqueológicos Complementarios",
+        "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+      ],
+      "provenance": "CMN Chile — Registro Arqueológico Acredi",
+      "years": [
+        "-1000",
+        "-2000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    }
+  ],
+  "Catac-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Catac-Peru",
+      "name": "Catac",
+      "other_names": [
+        "Cátac"
+      ],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 2.62,
+      "key": "Posadapampa-Peru",
+      "name": "Posadapampa",
+      "other_names": [],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 3.77,
+      "key": "Pachacoto (inca_chinchaysuyu)-Peru",
+      "name": "Pachacoto",
+      "other_names": [
+        "Mashaconga"
+      ],
+      "sources": [
+        "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+        "Hyslop (1984) Inka Road System",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Qhapaq_Nan_Peru",
+      "years": [
+        "1440",
+        "1470",
+        "1500",
+        "1525",
+        "1530",
+        "1532"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 4.55,
+      "key": "Ticapampa-Peru",
+      "name": "Ticapampa",
+      "other_names": [
+        "Alalapuquio",
+        "Cancarpunta",
+        "Castillo Punta",
+        "Oshcoshpunta",
+        "Posadapampa"
+      ],
+      "sources": [
+        "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+        "Hyslop (1984) Inka Road System",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Qhapaq_Nan_Peru",
+      "years": [
+        "1440",
+        "1470",
+        "1500",
+        "1525",
+        "1530",
+        "1532"
+      ]
+    }
+  ],
+  "Puqueldón-Chile": [
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Puqueldón-Chile",
+      "name": "Puqueldón",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censuses & Comunal Series 1952-2024 (Zenodo doi:10.5281/zenodo.12807987)",
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Aldea)",
+        "INE Chile Censos Comunales 1952-2024 & Proyecciones 2025"
+      ],
+      "provenance": "INE Chile Censuses & Comunal Series 1952-2024 (Zenodo doi:10.5281/zenodo.12807987)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1952",
+        "1960",
+        "1970",
+        "1982",
+        "1992",
+        "2002",
+        "2010",
+        "2012",
+        "2017",
+        "2022",
+        "2024",
+        "2025"
+      ]
+    },
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 2.55,
+      "key": "San Agustín (chl_region_de_los_lagos)-Chile",
+      "name": "San Agustín",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Caserío)"
+      ],
+      "provenance": "INE_Chile_CPAC_2017",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 4.92,
+      "key": "Puquelon-Chile",
+      "name": "Puquelon",
+      "other_names": [
+        "Puqueldon"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Mapa de la Provincia de Chiloé en el Reino de Chile y el número de sus habitantes', en: Archivo General de Indias, MP-PERU_CHILE,222 (Mapa,"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "dist": 4.92,
+      "key": "Puquelon-Chile",
+      "name": "Puquelon",
+      "other_names": [
+        "Puqueldon"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Mapa de la Provincia de Chiloé en el Reino de Chile y el número de sus habitantes', en: Archivo General de Indias, MP-PERU_CHILE,222 (Mapa,"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1536",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ],
+  "Moya-Peru_2": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Moya-Peru",
+      "name": "Moya",
+      "other_names": [
+        "Cerro Belisario",
+        "Cerro Dos Rayas",
+        "Cerro Moya",
+        "Cerro San Jose",
+        "Chutana",
+        "Elemento Arqueológico Aislado Moya",
+        "Elemento Arqueológico Aislado Quebrada Chutana",
+        "Fundo Garcia"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "-1000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Moya-Peru",
+      "name": "Moya",
+      "other_names": [
+        "Cerro Belisario",
+        "Cerro Dos Rayas",
+        "Cerro San Jose",
+        "Elemento Arqueológico Aislado Moya",
+        "Elemento Arqueológico Aislado Quebrada Chutana",
+        "Quebrada Chutana",
+        "Quebrada Chutana X",
+        "Quebrada Chutana Xx"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    }
+  ],
+  "Cuñumbuqui-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Cuñumbuqui-Peru",
+      "name": "Cuñumbuqui",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 2.54,
+      "key": "Zapatero-Peru",
+      "name": "Zapatero",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 3.04,
+      "key": "La Marginal-Peru",
+      "name": "La Marginal",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 4.18,
+      "key": "Macedo-Peru",
+      "name": "Macedo",
+      "other_names": [
+        "Santa Ana del Rio Mayo"
+      ],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    }
+  ],
+  "San Carlos de Austria Yumbel-Chile": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "San Carlos de Austria Yumbel-Chile",
+      "name": "San Carlos de Austria Yumbel",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Francisco de Solano, Relaciones económicas de Chile, 1780 (Madrid 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1603",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "dist": 0.0,
+      "key": "San Carlos de Austria Yumbel-Chile",
+      "name": "San Carlos de Austria Yumbel",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Francisco de Solano, Relaciones económicas de Chile, 1780 (Madrid 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1603",
+        "1650",
+        "1700",
+        "1750",
+        "1779",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 2.62,
+      "key": "Río Claro-Chile",
+      "name": "Río Claro",
+      "other_names": [],
+      "sources": [
+        "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+      ],
+      "provenance": "ArKG Chile Archaeological Knowledge Grap",
+      "years": [
+        "-1000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 4.82,
+      "key": "Lucay-Chile",
+      "name": "Lucay",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Daniel M. Stewart, 'The vineyards of Concepcion: distribution, size, and comercialization during the 17th century', en: RIVAR 2, 4 (2015), p"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1601",
+        "1625",
+        "1650"
+      ]
+    }
+  ],
+  "Cumanagoto Píritu-Venezuela": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Cumanagoto Píritu-Venezuela",
+      "name": "Cumanagoto Píritu",
+      "other_names": [
+        "Píritu"
+      ],
+      "sources": [
+        "Cruxent & Rouse (1958) Eastern Venezuelan Coast"
+      ],
+      "provenance": "Cruxent & Rouse (1958) Eastern Venezuelan Coast",
+      "years": [
+        "1200",
+        "1500",
+        "800"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 4.35,
+      "key": "Concepcion Piritu-Venezuela",
+      "name": "Concepcion Piritu",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Perez Lozano, Testimonio de la visita pastoral del ob. Perez Lozano a la Provincia de Cumana e Isla Margarita (1741)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ],
+  "Pampa de Nerete-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Pampa de Nerete-Colombia",
+      "name": "Pampa de Nerete",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 2.86,
+      "key": "San Antonio (col_narino_2)-Colombia",
+      "name": "San Antonio",
+      "other_names": [
+        "San Vicente ( Las Varas )"
+      ],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 3.65,
+      "key": "Mascarey-Colombia",
+      "name": "Mascarey",
+      "other_names": [
+        "Robles"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 4.28,
+      "key": "Tambillo-Colombia",
+      "name": "Tambillo",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    }
+  ],
+  "Inkawasi-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Inkawasi-Peru",
+      "name": "Inkawasi",
+      "other_names": [
+        "Amaybamba"
+      ],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 1.82,
+      "key": "Apaylla-Peru",
+      "name": "Apaylla",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 2.32,
+      "key": "Pacaybamba-Peru",
+      "name": "Pacaybamba",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 3.28,
+      "key": "San Martin (per_ayacucho)-Peru",
+      "name": "San Martin",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    }
+  ],
+  "Santa Cruz de Villacuri (villacuri)-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Santa Cruz de Villacuri (villacuri)-Peru",
+      "name": "Santa Cruz de Villacuri (villacuri)",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    }
+  ],
+  "Punto (na_magdalena_cauca_muisca_2)-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Punto (na_magdalena_cauca_muisca_2)-Colombia",
+      "name": "Punto",
+      "other_names": [
+        "Mor-Ab"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 3.25,
+      "key": "Mor-Cc-Colombia",
+      "name": "Mor-Cc",
+      "other_names": [
+        "Mor-Ba"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 3.46,
+      "key": "Puntos 16 a-Colombia",
+      "name": "Puntos 16 a",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 4.28,
+      "key": "Prospecto-Colombia",
+      "name": "Prospecto",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1300",
+        "1400",
+        "1500"
+      ]
+    }
+  ],
+  "Nariño (col_cundinamarca)-Colombia": [
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Nariño (col_cundinamarca)-Colombia",
+      "name": "Nariño",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "provenance": "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1985",
+        "1990",
+        "1993",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2018",
+        "2020",
+        "2023",
+        "2025"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 3.36,
+      "key": "Vega Los Padres-Colombia",
+      "name": "Vega Los Padres",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 4.58,
+      "key": "Sa-Tm-Colombia",
+      "name": "Sa-Tm",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500"
+      ]
+    }
+  ],
+  "Casbas-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Casbas-Argentina",
+      "name": "Casbas",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010"
+      ]
+    }
+  ],
+  "El Pinto-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "El Pinto-Venezuela",
+      "name": "El Pinto",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2010",
+        "2011",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    },
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 4.97,
+      "key": "La Bruja-Venezuela",
+      "name": "La Bruja",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela XIV Censo Nacional de Población y Vivienda 2011 (Centros Poblados)"
+      ],
+      "provenance": "INE_Venezuela_Censo_2011_Centros_Poblados",
+      "years": [
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2011"
+      ]
+    }
+  ],
+  "La Soledad-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "La Soledad-Venezuela",
+      "name": "La Soledad",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2010",
+        "2011",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    },
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 1.76,
+      "key": "La Ciénaga-Venezuela",
+      "name": "La Ciénaga",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 1.88,
+      "key": "Bariquis-Venezuela",
+      "name": "Bariquis",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Angel Altolaguirre, Relaciones geográficas de la gobernación de Venezuela (1767-1768) (Madrid 1909)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 1.99,
+      "key": "Bariquí-Santo Domingo-Venezuela",
+      "name": "Bariquí-Santo Domingo",
+      "other_names": [
+        "Bariquis"
+      ],
+      "sources": [
+        "INE Venezuela XIV Censo Nacional de Población y Vivienda 2011 (Centros Poblados)"
+      ],
+      "provenance": "INE_Venezuela_Censo_2011_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2011"
+      ]
+    }
+  ],
+  "Guimbi-Ecuador": [
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.0,
+      "key": "Guimbi-Ecuador",
+      "name": "Guimbi",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 0.0,
+      "key": "Guimbi-Ecuador",
+      "name": "Guimbi",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "dist": 4.25,
+      "key": "5 De Junio-Ecuador",
+      "name": "5 De Junio",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "provenance": "INEC_Ecuador_Parroquias_1990_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2001",
+        "2010",
+        "2015",
+        "2020",
+        "2022",
+        "2025"
+      ]
+    }
+  ],
+  "Area IV Qda. Playa Grande-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Area IV Qda. Playa Grande-Peru",
+      "name": "Area IV Qda. Playa Grande",
+      "other_names": [
+        "Area V Qda. La Rinconada Sur"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "-1000",
+        "-2000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Area IV Qda. Playa Grande-Peru",
+      "name": "Area IV Qda. Playa Grande",
+      "other_names": [
+        "Area V Qda. La Rinconada Sur"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    }
+  ],
+  "Cerro Suchiman-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Cerro Suchiman-Peru",
+      "name": "Cerro Suchiman",
+      "other_names": [],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "-1000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Cerro Suchiman-Peru",
+      "name": "Cerro Suchiman",
+      "other_names": [],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    }
+  ],
+  "Hernández-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Hernández-Venezuela",
+      "name": "Hernández",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2010",
+        "2011",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    }
+  ],
+  "Burruyacú-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Burruyacú-Argentina",
+      "name": "Burruyacú",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 3.54,
+      "key": "Villa Benjamín Aráoz-Argentina",
+      "name": "Villa Benjamín Aráoz",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    },
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 4.63,
+      "key": "Paso de las Lanzas-Argentina",
+      "name": "Paso de las Lanzas",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2022 (Localidades Censales Georef + Radios Censales)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2022_Radios_Localidades",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "Pisba-Colombia": [
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Pisba-Colombia",
+      "name": "Pisba",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "provenance": "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1985",
+        "1990",
+        "1993",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2018",
+        "2020",
+        "2023",
+        "2025"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 0.23,
+      "key": "Pisba-Colombia",
+      "name": "Pisba",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 0.23,
+      "key": "Pisba-Colombia",
+      "name": "Pisba",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1778",
+        "1779",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ],
+  "Clúster-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Clúster-Colombia",
+      "name": "Clúster",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 3.05,
+      "key": "Sobreancho Torre-Colombia",
+      "name": "Sobreancho Torre",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 3.76,
+      "key": "Santa Rosa (col_meta)-Colombia",
+      "name": "Santa Rosa",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2018"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 4.14,
+      "key": "Cluster 94. PS-Colombia",
+      "name": "Cluster 94. PS",
+      "other_names": [
+        "Cluster 94. Sitio arqueológico"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    }
+  ],
+  "Aguada de Pablo-Colombia": [
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Aguada de Pablo-Colombia",
+      "name": "Aguada de Pablo",
+      "other_names": [
+        "Villa Juana"
+      ],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    }
+  ],
+  "Valle de los Dinosaurios-Peru": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Valle de los Dinosaurios-Peru",
+      "name": "Valle de los Dinosaurios",
+      "other_names": [],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Valle de los Dinosaurios-Peru",
+      "name": "Valle de los Dinosaurios",
+      "other_names": [],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.45,
+      "key": "Quebrada Seca Alta-Peru",
+      "name": "Quebrada Seca Alta",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 1.7,
+      "key": "El Pintor-Peru",
+      "name": "El Pintor",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    }
+  ],
+  "Paico-Chile": [
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 0.0,
+      "key": "Paico-Chile",
+      "name": "Paico",
+      "other_names": [],
+      "sources": [
+        "CMN Chile — Registro Arqueológico Acreditado",
+        "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+      ],
+      "provenance": "CMN Chile — Registro Arqueológico Acredi",
+      "years": [
+        "1350",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "dist": 1.47,
+      "key": "Nanihue-Chile",
+      "name": "Nanihue",
+      "other_names": [
+        "Cayumapu",
+        "Gañihue",
+        "Guaneuhue",
+        "Nauihue",
+        "Pelchuquin"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Vicente Carvallo Goyeneche, Descripción Histórico-Geográfica del Reino de Chile (1796)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1777",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    },
+    {
+      "file": "chile_after_independence_settlements.json",
+      "dist": 2.67,
+      "key": "Pelchuquín-Chile",
+      "name": "Pelchuquín",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Aldea)"
+      ],
+      "provenance": "INE_Chile_CPAC_2017",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 4.35,
+      "key": "Panul-Chile",
+      "name": "Panul",
+      "other_names": [
+        "Cuyingue",
+        "Cuyinhue"
+      ],
+      "sources": [
+        "CMN Chile — Registro Arqueológico Acreditado",
+        "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+      ],
+      "provenance": "CMN Chile — Registro Arqueológico Acredi",
+      "years": [
+        "1350",
+        "1400",
+        "1500"
+      ]
+    }
+  ],
+  "San Buenaventura-Bolivia": [
+    {
+      "file": "andean_bolivia_independence_settlements.json",
+      "dist": 0.0,
+      "key": "San Buenaventura-Bolivia",
+      "name": "San Buenaventura",
+      "other_names": [],
+      "sources": [
+        "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+      ],
+      "provenance": "INE_Bolivia_CPV_2024_Centros_Poblados_Urbanos",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2024"
+      ]
+    }
+  ],
+  "Marcella-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Marcella-Colombia",
+      "name": "Marcella",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.71,
+      "key": "Marsella (col_antioquia)-Colombia",
+      "name": "Marsella",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 3.62,
+      "key": "Finca Santa Isabel-Colombia",
+      "name": "Finca Santa Isabel",
+      "other_names": [
+        "Finca La Primavera",
+        "Finca Sorrento"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 4.51,
+      "key": "Reporte mano_moler-Colombia",
+      "name": "Reporte mano_moler",
+      "other_names": [
+        "Reporte-ceramica-superficie_ceramicaperfil_SAR",
+        "Reporte_acopio material ceramico desechado",
+        "Reporte_ceramica_perfil"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "-1000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    }
+  ],
+  "Quebrada Honda-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Quebrada Honda-Peru",
+      "name": "Quebrada Honda",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 1.67,
+      "key": "Pampa del Pajonal - Alcosa-Peru",
+      "name": "Pampa del Pajonal - Alcosa",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 3.19,
+      "key": "Yarabamba-Peru",
+      "name": "Yarabamba",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 3.47,
+      "key": "Tambo Pajonal-Peru",
+      "name": "Tambo Pajonal",
+      "other_names": [
+        "Cerro Antena",
+        "Cerro Lloron",
+        "Cerro San Ignacio",
+        "Chavarría B",
+        "Huayrondo",
+        "La Querendosa",
+        "Sonqonata",
+        "Yarabamba"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    }
+  ],
+  "Gibraltar-Venezuela": [
+    {
+      "file": "venezuela_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Gibraltar-Venezuela",
+      "name": "Gibraltar",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "provenance": "INE_Venezuela_Parroquias_2000_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2020",
+        "2025"
+      ]
+    }
+  ],
+  "Villa de Trancas-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Villa de Trancas-Argentina",
+      "name": "Villa de Trancas",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010"
+      ]
+    },
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "dist": 1.78,
+      "key": "Villa de Trancas-Argentina",
+      "name": "Villa de Trancas",
+      "other_names": [
+        "Choromoros",
+        "Pozo del Pescado",
+        "San Joaquin"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1536",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ],
+  "California-Colombia": [
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "California-Colombia",
+      "name": "California",
+      "other_names": [
+        "Vetas bajas"
+      ],
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "provenance": "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1985",
+        "1990",
+        "1993",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2018",
+        "2020",
+        "2023",
+        "2025"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 1.03,
+      "key": "Aterrazamiento 5 - PS 4 y PS-Colombia",
+      "name": "Aterrazamiento 5 - PS 4 y PS",
+      "other_names": [
+        "Aterrazamiento 4 - RS",
+        "Corral de Piedra",
+        "Mina Antigua La Francesa"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 1.4,
+      "key": "Vetas bajas-Colombia",
+      "name": "Vetas bajas",
+      "other_names": [
+        "Montuosa baja",
+        "Real de la Baja",
+        "Real de minas",
+        "San Antonio"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 1.4,
+      "key": "Vetas bajas-Colombia",
+      "name": "Vetas bajas",
+      "other_names": [
+        "Montuosa baja",
+        "Real de la Baja",
+        "Real de minas",
+        "San Antonio"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1778",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ],
+  "Calquis-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Calquis-Peru",
+      "name": "Calquis",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 2.19,
+      "key": "San Miguel (per_cajamarca)-Peru",
+      "name": "San Miguel",
+      "other_names": [
+        "San Miguel de Pallaques",
+        "San Miguel de Pallazquez"
+      ],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "provenance": "INEI Peru Censuses 2007, 2017 & 2025 (all districts)",
+      "years": [
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017",
+        "2025"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 2.31,
+      "key": "San Miguel de Pallazquez-Peru",
+      "name": "San Miguel de Pallazquez",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "dist": 2.31,
+      "key": "San Miguel de Pallazquez-Peru",
+      "name": "San Miguel de Pallazquez",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1542",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1779",
+        "1780",
+        "1800",
+        "1825"
+      ]
+    }
+  ],
+  "Santa Ana-Peru_2": [
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Santa Ana-Peru",
+      "name": "Santa Ana",
+      "other_names": [
+        "Gross Munsa - Cancha del Inca",
+        "Higueritas",
+        "Las Higueritas",
+        "Pascana Paradero"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1300",
+        "1400",
+        "1438"
+      ]
+    },
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Santa Ana-Peru",
+      "name": "Santa Ana",
+      "other_names": [
+        "Gross Munsa - Cancha del Inca",
+        "Higueritas",
+        "Las Higueritas",
+        "Pascana Paradero"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 4.78,
+      "key": "Juan Velazco Alvarado D1-Peru",
+      "name": "Juan Velazco Alvarado D1",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    }
+  ],
+  "Plaza del Mundo-Colombia": [
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 0.0,
+      "key": "Plaza del Mundo-Colombia",
+      "name": "Plaza del Mundo",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1300",
+        "1400",
+        "1500"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 0.48,
+      "key": "Esperanza Galicia-Colombia",
+      "name": "Esperanza Galicia",
+      "other_names": [
+        "Cerritos",
+        "Estación Villegas"
+      ],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "colombia_after_independence_settlements.json",
+      "dist": 1.14,
+      "key": "Galicia Alta-Colombia",
+      "name": "Galicia Alta",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "provenance": "DANE_CNPV_2005_2018_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2005",
+        "2018"
+      ]
+    },
+    {
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "dist": 2.7,
+      "key": "Las Margaritas Sitio-Colombia",
+      "name": "Las Margaritas Sitio",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "provenance": "ICANH_Atlas_Arqueologico_Colombia",
+      "years": [
+        "1300",
+        "1400",
+        "1500"
+      ]
+    }
+  ],
+  "Kilo.coq-Chile": [
+    {
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "dist": 0.0,
+      "key": "Kilo.coq-Chile",
+      "name": "Kilo.coq",
+      "other_names": [],
+      "sources": [
+        "CMN Chile — Registro Arqueológico Acreditado"
+      ],
+      "provenance": "CMN Chile — Registro Arqueológico Acredi",
+      "years": [
+        "1438",
+        "1470",
+        "1500",
+        "1525",
+        "1530"
+      ]
+    },
+    {
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "dist": 0.0,
+      "key": "Kilo.coq-Chile",
+      "name": "Kilo.coq",
+      "other_names": [],
+      "sources": [
+        "CMN Chile — Registro Arqueológico Acreditado"
+      ],
+      "provenance": "CMN Chile — Registro Arqueológico Acredi",
+      "years": [
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1500",
+        "500",
+        "800"
+      ]
+    }
+  ],
+  "Jibito-Peru": [
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Jibito-Peru",
+      "name": "Jibito",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+        "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2007",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 2.55,
+      "key": "Nuevo Sullana-Peru",
+      "name": "Nuevo Sullana",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "peru_after_independence_settlements.json",
+      "dist": 2.99,
+      "key": "Vista Florida-Peru",
+      "name": "Vista Florida",
+      "other_names": [],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "provenance": "INEI_Peru_Censo_2007_2017_Centros_Poblados",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2017"
+      ]
+    },
+    {
+      "file": "pre_columbian_central_andes_settlements.json",
+      "dist": 4.77,
+      "key": "Chalaco A-Peru",
+      "name": "Chalaco A",
+      "other_names": [
+        "Chalaco B",
+        "Santa Sofía",
+        "Sojo",
+        "Sojo Monticulo",
+        "Tangarara",
+        "Tangarará"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "provenance": "SIGDA_Ministerio_de_Cultura_Peru",
+      "years": [
+        "-1000",
+        "-2000",
+        "-500",
+        "0",
+        "1000",
+        "1200",
+        "1300",
+        "1400",
+        "1438",
+        "500",
+        "800"
+      ]
+    }
+  ],
+  "Colonia Liebig-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Colonia Liebig-Argentina",
+      "name": "Colonia Liebig",
+      "other_names": [
+        "Colonia Liebig's",
+        "Estación Apóstoles"
+      ],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "provenance": "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+      "years": [
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010",
+        "2022"
+      ]
+    }
+  ],
+  "Villa San Agustín-Argentina": [
+    {
+      "file": "argentina_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Villa San Agustín-Argentina",
+      "name": "Villa San Agustín",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "provenance": "INDEC_Argentina_Censo_2010_Localidades",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2000",
+        "2010"
+      ]
+    },
+    {
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "dist": 0.05,
+      "key": "Villa San Agustin-Argentina",
+      "name": "Villa San Agustin",
+      "other_names": [
+        "San Agustin del Valle Fertil"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Marcello Carmagnani/Herbert S. Klein, 'Demografía histórica: la población del obispado de Santiago, 1777-1778', en: Boletín de la Academia C"
+      ],
+      "provenance": "HGIS_de_las_Indias_1701_1808",
+      "years": [
+        "1536",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1779",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ],
+  "Mindo-Ecuador": [
+    {
+      "file": "ecuador_after_independence_settlements.json",
+      "dist": 0.0,
+      "key": "Mindo-Ecuador",
+      "name": "Mindo",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "provenance": "INEC_Ecuador_Parroquias_1990_2025",
+      "years": [
+        "1850",
+        "1880",
+        "1900",
+        "1920",
+        "1950",
+        "1970",
+        "1980",
+        "1990",
+        "2001",
+        "2010",
+        "2015",
+        "2020",
+        "2022",
+        "2025"
+      ]
+    },
+    {
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "dist": 4.72,
+      "key": "Mindo-Ecuador",
+      "name": "Mindo",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1525",
+        "1550",
+        "1575",
+        "1600",
+        "1625",
+        "1650"
+      ]
+    },
+    {
+      "file": "viceroyalty_new_granada_settlements.json",
+      "dist": 4.72,
+      "key": "Mindo-Ecuador",
+      "name": "Mindo",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+      ],
+      "provenance": "HGIS_de_las_Indias_Gazetteer",
+      "years": [
+        "1538",
+        "1550",
+        "1600",
+        "1650",
+        "1700",
+        "1750",
+        "1780",
+        "1800",
+        "1825",
+        "1830"
+      ]
+    }
+  ]
+}

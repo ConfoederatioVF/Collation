@@ -1,0 +1,1079 @@
+{
+  "batch_index": 1427,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        18.86833,
+        -99.95583
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Cruz Capula-Mexico",
+      "known_aliases": [
+        "Santa Cruz Capula",
+        "santa cruz capula"
+      ],
+      "latest_year": 1821,
+      "max_pop": 215,
+      "name": "Santa Cruz Capula",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.66528,
+        -102.07306
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Mateo Ahuiran-Mexico",
+      "known_aliases": [
+        "San Mateo Ahuiran",
+        "san mateo ahuiran"
+      ],
+      "latest_year": 1821,
+      "max_pop": 215,
+      "name": "San Mateo Ahuiran",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.60176,
+        -100.10721
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa María Asunción Ichcatepec-Mexico",
+      "known_aliases": [
+        "Santa María Asunción Ichcatepec",
+        "santa maría asunción ichcatepec"
+      ],
+      "latest_year": 1646,
+      "max_pop": 215,
+      "name": "Santa María Asunción Ichcatepec",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.67389,
+        -100.1025
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa María Cacahuatlan-Mexico",
+      "known_aliases": [
+        "Santa María Cacahuatlan",
+        "santa maría cacahuatlan"
+      ],
+      "latest_year": 1646,
+      "max_pop": 215,
+      "name": "Santa María Cacahuatlan",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.468,
+        -80.642
+      ],
+      "country": "Panama",
+      "earliest_year": -5000,
+      "existing_historical_names": [
+        {
+          "date": "-5000.1.1",
+          "name": "Cueva de los Ladrones"
+        }
+      ],
+      "existing_meta_index": 13,
+      "existing_meta_name": "Cueva de los Ladrones",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cueva de los Ladrones Shelter-Panama",
+      "known_aliases": [
+        "Cueva de los Ladrones Shelter",
+        "cueva de los ladrones shelter"
+      ],
+      "latest_year": -1200,
+      "max_pop": 215,
+      "name": "Cueva de los Ladrones Shelter",
+      "reason": "under_covered_history",
+      "region": "precolumbian_lower_central_america",
+      "sample_years": [
+        -5000,
+        -3000,
+        -1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        21.61403,
+        -78.9585
+      ],
+      "country": "Cuba",
+      "earliest_year": 960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chorro de Maita-Cuba",
+      "known_aliases": [
+        "Chorro de Maita",
+        "chorro de maita"
+      ],
+      "latest_year": 1492,
+      "max_pop": 215,
+      "name": "Chorro de Maita",
+      "reason": "missing_entry",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        960,
+        1000,
+        1226,
+        1450,
+        1492
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.89923,
+        -70.50034
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 515,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cueva del Ferrocarril-Dominican Republic",
+      "known_aliases": [
+        "Cueva del Ferrocarril",
+        "cueva del ferrocarril"
+      ],
+      "latest_year": 765,
+      "max_pop": 215,
+      "name": "Cueva del Ferrocarril",
+      "reason": "missing_entry",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        515,
+        640,
+        765
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.338,
+        -61.012
+      ],
+      "country": "Trinidad and Tobago",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Ortoire"
+        }
+      ],
+      "existing_meta_index": 64,
+      "existing_meta_name": "Ortoire",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ortoire Site-Trinidad and Tobago",
+      "known_aliases": [
+        "Ortoire Site",
+        "ortoire site"
+      ],
+      "latest_year": -600,
+      "max_pop": 215,
+      "name": "Ortoire Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        -1000,
+        -600
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.6825,
+        -99.85944
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1990.3.12",
+          "name": "La Concepción de los Baños"
+        }
+      ],
+      "existing_meta_index": 3967,
+      "existing_meta_name": "La Concepción de los Baños",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Concepcion de los Baños-Mexico",
+      "known_aliases": [
+        "Concepcion de los Baños",
+        "concepcion de los baños"
+      ],
+      "latest_year": 1821,
+      "max_pop": 214,
+      "name": "Concepcion de los Baños",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        25.1,
+        -105.46528
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Arroyo del Cazadero-Mexico",
+      "known_aliases": [
+        "Arroyo del Cazadero",
+        "arroyo del cazadero"
+      ],
+      "latest_year": 1821,
+      "max_pop": 214,
+      "name": "Arroyo del Cazadero",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        24.18,
+        -110.3
+      ],
+      "country": "Mexico",
+      "earliest_year": 1325,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Piedra Gorda-Mexico_2",
+      "known_aliases": [
+        "Piedra Gorda",
+        "piedra gorda"
+      ],
+      "latest_year": 1519,
+      "max_pop": 214,
+      "name": "Piedra Gorda",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1325,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.10622,
+        -107.95399
+      ],
+      "country": "Mexico",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rancho Hueigos-Mexico",
+      "known_aliases": [
+        "Rancho Hueigos",
+        "rancho hueigos"
+      ],
+      "latest_year": 1519,
+      "max_pop": 214,
+      "name": "Rancho Hueigos",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1200,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.93507,
+        -72.67736
+      ],
+      "country": "Haiti",
+      "earliest_year": -1600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Couri II-Haiti",
+      "known_aliases": [
+        "Couri II",
+        "couri ii"
+      ],
+      "latest_year": 360,
+      "max_pop": 214,
+      "name": "Couri II",
+      "reason": "missing_entry",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        -1600,
+        -1000,
+        -620,
+        -500,
+        1,
+        360
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.95067,
+        -99.15004
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM ZU-CL-20-Mexico",
+      "known_aliases": [
+        "BOM ZU-CL-20",
+        "bom zu-cl-20"
+      ],
+      "latest_year": 650,
+      "max_pop": 214,
+      "name": "BOM ZU-CL-20",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -300,
+        1,
+        300,
+        500,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.12165,
+        -98.79662
+      ],
+      "country": "Mexico",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "-50.1.1",
+          "name": "Chalco Survey Site CH-TF-46"
+        },
+        {
+          "date": "1412.1.1",
+          "name": "Chalco Survey Site CH-EA-LA-39"
+        }
+      ],
+      "existing_meta_index": 151,
+      "existing_meta_name": "Ayapango",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-TF-46-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-TF-46",
+        "chalco survey ch-tf-46"
+      ],
+      "latest_year": 100,
+      "max_pop": 214,
+      "name": "Chalco Survey CH-TF-46",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -200,
+        -50,
+        100
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.45335,
+        -98.83137
+      ],
+      "country": "Mexico",
+      "earliest_year": -650,
+      "existing_historical_names": [
+        {
+          "date": "-350.1.1",
+          "name": "Chalco Survey Site CH-CL-51"
+        },
+        {
+          "date": "750.1.1",
+          "name": "Xico"
+        }
+      ],
+      "existing_meta_index": 108,
+      "existing_meta_name": "Xico",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico TX-LF-17-Mexico",
+      "known_aliases": [
+        "Basin of Mexico TX-LF-17",
+        "basin of mexico tx-lf-17"
+      ],
+      "latest_year": -300,
+      "max_pop": 214,
+      "name": "Basin of Mexico TX-LF-17",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -650,
+        -475,
+        -300
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.53222,
+        -99.06672
+      ],
+      "country": "Mexico",
+      "earliest_year": 650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-ET-55-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-ET-55",
+        "basin of mexico cu-et-55"
+      ],
+      "latest_year": 900,
+      "max_pop": 214,
+      "name": "Basin of Mexico CU-ET-55",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        650,
+        775,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.522,
+        -99.09531
+      ],
+      "country": "Mexico",
+      "earliest_year": 650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-ET-58-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-ET-58",
+        "basin of mexico cu-et-58"
+      ],
+      "latest_year": 900,
+      "max_pop": 214,
+      "name": "Basin of Mexico CU-ET-58",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        650,
+        775,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.52488,
+        -99.11438
+      ],
+      "country": "Mexico",
+      "earliest_year": 650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-ET-59-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-ET-59",
+        "basin of mexico cu-et-59"
+      ],
+      "latest_year": 900,
+      "max_pop": 214,
+      "name": "Basin of Mexico CU-ET-59",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        650,
+        775,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.71013,
+        -99.21947
+      ],
+      "country": "Mexico",
+      "earliest_year": -650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-LF-27-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-LF-27",
+        "basin of mexico cu-lf-27"
+      ],
+      "latest_year": -300,
+      "max_pop": 214,
+      "name": "Basin of Mexico CU-LF-27",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -650,
+        -475,
+        -300
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.42898,
+        -98.86664
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM TX-TF-44-Mexico",
+      "known_aliases": [
+        "BOM TX-TF-44",
+        "bom tx-tf-44"
+      ],
+      "latest_year": 150,
+      "max_pop": 214,
+      "name": "BOM TX-TF-44",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -300,
+        1,
+        150
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        22.39694,
+        -105.45694
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Tecuala"
+        }
+      ],
+      "existing_meta_index": 3107,
+      "existing_meta_name": "Tecuala",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan Tecuala-Mexico",
+      "known_aliases": [
+        "San Juan Tecuala",
+        "san juan tecuala"
+      ],
+      "latest_year": 1821,
+      "max_pop": 213,
+      "name": "San Juan Tecuala",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.85722,
+        -97.91528
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1990.3.12",
+          "name": "Ahuatepec"
+        }
+      ],
+      "existing_meta_index": 4406,
+      "existing_meta_name": "Ahuatepec",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Maria Ahuatepec-Mexico",
+      "known_aliases": [
+        "Santa Maria Ahuatepec",
+        "santa maria ahuatepec"
+      ],
+      "latest_year": 1821,
+      "max_pop": 213,
+      "name": "Santa Maria Ahuatepec",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.635,
+        -97.95583
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rosario Xochitiopan-Mexico",
+      "known_aliases": [
+        "Rosario Xochitiopan",
+        "rosario xochitiopan"
+      ],
+      "latest_year": 1821,
+      "max_pop": 213,
+      "name": "Rosario Xochitiopan",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.53889,
+        -88.26833
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santiago Tixcacalcupul-Mexico",
+      "known_aliases": [
+        "Santiago Tixcacalcupul",
+        "santiago tixcacalcupul"
+      ],
+      "latest_year": 1821,
+      "max_pop": 213,
+      "name": "Santiago Tixcacalcupul",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.31561,
+        -98.97116
+      ],
+      "country": "Mexico",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM IX-A-52-Mexico",
+      "known_aliases": [
+        "BOM IX-A-52",
+        "bom ix-a-52"
+      ],
+      "latest_year": 1519,
+      "max_pop": 213,
+      "name": "BOM IX-A-52",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1200,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.78766,
+        -98.77087
+      ],
+      "country": "Mexico",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM TE-AZ-126-Mexico",
+      "known_aliases": [
+        "BOM TE-AZ-126",
+        "bom te-az-126"
+      ],
+      "latest_year": 1519,
+      "max_pop": 213,
+      "name": "BOM TE-AZ-126",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1200,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.35403,
+        -83.637
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Upper Térraba UT-1085-Costa Rica",
+      "known_aliases": [
+        "Upper Térraba UT-1085",
+        "upper térraba ut-1085"
+      ],
+      "latest_year": 1502,
+      "max_pop": 213,
+      "name": "Upper Térraba UT-1085",
+      "reason": "missing_entry",
+      "region": "precolumbian_lower_central_america",
+      "sample_years": [
+        200,
+        300,
+        750,
+        950,
+        1200,
+        1492,
+        1502
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.89923,
+        -70.50034
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": -2090,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Vigia-Dominican Republic",
+      "known_aliases": [
+        "El Vigia",
+        "el vigia"
+      ],
+      "latest_year": -1705,
+      "max_pop": 213,
+      "name": "El Vigia",
+      "reason": "missing_entry",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        -2090,
+        -2000,
+        -1898,
+        -1705
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.97251,
+        -99.1816
+      ],
+      "country": "Mexico",
+      "earliest_year": 150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM ZU-CL-64-Mexico",
+      "known_aliases": [
+        "BOM ZU-CL-64",
+        "bom zu-cl-64"
+      ],
+      "latest_year": 650,
+      "max_pop": 213,
+      "name": "BOM ZU-CL-64",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        150,
+        300,
+        500,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

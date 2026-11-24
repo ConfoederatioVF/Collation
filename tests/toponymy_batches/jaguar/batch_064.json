@@ -1,0 +1,1055 @@
+{
+  "batch_index": 64,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        15.39696,
+        -91.04496
+      ],
+      "country": "Guatemala",
+      "earliest_year": -1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Acihtz o Asich-Guatemala",
+      "known_aliases": [
+        "Acihtz o Asich",
+        "acihtz o asich"
+      ],
+      "latest_year": 1200,
+      "max_pop": 5033,
+      "name": "Acihtz o Asich",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.27222,
+        -99.46194
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1521.1.1",
+          "name": "Ocoyoacac"
+        }
+      ],
+      "existing_meta_index": 714,
+      "existing_meta_name": "Ocoyoacac",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Martin Ocoyoacac-Mexico",
+      "known_aliases": [
+        "San Martin Ocoyoacac",
+        "san martin ocoyoacac"
+      ],
+      "latest_year": 1821,
+      "max_pop": 5031,
+      "name": "San Martin Ocoyoacac",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1700,
+        1790,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.28102,
+        -101.0059
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Sabino-Mexico",
+      "known_aliases": [
+        "El Sabino",
+        "el sabino"
+      ],
+      "latest_year": 2020,
+      "max_pop": 5030,
+      "name": "El Sabino",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.92816,
+        -89.96205
+      ],
+      "country": "Guatemala",
+      "earliest_year": -1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Teron-Guatemala",
+      "known_aliases": [
+        "El Teron",
+        "el teron"
+      ],
+      "latest_year": 1200,
+      "max_pop": 5028,
+      "name": "El Teron",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.48175,
+        -66.64716
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Islote-Puerto Rico",
+      "known_aliases": [
+        "Islote",
+        "islote"
+      ],
+      "latest_year": 2020,
+      "max_pop": 5024,
+      "name": "Islote",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.57835,
+        -90.73805
+      ],
+      "country": "Guatemala",
+      "earliest_year": 1790,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Jocotenango"
+        }
+      ],
+      "existing_meta_index": 2896,
+      "existing_meta_name": "Jocotenango",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Llanos-Guatemala",
+      "known_aliases": [
+        "Los Llanos",
+        "los llanos",
+        "jocotenango",
+        "las victorias",
+        "los angeles",
+        "el papelillo o vista hermosa",
+        "las perpetuas rosas",
+        "Jocotenango",
+        "Las Victorias",
+        "Los Angeles",
+        "El Papelillo O Vista Hermosa",
+        "Las Perpetuas Rosas"
+      ],
+      "latest_year": 2018,
+      "max_pop": 5021,
+      "name": "Los Llanos",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1790,
+        1808,
+        1821,
+        1850,
+        1900,
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.48278,
+        -99.18333
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1152.1.1",
+          "name": "Azcapotzalco"
+        }
+      ],
+      "existing_meta_index": 418,
+      "existing_meta_name": "Azcapotzalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santiago y San Felipe Azcapotzalco-Mexico",
+      "known_aliases": [
+        "Santiago y San Felipe Azcapotzalco",
+        "santiago y san felipe azcapotzalco"
+      ],
+      "latest_year": 1821,
+      "max_pop": 5021,
+      "name": "Santiago y San Felipe Azcapotzalco",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1700,
+        1790,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.47844,
+        -90.45312
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Puerta Del Señor-Guatemala",
+      "known_aliases": [
+        "Puerta Del Señor",
+        "puerta del señor"
+      ],
+      "latest_year": 2018,
+      "max_pop": 5020,
+      "name": "Puerta Del Señor",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.32315,
+        -90.79842
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cañaveral-Guatemala",
+      "known_aliases": [
+        "Cañaveral",
+        "cañaveral",
+        "popular",
+        "magnolias",
+        "quetzal",
+        "modelo 1",
+        "Popular",
+        "Magnolias",
+        "Quetzal",
+        "Modelo 1"
+      ],
+      "latest_year": 2018,
+      "max_pop": 5017,
+      "name": "Cañaveral",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.66328,
+        -89.01266
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Fronteras Rio Dulce-Guatemala",
+      "known_aliases": [
+        "Fronteras Rio Dulce",
+        "fronteras rio dulce"
+      ],
+      "latest_year": 2018,
+      "max_pop": 5015,
+      "name": "Fronteras Rio Dulce",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        24.84806,
+        -107.36056
+      ],
+      "country": "Mexico",
+      "earliest_year": 2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Fraccionamiento los Ángeles (mx_northwest_baja)-Mexico",
+      "known_aliases": [
+        "Fraccionamiento los Ángeles",
+        "fraccionamiento los ángeles",
+        "fraccionamiento floresta",
+        "Fraccionamiento Floresta"
+      ],
+      "latest_year": 2005,
+      "max_pop": 5011,
+      "name": "Fraccionamiento los Ángeles",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        2000,
+        2005
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.83271,
+        -81.82758
+      ],
+      "country": "Panama",
+      "earliest_year": 2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Kankintú-Panama",
+      "known_aliases": [
+        "Kankintú",
+        "kankintú"
+      ],
+      "latest_year": 2023,
+      "max_pop": 5009,
+      "name": "Kankintú",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2000,
+        2010,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.23805,
+        -90.23815
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Purulha-Guatemala",
+      "known_aliases": [
+        "Purulha",
+        "purulha",
+        "los pinos",
+        "la cruz ii",
+        "rincon del quetzal",
+        "Los Pinos",
+        "La Cruz Ii",
+        "Rincon Del Quetzal"
+      ],
+      "latest_year": 2018,
+      "max_pop": 5007,
+      "name": "Purulha",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.31966,
+        -90.78024
+      ],
+      "country": "Guatemala",
+      "earliest_year": -1150,
+      "existing_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Izcuintepeque"
+        },
+        {
+          "date": "1540.1.1",
+          "name": "Concepción Escuintla"
+        },
+        {
+          "date": "1825.10.11",
+          "name": "Escuintla"
+        }
+      ],
+      "existing_meta_index": 576,
+      "existing_meta_name": "Escuintla",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Concepcion-Guatemala_2",
+      "known_aliases": [
+        "Concepcion",
+        "concepcion"
+      ],
+      "latest_year": 1200,
+      "max_pop": 5003,
+      "name": "Concepcion",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.61164,
+        -92.71934
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1774.1.1",
+          "name": "San Lucas"
+        },
+        {
+          "date": "1934.2.13",
+          "name": "El Zapotal"
+        },
+        {
+          "date": "1972.8.23",
+          "name": "San Lucas"
+        }
+      ],
+      "existing_meta_index": 1939,
+      "existing_meta_name": "San Lucas",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Lucas-Mexico",
+      "known_aliases": [
+        "San Lucas",
+        "san lucas"
+      ],
+      "latest_year": 2020,
+      "max_pop": 4998,
+      "name": "San Lucas",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1910,
+        1980,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.40231,
+        -91.01511
+      ],
+      "country": "Guatemala",
+      "earliest_year": -1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tuchoc-Guatemala",
+      "known_aliases": [
+        "Tuchoc",
+        "tuchoc"
+      ],
+      "latest_year": 1200,
+      "max_pop": 4997,
+      "name": "Tuchoc",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.97833,
+        -89.33945
+      ],
+      "country": "Mexico",
+      "earliest_year": -600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Dos Naciones-Mexico",
+      "known_aliases": [
+        "Dos Naciones",
+        "dos naciones"
+      ],
+      "latest_year": 1519,
+      "max_pop": 4996,
+      "name": "Dos Naciones",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -600,
+        -500,
+        300,
+        750,
+        950,
+        1200,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.45361,
+        -91.44902
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Paquix-Guatemala",
+      "known_aliases": [
+        "Paquix",
+        "paquix"
+      ],
+      "latest_year": 2018,
+      "max_pop": 4993,
+      "name": "Paquix",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.18538,
+        -65.94485
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Florida-Puerto Rico",
+      "known_aliases": [
+        "Florida",
+        "florida"
+      ],
+      "latest_year": 2020,
+      "max_pop": 4993,
+      "name": "Florida",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.18565,
+        -65.75067
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Río-Puerto Rico",
+      "known_aliases": [
+        "Río",
+        "río"
+      ],
+      "latest_year": 2020,
+      "max_pop": 4991,
+      "name": "Río",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.9964,
+        -66.85262
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Barina-Puerto Rico",
+      "known_aliases": [
+        "Barina",
+        "barina"
+      ],
+      "latest_year": 2020,
+      "max_pop": 4988,
+      "name": "Barina",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.45088,
+        -61.44591
+      ],
+      "country": "Trinidad and Tobago",
+      "earliest_year": 2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mc Bean-Trinidad and Tobago",
+      "known_aliases": [
+        "Mc Bean",
+        "mc bean"
+      ],
+      "latest_year": 2011,
+      "max_pop": 4988,
+      "name": "Mc Bean",
+      "reason": "missing_entry",
+      "region": "lesser_antilles_bahamas_bermuda",
+      "sample_years": [
+        2000,
+        2011
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.83352,
+        -85.06659
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Canalete-Costa Rica",
+      "known_aliases": [
+        "Canalete",
+        "canalete"
+      ],
+      "latest_year": 2021,
+      "max_pop": 4987,
+      "name": "Canalete",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.92615,
+        -101.8718
+      ],
+      "country": "Mexico",
+      "earliest_year": -600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Durazno-Mexico_2",
+      "known_aliases": [
+        "El Durazno",
+        "el durazno"
+      ],
+      "latest_year": 1519,
+      "max_pop": 4985,
+      "name": "El Durazno",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        -600,
+        300,
+        1350,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.09356,
+        -77.10421
+      ],
+      "country": "Jamaica",
+      "earliest_year": 2022,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Point Hill-Jamaica",
+      "known_aliases": [
+        "Point Hill",
+        "point hill"
+      ],
+      "latest_year": 2022,
+      "max_pop": 4982,
+      "name": "Point Hill",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        25.7933,
+        -99.18123
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "General Bravo-Mexico",
+      "known_aliases": [
+        "General Bravo",
+        "general bravo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 4980,
+      "name": "General Bravo",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.57465,
+        -83.59405
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Colorado (ca_costa_rica)-Costa Rica",
+      "known_aliases": [
+        "Colorado",
+        "colorado"
+      ],
+      "latest_year": 2021,
+      "max_pop": 4980,
+      "name": "Colorado",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.88605,
+        -95.14008
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan Evangelista-Mexico",
+      "known_aliases": [
+        "San Juan Evangelista",
+        "san juan evangelista"
+      ],
+      "latest_year": 2020,
+      "max_pop": 4979,
+      "name": "San Juan Evangelista",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.09726,
+        -84.4247
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Palmitos-Costa Rica",
+      "known_aliases": [
+        "Palmitos",
+        "palmitos"
+      ],
+      "latest_year": 2021,
+      "max_pop": 4976,
+      "name": "Palmitos",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.2226,
+        -98.82617
+      ],
+      "country": "Mexico",
+      "earliest_year": -825,
+      "existing_historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Chalco Survey Site CH-LF-7"
+        },
+        {
+          "date": "600.1.1",
+          "name": "Chalco Survey Site CH-CL-ET-2"
+        },
+        {
+          "date": "1050.1.1",
+          "name": "Chalco Survey Site CH-LTAzI-60"
+        },
+        {
+          "date": "1300.1.1",
+          "name": "Chalco Survey Site CH-EA-13"
+        }
+      ],
+      "existing_meta_index": 114,
+      "existing_meta_name": "Chalco Survey Site CH-CL-9",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey Site CH-CL-9-Mexico",
+      "known_aliases": [
+        "Chalco Survey Site CH-CL-9",
+        "chalco survey site ch-cl-9"
+      ],
+      "latest_year": 1200,
+      "max_pop": 4976,
+      "name": "Chalco Survey Site CH-CL-9",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -825,
+        -150,
+        750,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

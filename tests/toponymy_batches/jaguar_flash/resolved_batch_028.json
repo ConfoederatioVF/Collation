@@ -1,0 +1,1455 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 28,
+  "count": 30,
+  "errors_remaining": 0,
+  "project": "JAGUAR",
+  "rounds": 1,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        21.2246,
+        -100.4954
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Pedro de los Pozos-Mexico",
+      "known_aliases": [
+        "San Pedro de los Pozos",
+        "san pedro de los pozos"
+      ],
+      "latest_year": 2020,
+      "max_pop": 11751,
+      "name": "San Pedro de los Pozos",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Porfirio Díaz",
+          "year": 1900
+        },
+        {
+          "name": "Pozos",
+          "year": 1921
+        },
+        {
+          "name": "Pozos Ciudad Porfirio Díaz",
+          "year": 1990
+        },
+        {
+          "name": "Mineral de San Pedro Pozos",
+          "year": 1995
+        },
+        {
+          "name": "San Pedro de los Pozos",
+          "year": 2000
+        }
+      ],
+      "canonical_name": "San Pedro de los Pozos",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "San Pedro de los Pozos"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Porfirio Díaz"
+        },
+        {
+          "date": "1921.1.1",
+          "name": "Pozos"
+        },
+        {
+          "date": "1990.1.1",
+          "name": "Pozos Ciudad Porfirio Díaz"
+        },
+        {
+          "date": "1995.1.1",
+          "name": "Mineral de San Pedro Pozos"
+        },
+        {
+          "date": "2000.1.1",
+          "name": "San Pedro de los Pozos"
+        }
+      ],
+      "other_names": [
+        "Mineral de Pozos",
+        "Real de San Pedro de los Pozos",
+        "Ciudad Porfirio Díaz"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.33986,
+        -99.72894
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1990.3.12",
+          "name": "Santiaguito Tlalcilalcalli"
+        }
+      ],
+      "existing_meta_index": 3871,
+      "existing_meta_name": "Santiaguito Tlalcilalcalli",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santiaguito Tlalcilalcali-Mexico",
+      "known_aliases": [
+        "Santiaguito Tlalcilalcali",
+        "santiaguito tlalcilalcali",
+        "santiaguito tlalcilalcalli",
+        "santa maría nativitas",
+        "Santiaguito Tlalcilalcalli",
+        "Santa María Nativitas"
+      ],
+      "latest_year": 2020,
+      "max_pop": 11746,
+      "name": "Santiaguito Tlalcilalcali",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Santiaguito",
+          "year": 1900
+        },
+        {
+          "name": "Santiaguito Tlalcilalcalli",
+          "year": 1995
+        },
+        {
+          "name": "Santiaguito Tlalcilalcali",
+          "year": 2010
+        }
+      ],
+      "canonical_name": "Santiaguito Tlalcilalcali",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Santiaguito Tlalcilalcali"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Santiaguito"
+        },
+        {
+          "date": "1995.1.1",
+          "name": "Santiaguito Tlalcilalcali"
+        }
+      ],
+      "other_names": [
+        "Santiaguito Tlalcilalcalli",
+        "Santa María Nativitas"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.98336,
+        -89.70821
+      ],
+      "country": "El Salvador",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Refugio-El Salvador",
+      "known_aliases": [
+        "El Refugio",
+        "el refugio"
+      ],
+      "latest_year": 2024,
+      "max_pop": 11744,
+      "name": "El Refugio",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "El Refugio",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "El Refugio"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.78611,
+        -89.76611
+      ],
+      "country": "El Salvador",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Catarina Masahuat-El Salvador",
+      "known_aliases": [
+        "Santa Catarina Masahuat",
+        "santa catarina masahuat"
+      ],
+      "latest_year": 2024,
+      "max_pop": 11707,
+      "name": "Santa Catarina Masahuat",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Santa Catarina Masahuat",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Santa Catarina Masahuat"
+        }
+      ],
+      "other_names": [
+        "Masahuat"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.30003,
+        -91.09834
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chuitinamit (guatemala_highlands_pacific)-Guatemala",
+      "known_aliases": [
+        "Chuitinamit",
+        "chuitinamit"
+      ],
+      "latest_year": 1200,
+      "max_pop": 11707,
+      "name": "Chuitinamit",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Chuitinamit",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Chuitinamit"
+        }
+      ],
+      "other_names": [
+        "Chwi Tinamit"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.40309,
+        -90.34279
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sakajut-Guatemala",
+      "known_aliases": [
+        "Sakajut",
+        "sakajut"
+      ],
+      "latest_year": 1200,
+      "max_pop": 11675,
+      "name": "Sakajut",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Sakajut",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Sakajut"
+        }
+      ],
+      "other_names": [
+        "Sacajut"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        10.05714,
+        -84.14248
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Jesús-Costa Rica",
+      "known_aliases": [
+        "Jesús",
+        "jesús"
+      ],
+      "latest_year": 2021,
+      "max_pop": 11669,
+      "name": "Jesús",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Jesús",
+      "historical_names": [
+        {
+          "date": "2021.1.1",
+          "name": "Jesús"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        10.26121,
+        -83.56247
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rio Jimenez-Costa Rica",
+      "known_aliases": [
+        "Rio Jimenez",
+        "rio jimenez"
+      ],
+      "latest_year": 2021,
+      "max_pop": 11665,
+      "name": "Rio Jimenez",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Río Jiménez",
+      "historical_names": [
+        {
+          "date": "2021.1.1",
+          "name": "Río Jiménez"
+        }
+      ],
+      "other_names": [
+        "Rio Jimenez"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        20.54812,
+        -101.15025
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Salamanca"
+        }
+      ],
+      "existing_meta_index": 2288,
+      "existing_meta_name": "Salamanca",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Fraccionamiento Villa Salamanca 400-Mexico",
+      "known_aliases": [
+        "Fraccionamiento Villa Salamanca 400",
+        "fraccionamiento villa salamanca 400",
+        "fraccionamiento barlovento",
+        "Fraccionamiento Barlovento"
+      ],
+      "latest_year": 2020,
+      "max_pop": 11648,
+      "name": "Fraccionamiento Villa Salamanca 400",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1877,
+        2010,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Fraccionamiento Villa Salamanca 400",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Salamanca"
+        },
+        {
+          "date": "2010.1.1",
+          "name": "Fraccionamiento Villa Salamanca 400"
+        }
+      ],
+      "other_names": [
+        "Fraccionamiento Barlovento"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.59368,
+        -71.59041
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 1742,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sabana Larga-Dominican Republic",
+      "known_aliases": [
+        "Sabana Larga",
+        "sabana larga"
+      ],
+      "latest_year": 2022,
+      "max_pop": 11636,
+      "name": "Sabana Larga",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1742,
+        1790,
+        1808,
+        1821,
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Sabana Larga",
+      "historical_names": [
+        {
+          "date": "1742.1.1",
+          "name": "Sabana Larga"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        20.5947,
+        -98.76414
+      ],
+      "country": "Mexico",
+      "earliest_year": 1300,
+      "existing_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Metztitlán"
+        }
+      ],
+      "existing_meta_index": 514,
+      "existing_meta_name": "Metztitlán",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Metztitlán-Mexico",
+      "known_aliases": [
+        "Metztitlán",
+        "metztitlán",
+        "metztitlan"
+      ],
+      "latest_year": 2020,
+      "max_pop": 11600,
+      "name": "Metztitlán",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1300,
+        1646,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Metztitlán",
+      "historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Metztitlán"
+        }
+      ],
+      "other_names": [
+        "Metztitlan",
+        "Meztitlán"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        17.855,
+        -88.884
+      ],
+      "country": "Belize",
+      "earliest_year": 200,
+      "existing_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Blue Creek"
+        }
+      ],
+      "existing_meta_index": 169,
+      "existing_meta_name": "Blue Creek",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Blue Creek Site-Belize",
+      "known_aliases": [
+        "Blue Creek Site",
+        "blue creek site"
+      ],
+      "latest_year": 800,
+      "max_pop": 11600,
+      "name": "Blue Creek Site",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        200,
+        600,
+        800
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Blue Creek",
+      "historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Blue Creek"
+        }
+      ],
+      "other_names": [
+        "Blue Creek Site"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.79616,
+        -90.226
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Conacaste-Guatemala",
+      "known_aliases": [
+        "Conacaste",
+        "conacaste"
+      ],
+      "latest_year": 1200,
+      "max_pop": 11593,
+      "name": "Conacaste",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Conacaste",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Conacaste"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.35367,
+        -89.28575
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pataxte-Guatemala_2",
+      "known_aliases": [
+        "Pataxte",
+        "pataxte"
+      ],
+      "latest_year": 1200,
+      "max_pop": 11585,
+      "name": "Pataxte",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Pataxte",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Pataxte"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.6151,
+        -90.74312
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Lagunita-Guatemala_2",
+      "known_aliases": [
+        "La Lagunita",
+        "la lagunita"
+      ],
+      "latest_year": 1200,
+      "max_pop": 11544,
+      "name": "La Lagunita",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "La Lagunita",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "La Lagunita"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        9.72834,
+        -83.91321
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Isidro 4-Costa Rica",
+      "known_aliases": [
+        "San Isidro",
+        "san isidro"
+      ],
+      "latest_year": 2021,
+      "max_pop": 11528,
+      "name": "San Isidro",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Isidro",
+      "historical_names": [
+        {
+          "date": "2021.1.1",
+          "name": "San Isidro"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        10.51474,
+        -61.35946
+      ],
+      "country": "Trinidad and Tobago",
+      "earliest_year": 2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Longdenville-Trinidad and Tobago",
+      "known_aliases": [
+        "Longdenville",
+        "longdenville"
+      ],
+      "latest_year": 2011,
+      "max_pop": 11510,
+      "name": "Longdenville",
+      "reason": "missing_entry",
+      "region": "lesser_antilles_bahamas_bermuda",
+      "sample_years": [
+        2000,
+        2011
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Longdenville",
+      "historical_names": [
+        {
+          "date": "2000.1.1",
+          "name": "Longdenville"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        32.30546,
+        -64.79854
+      ],
+      "country": "Bermuda",
+      "earliest_year": 1991,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pembroke-Bermuda",
+      "known_aliases": [
+        "Pembroke",
+        "pembroke"
+      ],
+      "latest_year": 2016,
+      "max_pop": 11507,
+      "name": "Pembroke",
+      "reason": "missing_entry",
+      "region": "lesser_antilles_bahamas_bermuda",
+      "sample_years": [
+        1991,
+        2000,
+        2010,
+        2016
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Pembroke",
+      "historical_names": [
+        {
+          "date": "1991.1.1",
+          "name": "Pembroke"
+        }
+      ],
+      "other_names": [
+        "Pembroke Parish"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.69428,
+        -91.96438
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ramon 1-Guatemala",
+      "known_aliases": [
+        "Ramon 1",
+        "ramon 1"
+      ],
+      "latest_year": 1200,
+      "max_pop": 11499,
+      "name": "Ramon 1",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Ramón 1",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Ramón 1"
+        }
+      ],
+      "other_names": [
+        "Ramon 1"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.49314,
+        -88.92396
+      ],
+      "country": "El Salvador",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Rafael Obrajuelo-El Salvador",
+      "known_aliases": [
+        "San Rafael Obrajuelo",
+        "san rafael obrajuelo"
+      ],
+      "latest_year": 2024,
+      "max_pop": 11453,
+      "name": "San Rafael Obrajuelo",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Rafael Obrajuelo",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "San Rafael Obrajuelo"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.4956,
+        -89.02684
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Labor-Honduras",
+      "known_aliases": [
+        "La Labor",
+        "la labor"
+      ],
+      "latest_year": 2024,
+      "max_pop": 11451,
+      "name": "La Labor",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "La Labor",
+      "historical_names": [
+        {
+          "date": "2001.1.1",
+          "name": "La Labor"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.14455,
+        -72.00875
+      ],
+      "country": "Haiti",
+      "earliest_year": 1742,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Hincha-Haiti",
+      "known_aliases": [
+        "Hincha",
+        "hincha"
+      ],
+      "latest_year": 1821,
+      "max_pop": 11429,
+      "name": "Hincha",
+      "reason": "missing_entry",
+      "region": "colonial_caribbean_plantation",
+      "sample_years": [
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Hincha",
+      "historical_names": [
+        {
+          "date": "1742.1.1",
+          "name": "Hincha"
+        }
+      ],
+      "other_names": [
+        "Hinche",
+        "Ench"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        12.50497,
+        -86.29942
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Francisco Libre-Nicaragua",
+      "known_aliases": [
+        "San Francisco Libre",
+        "san francisco libre"
+      ],
+      "latest_year": 2023,
+      "max_pop": 11426,
+      "name": "San Francisco Libre",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Francisco Libre",
+      "historical_names": [
+        {
+          "date": "1995.1.1",
+          "name": "San Francisco Libre"
+        }
+      ],
+      "other_names": [
+        "San Francisco del Carnicero"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        12.26875,
+        -85.38205
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 2005,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Francisco de Cuapa-Nicaragua",
+      "known_aliases": [
+        "San Francisco de Cuapa",
+        "san francisco de cuapa"
+      ],
+      "latest_year": 2023,
+      "max_pop": 11422,
+      "name": "San Francisco de Cuapa",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Francisco de Cuapa",
+      "historical_names": [
+        {
+          "date": "2005.1.1",
+          "name": "San Francisco de Cuapa"
+        }
+      ],
+      "other_names": [
+        "Cuapa"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.41853,
+        -88.33582
+      ],
+      "country": "El Salvador",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Jorge-El Salvador",
+      "known_aliases": [
+        "San Jorge",
+        "san jorge"
+      ],
+      "latest_year": 2024,
+      "max_pop": 11405,
+      "name": "San Jorge",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Jorge",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "San Jorge"
+        }
+      ],
+      "other_names": [],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.69694,
+        -98.75472
+      ],
+      "country": "Mexico",
+      "earliest_year": 1300,
+      "existing_historical_names": [
+        {
+          "date": "1520.7.7",
+          "name": "Otompan"
+        },
+        {
+          "date": "1527.1.1",
+          "name": "Otumba"
+        },
+        {
+          "date": "1877.1.1",
+          "name": "Otumba de Gómez Farías"
+        }
+      ],
+      "existing_meta_index": 1024,
+      "existing_meta_name": "Otumba de Gómez Farías",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Otumba-Mexico",
+      "known_aliases": [
+        "Otumba",
+        "otumba"
+      ],
+      "latest_year": 1778,
+      "max_pop": 11400,
+      "name": "Otumba",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1300,
+        1500,
+        1577,
+        1778
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Otumba",
+          "year": 1900
+        },
+        {
+          "name": "Otumba de Gómez Farías",
+          "year": 1930
+        }
+      ],
+      "canonical_name": "Otumba",
+      "historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Otompan"
+        },
+        {
+          "date": "1527.1.1",
+          "name": "Otumba"
+        },
+        {
+          "date": "1877.1.1",
+          "name": "Otumba de Gómez Farías"
+        }
+      ],
+      "other_names": [
+        "Otumba de Gómez Farías",
+        "Otompan"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        17.167,
+        -89.404
+      ],
+      "country": "Guatemala",
+      "earliest_year": 450,
+      "existing_historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Nakum"
+        }
+      ],
+      "existing_meta_index": 178,
+      "existing_meta_name": "Nakum",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Nakum-Guatemala",
+      "known_aliases": [
+        "Nakum",
+        "nakum"
+      ],
+      "latest_year": 900,
+      "max_pop": 11400,
+      "name": "Nakum",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        450,
+        750,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Nakum",
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Nakum"
+        }
+      ],
+      "other_names": [
+        "Nakúm"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.103,
+        -94.041
+      ],
+      "country": "Mexico",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "-1200.1.1",
+          "name": "La Venta"
+        }
+      ],
+      "existing_meta_index": 51,
+      "existing_meta_name": "La Venta",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Venta Site-Mexico",
+      "known_aliases": [
+        "La Venta Site",
+        "la venta site"
+      ],
+      "latest_year": -400,
+      "max_pop": 11400,
+      "name": "La Venta Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -1000,
+        -800,
+        -600,
+        -400
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "La Venta",
+      "historical_names": [
+        {
+          "date": "-1200.1.1",
+          "name": "La Venta"
+        }
+      ],
+      "other_names": [
+        "La Venta Site"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.246,
+        -98.338
+      ],
+      "country": "Mexico",
+      "earliest_year": -400,
+      "existing_historical_names": [
+        {
+          "date": "-400.1.1",
+          "name": "Cacaxtla-Xochitécatl"
+        }
+      ],
+      "existing_meta_index": 96,
+      "existing_meta_name": "Cacaxtla-Xochitécatl",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cacaxtla-Xochitecatl Site-Mexico",
+      "known_aliases": [
+        "Cacaxtla-Xochitecatl Site",
+        "cacaxtla-xochitecatl site"
+      ],
+      "latest_year": 900,
+      "max_pop": 11400,
+      "name": "Cacaxtla-Xochitecatl Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -400,
+        100,
+        700,
+        900
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Cacaxtla-Xochitécatl",
+      "historical_names": [
+        {
+          "date": "-400.1.1",
+          "name": "Cacaxtla-Xochitécatl"
+        }
+      ],
+      "other_names": [
+        "Cacaxtla-Xochitecatl Site",
+        "Cacaxtla",
+        "Xochitécatl"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.03902,
+        -90.38918
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Obraje o Solis-Guatemala",
+      "known_aliases": [
+        "Obraje o Solis",
+        "obraje o solis"
+      ],
+      "latest_year": 1200,
+      "max_pop": 11385,
+      "name": "Obraje o Solis",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Obraje o Solís",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Obraje o Solís"
+        }
+      ],
+      "other_names": [
+        "Obraje o Solis"
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

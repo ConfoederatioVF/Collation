@@ -1,0 +1,1088 @@
+{
+  "batch_index": 876,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -6.99146,
+        -77.65492
+      ],
+      "country": "Peru",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pampa Hermosa B-Peru",
+      "known_aliases": [
+        "Pampa Hermosa B",
+        "pampa hermosa b",
+        "cerro cedrobamba",
+        "mausoleo casa blanca",
+        "mausoleo casa de oro",
+        "mausoleo de los triángulos",
+        "mausoleos",
+        "mausoleos a - cerro tres ríos",
+        "pampa hermosa a",
+        "Cerro Cedrobamba",
+        "Mausoleo Casa Blanca",
+        "Mausoleo Casa de Oro",
+        "Mausoleo de los Triángulos",
+        "Mausoleos",
+        "Mausoleos A - Cerro Tres Ríos",
+        "Pampa Hermosa A"
+      ],
+      "latest_year": 1530,
+      "max_pop": 293,
+      "name": "Pampa Hermosa B",
+      "reason": "missing_entry",
+      "region": "inca_chinchaysuyu",
+      "sample_years": [
+        0,
+        1200,
+        1470,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.04539,
+        -75.93715
+      ],
+      "country": "Colombia",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guayabal (na_magdalena_cauca_muisca)-Colombia",
+      "known_aliases": [
+        "Guayabal",
+        "guayabal"
+      ],
+      "latest_year": 1500,
+      "max_pop": 293,
+      "name": "Guayabal",
+      "reason": "missing_entry",
+      "region": "na_magdalena_cauca_muisca",
+      "sample_years": [
+        0,
+        500,
+        800,
+        1000,
+        1200,
+        1300,
+        1400,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.93167,
+        -74.98771
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Juaruco-Colombia",
+      "known_aliases": [
+        "Juaruco",
+        "juaruco"
+      ],
+      "latest_year": 2018,
+      "max_pop": 292,
+      "name": "Juaruco",
+      "reason": "missing_entry",
+      "region": "col_atlantico",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.26991,
+        -75.87611
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Samaria (col_valle_del_cauca)-Colombia",
+      "known_aliases": [
+        "Samaria",
+        "samaria"
+      ],
+      "latest_year": 2018,
+      "max_pop": 292,
+      "name": "Samaria",
+      "reason": "missing_entry",
+      "region": "col_valle_del_cauca",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.67711,
+        -78.59941
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Agustín (col_narino)-Colombia",
+      "known_aliases": [
+        "San Agustín",
+        "san agustín",
+        "guachiri",
+        "Guachiri"
+      ],
+      "latest_year": 2018,
+      "max_pop": 292,
+      "name": "San Agustín",
+      "reason": "missing_entry",
+      "region": "col_narino",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.81881,
+        -72.52506
+      ],
+      "country": "Colombia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Pedro (col_norte_de_santander)-Colombia",
+      "known_aliases": [
+        "San Pedro",
+        "san pedro"
+      ],
+      "latest_year": 2018,
+      "max_pop": 292,
+      "name": "San Pedro",
+      "reason": "missing_entry",
+      "region": "col_norte_de_santander",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2005,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.95565,
+        -77.38586
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Loma Alta-Ecuador",
+      "known_aliases": [
+        "Loma Alta",
+        "loma alta"
+      ],
+      "latest_year": 2010,
+      "max_pop": 292,
+      "name": "Loma Alta",
+      "reason": "missing_entry",
+      "region": "ecu_napo",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.21567,
+        -78.00379
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tsuntsuntsa-Ecuador",
+      "known_aliases": [
+        "Tsuntsuntsa",
+        "tsuntsuntsa"
+      ],
+      "latest_year": 2010,
+      "max_pop": 292,
+      "name": "Tsuntsuntsa",
+      "reason": "missing_entry",
+      "region": "ecu_morona_santiago",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.3045,
+        -76.4657
+      ],
+      "country": "Peru",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Bellavista (per_loreto_2)-Peru",
+      "known_aliases": [
+        "Bellavista",
+        "bellavista"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Bellavista",
+      "reason": "missing_entry",
+      "region": "per_loreto",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -6.4068,
+        -79.871
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Casa Embarrada-Peru",
+      "known_aliases": [
+        "Casa Embarrada",
+        "casa embarrada"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Casa Embarrada",
+      "reason": "missing_entry",
+      "region": "per_lambayeque",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.194,
+        -71.4901
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ccotaña-Peru",
+      "known_aliases": [
+        "Ccotaña",
+        "ccotaña"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Ccotaña",
+      "reason": "missing_entry",
+      "region": "per_cusco",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -6.3929,
+        -77.9856
+      ],
+      "country": "Peru",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Choctamal-Peru",
+      "known_aliases": [
+        "Choctamal",
+        "choctamal"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Choctamal",
+      "reason": "missing_entry",
+      "region": "per_amazonas",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.6289,
+        -78.0747
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Churucana-Peru",
+      "known_aliases": [
+        "Churucana",
+        "churucana"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Churucana",
+      "reason": "missing_entry",
+      "region": "per_cajamarca",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.1569,
+        -78.5775
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cushunga-Peru",
+      "known_aliases": [
+        "Cushunga",
+        "cushunga",
+        "sexemayo lote ii",
+        "Sexemayo Lote II"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Cushunga",
+      "reason": "missing_entry",
+      "region": "per_cajamarca",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.8939,
+        -79.7261
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Pueblito-Peru",
+      "known_aliases": [
+        "El Pueblito",
+        "el pueblito"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "El Pueblito",
+      "reason": "missing_entry",
+      "region": "per_lambayeque",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.9183,
+        -80.0955
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ficuar-Peru",
+      "known_aliases": [
+        "Ficuar",
+        "ficuar"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Ficuar",
+      "reason": "missing_entry",
+      "region": "per_lambayeque",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.5548,
+        -73.8654
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Huamampata-Peru",
+      "known_aliases": [
+        "Huamampata",
+        "huamampata"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Huamampata",
+      "reason": "missing_entry",
+      "region": "per_ayacucho",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -6.3413,
+        -79.1032
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Pampa (per_cajamarca)-Peru",
+      "known_aliases": [
+        "La Pampa",
+        "la pampa"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "La Pampa",
+      "reason": "missing_entry",
+      "region": "per_cajamarca",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.8692,
+        -79.7286
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mano de Leon-Peru",
+      "known_aliases": [
+        "Mano de Leon",
+        "mano de leon"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Mano de Leon",
+      "reason": "missing_entry",
+      "region": "per_lambayeque",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.0753,
+        -74.8393
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pampahuasi-Peru",
+      "known_aliases": [
+        "Pampahuasi",
+        "pampahuasi"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Pampahuasi",
+      "reason": "missing_entry",
+      "region": "per_huancavelica",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.6183,
+        -77.6236
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pariashpampa-Peru",
+      "known_aliases": [
+        "Pariashpampa",
+        "pariashpampa",
+        "colpapampa",
+        "Colpapampa"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Pariashpampa",
+      "reason": "missing_entry",
+      "region": "per_ancash",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -4.9263,
+        -79.8187
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pechuquiz-Peru",
+      "known_aliases": [
+        "Pechuquiz",
+        "pechuquiz"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Pechuquiz",
+      "reason": "missing_entry",
+      "region": "per_piura",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -4.6994,
+        -79.7561
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Portachuelo de Culucan-Peru",
+      "known_aliases": [
+        "Portachuelo de Culucan",
+        "portachuelo de culucan"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Portachuelo de Culucan",
+      "reason": "missing_entry",
+      "region": "per_piura",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.2907,
+        -77.0738
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Queroragra-Peru",
+      "known_aliases": [
+        "Queroragra",
+        "queroragra"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Queroragra",
+      "reason": "missing_entry",
+      "region": "per_ancash",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.8781,
+        -76.0685
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Romani-Peru",
+      "known_aliases": [
+        "Romani",
+        "romani"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Romani",
+      "reason": "missing_entry",
+      "region": "per_lima",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.5561,
+        -73.3694
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan de Miraflores (per_apurimac)-Peru",
+      "known_aliases": [
+        "San Juan de Miraflores",
+        "san juan de miraflores",
+        "huallhuayocc",
+        "Huallhuayocc"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "San Juan de Miraflores",
+      "reason": "missing_entry",
+      "region": "per_apurimac",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.9361,
+        -72.9334
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ticumpinia Chocoriari-Peru",
+      "known_aliases": [
+        "Ticumpinia Chocoriari",
+        "ticumpinia chocoriari"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Ticumpinia Chocoriari",
+      "reason": "missing_entry",
+      "region": "per_cusco",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.7615,
+        -75.1641
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Yanesha Baja-Peru",
+      "known_aliases": [
+        "Yanesha Baja",
+        "yanesha baja"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Yanesha Baja",
+      "reason": "missing_entry",
+      "region": "per_pasco",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.8328,
+        -76.2804
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zona e el Triunfo-Peru",
+      "known_aliases": [
+        "Zona e el Triunfo",
+        "zona e el triunfo"
+      ],
+      "latest_year": 2017,
+      "max_pop": 292,
+      "name": "Zona e el Triunfo",
+      "reason": "missing_entry",
+      "region": "per_huanuco",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.9665,
+        -68.5198
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cruz de Huayllas-Bolivia",
+      "known_aliases": [
+        "Cruz de Huayllas",
+        "cruz de huayllas"
+      ],
+      "latest_year": 2024,
+      "max_pop": 292,
+      "name": "Cruz de Huayllas",
+      "reason": "missing_entry",
+      "region": "bol_oruro",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2024
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    }
+  ]
+}

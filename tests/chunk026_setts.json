@@ -1,0 +1,2365 @@
+{
+  "Diguillin-Chile_2": [],
+  "La Florida-Argentina": [],
+  "Caraqueño-Peru": [],
+  "Alto de los Ídolos-Colombia": [
+    {
+      "name": "Isnos",
+      "other_names": [],
+      "coords": [
+        1.929467,
+        -76.217637
+      ],
+      "coord_source": "DANE_DIVIPOLA",
+      "country": "Colombia",
+      "admin1": "Huila",
+      "admin_code": "41359",
+      "population_scope": "city_proper",
+      "is_capital": false,
+      "urban_cabecera_population": {
+        "1985": 2058,
+        "1990": 2893,
+        "1993": 3322,
+        "1995": 3593,
+        "2000": 4199,
+        "2005": 4755,
+        "2010": 5281,
+        "2015": 5825,
+        "2018": 6153,
+        "2020": 6318,
+        "2023": 6440,
+        "2025": 6506
+      },
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "_file": "raw_setts_colombia.json"
+    }
+  ],
+  "Gps-Colombia": [],
+  "Insculas-Peru": [
+    {
+      "gz_id": 6001473,
+      "name": "Insculas",
+      "modern_name": "Insculas",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Trujillo",
+      "colonial_partido": "Piura",
+      "categoria": "Rural",
+      "coords": [
+        -5.751,
+        -79.859
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Lorenzo Huertas Vallejos, 'Patrones de asentamiento poblacional en Piura (1532-1850)', en: Bulletin de l'Institut Français d'études andines 25, 1 (1996)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Moroturo-Venezuela": [
+    {
+      "gz_id": 4000215,
+      "name": "Parupano",
+      "modern_name": "Parupano",
+      "variants": [],
+      "country_iso3": "VEN",
+      "colonial_audiencia": "VEN",
+      "colonial_region": "VEN",
+      "colonial_province": "Caracas",
+      "colonial_partido": "Carora",
+      "categoria": "Poblacion",
+      "coords": [
+        10.617,
+        -69.279
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Ambrosio Perera, Historia de la organización de pueblos antiguos de VenezuelanMadrid 1964)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Santo Domingo Pocoto-Peru": [
+    {
+      "gz_id": 6000933,
+      "name": "Santo Domingo Pocoto",
+      "modern_name": "Santo Domingo Pocoto",
+      "variants": [
+        "Picoto|"
+      ],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Lima",
+      "colonial_partido": "Yauyos",
+      "categoria": "Pueblo",
+      "coords": [
+        -12.654,
+        -76.155
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Uia-Colombia": [],
+  "Quilaquila-Bolivia": [
+    {
+      "gz_id": 8000078,
+      "name": "Quilaquila",
+      "modern_name": "Quilaquila",
+      "variants": [
+        "Qullaquila|"
+      ],
+      "country_iso3": "BOL",
+      "colonial_audiencia": "CHA",
+      "colonial_region": "CHA",
+      "colonial_province": "Charcas",
+      "colonial_partido": "Yamparaez",
+      "categoria": "Pueblo",
+      "coords": [
+        -19.12,
+        -65.377
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "bol_department": "Chuquisaca",
+      "is_andean_bolivia": true,
+      "observations": [],
+      "sources": [
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "San Pedro (per_ancash)-Peru": [
+    {
+      "gz_id": 6000959,
+      "name": "Copa",
+      "modern_name": "Copa",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Tarma",
+      "colonial_partido": "Cajatambo",
+      "categoria": "Pueblo",
+      "coords": [
+        -10.372,
+        -77.486
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "San Pedro",
+      "other_names": [
+        "Copa"
+      ],
+      "coords": [
+        -10.371944,
+        -77.487222
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "Áncash",
+      "admin2": "OCROS",
+      "admin_code": "021409",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 33,
+        "2017": 37,
+        "2025": 24
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Sillkinchan-Peru": [
+    {
+      "name": "Saylla",
+      "other_names": [],
+      "coords": [
+        -13.57,
+        -71.827778
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "Cusco",
+      "admin2": "CUSCO",
+      "admin_code": "080107",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 43,
+        "2017": 62,
+        "2025": 68
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Tres de Febrero-Venezuela": [],
+  "Chocho-Colombia": [],
+  "José Gregorio Bastidas-Venezuela": [],
+  "Callapampa-Peru": [
+    {
+      "gz_id": 6000819,
+      "name": "Callapampa",
+      "modern_name": "Callapampa",
+      "variants": [
+        "Collapampa|"
+      ],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Lima",
+      "colonial_partido": "Huarochiri",
+      "categoria": "Pueblo",
+      "coords": [
+        -11.73,
+        -75.948
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Llangas-Peru": [
+    {
+      "gz_id": 6001510,
+      "name": "Llangas",
+      "modern_name": "Llangas",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Lima",
+      "colonial_partido": "Yauyos",
+      "categoria": "Poblacion",
+      "coords": [
+        -12.852,
+        -75.959
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Francisco Carrascon y Sola, 'Mapa primero del Perú que comprende la mayor parte del Virreinato de Lima y su Arzobispado, 1802.' (1802)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Palmar-Colombia_2": [],
+  "San Pablo (ecu_bolivar)-Ecuador": [],
+  "San Antonio de Antaparco-Peru": [
+    {
+      "gz_id": 6000609,
+      "name": "Antaparco",
+      "modern_name": "Antaparco",
+      "variants": [
+        "Antarpanco|"
+      ],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Huancavelica",
+      "colonial_partido": "Angaraes",
+      "categoria": "Pueblo",
+      "coords": [
+        -13.074,
+        -74.412
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "San Antonio de Antaparco",
+      "other_names": [
+        "Antaparco"
+      ],
+      "coords": [
+        -13.076111,
+        -74.411667
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "Huancavelica",
+      "admin2": "ANGARAES",
+      "admin_code": "090310",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 18,
+        "2017": 17,
+        "2025": 31
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Sara Sara-Peru": [
+    {
+      "gz_id": 6000569,
+      "name": "Quilcata",
+      "modern_name": "Quilcata",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Huamanga",
+      "colonial_partido": "Parinacochas",
+      "categoria": "Pueblo",
+      "coords": [
+        -15.245,
+        -73.453
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "Sara Sara",
+      "other_names": [
+        "Quilcata"
+      ],
+      "coords": [
+        -15.245278,
+        -73.453056
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "Ayacucho",
+      "admin2": "PAUCAR DEL SARA SARA",
+      "admin_code": "050810",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 83,
+        "2017": 91,
+        "2025": 92
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Huaca de Loro-Peru": [],
+  "Yacimiento 8 Km. 34 +-Colombia": [],
+  "La Punta-Peru": [],
+  "Los Caprichos-Venezuela": [],
+  "Vilca-Peru": [
+    {
+      "gz_id": 6000599,
+      "name": "Vilcabamba",
+      "modern_name": "Vilca",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Huancavelica",
+      "colonial_partido": "Angaraes",
+      "categoria": "Pueblo",
+      "coords": [
+        -12.483,
+        -75.184
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "Vilca",
+      "other_names": [],
+      "coords": [
+        -12.477222,
+        -75.183333
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "Huancavelica",
+      "admin2": "HUANCAVELICA",
+      "admin_code": "090116",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 9,
+        "2017": 9,
+        "2025": 9
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Montalvo (ecu_esmeraldas)-Ecuador": [],
+  "Gladiador-Colombia": [
+    {
+      "name": "Ricaurte",
+      "other_names": [],
+      "coords": [
+        4.282113,
+        -74.772861
+      ],
+      "coord_source": "DANE_DIVIPOLA",
+      "country": "Colombia",
+      "admin1": "Cundinamarca",
+      "admin_code": "25612",
+      "population_scope": "city_proper",
+      "is_capital": false,
+      "urban_cabecera_population": {
+        "1985": 1794,
+        "1990": 2188,
+        "1993": 2392,
+        "1995": 2550,
+        "2000": 2967,
+        "2005": 3549,
+        "2010": 4423,
+        "2015": 5728,
+        "2018": 6858,
+        "2020": 7681,
+        "2023": 8650,
+        "2025": 9313
+      },
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "_file": "raw_setts_colombia.json"
+    }
+  ],
+  "Santiago Apostol del Cercado-Peru": [
+    {
+      "gz_id": 9900203,
+      "name": "Santiago Apostol del Cercado",
+      "modern_name": "Santiago Apostol del Cercado",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Lima",
+      "colonial_partido": "Lima",
+      "categoria": "Parcialidad",
+      "coords": [
+        -12.05,
+        -77.012
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "gz_id": 9900206,
+      "name": "Santa Ana",
+      "modern_name": "Santa Ana",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Lima",
+      "colonial_partido": "Lima",
+      "categoria": "Parcialidad",
+      "coords": [
+        -12.052,
+        -77.023
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "San Miguel (col_santander)-Colombia": [
+    {
+      "gz_id": 5000517,
+      "name": "San Miguel",
+      "modern_name": "San Miguel",
+      "variants": [],
+      "country_iso3": "COL",
+      "colonial_audiencia": "NGR",
+      "colonial_region": "NGR",
+      "colonial_province": "Tunja",
+      "colonial_partido": "Duitama",
+      "categoria": "Poblacion",
+      "coords": [
+        6.577,
+        -72.646
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [
+        {
+          "it_id": 4686,
+          "year": 1777,
+          "fecha_dato": "1777",
+          "start_year": 1777,
+          "end_year": 1777,
+          "alcance_tipo": "",
+          "dato_tipo": "suma-de-parciales",
+          "total": 1365,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 590,
+          "indios": 36,
+          "mestizos": 648,
+          "castas": 91,
+          "esclavos": 0,
+          "fuente_id": "padron-san-miguel",
+          "source_citation": "'Censo de población de San Miguel', en: Archivo General de la Nación (Colombia), CENSOS-DEPTOS:SC.10,8,D.45 (1777)"
+        }
+      ],
+      "sources": [
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)",
+        "'Censo de población de San Miguel', en: Archivo General de la Nación (Colombia), CENSOS-DEPTOS:SC.10,8,D.45 (1777)"
+      ],
+      "has_demographic_observations": true,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "San Miguel",
+      "other_names": [],
+      "coords": [
+        6.575315,
+        -72.644123
+      ],
+      "coord_source": "DANE_DIVIPOLA",
+      "country": "Colombia",
+      "admin1": "Santander",
+      "admin_code": "68686",
+      "population_scope": "city_proper",
+      "is_capital": false,
+      "urban_cabecera_population": {
+        "1985": 426,
+        "1990": 449,
+        "1993": 471,
+        "1995": 479,
+        "2000": 513,
+        "2005": 525,
+        "2010": 539,
+        "2015": 589,
+        "2018": 636,
+        "2020": 706,
+        "2023": 750,
+        "2025": 774
+      },
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "_file": "raw_setts_colombia.json"
+    }
+  ],
+  "Ñomala-Peru": [
+    {
+      "gz_id": 6001465,
+      "name": "Nomala",
+      "modern_name": "Nomala",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Trujillo",
+      "colonial_partido": "Piura",
+      "categoria": "Rural",
+      "coords": [
+        -5.066,
+        -80.237
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Lorenzo Huertas Vallejos, 'Patrones de asentamiento poblacional en Piura (1532-1850)', en: Bulletin de l'Institut Français d'études andines 25, 1 (1996)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Globo Delta 1A- Yacimiento-Colombia": [],
+  "San Sebastián Del Coca-Ecuador": [],
+  "Acostambo (vp_intendencia_huamanga_huancavelica_2)-Peru": [
+    {
+      "gz_id": 6000625,
+      "name": "Acostamba",
+      "modern_name": "Acostambo",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Huancavelica",
+      "colonial_partido": "Castrovirreina",
+      "categoria": "Pueblo",
+      "coords": [
+        -13.286,
+        -74.933
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Puerto Pechiche-Ecuador": [],
+  "Huaca El Milagro-Peru": [],
+  "Concepcion de Caja-Peru": [
+    {
+      "gz_id": 6000533,
+      "name": "Concepcion de Caja",
+      "modern_name": "Concepcion de Caja",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Huamanga",
+      "colonial_partido": "Lucanas",
+      "categoria": "Pueblo",
+      "coords": [
+        -14.859,
+        -74.349
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Villa Ascasubi-Argentina": [
+    {
+      "gz_id": 9000066,
+      "name": "Rio Tercero abajo",
+      "modern_name": "Villa Ascasubi",
+      "variants": [],
+      "country_iso3": "ARG",
+      "colonial_audiencia": "RPL",
+      "colonial_region": "RPL",
+      "colonial_province": "Tucuman",
+      "colonial_partido": "Cordoba",
+      "categoria": "Poblacion",
+      "coords": [
+        -32.168,
+        -63.895
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "Villa Ascasubi",
+      "other_names": [],
+      "coords": [
+        -32.162794,
+        -63.892411
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "Córdoba",
+      "admin_code": "141505",
+      "gl_category": "MU",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "Rapaz-Peru": [
+    {
+      "gz_id": 6000998,
+      "name": "Rapas",
+      "modern_name": "Rapaz",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Tarma",
+      "colonial_partido": "Cajatambo",
+      "categoria": "Pueblo",
+      "coords": [
+        -10.873,
+        -76.706
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Palagua-Colombia": [],
+  "Ciruelos-Chile_2": [],
+  "Chapal-Colombia": [
+    {
+      "gz_id": 5600662,
+      "name": "Chapal",
+      "modern_name": "Chapal",
+      "variants": [
+        "Chaparral"
+      ],
+      "country_iso3": "COL",
+      "colonial_audiencia": "NGR",
+      "colonial_region": "QUI",
+      "colonial_province": "Popayan",
+      "colonial_partido": "Pasto",
+      "categoria": "Pueblo",
+      "coords": [
+        0.943,
+        -77.463
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [
+        {
+          "it_id": 5144,
+          "year": 1780,
+          "fecha_dato": "1780",
+          "start_year": 1780,
+          "end_year": 1780,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 171,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1,
+          "indios": 170,
+          "mestizos": 0,
+          "castas": 0,
+          "esclavos": 0,
+          "fuente_id": "censo-pasto",
+          "source_citation": "'Padrones de la provincia de Pasto en los años 1780, 1795 y 1796.', en: Archivo Histórico Cipriano Rodríguez Santa María, Fondo David Mejia Velilla 1. Archivo Santiago Arroyo y Valencia 1.3. Provincia de Popayán 1.3.3. Gobierno 1.3.3.2. Censos"
+        },
+        {
+          "it_id": 5145,
+          "year": 1794,
+          "fecha_dato": "1794",
+          "start_year": 1794,
+          "end_year": 1794,
+          "alcance_tipo": "",
+          "dato_tipo": "original",
+          "total": 382,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1,
+          "indios": 212,
+          "mestizos": 0,
+          "castas": 169,
+          "esclavos": 55,
+          "fuente_id": "censo-pasto",
+          "source_citation": "'Padrones de la provincia de Pasto en los años 1780, 1795 y 1796.', en: Archivo Histórico Cipriano Rodríguez Santa María, Fondo David Mejia Velilla 1. Archivo Santiago Arroyo y Valencia 1.3. Provincia de Popayán 1.3.3. Gobierno 1.3.3.2. Censos"
+        },
+        {
+          "it_id": 5146,
+          "year": 1795,
+          "fecha_dato": "1795",
+          "start_year": 1795,
+          "end_year": 1795,
+          "alcance_tipo": "",
+          "dato_tipo": "original",
+          "total": 321,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1,
+          "indios": 199,
+          "mestizos": 0,
+          "castas": 121,
+          "esclavos": 0,
+          "fuente_id": "censo-pasto",
+          "source_citation": "'Padrones de la provincia de Pasto en los años 1780, 1795 y 1796.', en: Archivo Histórico Cipriano Rodríguez Santa María, Fondo David Mejia Velilla 1. Archivo Santiago Arroyo y Valencia 1.3. Provincia de Popayán 1.3.3. Gobierno 1.3.3.2. Censos"
+        }
+      ],
+      "sources": [
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)",
+        "'Padrones de la provincia de Pasto en los años 1780, 1795 y 1796.', en: Archivo Histórico Cipriano Rodríguez Santa María, Fondo David Mejia Velilla 1. Archivo Santiago Arroyo y Valencia 1.3. Provincia de Popayán 1.3.3. Gobierno 1.3.3.2. Censos"
+      ],
+      "has_demographic_observations": true,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Asogasta-Argentina": [
+    {
+      "gz_id": 9000523,
+      "name": "Asogasta",
+      "modern_name": "Asogasta",
+      "variants": [
+        "Arsogasta"
+      ],
+      "country_iso3": "ARG",
+      "colonial_audiencia": "RPL",
+      "colonial_region": "RPL",
+      "colonial_province": "Tucuman",
+      "colonial_partido": "Estero",
+      "categoria": "Pueblo",
+      "coords": [
+        -27.739,
+        -63.576
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "José Luis Grosso, Indios muertos, negros invisiblesnCórdoba, Arg. 2008)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Cisnes-Chile": [
+    {
+      "name": "Cisnes",
+      "other_names": [],
+      "coords": [
+        -44.650647,
+        -73.165522
+      ],
+      "coord_source": "INE_SUBDERE_CODAB_ADM3",
+      "country": "Chile",
+      "admin1": "Región de Aysén del Gral. Ibañez del Campo",
+      "admin_code": "11202",
+      "population_scope": "city_proper",
+      "is_capital": false,
+      "sources": [
+        "INE Chile Censuses & Comunal Series 1952-2024 (Zenodo doi:10.5281/zenodo.12807987)"
+      ],
+      "urban_population_1992": 1784,
+      "_file": "raw_setts_chile.json"
+    }
+  ],
+  "Uribe (col_narino)-Colombia": [
+    {
+      "gz_id": 5600563,
+      "name": "Malave",
+      "modern_name": "Malaver",
+      "variants": [
+        "Malaver| Malhaber"
+      ],
+      "country_iso3": "COL",
+      "colonial_audiencia": "QUI",
+      "colonial_region": "QUI",
+      "colonial_province": "Popayan",
+      "colonial_partido": "Pastos",
+      "categoria": "Pueblo",
+      "coords": [
+        1.03,
+        -77.657
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Bellavista (ecu_el_oro)-Ecuador": [],
+  "Catanga-Colombia": [],
+  "Cedros-Peru": [
+    {
+      "gz_id": 6000318,
+      "name": "Cedros",
+      "modern_name": "Cedros",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Cuzco",
+      "colonial_partido": "Paucartambo",
+      "categoria": "Pueblo",
+      "coords": [
+        -13.118,
+        -71.611
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Mangomarca-Peru": [],
+  "Estero Curaco-Chile": [],
+  "Matara-Argentina": [
+    {
+      "gz_id": 9000610,
+      "name": "Matara",
+      "modern_name": "Matara",
+      "variants": [
+        "Mathala|"
+      ],
+      "country_iso3": "ARG",
+      "colonial_audiencia": "RPL",
+      "colonial_region": "RPL",
+      "colonial_province": "Tucuman",
+      "colonial_partido": "Estero",
+      "categoria": "Pueblo",
+      "coords": [
+        -28.177,
+        -63.279
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Chirimoyo-Peru": [],
+  "Chontamarca-Ecuador": [],
+  "Querco-Peru": [
+    {
+      "gz_id": 6000635,
+      "name": "Querco",
+      "modern_name": "Querco",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Huancavelica",
+      "colonial_partido": "Castrovirreina",
+      "categoria": "Pueblo",
+      "coords": [
+        -13.979,
+        -74.976
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "Querco",
+      "other_names": [],
+      "coords": [
+        -13.979444,
+        -74.976944
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "Huancavelica",
+      "admin2": "HUAYTARA",
+      "admin_code": "090608",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 60,
+        "2017": 66,
+        "2025": 61
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Llano de Jorge-Venezuela": [],
+  "Villacur-Peru": [],
+  "Cahuayo-Bolivia": [
+    {
+      "gz_id": 8000344,
+      "name": "Cahuayo",
+      "modern_name": "Cahuayo",
+      "variants": [],
+      "country_iso3": "BOL",
+      "colonial_audiencia": "CHA",
+      "colonial_region": "CHA",
+      "colonial_province": "Charcas",
+      "colonial_partido": "Paria",
+      "categoria": "Pueblo",
+      "coords": [
+        -19.281,
+        -66.19
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "bol_department": "Potosí",
+      "is_andean_bolivia": true,
+      "observations": [],
+      "sources": [
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Arroyo Fredes-Argentina": [],
+  "Sucre-Peru": [
+    {
+      "name": "Sucre",
+      "other_names": [],
+      "coords": [
+        -6.942778,
+        -78.135278
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "Cajamarca",
+      "admin2": "CELENDIN",
+      "admin_code": "060310",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 19,
+        "2017": 21,
+        "2025": 19
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Chimor-Peru_2": [
+    {
+      "gz_id": 6000319,
+      "name": "Chimor",
+      "modern_name": "Chimor",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Cuzco",
+      "colonial_partido": "Paucartambo",
+      "categoria": "Pueblo",
+      "coords": [
+        -13.143,
+        -71.633
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Itcacachi-Bolivia": [
+    {
+      "gz_id": 8000434,
+      "name": "Itcacachi",
+      "modern_name": "Itcacachi",
+      "variants": [
+        "Ilcacachi|"
+      ],
+      "country_iso3": "BOL",
+      "colonial_audiencia": "CHA",
+      "colonial_region": "CHA",
+      "colonial_province": "La Paz",
+      "colonial_partido": "Omasuyos",
+      "categoria": "Pueblo",
+      "coords": [
+        -15.995,
+        -68.736
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "bol_department": "La Paz",
+      "is_andean_bolivia": true,
+      "observations": [],
+      "sources": [
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Limoncito-Colombia": [
+    {
+      "gz_id": 4000610,
+      "name": "Limoncito",
+      "modern_name": "Limoncito",
+      "variants": [],
+      "country_iso3": "COL",
+      "colonial_audiencia": "NGR",
+      "colonial_region": "NGR",
+      "colonial_province": "Pamplona",
+      "colonial_partido": "Cucuta",
+      "categoria": "Pueblo",
+      "coords": [
+        8.107,
+        -72.568
+      ],
+      "start_year": 1785,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "'Testimonio de los autos ... 1811', en: Archivo General de Indias, Caracas,179 (1811)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Timborbamba-Peru": [
+    {
+      "gz_id": 9900785,
+      "name": "Timborbamba",
+      "modern_name": "Timborbamba",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Trujillo",
+      "colonial_partido": "Chachapoyas",
+      "categoria": "Rural",
+      "coords": [
+        -5.735,
+        -78.45
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "'Descripción corográfica de la provincia de Chachapoyas', en: Mercurio Peruano, tomo V (no.165-166) (1792)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Barranca de Los Loros-Argentina": [],
+  "Santa Elena-Ecuador_3": [],
+  "Tolhuin-Argentina": [
+    {
+      "name": "Tolhuin",
+      "other_names": [],
+      "coords": [
+        -54.511348,
+        -67.195224
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "Tierra del Fuego, Antártida e Islas del Atlántico Sur",
+      "admin_code": "940021",
+      "gl_category": "MU",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "Guaraciña-Chile": [
+    {
+      "gz_id": 6001502,
+      "name": "Guaraciña",
+      "modern_name": "Guaraciña",
+      "variants": [],
+      "country_iso3": "CHL",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Arequipa",
+      "colonial_partido": "Tarapaca",
+      "categoria": "Poblacion",
+      "coords": [
+        -19.95,
+        -69.539
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Paria Oruro-Bolivia": [],
+  "Cunchibamba-Ecuador": [],
+  "Santa Lucia Yaritagua-Venezuela": [
+    {
+      "gz_id": 4000035,
+      "name": "Santa Lucia Yaritagua",
+      "modern_name": "Santa Lucia Yaritagua",
+      "variants": [],
+      "country_iso3": "VEN",
+      "colonial_audiencia": "VEN",
+      "colonial_region": "VEN",
+      "colonial_province": "Caracas",
+      "colonial_partido": "Barquisimeto",
+      "categoria": "Poblacion",
+      "coords": [
+        10.08,
+        -69.126
+      ],
+      "start_year": 1701,
+      "end_year": 9999,
+      "observations": [
+        {
+          "it_id": 1858,
+          "year": 1782,
+          "fecha_dato": "1782",
+          "start_year": 1782,
+          "end_year": 1782,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 2745,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 965,
+          "indios": 230,
+          "mestizos": 0,
+          "castas": 1550,
+          "esclavos": 251,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1873,
+          "year": 1782,
+          "fecha_dato": "1782",
+          "start_year": 1781,
+          "end_year": 1783,
+          "alcance_tipo": "Nucleo",
+          "dato_tipo": "original",
+          "total": 2745,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": 475,
+          "casas_doc": null,
+          "blancos": 1,
+          "indios": 0,
+          "mestizos": 0,
+          "castas": 0,
+          "esclavos": 0,
+          "fuente_id": "Caracas,959",
+          "source_citation": "'Relación y testimonio íntegro de la visita general de este obispado de Caracas y Venezuela', en: Archivo General de Indias, Caracas,959 (1771)"
+        },
+        {
+          "it_id": 1859,
+          "year": 1802,
+          "fecha_dato": "1802",
+          "start_year": 1802,
+          "end_year": 1802,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 1899,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 408,
+          "indios": 133,
+          "mestizos": 0,
+          "castas": 1358,
+          "esclavos": 167,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1860,
+          "year": 1803,
+          "fecha_dato": "1803",
+          "start_year": 1803,
+          "end_year": 1803,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 2158,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 432,
+          "indios": 128,
+          "mestizos": 0,
+          "castas": 1598,
+          "esclavos": 195,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1861,
+          "year": 1804,
+          "fecha_dato": "1804",
+          "start_year": 1804,
+          "end_year": 1804,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 2165,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 432,
+          "indios": 128,
+          "mestizos": 0,
+          "castas": 1605,
+          "esclavos": 197,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1862,
+          "year": 1805,
+          "fecha_dato": "1805",
+          "start_year": 1805,
+          "end_year": 1805,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 2923,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 639,
+          "indios": 143,
+          "mestizos": 0,
+          "castas": 2141,
+          "esclavos": 366,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1863,
+          "year": 1807,
+          "fecha_dato": "1807",
+          "start_year": 1807,
+          "end_year": 1807,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 4598,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 877,
+          "indios": 125,
+          "mestizos": 0,
+          "castas": 3596,
+          "esclavos": 275,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1864,
+          "year": 1808,
+          "fecha_dato": "1808",
+          "start_year": 1808,
+          "end_year": 1808,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 5360,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1031,
+          "indios": 130,
+          "mestizos": 0,
+          "castas": 4199,
+          "esclavos": 249,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1865,
+          "year": 1809,
+          "fecha_dato": "1809",
+          "start_year": 1809,
+          "end_year": 1809,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 5360,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1031,
+          "indios": 130,
+          "mestizos": 0,
+          "castas": 4199,
+          "esclavos": 249,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1866,
+          "year": 1810,
+          "fecha_dato": "1810",
+          "start_year": 1810,
+          "end_year": 1810,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 5362,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1033,
+          "indios": 130,
+          "mestizos": 0,
+          "castas": 4199,
+          "esclavos": 249,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1867,
+          "year": 1811,
+          "fecha_dato": "1811",
+          "start_year": 1811,
+          "end_year": 1811,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 5126,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1020,
+          "indios": 118,
+          "mestizos": 0,
+          "castas": 3988,
+          "esclavos": 223,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1868,
+          "year": 1812,
+          "fecha_dato": "1812",
+          "start_year": 1812,
+          "end_year": 1812,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 4627,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 942,
+          "indios": 99,
+          "mestizos": 0,
+          "castas": 3586,
+          "esclavos": 211,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1869,
+          "year": 1816,
+          "fecha_dato": "1816",
+          "start_year": 1816,
+          "end_year": 1816,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 5705,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 597,
+          "indios": 63,
+          "mestizos": 0,
+          "castas": 5045,
+          "esclavos": 125,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1870,
+          "year": 1817,
+          "fecha_dato": "1817",
+          "start_year": 1817,
+          "end_year": 1817,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 5409,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1028,
+          "indios": 140,
+          "mestizos": 0,
+          "castas": 4241,
+          "esclavos": 243,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1871,
+          "year": 1818,
+          "fecha_dato": "1818",
+          "start_year": 1818,
+          "end_year": 1818,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 5579,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1119,
+          "indios": 222,
+          "mestizos": 0,
+          "castas": 4238,
+          "esclavos": 237,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        },
+        {
+          "it_id": 1872,
+          "year": 1820,
+          "fecha_dato": "1820",
+          "start_year": 1820,
+          "end_year": 1820,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 5776,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 1455,
+          "indios": 183,
+          "mestizos": 0,
+          "castas": 4138,
+          "esclavos": 251,
+          "fuente_id": "lombardi2",
+          "source_citation": "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html"
+        }
+      ],
+      "sources": [
+        "John Lombardi, People and Places in Colonial VenezuelanBloomington 1976)",
+        "John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_parish00.html",
+        "'Relación y testimonio íntegro de la visita general de este obispado de Caracas y Venezuela', en: Archivo General de Indias, Caracas,959 (1771)"
+      ],
+      "has_demographic_observations": true,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Oliveros-Argentina": [
+    {
+      "name": "Oliveros",
+      "other_names": [],
+      "coords": [
+        -32.573928,
+        -60.854749
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "Santa Fe",
+      "admin_code": "822917",
+      "gl_category": "CO",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "Ojo de Agua-Argentina": [
+    {
+      "gz_id": 9000534,
+      "name": "Ojo de Agua",
+      "modern_name": "Ojo de Agua",
+      "variants": [],
+      "country_iso3": "ARG",
+      "colonial_audiencia": "RPL",
+      "colonial_region": "RPL",
+      "colonial_province": "Tucuman",
+      "colonial_partido": "Estero",
+      "categoria": "Poblacion",
+      "coords": [
+        -29.501,
+        -63.694
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Antonio de Alcedo, Diccionario geográfico-histórico de las Indias Occidentales o América (Madrid 1786-1789)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "Villa Ojo de Agua",
+      "other_names": [],
+      "coords": [
+        -29.502666,
+        -63.694815
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "Santiago del Estero",
+      "admin_code": "860140",
+      "gl_category": "M3",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "Colonia Santa Fe-Chile": [],
+  "Gancedo-Argentina": [
+    {
+      "name": "Gancedo",
+      "other_names": [],
+      "coords": [
+        -27.490835,
+        -61.676489
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "Chaco",
+      "admin_code": "220091",
+      "gl_category": "M3",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "San José de la Dormida-Argentina": [
+    {
+      "gz_id": 9000280,
+      "name": "La Dormida",
+      "modern_name": "La Dormida",
+      "variants": [],
+      "country_iso3": "ARG",
+      "colonial_audiencia": "RPL",
+      "colonial_region": "RPL",
+      "colonial_province": "Tucuman",
+      "colonial_partido": "Cordoba",
+      "categoria": "Poblacion",
+      "coords": [
+        -30.354,
+        -63.949
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Concolorcorvo, Lazarillo de ciegos caminantes (Alicante 2001)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "San José de la Dormida",
+      "other_names": [],
+      "coords": [
+        -30.356266,
+        -63.950418
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "Córdoba",
+      "admin_code": "141561",
+      "gl_category": "MU",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "Colón (col_putumayo)-Colombia": [
+    {
+      "name": "Colón",
+      "other_names": [],
+      "coords": [
+        1.190133,
+        -76.972566
+      ],
+      "coord_source": "DANE_DIVIPOLA",
+      "country": "Colombia",
+      "admin1": "Putumayo",
+      "admin_code": "86219",
+      "population_scope": "city_proper",
+      "is_capital": false,
+      "urban_cabecera_population": {
+        "1985": 1575,
+        "1990": 1629,
+        "1993": 1645,
+        "1995": 1792,
+        "2000": 2398,
+        "2005": 2846,
+        "2010": 3023,
+        "2015": 3219,
+        "2018": 3426,
+        "2020": 3462,
+        "2023": 3619,
+        "2025": 3706
+      },
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "_file": "raw_setts_colombia.json"
+    }
+  ],
+  "Cotos-Peru": [
+    {
+      "gz_id": 9900794,
+      "name": "Cotos",
+      "modern_name": "Cotos",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Trujillo",
+      "colonial_partido": "Huamachuco",
+      "categoria": "Poblacion",
+      "coords": [
+        -8.203,
+        -78.3
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Baltasar Jaime Martínez Compañón y Bujanda, 'Carta topográfica de la Provincia de Huamachuco', en: Trujillo del Perú InMapa, 1782-1785)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Colonia Benítez-Argentina": [
+    {
+      "name": "Colonia Benítez",
+      "other_names": [],
+      "coords": [
+        -27.329492,
+        -58.95015
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "Chaco",
+      "admin_code": "220364",
+      "gl_category": "M3",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "Ciénaga Honda-Colombia": [
+    {
+      "gz_id": 5600698,
+      "name": "La Dominga",
+      "modern_name": "La Dominga",
+      "variants": [],
+      "country_iso3": "COL",
+      "colonial_audiencia": "QUI",
+      "colonial_region": "QUI",
+      "colonial_province": "Popayan",
+      "colonial_partido": "Caloto",
+      "categoria": "Poblacion",
+      "coords": [
+        3.096,
+        -76.4
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "'Relaciones geográficas de la Nueva Granada (siglos XVI a XIX)', en: Cespedesia 45-46, suplemento 4 (Cali 1983)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Bella Unión-Peru": [
+    {
+      "name": "Bella Unión",
+      "other_names": [],
+      "coords": [
+        -15.450556,
+        -74.658333
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "Arequipa",
+      "admin2": "CARAVELI",
+      "admin_code": "040305",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 34,
+        "2017": 91,
+        "2025": 87
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Moralba-Colombia": [],
+  "General Levalle-Argentina": [
+    {
+      "name": "General Levalle",
+      "other_names": [],
+      "coords": [
+        -34.007232,
+        -63.923387
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "Córdoba",
+      "admin_code": "140616",
+      "gl_category": "MU",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "Naranjillo-Peru": [
+    {
+      "name": "Awajun",
+      "other_names": [
+        "Bajo Naranjillo"
+      ],
+      "coords": [
+        -5.816111,
+        -77.382778
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "San Martín",
+      "admin2": "RIOJA",
+      "admin_code": "220802",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 31,
+        "2017": 38,
+        "2025": 52
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Engativa-Colombia": [
+    {
+      "gz_id": 5000349,
+      "name": "Fontibon",
+      "modern_name": "Fontibon",
+      "variants": [
+        "Hontibon|"
+      ],
+      "country_iso3": "COL",
+      "colonial_audiencia": "NGR",
+      "colonial_region": "NGR",
+      "colonial_province": "Santa Fe",
+      "colonial_partido": "Bogota",
+      "categoria": "Pueblo",
+      "coords": [
+        4.673,
+        -74.145
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [
+        {
+          "it_id": 4533,
+          "year": 1761,
+          "fecha_dato": "1761",
+          "start_year": 1755,
+          "end_year": 1761,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 945,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": 137,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 0,
+          "indios": 827,
+          "mestizos": 0,
+          "castas": 0,
+          "esclavos": 0,
+          "fuente_id": "visita-ariostegui",
+          "source_citation": "'Santafé: informe visita a corregimientos.', en: Archivo General de la Nación (Colombia), VISITAS-C/MARCA:SC.62,8,D.8 (1761)"
+        },
+        {
+          "it_id": 4532,
+          "year": 1779,
+          "fecha_dato": "1779",
+          "start_year": 1778,
+          "end_year": 1779,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "secundario",
+          "total": 1061,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 0,
+          "indios": 645,
+          "mestizos": 0,
+          "castas": 0,
+          "esclavos": 0,
+          "fuente_id": "herrera1",
+          "source_citation": "Marta Herrera Ángel, Poder local, población y ordenamiento territorial en la Nueva Granada, siglo XVIIInBogotá 1996)"
+        },
+        {
+          "it_id": 4531,
+          "year": 1783,
+          "fecha_dato": "1783",
+          "start_year": 1783,
+          "end_year": 1783,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 1603,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 0,
+          "indios": 0,
+          "mestizos": 0,
+          "castas": 0,
+          "esclavos": 0,
+          "fuente_id": "convocatoria",
+          "source_citation": "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+        }
+      ],
+      "sources": [
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)",
+        "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)",
+        "Marta Herrera Ángel, Poder local, población y ordenamiento territorial en la Nueva Granada, siglo XVIIInBogotá 1996)",
+        "'Santafé: informe visita a corregimientos.', en: Archivo General de la Nación (Colombia), VISITAS-C/MARCA:SC.62,8,D.8 (1761)"
+      ],
+      "has_demographic_observations": true,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "gz_id": 5000350,
+      "name": "Engativa",
+      "modern_name": "Engativa",
+      "variants": [],
+      "country_iso3": "COL",
+      "colonial_audiencia": "NGR",
+      "colonial_region": "NGR",
+      "colonial_province": "Santa Fe",
+      "colonial_partido": "Bogota",
+      "categoria": "Pueblo",
+      "coords": [
+        4.688,
+        -74.145
+      ],
+      "start_year": 1778,
+      "end_year": 1780,
+      "observations": [
+        {
+          "it_id": 4535,
+          "year": 1761,
+          "fecha_dato": "1761",
+          "start_year": 1755,
+          "end_year": 1761,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "original",
+          "total": 422,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": 40,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 0,
+          "indios": 296,
+          "mestizos": 0,
+          "castas": 0,
+          "esclavos": 0,
+          "fuente_id": "visita-ariostegui",
+          "source_citation": "'Santafé: informe visita a corregimientos.', en: Archivo General de la Nación (Colombia), VISITAS-C/MARCA:SC.62,8,D.8 (1761)"
+        },
+        {
+          "it_id": 4534,
+          "year": 1779,
+          "fecha_dato": "1779",
+          "start_year": 1778,
+          "end_year": 1779,
+          "alcance_tipo": "Curato",
+          "dato_tipo": "secundario",
+          "total": 453,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 0,
+          "indios": 345,
+          "mestizos": 0,
+          "castas": 0,
+          "esclavos": 0,
+          "fuente_id": "herrera1",
+          "source_citation": "Marta Herrera Ángel, Poder local, población y ordenamiento territorial en la Nueva Granada, siglo XVIIInBogotá 1996)"
+        }
+      ],
+      "sources": [
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)",
+        "Marta Herrera Ángel, Poder local, población y ordenamiento territorial en la Nueva Granada, siglo XVIIInBogotá 1996)",
+        "'Santafé: informe visita a corregimientos.', en: Archivo General de la Nación (Colombia), VISITAS-C/MARCA:SC.62,8,D.8 (1761)"
+      ],
+      "has_demographic_observations": true,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "La Jagua-Colombia": [
+    {
+      "gz_id": 5000620,
+      "name": "Jagua",
+      "modern_name": "Jagua",
+      "variants": [],
+      "country_iso3": "COL",
+      "colonial_audiencia": "NGR",
+      "colonial_region": "NGR",
+      "colonial_province": "Neiva",
+      "colonial_partido": "Timana",
+      "categoria": "Poblacion",
+      "coords": [
+        2.168,
+        -75.678
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [
+        {
+          "it_id": 4763,
+          "year": 1778,
+          "fecha_dato": "1778",
+          "start_year": 1778,
+          "end_year": 1778,
+          "alcance_tipo": "",
+          "dato_tipo": "original",
+          "total": 1032,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 226,
+          "indios": 244,
+          "mestizos": 0,
+          "castas": 562,
+          "esclavos": 83,
+          "fuente_id": "convocatoria",
+          "source_citation": "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+        },
+        {
+          "it_id": 4764,
+          "year": 1779,
+          "fecha_dato": "1779",
+          "start_year": 1779,
+          "end_year": 1779,
+          "alcance_tipo": "",
+          "dato_tipo": "original",
+          "total": 1204,
+          "total_doc": null,
+          "vecinos_doc": null,
+          "tributarios_doc": null,
+          "familias_doc": null,
+          "casas_doc": null,
+          "blancos": 305,
+          "indios": 248,
+          "mestizos": 0,
+          "castas": 651,
+          "esclavos": 99,
+          "fuente_id": "convocatoria",
+          "source_citation": "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+        }
+      ],
+      "sources": [
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)",
+        "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+      ],
+      "has_demographic_observations": true,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Chavin-Peru": [
+    {
+      "gz_id": 6000652,
+      "name": "Chavin",
+      "modern_name": "Chavin",
+      "variants": [],
+      "country_iso3": "PER",
+      "colonial_audiencia": "PER",
+      "colonial_region": "PER",
+      "colonial_province": "Huancavelica",
+      "colonial_partido": "Castrovirreina",
+      "categoria": "Pueblo",
+      "coords": [
+        -13.078,
+        -75.913
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "Chavin",
+      "other_names": [
+        "Chavín"
+      ],
+      "coords": [
+        -13.076389,
+        -75.913056
+      ],
+      "coord_source": "INEI_UBIGEO",
+      "country": "Peru",
+      "admin1": "Ica",
+      "admin2": "CHINCHA",
+      "admin_code": "110203",
+      "population_scope": "city_proper",
+      "urban_population": {
+        "2007": 46,
+        "2017": 6,
+        "2025": 20
+      },
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "_file": "raw_setts_peru.json"
+    }
+  ],
+  "Colimba-Colombia": [
+    {
+      "gz_id": 5600550,
+      "name": "Colimba",
+      "modern_name": "Colimba",
+      "variants": [],
+      "country_iso3": "COL",
+      "colonial_audiencia": "QUI",
+      "colonial_region": "QUI",
+      "colonial_province": "Popayan",
+      "colonial_partido": "Pastos",
+      "categoria": "Pueblo",
+      "coords": [
+        1.01,
+        -77.76
+      ],
+      "start_year": 1111,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    }
+  ],
+  "Castro Barros-Argentina": [
+    {
+      "name": "Castro Barros",
+      "other_names": [],
+      "coords": [
+        -30.580002,
+        -65.727412
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "La Rioja",
+      "admin_code": "460021",
+      "gl_category": "MU",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "General Galarza-Argentina": [
+    {
+      "name": "General Galarza",
+      "other_names": [],
+      "coords": [
+        -32.720396,
+        -59.395875
+      ],
+      "coord_source": "IGN_INDEC_Georef",
+      "country": "Argentina",
+      "admin1": "Entre Ríos",
+      "admin_code": "300168",
+      "gl_category": "MU",
+      "population_scope": "city_proper",
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "_file": "raw_setts_argentina.json"
+    }
+  ],
+  "Matanza-Colombia": [
+    {
+      "gz_id": 5000277,
+      "name": "La Matanza",
+      "modern_name": "La Matanza",
+      "variants": [],
+      "country_iso3": "COL",
+      "colonial_audiencia": "NGR",
+      "colonial_region": "NGR",
+      "colonial_province": "Pamplona",
+      "colonial_partido": "Vetas-Pamplona",
+      "categoria": "Poblacion",
+      "coords": [
+        7.323,
+        -73.016
+      ],
+      "start_year": 1748,
+      "end_year": 9999,
+      "observations": [],
+      "sources": [
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "has_demographic_observations": false,
+      "_file": "hgis_indias_colonial_raw.json"
+    },
+    {
+      "name": "Matanza",
+      "other_names": [],
+      "coords": [
+        7.323175,
+        -73.015566
+      ],
+      "coord_source": "DANE_DIVIPOLA",
+      "country": "Colombia",
+      "admin1": "Santander",
+      "admin_code": "68444",
+      "population_scope": "city_proper",
+      "is_capital": false,
+      "urban_cabecera_population": {
+        "1985": 1078,
+        "1990": 1186,
+        "1993": 1231,
+        "1995": 1232,
+        "2000": 1277,
+        "2005": 1316,
+        "2010": 1375,
+        "2015": 1362,
+        "2018": 1445,
+        "2020": 1570,
+        "2023": 1702,
+        "2025": 1781
+      },
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "_file": "raw_setts_colombia.json"
+    }
+  ]
+}

@@ -1,0 +1,1201 @@
+{
+  "batch_index": 2,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        20.05417,
+        -99.34167
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "651.1.1",
+          "name": "Tollan-Xicocotitlan"
+        }
+      ],
+      "existing_meta_index": 4491,
+      "existing_meta_name": "Tollan-Xicocotitlan",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "San Jose Tula-Mexico",
+      "known_aliases": [
+        "San Jose Tula",
+        "san jose tula"
+      ],
+      "latest_year": 1821,
+      "max_pop": 10820,
+      "name": "San Jose Tula",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1700,
+        1790,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.006,
+        -79.485
+      ],
+      "country": "Panama",
+      "earliest_year": 1522,
+      "existing_historical_names": [
+        {
+          "date": "1975.1.1",
+          "name": "Panama City"
+        }
+      ],
+      "existing_meta_index": 3406,
+      "existing_meta_name": "Panama City",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Panamá Viejo-Panama",
+      "known_aliases": [
+        "Panamá Viejo",
+        "panamá viejo"
+      ],
+      "latest_year": 1646,
+      "max_pop": 10800,
+      "name": "Panamá Viejo",
+      "reason": "under_covered_history",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1522,
+        1550,
+        1575,
+        1607,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.754,
+        -94.758
+      ],
+      "country": "Mexico",
+      "earliest_year": -1400,
+      "existing_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "San Lorenzo Tenochtitlán"
+        }
+      ],
+      "existing_meta_index": 3924,
+      "existing_meta_name": "San Lorenzo Tenochtitlán",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "San Lorenzo Tenochtitlan Site-Mexico",
+      "known_aliases": [
+        "San Lorenzo Tenochtitlan Site",
+        "san lorenzo tenochtitlan site"
+      ],
+      "latest_year": -600,
+      "max_pop": 10800,
+      "name": "San Lorenzo Tenochtitlan Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -1400,
+        -1200,
+        -1000,
+        -900,
+        -600
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.68296,
+        -99.11818
+      ],
+      "country": "Mexico",
+      "earliest_year": 1778,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Tlaltizapán"
+        }
+      ],
+      "existing_meta_index": 4481,
+      "existing_meta_name": "Tlaltizapán",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Tlaltizapán-Mexico",
+      "known_aliases": [
+        "Tlaltizapán",
+        "tlaltizapán",
+        "unidad habitacional número 1 emiliano zapata",
+        "tlaltizapan",
+        "Unidad Habitacional Número 1 Emiliano Zapata"
+      ],
+      "latest_year": 2020,
+      "max_pop": 10779,
+      "name": "Tlaltizapán",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1778,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.33529,
+        -98.01245
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1990.3.12",
+          "name": "Santiago Juxtlahuaca"
+        }
+      ],
+      "existing_meta_index": 2056,
+      "existing_meta_name": "Santiago Juxtlahuaca",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Santiago Juxtlahuaca-Mexico",
+      "known_aliases": [
+        "Santiago Juxtlahuaca",
+        "santiago juxtlahuaca"
+      ],
+      "latest_year": 2020,
+      "max_pop": 10611,
+      "name": "Santiago Juxtlahuaca",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.05417,
+        -99.34167
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [
+        {
+          "date": "651.1.1",
+          "name": "Tollan-Xicocotitlan"
+        }
+      ],
+      "existing_meta_index": 4491,
+      "existing_meta_name": "Tollan-Xicocotitlan",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Tula-Mexico_2",
+      "known_aliases": [
+        "Tula",
+        "tula"
+      ],
+      "latest_year": 1778,
+      "max_pop": 10210,
+      "name": "Tula",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646,
+        1778
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.127,
+        -61.842
+      ],
+      "country": "Antigua and Barbuda",
+      "earliest_year": 1635,
+      "existing_historical_names": [
+        {
+          "date": "1632.1.1",
+          "name": "Saint Johns"
+        }
+      ],
+      "existing_meta_index": 3862,
+      "existing_meta_name": "Saint John's",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "St. John's Antigua-Antigua and Barbuda",
+      "known_aliases": [
+        "St. John's Antigua",
+        "st. john's antigua"
+      ],
+      "latest_year": 1891,
+      "max_pop": 9738,
+      "name": "St. John's Antigua",
+      "reason": "under_covered_history",
+      "region": "colonial_caribbean_plantation",
+      "sample_years": [
+        1635,
+        1650,
+        1720,
+        1774,
+        1815,
+        1844,
+        1871,
+        1891
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.44257,
+        -96.40876
+      ],
+      "country": "Mexico",
+      "earliest_year": -600,
+      "existing_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Zempoallan"
+        },
+        {
+          "date": "1250.1.1",
+          "name": "Cempohuallan"
+        },
+        {
+          "date": "1519.5.18",
+          "name": "Zempoala"
+        }
+      ],
+      "existing_meta_index": 878,
+      "existing_meta_name": "Zempoala",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Zempoala-Mexico",
+      "known_aliases": [
+        "Zempoala",
+        "zempoala"
+      ],
+      "latest_year": 2020,
+      "max_pop": 9668,
+      "name": "Zempoala",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        -600,
+        1600,
+        1930,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.99988,
+        -61.71451
+      ],
+      "country": "Guadeloupe",
+      "earliest_year": 1644,
+      "existing_historical_names": [
+        {
+          "date": "1643.1.1",
+          "name": "Basse-Terre"
+        }
+      ],
+      "existing_meta_index": 516,
+      "existing_meta_name": "Basse-Terre",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Basse-Terre Guadeloupe-Guadeloupe",
+      "known_aliases": [
+        "Basse-Terre Guadeloupe",
+        "basse-terre guadeloupe"
+      ],
+      "latest_year": 1894,
+      "max_pop": 9480,
+      "name": "Basse-Terre Guadeloupe",
+      "reason": "under_covered_history",
+      "region": "colonial_caribbean_plantation",
+      "sample_years": [
+        1644,
+        1650,
+        1700,
+        1770,
+        1827,
+        1853,
+        1894
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.872,
+        -90.663
+      ],
+      "country": "Guatemala",
+      "earliest_year": 1300,
+      "existing_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Chuwa Nima'ab'äj"
+        }
+      ],
+      "existing_meta_index": 2948,
+      "existing_meta_name": "Mixco Viejo",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Mixco Viejo Jilotepeque-Guatemala",
+      "known_aliases": [
+        "Mixco Viejo Jilotepeque",
+        "mixco viejo jilotepeque"
+      ],
+      "latest_year": 1524,
+      "max_pop": 9120,
+      "name": "Mixco Viejo Jilotepeque",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        1300,
+        1450,
+        1524
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.927,
+        -96.36
+      ],
+      "country": "Mexico",
+      "earliest_year": 200,
+      "existing_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Lyobaa"
+        }
+      ],
+      "existing_meta_index": 2945,
+      "existing_meta_name": "Mitla",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Mitla Early Settlement-Mexico",
+      "known_aliases": [
+        "Mitla Early Settlement",
+        "mitla early settlement"
+      ],
+      "latest_year": 1200,
+      "max_pop": 8900,
+      "name": "Mitla Early Settlement",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        200,
+        650,
+        1000,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.31373,
+        -91.51157
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [
+        {
+          "date": "401.1.1",
+          "name": "Zaculeu"
+        }
+      ],
+      "existing_meta_index": 4912,
+      "existing_meta_name": "Zaculeu",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Zaculeu-Guatemala_2",
+      "known_aliases": [
+        "Zaculeu",
+        "zaculeu"
+      ],
+      "latest_year": 1524,
+      "max_pop": 8815,
+      "name": "Zaculeu",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        300,
+        950,
+        1524
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.28064,
+        -97.33996
+      ],
+      "country": "Mexico",
+      "earliest_year": 1250,
+      "existing_historical_names": [
+        {
+          "date": "-99.1.1",
+          "name": "Tilantongo"
+        }
+      ],
+      "existing_meta_index": 4461,
+      "existing_meta_name": "Tilantongo",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Tilantongo-Mexico",
+      "known_aliases": [
+        "Tilantongo",
+        "tilantongo"
+      ],
+      "latest_year": 1646,
+      "max_pop": 8550,
+      "name": "Tilantongo",
+      "reason": "under_covered_history",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1250,
+        1500,
+        1577,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.645,
+        -91.736
+      ],
+      "country": "Guatemala",
+      "earliest_year": -650,
+      "existing_historical_names": [
+        {
+          "date": "-999.1.1",
+          "name": "Takalik Abaj"
+        }
+      ],
+      "existing_meta_index": 4315,
+      "existing_meta_name": "Takalik Abaj",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Takalik Abaj-Guatemala",
+      "known_aliases": [
+        "Takalik Abaj",
+        "takalik abaj"
+      ],
+      "latest_year": 1200,
+      "max_pop": 7950,
+      "name": "Takalik Abaj",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -650,
+        -200,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.467,
+        -95.448
+      ],
+      "country": "Mexico",
+      "earliest_year": -800,
+      "existing_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Tres Zapotes"
+        }
+      ],
+      "existing_meta_index": 4529,
+      "existing_meta_name": "Tres Zapotes",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Tres Zapotes Site-Mexico",
+      "known_aliases": [
+        "Tres Zapotes Site",
+        "tres zapotes site"
+      ],
+      "latest_year": 800,
+      "max_pop": 7850,
+      "name": "Tres Zapotes Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -800,
+        -400,
+        -100,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.44778,
+        -97.32
+      ],
+      "country": "Mexico",
+      "earliest_year": 1350,
+      "existing_historical_names": [
+        {
+          "date": "1201.1.1",
+          "name": "Papantla"
+        }
+      ],
+      "existing_meta_index": 3415,
+      "existing_meta_name": "Papantla",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Papantla-Mexico",
+      "known_aliases": [
+        "Papantla",
+        "papantla"
+      ],
+      "latest_year": 1646,
+      "max_pop": 7550,
+      "name": "Papantla",
+      "reason": "under_covered_history",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1350,
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.394,
+        -97.606
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Huamelulpan"
+        }
+      ],
+      "existing_meta_index": 1838,
+      "existing_meta_name": "Huamelulpan",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Huamelulpan Site-Mexico",
+      "known_aliases": [
+        "Huamelulpan Site",
+        "huamelulpan site"
+      ],
+      "latest_year": 800,
+      "max_pop": 5400,
+      "name": "Huamelulpan Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -300,
+        100,
+        450,
+        800
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.79242,
+        -98.24247
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1001.1.1",
+          "name": "Xochistlahuaca"
+        }
+      ],
+      "existing_meta_index": 4856,
+      "existing_meta_name": "Xochistlahuaca",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Xochistlahuaca-Mexico",
+      "known_aliases": [
+        "Xochistlahuaca",
+        "xochistlahuaca",
+        "cozoyoapán",
+        "cozoyoapan",
+        "Cozoyoapán"
+      ],
+      "latest_year": 2020,
+      "max_pop": 4923,
+      "name": "Xochistlahuaca",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.05539,
+        -89.43088
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [
+        {
+          "date": "1442.1.1",
+          "name": "Topoxte"
+        }
+      ],
+      "existing_meta_index": 4498,
+      "existing_meta_name": "Topoxte",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Topoxté-Guatemala",
+      "known_aliases": [
+        "Topoxté",
+        "topoxté",
+        "topoxte",
+        "Topoxte"
+      ],
+      "latest_year": 1400,
+      "max_pop": 4779,
+      "name": "Topoxté",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        300,
+        1200,
+        1400
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.8962,
+        -62.8498
+      ],
+      "country": "Saint Barthelemy",
+      "earliest_year": 1788,
+      "existing_historical_names": [
+        {
+          "date": "1648.1.1",
+          "name": "Le Carénage"
+        }
+      ],
+      "existing_meta_index": 1662,
+      "existing_meta_name": "Le Carénage",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Gustavia-Saint Barthelemy",
+      "known_aliases": [
+        "Gustavia",
+        "gustavia",
+        "saint-barthélemy centre",
+        "Saint-Barthélemy Centre"
+      ],
+      "latest_year": 2022,
+      "max_pop": 4200,
+      "name": "Gustavia",
+      "reason": "under_covered_history",
+      "region": "lesser_antilles_bahamas_bermuda",
+      "sample_years": [
+        1788,
+        1878,
+        1982,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        14.544,
+        -92.049
+      ],
+      "country": "Guatemala",
+      "earliest_year": -400,
+      "existing_historical_names": [
+        {
+          "date": "-1199.1.1",
+          "name": "Ujuxte"
+        }
+      ],
+      "existing_meta_index": 4609,
+      "existing_meta_name": "Ujuxte",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "El Ujuxte Site-Guatemala",
+      "known_aliases": [
+        "El Ujuxte Site",
+        "el ujuxte site"
+      ],
+      "latest_year": 50,
+      "max_pop": 3940,
+      "name": "El Ujuxte Site",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -400,
+        -150,
+        50
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.143,
+        -62.622
+      ],
+      "country": "Saint Kitts and Nevis",
+      "earliest_year": 1630,
+      "existing_historical_names": [
+        {
+          "date": "1630.1.1",
+          "name": "Charlestown"
+        }
+      ],
+      "existing_meta_index": 916,
+      "existing_meta_name": "Charlestown",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Charlestown Nevis-Saint Kitts and Nevis",
+      "known_aliases": [
+        "Charlestown Nevis",
+        "charlestown nevis"
+      ],
+      "latest_year": 1891,
+      "max_pop": 3420,
+      "name": "Charlestown Nevis",
+      "reason": "under_covered_history",
+      "region": "colonial_caribbean_plantation",
+      "sample_years": [
+        1630,
+        1642,
+        1650,
+        1720,
+        1780,
+        1844,
+        1891
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.22589,
+        -89.64792
+      ],
+      "country": "Guatemala",
+      "earliest_year": -2000,
+      "existing_historical_names": [
+        {
+          "date": "-800.1.1",
+          "name": "Yax Mutal"
+        },
+        {
+          "date": "900.1.1",
+          "name": "Tikal"
+        }
+      ],
+      "existing_meta_index": 4457,
+      "existing_meta_name": "Tikal",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "CHIKIN TIKAL-Guatemala",
+      "known_aliases": [
+        "CHIKIN TIKAL",
+        "chikin tikal"
+      ],
+      "latest_year": 1200,
+      "max_pop": 3278,
+      "name": "CHIKIN TIKAL",
+      "reason": "under_covered_history",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -2000,
+        -1500,
+        -500,
+        300,
+        750,
+        950,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.28308,
+        -97.3398
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "-99.1.1",
+          "name": "Tilantongo"
+        }
+      ],
+      "existing_meta_index": 4461,
+      "existing_meta_name": "Tilantongo",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Santiago Tilantongo-Mexico",
+      "known_aliases": [
+        "Santiago Tilantongo",
+        "santiago tilantongo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 3174,
+      "name": "Santiago Tilantongo",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.6825,
+        -99.11944
+      ],
+      "country": "Mexico",
+      "earliest_year": 1548,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Tlaltizapán"
+        }
+      ],
+      "existing_meta_index": 4481,
+      "existing_meta_name": "Tlaltizapán",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "San Miguel Tlaltizapan-Mexico",
+      "known_aliases": [
+        "San Miguel Tlaltizapan",
+        "san miguel tlaltizapan"
+      ],
+      "latest_year": 1570,
+      "max_pop": 3041,
+      "name": "San Miguel Tlaltizapan",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1548,
+        1570
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.272,
+        -97.338
+      ],
+      "country": "Mexico",
+      "earliest_year": -400,
+      "existing_historical_names": [
+        {
+          "date": "-99.1.1",
+          "name": "Tilantongo"
+        }
+      ],
+      "existing_meta_index": 4461,
+      "existing_meta_name": "Tilantongo",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Monte Negro Site-Mexico",
+      "known_aliases": [
+        "Monte Negro Site",
+        "monte negro site"
+      ],
+      "latest_year": 100,
+      "max_pop": 2840,
+      "name": "Monte Negro Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -400,
+        -150,
+        100
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.18345,
+        -97.5312
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1151.1.1",
+          "name": "Tututepec"
+        }
+      ],
+      "existing_meta_index": 4577,
+      "existing_meta_name": "Tututepec",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Santa Ana Tututepec-Mexico",
+      "known_aliases": [
+        "Santa Ana Tututepec",
+        "santa ana tututepec"
+      ],
+      "latest_year": 2020,
+      "max_pop": 2733,
+      "name": "Santa Ana Tututepec",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1808,
+        1980,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.006,
+        -79.485
+      ],
+      "country": "Panama",
+      "earliest_year": 900,
+      "existing_historical_names": [
+        {
+          "date": "1975.1.1",
+          "name": "Panama City"
+        }
+      ],
+      "existing_meta_index": 3406,
+      "existing_meta_name": "Panama City",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Panama Viejo Pre-Columbian-Panama",
+      "known_aliases": [
+        "Panama Viejo Pre-Columbian",
+        "panama viejo pre-columbian"
+      ],
+      "latest_year": 1502,
+      "max_pop": 2480,
+      "name": "Panama Viejo Pre-Columbian",
+      "reason": "under_covered_history",
+      "region": "precolumbian_lower_central_america",
+      "sample_years": [
+        900,
+        1250,
+        1502
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.38865,
+        -91.61342
+      ],
+      "country": "Guatemala",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "401.1.1",
+          "name": "Zaculeu"
+        }
+      ],
+      "existing_meta_index": 4912,
+      "existing_meta_name": "Zaculeu",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "San Sebastian Huehuetenango-Guatemala",
+      "known_aliases": [
+        "San Sebastian Huehuetenango",
+        "san sebastian huehuetenango",
+        "quiajola",
+        "sujal",
+        "puente aguilar",
+        "chichicana",
+        "Quiajola",
+        "Sujal",
+        "Puente Aguilar",
+        "Chichicana"
+      ],
+      "latest_year": 2018,
+      "max_pop": 2444,
+      "name": "San Sebastian Huehuetenango",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1700,
+        1821,
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.44778,
+        -97.32
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1201.1.1",
+          "name": "Papantla"
+        }
+      ],
+      "existing_meta_index": 3415,
+      "existing_meta_name": "Papantla",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Santa Maria Papantla-Mexico",
+      "known_aliases": [
+        "Santa Maria Papantla",
+        "santa maria papantla"
+      ],
+      "latest_year": 1821,
+      "max_pop": 2218,
+      "name": "Santa Maria Papantla",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

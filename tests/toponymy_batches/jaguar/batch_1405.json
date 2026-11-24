@@ -1,0 +1,1084 @@
+{
+  "batch_index": 1405,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        17.78083,
+        -92.84944
+      ],
+      "country": "Mexico",
+      "earliest_year": 1548,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Astapa Zaguatán-Mexico",
+      "known_aliases": [
+        "Astapa Zaguatán",
+        "astapa zaguatán"
+      ],
+      "latest_year": 1646,
+      "max_pop": 288,
+      "name": "Astapa Zaguatán",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.98417,
+        -97.68944
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Miltepec-Mexico",
+      "known_aliases": [
+        "Miltepec",
+        "miltepec"
+      ],
+      "latest_year": 1646,
+      "max_pop": 288,
+      "name": "Miltepec",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        16.70689,
+        -89.5728
+      ],
+      "country": "Guatemala",
+      "earliest_year": -1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Ocote 1-Guatemala",
+      "known_aliases": [
+        "El Ocote 1",
+        "el ocote 1"
+      ],
+      "latest_year": 1200,
+      "max_pop": 288,
+      "name": "El Ocote 1",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.81845,
+        -98.82812
+      ],
+      "country": "Mexico",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM TM-AZ-108-Mexico",
+      "known_aliases": [
+        "BOM TM-AZ-108",
+        "bom tm-az-108"
+      ],
+      "latest_year": 1519,
+      "max_pop": 288,
+      "name": "BOM TM-AZ-108",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1200,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.86985,
+        -71.45551
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 600,
+      "existing_historical_names": [
+        {
+          "date": "1935.1.1",
+          "name": "Monte Cristi"
+        }
+      ],
+      "existing_meta_index": 2614,
+      "existing_meta_name": "Monte Cristi",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Montecristi MC-54-Dominican Republic",
+      "known_aliases": [
+        "Montecristi MC-54",
+        "montecristi mc-54"
+      ],
+      "latest_year": 1492,
+      "max_pop": 288,
+      "name": "Montecristi MC-54",
+      "reason": "under_covered_history",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        600,
+        750,
+        800,
+        950,
+        1000,
+        1200,
+        1492
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.30023,
+        -79.10937
+      ],
+      "country": "Panama",
+      "earliest_year": 2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pedro González-Panama",
+      "known_aliases": [
+        "Pedro González",
+        "pedro gonzález"
+      ],
+      "latest_year": 2023,
+      "max_pop": 287,
+      "name": "Pedro González",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2000,
+        2010,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.13916,
+        -66.58651
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2010,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Anon Raices-Puerto Rico",
+      "known_aliases": [
+        "Anon Raices",
+        "anon raices"
+      ],
+      "latest_year": 2020,
+      "max_pop": 287,
+      "name": "Anon Raices",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2010,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.14778,
+        -96.83556
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Cruz 5-Mexico_2",
+      "known_aliases": [
+        "Santa Cruz",
+        "santa cruz"
+      ],
+      "latest_year": 1821,
+      "max_pop": 287,
+      "name": "Santa Cruz",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.96694,
+        -97.71194
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1990.3.12",
+          "name": "San Simón de Bravo"
+        }
+      ],
+      "existing_meta_index": 4110,
+      "existing_meta_name": "San Simón de Bravo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Simon-Mexico",
+      "known_aliases": [
+        "San Simon",
+        "san simon"
+      ],
+      "latest_year": 1821,
+      "max_pop": 287,
+      "name": "San Simon",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.00111,
+        -97.65333
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Sebastian Tuxtla-Mexico",
+      "known_aliases": [
+        "San Sebastian Tuxtla",
+        "san sebastian tuxtla"
+      ],
+      "latest_year": 1821,
+      "max_pop": 287,
+      "name": "San Sebastian Tuxtla",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        21.00639,
+        -89.17944
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Asuncion Bokoba-Mexico",
+      "known_aliases": [
+        "Asuncion Bokoba",
+        "asuncion bokoba"
+      ],
+      "latest_year": 1821,
+      "max_pop": 287,
+      "name": "Asuncion Bokoba",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.64639,
+        -88.24444
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Andres Dzitnup-Mexico",
+      "known_aliases": [
+        "San Andres Dzitnup",
+        "san andres dzitnup"
+      ],
+      "latest_year": 1821,
+      "max_pop": 287,
+      "name": "San Andres Dzitnup",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.65778,
+        -107.68139
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1760.1.1",
+          "name": "San Andrés"
+        }
+      ],
+      "existing_meta_index": 1747,
+      "existing_meta_name": "San Andrés",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Andres 5-Mexico",
+      "known_aliases": [
+        "San Andres",
+        "san andres",
+        "san andrés",
+        "San Andrés"
+      ],
+      "latest_year": 1760,
+      "max_pop": 287,
+      "name": "San Andres",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1760
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        15.94101,
+        -91.93895
+      ],
+      "country": "Mexico",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Upper Grijalva RV270-Mexico",
+      "known_aliases": [
+        "Upper Grijalva RV270",
+        "upper grijalva rv270"
+      ],
+      "latest_year": 950,
+      "max_pop": 287,
+      "name": "Upper Grijalva RV270",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        600,
+        750,
+        800,
+        950
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.27639,
+        -98.99239
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM CH-AZ-232-Mexico",
+      "known_aliases": [
+        "BOM CH-AZ-232",
+        "bom ch-az-232"
+      ],
+      "latest_year": 1519,
+      "max_pop": 287,
+      "name": "BOM CH-AZ-232",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        850,
+        950,
+        1000,
+        1200,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.54651,
+        -99.04766
+      ],
+      "country": "Mexico",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM CU-AZ-287-Mexico",
+      "known_aliases": [
+        "BOM CU-AZ-287",
+        "bom cu-az-287"
+      ],
+      "latest_year": 1519,
+      "max_pop": 287,
+      "name": "BOM CU-AZ-287",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1200,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.61737,
+        -98.8188
+      ],
+      "country": "Mexico",
+      "earliest_year": 900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM TE-AZ-191-Mexico",
+      "known_aliases": [
+        "BOM TE-AZ-191",
+        "bom te-az-191"
+      ],
+      "latest_year": 1519,
+      "max_pop": 287,
+      "name": "BOM TE-AZ-191",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        900,
+        950,
+        1000,
+        1200,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.18488,
+        -107.99533
+      ],
+      "country": "Mexico",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "MW 94-252-Mexico",
+      "known_aliases": [
+        "MW 94-252",
+        "mw 94-252"
+      ],
+      "latest_year": 1519,
+      "max_pop": 287,
+      "name": "MW 94-252",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1200,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.76422,
+        -96.97451
+      ],
+      "country": "Mexico",
+      "earliest_year": -600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Loma Grande-Mexico_2",
+      "known_aliases": [
+        "Loma Grande",
+        "loma grande"
+      ],
+      "latest_year": 1519,
+      "max_pop": 287,
+      "name": "Loma Grande",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        -600,
+        300,
+        1350,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.04355,
+        -96.67805
+      ],
+      "country": "Mexico",
+      "earliest_year": -600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Loma de la Montura-Mexico",
+      "known_aliases": [
+        "Loma de la Montura",
+        "loma de la montura"
+      ],
+      "latest_year": 1519,
+      "max_pop": 287,
+      "name": "Loma de la Montura",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        -600,
+        300,
+        1350,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        12.01396,
+        -86.19393
+      ],
+      "country": "Nicaragua",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Masaya"
+        },
+        {
+          "date": "1819.3.24",
+          "name": "San Fernando de Masaya"
+        },
+        {
+          "date": "1839.9.2",
+          "name": "Masaya"
+        }
+      ],
+      "existing_meta_index": 579,
+      "existing_meta_name": "Masaya",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Masaya C218-Nicaragua",
+      "known_aliases": [
+        "Masaya C218",
+        "masaya c218"
+      ],
+      "latest_year": 1502,
+      "max_pop": 287,
+      "name": "Masaya C218",
+      "reason": "under_covered_history",
+      "region": "precolumbian_lower_central_america",
+      "sample_years": [
+        -500,
+        1,
+        500,
+        800,
+        1000,
+        1350,
+        1502
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        21.80926,
+        -71.74188
+      ],
+      "country": "Turks and Caicos Islands",
+      "earliest_year": 930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Kendrick-Turks and Caicos Islands",
+      "known_aliases": [
+        "Kendrick",
+        "kendrick"
+      ],
+      "latest_year": 1180,
+      "max_pop": 287,
+      "name": "Kendrick",
+      "reason": "missing_entry",
+      "region": "precolumbian_caribbean_islands",
+      "sample_years": [
+        930,
+        1000,
+        1055,
+        1180
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.12114,
+        -89.1347
+      ],
+      "country": "Belize",
+      "earliest_year": 2010,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Calla Creek-Belize",
+      "known_aliases": [
+        "Calla Creek",
+        "calla creek"
+      ],
+      "latest_year": 2010,
+      "max_pop": 286,
+      "name": "Calla Creek",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2010
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.40538,
+        -67.06719
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ferrer-Puerto Rico",
+      "known_aliases": [
+        "Ferrer",
+        "ferrer"
+      ],
+      "latest_year": 2020,
+      "max_pop": 286,
+      "name": "Ferrer",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.01111,
+        -99.82278
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santiago Texca-Mexico",
+      "known_aliases": [
+        "Santiago Texca",
+        "santiago texca"
+      ],
+      "latest_year": 1821,
+      "max_pop": 286,
+      "name": "Santiago Texca",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.96722,
+        -99.23778
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Lorenzo Chamilpa-Mexico",
+      "known_aliases": [
+        "San Lorenzo Chamilpa",
+        "san lorenzo chamilpa"
+      ],
+      "latest_year": 1821,
+      "max_pop": 286,
+      "name": "San Lorenzo Chamilpa",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.81083,
+        -96.96306
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Cristobal Naranjal-Mexico",
+      "known_aliases": [
+        "San Cristobal Naranjal",
+        "san cristobal naranjal"
+      ],
+      "latest_year": 1821,
+      "max_pop": 286,
+      "name": "San Cristobal Naranjal",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        20.88583,
+        -89.88944
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Pedro Samahil-Mexico",
+      "known_aliases": [
+        "San Pedro Samahil",
+        "san pedro samahil"
+      ],
+      "latest_year": 1821,
+      "max_pop": 286,
+      "name": "San Pedro Samahil",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1600,
+        1646,
+        1700,
+        1742,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        18.9056,
+        -99.92698
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Francisco Coaxuchco-Mexico",
+      "known_aliases": [
+        "San Francisco Coaxuchco",
+        "san francisco coaxuchco"
+      ],
+      "latest_year": 1646,
+      "max_pop": 286,
+      "name": "San Francisco Coaxuchco",
+      "reason": "missing_entry",
+      "region": "conquest_collapse_mesoamerica",
+      "sample_years": [
+        1480,
+        1500,
+        1519,
+        1548,
+        1577,
+        1600,
+        1646
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.93197,
+        -99.2322
+      ],
+      "country": "Mexico",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "BOM ZU-AZ-56-Mexico",
+      "known_aliases": [
+        "BOM ZU-AZ-56",
+        "bom zu-az-56"
+      ],
+      "latest_year": 1519,
+      "max_pop": 286,
+      "name": "BOM ZU-AZ-56",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1200,
+        1350,
+        1492,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 for Operation Viscount Project HANDBOOK.
 
 STRICT HISTORICAL ACCURACY CONTRACT:
-  - ZERO videogame maps (EU4, Vic2, etc.).
+  - ZERO commercial videogame basemaps.
   - ZERO fake HydroBASINS Voronoi blobs in historical eras!
   - ZERO modern nation-state borders (Sykes-Picot, 25E Egypt-Libya, 1906 Sinai, 1923 Lausanne, modern
     Iran/Afghanistan/Iraq/Turkey/Algeria/Libya/Western Sahara Berm) inside pre-modern chapters!
@@ -12,7 +12,7 @@ STRICT HISTORICAL ACCURACY CONTRACT:
       * Harvard CGA DARMC Roman World (closed polygons: 117 CE, 303-324 CE, 500 CE) & Medieval World (632-750, 814, 1000, 1200, 1450, Crusader States)
       * AWMC (Notitia Dignitatum 400 CE, Persian Extent, Alexander's Empire) & Barrington Atlas Map 100
       * Euratlas Georeferenced Historical Vector Data (700, 900, 1000, 1100, 1300, 1500 via Harvard WorldMap)
-      * Coastal-complete `atlas_dejure.naissance` (re-encoded coastal-complete Cliopatria, -3000..1880, ZERO raw coastal-gapped Cliopatria, ZERO aourednik!)
+      * Coastal-complete `atlas_dejure.naissance` (re-encoded coastal-complete Cliopatria, -3000..1880, ZERO raw coastal-gapped Cliopatria or unverified web basemaps)
       * Harvard WorldMap (Fertile Crescent, Sumer, Babylonia, Hittites, Ancient Egypt, Umayyad, Samanid, Ilkhanate)
       * Harvard CGA Prof. Jason Ur Neo-Assyrian Empire & Ramesses II New Kingdom Egypt
       * Harvard Dataverse Oxford MEC Historic Shapefiles (Palestine 1843 & 1896 Vilayets/Sanjaks/Kazas, Syria & Lebanon 1926)

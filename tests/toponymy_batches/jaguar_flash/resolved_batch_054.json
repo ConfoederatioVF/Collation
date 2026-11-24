@@ -1,0 +1,1440 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 54,
+  "count": 30,
+  "errors_remaining": 0,
+  "project": "JAGUAR",
+  "rounds": 2,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        11.46916,
+        -85.81661
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Buenos Aires-Nicaragua",
+      "known_aliases": [
+        "Buenos Aires",
+        "buenos aires"
+      ],
+      "latest_year": 2023,
+      "max_pop": 5870,
+      "name": "Buenos Aires",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Buenos Aires",
+      "historical_names": [
+        {
+          "date": "1995.1.1",
+          "name": "Buenos Aires"
+        }
+      ],
+      "other_names": [
+        "buenos aires"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        10.08679,
+        -84.45005
+      ],
+      "country": "Costa Rica",
+      "earliest_year": 2021,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Isidro 7-Costa Rica",
+      "known_aliases": [
+        "San Isidro",
+        "san isidro"
+      ],
+      "latest_year": 2021,
+      "max_pop": 5869,
+      "name": "San Isidro",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2021
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Isidro",
+      "historical_names": [
+        {
+          "date": "2021.1.1",
+          "name": "San Isidro"
+        }
+      ],
+      "other_names": [
+        "san isidro"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.21222,
+        -65.93956
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Lirios-Puerto Rico",
+      "known_aliases": [
+        "Lirios",
+        "lirios"
+      ],
+      "latest_year": 2020,
+      "max_pop": 5865,
+      "name": "Lirios",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Lirios",
+      "historical_names": [
+        {
+          "date": "2020.1.1",
+          "name": "Lirios"
+        }
+      ],
+      "other_names": [
+        "lirios"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.81263,
+        -88.15316
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Concepción del Sur-Honduras",
+      "known_aliases": [
+        "Concepción del Sur",
+        "concepción del sur"
+      ],
+      "latest_year": 2024,
+      "max_pop": 5862,
+      "name": "Concepción del Sur",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Concepción del Sur",
+      "historical_names": [
+        {
+          "date": "2001.1.1",
+          "name": "Concepción del Sur"
+        }
+      ],
+      "other_names": [
+        "concepción del sur"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.05963,
+        -66.72114
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 1808,
+      "existing_historical_names": [
+        {
+          "date": "1910.1.1",
+          "name": "Peñuelas"
+        }
+      ],
+      "existing_meta_index": 2457,
+      "existing_meta_name": "Peñuelas",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Peñuelas-Puerto Rico",
+      "known_aliases": [
+        "Peñuelas",
+        "peñuelas"
+      ],
+      "latest_year": 2020,
+      "max_pop": 5859,
+      "name": "Peñuelas",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1808,
+        1821,
+        1850,
+        1900,
+        2010,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Peñuelas",
+      "historical_names": [
+        {
+          "date": "1793.8.25",
+          "name": "Peñuelas"
+        }
+      ],
+      "other_names": [
+        "peñuelas"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.06666,
+        -90.41764
+      ],
+      "country": "Guatemala",
+      "earliest_year": -1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Costarrical-Guatemala",
+      "known_aliases": [
+        "Costarrical",
+        "costarrical"
+      ],
+      "latest_year": 1200,
+      "max_pop": 5859,
+      "name": "Costarrical",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Costarrical",
+      "historical_names": [
+        {
+          "date": "-1150.1.1",
+          "name": "Costarrical"
+        }
+      ],
+      "other_names": [
+        "costarrical"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        16.82067,
+        -95.14042
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1990.3.12",
+          "name": "Santo Domingo Petapa"
+        }
+      ],
+      "existing_meta_index": 4202,
+      "existing_meta_name": "Santo Domingo Petapa",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santo Domingo Petapa-Mexico",
+      "known_aliases": [
+        "Santo Domingo Petapa",
+        "santo domingo petapa"
+      ],
+      "latest_year": 2020,
+      "max_pop": 5856,
+      "name": "Santo Domingo Petapa",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Santo Domingo Petapa",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Santo Domingo Petapa"
+        }
+      ],
+      "other_names": [
+        "santo domingo petapa",
+        "Petapa"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.14028,
+        -70.02199
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 2002,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Eugenio María de Hostos-Dominican Republic",
+      "known_aliases": [
+        "Eugenio María de Hostos",
+        "eugenio maría de hostos"
+      ],
+      "latest_year": 2022,
+      "max_pop": 5856,
+      "name": "Eugenio María de Hostos",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2002,
+        2010,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Eugenio María de Hostos",
+      "historical_names": [
+        {
+          "date": "2002.1.1",
+          "name": "Eugenio María de Hostos"
+        }
+      ],
+      "other_names": [
+        "eugenio maría de hostos"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.35179,
+        -91.96624
+      ],
+      "country": "Guatemala",
+      "earliest_year": -1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Horacio-Guatemala",
+      "known_aliases": [
+        "Horacio",
+        "horacio"
+      ],
+      "latest_year": 1200,
+      "max_pop": 5856,
+      "name": "Horacio",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Horacio",
+      "historical_names": [
+        {
+          "date": "-1150.1.1",
+          "name": "Horacio"
+        }
+      ],
+      "other_names": [
+        "horacio"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        11.82311,
+        -86.12781
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Paz de Carazo-Nicaragua",
+      "known_aliases": [
+        "La Paz de Carazo",
+        "la paz de carazo"
+      ],
+      "latest_year": 2023,
+      "max_pop": 5850,
+      "name": "La Paz de Carazo",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "La Paz de Carazo",
+      "historical_names": [
+        {
+          "date": "1995.1.1",
+          "name": "La Paz de Carazo"
+        }
+      ],
+      "other_names": [
+        "la paz de carazo"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.295,
+        -103.733
+      ],
+      "country": "Mexico",
+      "earliest_year": 900,
+      "existing_historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "El Chanal"
+        }
+      ],
+      "existing_meta_index": 273,
+      "existing_meta_name": "El Chanal",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Chanal Site-Mexico",
+      "known_aliases": [
+        "El Chanal Site",
+        "el chanal site"
+      ],
+      "latest_year": 1150,
+      "max_pop": 5850,
+      "name": "El Chanal Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        900,
+        1150
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "El Chanal",
+      "historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "El Chanal"
+        }
+      ],
+      "other_names": [
+        "El Chanal Site",
+        "el chanal site"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.7018,
+        -88.93283
+      ],
+      "country": "El Salvador",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Ramón-El Salvador",
+      "known_aliases": [
+        "San Ramón",
+        "san ramón"
+      ],
+      "latest_year": 2024,
+      "max_pop": 5848,
+      "name": "San Ramón",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Ramón",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "San Ramón"
+        }
+      ],
+      "other_names": [
+        "san ramón"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.47597,
+        -91.69801
+      ],
+      "country": "Guatemala",
+      "earliest_year": 1570,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santiago Chimaltenango-Guatemala",
+      "known_aliases": [
+        "Santiago Chimaltenango",
+        "santiago chimaltenango"
+      ],
+      "latest_year": 2018,
+      "max_pop": 5841,
+      "name": "Santiago Chimaltenango",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1700,
+        1821,
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Santiago Chimaltenango",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Santiago Chimaltenango"
+        }
+      ],
+      "other_names": [
+        "santiago chimaltenango",
+        "Chimaltenango"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.27843,
+        -98.28462
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1990.3.12",
+          "name": "San Damián Texóloc"
+        }
+      ],
+      "existing_meta_index": 4205,
+      "existing_meta_name": "San Damián Texóloc",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Damián Texóloc-Mexico",
+      "known_aliases": [
+        "San Damián Texóloc",
+        "san damián texóloc",
+        "san damián texoloc",
+        "san damian texoloc",
+        "San Damián Texoloc"
+      ],
+      "latest_year": 2020,
+      "max_pop": 5832,
+      "name": "San Damián Texóloc",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "San Damián Texoloc",
+          "year": 1995
+        },
+        {
+          "name": "San Damián Texóloc",
+          "year": 2008
+        }
+      ],
+      "canonical_name": "San Damián Texóloc",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "San Damián Texóloc"
+        }
+      ],
+      "other_names": [
+        "San Damián Texoloc",
+        "san damián texóloc",
+        "san damián texoloc",
+        "san damian texoloc",
+        "Texóloc",
+        "Texoloc"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.52819,
+        -87.99846
+      ],
+      "country": "El Salvador",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Yucuaiquín-El Salvador",
+      "known_aliases": [
+        "Yucuaiquín",
+        "yucuaiquín"
+      ],
+      "latest_year": 2024,
+      "max_pop": 5829,
+      "name": "Yucuaiquín",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Yucuaiquín",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Yucuaiquín"
+        }
+      ],
+      "other_names": [
+        "yucuaiquín"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.39712,
+        -99.31131
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1970.1.28",
+          "name": "San Bartolomé Coatepec"
+        }
+      ],
+      "existing_meta_index": 3601,
+      "existing_meta_name": "San Bartolomé Coatepec",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Bartolomé Coatepec-Mexico",
+      "known_aliases": [
+        "San Bartolomé Coatepec",
+        "san bartolomé coatepec",
+        "trejo",
+        "paraje trejo",
+        "san bartolome coatepec",
+        "Trejo",
+        "Paraje Trejo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 5828,
+      "name": "San Bartolomé Coatepec",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Coatepec San Bartolo",
+          "year": 1900
+        },
+        {
+          "name": "San Bartolo, Coatepec",
+          "year": 1910
+        },
+        {
+          "name": "San Bartolomé Coatepec",
+          "year": 1930
+        }
+      ],
+      "canonical_name": "San Bartolomé Coatepec",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "San Bartolomé Coatepec"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Coatepec San Bartolo"
+        },
+        {
+          "date": "1930.1.1",
+          "name": "San Bartolomé Coatepec"
+        }
+      ],
+      "other_names": [
+        "san bartolomé coatepec",
+        "san bartolome coatepec",
+        "San Bartolo, Coatepec",
+        "San Bartolo Coatepec",
+        "Trejo",
+        "Paraje Trejo",
+        "trejo",
+        "paraje trejo"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.31786,
+        -91.42661
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chinaca-Guatemala",
+      "known_aliases": [
+        "Chinaca",
+        "chinaca"
+      ],
+      "latest_year": 2018,
+      "max_pop": 5827,
+      "name": "Chinaca",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Chinacá",
+      "historical_names": [
+        {
+          "date": "2018.1.1",
+          "name": "Chinacá"
+        }
+      ],
+      "other_names": [
+        "Chinaca",
+        "chinaca",
+        "chinacá"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        24.10218,
+        -105.93125
+      ],
+      "country": "Mexico",
+      "earliest_year": 1790,
+      "existing_historical_names": [
+        {
+          "date": "1990.3.12",
+          "name": "Tayoltita"
+        }
+      ],
+      "existing_meta_index": 4204,
+      "existing_meta_name": "Tayoltita",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Tayoltita-Mexico",
+      "known_aliases": [
+        "Tayoltita",
+        "tayoltita"
+      ],
+      "latest_year": 2020,
+      "max_pop": 5817,
+      "name": "Tayoltita",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1790,
+        1910,
+        1980,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Tayoltita",
+      "historical_names": [
+        {
+          "date": "1790.1.1",
+          "name": "Tayoltita"
+        }
+      ],
+      "other_names": [
+        "tayoltita"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        8.4075,
+        -80.42208
+      ],
+      "country": "Panama",
+      "earliest_year": 2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Coclé-Panama",
+      "known_aliases": [
+        "Coclé",
+        "coclé"
+      ],
+      "latest_year": 2023,
+      "max_pop": 5811,
+      "name": "Coclé",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2000,
+        2010,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Coclé",
+      "historical_names": [
+        {
+          "date": "2000.1.1",
+          "name": "Coclé"
+        }
+      ],
+      "other_names": [
+        "coclé"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.74667,
+        -101.04631
+      ],
+      "country": "Mexico",
+      "earliest_year": 1480,
+      "existing_historical_names": [
+        {
+          "date": "1831.12.10",
+          "name": "Charo"
+        }
+      ],
+      "existing_meta_index": 2096,
+      "existing_meta_name": "Charo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Charo-Mexico",
+      "known_aliases": [
+        "Charo",
+        "charo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 5807,
+      "name": "Charo",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1480,
+        1877,
+        1970,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Charo",
+      "historical_names": [
+        {
+          "date": "1480.1.1",
+          "name": "Charo"
+        }
+      ],
+      "other_names": [
+        "charo",
+        "Matalcingo",
+        "San Miguel Charo",
+        "Charo Matalcingo"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.56667,
+        -88.25
+      ],
+      "country": "Honduras",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Lucia (ca_honduras)-Honduras",
+      "known_aliases": [
+        "Santa Lucia",
+        "santa lucia"
+      ],
+      "latest_year": 2024,
+      "max_pop": 5806,
+      "name": "Santa Lucia",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Santa Lucía",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Santa Lucía"
+        }
+      ],
+      "other_names": [
+        "Santa Lucia",
+        "santa lucia",
+        "santa lucía"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.93688,
+        -86.6553
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Matías-Honduras",
+      "known_aliases": [
+        "San Matías",
+        "san matías"
+      ],
+      "latest_year": 2024,
+      "max_pop": 5802,
+      "name": "San Matías",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Matías",
+      "historical_names": [
+        {
+          "date": "2001.1.1",
+          "name": "San Matías"
+        }
+      ],
+      "other_names": [
+        "san matías"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        22.23772,
+        -102.08896
+      ],
+      "country": "Mexico",
+      "earliest_year": 1742,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Belen de Ibarra-Mexico",
+      "known_aliases": [
+        "Belen de Ibarra",
+        "belen de ibarra"
+      ],
+      "latest_year": 1821,
+      "max_pop": 5801,
+      "name": "Belen de Ibarra",
+      "reason": "missing_entry",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1742,
+        1780,
+        1790,
+        1808,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Belén de Ibarra",
+      "historical_names": [
+        {
+          "date": "1742.1.1",
+          "name": "Belén de Ibarra"
+        }
+      ],
+      "other_names": [
+        "Belen de Ibarra",
+        "belen de ibarra",
+        "belén de ibarra",
+        "Belén del Refugio"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.32808,
+        -89.7327
+      ],
+      "country": "Guatemala",
+      "earliest_year": -1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan Las Minas-Guatemala",
+      "known_aliases": [
+        "San Juan Las Minas",
+        "san juan las minas"
+      ],
+      "latest_year": 1200,
+      "max_pop": 5800,
+      "name": "San Juan Las Minas",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Juan Las Minas",
+      "historical_names": [
+        {
+          "date": "-1150.1.1",
+          "name": "San Juan Las Minas"
+        }
+      ],
+      "other_names": [
+        "san juan las minas"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        10.71943,
+        -61.55874
+      ],
+      "country": "Trinidad and Tobago",
+      "earliest_year": 2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Diamond Vale-Trinidad and Tobago",
+      "known_aliases": [
+        "Diamond Vale",
+        "diamond vale",
+        "st. lucien road",
+        "green hill village",
+        "industrial estate",
+        "blue range",
+        "St. Lucien Road",
+        "Green Hill Village",
+        "Industrial Estate",
+        "Blue Range"
+      ],
+      "latest_year": 2011,
+      "max_pop": 5794,
+      "name": "Diamond Vale",
+      "reason": "missing_entry",
+      "region": "lesser_antilles_bahamas_bermuda",
+      "sample_years": [
+        2000,
+        2011
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Diamond Vale",
+      "historical_names": [
+        {
+          "date": "2000.1.1",
+          "name": "Diamond Vale"
+        }
+      ],
+      "other_names": [
+        "diamond vale",
+        "st. lucien road",
+        "green hill village",
+        "industrial estate",
+        "blue range",
+        "St. Lucien Road",
+        "Green Hill Village"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.34112,
+        -89.73893
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Teleman-Guatemala",
+      "known_aliases": [
+        "Teleman",
+        "teleman",
+        "cacavila",
+        "setzac",
+        "el esfuerzo ii",
+        "Cacavila",
+        "Setzac",
+        "El Esfuerzo Ii"
+      ],
+      "latest_year": 2018,
+      "max_pop": 5790,
+      "name": "Teleman",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Telemán",
+      "historical_names": [
+        {
+          "date": "2018.1.1",
+          "name": "Telemán"
+        }
+      ],
+      "other_names": [
+        "Teleman",
+        "teleman",
+        "telemán",
+        "cacavila",
+        "setzac",
+        "el esfuerzo ii",
+        "Cacavila",
+        "Setzac",
+        "El Esfuerzo II"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.50637,
+        -92.17586
+      ],
+      "country": "Guatemala",
+      "earliest_year": -1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Salinas Tilapa-Guatemala",
+      "known_aliases": [
+        "Salinas Tilapa",
+        "salinas tilapa"
+      ],
+      "latest_year": 1200,
+      "max_pop": 5790,
+      "name": "Salinas Tilapa",
+      "reason": "missing_entry",
+      "region": "classic_postclassic_maya",
+      "sample_years": [
+        -1150,
+        -1000,
+        -500,
+        1,
+        300,
+        500,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Salinas Tilapa",
+      "historical_names": [
+        {
+          "date": "-1150.1.1",
+          "name": "Salinas Tilapa"
+        }
+      ],
+      "other_names": [
+        "salinas tilapa"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.8869,
+        -85.67801
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Rosa de Aguán-Honduras",
+      "known_aliases": [
+        "Santa Rosa de Aguán",
+        "santa rosa de aguán"
+      ],
+      "latest_year": 2024,
+      "max_pop": 5785,
+      "name": "Santa Rosa de Aguán",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Santa Rosa de Aguán",
+      "historical_names": [
+        {
+          "date": "2001.1.1",
+          "name": "Santa Rosa de Aguán"
+        }
+      ],
+      "other_names": [
+        "santa rosa de aguán"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.85269,
+        -91.46011
+      ],
+      "country": "Guatemala",
+      "earliest_year": 2018,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Urbina-Guatemala",
+      "known_aliases": [
+        "Urbina",
+        "urbina"
+      ],
+      "latest_year": 2018,
+      "max_pop": 5781,
+      "name": "Urbina",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2018
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Urbina",
+      "historical_names": [
+        {
+          "date": "2018.1.1",
+          "name": "Urbina"
+        }
+      ],
+      "other_names": [
+        "urbina"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        9.40922,
+        -82.49312
+      ],
+      "country": "Panama",
+      "earliest_year": 2023,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Finca 4-Panama",
+      "known_aliases": [
+        "Finca 4",
+        "finca 4"
+      ],
+      "latest_year": 2023,
+      "max_pop": 5781,
+      "name": "Finca 4",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Finca 4",
+      "historical_names": [
+        {
+          "date": "2023.1.1",
+          "name": "Finca 4"
+        }
+      ],
+      "other_names": [
+        "finca 4"
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

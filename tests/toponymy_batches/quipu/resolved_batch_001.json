@@ -1,0 +1,1699 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 1,
+  "count": 30,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -34.6037,
+        -58.3816
+      ],
+      "country": "Argentina",
+      "earliest_year": 1580,
+      "existing_historical_names": [
+        {
+          "date": "1580.6.11",
+          "name": "Buenos Aires"
+        }
+      ],
+      "existing_meta_index": 981,
+      "existing_meta_name": "Ciudad de Nuestra Señora Buenos Aires",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Buenos Aires-Argentina",
+      "known_aliases": [
+        "Buenos Aires",
+        "buenos aires",
+        "caba",
+        "capital federal",
+        "ciudad autónoma de buenos aires",
+        "barrio de monserrat",
+        "barrio de piedad",
+        "barrio de san juan bautista",
+        "barrio de san nicolas",
+        "barrio de socorro",
+        "santísima trinidad y puerto de santa maría del buen ayre",
+        "CABA",
+        "Capital Federal",
+        "Ciudad Autónoma de Buenos Aires",
+        "Barrio de Monserrat",
+        "Barrio de Piedad",
+        "Barrio de San Juan Bautista",
+        "Barrio de San Nicolas",
+        "Barrio de Socorro",
+        "Santísima Trinidad y Puerto de Santa María del Buen Ayre"
+      ],
+      "latest_year": 2022,
+      "max_pop": 3487948,
+      "name": "Buenos Aires",
+      "reason": "under_covered_history",
+      "region": "arg_ciudad_autonoma_de_buenos_aires",
+      "sample_years": [
+        1580,
+        1822,
+        1947,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Buenos Aires",
+      "historical_names": [
+        {
+          "date": "1536.2.2",
+          "date_source_note": "First Spanish foundation by Pedro de Mendoza on 2 February 1536 as Puerto de Nuestra Señora Santa María del Buen Ayre",
+          "name": "Santa María del Buen Ayre"
+        },
+        {
+          "date": "1580.6.11",
+          "date_source_note": "Second permanent foundation by Juan de Garay on 11 June 1580 as Ciudad de la Trinidad y Puerto de Santa María de los Buenos Aires",
+          "name": "Ciudad de la Trinidad"
+        },
+        {
+          "date": "1810.5.25",
+          "date_source_note": "May Revolution of 25 May 1810 establishing standard republican usage as Buenos Aires",
+          "name": "Buenos Aires"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.38513,
+        -75.49627
+      ],
+      "country": "Colombia",
+      "earliest_year": 1535,
+      "existing_historical_names": [
+        {
+          "date": "1811.11.11",
+          "name": "Cartagena de Indias"
+        }
+      ],
+      "existing_meta_index": 851,
+      "existing_meta_name": "Cartagena de Indias",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Cartagena De Indias-Colombia",
+      "known_aliases": [
+        "Cartagena De Indias",
+        "cartagena de indias",
+        "cartagena",
+        "Cartagena de Indias"
+      ],
+      "latest_year": 2025,
+      "max_pop": 1011520,
+      "name": "Cartagena De Indias",
+      "reason": "under_covered_history",
+      "region": "col_bolivar",
+      "sample_years": [
+        1535,
+        1900,
+        1995,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cartagena de Indias",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Mocaná village on Cartagena Bay before Spanish conquest",
+          "name": "Calamarí"
+        },
+        {
+          "date": "1533.6.1",
+          "date_source_note": "Founded by Pedro de Heredia on 1 June 1533",
+          "name": "Cartagena de Indias"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.45295,
+        -70.65428
+      ],
+      "country": "Chile",
+      "earliest_year": 1545,
+      "existing_historical_names": [
+        {
+          "date": "1657.1.1",
+          "name": "Santiago"
+        }
+      ],
+      "existing_meta_index": 3954,
+      "existing_meta_name": "Santiago",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Santiago-Chile",
+      "known_aliases": [
+        "Santiago",
+        "santiago",
+        "santiago de nueva extremadura",
+        "Santiago de Nueva Extremadura"
+      ],
+      "latest_year": 2025,
+      "max_pop": 975964,
+      "name": "Santiago",
+      "reason": "under_covered_history",
+      "region": "chl_region_metropolitana_de_santiago",
+      "sample_years": [
+        1545,
+        1865,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Santiago",
+      "historical_names": [
+        {
+          "date": "1480.1.1",
+          "date_source_note": "Pre-colonial Inca-Picunche administrative centre in the Mapocho Valley prior to Spanish conquest",
+          "name": "Mapocho"
+        },
+        {
+          "date": "1541.2.12",
+          "date_source_note": "Spanish colonial foundation by Pedro de Valdivia on 12 February 1541",
+          "name": "Santiago de Nueva Extremadura"
+        },
+        {
+          "date": "1818.2.12",
+          "date_source_note": "Chilean Declaration of Independence on 12 February 1818 and republican capital designation as Santiago",
+          "name": "Santiago"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.64656,
+        -60.71
+      ],
+      "country": "Argentina",
+      "earliest_year": 1575,
+      "existing_historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Santa Fe"
+        }
+      ],
+      "existing_meta_index": 3949,
+      "existing_meta_name": "Santa Fé",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Santa Fe-Argentina",
+      "known_aliases": [
+        "Santa Fe",
+        "santa fe",
+        "santa fe de la vera cruz",
+        "Santa Fe de la Vera Cruz"
+      ],
+      "latest_year": 2022,
+      "max_pop": 490171,
+      "name": "Santa Fe",
+      "reason": "under_covered_history",
+      "region": "arg_santa_fe",
+      "sample_years": [
+        1575,
+        1869,
+        1960,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Santa Fe",
+      "historical_names": [
+        {
+          "date": "1573.11.15",
+          "date_source_note": "Founded by Juan de Garay on 15 November 1573 at Cayastá and relocated to its present site between 1651 and 1660",
+          "name": "Santa Fe de la Vera Cruz"
+        },
+        {
+          "date": "1816.7.9",
+          "date_source_note": "Standardised republican provincial capital name following the Argentine Declaration of Independence on 9 July 1816",
+          "name": "Santa Fe"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.128,
+        -63.549
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1764,
+      "existing_historical_names": [
+        {
+          "date": "1819.7.5",
+          "name": "Angostura"
+        }
+      ],
+      "existing_meta_index": 210,
+      "existing_meta_name": "Angostura",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Ciudad Bolívar-Venezuela",
+      "known_aliases": [
+        "Ciudad Bolívar",
+        "ciudad bolívar",
+        "ciudad bolivar",
+        "angostura",
+        "nueva guayana",
+        "santo tome de guayana de la angostura del orinoco",
+        "santo tomé de guayana",
+        "Ciudad Bolivar",
+        "Angostura",
+        "Nueva Guayana",
+        "Santo Tome de Guayana de la Angostura del Orinoco",
+        "Santo Tomé de Guayana"
+      ],
+      "latest_year": 2019,
+      "max_pop": 425000,
+      "name": "Ciudad Bolívar",
+      "reason": "under_covered_history",
+      "region": "ven_anzoategui",
+      "sample_years": [
+        1764,
+        1891,
+        1950,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Ciudad Bolívar",
+      "historical_names": [
+        {
+          "date": "1764.5.22",
+          "date_source_note": "Definitive foundation at the Orinoco narrows on 22 May 1764 by Joaquín Sabás Moreno de Mendoza under Royal order of Charles III",
+          "name": "Santo Tomás de la Nueva Guayana de la Angostura del Orinoco"
+        },
+        {
+          "date": "1817.7.17",
+          "date_source_note": "Liberation of Angostura by patriot forces on 17 July 1817 and designation as provisional capital of the Third Republic of Venezuela (seat of the 1819 Congress of Angostura)",
+          "name": "Angostura"
+        },
+        {
+          "date": "1846.5.30",
+          "date_source_note": "Officially renamed Ciudad Bolívar by decree of the Venezuelan Congress under President Carlos Soublette on 30 May 1846",
+          "name": "Ciudad Bolívar"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.99909,
+        -80.39772
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1540,
+      "existing_historical_names": [
+        {
+          "date": "1885.1.1",
+          "name": "Portoviejo"
+        }
+      ],
+      "existing_meta_index": 3591,
+      "existing_meta_name": "Portoviejo",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Portoviejo-Ecuador",
+      "known_aliases": [
+        "Portoviejo",
+        "portoviejo",
+        "san gregorio de puerto viejo",
+        "San Gregorio de Puerto Viejo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 345349,
+      "name": "Portoviejo",
+      "reason": "under_covered_history",
+      "region": "ecu_manabi",
+      "sample_years": [
+        1540,
+        1889,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Portoviejo",
+      "historical_names": [
+        {
+          "date": "1000.1.1",
+          "date_source_note": "Pre-colonial Manteño indigenous polity (Señorío de Cancebí) occupying the Portoviejo valley prior to Spanish conquest",
+          "name": "Cancebí"
+        },
+        {
+          "date": "1535.3.12",
+          "date_source_note": "Spanish colonial foundation by Francisco Pacheco on 12 March 1535 under orders of Diego de Almagro",
+          "name": "Villa Nueva de San Gregorio de Puerto Viejo"
+        },
+        {
+          "date": "1820.10.18",
+          "date_source_note": "Independence of Portoviejo on 18 October 1820 and adoption of the consolidated republican name Portoviejo",
+          "name": "Portoviejo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.74015,
+        -60.52747
+      ],
+      "country": "Argentina",
+      "earliest_year": 1730,
+      "existing_historical_names": [
+        {
+          "date": "1838.1.1",
+          "name": "Paraná"
+        }
+      ],
+      "existing_meta_index": 3422,
+      "existing_meta_name": "Paraná",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Paraná-Argentina",
+      "known_aliases": [
+        "Paraná",
+        "paraná",
+        "bajada del paraná",
+        "entre rios",
+        "parana",
+        "rosario la bajada",
+        "Bajada del Paraná",
+        "Entre Rios",
+        "Parana",
+        "Rosario La Bajada"
+      ],
+      "latest_year": 2022,
+      "max_pop": 271304,
+      "name": "Paraná",
+      "reason": "under_covered_history",
+      "region": "arg_entre_rios",
+      "sample_years": [
+        1730,
+        1895,
+        1970,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Paraná",
+      "historical_names": [
+        {
+          "date": "1730.10.23",
+          "date_source_note": "Ecclesiastical parish of Nuestra Señora del Rosario de la Bajada del Paraná established by the Cabildo Eclesiástico of Buenos Aires on 23 October 1730, adopted as the city's civic founding date",
+          "name": "Bajada del Paraná"
+        },
+        {
+          "date": "1813.6.25",
+          "date_source_note": "Elevated to Villa del Paraná by the Asamblea General Constituyente on 25 June 1813, emancipating it from Santa Fe; subsequently elevated to city on 26 August 1826",
+          "name": "Paraná"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.407,
+        -69.678
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1574,
+      "existing_historical_names": [
+        {
+          "date": "1873.1.1",
+          "name": "Coro"
+        }
+      ],
+      "existing_meta_index": 1028,
+      "existing_meta_name": "Coro",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Coro-Venezuela",
+      "known_aliases": [
+        "Coro",
+        "coro",
+        "sta. ana de coro",
+        "santa ana de coro",
+        "Sta. Ana de Coro",
+        "Santa Ana de Coro"
+      ],
+      "latest_year": 2019,
+      "max_pop": 231600,
+      "name": "Coro",
+      "reason": "under_covered_history",
+      "region": "ven_falcon",
+      "sample_years": [
+        1574,
+        1881,
+        1950,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Coro",
+      "historical_names": [
+        {
+          "date": "600.1.1",
+          "date_source_note": "Pre-colonial Caquetío paramount settlement on the Falcón coast prior to Spanish colonisation",
+          "name": "Todariquiba"
+        },
+        {
+          "date": "1527.7.26",
+          "date_source_note": "Spanish colonial foundation by Juan de Ampíes on 26 July 1527",
+          "name": "Santa Ana de Coro"
+        },
+        {
+          "date": "1821.5.11",
+          "date_source_note": "Adhesion of Coro to the Republic of Colombia on 11 May 1821 following Josefa Camejo's uprising, standardising republican usage as Coro",
+          "name": "Coro"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.41279,
+        -66.85587
+      ],
+      "country": "Argentina",
+      "earliest_year": 1595,
+      "existing_historical_names": [
+        {
+          "date": "1847.1.1",
+          "name": "La Rioja"
+        }
+      ],
+      "existing_meta_index": 2483,
+      "existing_meta_name": "La Rioja",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "La Rioja-Argentina",
+      "known_aliases": [
+        "La Rioja",
+        "la rioja"
+      ],
+      "latest_year": 2022,
+      "max_pop": 211651,
+      "name": "La Rioja",
+      "reason": "under_covered_history",
+      "region": "arg_la_rioja",
+      "sample_years": [
+        1595,
+        1880,
+        1960,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Rioja",
+      "historical_names": [
+        {
+          "date": "1591.5.20",
+          "date_source_note": "Spanish colonial foundation by Governor Juan Ramírez de Velasco on 20 May 1591",
+          "name": "Todos los Santos de la Nueva Rioja"
+        },
+        {
+          "date": "1820.3.1",
+          "date_source_note": "Declaration of provincial autonomy of La Rioja on 1 March 1820, establishing standard republican name La Rioja",
+          "name": "La Rioja"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.263,
+        -67.89205
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1538,
+      "existing_historical_names": [
+        {
+          "date": "1888.1.1",
+          "name": "Guacara"
+        }
+      ],
+      "existing_meta_index": 1636,
+      "existing_meta_name": "Guacara",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Guacara-Venezuela",
+      "known_aliases": [
+        "Guacara",
+        "guacara"
+      ],
+      "latest_year": 2019,
+      "max_pop": 196400,
+      "name": "Guacara",
+      "reason": "under_covered_history",
+      "region": "ven_carabobo",
+      "sample_years": [
+        1538,
+        1800,
+        1880,
+        2019
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Guacara",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial indigenous Carib and Tacarigua settlement north-east of Lake Tacarigua (Valencia) prior to Spanish colonisation",
+          "name": "Guacara"
+        },
+        {
+          "date": "1694.2.20",
+          "date_source_note": "Formally erected as a colonial pueblo de doctrina on 20 February 1694 by Governor Francisco de Berroterán and Bishop Diego de Baños y Sotomayor, consolidating the earlier 1624 mission settlement",
+          "name": "San Agustín de Guacara"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Venezuelan Declaration of Independence on 5 July 1811 and standard republican municipal designation as Guacara",
+          "name": "Guacara"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.24289,
+        -70.13911
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1875.1.1",
+          "name": "Iquique"
+        }
+      ],
+      "existing_meta_index": 1922,
+      "existing_meta_name": "Iquique",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Iquique (chl_region_de_tarapaca)-Chile",
+      "known_aliases": [
+        "Iquique",
+        "iquique",
+        "yqueyque",
+        "Yqueyque"
+      ],
+      "latest_year": 2017,
+      "max_pop": 188003,
+      "name": "Iquique",
+      "reason": "under_covered_history",
+      "region": "chl_region_de_tarapaca",
+      "sample_years": [
+        1525,
+        1650,
+        1970,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Iquique",
+      "historical_names": [
+        {
+          "date": "1525.1.1",
+          "date_source_note": "Pre-Hispanic coastal anchorage; first recorded 1547 as Yqueyque",
+          "name": "Iquique"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.46801,
+        -65.78894
+      ],
+      "country": "Argentina",
+      "earliest_year": 1683,
+      "existing_historical_names": [
+        {
+          "date": "1847.1.1",
+          "name": "Catamarca"
+        }
+      ],
+      "existing_meta_index": 869,
+      "existing_meta_name": "Catamarca",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "San Fernando del Valle de Catamarca-Argentina",
+      "known_aliases": [
+        "San Fernando del Valle de Catamarca",
+        "san fernando del valle de catamarca",
+        "catamarca",
+        "Catamarca"
+      ],
+      "latest_year": 2022,
+      "max_pop": 186947,
+      "name": "San Fernando del Valle de Catamarca",
+      "reason": "under_covered_history",
+      "region": "arg_catamarca",
+      "sample_years": [
+        1683,
+        1895,
+        1970,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Fernando del Valle de Catamarca",
+      "historical_names": [
+        {
+          "date": "1683.7.5",
+          "date_source_note": "Founded by Governor Fernando de Mendoza y Mate de Luna on 5 July 1683 under Royal Cédula of 1679; has continuously retained its full official name to the present",
+          "name": "San Fernando del Valle de Catamarca"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        0.37856,
+        -78.08838
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1608,
+      "existing_historical_names": [
+        {
+          "date": "1885.1.1",
+          "name": "Ibarra"
+        }
+      ],
+      "existing_meta_index": 1873,
+      "existing_meta_name": "Ibarra",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "San Miguel De Ibarra-Ecuador",
+      "known_aliases": [
+        "San Miguel De Ibarra",
+        "san miguel de ibarra",
+        "ibarra",
+        "san miguel ibarra",
+        "San Miguel Ibarra",
+        "San Miguel de Ibarra"
+      ],
+      "latest_year": 2025,
+      "max_pop": 178372,
+      "name": "San Miguel De Ibarra",
+      "reason": "under_covered_history",
+      "region": "ecu_imbabura",
+      "sample_years": [
+        1608,
+        1900,
+        2001,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Ibarra",
+      "historical_names": [
+        {
+          "date": "1606.9.28",
+          "date_source_note": "Spanish villa founded by Cristóbal de Troya in Carangue Valley",
+          "name": "San Miguel de Ibarra"
+        },
+        {
+          "date": "1824.6.25",
+          "date_source_note": "Designated canton capital Ibarra under Gran Colombia territorial division law",
+          "name": "Ibarra"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.73279,
+        -74.26585
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1973.1.1",
+          "name": "Madrid"
+        }
+      ],
+      "existing_meta_index": 2699,
+      "existing_meta_name": "Madrid",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Madrid-Colombia",
+      "known_aliases": [
+        "Madrid",
+        "madrid",
+        "sagasuca",
+        "zerrezuela",
+        "Sagasuca",
+        "Zerrezuela"
+      ],
+      "latest_year": 2025,
+      "max_pop": 143090,
+      "name": "Madrid",
+      "reason": "under_covered_history",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        1525,
+        1780,
+        1985,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Madrid",
+      "historical_names": [
+        {
+          "date": "1000.1.1",
+          "date_source_note": "Pre-colonial Muisca settlement on the Bogotá savanna prior to Spanish conquest",
+          "name": "Sagasuca"
+        },
+        {
+          "date": "1559.11.20",
+          "date_source_note": "Founded as a colonial pueblo de indios by Alonso Díaz under orders of Oidor Tomás López on 20 November 1559",
+          "name": "Serrezuela"
+        },
+        {
+          "date": "1875.11.17",
+          "date_source_note": "Renamed Madrid by Law 14 of 17 November 1875 of the Sovereign State of Cundinamarca in honour of Pedro Fernández Madrid",
+          "name": "Madrid"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.061,
+        -74.198
+      ],
+      "country": "Peru",
+      "earliest_year": 500,
+      "existing_historical_names": [
+        {
+          "date": "601.1.1",
+          "name": "Huari"
+        }
+      ],
+      "existing_meta_index": 1842,
+      "existing_meta_name": "Huari",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Wari-Peru",
+      "known_aliases": [
+        "Wari",
+        "wari",
+        "ayamachay",
+        "ayamachay _ac_102",
+        "condormarca",
+        "cueva de pikimachay",
+        "huar",
+        "huari",
+        "lagunillas",
+        "leqles pampa",
+        "Ayamachay",
+        "Ayamachay _Ac_102",
+        "Condormarca",
+        "Cueva de Pikimachay",
+        "Huar",
+        "Huari",
+        "Lagunillas",
+        "Leqles Pampa"
+      ],
+      "latest_year": 1000,
+      "max_pop": 38400,
+      "name": "Wari",
+      "reason": "under_covered_history",
+      "region": "ca_central_sierra_wari_chanka",
+      "sample_years": [
+        500,
+        700,
+        850,
+        1000
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Wari",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "date_source_note": "Archaeologically dated emergence of the Wari imperial capital in the Ayacucho basin (Middle Horizon, ca. 500-1000 CE)",
+          "name": "Wari"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.55475,
+        -68.67352
+      ],
+      "country": "Bolivia",
+      "earliest_year": 200,
+      "existing_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Tiwanaku"
+        }
+      ],
+      "existing_meta_index": 4477,
+      "existing_meta_name": "Tiwanaku",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Tiwanaku-Bolivia",
+      "known_aliases": [
+        "Tiwanaku",
+        "tiwanaku",
+        "tiahuanaco",
+        "Tiahuanaco"
+      ],
+      "latest_year": 1532,
+      "max_pop": 34200,
+      "name": "Tiwanaku",
+      "reason": "under_covered_history",
+      "region": "inca_antisuyu",
+      "sample_years": [
+        200,
+        1000,
+        1500,
+        1532
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tiwanaku",
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "date_source_note": "Formative-to-Middle Horizon pre-colonial ceremonial and urban capital of the Tiwanaku polity in the Lake Titicaca basin (also attested in Aymara tradition as Taypikala)",
+          "name": "Tiwanaku"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.18362,
+        -66.31276
+      ],
+      "country": "Argentina",
+      "earliest_year": 1595,
+      "existing_historical_names": [
+        {
+          "date": "1847.1.1",
+          "name": "San Luis"
+        }
+      ],
+      "existing_meta_index": 3925,
+      "existing_meta_name": "San Luis",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "La Punta-Argentina",
+      "known_aliases": [
+        "La Punta",
+        "la punta",
+        "san luis",
+        "san luis de loyola",
+        "san luis de la punta",
+        "San Luis de Loyola",
+        "San Luis de la Punta"
+      ],
+      "latest_year": 2022,
+      "max_pop": 21873,
+      "name": "La Punta",
+      "reason": "under_covered_history",
+      "region": "arg_san_luis",
+      "sample_years": [
+        1595,
+        1880,
+        1980,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Punta",
+      "historical_names": [
+        {
+          "date": "2003.3.26",
+          "date_source_note": "Official founding of Ciudad de La Punta (San Luis Province) on 26 March 2003",
+          "name": "La Punta"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.9,
+        -79.005
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1560,
+      "existing_historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Cuenca"
+        }
+      ],
+      "existing_meta_index": 1050,
+      "existing_meta_name": "Cuenca",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Cuenca-Ecuador_2",
+      "known_aliases": [
+        "Cuenca",
+        "cuenca",
+        "san blas",
+        "santa ana de los ríos de cuenca",
+        "tomebamba",
+        "tumipampa",
+        "San Blas",
+        "Santa Ana de los Ríos de Cuenca",
+        "Tumipampa"
+      ],
+      "latest_year": 1825,
+      "max_pop": 20400,
+      "name": "Cuenca",
+      "reason": "under_covered_history",
+      "region": "vng_guayaquil_esmeraldas",
+      "sample_years": [
+        1560,
+        1574,
+        1628,
+        1780,
+        1825
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cuenca",
+      "historical_names": [
+        {
+          "date": "600.1.1",
+          "date_source_note": "Pre-colonial Cañari urban and ceremonial centre prior to Inca conquest",
+          "name": "Guapondelig"
+        },
+        {
+          "date": "1470.1.1",
+          "date_source_note": "Inca northern imperial capital established over Guapondelig under Tupac Yupanqui (ca. 1470 CE)",
+          "name": "Tumipampa"
+        },
+        {
+          "date": "1557.4.12",
+          "date_source_note": "Spanish colonial foundation by Gil Ramírez Dávalos on 12 April 1557 under orders of Viceroy Andrés Hurtado de Mendoza",
+          "name": "Santa Ana de los Ríos de Cuenca"
+        },
+        {
+          "date": "1820.11.3",
+          "date_source_note": "Independence of Cuenca on 3 November 1820 and adoption of the standard republican name Cuenca",
+          "name": "Cuenca"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.19,
+        -79.888
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1545,
+      "existing_historical_names": [
+        {
+          "date": "1734.1.1",
+          "name": "Guayaquil"
+        }
+      ],
+      "existing_meta_index": 1648,
+      "existing_meta_name": "Guayaquil",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Guayaquil-Ecuador_2",
+      "known_aliases": [
+        "Guayaquil",
+        "guayaquil",
+        "santiago de guayaquil",
+        "peñón del río",
+        "guayas",
+        "milagro-quevedo",
+        "Santiago de Guayaquil",
+        "Guayas",
+        "Milagro-Quevedo"
+      ],
+      "latest_year": 1825,
+      "max_pop": 18400,
+      "name": "Guayaquil",
+      "reason": "under_covered_history",
+      "region": "vng_guayaquil_esmeraldas",
+      "sample_years": [
+        1545,
+        1574,
+        1628,
+        1740,
+        1780,
+        1804,
+        1825
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Guayaquil",
+      "historical_names": [
+        {
+          "date": "1535.7.25",
+          "date_source_note": "Traditional Spanish colonial founding date of Santiago de Guayaquil by Sebastián de Benalcázar on 25 July 1535 in Huancavilca territory, definitively consolidated on Cerro Santa Ana by 1538-1547",
+          "name": "Santiago de Guayaquil"
+        },
+        {
+          "date": "1820.10.9",
+          "date_source_note": "Independence of the Free Province of Guayaquil on 9 October 1820 and standard republican designation as Guayaquil",
+          "name": "Guayaquil"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.06306,
+        -72.93444
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1537.1.1",
+          "name": "Vilcabamba"
+        }
+      ],
+      "existing_meta_index": 4712,
+      "existing_meta_name": "Vilcabamba",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Vilcabamba-Peru",
+      "known_aliases": [
+        "Vilcabamba",
+        "vilcabamba",
+        "lucma",
+        "san juan de lucma",
+        "Lucma",
+        "San Juan de Lucma"
+      ],
+      "latest_year": 2025,
+      "max_pop": 17832,
+      "name": "Vilcabamba",
+      "reason": "under_covered_history",
+      "region": "per_cusco",
+      "sample_years": [
+        1525,
+        1750,
+        1950,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Vilcabamba",
+      "historical_names": [
+        {
+          "date": "1525.1.1",
+          "date_source_note": "Inca-era settlement horizon in Vitcos-Vilcabamba valley before conquest",
+          "name": "Vilcabamba"
+        },
+        {
+          "date": "1572.9.4",
+          "date_source_note": "Spanish town founded by Martín Hurtado de Arbieto near Lucma",
+          "name": "San Francisco de la Victoria de Vilcabamba"
+        },
+        {
+          "date": "1857.1.2",
+          "date_source_note": "Confirmed as Vilcabamba district in Peruvian republican law",
+          "name": "Vilcabamba"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.22,
+        -78.512
+      ],
+      "country": "Ecuador",
+      "earliest_year": 400,
+      "existing_historical_names": [
+        {
+          "date": "980.1.1",
+          "name": "Kitu"
+        },
+        {
+          "date": "1534.12.6",
+          "name": "San Francisco de Quito"
+        },
+        {
+          "date": "1800.1.1",
+          "name": "Quito"
+        }
+      ],
+      "existing_meta_index": 3690,
+      "existing_meta_name": "Quito",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Quito Pre-Inca-Ecuador",
+      "known_aliases": [
+        "Quito Pre-Inca",
+        "quito pre-inca",
+        "la florida",
+        "quitu-cara",
+        "La Florida",
+        "Quitu-Cara"
+      ],
+      "latest_year": 1430,
+      "max_pop": 14800,
+      "name": "Quito Pre-Inca",
+      "reason": "under_covered_history",
+      "region": "ca_equatorial_sierra_canari",
+      "sample_years": [
+        400,
+        900,
+        1300,
+        1430
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Kitu",
+      "historical_names": [
+        {
+          "date": "400.1.1",
+          "date_source_note": "Pre-Inca Quitu settlement in the Quito basin (La Florida archaeological phase, ca. 400-1430 CE) prior to Inca and Spanish conquest",
+          "name": "Kitu"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.55228,
+        -68.68108
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Tiwanaku"
+        }
+      ],
+      "existing_meta_index": 4477,
+      "existing_meta_name": "Tiwanaku",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Tiahuanacu-Bolivia",
+      "known_aliases": [
+        "Tiahuanacu",
+        "tiahuanacu",
+        "tiaguanaco",
+        "Tiaguanaco"
+      ],
+      "latest_year": 2026,
+      "max_pop": 13738,
+      "name": "Tiahuanacu",
+      "reason": "under_covered_history",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1525,
+        1846,
+        1960,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Tiahuanacu",
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "date_source_note": "Attested pre-colonial Aymara indigenous endonym ('stone at the centre', recorded in Bernabé Cobo's 1653 chronicle) of the Tiwanaku ceremonial and urban capital prior to Spanish contact",
+          "name": "Taypikala"
+        },
+        {
+          "date": "1549.1.1",
+          "date_source_note": "Hispanicised colonial-era toponym recorded by Pedro Cieza de León (1549), used for the colonial reducción (San Pedro de Tiahuanacu) and retained as Bolivia's official statutory/INE municipal name (Gobierno Autónomo Municipal de Tiahuanacu, Provincia Ingavi)",
+          "name": "Tiahuanacu"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        0.335,
+        -78.17
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1683,
+      "existing_historical_names": [
+        {
+          "date": "1885.1.1",
+          "name": "Ibarra"
+        }
+      ],
+      "existing_meta_index": 1873,
+      "existing_meta_name": "Ibarra",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "San Antonio de Ibarra-Ecuador",
+      "known_aliases": [
+        "San Antonio de Ibarra",
+        "san antonio de ibarra",
+        "san antonio de carangue",
+        "San Antonio de Carangue"
+      ],
+      "latest_year": 2022,
+      "max_pop": 13626,
+      "name": "San Antonio de Ibarra",
+      "reason": "under_covered_history",
+      "region": "ecu_imbabura",
+      "sample_years": [
+        1683,
+        1830,
+        1970,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Antonio de Ibarra",
+      "historical_names": [
+        {
+          "date": "1683.1.1",
+          "date_source_note": "Earliest gazetteer horizon; Franciscan reducción recorded 1693 as San Antonio de Carangue",
+          "name": "San Antonio de Carangue"
+        },
+        {
+          "date": "1861.5.29",
+          "date_source_note": "Constituted as civil parish under Ecuadorian Territorial Division Law",
+          "name": "San Antonio de Ibarra"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.438,
+        -70.659
+      ],
+      "country": "Chile",
+      "earliest_year": 1536,
+      "existing_historical_names": [
+        {
+          "date": "1657.1.1",
+          "name": "Santiago"
+        }
+      ],
+      "existing_meta_index": 3954,
+      "existing_meta_name": "Santiago",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Santa Ana-Chile_2",
+      "known_aliases": [
+        "Santa Ana",
+        "santa ana",
+        "santiago de chile",
+        "Santiago de Chile"
+      ],
+      "latest_year": 1830,
+      "max_pop": 9909,
+      "name": "Santa Ana",
+      "reason": "under_covered_history",
+      "region": "crp_obispado_santiago",
+      "sample_years": [
+        1536,
+        1650,
+        1780,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Santa Ana",
+      "historical_names": [
+        {
+          "date": "1536.1.1",
+          "date_source_note": "Pre-Hispanic Mapocho valley settlement at earliest dataset horizon",
+          "name": "Mapocho"
+        },
+        {
+          "date": "1541.2.12",
+          "date_source_note": "Spanish colonial city founded by Pedro de Valdivia",
+          "name": "Santiago del Nuevo Extremo"
+        },
+        {
+          "date": "1576.1.1",
+          "date_source_note": "Hermitage and parish of Santa Ana established in western Santiago",
+          "name": "Santa Ana"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.9,
+        -79.005
+      ],
+      "country": "Ecuador",
+      "earliest_year": 600,
+      "existing_historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Cuenca"
+        }
+      ],
+      "existing_meta_index": 1050,
+      "existing_meta_name": "Cuenca",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Guapondelig-Ecuador",
+      "known_aliases": [
+        "Guapondelig",
+        "guapondelig",
+        "cuenca cañari",
+        "Cuenca Cañari"
+      ],
+      "latest_year": 1430,
+      "max_pop": 9640,
+      "name": "Guapondelig",
+      "reason": "under_covered_history",
+      "region": "ca_equatorial_sierra_canari",
+      "sample_years": [
+        600,
+        1000,
+        1430
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Guapondelig",
+      "historical_names": [
+        {
+          "date": "600.1.1",
+          "date_source_note": "Pre-colonial Cañari urban and ceremonial capital (ca. 600-1470 CE) prior to Inca rebuilding as Tumipampa",
+          "name": "Guapondelig"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.618,
+        -60.703
+      ],
+      "country": "Argentina",
+      "earliest_year": 1573,
+      "existing_historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Santa Fe"
+        }
+      ],
+      "existing_meta_index": 3949,
+      "existing_meta_name": "Santa Fé",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Santa Fe de la Vera Cruz-Argentina",
+      "known_aliases": [
+        "Santa Fe de la Vera Cruz",
+        "santa fe de la vera cruz",
+        "san roque",
+        "San Roque"
+      ],
+      "latest_year": 1830,
+      "max_pop": 8571,
+      "name": "Santa Fe de la Vera Cruz",
+      "reason": "under_covered_history",
+      "region": "crp_intendencia_buenos_aires",
+      "sample_years": [
+        1573,
+        1700,
+        1798,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Santa Fe de la Vera Cruz",
+      "historical_names": [
+        {
+          "date": "1573.11.15",
+          "date_source_note": "Founded by Juan de Garay at Cayastá as Santa Fe",
+          "name": "Santa Fe"
+        },
+        {
+          "date": "1661.1.1",
+          "date_source_note": "Relocated to current site as Santa Fe de la Vera Cruz",
+          "name": "Santa Fe de la Vera Cruz"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.593,
+        -69.227
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1694,
+      "existing_historical_names": [
+        {
+          "date": "1888.1.1",
+          "name": "Araure"
+        }
+      ],
+      "existing_meta_index": 264,
+      "existing_meta_name": "Araure",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Villa de Araure-Venezuela",
+      "known_aliases": [
+        "Villa de Araure",
+        "villa de araure",
+        "pilar de zaragoza y araure",
+        "Pilar de Zaragoza y Araure"
+      ],
+      "latest_year": 1830,
+      "max_pop": 7835,
+      "name": "Villa de Araure",
+      "reason": "under_covered_history",
+      "region": "vng_capitania_caracas_maracaibo",
+      "sample_years": [
+        1694,
+        1800,
+        1809,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Araure",
+      "historical_names": [
+        {
+          "date": "1694.7.6",
+          "date_source_note": "Formally founded on 6 July 1694 by José Ramírez de Arellano and Fray Ildefonso de Zaragoza under Royal Cédula of 15 June 1692; relocated to the Quebrada de Araure in 1696",
+          "name": "Villa de Nuestra Señora del Pilar de Zaragoza de Araure"
+        },
+        {
+          "date": "1811.7.5",
+          "date_source_note": "Venezuelan Declaration of Independence on 5 July 1811 and republican administrative shortening to Araure",
+          "name": "Araure"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        11.404,
+        -69.673
+      ],
+      "country": "Venezuela",
+      "earliest_year": 600,
+      "existing_historical_names": [
+        {
+          "date": "1873.1.1",
+          "name": "Coro"
+        }
+      ],
+      "existing_meta_index": 1028,
+      "existing_meta_name": "Coro",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Todariquiba-Venezuela",
+      "known_aliases": [
+        "Todariquiba",
+        "todariquiba",
+        "coro caquetío",
+        "dabajuro",
+        "Coro Caquetío",
+        "Dabajuro"
+      ],
+      "latest_year": 1500,
+      "max_pop": 7650,
+      "name": "Todariquiba",
+      "reason": "under_covered_history",
+      "region": "na_caribbean_maracaibo_tairona",
+      "sample_years": [
+        600,
+        1100,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Todariquiba",
+      "historical_names": [
+        {
+          "date": "600.1.1",
+          "date_source_note": "Pre-colonial Caquetío paramount settlement on the Falcón coast (Dabajuro archaeological horizon, ca. 600-1527 CE) prior to the foundation of Santa Ana de Coro",
+          "name": "Todariquiba"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.6649,
+        -76.7874
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1650.1.1",
+          "name": "Sion"
+        }
+      ],
+      "existing_meta_index": 4118,
+      "existing_meta_name": "Sion",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "Sion-Peru",
+      "known_aliases": [
+        "Sion",
+        "sion",
+        "jesus de monte sion",
+        "Jesus de Monte Sion"
+      ],
+      "latest_year": 2017,
+      "max_pop": 6981,
+      "name": "Sion",
+      "reason": "under_covered_history",
+      "region": "per_san_martin",
+      "sample_years": [
+        1525,
+        1700,
+        1920,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sión",
+      "historical_names": [
+        {
+          "date": "1676.1.1",
+          "date_source_note": "Franciscan reduction established among Hibitos preceding Monte Sión split",
+          "name": "Jesús de Ochanache"
+        },
+        {
+          "date": "1700.1.1",
+          "date_source_note": "Franciscan mission established; attested by Fray Manuel Amich in 1767",
+          "name": "Jesús de Monte Sión"
+        },
+        {
+          "date": "1857.1.2",
+          "date_source_note": "Shortened name in Peruvian republican administrative records",
+          "name": "Sión"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.449,
+        -70.643
+      ],
+      "country": "Chile",
+      "earliest_year": 1540,
+      "existing_historical_names": [
+        {
+          "date": "1657.1.1",
+          "name": "Santiago"
+        }
+      ],
+      "existing_meta_index": 3954,
+      "existing_meta_name": "Santiago",
+      "existing_shard_file": "00_capitals.json",
+      "is_capital": true,
+      "is_indigenous_region": true,
+      "key": "San Isidro-Chile_2",
+      "known_aliases": [
+        "San Isidro",
+        "san isidro",
+        "santiago de chile",
+        "santa ana",
+        "Santa Ana"
+      ],
+      "latest_year": 1830,
+      "max_pop": 6164,
+      "name": "San Isidro",
+      "reason": "under_covered_history",
+      "region": "crp_obispado_santiago",
+      "sample_years": [
+        1540,
+        1625,
+        1755,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Isidro",
+      "historical_names": [
+        {
+          "date": "1540.1.1",
+          "date_source_note": "Pre-Hispanic Mapocho valley settlement at earliest dataset horizon",
+          "name": "Mapocho"
+        },
+        {
+          "date": "1541.2.12",
+          "date_source_note": "Spanish colonial city founded by Pedro de Valdivia",
+          "name": "Santiago del Nuevo Extremo"
+        },
+        {
+          "date": "1686.5.15",
+          "date_source_note": "Parish of San Isidro Labrador founded by Bishop Diego de Umanzoro",
+          "name": "San Isidro"
+        }
+      ]
+    }
+  ]
+}

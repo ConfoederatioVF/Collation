@@ -1,0 +1,1074 @@
+{
+  "batch_index": 428,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -17.19218,
+        -71.73177
+      ],
+      "country": "Peru",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Punta de Bombón-Peru_2",
+      "known_aliases": [
+        "Punta de Bombón",
+        "punta de bombón",
+        "pampa amancaes",
+        "Pampa Amancaes"
+      ],
+      "latest_year": 1532,
+      "max_pop": 1298,
+      "name": "Punta de Bombón",
+      "reason": "missing_entry",
+      "region": "inca_contisuyu",
+      "sample_years": [
+        0,
+        1200,
+        1470,
+        1532
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.38545,
+        -74.01901
+      ],
+      "country": "Colombia",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Piedra de los Pinos-Colombia",
+      "known_aliases": [
+        "Piedra de los Pinos",
+        "piedra de los pinos"
+      ],
+      "latest_year": 1500,
+      "max_pop": 1298,
+      "name": "Piedra de los Pinos",
+      "reason": "missing_entry",
+      "region": "na_magdalena_cauca_muisca",
+      "sample_years": [
+        1300,
+        1400,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.59612,
+        -75.90477
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Capitán Augusto Rivadeneyra-Ecuador",
+      "known_aliases": [
+        "Capitán Augusto Rivadeneyra",
+        "capitán augusto rivadeneyra"
+      ],
+      "latest_year": 2025,
+      "max_pop": 1297,
+      "name": "Capitán Augusto Rivadeneyra",
+      "reason": "missing_entry",
+      "region": "ecu_sucumbios",
+      "sample_years": [
+        1950,
+        1990,
+        2015,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.91639,
+        -65.39806
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chipiriri-Bolivia",
+      "known_aliases": [
+        "Chipiriri",
+        "chipiriri"
+      ],
+      "latest_year": 2024,
+      "max_pop": 1297,
+      "name": "Chipiriri",
+      "reason": "missing_entry",
+      "region": "bol_cochabamba",
+      "sample_years": [
+        1880,
+        1950,
+        1990,
+        2024
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.67355,
+        -61.07478
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Carlos Norte-Argentina",
+      "known_aliases": [
+        "San Carlos Norte",
+        "san carlos norte"
+      ],
+      "latest_year": 2022,
+      "max_pop": 1297,
+      "name": "San Carlos Norte",
+      "reason": "missing_entry",
+      "region": "arg_santa_fe",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.628,
+        -64.421
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1776,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Maximo Aribi-Venezuela",
+      "known_aliases": [
+        "San Maximo Aribi",
+        "san maximo aribi"
+      ],
+      "latest_year": 1781,
+      "max_pop": 1297,
+      "name": "San Maximo Aribi",
+      "reason": "missing_entry",
+      "region": "vng_cumana_guayana_margarita",
+      "sample_years": [
+        1776,
+        1780,
+        1781
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.25053,
+        -72.98529
+      ],
+      "country": "Peru",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chaupo-Peru",
+      "known_aliases": [
+        "Chaupo",
+        "chaupo",
+        "ancalla mogo",
+        "conculla",
+        "Ancalla Mogo",
+        "Conculla"
+      ],
+      "latest_year": 1530,
+      "max_pop": 1297,
+      "name": "Chaupo",
+      "reason": "missing_entry",
+      "region": "inca_contisuyu",
+      "sample_years": [
+        0,
+        1200,
+        1470,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.78223,
+        -73.06555
+      ],
+      "country": "Colombia",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Tabacal-Colombia",
+      "known_aliases": [
+        "El Tabacal",
+        "el tabacal",
+        "cascada la mojarra",
+        "cueva de las tejedoras",
+        "la represa",
+        "yacimiento",
+        "mesa de los santos",
+        "cruz de la mojarra",
+        "fondo del parque la mojarra",
+        "guane",
+        "pradera de la mojarra",
+        "Cascada La Mojarra",
+        "Cueva de Las Tejedoras",
+        "La Represa",
+        "Yacimiento",
+        "Cruz de la Mojarra",
+        "Fondo del Parque La Mojarra",
+        "Guane",
+        "Pradera de La Mojarra"
+      ],
+      "latest_year": 1500,
+      "max_pop": 1297,
+      "name": "El Tabacal",
+      "reason": "missing_entry",
+      "region": "na_magdalena_cauca_muisca",
+      "sample_years": [
+        -3000,
+        0,
+        1200,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.54302,
+        -74.27786
+      ],
+      "country": "Colombia",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Charquito-Colombia",
+      "known_aliases": [
+        "Charquito",
+        "charquito",
+        "tequendama zn",
+        "tequendama 1 y",
+        "tequendama er",
+        "Tequendama 1 y",
+        "Tequendama ER"
+      ],
+      "latest_year": 2018,
+      "max_pop": 1296,
+      "name": "Charquito",
+      "reason": "missing_entry",
+      "region": "col_cundinamarca",
+      "sample_years": [
+        500,
+        1400,
+        1970,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.4772,
+        -75.71116
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Jerónimo (col_caldas)-Colombia",
+      "known_aliases": [
+        "San Jerónimo",
+        "san jerónimo"
+      ],
+      "latest_year": 2018,
+      "max_pop": 1296,
+      "name": "San Jerónimo",
+      "reason": "missing_entry",
+      "region": "col_caldas",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.72597,
+        -71.4358
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cuncumén (chl_region_de_valparaiso)-Chile",
+      "known_aliases": [
+        "Cuncumén",
+        "cuncumén",
+        "cuncumen"
+      ],
+      "latest_year": 2017,
+      "max_pop": 1296,
+      "name": "Cuncumén",
+      "reason": "missing_entry",
+      "region": "chl_region_de_valparaiso",
+      "sample_years": [
+        1525,
+        1750,
+        1920,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.288,
+        -63.69
+      ],
+      "country": "Argentina",
+      "earliest_year": 1536,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Carlos (crp_gobernacion_tucuman)-Argentina",
+      "known_aliases": [
+        "San Carlos",
+        "san carlos",
+        "la luisiana",
+        "La Luisiana"
+      ],
+      "latest_year": 1830,
+      "max_pop": 1296,
+      "name": "San Carlos",
+      "reason": "missing_entry",
+      "region": "crp_gobernacion_tucuman",
+      "sample_years": [
+        1536,
+        1650,
+        1780,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.05242,
+        -65.48251
+      ],
+      "country": "Argentina",
+      "earliest_year": 80,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Las Higueras-Argentina_2",
+      "known_aliases": [
+        "Las Higueras",
+        "las higueras"
+      ],
+      "latest_year": 1500,
+      "max_pop": 1296,
+      "name": "Las Higueras",
+      "reason": "missing_entry",
+      "region": "sc_nw_andes_sierras_cuyo",
+      "sample_years": [
+        80,
+        500,
+        800,
+        1000,
+        1200,
+        1300,
+        1400,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.7248,
+        -77.7447
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Los Arenales-Peru",
+      "known_aliases": [
+        "Los Arenales",
+        "los arenales",
+        "la ensenada",
+        "potao",
+        "victor raul haya de la torre - el molino",
+        "La Ensenada",
+        "Potao",
+        "Victor Raul Haya de la Torre - el Molino"
+      ],
+      "latest_year": 2017,
+      "max_pop": 1295,
+      "name": "Los Arenales",
+      "reason": "missing_entry",
+      "region": "per_lima",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.34611,
+        -72.12833
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan de Siguas-Peru",
+      "known_aliases": [
+        "San Juan de Siguas",
+        "san juan de siguas"
+      ],
+      "latest_year": 2025,
+      "max_pop": 1295,
+      "name": "San Juan de Siguas",
+      "reason": "missing_entry",
+      "region": "per_arequipa",
+      "sample_years": [
+        1850,
+        1950,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.17957,
+        -69.8355
+      ],
+      "country": "Peru",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Arapa-Peru_2",
+      "known_aliases": [
+        "Arapa",
+        "arapa",
+        "huanca wichinca",
+        "sangraña pata",
+        "Huanca Wichinca",
+        "Sangraña Pata"
+      ],
+      "latest_year": 1532,
+      "max_pop": 1295,
+      "name": "Arapa",
+      "reason": "missing_entry",
+      "region": "inca_collasuyu",
+      "sample_years": [
+        500,
+        1300,
+        1470,
+        1532
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.0965,
+        -78.97724
+      ],
+      "country": "Peru",
+      "earliest_year": 1438,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Huaca Sacachique-Peru",
+      "known_aliases": [
+        "Huaca Sacachique",
+        "huaca sacachique",
+        "cerro pesqueda",
+        "las casuarinas",
+        "Cerro Pesqueda",
+        "Las Casuarinas"
+      ],
+      "latest_year": 1530,
+      "max_pop": 1295,
+      "name": "Huaca Sacachique",
+      "reason": "missing_entry",
+      "region": "inca_chinchaysuyu",
+      "sample_years": [
+        1438,
+        1470,
+        1500,
+        1525,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.79054,
+        -74.54636
+      ],
+      "country": "Colombia",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Yan-Colombia",
+      "known_aliases": [
+        "Yan",
+        "yan"
+      ],
+      "latest_year": 1500,
+      "max_pop": 1295,
+      "name": "Yan",
+      "reason": "missing_entry",
+      "region": "na_magdalena_cauca_muisca",
+      "sample_years": [
+        500,
+        800,
+        1000,
+        1200,
+        1300,
+        1400,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.90659,
+        -73.45354
+      ],
+      "country": "Peru",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "M.A. Chacra Horizonte-Peru",
+      "known_aliases": [
+        "M.A. Chacra Horizonte",
+        "m.a. chacra horizonte",
+        "m.a. san felipe escuela",
+        "M.A. San Felipe Escuela"
+      ],
+      "latest_year": 1438,
+      "max_pop": 1295,
+      "name": "M.A. Chacra Horizonte",
+      "reason": "missing_entry",
+      "region": "ca_eastern_montana_yungas",
+      "sample_years": [
+        -2000,
+        0,
+        1200,
+        1438
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.61944,
+        -63.26667
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Boquerón de Amana-Venezuela",
+      "known_aliases": [
+        "Boquerón de Amana",
+        "boquerón de amana"
+      ],
+      "latest_year": 2011,
+      "max_pop": 1294,
+      "name": "Boquerón de Amana",
+      "reason": "missing_entry",
+      "region": "ven_monagas",
+      "sample_years": [
+        1880,
+        1950,
+        1990,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.89833,
+        -63.92611
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Isleta-Venezuela",
+      "known_aliases": [
+        "La Isleta",
+        "la isleta"
+      ],
+      "latest_year": 2011,
+      "max_pop": 1293,
+      "name": "La Isleta",
+      "reason": "missing_entry",
+      "region": "ven_nueva_esparta",
+      "sample_years": [
+        1880,
+        1950,
+        1990,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        7.91944,
+        -72.17278
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Potrero de Las Casas-Venezuela",
+      "known_aliases": [
+        "Potrero de Las Casas",
+        "potrero de las casas"
+      ],
+      "latest_year": 2011,
+      "max_pop": 1293,
+      "name": "Potrero de Las Casas",
+      "reason": "missing_entry",
+      "region": "ven_tachira",
+      "sample_years": [
+        1880,
+        1950,
+        1990,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -6.6754,
+        -76.624
+      ],
+      "country": "Peru",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Martha-Peru",
+      "known_aliases": [
+        "Santa Martha",
+        "santa martha"
+      ],
+      "latest_year": 2017,
+      "max_pop": 1293,
+      "name": "Santa Martha",
+      "reason": "missing_entry",
+      "region": "per_san_martin",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2007,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.71292,
+        -63.55657
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Yaguacua-Bolivia",
+      "known_aliases": [
+        "Yaguacua",
+        "yaguacua"
+      ],
+      "latest_year": 2024,
+      "max_pop": 1293,
+      "name": "Yaguacua",
+      "reason": "missing_entry",
+      "region": "bol_tarija",
+      "sample_years": [
+        1880,
+        1950,
+        1990,
+        2024
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.30111,
+        -80.7532
+      ],
+      "country": "Peru",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Huaca Chaquira-Peru",
+      "known_aliases": [
+        "Huaca Chaquira",
+        "huaca chaquira",
+        "elemento arqueológico aislado huaca el peñal",
+        "huaca loma negra",
+        "huaca loma negra del colegio",
+        "huaca ricardo palma",
+        "huaca de gaviano",
+        "Elemento Arqueológico Aislado Huaca el Peñal",
+        "Huaca Loma Negra",
+        "Huaca Loma Negra del Colegio",
+        "Huaca Ricardo Palma",
+        "Huaca de Gaviano"
+      ],
+      "latest_year": 1530,
+      "max_pop": 1293,
+      "name": "Huaca Chaquira",
+      "reason": "missing_entry",
+      "region": "inca_chinchaysuyu",
+      "sample_years": [
+        -2000,
+        800,
+        1438,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.27374,
+        -75.64847
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Palma (col_antioquia)-Colombia",
+      "known_aliases": [
+        "La Palma",
+        "la palma",
+        "el patio",
+        "las playas",
+        "san cristobal",
+        "El Patio",
+        "Las Playas",
+        "San Cristobal"
+      ],
+      "latest_year": 2018,
+      "max_pop": 1292,
+      "name": "La Palma",
+      "reason": "missing_entry",
+      "region": "col_antioquia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.4043,
+        -70.3182
+      ],
+      "country": "Peru",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Manoa (puerto Manoa Oroya)-Peru",
+      "known_aliases": [
+        "Manoa (puerto Manoa Oroya)",
+        "manoa",
+        "oroya",
+        "Oroya"
+      ],
+      "latest_year": 2017,
+      "max_pop": 1292,
+      "name": "Manoa (puerto Manoa Oroya)",
+      "reason": "missing_entry",
+      "region": "per_puno",
+      "sample_years": [
+        1880,
+        1950,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.9612,
+        -75.6949
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pampa de la Isla-Peru",
+      "known_aliases": [
+        "Pampa de la Isla",
+        "pampa de la isla",
+        "galagarza",
+        "Galagarza"
+      ],
+      "latest_year": 2017,
+      "max_pop": 1292,
+      "name": "Pampa de la Isla",
+      "reason": "missing_entry",
+      "region": "per_ica",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.94067,
+        -71.12011
+      ],
+      "country": "Chile",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Altovalsol-Chile",
+      "known_aliases": [
+        "Altovalsol",
+        "altovalsol"
+      ],
+      "latest_year": 2017,
+      "max_pop": 1292,
+      "name": "Altovalsol",
+      "reason": "missing_entry",
+      "region": "chl_region_de_coquimbo",
+      "sample_years": [
+        1880,
+        1950,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        2.827,
+        -76.374
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Litago-Colombia",
+      "known_aliases": [
+        "Litago",
+        "litago"
+      ],
+      "latest_year": 1830,
+      "max_pop": 1292,
+      "name": "Litago",
+      "reason": "missing_entry",
+      "region": "vng_antioquia_popayan_choco",
+      "sample_years": [
+        1525,
+        1600,
+        1750,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    }
+  ]
+}

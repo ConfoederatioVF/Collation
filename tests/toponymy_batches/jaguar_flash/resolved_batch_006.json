@@ -1,0 +1,1628 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 6,
+  "count": 30,
+  "errors_remaining": 0,
+  "project": "JAGUAR",
+  "rounds": 3,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        19.08209,
+        -71.83855
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Thomassique-Haiti",
+      "known_aliases": [
+        "Thomassique",
+        "thomassique"
+      ],
+      "latest_year": 2024,
+      "max_pop": 85148,
+      "name": "Thomassique",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Thomassique",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Thomassique"
+        }
+      ],
+      "other_names": [
+        "Tomasik"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19,
+        -70.16667
+      ],
+      "country": "Dominican Republic",
+      "earliest_year": 1510,
+      "existing_historical_names": [
+        {
+          "date": "1970.1.1",
+          "name": "Cotuí"
+        }
+      ],
+      "existing_meta_index": 3448,
+      "existing_meta_name": "Cotuí",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cotuí-Dominican Republic",
+      "known_aliases": [
+        "Cotuí",
+        "cotuí",
+        "cotui"
+      ],
+      "latest_year": 2022,
+      "max_pop": 84193,
+      "name": "Cotuí",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1510,
+        1606,
+        1808,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Cotuí",
+      "historical_names": [
+        {
+          "date": "1505.1.1",
+          "name": "Cotuí"
+        },
+        {
+          "date": "1533.1.1",
+          "name": "La Mejorada del Cotuí"
+        },
+        {
+          "date": "1844.2.27",
+          "name": "Cotuí"
+        }
+      ],
+      "other_names": [
+        "Cotui",
+        "Cotoy",
+        "Las Minas del Cotuí"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        8.4273,
+        -82.4308
+      ],
+      "country": "Panama",
+      "earliest_year": 1680,
+      "existing_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Chiriquí"
+        }
+      ],
+      "existing_meta_index": 409,
+      "existing_meta_name": "Chiriquí",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "David-Panama",
+      "known_aliases": [
+        "David",
+        "david"
+      ],
+      "latest_year": 2023,
+      "max_pop": 82907,
+      "name": "David",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1680,
+        1911,
+        1970,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "David",
+      "historical_names": [
+        {
+          "date": "1602.3.19",
+          "name": "San José de David"
+        },
+        {
+          "date": "1849.5.26",
+          "name": "David"
+        }
+      ],
+      "other_names": [
+        "Ciudad de David",
+        "San Jose de David"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        17.02728,
+        -96.73436
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Santa Cruz Xoxocotlán"
+        }
+      ],
+      "existing_meta_index": 3080,
+      "existing_meta_name": "Santa Cruz Xoxocotlán",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Cruz Xoxocotlán-Mexico",
+      "known_aliases": [
+        "Santa Cruz Xoxocotlán",
+        "santa cruz xoxocotlán",
+        "santa cruz xoxocotlan"
+      ],
+      "latest_year": 2020,
+      "max_pop": 81848,
+      "name": "Santa Cruz Xoxocotlán",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Santa Cruz Xoxocotlán",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Santa Cruz Xoxocotlán"
+        }
+      ],
+      "other_names": [
+        "Xoxocotlán",
+        "Jojocotlán",
+        "Xocotlán",
+        "Santa Cruz Xoxocotlan"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        22.93651,
+        -82.15229
+      ],
+      "country": "Cuba",
+      "earliest_year": 1808,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "San José de las Lajas"
+        }
+      ],
+      "existing_meta_index": 3044,
+      "existing_meta_name": "San José de las Lajas",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San José de las Lajas-Cuba",
+      "known_aliases": [
+        "San José de las Lajas",
+        "san josé de las lajas",
+        "san jose de las lajas"
+      ],
+      "latest_year": 2022,
+      "max_pop": 81261,
+      "name": "San José de las Lajas",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1808,
+        1821,
+        1850,
+        1900,
+        2002,
+        2012,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San José de las Lajas",
+      "historical_names": [
+        {
+          "date": "1778.1.1",
+          "name": "San José de las Lajas"
+        }
+      ],
+      "other_names": [
+        "Las Lajas",
+        "San Jose de las Lajas"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.04415,
+        -85.74872
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1995,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Tuma - La Dalia-Nicaragua",
+      "known_aliases": [
+        "El Tuma - La Dalia",
+        "el tuma - la dalia"
+      ],
+      "latest_year": 2023,
+      "max_pop": 81043,
+      "name": "El Tuma - La Dalia",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        1995,
+        2005,
+        2015,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "El Tuma - La Dalia",
+      "historical_names": [
+        {
+          "date": "1989.1.1",
+          "name": "El Tuma - La Dalia"
+        }
+      ],
+      "other_names": [
+        "La Dalia",
+        "El Tuma",
+        "El Tuma-La Dalia"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        21.01868,
+        -101.85852
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "San Francisco del Rincón"
+        }
+      ],
+      "existing_meta_index": 2292,
+      "existing_meta_name": "San Francisco del Rincón",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Francisco del Rincón-Mexico",
+      "known_aliases": [
+        "San Francisco del Rincón",
+        "san francisco del rincón",
+        "san francisco del rincon"
+      ],
+      "latest_year": 2020,
+      "max_pop": 79772,
+      "name": "San Francisco del Rincón",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "San Francisco del Rincón",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "El Tule"
+        },
+        {
+          "date": "1607.1.20",
+          "name": "San Francisco del Rincón"
+        }
+      ],
+      "other_names": [
+        "San Francisco del Tule",
+        "El Rincón",
+        "San Francisco del Rincon"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.95319,
+        -72.15453
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Boucan Carré-Haiti",
+      "known_aliases": [
+        "Boucan Carré",
+        "boucan carré"
+      ],
+      "latest_year": 2024,
+      "max_pop": 79705,
+      "name": "Boucan Carré",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Boucan Carré",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Boucan Carré"
+        }
+      ],
+      "other_names": [
+        "Boukan Kare",
+        "Boucan Carre"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        19.535,
+        -97.469
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Cantona"
+        }
+      ],
+      "existing_meta_index": 118,
+      "existing_meta_name": "Cantona",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cantona Site-Mexico",
+      "known_aliases": [
+        "Cantona Site",
+        "cantona site"
+      ],
+      "latest_year": 950,
+      "max_pop": 79400,
+      "name": "Cantona Site",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -300,
+        200,
+        600,
+        800,
+        950
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Cantona",
+      "historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Cantona"
+        }
+      ],
+      "other_names": [
+        "Cantona Site"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        25.56555,
+        -108.47182
+      ],
+      "country": "Mexico",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "950.1.1",
+          "name": "Guasave"
+        }
+      ],
+      "existing_meta_index": 356,
+      "existing_meta_name": "Guasave",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guasave-Mexico",
+      "known_aliases": [
+        "Guasave",
+        "guasave"
+      ],
+      "latest_year": 2020,
+      "max_pop": 77849,
+      "name": "Guasave",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        -500,
+        1400,
+        1950,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Guasave",
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Guasave"
+        }
+      ],
+      "other_names": [
+        "San Pedro Guasave",
+        "Guazave",
+        "Huazave"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        16.17589,
+        -95.19216
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Salina Cruz"
+        }
+      ],
+      "existing_meta_index": 2289,
+      "existing_meta_name": "Salina Cruz",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Salina Cruz-Mexico",
+      "known_aliases": [
+        "Salina Cruz",
+        "salina cruz"
+      ],
+      "latest_year": 2020,
+      "max_pop": 76660,
+      "name": "Salina Cruz",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Salina Cruz",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Salina Cruz"
+        }
+      ],
+      "other_names": [
+        "La Salina Cruz"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        25.59101,
+        -100.00159
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Cadereyta Jiménez"
+        }
+      ],
+      "existing_meta_index": 2262,
+      "existing_meta_name": "Cadereyta Jiménez",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cadereyta Jiménez-Mexico",
+      "known_aliases": [
+        "Cadereyta Jiménez",
+        "cadereyta jiménez"
+      ],
+      "latest_year": 2020,
+      "max_pop": 75721,
+      "name": "Cadereyta Jiménez",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Cadereita Jiménez",
+          "year": 1900
+        },
+        {
+          "name": "Cadereyta Jiménez",
+          "year": 1917
+        }
+      ],
+      "canonical_name": "Cadereyta Jiménez",
+      "historical_names": [
+        {
+          "date": "1637.8.13",
+          "name": "San Juan Bautista de Cadereyta"
+        },
+        {
+          "date": "1825.5.28",
+          "name": "Cadereyta Jiménez"
+        }
+      ],
+      "other_names": [
+        "Cadereita Jiménez",
+        "Villa de San Juan Bautista de Cadereyta",
+        "Cadereyta Jimenez"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        13.9248,
+        -86.10176
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1963.1.1",
+          "name": "Jalapa"
+        }
+      ],
+      "existing_meta_index": 3284,
+      "existing_meta_name": "Jalapa",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Jalapa-Nicaragua",
+      "known_aliases": [
+        "Jalapa",
+        "jalapa"
+      ],
+      "latest_year": 2023,
+      "max_pop": 74958,
+      "name": "Jalapa",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Jalapa",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Jalapa"
+        }
+      ],
+      "other_names": [
+        "Xalapa",
+        "Xalapan"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        20.39132,
+        -101.18143
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Valle de Santiago"
+        }
+      ],
+      "existing_meta_index": 2304,
+      "existing_meta_name": "Valle de Santiago",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Valle de Santiago-Mexico",
+      "known_aliases": [
+        "Valle de Santiago",
+        "valle de santiago"
+      ],
+      "latest_year": 2020,
+      "max_pop": 72663,
+      "name": "Valle de Santiago",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1900,
+        1970,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Valle de Santiago",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Camémbaro"
+        },
+        {
+          "date": "1607.5.28",
+          "name": "Valle de Santiago"
+        }
+      ],
+      "other_names": [
+        "Camembaro",
+        "Villa del Valle de Santiago"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        14.43,
+        -88.17
+      ],
+      "country": "Honduras",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1857.1.1",
+          "name": "Intibucá"
+        }
+      ],
+      "existing_meta_index": 2114,
+      "existing_meta_name": "Intibucá",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Intibucá-Honduras",
+      "known_aliases": [
+        "Intibucá",
+        "intibucá",
+        "intibuca"
+      ],
+      "latest_year": 2024,
+      "max_pop": 71477,
+      "name": "Intibucá",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        2001,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Intibucá",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Intibucá"
+        }
+      ],
+      "other_names": [
+        "Entepica",
+        "Yntibucá",
+        "Intibuca"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        17.65046,
+        -101.54818
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1970.1.1",
+          "name": "Zihuatanejo"
+        }
+      ],
+      "existing_meta_index": 3499,
+      "existing_meta_name": "Zihuatanejo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zihuatanejo-Mexico",
+      "known_aliases": [
+        "Zihuatanejo",
+        "zihuatanejo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 70760,
+      "name": "Zihuatanejo",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1790,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Zihuatanejo",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Cihuatlán"
+        },
+        {
+          "date": "1527.10.31",
+          "name": "Zihuatanejo"
+        }
+      ],
+      "other_names": [
+        "Zaguatanejo",
+        "Ciguatanejo",
+        "Zihuatanejo de Azueta"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.44735,
+        -66.06804
+      ],
+      "country": "Puerto Rico",
+      "earliest_year": 2020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santurce-Puerto Rico",
+      "known_aliases": [
+        "Santurce",
+        "santurce",
+        "hato rey norte",
+        "Hato Rey Norte"
+      ],
+      "latest_year": 2020,
+      "max_pop": 69469,
+      "name": "Santurce",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Santurce",
+      "historical_names": [
+        {
+          "date": "1773.1.1",
+          "name": "San Mateo de Cangrejos"
+        },
+        {
+          "date": "1880.1.1",
+          "name": "Santurce"
+        }
+      ],
+      "other_names": [
+        "Cangrejos",
+        "Hato Rey Norte"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        20.48351,
+        -100.96373
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Cortázar"
+        }
+      ],
+      "existing_meta_index": 2264,
+      "existing_meta_name": "Cortázar",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cortazar-Mexico",
+      "known_aliases": [
+        "Cortazar",
+        "cortazar"
+      ],
+      "latest_year": 2020,
+      "max_pop": 69371,
+      "name": "Cortazar",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Cortazar",
+      "historical_names": [
+        {
+          "date": "1721.5.5",
+          "name": "San José de los Amoles"
+        },
+        {
+          "date": "1857.10.21",
+          "name": "Cortazar"
+        }
+      ],
+      "other_names": [
+        "Cortázar",
+        "Villa de Cortazar",
+        "Los Amoles",
+        "Degni"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        22.83837,
+        -82.02673
+      ],
+      "country": "Cuba",
+      "earliest_year": 1742,
+      "existing_historical_names": [
+        {
+          "date": "1899.1.1",
+          "name": "Güines"
+        }
+      ],
+      "existing_meta_index": 2227,
+      "existing_meta_name": "Güines",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Güines-Cuba",
+      "known_aliases": [
+        "Güines",
+        "güines",
+        "guines",
+        "Guines"
+      ],
+      "latest_year": 2022,
+      "max_pop": 68840,
+      "name": "Güines",
+      "reason": "under_covered_history",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        1742,
+        1821,
+        1898,
+        2022
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Güines",
+      "historical_names": [
+        {
+          "date": "1735.1.1",
+          "name": "San Julián de los Güines"
+        },
+        {
+          "date": "1899.1.1",
+          "name": "Güines"
+        }
+      ],
+      "other_names": [
+        "Los Güines",
+        "Guines",
+        "San Julian de los Guines"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        15.34752,
+        -88.4052
+      ],
+      "country": "Honduras",
+      "earliest_year": 2001,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Quimistán-Honduras",
+      "known_aliases": [
+        "Quimistán",
+        "quimistán"
+      ],
+      "latest_year": 2024,
+      "max_pop": 67697,
+      "name": "Quimistán",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2001,
+        2013,
+        2023,
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Quimistán",
+      "historical_names": [
+        {
+          "date": "1536.1.1",
+          "name": "Quimistán"
+        }
+      ],
+      "other_names": [
+        "Quimistlán",
+        "Quimistan"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        30.71407,
+        -112.14835
+      ],
+      "country": "Mexico",
+      "earliest_year": 1900,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Heroica Caborca"
+        }
+      ],
+      "existing_meta_index": 2270,
+      "existing_meta_name": "Heroica Caborca",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Heroica Caborca-Mexico",
+      "known_aliases": [
+        "Heroica Caborca",
+        "heroica caborca"
+      ],
+      "latest_year": 2020,
+      "max_pop": 67604,
+      "name": "Heroica Caborca",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1900,
+        1950,
+        1995,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Caborca",
+          "year": 1900
+        },
+        {
+          "name": "Heróica Caborca",
+          "year": 1942
+        },
+        {
+          "name": "Heroica Caborca",
+          "year": 2010
+        }
+      ],
+      "canonical_name": "Heroica Caborca",
+      "historical_names": [
+        {
+          "date": "1693.1.1",
+          "name": "Caborca"
+        },
+        {
+          "date": "1942.1.1",
+          "name": "Heroica Caborca"
+        }
+      ],
+      "other_names": [
+        "La Purísima Concepción de Caborca",
+        "Concepción de Caborca",
+        "Cabóraca",
+        "Heróica Caborca"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        21.1592,
+        -100.91724
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Dolores Hidalgo"
+        }
+      ],
+      "existing_meta_index": 2266,
+      "existing_meta_name": "Dolores Hidalgo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Dolores Hidalgo Cuna de la Independencia Nacional-Mexico",
+      "known_aliases": [
+        "Dolores Hidalgo Cuna de la Independencia Nacional",
+        "dolores hidalgo cuna de la independencia nacional"
+      ],
+      "latest_year": 2020,
+      "max_pop": 67101,
+      "name": "Dolores Hidalgo Cuna de la Independencia Nacional",
+      "reason": "indigenous_stub",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "Dolores Hidalgo",
+          "year": 1900
+        },
+        {
+          "name": "Ciudad de Dolores Hidalgo, Cuna de la Independencia Nacional",
+          "year": 1947
+        },
+        {
+          "name": "Ciudad Dolores Hidalgo, Cuna de la Independencia Nacional",
+          "year": 1950
+        },
+        {
+          "name": "Dolores Hidalgo, Cuna de la Independencia Nacional",
+          "year": 1997
+        },
+        {
+          "name": "Dolores Hidalgo Cuna de la Independencia Nacional",
+          "year": 2000
+        }
+      ],
+      "canonical_name": "Dolores Hidalgo Cuna de la Independencia Nacional",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Cocomacán"
+        },
+        {
+          "date": "1710.1.1",
+          "name": "Nuestra Señora de los Dolores"
+        },
+        {
+          "date": "1824.1.1",
+          "name": "Dolores Hidalgo"
+        },
+        {
+          "date": "1947.1.1",
+          "name": "Dolores Hidalgo Cuna de la Independencia Nacional"
+        }
+      ],
+      "other_names": [
+        "Dolores",
+        "Pueblo de los Dolores",
+        "Congregación de Nuestra Señora de los Dolores",
+        "Ciudad de Dolores Hidalgo, Cuna de la Independencia Nacional",
+        "Ciudad Dolores Hidalgo, Cuna de la Independencia Nacional",
+        "Dolores Hidalgo, Cuna de la Independencia Nacional"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        8.94056,
+        -79.73213
+      ],
+      "country": "Panama",
+      "earliest_year": 2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Juan Demóstenes Arosemena-Panama",
+      "known_aliases": [
+        "Juan Demóstenes Arosemena",
+        "juan demóstenes arosemena"
+      ],
+      "latest_year": 2023,
+      "max_pop": 66474,
+      "name": "Juan Demóstenes Arosemena",
+      "reason": "missing_entry",
+      "region": "central_american_republics",
+      "sample_years": [
+        2000,
+        2010,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Juan Demóstenes Arosemena",
+      "historical_names": [
+        {
+          "date": "2000.1.1",
+          "name": "Juan Demóstenes Arosemena"
+        }
+      ],
+      "other_names": [
+        "Nuevo Arraiján",
+        "Juan Demostenes Arosemena"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.67546,
+        -71.95271
+      ],
+      "country": "Haiti",
+      "earliest_year": 2024,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cornillon-Haiti",
+      "known_aliases": [
+        "Cornillon",
+        "cornillon"
+      ],
+      "latest_year": 2024,
+      "max_pop": 66185,
+      "name": "Cornillon",
+      "reason": "missing_entry",
+      "region": "greater_antilles_modern",
+      "sample_years": [
+        2024
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Cornillon",
+      "historical_names": [
+        {
+          "date": "2024.1.1",
+          "name": "Cornillon"
+        }
+      ],
+      "other_names": [
+        "Grand-Bois",
+        "Kòniyon",
+        "Cornillon / Grand-Bois"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        11.78422,
+        -86.31395
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1920.1.1",
+          "name": "Diriamba"
+        }
+      ],
+      "existing_meta_index": 2510,
+      "existing_meta_name": "Diriamba",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Diriamba-Nicaragua",
+      "known_aliases": [
+        "Diriamba",
+        "diriamba"
+      ],
+      "latest_year": 2023,
+      "max_pop": 65479,
+      "name": "Diriamba",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Diriamba",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Diriamba"
+        }
+      ],
+      "other_names": [
+        "San Sebastián de Diriamba"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        20.07339,
+        -97.05384
+      ],
+      "country": "Mexico",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Martínez de la Torre-Mexico",
+      "known_aliases": [
+        "Martínez de la Torre",
+        "martínez de la torre"
+      ],
+      "latest_year": 2020,
+      "max_pop": 64692,
+      "name": "Martínez de la Torre",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1850,
+        1930,
+        1990,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Martínez de la Torre",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Paso de Novillos"
+        },
+        {
+          "date": "1882.10.27",
+          "name": "Martínez de la Torre"
+        }
+      ],
+      "other_names": [
+        "Martinez de la Torre"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.44867,
+        -95.21257
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "San Andrés Tuxtla"
+        }
+      ],
+      "existing_meta_index": 2291,
+      "existing_meta_name": "San Andrés Tuxtla",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Andrés Tuxtla-Mexico",
+      "known_aliases": [
+        "San Andrés Tuxtla",
+        "san andrés tuxtla",
+        "emiliano zapata",
+        "tepancan",
+        "ranchoapan",
+        "buenavista",
+        "tres de mayo",
+        "san andres tuxtla",
+        "Emiliano Zapata",
+        "Tepancan",
+        "Ranchoapan",
+        "Buenavista",
+        "Tres de Mayo"
+      ],
+      "latest_year": 2020,
+      "max_pop": 64445,
+      "name": "San Andrés Tuxtla",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "official_ahl_history": [
+        {
+          "name": "San Andrés Tuxtla",
+          "year": 1900
+        },
+        {
+          "name": "Los Tuxtlas",
+          "year": 1932
+        }
+      ],
+      "canonical_name": "San Andrés Tuxtla",
+      "historical_names": [
+        {
+          "date": "1520.1.1",
+          "name": "Tzacoalco"
+        },
+        {
+          "date": "1580.1.1",
+          "name": "San Andrés Tuxtla"
+        },
+        {
+          "date": "1932.1.1",
+          "name": "Los Tuxtlas"
+        },
+        {
+          "date": "1938.1.1",
+          "name": "San Andrés Tuxtla"
+        }
+      ],
+      "other_names": [
+        "San Andrés Tzacoalco",
+        "Tochtlan",
+        "San Andres Tuxtla"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        18.84098,
+        -99.18324
+      ],
+      "country": "Mexico",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Emiliano Zapata-Mexico",
+      "known_aliases": [
+        "Emiliano Zapata",
+        "emiliano zapata"
+      ],
+      "latest_year": 2020,
+      "max_pop": 64084,
+      "name": "Emiliano Zapata",
+      "reason": "missing_entry",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1940,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Emiliano Zapata",
+      "historical_names": [
+        {
+          "date": "1932.12.14",
+          "name": "Emiliano Zapata"
+        }
+      ],
+      "other_names": [
+        "San Vicente Zacualpan",
+        "Zacualpan",
+        "San Vicente"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        21.96127,
+        -102.34342
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Jesús María"
+        }
+      ],
+      "existing_meta_index": 2891,
+      "existing_meta_name": "Jesús María",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Jesús María-Mexico",
+      "known_aliases": [
+        "Jesús María",
+        "jesús maría",
+        "jesus maria"
+      ],
+      "latest_year": 2020,
+      "max_pop": 63805,
+      "name": "Jesús María",
+      "reason": "under_covered_history",
+      "region": "mexico_after_independence",
+      "sample_years": [
+        1570,
+        1850,
+        1960,
+        2020
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Jesús María",
+      "historical_names": [
+        {
+          "date": "1570.1.1",
+          "name": "Xonacatique"
+        },
+        {
+          "date": "1701.12.1",
+          "name": "Jesús María"
+        }
+      ],
+      "other_names": [
+        "Jesús María de los Dolores",
+        "Jesus Maria"
+      ],
+      "verified_settlement": true
+    },
+    {
+      "coords_lat_lng": [
+        12.04895,
+        -86.13907
+      ],
+      "country": "Nicaragua",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1523.1.1",
+          "name": "Nindirí"
+        }
+      ],
+      "existing_meta_index": 1151,
+      "existing_meta_name": "Nindirí",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Nindirí-Nicaragua",
+      "known_aliases": [
+        "Nindirí",
+        "nindirí",
+        "nindiri"
+      ],
+      "latest_year": 2023,
+      "max_pop": 63093,
+      "name": "Nindirí",
+      "reason": "under_covered_history",
+      "region": "central_american_republics",
+      "sample_years": [
+        1570,
+        1742,
+        1900,
+        2023
+      ],
+      "sources": [
+        "JAGUAR"
+      ],
+      "canonical_name": "Nindirí",
+      "historical_names": [
+        {
+          "date": "1523.1.1",
+          "name": "Nindirí"
+        }
+      ],
+      "other_names": [
+        "Tenderí",
+        "Nenderí",
+        "Santa Ana de Nindirí",
+        "Nindiri"
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

@@ -1,0 +1,2352 @@
+{
+  "Yarabamba-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Yarabamba-Peru",
+      "name": "Yarabamba",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_arequipa"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Cº Escalerilla-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Cº Escalerilla-Peru",
+      "name": "Cº Escalerilla",
+      "other_names": [
+        "Cerro Calvario",
+        "Clarinorco",
+        "Escalerilla",
+        "La Peña",
+        "Tambillo Inca de Cerro Huaylillas"
+      ],
+      "sources": [
+        "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+        "Hyslop (1984) Inka Road System",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_chinchaysuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Cerro Los Pancitos-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Cerro Los Pancitos-Peru",
+      "name": "Cerro Los Pancitos",
+      "other_names": [
+        "Geoglífo Cruz del Sur",
+        "Las Malvinas II",
+        "Salinas",
+        "Salinas de Chao"
+      ],
+      "sources": [
+        "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+        "Hyslop (1984) Inka Road System",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_chinchaysuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Divina Pastora Guanare Viejo-Venezuela": [
+    {
+      "match": "exact_key",
+      "file": "viceroyalty_new_granada_settlements.json",
+      "key": "Divina Pastora Guanare Viejo-Venezuela",
+      "name": "Divina Pastora Guanare Viejo",
+      "other_names": [
+        "Morrones"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_",
+        "HGIS Primary: 'Relación y testimonio íntegro de la visita general de este obispado de Caracas y Venezuela', en: Archivo General de Indias, Caracas,959 (17"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Venezuela",
+        "region": "vng_capitania_caracas_maracaibo"
+      },
+      "years": [
+        null,
+        null,
+        1771
+      ]
+    }
+  ],
+  "La Catalina-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "key": "La Catalina-Colombia",
+      "name": "La Catalina",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "na_magdalena_cauca_muisca"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Daule (ecu_esmeraldas)-Ecuador": [
+    {
+      "match": "exact_key",
+      "file": "ecuador_after_independence_settlements.json",
+      "key": "Daule (ecu_esmeraldas)-Ecuador",
+      "name": "Daule",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Ecuador",
+        "region": "ecu_esmeraldas"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "La Magdalena-Ecuador": [
+    {
+      "match": "exact_key",
+      "file": "ecuador_after_independence_settlements.json",
+      "key": "La Magdalena-Ecuador",
+      "name": "La Magdalena",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Ecuador",
+        "region": "ecu_bolivar"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Tintay-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Tintay-Peru",
+      "name": "Tintay",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_apurimac"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Coronel Carlos Concha Torres-Ecuador": [
+    {
+      "match": "exact_key",
+      "file": "ecuador_after_independence_settlements.json",
+      "key": "Coronel Carlos Concha Torres-Ecuador",
+      "name": "Coronel Carlos Concha Torres",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Ecuador",
+        "region": "ecu_esmeraldas"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "El Pan-Ecuador": [
+    {
+      "match": "exact_key",
+      "file": "ecuador_after_independence_settlements.json",
+      "key": "El Pan-Ecuador",
+      "name": "El Pan",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revision 2024 (via pobecu)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Ecuador",
+        "region": "ecu_azuay"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Shatoja-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Shatoja-Peru",
+      "name": "Shatoja",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_san_martin"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Vichaycoto-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Vichaycoto-Peru",
+      "name": "Vichaycoto",
+      "other_names": [
+        "Huamangaga",
+        "San Juan de Vichaycoto"
+      ],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_huanuco"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Reporte HF SAR (na_nw_amazon_foothills_2)-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "key": "Reporte HF SAR (na_nw_amazon_foothills_2)-Colombia",
+      "name": "Reporte HF SAR",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "na_nw_amazon_foothills"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "match": "ll_match",
+      "file": "pre_columbian_central_andes_settlements.json",
+      "key": "Reporte HF SAR (ca_eastern_montana_yungas)-Colombia",
+      "name": "Reporte HF SAR",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "ca_eastern_montana_yungas"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "San Martín de las Escobas-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "San Martín de las Escobas-Argentina",
+      "name": "San Martín de las Escobas",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_santa_fe"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Tres de Abril-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "Tres de Abril-Argentina",
+      "name": "Tres de Abril",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2022 (Localidades Censales Georef + Radios Censales)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_corrientes"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Tabiazo-Ecuador": [
+    {
+      "match": "exact_key",
+      "file": "ecuador_after_independence_settlements.json",
+      "key": "Tabiazo-Ecuador",
+      "name": "Tabiazo",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Ecuador",
+        "region": "ecu_esmeraldas"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Area de Interes-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "key": "Area de Interes-Colombia",
+      "name": "Area de Interes",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "na_magdalena_cauca_muisca"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Ansina-Uruguay": [
+    {
+      "match": "exact_key",
+      "file": "uruguay_after_independence_settlements.json",
+      "key": "Ansina-Uruguay",
+      "name": "Ansina",
+      "other_names": [],
+      "sources": [
+        "INE Uruguay Censo 2023 (Cuadro 11 Localidades)",
+        "INE Uruguay Censo 2011 (Localidades Censales)",
+        "INE Uruguay Censo 2004 (Localidades Censales)",
+        "INE Uruguay Censos Nacionales 1963, 1975, 1985 & 1996 (Cuadros Comparativos por Localidad)",
+        "INE Uruguay Censos Nacionales 2004, 2011 & 2023 (Localidades Censales / MIDES WFS)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Uruguay",
+        "region": "ury_rivera"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Morocaso-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "viceroyalty_new_granada_settlements.json",
+      "key": "Morocaso-Colombia",
+      "name": "Morocaso",
+      "other_names": [
+        "Marocasa",
+        "Marocaya",
+        "Morocazo"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "vng_cartagena_santa_marta"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Caimito-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Caimito-Peru",
+      "name": "Caimito",
+      "other_names": [
+        "San Miguel de los Conibos"
+      ],
+      "sources": [
+        "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_ucayali"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Ichuña-Peru_2": [
+    {
+      "match": "ll_match",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Ichuña-Peru",
+      "name": "Ichuña",
+      "other_names": [
+        "Chujulaque",
+        "Elemento Arqueológico Aislado Chujulaque",
+        "Llacta Pata",
+        "Saucinto"
+      ],
+      "sources": [
+        "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+        "Hyslop (1984) Inka Road System",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_collasuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Bag-Chile": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "key": "Bag-Chile",
+      "name": "Bag",
+      "other_names": [],
+      "sources": [
+        "CMN Chile — Registro Arqueológico Acreditado",
+        "CMN Chile — Registros Arqueológicos Complementarios",
+        "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Chile",
+        "region": "sc_patagonia_tierra_del_fuego"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "San Francisco Arenosa-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "viceroyalty_new_granada_settlements.json",
+      "key": "San Francisco Arenosa-Colombia",
+      "name": "San Francisco Arenosa",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Testimonio de los autos ... 1811', en: Archivo General de Indias, Caracas,179 (1811)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "vng_santafe_tunja_highlands"
+      },
+      "years": [
+        null,
+        null,
+        1780
+      ]
+    }
+  ],
+  "Suyollihua-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Suyollihua-Peru",
+      "name": "Suyollihua",
+      "other_names": [],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_contisuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Acurigua-Venezuela": [
+    {
+      "match": "exact_key",
+      "file": "venezuela_after_independence_settlements.json",
+      "key": "Acurigua-Venezuela",
+      "name": "Acurigua",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+        "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Venezuela",
+        "region": "ven_falcon"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Uranmarca-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Uranmarca-Peru",
+      "name": "Uranmarca",
+      "other_names": [
+        "Uracmarca"
+      ],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_apurimac"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Mallkamayo-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Mallkamayo-Peru",
+      "name": "Mallkamayo",
+      "other_names": [],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_collasuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Canchabamba-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Canchabamba-Peru",
+      "name": "Canchabamba",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_ancash"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Sanagasta-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "Sanagasta-Argentina",
+      "name": "Sanagasta",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_la_rioja"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Unión-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "Unión-Argentina",
+      "name": "Unión",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_san_luis"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Chaclaya-Bolivia": [
+    {
+      "match": "exact_key",
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "key": "Chaclaya-Bolivia",
+      "name": "Chaclaya",
+      "other_names": [
+        "Cusahuaya"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Bolivia",
+        "region": "vp_intendencia_la_paz"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Cerro La Puntilla-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Cerro La Puntilla-Peru",
+      "name": "Cerro La Puntilla",
+      "other_names": [
+        "Clavelinas 07-B",
+        "La Cueva",
+        "La Cueva A",
+        "La Cueva B",
+        "La Cueva C",
+        "La Cueva D",
+        "La Cueva E",
+        "La Cueva F"
+      ],
+      "sources": [
+        "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+        "Hyslop (1984) Inka Road System",
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_contisuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Casacay-Ecuador": [
+    {
+      "match": "exact_key",
+      "file": "ecuador_after_independence_settlements.json",
+      "key": "Casacay-Ecuador",
+      "name": "Casacay",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Ecuador",
+        "region": "ecu_el_oro"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "El Porvenir (per_san_martin)-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "El Porvenir (per_san_martin)-Peru",
+      "name": "El Porvenir",
+      "other_names": [
+        "Pelejo"
+      ],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_san_martin"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Lluta (inca_collasuyu)-Chile": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Lluta (inca_collasuyu)-Chile",
+      "name": "Lluta",
+      "other_names": [],
+      "sources": [
+        "Chile Radiocarbon Synthesis (Campbell/Mendez)",
+        "Noisat et al. 1991",
+        "Valenzuela 2011",
+        "Valenzuela 2011; p3k14c",
+        "Osorio 2013",
+        "Osorio 2013; p3k14c"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Chile",
+        "region": "inca_collasuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "match": "ll_match",
+      "file": "pre_columbian_central_andes_settlements.json",
+      "key": "Lluta (ca_titicaca_altiplano_tiwanaku)-Chile",
+      "name": "Lluta",
+      "other_names": [],
+      "sources": [
+        "Chile Radiocarbon Synthesis (Campbell/Mendez)",
+        "Noisat et al. 1991",
+        "Valenzuela 2011",
+        "Valenzuela 2011; p3k14c",
+        "Osorio 2013",
+        "Osorio 2013; p3k14c"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Chile",
+        "region": "ca_titicaca_altiplano_tiwanaku"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "match": "ll_match",
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "key": "Lluta (sc_atacama_norte_grande)-Chile",
+      "name": "Lluta",
+      "other_names": [],
+      "sources": [
+        "Chile Radiocarbon Synthesis (Campbell/Mendez)",
+        "Noisat et al. 1991",
+        "Valenzuela 2011",
+        "Valenzuela 2011; p3k14c",
+        "Osorio 2013",
+        "Osorio 2013; p3k14c"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Chile",
+        "region": "sc_atacama_norte_grande"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "El Cacique-Chile": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "key": "El Cacique-Chile",
+      "name": "El Cacique",
+      "other_names": [
+        "La Piña",
+        "Larqu",
+        "Los Caballos"
+      ],
+      "sources": [
+        "CMN Chile — Registro Arqueológico Acreditado",
+        "CMN Chile — Registros Arqueológicos Complementarios",
+        "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Chile",
+        "region": "sc_chile_central_araucania"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Garza-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "Garza-Argentina",
+      "name": "Garza",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_santiago_del_estero"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Cueva de Mollepunco-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Cueva de Mollepunco-Peru",
+      "name": "Cueva de Mollepunco",
+      "other_names": [
+        "Mamani Chilpa",
+        "Pucara Vilca Huamán",
+        "Vilcahuamán Condor"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_collasuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "La Boquita (El Barro)-Venezuela": [
+    {
+      "match": "exact_key",
+      "file": "venezuela_after_independence_settlements.json",
+      "key": "La Boquita (El Barro)-Venezuela",
+      "name": "La Boquita (El Barro)",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela XIV Censo Nacional de Población y Vivienda 2011 (Centros Poblados)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Venezuela",
+        "region": "ven_zulia"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Vegón de Nutrias (Pueblo Nuevo)-Venezuela": [
+    {
+      "match": "exact_key",
+      "file": "venezuela_after_independence_settlements.json",
+      "key": "Vegón de Nutrias (Pueblo Nuevo)-Venezuela",
+      "name": "Vegón de Nutrias (Pueblo Nuevo)",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela XIV Censo Nacional de Población y Vivienda 2011 (Centros Poblados)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Venezuela",
+        "region": "ven_barinas"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Huachocolpa (per_huancavelica)-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Huachocolpa (per_huancavelica)-Peru",
+      "name": "Huachocolpa",
+      "other_names": [
+        "Huachocollpa"
+      ],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_huancavelica"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "match": "ll_match",
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "key": "Huachocollpa-Peru",
+      "name": "Huachocollpa",
+      "other_names": [
+        "Cuachocollpa"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "conq_peru_sierra_cusco_huamanga"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "match": "ll_match",
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "key": "Huachocollpa-Peru",
+      "name": "Huachocollpa",
+      "other_names": [
+        "Cuachocollpa"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "vp_intendencia_huamanga_huancavelica"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "La Obra - las Vertientes-Chile": [
+    {
+      "match": "exact_key",
+      "file": "chile_after_independence_settlements.json",
+      "key": "La Obra - las Vertientes-Chile",
+      "name": "La Obra - las Vertientes",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Ciudad)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Chile",
+        "region": "chl_region_metropolitana_de_santiago"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Carurú-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "colombia_after_independence_settlements.json",
+      "key": "Carurú-Colombia",
+      "name": "Carurú",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "col_vaupes"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Pisiga Bolivar-Bolivia": [
+    {
+      "match": "exact_key",
+      "file": "andean_bolivia_independence_settlements.json",
+      "key": "Pisiga Bolivar-Bolivia",
+      "name": "Pisiga Bolivar",
+      "other_names": [],
+      "sources": [
+        "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Bolivia",
+        "region": "bol_oruro"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Cerro La Cruz-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Cerro La Cruz-Peru",
+      "name": "Cerro La Cruz",
+      "other_names": [
+        "Llagumpe",
+        "Monte Grande",
+        "Quebrada Llagumpe"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_chinchaysuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Monitoreo-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "key": "Monitoreo-Colombia",
+      "name": "Monitoreo",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "na_magdalena_cauca_muisca"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Balneario (sc_parana_uruguay_charrua)-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "key": "Balneario (sc_parana_uruguay_charrua)-Argentina",
+      "name": "Balneario",
+      "other_names": [],
+      "sources": [
+        "IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "sc_parana_uruguay_charrua"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Ranrahirca-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Ranrahirca-Peru",
+      "name": "Ranrahirca",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_ancash"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Arjona (col_cesar)-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "colombia_after_independence_settlements.json",
+      "key": "Arjona (col_cesar)-Colombia",
+      "name": "Arjona",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "col_cesar"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Puerto Leoni-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "Puerto Leoni-Argentina",
+      "name": "Puerto Leoni",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_misiones"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Torre (na_orinoco_llanos_guayana)-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "key": "Torre (na_orinoco_llanos_guayana)-Colombia",
+      "name": "Torre",
+      "other_names": [
+        "La Concepción",
+        "Las Mercedes"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "na_orinoco_llanos_guayana"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Palca (per_puno)-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Palca (per_puno)-Peru",
+      "name": "Palca",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_puno"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "San Mateo-Bolivia": [
+    {
+      "match": "exact_key",
+      "file": "andean_bolivia_independence_settlements.json",
+      "key": "San Mateo-Bolivia",
+      "name": "San Mateo",
+      "other_names": [],
+      "sources": [
+        "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Bolivia",
+        "region": "bol_tarija"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Cubsio-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "viceroyalty_new_granada_settlements.json",
+      "key": "Cubsio-Colombia",
+      "name": "Cubsio",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: 'Santafé: informe visita a corregimientos.', en: Archivo General de la Nación (Colombia), VISITAS-C/MARCA:SC.62,8,D.8 (1761)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "vng_santafe_tunja_highlands"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Piruruyoq-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Piruruyoq-Peru",
+      "name": "Piruruyoq",
+      "other_names": [
+        "Inca Raqay"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_contisuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Palmeras-Peru_2": [
+    {
+      "match": "ll_match",
+      "file": "pre_columbian_central_andes_settlements.json",
+      "key": "Palmeras-Peru",
+      "name": "Palmeras",
+      "other_names": [
+        "Chilcal",
+        "El Milagro a",
+        "Galpón",
+        "Montículo Hualmayo",
+        "Montículo San José B",
+        "Montículo San José C",
+        "Montículo San José D",
+        "Montículo San José a"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "ca_north_coast_moche_chimu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "match": "ll_match",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Palmeras-Peru",
+      "name": "Palmeras",
+      "other_names": [
+        "Chilcal",
+        "El Milagro a",
+        "Galpón",
+        "Montículo Hualmayo",
+        "Montículo San José B",
+        "Montículo San José C",
+        "Montículo San José D",
+        "Montículo San José a"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_chinchaysuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "El Antivo-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "El Antivo-Peru",
+      "name": "El Antivo",
+      "other_names": [
+        "Chanrry",
+        "Viña Magdalena"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_chinchaysuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Tescual-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "colombia_after_independence_settlements.json",
+      "key": "Tescual-Colombia",
+      "name": "Tescual",
+      "other_names": [
+        "Aranda"
+      ],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "col_narino"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Quimare-Venezuela": [
+    {
+      "match": "exact_key",
+      "file": "venezuela_after_independence_settlements.json",
+      "key": "Quimare-Venezuela",
+      "name": "Quimare",
+      "other_names": [
+        "Quiamare"
+      ],
+      "sources": [
+        "INE Venezuela XIV Censo Nacional de Población y Vivienda 2011 (Centros Poblados)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Venezuela",
+        "region": "ven_anzoategui"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "San Joaquin de Ortega-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "chile_rio_plata_banda_oriental_settlements.json",
+      "key": "San Joaquin de Ortega-Argentina",
+      "name": "San Joaquin de Ortega",
+      "other_names": [
+        "Buen Consejo"
+      ],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "crp_gobernacion_tucuman"
+      },
+      "years": [
+        null,
+        null,
+        1742
+      ]
+    }
+  ],
+  "La Fortuna-Venezuela": [
+    {
+      "match": "exact_key",
+      "file": "venezuela_after_independence_settlements.json",
+      "key": "La Fortuna-Venezuela",
+      "name": "La Fortuna",
+      "other_names": [],
+      "sources": [
+        "INE Venezuela XIV Censo Nacional de Población y Vivienda 2011 (Centros Poblados)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Venezuela",
+        "region": "ven_zulia"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Polígono-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_central_andes_settlements.json",
+      "key": "Polígono-Colombia",
+      "name": "Polígono",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "ca_eastern_montana_yungas"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Nazón-Ecuador": [
+    {
+      "match": "exact_key",
+      "file": "ecuador_after_independence_settlements.json",
+      "key": "Nazón-Ecuador",
+      "name": "Nazón",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Ecuador",
+        "region": "ecu_canar"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Ninabamba-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Ninabamba-Peru",
+      "name": "Ninabamba",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_cajamarca"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Angostura-Bolivia": [
+    {
+      "match": "exact_key",
+      "file": "andean_bolivia_independence_settlements.json",
+      "key": "Angostura-Bolivia",
+      "name": "Angostura",
+      "other_names": [],
+      "sources": [
+        "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Bolivia",
+        "region": "bol_cochabamba"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Entre Ríos-Bolivia": [
+    {
+      "match": "exact_key",
+      "file": "andean_bolivia_independence_settlements.json",
+      "key": "Entre Ríos-Bolivia",
+      "name": "Entre Ríos",
+      "other_names": [
+        "Entre Rios"
+      ],
+      "sources": [
+        "PRETA",
+        "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Bolivia",
+        "region": "bol_tarija"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Pikillaqta-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Pikillaqta-Peru",
+      "name": "Pikillaqta",
+      "other_names": [
+        "Arqueológico Lloqepata",
+        "Erapata",
+        "Huayrana Pata",
+        "Lejchapata",
+        "Muyomuyo",
+        "Piteq",
+        "Piteq Grande",
+        "Puntayorqo"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_contisuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Urpay-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Urpay-Peru",
+      "name": "Urpay",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_la_libertad"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Torranzo-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Torranzo-Peru",
+      "name": "Torranzo",
+      "other_names": [
+        "Cerro Barbacoa",
+        "Cerro Potrero",
+        "Chuica",
+        "Santa Rosa"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_contisuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Cajay-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Cajay-Peru",
+      "name": "Cajay",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_ancash"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Los Loros-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "key": "Los Loros-Colombia",
+      "name": "Los Loros",
+      "other_names": [
+        "Los Moncholos"
+      ],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "na_caribbean_maracaibo_tairona"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "El Cajón-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "colombia_after_independence_settlements.json",
+      "key": "El Cajón-Colombia",
+      "name": "El Cajón",
+      "other_names": [
+        "El Cajon"
+      ],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "col_choco"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "match": "ll_match",
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "key": "El Cajon-Colombia",
+      "name": "El Cajon",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)",
+        "HGIS Primary: 'Censo población', en: Archivo General de la Nación (Colombia), MISCELANEA:SC.39,129,D.19"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "conq_nuevo_reino_granada"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "match": "ll_match",
+      "file": "viceroyalty_new_granada_settlements.json",
+      "key": "El Cajon-Colombia",
+      "name": "El Cajon",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)",
+        "HGIS Primary: 'Censo población', en: Archivo General de la Nación (Colombia), MISCELANEA:SC.39,129,D.19"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "vng_antioquia_popayan_choco"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "La Cruzada-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "colombia_after_independence_settlements.json",
+      "key": "La Cruzada-Colombia",
+      "name": "La Cruzada",
+      "other_names": [],
+      "sources": [
+        "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+        "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "col_antioquia"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Recolección-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "key": "Recolección-Colombia",
+      "name": "Recolección",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "na_magdalena_cauca_muisca"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Buena Vista-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "Buena Vista-Argentina",
+      "name": "Buena Vista",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+        "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_formosa"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Vichigasta-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "Vichigasta-Argentina",
+      "name": "Vichigasta",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_la_rioja"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Las Torres-Peru": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_central_andes_settlements.json",
+      "key": "Las Torres-Peru",
+      "name": "Las Torres",
+      "other_names": [],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "ca_north_coast_moche_chimu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Retamapunta-Peru": [
+    {
+      "match": "exact_key",
+      "file": "inca_empire_tawantinsuyu_settlements.json",
+      "key": "Retamapunta-Peru",
+      "name": "Retamapunta",
+      "other_names": [
+        "Capillayog",
+        "Racrapunta - Ushayajirca"
+      ],
+      "sources": [
+        "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "inca_chinchaysuyu"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Chaca-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Chaca-Peru",
+      "name": "Chaca",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_huancavelica"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "La Vara-Chile": [
+    {
+      "match": "exact_key",
+      "file": "chile_after_independence_settlements.json",
+      "key": "La Vara-Chile",
+      "name": "La Vara",
+      "other_names": [],
+      "sources": [
+        "INE Chile Censo 2017 — Ciudades, Pueblos, Aldeas y Caseríos (Pueblo)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Chile",
+        "region": "chl_region_de_los_lagos"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Los Sarmientos-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "Los Sarmientos-Argentina",
+      "name": "Los Sarmientos",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_tucuman"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Olympian-Chile": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_southern_cone_settlements.json",
+      "key": "Olympian-Chile",
+      "name": "Olympian",
+      "other_names": [
+        "Naufragio del Olympian"
+      ],
+      "sources": [
+        "CMN Chile — Registro Arqueológico Acreditado",
+        "CMN Chile — Registros Arqueológicos Complementarios",
+        "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Chile",
+        "region": "sc_patagonia_tierra_del_fuego"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "San Jose de las Palmas-Venezuela": [
+    {
+      "match": "exact_key",
+      "file": "viceroyalty_new_granada_settlements.json",
+      "key": "San Jose de las Palmas-Venezuela",
+      "name": "San Jose de las Palmas",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "'Testimonio de los autos ... 1811', en: Archivo General de Indias, Caracas,179 (1811)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Venezuela",
+        "region": "vng_santafe_tunja_highlands"
+      },
+      "years": [
+        null,
+        null,
+        1785
+      ]
+    }
+  ],
+  "Uia (na_magdalena_cauca_muisca_3)-Colombia": [
+    {
+      "match": "exact_key",
+      "file": "pre_columbian_northern_andes_settlements.json",
+      "key": "Uia (na_magdalena_cauca_muisca_3)-Colombia",
+      "name": "Uia",
+      "other_names": [],
+      "sources": [
+        "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Colombia",
+        "region": "na_magdalena_cauca_muisca"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Bolívar (ecu_tungurahua)-Ecuador": [
+    {
+      "match": "exact_key",
+      "file": "ecuador_after_independence_settlements.json",
+      "key": "Bolívar (ecu_tungurahua)-Ecuador",
+      "name": "Bolívar",
+      "other_names": [],
+      "sources": [
+        "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+        "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Ecuador",
+        "region": "ecu_tungurahua"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Serrezuela-Argentina": [
+    {
+      "match": "exact_key",
+      "file": "argentina_after_independence_settlements.json",
+      "key": "Serrezuela-Argentina",
+      "name": "Serrezuela",
+      "other_names": [],
+      "sources": [
+        "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+        "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Argentina",
+        "region": "arg_cordoba"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Concepcion (vp_intendencia_huamanga_huancavelica)-Peru": [
+    {
+      "match": "exact_key",
+      "file": "viceroyalty_peru_upper_peru_settlements.json",
+      "key": "Concepcion (vp_intendencia_huamanga_huancavelica)-Peru",
+      "name": "Concepcion",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "vp_intendencia_huamanga_huancavelica"
+      },
+      "years": [
+        null,
+        null,
+        1550
+      ]
+    },
+    {
+      "match": "ll_match",
+      "file": "spanish_conquest_andes_collapse_settlements.json",
+      "key": "Concepcion (conq_peru_sierra_cusco_huamanga_2)-Peru",
+      "name": "Concepcion",
+      "other_names": [],
+      "sources": [
+        "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+        "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "conq_peru_sierra_cusco_huamanga"
+      },
+      "years": [
+        null,
+        null,
+        1550
+      ]
+    }
+  ],
+  "Pachamarca-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Pachamarca-Peru",
+      "name": "Pachamarca",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_huancavelica"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Huaricolca-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Huaricolca-Peru",
+      "name": "Huaricolca",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_junin"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "Vista Alegre (per_amazonas)-Peru": [
+    {
+      "match": "exact_key",
+      "file": "peru_after_independence_settlements.json",
+      "key": "Vista Alegre (per_amazonas)-Peru",
+      "name": "Vista Alegre",
+      "other_names": [],
+      "sources": [
+        "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+      ],
+      "notes": null,
+      "admin": {
+        "country": "Peru",
+        "region": "per_amazonas"
+      },
+      "years": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

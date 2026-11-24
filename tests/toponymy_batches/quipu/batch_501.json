@@ -1,0 +1,1048 @@
+{
+  "batch_index": 501,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -21.47579,
+        -68.34684
+      ],
+      "country": "Chile",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ollagüe-Chile",
+      "known_aliases": [
+        "Ollagüe",
+        "ollagüe"
+      ],
+      "latest_year": 2025,
+      "max_pop": 911,
+      "name": "Ollagüe",
+      "reason": "missing_entry",
+      "region": "chl_region_de_antofagasta",
+      "sample_years": [
+        1900,
+        1982,
+        2012,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.40315,
+        -67.15612
+      ],
+      "country": "Argentina",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Desaguadero-Argentina",
+      "known_aliases": [
+        "Desaguadero",
+        "desaguadero"
+      ],
+      "latest_year": 2022,
+      "max_pop": 911,
+      "name": "Desaguadero",
+      "reason": "missing_entry",
+      "region": "arg_san_luis",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.39723,
+        -60.54439
+      ],
+      "country": "Argentina",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Inés Indart-Argentina",
+      "known_aliases": [
+        "Inés Indart",
+        "inés indart"
+      ],
+      "latest_year": 2022,
+      "max_pop": 911,
+      "name": "Inés Indart",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.37756,
+        -65.74711
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Monte Bello-Argentina",
+      "known_aliases": [
+        "Monte Bello",
+        "monte bello"
+      ],
+      "latest_year": 2022,
+      "max_pop": 911,
+      "name": "Monte Bello",
+      "reason": "missing_entry",
+      "region": "arg_tucuman",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.51111,
+        -68.71444
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sabana Larga (Ojo de Agua)-Venezuela",
+      "known_aliases": [
+        "Sabana Larga (Ojo de Agua)",
+        "sabana larga"
+      ],
+      "latest_year": 2011,
+      "max_pop": 910,
+      "name": "Sabana Larga (Ojo de Agua)",
+      "reason": "missing_entry",
+      "region": "ven_cojedes",
+      "sample_years": [
+        1900,
+        1920,
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2011
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.9437,
+        -79.51224
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Zambi-Ecuador",
+      "known_aliases": [
+        "Zambi",
+        "zambi"
+      ],
+      "latest_year": 2025,
+      "max_pop": 910,
+      "name": "Zambi",
+      "reason": "missing_entry",
+      "region": "ecu_loja",
+      "sample_years": [
+        1900,
+        1980,
+        2015,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.62799,
+        -70.7319
+      ],
+      "country": "Chile",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Granalla Norte-Chile",
+      "known_aliases": [
+        "Granalla Norte",
+        "granalla norte"
+      ],
+      "latest_year": 2017,
+      "max_pop": 910,
+      "name": "Granalla Norte",
+      "reason": "missing_entry",
+      "region": "chl_region_de_valparaiso",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.60986,
+        -61.31676
+      ],
+      "country": "Argentina",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Río Muerto (arg_formosa)-Argentina",
+      "known_aliases": [
+        "Río Muerto",
+        "río muerto"
+      ],
+      "latest_year": 2022,
+      "max_pop": 910,
+      "name": "Río Muerto",
+      "reason": "missing_entry",
+      "region": "arg_formosa",
+      "sample_years": [
+        1950,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.22475,
+        -70.07028
+      ],
+      "country": "Chile",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Alto de San Simón-Chile",
+      "known_aliases": [
+        "Alto de San Simón",
+        "alto de san simón",
+        "alto san agustín",
+        "alto san simón",
+        "huant",
+        "quebrada del obispo",
+        "Alto San Agustín",
+        "Alto San Simón",
+        "Huant",
+        "quebrada del Obispo"
+      ],
+      "latest_year": 1532,
+      "max_pop": 910,
+      "name": "Alto de San Simón",
+      "reason": "missing_entry",
+      "region": "inca_collasuyu",
+      "sample_years": [
+        1300,
+        1438,
+        1525,
+        1532
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.35593,
+        -80.67571
+      ],
+      "country": "Peru",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Huaca Chato Grande-Peru",
+      "known_aliases": [
+        "Huaca Chato Grande",
+        "huaca chato grande",
+        "chato grande",
+        "huaca pedrito",
+        "loma del gallo",
+        "Chato Grande",
+        "Huaca Pedrito",
+        "Loma del Gallo"
+      ],
+      "latest_year": 1530,
+      "max_pop": 910,
+      "name": "Huaca Chato Grande",
+      "reason": "missing_entry",
+      "region": "inca_chinchaysuyu",
+      "sample_years": [
+        -3000,
+        500,
+        1400,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        1.7765,
+        -76.99204
+      ],
+      "country": "Colombia",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Lorenzo (col_cauca)-Colombia",
+      "known_aliases": [
+        "San Lorenzo",
+        "san lorenzo"
+      ],
+      "latest_year": 2018,
+      "max_pop": 909,
+      "name": "San Lorenzo",
+      "reason": "missing_entry",
+      "region": "col_cauca",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.21651,
+        -63.84841
+      ],
+      "country": "Argentina",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Padre Lozano-Argentina",
+      "known_aliases": [
+        "Padre Lozano",
+        "padre lozano"
+      ],
+      "latest_year": 2022,
+      "max_pop": 909,
+      "name": "Padre Lozano",
+      "reason": "missing_entry",
+      "region": "arg_salta",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.775,
+        -64.768
+      ],
+      "country": "Argentina",
+      "earliest_year": 1756,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Ignacio de Tobas-Argentina",
+      "known_aliases": [
+        "San Ignacio de Tobas",
+        "san ignacio de tobas",
+        "san ignacio de ledesma",
+        "san ignacion del rio negro",
+        "San Ignacio de Ledesma",
+        "San Ignacion del Rio Negro"
+      ],
+      "latest_year": 1830,
+      "max_pop": 909,
+      "name": "San Ignacio de Tobas",
+      "reason": "missing_entry",
+      "region": "crp_gobernacion_tucuman",
+      "sample_years": [
+        1756,
+        1780,
+        1800,
+        1825,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.96651,
+        -76.73338
+      ],
+      "country": "Peru",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Allaucapata-Peru",
+      "known_aliases": [
+        "Allaucapata",
+        "allaucapata",
+        "huarimarca",
+        "mirador de shongupa",
+        "umashuko",
+        "Huarimarca",
+        "Mirador de Shongupa",
+        "Umashuko"
+      ],
+      "latest_year": 1530,
+      "max_pop": 909,
+      "name": "Allaucapata",
+      "reason": "missing_entry",
+      "region": "inca_chinchaysuyu",
+      "sample_years": [
+        0,
+        1200,
+        1470,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.5369,
+        -74.59886
+      ],
+      "country": "Peru",
+      "earliest_year": 1440,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pampa Mendoza-Peru",
+      "known_aliases": [
+        "Pampa Mendoza",
+        "pampa mendoza"
+      ],
+      "latest_year": 1532,
+      "max_pop": 909,
+      "name": "Pampa Mendoza",
+      "reason": "missing_entry",
+      "region": "inca_contisuyu",
+      "sample_years": [
+        1440,
+        1470,
+        1500,
+        1525,
+        1530,
+        1532
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.38417,
+        -76.24405
+      ],
+      "country": "Colombia",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Tulia-Colombia",
+      "known_aliases": [
+        "La Tulia",
+        "la tulia",
+        "el retiro",
+        "El Retiro"
+      ],
+      "latest_year": 2018,
+      "max_pop": 908,
+      "name": "La Tulia",
+      "reason": "missing_entry",
+      "region": "col_valle_del_cauca",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.79429,
+        -80.0227
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "El Paraíso-Ecuador",
+      "known_aliases": [
+        "El Paraíso",
+        "el paraíso"
+      ],
+      "latest_year": 2025,
+      "max_pop": 908,
+      "name": "El Paraíso",
+      "reason": "missing_entry",
+      "region": "ecu_el_oro",
+      "sample_years": [
+        1900,
+        1980,
+        2015,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.6205,
+        -73.9845
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pomacocha Qollpacucho-Peru",
+      "known_aliases": [
+        "Pomacocha Qollpacucho",
+        "pomacocha qollpacucho"
+      ],
+      "latest_year": 2017,
+      "max_pop": 908,
+      "name": "Pomacocha Qollpacucho",
+      "reason": "missing_entry",
+      "region": "per_ayacucho",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.2255,
+        -79.4677
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Seman-Peru",
+      "known_aliases": [
+        "Seman",
+        "seman"
+      ],
+      "latest_year": 2017,
+      "max_pop": 908,
+      "name": "Seman",
+      "reason": "missing_entry",
+      "region": "per_la_libertad",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.201,
+        -70.673
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1561,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mendoza-Venezuela",
+      "known_aliases": [
+        "Mendoza",
+        "mendoza",
+        "mendosa",
+        "timotes",
+        "Mendosa",
+        "Timotes"
+      ],
+      "latest_year": 1830,
+      "max_pop": 908,
+      "name": "Mendoza",
+      "reason": "missing_entry",
+      "region": "vng_capitania_caracas_maracaibo",
+      "sample_years": [
+        1561,
+        1700,
+        1780,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.27307,
+        -76.54778
+      ],
+      "country": "Peru",
+      "earliest_year": 1438,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Linda-Peru",
+      "known_aliases": [
+        "Linda",
+        "linda"
+      ],
+      "latest_year": 1530,
+      "max_pop": 908,
+      "name": "Linda",
+      "reason": "missing_entry",
+      "region": "inca_chinchaysuyu",
+      "sample_years": [
+        1438,
+        1470,
+        1500,
+        1525,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.1665,
+        -72.27909
+      ],
+      "country": "Peru",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pampa Alto Huacan-Peru",
+      "known_aliases": [
+        "Pampa Alto Huacan",
+        "pampa alto huacan"
+      ],
+      "latest_year": 1530,
+      "max_pop": 908,
+      "name": "Pampa Alto Huacan",
+      "reason": "missing_entry",
+      "region": "inca_contisuyu",
+      "sample_years": [
+        0,
+        1200,
+        1470,
+        1530
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        10.75844,
+        -72.84579
+      ],
+      "country": "Colombia",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Material cerámico en superficie (na_caribbean_maracaibo_tairona)-Colombia",
+      "known_aliases": [
+        "Material cerámico en superficie",
+        "material cerámico en superficie",
+        "material cerámico y lítico",
+        "Material cerámico y lítico"
+      ],
+      "latest_year": 1500,
+      "max_pop": 908,
+      "name": "Material cerámico en superficie",
+      "reason": "missing_entry",
+      "region": "na_caribbean_maracaibo_tairona",
+      "sample_years": [
+        1300,
+        1400,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        6.536,
+        -75.25267
+      ],
+      "country": "Colombia",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Uma (na_magdalena_cauca_muisca)-Colombia",
+      "known_aliases": [
+        "Uma",
+        "uma"
+      ],
+      "latest_year": 1500,
+      "max_pop": 908,
+      "name": "Uma",
+      "reason": "missing_entry",
+      "region": "na_magdalena_cauca_muisca",
+      "sample_years": [
+        500,
+        800,
+        1000,
+        1200,
+        1300,
+        1400,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.23378,
+        -64.6317
+      ],
+      "country": "Argentina",
+      "earliest_year": 450,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Agua Y Energia-Argentina",
+      "known_aliases": [
+        "Agua Y Energia",
+        "agua y energia"
+      ],
+      "latest_year": 1500,
+      "max_pop": 908,
+      "name": "Agua Y Energia",
+      "reason": "missing_entry",
+      "region": "sc_parana_uruguay_charrua",
+      "sample_years": [
+        450,
+        500,
+        800,
+        1000,
+        1200,
+        1300,
+        1400,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -46.26196,
+        -71.9524
+      ],
+      "country": "Chile",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Río Ibáñez-Chile_2",
+      "known_aliases": [
+        "Río Ibáñez",
+        "río ibáñez",
+        "juncal alto",
+        "Juncal Alto"
+      ],
+      "latest_year": 1500,
+      "max_pop": 908,
+      "name": "Río Ibáñez",
+      "reason": "missing_entry",
+      "region": "sc_patagonia_tierra_del_fuego",
+      "sample_years": [
+        1300,
+        1400,
+        1500
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.40917,
+        -75.17833
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Huayllahuara-Peru",
+      "known_aliases": [
+        "Huayllahuara",
+        "huayllahuara"
+      ],
+      "latest_year": 2025,
+      "max_pop": 907,
+      "name": "Huayllahuara",
+      "reason": "missing_entry",
+      "region": "per_junin",
+      "sample_years": [
+        1850,
+        1950,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.6437,
+        -72.0167
+      ],
+      "country": "Peru",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Pulpera-Peru",
+      "known_aliases": [
+        "Pulpera",
+        "pulpera"
+      ],
+      "latest_year": 2017,
+      "max_pop": 907,
+      "name": "Pulpera",
+      "reason": "missing_entry",
+      "region": "per_cusco",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.2232,
+        -70.77176
+      ],
+      "country": "Chile",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Sara-Chile",
+      "known_aliases": [
+        "Santa Sara",
+        "santa sara"
+      ],
+      "latest_year": 2017,
+      "max_pop": 907,
+      "name": "Santa Sara",
+      "reason": "missing_entry",
+      "region": "chl_region_metropolitana_de_santiago",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.62453,
+        -68.31382
+      ],
+      "country": "Argentina",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Villa Independencia-Argentina",
+      "known_aliases": [
+        "Villa Independencia",
+        "villa independencia"
+      ],
+      "latest_year": 2022,
+      "max_pop": 907,
+      "name": "Villa Independencia",
+      "reason": "missing_entry",
+      "region": "arg_san_juan",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ]
+    }
+  ]
+}

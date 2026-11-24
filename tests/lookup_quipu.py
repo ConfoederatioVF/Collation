@@ -1,0 +1,158 @@
+import json
+import urllib.request
+import urllib.parse
+import concurrent.futures
+
+INPUT = [
+  {"key": "La Cueva de Ya-Argentina", "n": "La Cueva de Ya", "c": "Argentina", "r": "sc_gran_chaco_pilcomayo", "ll": [-22.1166, -65.4666], "ey": -9948, "ly": -6598, "p": 4749},
+  {"key": "Fundo Ainilebu-Chile", "n": "Fundo Ainilebu", "c": "Chile", "r": "sc_chile_central_araucania", "ll": [-39.84095, -72.77907], "ey": 0, "ly": 1500, "p": 4747, "al": ["rancul", "tres montes", "Rancul"]},
+  {"key": "La Milagrosa-Colombia", "n": "La Milagrosa", "c": "Colombia", "r": "col_cauca", "ll": [2.53303, -76.08593], "ey": 1525, "ly": 2018, "p": 4746, "al": ["san pedro guanacas", "San Pedro Guanacas"]},
+  {"key": "Santa Clara-Peru", "n": "Santa Clara", "c": "Peru", "r": "per_loreto", "ll": [-3.7853, -73.3393], "ey": 1920, "ly": 2017, "p": 4746},
+  {"key": "Santa Isabel-Argentina", "n": "Santa Isabel", "c": "Argentina", "r": "arg_santa_fe", "ll": [-33.88766, -61.69592], "ey": 1850, "ly": 2022, "p": 4744},
+  {"key": "Pueblo Nuevo (col_arauca)-Colombia", "n": "Pueblo Nuevo", "c": "Colombia", "r": "col_arauca", "ll": [6.68838, -71.34307], "ey": 1920, "ly": 2018, "p": 4743},
+  {"key": "Santa Clara-Ecuador", "n": "Santa Clara", "c": "Ecuador", "r": "ecu_napo", "ll": [-1.26455, -77.87546], "ey": 1850, "ly": 2025, "p": 4743},
+  {"key": "Puán-Argentina", "n": "Puán", "c": "Argentina", "r": "arg_buenos_aires", "ll": [-38.3025, -62.98349], "ey": 1850, "ly": 2010, "p": 4743},
+  {"key": "Pica-Chile_2", "n": "Pica", "c": "Chile", "r": "vp_intendencia_arequipa", "ll": [-20.49, -69.33], "ey": 590, "ly": 1825, "p": 4742},
+  {"key": "Cerro Chillin-Peru", "n": "Cerro Chillin", "c": "Peru", "r": "inca_chinchaysuyu", "ll": [-7.73723, -78.09914], "ey": 500, "ly": 1530, "p": 4739, "al": ["cerro alto quisquipampa", "cerro marcachugo", "las piedras grandes"]},
+  {"key": "Saisa-Peru", "n": "Saisa", "c": "Peru", "r": "per_ayacucho", "ll": [-14.94028, -74.41722], "ey": 1525, "ly": 2025, "p": 4738, "al": ["cayza", "layza", "Cayza"]},
+  {"key": "Nuestra Señora del Rosario de Caá Catí-Argentina", "n": "Nuestra Señora del Rosario de Caá Catí", "c": "Argentina", "r": "arg_corrientes", "ll": [-27.752, -57.62251], "ey": 1850, "ly": 2010, "p": 4738},
+  {"key": "Puntos 16 a-Colombia", "n": "Puntos 16 a", "c": "Colombia", "r": "na_magdalena_cauca_muisca", "ll": [6.18175, -74.55938], "ey": 1000, "ly": 1500, "p": 4738},
+  {"key": "Villa Sarmiento-Argentina", "n": "Villa Sarmiento", "c": "Argentina", "r": "arg_cordoba", "ll": [-34.12283, -64.72519], "ey": 1850, "ly": 2022, "p": 4736},
+  {"key": "Fray Luis Beltrán (arg_mendoza)-Argentina", "n": "Fray Luis Beltrán", "c": "Argentina", "r": "arg_mendoza", "ll": [-33.0044, -68.64992], "ey": 1850, "ly": 2010, "p": 4735},
+  {"key": "Santa Ana de los Guácaras-Argentina", "n": "Santa Ana de los Guácaras", "c": "Argentina", "r": "arg_corrientes", "ll": [-27.45432, -58.68035], "ey": 1798, "ly": 2022, "p": 4735, "al": ["santa ana de los guacaras"]},
+  {"key": "Siswa-Peru", "n": "Siswa", "c": "Peru", "r": "inca_chinchaysuyu", "ll": [-9.95427, -76.03734], "ey": -1000, "ly": 1530, "p": 4734, "al": ["ancomarca", "cruz punta huarichaca", "elemento arqueológico aislado huarichaca"]},
+  {"key": "El Chical-Ecuador", "n": "El Chical", "c": "Ecuador", "r": "ecu_carchi", "ll": [1.01152, -78.26861], "ey": 1850, "ly": 2025, "p": 4733},
+  {"key": "San Bartolome de Buena vista-Colombia", "n": "San Bartolome de Buena vista", "c": "Colombia", "r": "vng_antioquia_popayan_choco", "ll": [6.635, -74.374], "ey": 1525, "ly": 1830, "p": 4733},
+  {"key": "Duna Grande-Peru", "n": "Duna Grande", "c": "Peru", "r": "inca_contisuyu", "ll": [-15.05314, -74.86202], "ey": 0, "ly": 1530, "p": 4732},
+  {"key": "Sabana de La Plata-Venezuela", "n": "Sabana de La Plata", "c": "Venezuela", "r": "ven_zulia", "ll": [10.32278, -71.28222], "ey": 1850, "ly": 2011, "p": 4727},
+  {"key": "Sapse-Bolivia", "n": "Sapse", "c": "Bolivia", "r": "vp_intendencia_charcas_potosi", "ll": [-18.724, -65.278], "ey": 1525, "ly": 1825, "p": 4726, "al": ["sapci", "sapsi", "Sapci"]},
+  {"key": "Sipisa-Chile", "n": "Sipisa", "c": "Chile", "r": "vp_intendencia_arequipa", "ll": [-19.286, -69.475], "ey": 1525, "ly": 1825, "p": 4726},
+  {"key": "Paclín-Argentina", "n": "Paclín", "c": "Argentina", "r": "arg_catamarca", "ll": [-28.11032, -65.67432], "ey": 1850, "ly": 2022, "p": 4725},
+  {"key": "Paccha (per_piura)-Peru", "n": "Paccha", "c": "Peru", "r": "per_piura", "ll": [-5.0123, -80.2242], "ey": 1850, "ly": 2017, "p": 4723, "al": ["rinconada", "Rinconada"]},
+  {"key": "Pobreza Baudo-Colombia", "n": "Pobreza Baudo", "c": "Colombia", "r": "vng_antioquia_popayan_choco", "ll": [5.051, -77.044], "ey": 1525, "ly": 1830, "p": 4723},
+  {"key": "Chimpay-Argentina", "n": "Chimpay", "c": "Argentina", "r": "arg_rio_negro", "ll": [-39.16487, -66.14579], "ey": 1900, "ly": 2022, "p": 4721},
+  {"key": "Abdón Calderón (ecu_azuay)-Ecuador", "n": "Abdón Calderón", "c": "Ecuador", "r": "ecu_azuay", "ll": [-3.25889, -79.27108], "ey": 1850, "ly": 2025, "p": 4718},
+  {"key": "La Ramada-Peru", "n": "La Ramada", "c": "Peru", "r": "per_cajamarca", "ll": [-6.25333, -78.57556], "ey": 1850, "ly": 2025, "p": 4718},
+  {"key": "Santiago de Vado-Peru", "n": "Santiago de Vado", "c": "Peru", "r": "per_ayacucho", "ll": [-14.6045, -74.2732], "ey": 1525, "ly": 2017, "p": 4718, "al": ["vado", "Vado"]},
+  {"key": "Pomán-Argentina", "n": "Pomán", "c": "Argentina", "r": "arg_catamarca", "ll": [-28.39673, -66.2185], "ey": 1850, "ly": 2022, "p": 4718},
+  {"key": "Pozo Hondo-Argentina", "n": "Pozo Hondo", "c": "Argentina", "r": "arg_santiago_del_estero", "ll": [-27.16718, -64.49087], "ey": 1850, "ly": 2022, "p": 4717},
+  {"key": "Coronel Juan Solá-Argentina", "n": "Coronel Juan Solá", "c": "Argentina", "r": "arg_salta", "ll": [-23.47051, -62.88788], "ey": 1850, "ly": 2010, "p": 4714},
+  {"key": "Chalgayaco-Colombia", "n": "Chalgayaco", "c": "Colombia", "r": "vng_antioquia_popayan_choco", "ll": [1.896, -77.015], "ey": 1525, "ly": 1830, "p": 4714, "al": ["vueltas", "Vueltas"]},
+  {"key": "Mopora-Colombia", "n": "Mopora", "c": "Colombia", "r": "vng_santafe_tunja_highlands", "ll": [5.746, -73.97], "ey": 1525, "ly": 1830, "p": 4714},
+  {"key": "San Juan de Oro-Argentina", "n": "San Juan de Oro", "c": "Argentina", "r": "crp_gobernacion_tucuman", "ll": [-22.216, -66.387], "ey": 1525, "ly": 1830, "p": 4714, "al": ["rio de san juan", "Rio de San Juan"]},
+  {"key": "El Retiro-Ecuador", "n": "El Retiro", "c": "Ecuador", "r": "ecu_el_oro", "ll": [-3.37008, -79.9574], "ey": 1850, "ly": 2025, "p": 4712},
+  {"key": "Lomas Blancas-Chile", "n": "Lomas Blancas", "c": "Chile", "r": "sc_chile_central_araucania", "ll": [-39.89145, -72.77035], "ey": 1350, "ly": 1500, "p": 4712},
+  {"key": "Inambari-Peru_2", "n": "Inambari", "c": "Peru", "r": "vp_intendencia_puno", "ll": [-13.571, -70.133], "ey": 1525, "ly": 1825, "p": 4711},
+  {"key": "Chura-Ecuador", "n": "Chura", "c": "Ecuador", "r": "ecu_esmeraldas", "ll": [0.54316, -79.45972], "ey": 1850, "ly": 2025, "p": 4709},
+  {"key": "Altarani Llavinipunko-Peru", "n": "Altarani Llavinipunko", "c": "Peru", "r": "inca_collasuyu", "ll": [-16.17098, -69.54053], "ey": 1300, "ly": 1530, "p": 4709, "al": ["añutan", "ccoroskan", "chocchon"]},
+  {"key": "San Simón-Ecuador", "n": "San Simón", "c": "Ecuador", "r": "ecu_bolivar", "ll": [-1.63841, -78.92824], "ey": 1850, "ly": 2025, "p": 4708},
+  {"key": "Torre 301 Yacimiento-Colombia", "n": "Torre 301 Yacimiento", "c": "Colombia", "r": "na_magdalena_cauca_muisca", "ll": [5.41, -75.58], "ey": 1215, "ly": 1500, "p": 4708},
+  {"key": "Chanabaya-Chile", "n": "Chanabaya", "c": "Chile", "r": "vp_intendencia_arequipa", "ll": [-20.86, -70.152], "ey": 1525, "ly": 1825, "p": 4707},
+  {"key": "Abelardo Pardo Lezameta-Peru", "n": "Abelardo Pardo Lezameta", "c": "Peru", "r": "per_ancash", "ll": [-10.29917, -77.14639], "ey": 1525, "ly": 2025, "p": 4705, "al": ["llaclla", "pacllon", "Llaclla"]},
+  {"key": "Sa-Sls-Colombia", "n": "Sa-Sls", "c": "Colombia", "r": "na_orinoco_llanos_guayana", "ll": [7.19572, -72.64183], "ey": 500, "ly": 1500, "p": 4702},
+  {"key": "Sama Grande-Peru", "n": "Sama Grande", "c": "Peru", "r": "inca_collasuyu", "ll": [-17.79235, -70.48488], "ey": 1440, "ly": 1532, "p": 4699, "al": ["aahh virgen de la candelaria", "alto poquera", "alto poquera s"]},
+  {"key": "Bachillero-Ecuador", "n": "Bachillero", "c": "Ecuador", "r": "ecu_manabi", "ll": [-0.75653, -80.1958], "ey": 1850, "ly": 2025, "p": 4698},
+  {"key": "Guantajaya-Chile", "n": "Guantajaya", "c": "Chile", "r": "vp_intendencia_arequipa", "ll": [-20.215, -70.035], "ey": 1525, "ly": 1825, "p": 4698, "al": ["real asiento de guantajaya", "Real Asiento de Guantajaya"]},
+  {"key": "Bss-Chile", "n": "Bss", "c": "Chile", "r": "sc_patagonia_tierra_del_fuego", "ll": [-53.1673, -68.70757], "ey": 0, "ly": 1500, "p": 4698, "al": ["chpe"]},
+  {"key": "Campo Scodellaro-Argentina", "n": "Campo Scodellaro", "c": "Argentina", "r": "sc_nw_andes_sierras_cuyo", "ll": [-31.65799, -64.00711], "ey": 80, "ly": 1500, "p": 4698, "al": ["campo aguirre", "campo aguirre- oc", "Campo Aguirre"]},
+  {"key": "Las Piedras-Colombia", "n": "Las Piedras", "c": "Colombia", "r": "col_bolivar", "ll": [10.31377, -75.19576], "ey": 1850, "ly": 2018, "p": 4695},
+  {"key": "Arpichillo-Peru", "n": "Arpichillo", "c": "Peru", "r": "inca_contisuyu", "ll": [-14.63155, -74.95861], "ey": 0, "ly": 1530, "p": 4694, "al": ["condoya", "los batanes de surcuña", "surcuña"]},
+  {"key": "Francisco Bolognesi (per_piura)-Peru", "n": "Francisco Bolognesi", "c": "Peru", "r": "per_piura", "ll": [-5.076, -79.7715], "ey": 1525, "ly": 2017, "p": 4693, "al": ["cumbicos", "el naranjo", "cambicos"]},
+  {"key": "Huasco Bajo-Chile", "n": "Huasco Bajo", "c": "Chile", "r": "chl_region_de_atacama", "ll": [-28.47538, -71.17631], "ey": 1525, "ly": 2017, "p": 4693},
+  {"key": "Puerto Rondón-Colombia", "n": "Puerto Rondón", "c": "Colombia", "r": "col_arauca", "ll": [6.28146, -71.10339], "ey": 1900, "ly": 2025, "p": 4692},
+  {"key": "Copequén-Chile", "n": "Copequén", "c": "Chile", "r": "chl_region_metropolitana_de_santiago", "ll": [-34.24608, -70.92233], "ey": 1525, "ly": 2017, "p": 4692, "al": ["copequen"]},
+  {"key": "Pampa Soledad-Chile", "n": "Pampa Soledad", "c": "Chile", "r": "inca_collasuyu", "ll": [-21.38027, -69.45502], "ey": 1300, "ly": 1530, "p": 4692},
+  {"key": "Buenos Aires-Colombia_2", "n": "Buenos Aires", "c": "Colombia", "r": "na_magdalena_cauca_muisca", "ll": [3.93013, -74.86916], "ey": 1000, "ly": 1500, "p": 4692, "al": ["campo alegre", "Campo Alegre"]},
+  {"key": "Chontaduro-Ecuador", "n": "Chontaduro", "c": "Ecuador", "r": "ecu_esmeraldas", "ll": [0.878, -79.41782], "ey": 1850, "ly": 2025, "p": 4690},
+  {"key": "La Capuera-Uruguay", "n": "La Capuera", "c": "Uruguay", "r": "ury_maldonado", "ll": [-34.86465, -55.08542], "ey": 1850, "ly": 2023, "p": 4679, "al": ["chihuahua", "Chihuahua"]},
+  {"key": "Chiguirip-Peru", "n": "Chiguirip", "c": "Peru", "r": "per_cajamarca", "ll": [-6.42833, -78.72139], "ey": 1850, "ly": 2025, "p": 4678},
+  {"key": "Buenavista (col_norte_de_santander)-Colombia", "n": "Buenavista", "c": "Colombia", "r": "col_norte_de_santander", "ll": [8.18864, -73.34608], "ey": 1525, "ly": 2018, "p": 4677, "al": ["candelaria buenavista", "san andres", "Candelaria Buenavista"]},
+  {"key": "Villa General Manuel Belgrano-Argentina", "n": "Villa General Manuel Belgrano", "c": "Argentina", "r": "arg_formosa", "ll": [-24.93853, -59.02642], "ey": 1920, "ly": 2010, "p": 4676},
+  {"key": "Villa Kilómetro 213-Argentina", "n": "Villa Kilómetro 213", "c": "Argentina", "r": "arg_formosa", "ll": [-26.18715, -59.36705], "ey": 1920, "ly": 2010, "p": 4675},
+  {"key": "Simón Bolívar (ecu_santa_elena)-Ecuador", "n": "Simón Bolívar", "c": "Ecuador", "r": "ecu_santa_elena", "ll": [-2.15413, -80.36274], "ey": 1850, "ly": 2025, "p": 4672},
+  {"key": "Gallipavo-Chile", "n": "Gallipavo", "c": "Chile", "r": "sc_chile_central_araucania", "ll": [-36.8281, -72.0982], "ey": 0, "ly": 1500, "p": 4671},
+  {"key": "Campo Elías (ven_trujillo)-Venezuela", "n": "Campo Elías", "c": "Venezuela", "r": "ven_trujillo", "ll": [9.39167, -70.05722], "ey": 1850, "ly": 2025, "p": 4670},
+  {"key": "La Lagunita (ven_yaracuy)-Venezuela", "n": "La Lagunita", "c": "Venezuela", "r": "ven_yaracuy", "ll": [10.15594, -68.56435], "ey": 1625, "ly": 2011, "p": 4669, "al": ["lagunita", "nirgua", "Lagunita"]},
+  {"key": "Loma de Arena-Colombia", "n": "Loma de Arena", "c": "Colombia", "r": "col_atlantico", "ll": [10.73414, -75.26417], "ey": 1850, "ly": 2018, "p": 4668, "al": ["pueblo nuevo", "Pueblo Nuevo"]},
+  {"key": "Mutiscua-Colombia", "n": "Mutiscua", "c": "Colombia", "r": "col_norte_de_santander", "ll": [7.30047, -72.74717], "ey": 1850, "ly": 2025, "p": 4668},
+  {"key": "Cavari-Bolivia", "n": "Cavari", "c": "Bolivia", "r": "bol_cochabamba", "ll": [-17.07912, -66.99162], "ey": 1525, "ly": 2024, "p": 4667, "al": ["cabari", "usungani", "Usungani"]},
+  {"key": "Zona A - Sinifaná - Yacimiento 18 - Cuevas de Santa Catalina-Colombia", "n": "Zona A - Sinifaná - Yacimiento 18 - Cuevas de Santa Catalina", "c": "Colombia", "r": "na_magdalena_cauca_muisca", "ll": [5.96, -75.75], "ey": 1175, "ly": 1500, "p": 4667},
+  {"key": "Agua Santa-Venezuela", "n": "Agua Santa", "c": "Venezuela", "r": "ven_trujillo", "ll": [9.51667, -70.66667], "ey": 1850, "ly": 2025, "p": 4666},
+  {"key": "Viviate-Peru", "n": "Viviate", "c": "Peru", "r": "per_piura", "ll": [-4.9204, -80.9192], "ey": 1850, "ly": 2017, "p": 4666},
+  {"key": "Tres Unidos-Peru", "n": "Tres Unidos", "c": "Peru", "r": "per_san_martin", "ll": [-6.80583, -76.23222], "ey": 1900, "ly": 2025, "p": 4663},
+  {"key": "Campos Elevados-Peru", "n": "Campos Elevados", "c": "Peru", "r": "inca_chinchaysuyu", "ll": [-9.48033, -78.36895], "ey": -3000, "ly": 1532, "p": 4663, "al": ["cerro blanco", "cerro mongon", "puerto pobre"]},
+  {"key": "Taganga-Colombia", "n": "Taganga", "c": "Colombia", "r": "col_magdalena", "ll": [11.26816, -74.1885], "ey": 1525, "ly": 2018, "p": 4661, "al": ["san francisco taganga", "San Francisco Taganga"]},
+  {"key": "Santa Cruz (per_loreto)-Peru", "n": "Santa Cruz", "c": "Peru", "r": "per_loreto", "ll": [-5.51333, -75.85889], "ey": 1900, "ly": 2025, "p": 4661},
+  {"key": "San Genaro Norte-Argentina", "n": "San Genaro Norte", "c": "Argentina", "r": "arg_santa_fe", "ll": [-32.3648, -61.33723], "ey": 1850, "ly": 2010, "p": 4661},
+  {"key": "Simbila-Peru", "n": "Simbila", "c": "Peru", "r": "per_piura", "ll": [-5.2444, -80.6497], "ey": 1850, "ly": 2017, "p": 4658},
+  {"key": "Jaiva-Peru", "n": "Jaiva", "c": "Peru", "r": "inca_chinchaysuyu", "ll": [-10.897, -77.37239], "ey": -2000, "ly": 1530, "p": 4657, "al": ["cerro arara", "otro", "raywa"]},
+  {"key": "Villa Pasco-Peru", "n": "Villa Pasco", "c": "Peru", "r": "inca_chinchaysuyu", "ll": [-10.77856, -76.25451], "ey": 0, "ly": 1532, "p": 4657, "al": ["huachuacaja", "marcapunta", "ricran"]},
+  {"key": "Los Antiguos-Argentina", "n": "Los Antiguos", "c": "Argentina", "r": "arg_santa_cruz", "ll": [-46.54957, -71.62512], "ey": 1900, "ly": 2022, "p": 4655},
+  {"key": "Ayallaqta-Peru", "n": "Ayallaqta", "c": "Peru", "r": "inca_collasuyu", "ll": [-14.09031, -71.51206], "ey": 1000, "ly": 1530, "p": 4654, "al": ["hatun qero", "Hatun Qero"]},
+  {"key": "Marta-Colombia", "n": "Marta", "c": "Colombia", "r": "na_caribbean_maracaibo_tairona", "ll": [9.48339, -75.59988], "ey": -501, "ly": 793, "p": 4654, "al": ["yacimiento", "Yacimiento"]},
+  {"key": "Quilanga-Ecuador", "n": "Quilanga", "c": "Ecuador", "r": "ecu_loja", "ll": [-4.35293, -79.38157], "ey": 1850, "ly": 2025, "p": 4653},
+  {"key": "Gobernador Martínez-Argentina", "n": "Gobernador Martínez", "c": "Argentina", "r": "arg_corrientes", "ll": [-28.91231, -58.93607], "ey": 1850, "ly": 2022, "p": 4653, "al": ["gobernador juan e. martínez", "Gobernador Juan E. Martínez"]},
+  {"key": "Chairama-Colombia", "n": "Chairama", "c": "Colombia", "r": "na_caribbean_maracaibo_tairona", "ll": [11.3, -74.06], "ey": 900, "ly": 1500, "p": 4650, "al": ["pueblito", "Pueblito"]},
+  {"key": "Catavi-Bolivia", "n": "Catavi", "c": "Bolivia", "r": "bol_potosi", "ll": [-18.41507, -66.56544], "ey": 1850, "ly": 2024, "p": 4648}
+]
+
+HEADERS = {'User-Agent': 'HistoricalToponymyResearch/1.0 (https://example.org)'}
+
+def fetch_json(url):
+    req = urllib.request.Request(url, headers=HEADERS)
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        return json.loads(resp.read().decode('utf-8'))
+
+def lookup_item(item):
+    lat, lng = item['ll']
+    name = item['n']
+    country = item['c']
+    res = {'key': item['key'], 'n': name, 'c': country, 'r': item['r'], 'll': item['ll'], 'ey': item['ey'], 'ly': item['ly']}
+    try:
+        geo_url = f"https://es.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord={lat}|{lng}&gsradius=10000&gslimit=5&format=json"
+        geo = fetch_json(geo_url).get('query', {}).get('geosearch', [])
+        res['geo'] = [{'title': g['title'], 'dist': g['dist']} for g in geo]
+    except Exception as e:
+        res['geo_err'] = str(e)
+    try:
+        q = urllib.parse.quote(f"{name} {country}")
+        sr_url = f"https://es.wikipedia.org/w/api.php?action=query&list=search&srsearch={q}&srlimit=3&format=json"
+        sr = fetch_json(sr_url).get('query', {}).get('search', [])
+        res['sr'] = [s['title'] for s in sr]
+    except Exception as e:
+        res['sr_err'] = str(e)
+    
+    # Fetch extract for top geo or top search hit
+    titles = []
+    if res.get('geo'):
+        for g in res['geo'][:2]:
+            if g['title'] not in titles:
+                titles.append(g['title'])
+    if res.get('sr'):
+        for t in res['sr'][:2]:
+            if t not in titles:
+                titles.append(t)
+    if titles:
+        try:
+            t_param = urllib.parse.quote('|'.join(titles[:3]))
+            ext_url = f"https://es.wikipedia.org/w/api.php?action=query&prop=extracts|coordinates&explaintext=1&exintro=1&titles={t_param}&format=json"
+            pages = fetch_json(ext_url).get('query', {}).get('pages', {})
+            res['pages'] = []
+            for pid, pdata in pages.items():
+                if 'missing' not in pdata:
+                    res['pages'].append({
+                        'title': pdata.get('title'),
+                        'coords': pdata.get('coordinates', []),
+                        'extract': (pdata.get('extract') or '')[:800]
+                    })
+        except Exception as e:
+            res['ext_err'] = str(e)
+    return res
+
+with concurrent.futures.ThreadPoolExecutor(max_workers=10) as ex:
+    results = list(ex.map(lookup_item, INPUT))
+
+with open('tests/quipu_results.json', 'w', encoding='utf-8') as f:
+    json.dump(results, f, ensure_ascii=False, indent=2)
+
+print("Done:", len(results))

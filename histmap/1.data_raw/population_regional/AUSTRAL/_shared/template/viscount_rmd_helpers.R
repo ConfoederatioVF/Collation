@@ -121,6 +121,15 @@ viscount_table <- function (arg0_df, arg1_caption, arg2_col_names = NULL, arg3_o
   if (is.null(opts$span_columns)) opts$span_columns <- TRUE
   if (is.null(opts$bold_first_col)) opts$bold_first_col <- TRUE
 
+  if (knitr::is_latex_output() && is.data.frame(arg0_df)) {
+    for (ci in seq_along(arg0_df)) {
+      if (is.character(arg0_df[[ci]]) || is.factor(arg0_df[[ci]])) {
+        col_v <- as.character(arg0_df[[ci]])
+        col_v <- gsub("\\s*#\\s*", " No. ", col_v, perl = TRUE)
+        arg0_df[[ci]] <- col_v
+      }
+    }
+  }
   if (exists("render_table_template", mode = "function")) {
     return(render_table_template(arg0_df, opts))
   }

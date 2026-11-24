@@ -1,0 +1,3610 @@
+[
+  {
+    "key": "San Pedro Capacho-Venezuela",
+    "n": "San Pedro Capacho",
+    "c": "Venezuela",
+    "r": "vng_capitania_caracas_maracaibo",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "San Pedro Capacho",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "'Visita de Francisco Antonio Moreno y Escandón', en: Archivo General de Indias, AGI,Santa_Fe,595"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_new_granada_settlements.json",
+        {
+          "name": "San Pedro Capacho",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "'Visita de Francisco Antonio Moreno y Escandón', en: Archivo General de Indias, AGI,Santa_Fe,595"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Parque zoológico La Laguna",
+        207
+      ],
+      [
+        "Capacho Viejo",
+        673
+      ],
+      [
+        "Capacho Nuevo",
+        918
+      ],
+      [
+        "Monumento Cristo Rey",
+        1605
+      ],
+      [
+        "Municipio Independencia (Táchira)",
+        2882
+      ]
+    ],
+    "es_sr": [
+      "Capacho Nuevo",
+      "Municipio Independencia (Táchira)",
+      "Municipio Pedro María Ureña"
+    ]
+  },
+  {
+    "key": "Cazorla-Venezuela",
+    "n": "Cazorla",
+    "c": "Venezuela",
+    "r": "ven_guarico",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "venezuela_after_independence_settlements.json",
+        {
+          "name": "Cazorla",
+          "other_names": [],
+          "sources": [
+            "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+            "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Estados Unidos de Venezuela",
+        1701
+      ],
+      [
+        "Cazorla (Guárico)",
+        5931
+      ]
+    ],
+    "es_sr": [
+      "Raquel Antúnez",
+      "Cazorla (Guárico)",
+      "Juan Cazorla Pedrero"
+    ]
+  },
+  {
+    "key": "Pocanchi-Bolivia",
+    "n": "Pocanchi",
+    "c": "Bolivia",
+    "r": "vp_intendencia_cochabamba",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Pocanchi",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Francisco de Viedma, Descripción geográfica y estadística de la provincia de Santa Cruz de la Sierra (1793)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_peru_upper_peru_settlements.json",
+        {
+          "name": "Pocanchi",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Francisco de Viedma, Descripción geográfica y estadística de la provincia de Santa Cruz de la Sierra (1793)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Pichota-Ecuador",
+    "n": "Pichota",
+    "c": "Ecuador",
+    "r": "vng_guayaquil_esmeraldas",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Pichota",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "HGIS Primary: Martin Volland, Indianische Bevölkerungsgeschichte im Corregimiento Guayaquil (1548-1765)nBonn 1994)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_new_granada_settlements.json",
+        {
+          "name": "Pichota",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "HGIS Primary: Martin Volland, Indianische Bevölkerungsgeschichte im Corregimiento Guayaquil (1548-1765)nBonn 1994)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Cantón Rocafuerte",
+        1268
+      ],
+      [
+        "Parroquia Sosote",
+        3518
+      ]
+    ],
+    "es_sr": [
+      "Provincia de Manabí",
+      "Chone",
+      "Nicolás Márquez (escritor)"
+    ]
+  },
+  {
+    "key": "Loreto (arg_corrientes)-Argentina",
+    "n": "Loreto",
+    "c": "Argentina",
+    "r": "arg_corrientes",
+    "ey": 1536,
+    "ly": 2022,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "Loreto",
+          "other_names": [],
+          "sources": [
+            "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+            "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+            "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Loreto (Corrientes)",
+        116
+      ]
+    ],
+    "es_sr": [
+      "Loreto",
+      "Misión jesuítica de Nuestra Señora de Loreto",
+      "Loreto (Italia)"
+    ]
+  },
+  {
+    "key": "Valle Sacta-Bolivia",
+    "n": "Valle Sacta",
+    "c": "Bolivia",
+    "r": "bol_cochabamba",
+    "ey": 1850,
+    "ly": 2024,
+    "al": [
+      "dr. ernesto daza ondarza",
+      "Dr. Ernesto Daza Ondarza"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "andean_bolivia_independence_settlements.json",
+        {
+          "name": "Valle Sacta",
+          "other_names": [
+            "Dr. Ernesto Daza Ondarza"
+          ],
+          "sources": [
+            "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)",
+            "INE Bolivia Censo de Población y Vivienda 2024 (Comunidades / Unidades Censales)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Valle Sacta",
+        578
+      ]
+    ],
+    "es_sr": [
+      "Valle Sacta",
+      "Universidad Mayor de San Simón",
+      "Río Mamoré"
+    ]
+  },
+  {
+    "key": "Campo Grande (arg_formosa)-Argentina",
+    "n": "Campo Grande",
+    "c": "Argentina",
+    "r": "arg_formosa",
+    "ey": 1900,
+    "ly": 2022,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "Campo Grande",
+          "other_names": [],
+          "sources": [
+            "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+            "INDEC Argentina Censo Nacional 2022 (Localidades Censales Georef + Radios Censales)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": [
+      "Batalla de Arroyo Grande (Argentina)",
+      "Campo Grande",
+      "Campo Grande (Río Negro)"
+    ]
+  },
+  {
+    "key": "Pucacaca-Peru",
+    "n": "Pucacaca",
+    "c": "Peru",
+    "r": "per_san_martin",
+    "ey": 1900,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "peru_after_independence_settlements.json",
+        {
+          "name": "Pucacaca",
+          "other_names": [],
+          "sources": [
+            "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Distrito de Pucacaca",
+        480
+      ],
+      [
+        "Distrito de Buenos Aires (Picota)",
+        6607
+      ],
+      [
+        "Provincia de Picota",
+        7650
+      ],
+      [
+        "Distrito de Picota",
+        8059
+      ],
+      [
+        "Picota (ciudad)",
+        8074
+      ]
+    ],
+    "es_sr": [
+      "Distrito de Pucacaca",
+      "Provincia del Cusco",
+      "Asesinato de Elmer Ríos"
+    ]
+  },
+  {
+    "key": "Campo Grande-Bolivia",
+    "n": "Campo Grande",
+    "c": "Bolivia",
+    "r": "bol_tarija",
+    "ey": 1850,
+    "ly": 2024,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "andean_bolivia_independence_settlements.json",
+        {
+          "name": "Campo Grande",
+          "other_names": [],
+          "sources": [
+            "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Aeropuerto de Yacuiba",
+        989
+      ],
+      [
+        "Campo Pajoso",
+        6240
+      ],
+      [
+        "Yacuiba",
+        6757
+      ],
+      [
+        "Estadio Ovidio Messa Soruco",
+        8016
+      ]
+    ],
+    "es_sr": [
+      "Batalla de Campo Grande",
+      "Bolivia",
+      "Escudo de Bolivia"
+    ]
+  },
+  {
+    "key": "Rosario Casigua-Venezuela",
+    "n": "Rosario Casigua",
+    "c": "Venezuela",
+    "r": "vng_capitania_caracas_maracaibo",
+    "ey": 1724,
+    "ly": 1830,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "viceroyalty_new_granada_settlements.json",
+        {
+          "name": "Rosario Casigua",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "HGIS Primary: 'Relación y testimonio íntegro de la visita general de este obispado de Caracas y Venezuela', en: Archivo General de Indias, Caracas,959 (17",
+            "HGIS Primary: John V. Lombardi, 'Type III Census Data. Parishes of the Bishopric of Caracas (CaracasType3.xls)', en: http://jvlone.com/venezuela/parish/p_"
+          ],
+          "foundation_year": 1724
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Casigua",
+        212
+      ]
+    ],
+    "es_sr": [
+      "Municipio Mauroa",
+      "Frontera entre Colombia y Venezuela",
+      "Municipio Maracaibo"
+    ]
+  },
+  {
+    "key": "Estructuras (inca_collasuyu)-Chile",
+    "n": "Estructuras",
+    "c": "Chile",
+    "r": "inca_collasuyu",
+    "ey": 900,
+    "ly": 1532,
+    "al": [
+      "pukara de lasana",
+      "lasana",
+      "Pukara de Lasana"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Estructuras",
+          "other_names": [
+            "Pukara de Lasana"
+          ],
+          "sources": [
+            "CMN Chile — Registro Arqueológico Acreditado"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Lasana",
+        165
+      ],
+      [
+        "Pucará de Lasana",
+        1488
+      ],
+      [
+        "Chiu Chiu",
+        8176
+      ],
+      [
+        "Iglesia de San Francisco (Chiu Chiu)",
+        8294
+      ],
+      [
+        "Laguna Inka Coya",
+        8385
+      ]
+    ],
+    "es_sr": [
+      "Escultismo en Chile",
+      "Movistar (Chile)",
+      "Ministerio de Defensa Nacional (Chile)"
+    ]
+  },
+  {
+    "key": "Torrejirca y Huancuyo-Peru",
+    "n": "Torrejirca y Huancuyo",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -2000,
+    "ly": 1530,
+    "al": [
+      "arqueológico pahuarchuco",
+      "cashua",
+      "el tuco"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_central_andes_settlements.json",
+        {
+          "name": "Torrejirca y Huancuyo",
+          "other_names": [
+            "Arqueológico Pahuarchuco",
+            "Cashua",
+            "El Tuco",
+            "Huancuyo",
+            "Huarishtambo",
+            "Huaristambo",
+            "Huarugaga",
+            "Pahuarchuco"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ],
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Torrejirca y Huancuyo",
+          "other_names": [
+            "Arqueológico Pahuarchuco",
+            "Cashua",
+            "El Tuco",
+            "Huancuyo",
+            "Huarishtambo",
+            "Huaristambo",
+            "Huarugaga",
+            "Pahuarchuco"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Provincia de Pataz",
+        5572
+      ],
+      [
+        "Tayabamba",
+        5573
+      ],
+      [
+        "Distrito de Tayabamba",
+        5586
+      ]
+    ],
+    "es_sr": []
+  },
+  {
+    "key": "Uvencio Antonio Velásquez-Venezuela",
+    "n": "Uvencio Antonio Velásquez",
+    "c": "Venezuela",
+    "r": "ven_portuguesa",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "venezuela_after_independence_settlements.json",
+        {
+          "name": "Uvencio Antonio Velásquez",
+          "other_names": [],
+          "sources": [
+            "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+            "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": [
+      "Municipio Sucre (Portuguesa)",
+      "Biscucuy"
+    ]
+  },
+  {
+    "key": "Piedras Tacitas Fundo El Rebaño-Chile",
+    "n": "Piedras Tacitas Fundo El Rebaño",
+    "c": "Chile",
+    "r": "inca_collasuyu",
+    "ey": -5000,
+    "ly": 1500,
+    "al": [
+      "bto",
+      "col",
+      "elo1 piedra tacita el olivar"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Piedras Tacitas Fundo El Rebaño",
+          "other_names": [
+            "Bto",
+            "Col",
+            "ELO1 Piedra Tacita El Olivar",
+            "Frb",
+            "Fsj",
+            "Fsjh",
+            "Hist",
+            "Hvm"
+          ],
+          "sources": [
+            "CMN Chile — Registro Arqueológico Acreditado",
+            "CMN Chile — Registros Arqueológicos Complementarios",
+            "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+          ]
+        }
+      ],
+      [
+        "pre_columbian_southern_cone_settlements.json",
+        {
+          "name": "Piedras Tacitas Fundo El Rebaño",
+          "other_names": [
+            "Frb",
+            "Hvm",
+            "Piedra Tacita Hijuela Virgen María"
+          ],
+          "sources": [
+            "CMN Chile — Registro Arqueológico Acreditado",
+            "CMN Chile — Registros Arqueológicos Complementarios",
+            "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Estación Valencia",
+        1620
+      ],
+      [
+        "Bioparque Fundo El Carmen",
+        1670
+      ],
+      [
+        "El Retiro (Quilpué)",
+        2115
+      ],
+      [
+        "Estación Quilpué",
+        2417
+      ],
+      [
+        "Teatro Municipal Juan Bustos Ramírez",
+        2442
+      ]
+    ],
+    "es_sr": [
+      "El Retiro (Quilpué)",
+      "Quilpué",
+      "Hermes"
+    ]
+  },
+  {
+    "key": "Yungar-Peru",
+    "n": "Yungar",
+    "c": "Peru",
+    "r": "per_ancash",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "peru_after_independence_settlements.json",
+        {
+          "name": "Yungar",
+          "other_names": [],
+          "sources": [
+            "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Distrito de Yungar",
+        37
+      ],
+      [
+        "Distrito de Pariahuanca (Carhuaz)",
+        1546
+      ],
+      [
+        "Distrito de Anta (Carhuaz)",
+        2294
+      ],
+      [
+        "Distrito de Taricá",
+        2560
+      ],
+      [
+        "Distrito de Jangas",
+        2696
+      ]
+    ],
+    "es_sr": [
+      "Distrito de Yungar",
+      "Provincia de Carhuaz",
+      "Cielo de las vertientes"
+    ]
+  },
+  {
+    "key": "Piamonte-Colombia_2",
+    "n": "Piamonte",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": -290,
+    "ly": 542,
+    "al": [
+      "prueba de pala no",
+      "área de interés arqueológico no",
+      "Prueba de pala No"
+    ],
+    "hgis": [],
+    "es_geo": [
+      [
+        "Puerto Berrío",
+        6806
+      ]
+    ],
+    "es_sr": [
+      "Piamonte (desambiguación)",
+      "Idioma piamontés",
+      "Piamonte (Cauca)"
+    ]
+  },
+  {
+    "key": "Tres Cruces Garnica-Bolivia",
+    "n": "Tres Cruces Garnica",
+    "c": "Bolivia",
+    "r": "bol_potosi",
+    "ey": 1525,
+    "ly": 2024,
+    "al": [
+      "belen",
+      "Belen"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "andean_bolivia_independence_settlements.json",
+        {
+          "name": "Tres Cruces Garnica",
+          "other_names": [
+            "Belen"
+          ],
+          "sources": [
+            "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Puna (Bolivia)",
+        6244
+      ]
+    ],
+    "es_sr": [
+      "Elecciones subnacionales de Bolivia de 2021",
+      "Club Bolívar",
+      "Primero la Gente (Bolivia)"
+    ]
+  },
+  {
+    "key": "Los Sunchales-Argentina",
+    "n": "Los Sunchales",
+    "c": "Argentina",
+    "r": "crp_intendencia_buenos_aires",
+    "ey": 1790,
+    "ly": 1830,
+    "al": [
+      "la vireyna",
+      "La Vireyna"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "chile_rio_plata_banda_oriental_settlements.json",
+        {
+          "name": "Los Sunchales",
+          "other_names": [
+            "La Vireyna"
+          ],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Felix de Azara, Viajes por la America del Sur de Don Felix de Azara (Montevideo 1850)"
+          ],
+          "foundation_year": 1790
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Sunchales",
+        100
+      ],
+      [
+        "Estación Sunchales",
+        600
+      ],
+      [
+        "Aeropuerto de Sunchales",
+        3350
+      ],
+      [
+        "Estación Cabaña Cisne",
+        7513
+      ]
+    ],
+    "es_sr": [
+      "Sunchales",
+      "Club Atlético Unión (Sunchales)",
+      "Estación Sunchales"
+    ]
+  },
+  {
+    "key": "Pampa Munipata-Peru",
+    "n": "Pampa Munipata",
+    "c": "Peru",
+    "r": "inca_collasuyu",
+    "ey": -1000,
+    "ly": 1530,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_central_andes_settlements.json",
+        {
+          "name": "Pampa Munipata",
+          "other_names": [],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ],
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Pampa Munipata",
+          "other_names": [],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Las Yaras (Tacna)",
+        5209
+      ],
+      [
+        "Distrito de Sama",
+        5211
+      ],
+      [
+        "Combate de Buenavista",
+        8303
+      ],
+      [
+        "Tomasiri",
+        9876
+      ]
+    ],
+    "es_sr": []
+  },
+  {
+    "key": "Estero Meco-Chile",
+    "n": "Estero Meco",
+    "c": "Chile",
+    "r": "sc_chile_central_araucania",
+    "ey": 0,
+    "ly": 1500,
+    "al": [
+      "estero el coigue",
+      "Estero El Coigue"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_southern_cone_settlements.json",
+        {
+          "name": "Estero Meco",
+          "other_names": [
+            "Estero El Coigue"
+          ],
+          "sources": [
+            "CMN Chile — Registro Arqueológico Acreditado",
+            "CMN Chile — Registros Arqueológicos Complementarios",
+            "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "San Ignacio (Chile)",
+        4703
+      ],
+      [
+        "San Ignacio (comuna)",
+        4703
+      ]
+    ],
+    "es_sr": [
+      "Río Larqui",
+      "Río Rehue",
+      "Lengua no clasificada"
+    ]
+  },
+  {
+    "key": "Callelarga-Colombia",
+    "n": "Callelarga",
+    "c": "Colombia",
+    "r": "col_cauca",
+    "ey": 1850,
+    "ly": 2018,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "colombia_after_independence_settlements.json",
+        {
+          "name": "Callelarga",
+          "other_names": [],
+          "sources": [
+            "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+            "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Realito",
+        8777
+      ]
+    ],
+    "es_sr": [
+      "Eje cafetero",
+      "Calarcá (Quindío)"
+    ]
+  },
+  {
+    "key": "Apillapampa-Bolivia",
+    "n": "Apillapampa",
+    "c": "Bolivia",
+    "r": "bol_cochabamba",
+    "ey": 1525,
+    "ly": 2024,
+    "al": [
+      "apilla pampa"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "andean_bolivia_independence_settlements.json",
+        {
+          "name": "Apillapampa",
+          "other_names": [],
+          "sources": [
+            "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Apillapampa",
+        89
+      ]
+    ],
+    "es_sr": [
+      "Apillapampa",
+      "San Pedro de Buena Vista"
+    ]
+  },
+  {
+    "key": "Candua-Bolivia",
+    "n": "Candua",
+    "c": "Bolivia",
+    "r": "bol_chuquisaca",
+    "ey": 1850,
+    "ly": 2024,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "andean_bolivia_independence_settlements.json",
+        {
+          "name": "Candua",
+          "other_names": [],
+          "sources": [
+            "INE Bolivia Censo de Población y Vivienda 2024 (Centros Poblados Urbanos)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Aeropuerto Apiaguaiki Tumpa",
+        2215
+      ],
+      [
+        "Monteagudo (Bolivia)",
+        2610
+      ]
+    ],
+    "es_sr": [
+      "Monteagudo (Bolivia)",
+      "Torneo Nacional Interprovincial 2012",
+      "Agua potable y saneamiento en Bolivia"
+    ]
+  },
+  {
+    "key": "Loma China-Colombia",
+    "n": "Loma China",
+    "c": "Colombia",
+    "r": "na_caribbean_maracaibo_tairona",
+    "ey": 1300,
+    "ly": 1500,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_northern_andes_settlements.json",
+        {
+          "name": "Loma China",
+          "other_names": [],
+          "sources": [
+            "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Salgar (Atlántico)",
+        3137
+      ],
+      [
+        "Castillo de San Antonio de Salgar",
+        3692
+      ],
+      [
+        "Puerto Colombia",
+        3883
+      ],
+      [
+        "Ventana de sueños",
+        3932
+      ],
+      [
+        "Sabanilla (Colombia)",
+        4681
+      ]
+    ],
+    "es_sr": [
+      "Atlántico (Colombia)",
+      "Ferrocarril en Colombia",
+      "Parque Arqueológico Nacional de Tierradentro"
+    ]
+  },
+  {
+    "key": "Mateo Gómez-Colombia",
+    "n": "Mateo Gómez",
+    "c": "Colombia",
+    "r": "col_cordoba",
+    "ey": 1850,
+    "ly": 2018,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "colombia_after_independence_settlements.json",
+        {
+          "name": "Mateo Gómez",
+          "other_names": [],
+          "sources": [
+            "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+            "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Aeropuerto Los Garzones",
+        2536
+      ],
+      [
+        "Cereté",
+        6153
+      ],
+      [
+        "Universidad de Córdoba (Colombia)",
+        7209
+      ]
+    ],
+    "es_sr": [
+      "San Mateo (Aragua)",
+      "Álvaro Gómez Hurtado",
+      "Juan Gómez"
+    ]
+  },
+  {
+    "key": "Calpamayo-Peru",
+    "n": "Calpamayo",
+    "c": "Peru",
+    "r": "inca_contisuyu",
+    "ey": -1000,
+    "ly": 1532,
+    "al": [
+      "yuraqmachay",
+      "en proceso",
+      "calvariopata"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Calpamayo",
+          "other_names": [
+            "Yuraqmachay"
+          ],
+          "sources": [
+            "SIGDA Qhapaq Ñan — Ministerio de Cultura del Perú",
+            "Hyslop (1984) Inka Road System",
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": [
+      "Distrito de Upahuacho",
+      "Departamento de Apurímac"
+    ]
+  },
+  {
+    "key": "Jiskha-Bolivia",
+    "n": "Jiskha",
+    "c": "Bolivia",
+    "r": "inca_collasuyu",
+    "ey": 900,
+    "ly": 1500,
+    "al": [
+      "grande pampa",
+      "kisca kara",
+      "Grande Pampa"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_central_andes_settlements.json",
+        {
+          "name": "Jiskha",
+          "other_names": [
+            "Grande Pampa",
+            "Kisca Kara"
+          ],
+          "sources": [
+            "McAndrews (2005) Wankarani Settlement Pattern CADB",
+            "Arkush (2011) Altiplano Survey"
+          ]
+        }
+      ],
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Jiskha",
+          "other_names": [
+            "Grande Pampa",
+            "Kisca Kara"
+          ],
+          "sources": [
+            "McAndrews (2005) Wankarani Settlement Pattern CADB",
+            "Arkush (2011) Altiplano Survey"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "La Joya (Bolivia)",
+        9707
+      ]
+    ],
+    "es_sr": []
+  },
+  {
+    "key": "Naranjales-Colombia_2",
+    "n": "Naranjales",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": -1000,
+    "ly": 1500,
+    "al": [],
+    "hgis": [],
+    "es_geo": [
+      [
+        "Tarso (Antioquia)",
+        6277
+      ],
+      [
+        "Jericó (Antioquia)",
+        7997
+      ],
+      [
+        "Bolombolo",
+        9558
+      ]
+    ],
+    "es_sr": [
+      "Diócesis de Cartago (Colombia)",
+      "Moñitos",
+      "Sahagún (Colombia)"
+    ]
+  },
+  {
+    "key": "Fortín Olmos-Argentina",
+    "n": "Fortín Olmos",
+    "c": "Argentina",
+    "r": "arg_santa_fe",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "Fortín Olmos",
+          "other_names": [],
+          "sources": [
+            "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+            "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+            "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Fortín Olmos",
+        632
+      ]
+    ],
+    "es_sr": [
+      "Fortín Olmos",
+      "Fortin",
+      "Ambrosio Olmos"
+    ]
+  },
+  {
+    "key": "Fuerte de Lobos-Argentina",
+    "n": "Fuerte de Lobos",
+    "c": "Argentina",
+    "r": "crp_intendencia_buenos_aires",
+    "ey": 1775,
+    "ly": 1830,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "chile_rio_plata_banda_oriental_settlements.json",
+        {
+          "name": "Fuerte de Lobos",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Andrea Reguera/Leonardo Canciani, 'Espacios fiscales desiertos'. Territorio, expansión y apropiación en la conformación rural de la provinci"
+          ],
+          "foundation_year": 1775
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Lobos (ciudad)",
+        184
+      ],
+      [
+        "Estación Lobos",
+        239
+      ],
+      [
+        "Estación Empalme Lobos",
+        3746
+      ],
+      [
+        "Empalme Lobos",
+        4034
+      ],
+      [
+        "Estación José Santos Arévalo",
+        6827
+      ]
+    ],
+    "es_sr": [
+      "Lobos (ciudad)",
+      "Fortín de Lobos",
+      "Heitor Villa-Lobos"
+    ]
+  },
+  {
+    "key": "Tirata-Bolivia_2",
+    "n": "Tirata",
+    "c": "Bolivia",
+    "r": "vp_intendencia_cochabamba",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [],
+    "hgis": [],
+    "es_geo": [],
+    "es_sr": [
+      "Río La Paz",
+      "Rey Pirin",
+      "21 de junio"
+    ]
+  },
+  {
+    "key": "Villa de Maria-Colombia",
+    "n": "Villa de Maria",
+    "c": "Colombia",
+    "r": "vng_cartagena_santa_marta",
+    "ey": 1534,
+    "ly": 1830,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Villa de Maria",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+          ],
+          "foundation_year": 1534
+        }
+      ],
+      [
+        "viceroyalty_new_granada_settlements.json",
+        {
+          "name": "Villa de Maria",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+          ],
+          "foundation_year": 1534
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "El Carmen de Bolívar",
+        2030
+      ],
+      [
+        "Operación Alcatraz",
+        4861
+      ]
+    ],
+    "es_sr": [
+      "Villa de Leyva",
+      "Villa María (desambiguación)",
+      "José María Villa"
+    ]
+  },
+  {
+    "key": "Sucumbíos-Ecuador",
+    "n": "Sucumbíos",
+    "c": "Ecuador",
+    "r": "ecu_sucumbios",
+    "ey": 1900,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "ecuador_after_independence_settlements.json",
+        {
+          "name": "Sucumbíos",
+          "other_names": [],
+          "sources": [
+            "INEC Ecuador Censo 2010 & 2022 / Revision 2024 (via pobecu)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": [
+      "Provincia de Sucumbíos",
+      "Segunda Categoría de Sucumbíos",
+      "Segunda Categoría de Sucumbíos 2014"
+    ]
+  },
+  {
+    "key": "El Lucero-Ecuador",
+    "n": "El Lucero",
+    "c": "Ecuador",
+    "r": "ecu_loja",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "ecuador_after_independence_settlements.json",
+        {
+          "name": "El Lucero",
+          "other_names": [],
+          "sources": [
+            "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+            "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": [
+      "Wilfrido Lucero",
+      "Diego Lucero",
+      "Congreso Nacional del Ecuador"
+    ]
+  },
+  {
+    "key": "Tapasa-Bolivia",
+    "n": "Tapasa",
+    "c": "Bolivia",
+    "r": "vp_intendencia_cochabamba",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Tapasa",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Francisco de Viedma, Descripción geográfica y estadística de la provincia de Santa Cruz de la Sierra (1793)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_peru_upper_peru_settlements.json",
+        {
+          "name": "Tapasa",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Francisco de Viedma, Descripción geográfica y estadística de la provincia de Santa Cruz de la Sierra (1793)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": []
+  },
+  {
+    "key": "Majagual Yacimiento-Colombia",
+    "n": "Majagual Yacimiento",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1003,
+    "ly": 1500,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_northern_andes_settlements.json",
+        {
+          "name": "Majagual Yacimiento",
+          "other_names": [],
+          "sources": [
+            "COL14 Colombia Radiocarbon Database",
+            "Santos Vecino, G. (1996). Rescate arqueologico de la variante San Jose de Nus-Cisneros Poliducto Sebastopol-Medellin. In"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Providencia (San Roque)",
+        7080
+      ],
+      [
+        "Maceo",
+        8622
+      ],
+      [
+        "Cristales (San Roque)",
+        9104
+      ]
+    ],
+    "es_sr": [
+      "Turismo en Colombia",
+      "Ayapel",
+      "Ragonvalia"
+    ]
+  },
+  {
+    "key": "Chiwaco Wayqo-Peru",
+    "n": "Chiwaco Wayqo",
+    "c": "Peru",
+    "r": "inca_cuzco_heartland",
+    "ey": 1000,
+    "ly": 1530,
+    "al": [
+      "balconpata",
+      "wat'a",
+      "kimsaera"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Chiwaco Wayqo",
+          "other_names": [
+            "Balconpata"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Sitio arqueológico de Raqaypata",
+        6136
+      ],
+      [
+        "Moray (sitio arqueológico)",
+        6851
+      ],
+      [
+        "Huarocondo",
+        7033
+      ],
+      [
+        "Distrito de Huarocondo",
+        7310
+      ],
+      [
+        "Ñaupa Iglesia",
+        8487
+      ]
+    ],
+    "es_sr": []
+  },
+  {
+    "key": "Los Potreros Y-Argentina",
+    "n": "Los Potreros Y",
+    "c": "Argentina",
+    "r": "sc_parana_uruguay_charrua",
+    "ey": 80,
+    "ly": 1500,
+    "al": [
+      "bia",
+      "tomatt",
+      "Bia"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_southern_cone_settlements.json",
+        {
+          "name": "Los Potreros Y",
+          "other_names": [
+            "Bia",
+            "Tomatt"
+          ],
+          "sources": [
+            "IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Estación Río Tercero",
+        7108
+      ],
+      [
+        "Río Tercero (ciudad)",
+        7311
+      ]
+    ],
+    "es_sr": [
+      "Potrero de los Funes",
+      "Circuito de Potrero de los Funes",
+      "Potrero"
+    ]
+  },
+  {
+    "key": "Agua Larga-Venezuela",
+    "n": "Agua Larga",
+    "c": "Venezuela",
+    "r": "ven_falcon",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "venezuela_after_independence_settlements.json",
+        {
+          "name": "Agua Larga",
+          "other_names": [],
+          "sources": [
+            "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+            "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": [
+      "Mérida (Venezuela)",
+      "Cayo de Agua",
+      "Escasez en Venezuela"
+    ]
+  },
+  {
+    "key": "Apiay-Colombia",
+    "n": "Apiay",
+    "c": "Colombia",
+    "r": "col_meta",
+    "ey": 1850,
+    "ly": 2018,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "colombia_after_independence_settlements.json",
+        {
+          "name": "Apiay",
+          "other_names": [],
+          "sources": [
+            "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+            "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Base Aérea CT Luis Francisco Gómez Niño",
+        998
+      ],
+      [
+        "Universidad de los Llanos",
+        2853
+      ],
+      [
+        "Terremoto en Villavicencio de 1917",
+        8137
+      ],
+      [
+        "Estadio Bello Horizonte - Rey Pelé",
+        8779
+      ],
+      [
+        "Villavicencio",
+        9876
+      ]
+    ],
+    "es_sr": [
+      "Base Aérea CT Luis Francisco Gómez Niño",
+      "Aeropuerto Vanguardia",
+      "Fuerza Aérea Colombiana"
+    ]
+  },
+  {
+    "key": "Cuenca-Peru",
+    "n": "Cuenca",
+    "c": "Peru",
+    "r": "per_huancavelica",
+    "ey": 1557,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Cuenca",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+          ],
+          "foundation_year": 1557
+        }
+      ],
+      [
+        "viceroyalty_peru_upper_peru_settlements.json",
+        {
+          "name": "Cuenca",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+          ],
+          "foundation_year": 1557
+        }
+      ],
+      [
+        "peru_after_independence_settlements.json",
+        {
+          "name": "Cuenca",
+          "other_names": [],
+          "sources": [
+            "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+          ],
+          "foundation_year": 1557
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Distrito de Cuenca (Huancavelica)",
+        368
+      ],
+      [
+        "Distrito de Pilchaca",
+        6031
+      ],
+      [
+        "Larmenta",
+        7045
+      ],
+      [
+        "Distrito de Acostambo",
+        7732
+      ],
+      [
+        "Distrito de Izcuchaca (Huancavelica)",
+        8764
+      ]
+    ],
+    "es_sr": [
+      "Distrito de Cuenca (Huancavelica)",
+      "Cuenca del Amazonas",
+      "Cuenca endorreica"
+    ]
+  },
+  {
+    "key": "Milagro-Argentina",
+    "n": "Milagro",
+    "c": "Argentina",
+    "r": "arg_la_rioja",
+    "ey": 1850,
+    "ly": 2010,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "Milagro",
+          "other_names": [],
+          "sources": [
+            "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Departamento General Ortiz de Ocampo",
+        315
+      ],
+      [
+        "Estación Milagro",
+        346
+      ],
+      [
+        "Milagro (La Rioja)",
+        1484
+      ]
+    ],
+    "es_sr": [
+      "Milagro (La Rioja)",
+      "Milagro Sala",
+      "Misión Milagro"
+    ]
+  },
+  {
+    "key": "San Marcos Sierra-Argentina",
+    "n": "San Marcos Sierra",
+    "c": "Argentina",
+    "r": "arg_cordoba",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "San Marcos Sierra",
+          "other_names": [],
+          "sources": [
+            "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+            "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+            "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "La Banda (Córdoba)",
+        1241
+      ],
+      [
+        "San Marcos Sierras",
+        1322
+      ],
+      [
+        "El Rincón (Córdoba)",
+        4513
+      ],
+      [
+        "Estación Los Sauces (Córdoba)",
+        7462
+      ],
+      [
+        "Los Sauces (Córdoba)",
+        7506
+      ]
+    ],
+    "es_sr": [
+      "San Marcos Sierras",
+      "San Marcos",
+      "Rally de Argentina"
+    ]
+  },
+  {
+    "key": "Zarapullo-Ecuador",
+    "n": "Zarapullo",
+    "c": "Ecuador",
+    "r": "vng_audiencia_quito_sierra",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Zarapullo",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_new_granada_settlements.json",
+        {
+          "name": "Zarapullo",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Pilar Ponce, Relaciones histórico-geográficas de la Audiencia de Quito: s. XVI-XIX (Madrid 1991)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": [
+      "Bosque Protector Ecuador"
+    ]
+  },
+  {
+    "key": "Yacimiento (na_magdalena_cauca_muisca_6)-Colombia",
+    "n": "Yacimiento",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": -98,
+    "ly": 602,
+    "al": [
+      "tumulo de puerto lopez",
+      "Tumulo de Puerto Lopez"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_northern_andes_settlements.json",
+        {
+          "name": "Yacimiento",
+          "other_names": [
+            "Tumulo de Puerto Lopez"
+          ],
+          "sources": [
+            "COL14 Colombia Radiocarbon Database",
+            "Santos, G. A., Vergara Castaneda, F. A. & Quintero Zapata, O. D. (1999). Ocupaciones tempranas (Holoceno medio) y desarr",
+            "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Pueblo Flechas",
+        7694
+      ]
+    ],
+    "es_sr": [
+      "Yacimiento rupestre de Sáchica",
+      "Historia de Colombia",
+      "Historia del petróleo en Colombia"
+    ]
+  },
+  {
+    "key": "HA1 Retamos Norte ZG-B-Chile",
+    "n": "HA1 Retamos Norte ZG-B",
+    "c": "Chile",
+    "r": "sc_patagonia_tierra_del_fuego",
+    "ey": 1000,
+    "ly": 1500,
+    "al": [
+      "ha2 retamos norte zg-b",
+      "HA2 Retamos Norte ZG-B"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_southern_cone_settlements.json",
+        {
+          "name": "HA1 Retamos Norte ZG-B",
+          "other_names": [
+            "HA2 Retamos Norte ZG-B"
+          ],
+          "sources": [
+            "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Río Oscar",
+        7773
+      ]
+    ],
+    "es_sr": []
+  },
+  {
+    "key": "Palca-Peru_2",
+    "n": "Palca",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": 0,
+    "ly": 1532,
+    "al": [
+      "piruro jirca",
+      "piwinchajirca",
+      "ponto viejo"
+    ],
+    "hgis": [],
+    "es_geo": [
+      [
+        "Distrito de Pontó",
+        2932
+      ],
+      [
+        "Distrito de Huacachi",
+        8781
+      ],
+      [
+        "Distrito de Rahuapampa",
+        9073
+      ]
+    ],
+    "es_sr": [
+      "Distrito de Palca (Lampa)",
+      "Palca (Tacna)",
+      "Distrito de Palca (Tacna)"
+    ]
+  },
+  {
+    "key": "Guachipas-Argentina",
+    "n": "Guachipas",
+    "c": "Argentina",
+    "r": "arg_salta",
+    "ey": 1536,
+    "ly": 2022,
+    "al": [
+      "huachipas",
+      "Huachipas"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "chile_rio_plata_banda_oriental_settlements.json",
+        {
+          "name": "Guachipas",
+          "other_names": [
+            "Huachipas"
+          ],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Juan Ignacio Quintian, 'Articulación política y etnogénesis en los Valles Calchaquíes. Los Pulares durante los siglos XVII y XVIII', en: And"
+          ]
+        }
+      ],
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "Guachipas",
+          "other_names": [],
+          "sources": [
+            "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+            "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+            "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Guachipas",
+        2401
+      ],
+      [
+        "Talapampa",
+        5785
+      ],
+      [
+        "La Viña (Salta)",
+        8049
+      ],
+      [
+        "Departamento La Viña",
+        8192
+      ]
+    ],
+    "es_sr": [
+      "Guachipas",
+      "Departamento de Guachipas",
+      "Bernardino Olivera"
+    ]
+  },
+  {
+    "key": "UIA 98 - Yacimiento-Colombia",
+    "n": "UIA 98 - Yacimiento",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1300,
+    "ly": 1500,
+    "al": [
+      "uia 103 - yacimiento",
+      "uia 176 - yacimiento",
+      "UIA 103 - Yacimiento"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_northern_andes_settlements.json",
+        {
+          "name": "UIA 98 - Yacimiento",
+          "other_names": [
+            "UIA 103 - Yacimiento",
+            "UIA 176 - Yacimiento"
+          ],
+          "sources": [
+            "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": [
+      "Unión Cívica Radical",
+      "Costa Rica",
+      "Juan Domingo Perón"
+    ]
+  },
+  {
+    "key": "Estero Lumaco-Chile",
+    "n": "Estero Lumaco",
+    "c": "Chile",
+    "r": "sc_chile_central_araucania",
+    "ey": 1282,
+    "ly": 1500,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_southern_cone_settlements.json",
+        {
+          "name": "Estero Lumaco",
+          "other_names": [],
+          "sources": [
+            "Chile Radiocarbon Synthesis (Campbell/Mendez)",
+            "Gayo_CentralChile; p3k14c",
+            "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Estación Antilhue",
+        634
+      ],
+      [
+        "Antilhue",
+        1574
+      ],
+      [
+        "Estación Mulpun",
+        3775
+      ],
+      [
+        "San Javier (Máfil)",
+        4436
+      ],
+      [
+        "Chincuin",
+        4986
+      ]
+    ],
+    "es_sr": [
+      "Río Lumaco",
+      "Departamento de Valdivia",
+      "Río Purén"
+    ]
+  },
+  {
+    "key": "Villa Valeria-Argentina",
+    "n": "Villa Valeria",
+    "c": "Argentina",
+    "r": "arg_cordoba",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "Villa Valeria",
+          "other_names": [],
+          "sources": [
+            "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+            "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Villa Valeria",
+        34
+      ],
+      [
+        "Estación Villa Valeria",
+        374
+      ]
+    ],
+    "es_sr": [
+      "Ramal ferroviario Laboulaye-Villa Valeria",
+      "Villa Valeria",
+      "Estación Villa Valeria"
+    ]
+  },
+  {
+    "key": "Kancha Kancha-Peru",
+    "n": "Kancha Kancha",
+    "c": "Peru",
+    "r": "inca_antisuyu",
+    "ey": 500,
+    "ly": 1530,
+    "al": [
+      "hatun rumiyoq",
+      "plaza kancha",
+      "quellomachuwas"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Kancha Kancha",
+          "other_names": [
+            "Hatun Rumiyoq",
+            "Plaza Kancha",
+            "Quellomachuwas",
+            "Sayllaqata",
+            "Seqe Seqe"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Chahuaytire",
+        6063
+      ],
+      [
+        "Distrito de Colquepata",
+        8070
+      ]
+    ]
+  },
+  {
+    "key": "Pedregal Grande-Peru",
+    "n": "Pedregal Grande",
+    "c": "Peru",
+    "r": "per_piura",
+    "ey": 1850,
+    "ly": 2017,
+    "al": [
+      "la campiña",
+      "nuevo pedregal",
+      "pedregal chico"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "peru_after_independence_settlements.json",
+        {
+          "name": "Pedregal Grande",
+          "other_names": [
+            "La Campiña",
+            "Nuevo Pedregal (pedregal Grande)",
+            "Pedregal Chico"
+          ],
+          "sources": [
+            "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+            "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Pedregal Grande",
+        99
+      ],
+      [
+        "Nuevo Pedregal",
+        823
+      ],
+      [
+        "La Campiña (Piura)",
+        1056
+      ],
+      [
+        "Pedregal Chico",
+        1151
+      ],
+      [
+        "Narihualá",
+        1439
+      ]
+    ],
+    "es_sr": [
+      "Pedregal Grande",
+      "Tambogrande",
+      "Coñocranra"
+    ]
+  },
+  {
+    "key": "Pajcha-Bolivia",
+    "n": "Pajcha",
+    "c": "Bolivia",
+    "r": "vp_intendencia_charcas_potosi",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [
+      "paccha",
+      "Paccha"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Pajcha",
+          "other_names": [
+            "Paccha"
+          ],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_peru_upper_peru_settlements.json",
+        {
+          "name": "Pajcha",
+          "other_names": [
+            "Paccha"
+          ],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Laguna La Angelita-Argentina",
+    "n": "Laguna La Angelita",
+    "c": "Argentina",
+    "r": "sc_pampas_salado_colorado",
+    "ey": 80,
+    "ly": 1500,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_southern_cone_settlements.json",
+        {
+          "name": "Laguna La Angelita",
+          "other_names": [],
+          "sources": [
+            "IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "San Marcos Sud-Argentina",
+    "n": "San Marcos Sud",
+    "c": "Argentina",
+    "r": "arg_cordoba",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [
+      "san marcos",
+      "San Marcos"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "San Marcos Sud",
+          "other_names": [
+            "San Marcos"
+          ],
+          "sources": [
+            "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+            "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Estación San Marcos",
+        437
+      ],
+      [
+        "San Marcos Sud",
+        459
+      ]
+    ],
+    "es_sr": [
+      "San Marcos Sud",
+      "San Marcos",
+      "Matías Fissore"
+    ]
+  },
+  {
+    "key": "Las Velas-Venezuela",
+    "n": "Las Velas",
+    "c": "Venezuela",
+    "r": "ven_yaracuy",
+    "ey": 1850,
+    "ly": 2011,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "venezuela_after_independence_settlements.json",
+        {
+          "name": "Las Velas",
+          "other_names": [],
+          "sources": [
+            "INE Venezuela XIV Censo Nacional de Población y Vivienda 2011 (Centros Poblados)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Estadio Metropolitano de Lara",
+        9615
+      ],
+      [
+        "Municipio Peña",
+        9878
+      ]
+    ]
+  },
+  {
+    "key": "Sajara-patac-Peru",
+    "n": "Sajara-patac",
+    "c": "Peru",
+    "r": "ca_eastern_montana_yungas",
+    "ey": -971,
+    "ly": 389,
+    "al": [
+      "achasgoto",
+      "chacuas pampa",
+      "chacuaspampa"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_central_andes_settlements.json",
+        {
+          "name": "Sajara-patac",
+          "other_names": [
+            "Achasgoto",
+            "Chacuas Pampa",
+            "Chacuaspampa",
+            "Collpana",
+            "Papayo",
+            "Papayoc",
+            "Piquimina",
+            "Puitoq"
+          ],
+          "sources": [
+            "Matsumoto_&_Tsurumi_2011",
+            "Sales et al. (2021) Andean Radiocarbon Compilation",
+            "XRONOS Global Radiocarbon Database",
+            "c14bazAAR Andean Radiocarbon Synthesis",
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Distrito de Churubamba",
+        954
+      ],
+      [
+        "Distrito de Santa María del Valle",
+        4909
+      ],
+      [
+        "Distrito de Chinchao",
+        8035
+      ],
+      [
+        "Aeropuerto Alf. FAP David Figueroa Fernandini",
+        9040
+      ]
+    ],
+    "es_sr": [
+      "Río Marañón"
+    ]
+  },
+  {
+    "key": "Rinconada Llicuar-Peru",
+    "n": "Rinconada Llicuar",
+    "c": "Peru",
+    "r": "per_piura",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [
+      "dos pueblos",
+      "Dos Pueblos"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "peru_after_independence_settlements.json",
+        {
+          "name": "Rinconada Llicuar",
+          "other_names": [
+            "Dos Pueblos"
+          ],
+          "sources": [
+            "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Dos Pueblos",
+        12
+      ],
+      [
+        "Distrito de Rinconada-Llícuar",
+        12
+      ],
+      [
+        "Salitral (Sechura)",
+        1076
+      ],
+      [
+        "Chepito",
+        1561
+      ],
+      [
+        "El Impulso (Perú)",
+        1960
+      ]
+    ],
+    "es_sr": [
+      "Distrito de Rinconada-Llícuar",
+      "Vista Florida (Rinconada-Llícuar)",
+      "El Impulso (Perú)"
+    ]
+  },
+  {
+    "key": "Cañada de Machado-Argentina",
+    "n": "Cañada de Machado",
+    "c": "Argentina",
+    "r": "arg_cordoba",
+    "ey": 80,
+    "ly": 2022,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_southern_cone_settlements.json",
+        {
+          "name": "Cañada de Machado",
+          "other_names": [],
+          "sources": [
+            "IDACOR (CONICET/UNC) — BADACOR Archaeological Sites via ARIADNEplus"
+          ]
+        }
+      ],
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "Cañada de Machado",
+          "other_names": [],
+          "sources": [
+            "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+            "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+            "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Cerro Trinidad-Peru",
+    "n": "Cerro Trinidad",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -2000,
+    "ly": 1530,
+    "al": [
+      "castillo de pasamayo",
+      "chacarilla",
+      "humedal de santa rosa"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_central_andes_settlements.json",
+        {
+          "name": "Cerro Trinidad",
+          "other_names": [
+            "Castillo de Pasamayo",
+            "Chacarilla",
+            "Humedal de Santa Rosa",
+            "Peralvillo",
+            "Salinas"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ],
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Cerro Trinidad",
+          "other_names": [
+            "Castillo de Pasamayo",
+            "Chacarilla",
+            "Humedal de Santa Rosa",
+            "Peralvillo",
+            "Salinas"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Cerro Trinidad (sitio arqueológico)",
+        81
+      ],
+      [
+        "Castillo de Chancay",
+        1304
+      ],
+      [
+        "Puerto de Chancay",
+        1453
+      ],
+      [
+        "Distrito de Chancay",
+        1774
+      ],
+      [
+        "Chancay",
+        2183
+      ]
+    ]
+  },
+  {
+    "key": "Lbp-Colombia",
+    "n": "Lbp",
+    "c": "Colombia",
+    "r": "na_magdalena_cauca_muisca",
+    "ey": 1300,
+    "ly": 1500,
+    "al": [
+      "hss",
+      "llanito 17a-1 sondeo #",
+      "Hss"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_northern_andes_settlements.json",
+        {
+          "name": "Lbp",
+          "other_names": [
+            "Hss",
+            "Llanito 17A-1 Sondeo #"
+          ],
+          "sources": [
+            "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [],
+    "es_sr": [
+      "Corsarios de Cartagena",
+      "Chevrolet Orlando",
+      "Ernesto Oglivie"
+    ]
+  },
+  {
+    "key": "Choromoro-Argentina",
+    "n": "Choromoro",
+    "c": "Argentina",
+    "r": "arg_tucuman",
+    "ey": 1850,
+    "ly": 2022,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "argentina_after_independence_settlements.json",
+        {
+          "name": "Choromoro",
+          "other_names": [],
+          "sources": [
+            "INDEC Argentina Censo 2022 (Total del país por gobierno local)",
+            "INDEC Argentina Censo Nacional 2010 — Localidades Censales (CODGEO)",
+            "INDEC Argentina Censo Nacional 2022 (Radios Censales / CONICET)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Choromoro",
+        186
+      ]
+    ],
+    "es_sr": [
+      "Choromoro",
+      "Estación Choromoro",
+      "Río Dulce (Argentina)"
+    ]
+  },
+  {
+    "key": "La Aguada Ambato-Argentina",
+    "n": "La Aguada Ambato",
+    "c": "Argentina",
+    "r": "sc_nw_andes_sierras_cuyo",
+    "ey": 400,
+    "ly": 900,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_southern_cone_settlements.json",
+        {
+          "name": "La Aguada Ambato",
+          "other_names": [],
+          "sources": [
+            "Tarragó (2000) / Nielsen (2001) NOA Quebrada & Valles",
+            "Lorandi & Boixadós (1988)",
+            "IDACOR / INAPL"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Colpes (Ambato)",
+        6286
+      ],
+      [
+        "Huaycama (Ambato)",
+        6611
+      ],
+      [
+        "Las Juntas (Ambato)",
+        9049
+      ],
+      [
+        "Los Talas (Catamarca)",
+        9856
+      ]
+    ],
+    "es_sr": [
+      "Cultura de la Aguada",
+      "Museo Arqueológico Argentino Ambato",
+      "Departamento Ambato"
+    ]
+  },
+  {
+    "key": "Cerro Narrío-Ecuador",
+    "n": "Cerro Narrío",
+    "c": "Ecuador",
+    "r": "ca_equatorial_sierra_canari",
+    "ey": -1800,
+    "ly": 1000,
+    "al": [
+      "cerro narrio",
+      "Cerro Narrio"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_central_andes_settlements.json",
+        {
+          "name": "Cerro Narrío",
+          "other_names": [
+            "Cerro Narrio"
+          ],
+          "sources": [
+            "Marcos (2003) Real Alto",
+            "Rostain et al. (2024) Science Upano Valley",
+            "CADB Ecuador",
+            "Ecuador Radiocarbon Syntheses",
+            "Sales et al. (2021) Andean Radiocarbon Compilation",
+            "Ziolkowski et al 1994"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Chancayllo-Peru_2",
+    "n": "Chancayllo",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -3000,
+    "ly": 1530,
+    "al": [
+      "cerro la mina",
+      "cerro peñarol",
+      "eaa el carmen"
+    ],
+    "hgis": [],
+    "es_geo": [
+      [
+        "4 de Junio (Chancay)",
+        1187
+      ],
+      [
+        "Los Álamos (Chancay)",
+        1274
+      ],
+      [
+        "San José (Chancay)",
+        1337
+      ],
+      [
+        "Chancayllo",
+        1961
+      ],
+      [
+        "Los Laureles (Chancay)",
+        2082
+      ]
+    ],
+    "es_sr": [
+      "Club Deportivo Aurora Chancayllo",
+      "Chancayllo",
+      "Ex Hacienda Chancayllo"
+    ]
+  },
+  {
+    "key": "Liticos-Colombia",
+    "n": "Liticos",
+    "c": "Colombia",
+    "r": "na_caribbean_maracaibo_tairona",
+    "ey": 1300,
+    "ly": 1500,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_northern_andes_settlements.json",
+        {
+          "name": "Liticos",
+          "other_names": [],
+          "sources": [
+            "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Galapa",
+        2041
+      ],
+      [
+        "Ciudadela 20 de Julio",
+        9033
+      ],
+      [
+        "Pital de Megua",
+        9230
+      ],
+      [
+        "Estadio Metropolitano Roberto Meléndez",
+        9249
+      ],
+      [
+        "Joaquín Barrios Polo (estación)",
+        9503
+      ]
+    ]
+  },
+  {
+    "key": "Campo Dos-Colombia",
+    "n": "Campo Dos",
+    "c": "Colombia",
+    "r": "col_norte_de_santander",
+    "ey": 1850,
+    "ly": 2018,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "colombia_after_independence_settlements.json",
+        {
+          "name": "Campo Dos",
+          "other_names": [],
+          "sources": [
+            "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+            "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+          ]
+        }
+      ]
+    ],
+    "es_geo": []
+  },
+  {
+    "key": "San Gerardo-Ecuador",
+    "n": "San Gerardo",
+    "c": "Ecuador",
+    "r": "ecu_chimborazo",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "ecuador_after_independence_settlements.json",
+        {
+          "name": "San Gerardo",
+          "other_names": [],
+          "sources": [
+            "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+            "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+          ]
+        }
+      ]
+    ],
+    "es_geo": [
+      [
+        "Terremoto de Riobamba de 1797",
+        4402
+      ],
+      [
+        "Aeropuerto Chimborazo",
+        4919
+      ],
+      [
+        "Basílica del Sagrado Corazón de Jesús (Riobamba)",
+        5344
+      ],
+      [
+        "Catedral de San Pedro (Riobamba)",
+        5358
+      ],
+      [
+        "Riobamba",
+        5438
+      ]
+    ]
+  },
+  {
+    "key": "Churumatas-Bolivia",
+    "n": "Churumatas",
+    "c": "Bolivia",
+    "r": "vp_intendencia_charcas_potosi",
+    "ey": 1525,
+    "ly": 1825,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Churumatas",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_peru_upper_peru_settlements.json",
+        {
+          "name": "Churumatas",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Cosme Bueno, Descripción del virreynato del Perú (Lima 1764-1776)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Garagay-Peru",
+    "n": "Garagay",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": -1400,
+    "ly": 1530,
+    "al": [
+      "aznapuquio",
+      "aznapuquio - área intangible \"a",
+      "aznapuquio - área intangible \"b"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_central_andes_settlements.json",
+        {
+          "name": "Garagay",
+          "other_names": [
+            "Aznapuquio",
+            "Aznapuquio - Área Intangible \"A",
+            "Aznapuquio - Área Intangible \"B",
+            "Cerro La Cruz",
+            "Cerro La Regla - Parcela A",
+            "Cerro La Regla - Parcela B",
+            "Cerro La Regla Parcela B",
+            "Cerro Muleria"
+          ],
+          "sources": [
+            "Burger (1992) Chavín and the Origins of Andean Civilization",
+            "SIGDA",
+            "XRONOS Global Radiocarbon Database",
+            "c14bazAAR Andean Radiocarbon Synthesis",
+            "p3k14c Radiocarbon Database (Bird et al. 2022/2025)",
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ],
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Garagay",
+          "other_names": [
+            "Aznapuquio",
+            "Aznapuquio - Área Intangible \"A",
+            "Aznapuquio - Área Intangible \"B",
+            "Cerro La Cruz",
+            "Cerro La Regla - Parcela A",
+            "Cerro La Regla - Parcela B",
+            "Cerro La Regla Parcela B",
+            "Cerro Muleria"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Catuaro-Venezuela",
+    "n": "Catuaro",
+    "c": "Venezuela",
+    "r": "ven_sucre",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "venezuela_after_independence_settlements.json",
+        {
+          "name": "Catuaro",
+          "other_names": [],
+          "sources": [
+            "INE Venezuela Proyecciones de Población por Parroquia 2000-2025 (HDX)",
+            "INE Venezuela Censo 2011 Parroquias (ESRI Venezuela)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Carolina-Ecuador",
+    "n": "Carolina",
+    "c": "Ecuador",
+    "r": "ecu_carchi",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "ecuador_after_independence_settlements.json",
+        {
+          "name": "Carolina",
+          "other_names": [],
+          "sources": [
+            "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+            "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "El Castigo-Colombia",
+    "n": "El Castigo",
+    "c": "Colombia",
+    "r": "vng_antioquia_popayan_choco",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "El Castigo",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_new_granada_settlements.json",
+        {
+          "name": "El Castigo",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Juan de Velasco, Historia del Reino de Quito en la América meridional. Historia moderna (Quito 1842)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Shincaspunta-Peru",
+    "n": "Shincaspunta",
+    "c": "Peru",
+    "r": "inca_chinchaysuyu",
+    "ey": 1438,
+    "ly": 1530,
+    "al": [
+      "huanash",
+      "inca tambo",
+      "lirio"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Shincaspunta",
+          "other_names": [
+            "Huanash",
+            "Inca Tambo",
+            "Lirio",
+            "Tambo Oguro",
+            "Torgarajo"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Pueblo Buho-Colombia",
+    "n": "Pueblo Buho",
+    "c": "Colombia",
+    "r": "col_sucre",
+    "ey": 1013,
+    "ly": 2018,
+    "al": [
+      "pueblo búho"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "colombia_after_independence_settlements.json",
+        {
+          "name": "Pueblo Buho",
+          "other_names": [],
+          "sources": [
+            "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+            "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Qollmay-Peru",
+    "n": "Qollmay",
+    "c": "Peru",
+    "r": "inca_contisuyu",
+    "ey": 500,
+    "ly": 1530,
+    "al": [
+      "asaqwana",
+      "inka was",
+      "inkawaskar"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_central_andes_settlements.json",
+        {
+          "name": "Qollmay",
+          "other_names": [
+            "Asaqwana",
+            "Inka Was",
+            "Inkawaskar",
+            "Inkawaskar-Andepata",
+            "Negro Pugio",
+            "Qallmay- Inkawas",
+            "Qallmay-In",
+            "Saqsaywaman"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ],
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Qollmay",
+          "other_names": [
+            "Asaqwana",
+            "Inka Was",
+            "Inkawaskar",
+            "Inkawaskar-Andepata",
+            "Negro Pugio",
+            "Qallmay- Inkawas",
+            "Qallmay-In",
+            "Saqsaywaman"
+          ],
+          "sources": [
+            "SIGDA Ministerio de Cultura del Perú (Patrimonio Arqueológico)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Naranjal-Peru_2",
+    "n": "Naranjal",
+    "c": "Peru",
+    "r": "ca_equatorial_sierra_canari",
+    "ey": -3000,
+    "ly": 1438,
+    "al": [
+      "quebrada maría",
+      "Quebrada María"
+    ],
+    "hgis": [],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "El Calvario-Colombia",
+    "n": "El Calvario",
+    "c": "Colombia",
+    "r": "col_cundinamarca",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "colombia_after_independence_settlements.json",
+        {
+          "name": "El Calvario",
+          "other_names": [],
+          "sources": [
+            "DANE Colombia (1985-2042 Municipal Population Series, CNPV 2018 baseline)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "El Salado (col_valle_del_cauca)-Colombia",
+    "n": "El Salado",
+    "c": "Colombia",
+    "r": "col_valle_del_cauca",
+    "ey": -1000,
+    "ly": 2018,
+    "al": [
+      "salado",
+      "Salado"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "colombia_after_independence_settlements.json",
+        {
+          "name": "El Salado",
+          "other_names": [
+            "Salado"
+          ],
+          "sources": [
+            "DANE Colombia CNPV 2005 & 2018 Centros Poblados (via DANE DIVIPOLA / citypopulation.de)",
+            "DANE DIVIPOLA Georeferenced Centros Poblados (datos.gov.co)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Santiago De Méndez-Ecuador",
+    "n": "Santiago De Méndez",
+    "c": "Ecuador",
+    "r": "ecu_morona_santiago",
+    "ey": 1920,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "ecuador_after_independence_settlements.json",
+        {
+          "name": "Santiago De Méndez",
+          "other_names": [],
+          "sources": [
+            "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+            "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Cuenda-Colombia",
+    "n": "Cuenda",
+    "c": "Colombia",
+    "r": "vng_santafe_tunja_highlands",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Cuenda",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_new_granada_settlements.json",
+        {
+          "name": "Cuenda",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Joaquín Durán, Estado General de todo el Virreinato de Santafe de Bogotá en el presente año de 1794 (Bogotá 2012)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Ponto-Peru",
+    "n": "Ponto",
+    "c": "Peru",
+    "r": "per_ancash",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "peru_after_independence_settlements.json",
+        {
+          "name": "Ponto",
+          "other_names": [],
+          "sources": [
+            "INEI Peru Censuses 2007, 2017 & 2025 (all districts)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Tomayrica-Peru",
+    "n": "Tomayrica",
+    "c": "Peru",
+    "r": "per_huanuco",
+    "ey": -2000,
+    "ly": 2017,
+    "al": [
+      "paco"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "Tomayrica",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_peru_upper_peru_settlements.json",
+        {
+          "name": "Tomayrica",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Günter Vollmer, Bevölkerungspolitik und Bevölkerungsstruktur im Vizekönigreich Peru zu Ende der Kolonialzeit 1741-1821nBerlin/Zürich 1967)"
+          ]
+        }
+      ],
+      [
+        "peru_after_independence_settlements.json",
+        {
+          "name": "Tomayrica",
+          "other_names": [],
+          "sources": [
+            "INEI Peru XII Censo Nacional de Población 2017 (Directorio Nacional de Centros Poblados)",
+            "INEI Peru XI Censo Nacional de Población 2007 (Centros Poblados via citypopulation.de)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "San Antonio Pereira-Colombia",
+    "n": "San Antonio Pereira",
+    "c": "Colombia",
+    "r": "vng_antioquia_popayan_choco",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [
+      "pereiras",
+      "Pereiras"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "spanish_conquest_andes_collapse_settlements.json",
+        {
+          "name": "San Antonio Pereira",
+          "other_names": [
+            "Pereiras"
+          ],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+          ]
+        }
+      ],
+      [
+        "viceroyalty_new_granada_settlements.json",
+        {
+          "name": "San Antonio Pereira",
+          "other_names": [
+            "Pereiras"
+          ],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Velásquez-San Juan-La Troja-Venezuela",
+    "n": "Velásquez-San Juan-La Troja",
+    "c": "Venezuela",
+    "r": "ven_miranda",
+    "ey": 1850,
+    "ly": 2011,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "venezuela_after_independence_settlements.json",
+        {
+          "name": "Velásquez-San Juan-La Troja",
+          "other_names": [],
+          "sources": [
+            "INE Venezuela XIV Censo Nacional de Población y Vivienda 2011 (Centros Poblados)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Puerto El Carmen De Putumayo-Ecuador",
+    "n": "Puerto El Carmen De Putumayo",
+    "c": "Ecuador",
+    "r": "ecu_sucumbios",
+    "ey": 1850,
+    "ly": 2025,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "ecuador_after_independence_settlements.json",
+        {
+          "name": "Puerto El Carmen De Putumayo",
+          "other_names": [],
+          "sources": [
+            "INEC Ecuador Censo 2010 & 2022 / Revisión 2024 por Parroquias (via pobecu)",
+            "INEC Ecuador Censos 1990, 2001 & 2010 por Parroquias"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Cl_1 y 2 Corte-Colombia",
+    "n": "Cl_1 y 2 Corte",
+    "c": "Colombia",
+    "r": "na_orinoco_llanos_guayana",
+    "ey": 0,
+    "ly": 1500,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "pre_columbian_northern_andes_settlements.json",
+        {
+          "name": "Cl_1 y 2 Corte",
+          "other_names": [],
+          "sources": [
+            "ICANH Atlas Arqueológico de Colombia (datos.gov.co: 3kq2-tnay)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Llano Grande (vng_antioquia_popayan_choco)-Colombia",
+    "n": "Llano Grande",
+    "c": "Colombia",
+    "r": "vng_antioquia_popayan_choco",
+    "ey": 1525,
+    "ly": 1830,
+    "al": [],
+    "hgis": [],
+    "local": [
+      [
+        "viceroyalty_new_granada_settlements.json",
+        {
+          "name": "Llano Grande",
+          "other_names": [],
+          "sources": [
+            "HGIS de las Indias (Stangl 2020/2023; 1701-1808)",
+            "Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  },
+  {
+    "key": "Cailloma-Chile",
+    "n": "Cailloma",
+    "c": "Chile",
+    "r": "inca_collasuyu",
+    "ey": 500,
+    "ly": 1532,
+    "al": [
+      "chamico",
+      "coinco",
+      "Chamico"
+    ],
+    "hgis": [],
+    "local": [
+      [
+        "inca_empire_tawantinsuyu_settlements.json",
+        {
+          "name": "Cailloma",
+          "other_names": [
+            "Chamico",
+            "Coinco"
+          ],
+          "sources": [
+            "CMN Chile — Registro Arqueológico Acreditado",
+            "CMN Chile — Registros Arqueológicos Complementarios",
+            "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+          ]
+        }
+      ],
+      [
+        "pre_columbian_southern_cone_settlements.json",
+        {
+          "name": "Cailloma",
+          "other_names": [],
+          "sources": [
+            "CMN Chile — Registro Arqueológico Acreditado",
+            "CMN Chile — Registros Arqueológicos Complementarios",
+            "ArKG Chile Archaeological Knowledge Graph (Campbell et al. / IMFD)"
+          ]
+        }
+      ]
+    ],
+    "es_geo_err": "HTTP Error 429: Your bot is making too many requests. Please reduce your request rate or contact bot-traffic@wikimedia.org (f263c81)"
+  }
+]

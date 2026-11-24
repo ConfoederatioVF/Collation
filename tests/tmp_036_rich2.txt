@@ -1,0 +1,750 @@
+=== [60] San Luis-Peru_2 | n=San Luis | c=Peru | r=ca_equatorial_sierra_canari | ll=[-3.69832, -76.40295] | ey=-2000 | ly=1438 | al=['boca del loboyacu', 'loboyacu', 'Boca del Loboyacu'] ===
+  WD: Q35386250 'Río Huasaga' (2.11km) inc=None desc=river in Ecuador and Peru es=None en=None
+  WD: Q49643535 'Isla Santa Rosa' (5.41km) inc=None desc=isla en Loreto, Perú es=None en=None
+  WD: Q35433464 'Río Sungache' (7.42km) inc=None desc=stream in Loreto, Peru es=None en=None
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Sabana de San Luis-Colombia": {
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "Sabana de San Luis",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "Sabana de San Luis-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "San Luis (na_caribbean_maracaibo_tairona)-Colombia": {
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "San Luis",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "San Luis (na_caribbean_maracaibo_tairona)-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Sabana de San Luis-Colombia",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Paqcha San Luis",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "San Luis-Peru",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Ruinas de San Luis"
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "San Luis-Peru",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Castillo San Luis de Alba",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Puntas de San Luis-Uruguay",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Castillo San Luis de Alba de Cruces"
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "San Luis (conq_nuevo_reino_granada)-Colombia",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "San Luis Sacaca",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "San Luis (vp_intendencia_tarma)-Peru",
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "San Luis Beltran"
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "San Luis Aribi-Venezuela",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental.json5: "name": "Corregimiento de Cuyo (Mendoza, San Juan & San Luis)",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "'Plano que demuestra la situación de las Ciudades de Mendoza y San Luis', en: Archivo General de Indias, MP-BUENOS_AIRES,204 (
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "San Luis de Alba de Amargos-Chile",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_summary.json: "name": "Corregimiento de Cuyo (Mendoza, San Juan & San Luis)",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "San Luis Beltran"
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Corral de San Luis-Colombia",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "Los Naranjos-La Belleca-San Luis-El Guafal-Venezuela": {
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "Los Naranjos-La Belleca-San Luis-El Guafal-Venezuela",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "San Luis Carondelet"
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "San Luis (ecu_napo)-Ecuador",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "San Luis"
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Pampa de San Luis-Peru",
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "San Luis-Bolivia": {
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "San Luis-Bolivia",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "Callejón San Luis"
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "San Luis (chl_region_del_bio_bio)-Chile",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence.json5: "name": "San Luis",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "admin1": "San Luis"
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "San Luis del Palmar-Argentina",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_summary.json: "name": "San Luis",
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_settlements.json: "San Luis Al Medio-Uruguay": {
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_source_ledger.json5: "settlement_key": "San Luis Al Medio-Uruguay",
+  LOC: _shared\quipu_chapter_summaries.json: "name": "Corregimiento de Cuyo (Mendoza, San Juan & San Luis)",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Villa de San Luis de Cura",
+  LOC: _shared\settlement_sources\raw_setts_argentina.json: "San Luis del Palmar-Argentina": {
+  LOC: _shared\settlement_sources\raw_setts_colombia.json: "San Luis-Antioquia-Colombia": {
+  LOC: _shared\settlement_sources\raw_setts_peru.json: "San Luis-Peru": {
+  LOC: _shared\settlement_sources\raw_setts_uruguay.json: "San Luis-Uruguay": {
+  LOC: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "municipality": "San Luis",
+  LOC: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Imbaya ( San Luis de Cobuendo )",
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "San Luis",
+  LOC: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 020701,021701,ANCASH,CARLOS FERMIN FITZCARRALD,SAN LUIS,ANCASH,CENTRO,MACROREGION NORTE,PE-ANC,02,San Luis,256.45,44.4024176252681,3145,-9.09416666666667,
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_idacor_ariadne.json: "Pampa de San Luis"
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_ign_wfs.json: "name": "Museo Histórico de San Luis (MUHSAL)",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_arkg.json: "name": "Castillo San Luis de Alba 001",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_acreditado.json: "reference": "Informe FONDECYT 1130730 “Arqueología\nhistórica de la ciudad de Valdivia y su jurisdicción en el período colonial. Informe técnico 
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "name": "Fuerte de San Luis de Alba de Amargos",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_col14.json: "name": "San Luis I",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "citation": "Suaza Espa?ol, María Angélica (2019). Visita a Lugares con evidencias arqueológicas corregimiento de San Luis-Neiva (Huila)",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_c14_dedup.csv: ETH-3787,7640,400,-21.54479,-64.71255,San Luis Tarija,Bolivia,p3k14c,368
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_loreto_figshare.json: {"source": "Archaeological sites in the Department of Loreto, Peruvian Amazon", "doi": "10.6084/m9.figshare.13547684.v1", "url": "https:/
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_p3k14c_2025.csv: people3k-p3k14c-99e8934/inst/p3k14c_scrubbed_fuzzed.csv,ETH-3787,7640,400,apatite,San Luis Tarija,Bolivia,,South America,-21.544786,-64.712553
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_xronos.json: {"source": "XRONOS Chronological Database (https://xronos.ch/api/v1/data)", "urls": ["https://xronos.ch/api/v1/data?query_country=PE", "https://xr
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_uruguay_radiocarbon.json: "name": "Puntas de San Luis",
+  LOC: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "Villa de San Luis de Cura",
+=== [61] El Sireno UMP-Colombia | n=El Sireno UMP | c=Colombia | r=na_caribbean_maracaibo_tairona | ll=[6.41, -76.29] | ey=145 | ly=1500 | al=[] ===
+  WD: Q23691371 'Q23691371' (4.73km) inc=None desc=curso de agua de Colombia es=None en=None
+  WD: Q23685301 'Q23685301' (6.42km) inc=None desc=curso de agua de Colombia es=None en=None
+  WD: Q23685447 'Q23685447' (6.5km) inc=None desc=curso de agua de Colombia es=None en=None
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "El Sireno UMP-Colombia": {
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "El Sireno UMP",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "El Sireno UMP-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "El Sireno UMP-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "El Sireno UMP",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "El Sireno UMP-Colombia",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_col14.json: "name": "El Sireno UMP28",
+=== [62] Reducción-Argentina | n=Reducción | c=Argentina | r=arg_cordoba | ll=[-33.20319, -63.86259] | ey=1751 | ly=2022 | al=['villa reducción', 'san francisco asis de los indios pampas', 'reduccion'] ===
+  WD: Q60305464 'Iglesia Parroquial de Villa Reducción' (0.1km) inc=None desc=lugar declarado monumento histórico nacional de Argentina es=None en=None
+  WD: Q11071461 'Villa Reducción' (0.14km) inc=None desc=asentamiento humano en Argentina es=Villa Reducción en=None
+  WD: Q10358365 'Reducción' (0.2km) inc=None desc=localidad en la provincia de Córdoba, Argentina es=None en=None
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "La Reducción-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "name": "La Reducción",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "key": "La Reducción-Argentina",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Reducción de Abajo-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "name": "Reducción de Abajo",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "key": "Reducción de Abajo-Argentina",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "La Reducción-Argentina",
+  LOC: _shared\settlement_sources\raw_setts_argentina.json: "Reducción-Argentina": {
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_idacor_ariadne.json: "Reducción",
+=== [63] Pueblo Nuevo-Ecuador | n=Pueblo Nuevo | c=Ecuador | r=ecu_manabi | ll=[-0.97629, -80.30103] | ey=1850 | ly=2025 | al=[] ===
+  WD: Q13190324 'Pueblo Nuevo' (0.85km) inc=None desc=Parroquia rural del cantón Portoviejo es=None en=None
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Pueblo Nuevo",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Pueblo Nuevo-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "Pueblo Nuevo",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'Pueblo Nuevo' into 'Chorrera' (1.46 km)."
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Conjunto Arqueológico Pueblo Nuevo",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Conjunto Pueblo Nuevo"
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Pueblo Nuevo - Muy Finca - Mochum-Peru",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Conjunto Arqueológico Pueblo Nuevo",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Pueblo Nuevo (inca_chinchaysuyu)-Peru",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Pueblo Nuevo"
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Pueblo Nuevo (conq_peru_sierra_cusco_huamanga)-Peru",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "Pueblo Nuevo"
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "Pueblo Nuevo (vp_intendencia_trujillo)-Peru",
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Pueblo Nuevo",
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "Pueblo Nuevo (vng_capitania_caracas_maracaibo)-Venezuela",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "Pueblo Nuevo ( Tablón Salado )"
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Pueblo Nuevo ( Río Mira )-Colombia",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "Pueblo Nuevo"
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "Guayabal (Pueblo Nuevo)-Venezuela",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "Pueblo Nuevo-Ecuador": {
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "Pueblo Nuevo-Ecuador",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "San Lucas (Pueblo Nuevo de Colán)"
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Pueblo Nuevo (per_amazonas)-Peru",
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "Pueblo Nuevo",
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "Pueblo Nuevo-Bolivia",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "Pueblo Nuevo-Chile": {
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "Pueblo Nuevo-Chile",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Pueblo Nuevo"
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Pueblo Nuevo-Argentina",
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_settlements.json: "Pueblo Nuevo-Uruguay": {
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_source_ledger.json5: "settlement_key": "Pueblo Nuevo-Uruguay",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "Nombre de Jesus| Pueblo Nuevo|"
+  LOC: _shared\settlement_sources\raw_setts_colombia.json: "Pueblo Nuevo-Colombia": {
+  LOC: _shared\settlement_sources\raw_setts_peru.json: "Pueblo Nuevo-Peru": {
+  LOC: _shared\settlement_sources\raw_setts_uruguay.json: "Pueblo Nuevo-Uruguay": {
+  LOC: _shared\settlement_sources\raw_setts_venezuela.json: "Pueblo Nuevo-Venezuela": {
+  LOC: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Berlín ( Pueblo Nuevo )",
+  LOC: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Guayas ( Pueblo Nuevo )",
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Pueblo Nuevo",
+  LOC: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 100609,090609,HUANUCO,LEONCIO PRADO,PUEBLO NUEVO,HUANUCO,CENTRO,MACROREGION CENTRO,PE-HUC,10,Pueblo Nuevo,S.I.,S.I.,626,-9.07861111111111,-76.060555555555
+  LOC: _shared\settlement_sources\raw\nso_venezuela\ine_ven_2001_2011.json: "name": "Pueblo Nuevo",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_col14.json: "citation": "Fajardo, S. (2015). Monitoreo arqueologico en la zona de influencia de las nuevas estaciones Paez (Paez Boyaca), Chiquillo (Remedios Antioq
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "citation": "Jessica Natalia Álvarez Correa (2017). Programa de arqueología preventiva, reconocimiento, prospección y plan de manejo arqueológico
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/
+  LOC: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "Pueblo Nuevo",
+=== [64] Santa Lucia (per_san_martin)-Peru | n=Santa Lucia | c=Peru | r=per_san_martin | ll=[-8.3449, -76.3872] | ey=1920 | ly=2017 | al=['nueva union', 'Nueva Union'] ===
+  WD: Q137715155 'Santa Lucía' (0.15km) inc=None desc=villa en San Martín, Perú es=None en=None
+  WD: Q106785026 'Distrito de Santa Lucía' (0.3km) inc=None desc=distrito en San Martín, Perú es=Distrito de Santa Lucía (Tocache) en=None
+  WD: Q32578427 'Quebrada Cachiyacu Santa Ana' (3.59km) inc=None desc=río en Perú es=None en=None
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Santa Lucia ED-Ecuador": {
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "Santa Lucia ED",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "Santa Lucia ED-Ecuador",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Santa Lucia-Colombia": {
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "Santa Lucia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "Santa Lucia-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Santa Lucia ED-Ecuador",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Santa Lucia"
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Santa Lucia - Amaclle-Peru",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Santa Lucia - Amaclle-Peru": {
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Santa Lucia - Amaclle-Peru",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Santa Lucia (conq_audiencia_charcas_potosi)-Bolivia": {
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Santa Lucia (conq_audiencia_charcas_potosi)-Bolivia",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "Santa Lucia (vp_intendencia_charcas_potosi)-Bolivia": {
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "Santa Lucia (vp_intendencia_charcas_potosi)-Bolivia",
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Santa Lucia"
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "Santa Lucia (vng_antioquia_popayan_choco)-Colombia",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "Santa Lucia-Argentina": {
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "Santa Lucia-Argentina",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "Santa Lucia"
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Santa Lucia-Colombia",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "Santa Lucia (ven_portuguesa)-Venezuela": {
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "Santa Lucia (ven_portuguesa)-Venezuela",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Santa Lucia Moche"
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Santa Lucia (per_ayacucho)-Peru",
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "Santa Lucia"
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "Santa Lucia-Bolivia",
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_settlements.json: "Santa Lucia del Este-Uruguay": {
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_source_ledger.json5: "settlement_key": "Santa Lucia del Este-Uruguay",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Santa Lucia Yaritagua",
+  LOC: _shared\settlement_sources\raw_setts_peru.json: "Santa Lucia-Peru": {
+  LOC: _shared\settlement_sources\raw_setts_uruguay.json: "Santa Lucia-Uruguay": {
+  LOC: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Santa Lucia",
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Santa Lucia",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "name": "Santa Lucia",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_ecuador_radiocarbon_syntheses.json: "name": "Santa Lucia ED-16",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_c14_dedup.csv: GD-15881,2060,100,-17.59467,-65.96728,Santa Lucia,Bolivia,p3k14c,317
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_p3k14c_2025.csv: people3k-p3k14c-99e8934/inst/p3k14c_scrubbed_fuzzed.csv,GD-12822,2200,55,charcoal,Santa Lucia,Bolivia,,South America,-17.594666,-65.967283,2,A
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_xronos.json: {"source": "XRONOS Chronological Database (https://xronos.ch/api/v1/data)", "urls": ["https://xronos.ch/api/v1/data?query_country=PE", "https://xr
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/
+  LOC: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "Santa Lucia Yaritagua",
+=== [65] San Francisco (ven_falcon_2)-Venezuela | n=San Francisco | c=Venezuela | r=ven_falcon | ll=[11.44778, -69.26722] | ey=1538 | ly=2011 | al=['turupia', 'turupiza o turupiita', 'Turupia'] ===
+  WD: Q31595053 'Cerro de Mampostal' (1.28km) inc=None desc=montaña de Venezuela es=None en=None
+  WD: Q31398360 'Cerro de Mampostal' (1.9km) inc=None desc=colina de Venezuela es=None en=None
+  WD: Q31943176 'Llanada de San Francisco' (3.65km) inc=None desc=None es=None en=None
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Claustro de San Francisco",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Circuito Manitas en barrio San Francisco",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "San Francisco",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Plaza San Francisco"
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Piedra de San Francisco"
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "San Francisco (na_magdalena_cauca_muisca)-Colombia": {
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "San Francisco (na_magdalena_cauca_muisca)-Colombia",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Huaca San Francisco",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Huaca San Francisco-Peru",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Huaca San Francisco",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Predios denominados San Francisco de Lagunillas y Quillayal-Chile",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Predios denominados San Francisco de Lagunillas y Quillayal"
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Predios denominados San Francisco de Lagunillas y Quillayal-Chile",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "San Francisco de Borja"
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "San Francisco Baba-Ecuador",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "San Francisco de Borja"
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "San Francisco Asis Amaguajes-Colombia",
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "San Francisco Javier La Ceja"
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "San Francisco Altagracia-Venezuela",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "San Francisco de la Selva",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "San Francisco Asis de los indios pampas-Argentina",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "San Francisco Chinu"
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "San Francisco ( El Llanito )-Colombia",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "San Francisco Cojede"
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "El Conde-San Francisco-Venezuela",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_summary.json: "name": "San Francisco",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "El Playón De San Francisco-Ecuador": {
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "El Playón De San Francisco-Ecuador",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "San Francisco"
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Frontera San Francisco-Peru",
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "Lacoyo San Francisco-Bolivia": {
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "Lacoyo San Francisco-Bolivia",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "Alto Puerto-San Francisco-Chile": {
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "Alto Puerto-San Francisco-Chile",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Aldea San Francisco-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Aldea San Francisco-Argentina",
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_settlements.json: "San Francisco De Las Sierras-Uruguay": {
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_source_ledger.json5: "settlement_key": "San Francisco De Las Sierras-Uruguay",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "San Francisco del valle de Moron",
+  LOC: _shared\settlement_sources\raw_setts_andean_bolivia.json: "San Francisco-Bolivia": {
+  LOC: _shared\settlement_sources\raw_setts_argentina.json: "San Francisco-Argentina": {
+  LOC: _shared\settlement_sources\raw_setts_colombia.json: "San Francisco-Colombia": {
+  LOC: _shared\settlement_sources\raw_setts_peru.json: "San Francisco de Daguas-Peru": {
+  LOC: _shared\settlement_sources\raw_setts_uruguay.json: "San Francisco De Las Sierras-Uruguay": {
+  LOC: _shared\settlement_sources\raw_setts_venezuela.json: "San Francisco-Venezuela": {
+  LOC: _shared\settlement_sources\raw\hdx_cod_ps\ven_admpop_adm2_2011_v3.csv: VE,Venezuela (República Bolivariana de),VE11,Falcón,Falcon,VE1119,San Francisco,San Francisco,11030,5443,5587,941,1110,1178,1245,935,909,792,712,667,
+  LOC: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "San Francisco",
+  LOC: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Abdón Calderón ( San Francisco )",
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Daguas ( San Francisco de Daguas )",
+  LOC: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 010517,010416,AMAZONAS,LUYA,SAN FRANCISCO DEL YESO,AMAZONAS,ORIENTE,MACROREGION ORIENTE,PE-AMA,01,San Francisco del Yeso,113.94,6.9510268562401301,2404,-6
+  LOC: _shared\settlement_sources\raw\nso_venezuela\ine_ven_2001_2011.json: "name": "San Francisco",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_idacor_ariadne.json: "San Francisco",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_ign_wfs.json: "name": "Fundación Archivo Gráfico y Museo Histórico de la Ciudad de San Francisco y la Región",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_arkg.json: "name": "San Francisco-Eyzaguirre",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_acreditado.json: "name": "San Francisco-Eyzaguirre",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "name": "San Francisco-Eyzaguirre",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_col14.json: "citation": "Bruhns, K. O., & Gomez, I. (1970). Excavaciones arqueologicas en unos cementerios de la Tebaida y Cordoba departamento del Quindio. Univers
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "citation": "Alvarado Velandia, Luz Angélica (2020). Bioarqueología histórica: análisis sistemático de trauma óseo en una muestra del convento de
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_c14_dedup.csv: POZ-38850,4770,60,-15.167,-65.081,San Francisco SM2,Bolivia,p3k14c,317
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_p3k14c_2025.csv: people3k-p3k14c-99e8934/inst/p3k14c_scrubbed_fuzzed.csv,POZ-38850,4770,60,charcoal,San Francisco SM2,Bolivia,,South America,-15.167,-65.081,2,
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_xronos.json: {"source": "XRONOS Chronological Database (https://xronos.ch/api/v1/data)", "urls": ["https://xronos.ch/api/v1/data?query_country=PE", "https://xr
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/
+  LOC: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "San Francisco de Tiznados",
+=== [66] Los Barriales-Argentina | n=Los Barriales | c=Argentina | r=arg_mendoza | ll=[-33.10104, -68.56753] | ey=1850 | ly=2022 | al=[] ===
+  WD: Q5979350 'Los Barriales' (0.33km) inc=None desc=localidad de la provincia de Mendoza, Argentina es=Los Barriales en=None
+  WD: Q141004839 'San Martín Labrador' (0.39km) inc=None desc=escuela secundaria en Los Barriales, Mendoza, Argentina es=None en=None
+  WD: Q141004840 'Escuela Nº 4-243' (0.39km) inc=None desc=escuela secundaria en Los Barriales, Mendoza, Argentina es=None en=None
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Los Barriales"
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Los Barriales-Argentina",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "name": "Los Barriales",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "justification": "Merged co-located same-country twin 'Los Barriales' into 'Casa De Diaz' (0.38 km)."
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Los Barriales-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "name": "Los Barriales",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Los Barriales-Argentina",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_idacor_ariadne.json: "name": "Los Barriales",
+=== [67] Pérez Millán-Argentina | n=Pérez Millán | c=Argentina | r=arg_buenos_aires | ll=[-33.7701, -60.09389] | ey=1850 | ly=2010 | al=[] ===
+  WD: Q9065036 'Pérez Millán' (0.07km) inc=None desc=asentamiento en Argentina es=Pérez Millán en=Pérez Millán
+  WD: Q140283447 'Escuela de Educación Primaria Nº 16 Juan Bautista Alberdi' (0.12km) inc=None desc=escuela primaria en Perez Millan, Argentina es=None en=None
+  WD: Q140417265 'Escuela de Educación Secundaria Técnica Nº 2 Héroes de Malvinas' (0.42km) inc=None desc=escuela secundaria en Perez Millan, Argentina es=None en=None
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Pérez Millán-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "name": "Pérez Millán",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "key": "Pérez Millán-Argentina",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Pérez Millán-Argentina",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "name": "Pérez Millán",
+=== [68] Los Lirios-Chile | n=Los Lirios | c=Chile | r=chl_region_del_libertador_bernardo_o_higgins | ll=[-34.23003, -70.7802] | ey=1850 | ly=2017 | al=[] ===
+  WD: Q5843461 'Estación Los Lirios' (0.52km) inc=None desc=estación de ferrocarril de Chile es=Estación Los Lirios en=None
+  WD: Q5979889 'Los Lirios' (0.65km) inc=None desc=localidad de la Región de O'Higgins, Chile es=Los Lirios (O'Higgins) en=None
+  WD: Q201144 'Cachapoal' (1.51km) inc=None desc=provincia de Chile es=Provincia de Cachapoal en=Cachapoal Province
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Los Lirios (per_apurimac)-Peru": {
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "name": "Los Lirios",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "key": "Los Lirios (per_apurimac)-Peru",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Los Lirios (per_cajamarca)-Peru": {
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "name": "Los Lirios",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "key": "Los Lirios (per_cajamarca)-Peru",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Los Lirios (per_apurimac)-Peru",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "Los Lirios-Chile": {
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "Los Lirios-Chile",
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Los Lirios",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_arkg.json: "name": "07 Pe 014 Los Lirios",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_acreditado.json: "name": "07 Pe 014 Los Lirios (07 Pe 014, Los Lirios)",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "name": "07 Pe 014 Los Lirios (07 Pe 014, Los Lirios)",
+=== [69] La Tigra-Argentina | n=La Tigra | c=Argentina | r=arg_chaco | ll=[-27.10954, -60.58734] | ey=1900 | ly=2022 | al=[] ===
+  WD: Q1657168 'La Tigra' (0.05km) inc=None desc=municipio de Chaco, Argentina es=La Tigra (Chaco) en=La Tigra, Chaco
+  WD: Q94580478 'Centro De Salud Lote 10' (0.09km) inc=None desc=establecimiento de salud de caracter provincial en la localidad de La Tigra, provincia de Chaco es=None en=None
+  WD: Q140554889 'E.E.P. Nº 291 - Roberto M. Maglio' (0.22km) inc=None desc=escuela primaria en La Tigra, Argentina es=None en=None
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "La Tigra-Argentina": {
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "name": "La Tigra",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "key": "La Tigra-Argentina",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "La Tigra-Argentina",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "name": "La Tigra",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "La Tigra-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "La Tigra-Argentina",
+  LOC: _shared\settlement_sources\raw_setts_argentina.json: "La Tigra-Argentina": {
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_radiocarbon.json: "name": "La Tigra",
+=== [70] Ugarteche-Argentina | n=Ugarteche | c=Argentina | r=arg_mendoza | ll=[-33.2119, -68.88776] | ey=1850 | ly=2010 | al=[] ===
+  WD: Q2880133 'Ugarteche' (0.08km) inc=None desc=localidad en Mendoza, Argentina es=Ugarteche (Mendoza) en=None
+  WD: Q141006708 'Estación José Francisco Ugarteche' (0.43km) inc=None desc=escuela primaria en Ugarteche, Mendoza, Argentina es=None en=None
+  WD: Q100998128 'C.A.P.S. 039 Ugarteche' (0.49km) inc=None desc=establecimiento de salud de caracter provincial sin internación de diagnóstico y tratamiento en la localidad de Luján De Cuyo, provincia de Mendoza es=None en=None
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Jose Maria Ugarteche-Peru": {
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "name": "Jose Maria Ugarteche",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "key": "Jose Maria Ugarteche-Peru",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Jose Maria Ugarteche-Peru",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "name": "Jose Maria Ugarteche",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Ugarteche-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Ugarteche-Argentina",
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Jose Maria Ugarteche",
+  ES[Ugarteche (Mendoza)]: Ugarteche es una localidad y distrito ubicado en el departamento Luján de Cuyo de la provincia de Mendoza,  Argentina.  Se encuentra sobre la Ruta Nacional 40, la cual constituye su principal vía de comunicación vinculándola al norte con la Ciudad de Mendoza y al sur con Tunuyán. Es atravesada por el río Tunuyán. La principal actividad económica es la vitivinicultura, contando la localidad con un instituto terceriario en Enología.​ La zona presenta chacras de grandes extensiones con preferencia por uvas comunes y variedades de tinto.​ En el poblado hay una importante colectividad boliviana, que festeja sus carnavales todos los años.​​   | [== Toponimia ==] Su nombre es un homenaje a José Francisco Ugarteche, abogado y político paraguayo nacionalizado argentino.  
+=== [71] La Ramada-Bolivia | n=La Ramada | c=Bolivia | r=vp_intendencia_cochabamba | ll=[-17.571, -66.461] | ey=1525 | ly=1825 | al=[] ===
+  WD: Q21793630 'Q21793630' (2.41km) inc=None desc=río de Bolivia es=None en=None
+  WD: Q21794866 'Q21794866' (2.41km) inc=None desc=río de Bolivia es=None en=None
+  WD: Q29015940 'Q29015940' (2.45km) inc=None desc=None es=None en=None
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "La Ramada"
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "La Ramada-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "La Ramada",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'La Ramada' into 'Funza' (1.12 km)."
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "La Ramada-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "name": "La Ramada",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "La Ramada",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "La Ramada-Peru",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "La Ramada",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "La Ramada-Peru",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "La Ramada-Bolivia": {
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "La Ramada-Bolivia",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "La Ramada-Bolivia": {
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "La Ramada-Bolivia",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "La Ramada"
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "La Ramada (per_la_libertad)-Peru": {
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "La Ramada (per_la_libertad)-Peru",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "La Ramada-Chile": {
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "La Ramada-Chile",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "La Ramada (arg_cordoba)-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "La Ramada (arg_cordoba)-Argentina",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "La Ramada",
+  LOC: _shared\settlement_sources\raw_setts_argentina.json: "La Ramada y La Cruz-Argentina": {
+  LOC: _shared\settlement_sources\raw_setts_peru.json: "La Ramada-Peru": {
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "La Ramada",
+  LOC: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 060605,060505,CAJAMARCA,CUTERVO,LA RAMADA,CAJAMARCA,NORTE,MACROREGION NORTE,PE-CAJ,06,La Ramada,30.27,148.13346547737001,2131,-6.25333333333333,-78.575555
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_idacor_ariadne.json: "La Ramada",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "name": "La Ramada",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/
+=== [72] La Torita-Peru | n=La Torita | c=Peru | r=inca_chinchaysuyu | ll=[-5.73409, -78.43822] | ey=500 | ly=1530 | al=[] ===
+  WD: Q31266575 'Cerro Pan de Azúcar' (0.93km) inc=None desc=None es=None en=None
+  WD: Q49277314 'Cajaruro' (0.99km) inc=None desc=pueblo en Amazonas, Perú es=None en=None
+  WD: Q660648 'Distrito de Cajaruro' (1.36km) inc=None desc=distrito en Amazonas, Perú es=Distrito de Cajaruro en=Cajaruro District
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "La Torita-Peru": {
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "name": "La Torita",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "key": "La Torita-Peru",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "La Torita-Peru",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "name": "La Torita",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "La Torita-Peru": {
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "La Torita-Peru",
+=== [73] La Paya-Argentina | n=La Paya | c=Argentina | r=inca_collasuyu | ll=[-25.182, -66.178] | ey=1475 | ly=1530 | al=[] ===
+  WD: Q141433312 'Cabo Orlando Aníbal Moya Ex N°332' (1.58km) inc=None desc=escuela primaria en Rancagua, Argentina es=None en=None
+  WD: Q140296155 'Q140296155' (2.04km) inc=None desc=asentamiento en Cachi, Salta, Argentina es=None en=None
+  WD: Q21831587 'Q21831587' (2.06km) inc=None desc=curso de agua en Argentina es=None en=None
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "La Paya-Argentina": {
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "name": "La Paya",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "key": "La Paya-Argentina",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "La Paya-Argentina",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "name": "La Paya",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "citation": "Rojas, Angélica (1996). Prospección arqueológica de las riberas del río Caucayá, Parque Nacional Natural La Paya, Putumayo.  Tesis d
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_cadb_wankarani_arkush.json: {"sources": [{"title": "Wankarani Settlement Dataset (Bolivian Altiplano)", "author": "Timothy L. McAndrews", "year": 2005, "url": 
+=== [74] Cotogchoa-Ecuador | n=Cotogchoa | c=Ecuador | r=ecu_pichincha | ll=[-0.41123, -78.45233] | ey=1850 | ly=2025 | al=[] ===
+  WD: Q23875533 'Quebrada Pamparumi' (0.66km) inc=None desc=stream in Pichincha Province, Ecuador es=None en=None
+  WD: Q23882304 'Quebrada de Cuendina Alta' (2.02km) inc=None desc=stream in Pichincha Province, Ecuador es=None en=None
+  WD: Q23869788 'Q23869788' (2.45km) inc=None desc=stream in Pichincha Province, Ecuador es=None en=None
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "Cotogchoa-Ecuador": {
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "name": "Cotogchoa",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "key": "Cotogchoa-Ecuador",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "Cotogchoa-Ecuador",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "name": "Cotogchoa",
+  LOC: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Cotogchoa",
+=== [75] José María Arguedas-Peru | n=José María Arguedas | c=Peru | r=per_apurimac | ll=[-13.73417, -73.35056] | ey=1850 | ly=2025 | al=['huancabamba', 'Huancabamba'] ===
+  WD: Q20763593 'Distrito de José María Arguedas' (0.04km) inc=None desc=distrito peruano es=Distrito de José María Arguedas en=None
+  WD: Q131187838 'Huancabamba' (0.05km) inc=None desc=pueblo en Apurímac, Perú es=None en=None
+  WD: Q35348001 'Quebrada Atacori' (0.38km) inc=None desc=stream in Apurímac, Peru es=None en=None
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "José María Arguedas-Peru": {
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "name": "José María Arguedas",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "key": "José María Arguedas-Peru",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "José María Arguedas-Peru",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "name": "José María Arguedas",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "justification": "Co-located with existing district record 'José María Arguedas' (0.01 km, close)."
+  LOC: _shared\settlement_sources\raw_setts_peru.json: "José María Arguedas-Peru": {
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/
+=== [76] Wallpartasiri Pongo-Peru | n=Wallpartasiri Pongo | c=Peru | r=inca_collasuyu | ll=[-16.04313, -69.47797] | ey=1300 | ly=1530 | al=['chejota pongo', 'huancuni pongo', 'llangamaya pongo'] ===
+  WD: Q49642804 'Isla Coate' (5.44km) inc=None desc=isla en Perú es=None en=None
+  WD: Q49642799 'Isla Churo Huayllata' (5.46km) inc=None desc=isla en Perú es=None en=None
+  WD: Q29019530 'Río Ilave' (6.05km) inc=None desc=río en Perú es=Río Ilave en=Ilave River
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Wallpartasiri Pongo-Peru": {
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "name": "Wallpartasiri Pongo",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "key": "Wallpartasiri Pongo-Peru",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Wallpartasiri Pongo-Peru",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "name": "Wallpartasiri Pongo",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "justification": "Merged co-located same-country twin 'Winaca Pongo' into 'Wallpartasiri Pongo' (1.11 km)."
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Wallpartasiri Pongo-Peru": {
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Wallpartasiri Pongo-Peru",
+=== [77] José Felipe Márquez Cañizales-Venezuela | n=José Felipe Márquez Cañizales | c=Venezuela | r=ven_trujillo | ll=[9.8665, -70.57931] | ey=1850 | ly=2011 | al=[] ===
+  WD: Q31398436 'Fila Las Mulas' (1.75km) inc=None desc=ridge in Venezuela es=None en=None
+  WD: Q2263307 'Municipio José Felipe Márquez Cañizalez' (3.71km) inc=None desc=municipio de Trujillo, Venezuela es=Municipio José Felipe Márquez Cañizales en=José Felipe Márquez Cañizales Municipality
+  WD: Q34759473 'Caños Las Casitas' (3.75km) inc=None desc=río de Venezuela es=None en=None
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "José Felipe Márquez Cañizales-Venezuela": {
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "name": "José Felipe Márquez Cañizales",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "key": "José Felipe Márquez Cañizales-Venezuela",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "José Felipe Márquez Cañizales-Venezuela",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "name": "José Felipe Márquez Cañizales",
+  LOC: _shared\settlement_sources\raw_setts_venezuela.json: "José Felipe Márquez Cañizales-Venezuela": {
+  LOC: _shared\settlement_sources\raw\hdx_cod_ps\ven_admpop_adm2_2011_v3.csv: VE,Venezuela (República Bolivariana de),VE21,Trujillo,Trujillo,VE2107,José Felipe Márquez Cañizales,Jose Felipe Marquez Canizales,4551,2131,2420,414,
+  LOC: _shared\settlement_sources\raw\nso_venezuela\ine_ven_2001_2011.json: "name": "José Felipe Márquez Cañizales",
+=== [78] El Guásimo-Colombia | n=El Guásimo | c=Colombia | r=col_cauca | ll=[3.06638, -76.41011] | ey=1525 | ly=2018 | al=['la quebrada', 'el sauce', 'La Quebrada'] ===
+  WD: Q23728446 'Q23728446' (1.43km) inc=None desc=None es=None en=None
+  WD: Q23728445 'Q23728445' (2.06km) inc=None desc=None es=None en=None
+  WD: Q23728444 'Q23728444' (2.82km) inc=None desc=None es=None en=None
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "El Guásimo-Colombia": {
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "name": "El Guásimo",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "key": "El Guásimo-Colombia",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "El Guásimo-Colombia",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "name": "El Guásimo",
+  LOC: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "El Guásimo",
+=== [79] San Juan Bosco-Ecuador | n=San Juan Bosco | c=Ecuador | r=ecu_morona_santiago | ll=[-3.25995, -78.38524] | ey=1900 | ly=2025 | al=[] ===
+  WD: Q23875540 'Q23875540' (5.61km) inc=None desc=stream in Morona-Santiago Province, Ecuador es=None en=None
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "San Juan Bosco (ecu_sucumbios)-Ecuador": {
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "name": "San Juan Bosco",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "key": "San Juan Bosco (ecu_sucumbios)-Ecuador",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "San Juan Bosco-Ecuador": {
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "name": "San Juan Bosco",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "key": "San Juan Bosco-Ecuador",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "San Juan Bosco (ecu_sucumbios)-Ecuador",
+  LOC: _shared\settlement_sources\raw_setts_ecuador.json: "San Juan Bosco-Ecuador": {
+  LOC: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "San Juan Bosco de la Verde",
+  LOC: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "San Juan Bosco",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "name": "San Juan Bosco, Etapa 1",
+=== [80] Olta-Argentina | n=Olta | c=Argentina | r=arg_la_rioja | ll=[-30.63062, -66.26729] | ey=1536 | ly=2010 | al=[] ===
+  WD: Q764225 'Departamento General Belgrano' (0.14km) inc=None desc=departamento de la provincia de La Rioja, Argentina es=Departamento General Belgrano (La Rioja) en=General Belgrano Department, La Rioja
+  WD: Q140771193 'Escuela N°267 Gral.Ángel Vicente Peñalozaj.C.' (0.35km) inc=None desc=escuela primaria en La Rioja, Argentina es=None en=None
+  WD: Q64337886 'Biblioteca Popular Domingo Faustino Sarmiento' (0.38km) inc=1908-12-15T00:00:00Z desc=biblioteca popular en Olta, La Rioja, Argentina es=None en=None
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "Olta-Argentina": {
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "name": "Olta",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "key": "Olta-Argentina",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "Olta-Argentina",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "name": "Olta",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Olta-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Olta-Argentina",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Olta",
+=== [81] San Antonio-Colombia_2 | n=San Antonio | c=Colombia | r=na_magdalena_cauca_muisca | ll=[7.07632, -73.73031] | ey=1300 | ly=1500 | al=['el campanario k16+', 'galilea', 'El Campanario K16+'] ===
+  WD: Q23716046 'Q23716046' (2.15km) inc=None desc=natural watercourse in Santander Department, Colombia es=None en=None
+  WD: Q23680841 'Quebrada Vizcaína' (2.22km) inc=None desc=curso de agua de Colombia es=None en=None
+  WD: Q23684425 'Q23684425' (2.42km) inc=None desc=curso de agua de Colombia es=None en=None
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "San Antonio de Prado"
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "San Antonio"
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "HF_Ceramica_CRG San Antonio Nuevo_McpioSahagun_Cordoba-Colombia": {
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "HF_Ceramica_CRG San Antonio Nuevo_McpioSahagun_Cordoba",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "HF_Ceramica_CRG San Antonio Nuevo_McpioSahagun_Cordoba-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "SAR Gameza Vda San Antonio",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "HF_Ceramica_CRG San Antonio Nuevo_McpioSahagun_Cordoba-Colombia",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Cerro San Antonio",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Cerro San Antonio-Peru",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Huacariz San Antonio",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Cerro San Antonio (inca_contisuyu)-Peru",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Bahia de San Antonio-Argentina": {
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Bahia de San Antonio-Argentina",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "San Antonio de Morga"
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "San Antonio Bebara-Colombia",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_summary.json: "name": "San Antonio de Toro del Simiti",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "San Antonio Cachi-Peru": {
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "San Antonio Cachi-Peru",
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Asiento de San Antonio-Colombia": {
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "Asiento de San Antonio-Colombia",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "San Antonio",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "Fuerte de San Antonio-Argentina",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "San Antonio Vadillo"
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Boca de San Antonio-Colombia",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "Alto de San Antonio-Venezuela": {
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "Alto de San Antonio-Venezuela",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "San Antonio (ecu_canar)-Ecuador": {
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "San Antonio (ecu_canar)-Ecuador",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Chihuillo Alto San Antonio-Peru": {
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Chihuillo Alto San Antonio-Peru",
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "San Antonio"
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "Lacoyo San Antonio-Bolivia",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "San Antonio",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "San Antonio (chl_region_de_atacama)-Chile",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Aldea San Antonio (arg_entre_rios)-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Aldea San Antonio (arg_entre_rios)-Argentina",
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_settlements.json: "San Antonio (ury_canelones)-Uruguay": {
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_source_ledger.json5: "settlement_key": "San Antonio (ury_canelones)-Uruguay",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "San Antonio Turen",
+  LOC: _shared\settlement_sources\raw_setts_andean_bolivia.json: "San Antonio de Esmoruco-Bolivia": {
+  LOC: _shared\settlement_sources\raw_setts_argentina.json: "San Antonio de Areco-Argentina": {
+  LOC: _shared\settlement_sources\raw_setts_chile.json: "San Antonio-Chile": {
+  LOC: _shared\settlement_sources\raw_setts_colombia.json: "San Antonio Del Tequendama-Colombia": {
+  LOC: _shared\settlement_sources\raw_setts_ecuador.json: "incl. San Antonio"
+  LOC: _shared\settlement_sources\raw_setts_peru.json: "San Antonio de Cachi-Peru": {
+  LOC: _shared\settlement_sources\raw_setts_uruguay.json: "San Antonio-Uruguay": {
+  LOC: _shared\settlement_sources\raw_setts_venezuela.json: "San Antonio de los Altos-Venezuela": {
+  LOC: _shared\settlement_sources\raw\hdx_cod_ps\chl_admpop_adm3_2022.csv: 2022,CHL,Chile,CL,Región de Valparaíso,Valparaíso,CL05,San Antonio,San Antonio,CL056,Algarrobo,Algarrobo,CL05602,7950,7718,15668,412,446,454,385,377,442
+  LOC: _shared\settlement_sources\raw\nso_chile\chile_ine_proyecciones_comuna_2002_2035.csv: "2109";5;"Valparaíso";56;"San Antonio";5601;"San Antonio";2002;89844
+  LOC: _shared\settlement_sources\raw\nso_chile\chile_ine_proyeccion_2024.csv: "63";5;"Valparaíso";56;"San Antonio";5601;"San Antonio";98579
+  LOC: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Comunidad Indígena San Antonio de los Lagos",
+  LOC: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Cadeate - San Antonio",
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Progreso San Antonio",
+  LOC: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 030212,030309,APURIMAC,ANDAHUAYLAS,SAN ANTONIO DE CACHI,APURIMAC,SUR,MACROREGION CENTRO,PE-APU,03,San Antonio de Cachi,178.78,18.374538538986499,3258,-13.
+  LOC: _shared\settlement_sources\raw\nso_venezuela\ine_ven_2001_2011.json: "name": "San Antonio de Los Altos",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_idacor_ariadne.json: "San Antonio",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_ign_wfs.json: "name": "Museo Antapu, Étnico y Arqueológico de San Antonio de los Cobres",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_radiocarbon.json: "name": "Bahia de San Antonio",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_arkg.json: "name": "San Antonio 1",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_acreditado.json: "province": "San Antonio",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "province": "San Antonio",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_col14.json: "name": "San Antonio (Aures)",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "citation": "Castellanos Rodríguez, Ciro Adolfo y José Manuel Rozo (2018). Solicitud de licencia de intervención arqueológica, fase de prospecció
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_cadb_wankarani_arkush.json: {"sources": [{"title": "Wankarani Settlement Dataset (Bolivian Altiplano)", "author": "Timothy L. McAndrews", "year": 2005, "url": 
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_p3k14c_2025.csv: people3k-p3k14c-99e8934/inst/p3k14c_scrubbed_fuzzed.csv,BETA-180012,370,30,Wood,Quebrada San Antonio,Peru,,South America,,,0,SCAR,Magilligan e
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_xronos.json: {"source": "XRONOS Chronological Database (https://xronos.ch/api/v1/data)", "urls": ["https://xronos.ch/api/v1/data?query_country=PE", "https://xr
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/
+  LOC: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "San Antonio de los Naranjos Humocaro alto",
+=== [82] Quichuas-Peru | n=Quichuas | c=Peru | r=per_huancavelica | ll=[-12.4725, -74.7675] | ey=1850 | ly=2025 | al=[] ===
+  WD: Q130371068 'Quichuas' (0.03km) inc=None desc=caserío en Huancavelica, Perú es=None en=None
+  WD: Q24039096 'Distrito de Quichuas' (0.31km) inc=None desc=distrito en Huancavelica, Perú es=Distrito de Quichuas en=None
+  WD: Q35470448 'Quebrada Llactahuayjo' (0.48km) inc=None desc=stream in Huancavelica, Peru es=None en=None
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Quichuas-Peru": {
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "name": "Quichuas",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "key": "Quichuas-Peru",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Quichuas-Peru",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "name": "Quichuas",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Quichuas-Peru",
+  LOC: _shared\settlement_sources\raw_setts_peru.json: "Quichuas-Peru": {
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "name": "Quichuas",
+  LOC: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 090719,080528,HUANCAVELICA,TAYACAJA,QUICHUAS,HUANCAVELICA,CENTRO,MACROREGION CENTRO,PE-HUV,09,Quichuas,114.16,45.077084793272597,2706,-12.4725,-74.7675,0.
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/
+  ES[Distrito de Quichuas]: El distrito peruano de Quichuas es una de los dieciocho distritos pertenecientes a la provincia de Tayacaja, en el departamento de Huancavelica, bajo la administración del Gobierno regional de Huancavelica. Limita por el norte con el Distrito de Colcabamba; por el este con el Distrito de Cosme; por el sur con la Provincia de Huancavelica; y por el oeste con los distritos de Pampas y Daniel Hernández. Desde el punto de vista jerárquico de la Iglesia católica, forma parte de la Diócesis de Huancavelica.​   | [== Historia ==] El distrito fue creado mediante Nº 30278​ el 14 de noviembre de 2014, en el gobierno de Ollanta Humala.  
+=== [83] Cochinoca-Argentina | n=Cochinoca | c=Argentina | r=arg_jujuy | ll=[-22.74533, -65.89612] | ey=1536 | ly=2022 | al=[] ===
+  WD: Q1105115 'Cochinoca' (0.07km) inc=None desc=localidad en Argentina es=Cochinoca en=Cochinoca
+  WD: Q95364760 'Puesto Barrancas (17)' (0.11km) inc=None desc=establecimiento de salud de caracter provincial sin internación de diagnóstico y tratamiento en la localidad de Cochinoca, provincia de Jujuy es=None en=None
+  WD: Q95365157 'Puesto Quebraleña (20)' (0.13km) inc=None desc=establecimiento de salud de caracter provincial sin internación de diagnóstico y tratamiento en la localidad de Cochinoca, provincia de Jujuy es=None en=None
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "Cochinoca-Argentina": {
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "name": "Cochinoca",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "key": "Cochinoca-Argentina",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "Cochinoca-Argentina",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "name": "Cochinoca",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Cochinoca-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Cochinoca-Argentina",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Cochinoca",
+  LOC: _shared\settlement_sources\raw_setts_argentina.json: "Cochinoca (Depto)-Argentina": {
+=== [84] Cueva Mora-Argentina | n=Cueva Mora | c=Argentina | r=sc_patagonia_tierra_del_fuego | ll=[-46.90255, -68.89426] | ey=-2206 | ly=-1306 | al=[] ===
+  WD: Q21834429 'Laguna Sirven' (3.24km) inc=None desc=lago en Argentina es=None en=None
+  WD: Q21831485 'Q21831485' (5.42km) inc=None desc=curso de agua en Argentina es=None en=None
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Cueva Mora-Argentina": {
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "name": "Cueva Mora",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "key": "Cueva Mora-Argentina",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Cueva Mora-Argentina",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "name": "Cueva Mora",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_radiocarbon.json: "name": "Cueva Mora",
+=== [85] Córdoba (ven_portuguesa)-Venezuela | n=Córdoba | c=Venezuela | r=ven_portuguesa | ll=[9.31722, -69.85] | ey=1850 | ly=2025 | al=[] ===
+  WD: Q31399929 'Fila San Rafael' (1.18km) inc=None desc=None es=None en=None
+  WD: Q31399930 'Fila San Rafael' (2.98km) inc=None desc=None es=None en=None
+  WD: Q35252208 'Río Riecito' (4.83km) inc=None desc=None es=None en=None
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Moñitos Córdoba-Colombia": {
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "Moñitos Córdoba",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "Moñitos Córdoba-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Puerto Córdoba-Colombia": {
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "name": "Puerto Córdoba",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "key": "Puerto Córdoba-Colombia",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Moñitos Córdoba-Colombia",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "BADACOR. Base de Datos Arqueológica de Córdoba-Argentina": {
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "BADACOR. Base de Datos Arqueológica de Córdoba-Argentina",
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "Nueva Córdoba"
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental.json5: "name": "Gobernación del Tucumán (Córdoba, Salta, Jujuy & Interior)",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "José Luis Grosso, Indios muertos, negros invisiblesnCórdoba, Arg. 2008)"
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "Córdoba-Argentina",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_summary.json: "name": "Gobernación del Tucumán (Córdoba, Salta, Jujuy & Interior)",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence.json5: "name": "Córdoba",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "admin1": "Córdoba"
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "settlement_key": "Córdoba (col_antioquia)-Colombia",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_summary.json: "name": "Córdoba",
+  LOC: 3.post_independence\1.colombia_after_independence\papers\papers_metadata.json: "Córdoba-Perozo, Karen"
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "Córdoba (ven_portuguesa)-Venezuela": {
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "Córdoba (ven_portuguesa)-Venezuela",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence.json5: "name": "Córdoba",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "admin1": "Córdoba"
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Córdoba-Argentina",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_summary.json: "name": "Córdoba",
+  LOC: 3.post_independence\7.argentina_after_independence\papers\papers_metadata.json: "title": "Migración sur-sur: factores relacionales e inserción segmentada de la población boliviana y peruana en la ciudad de Córdoba, Argen
+  LOC: _shared\quipu_chapter_summaries.json: "name": "Gobernación del Tucumán (Córdoba, Salta, Jujuy & Interior)",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "Valentina Ayrolo, 'Cura de almas. Aproximación al clero secular de la diócesis de Córdoba del Tucumán, en la primera mitad del siglo XIX', en: Anuario IHES 16 (T
+  LOC: _shared\settlement_sources\raw_setts_argentina.json: "admin1": "Córdoba",
+  LOC: _shared\settlement_sources\raw_setts_colombia.json: "Córdoba-Bolívar-Colombia": {
+  LOC: _shared\settlement_sources\raw_setts_venezuela.json: "Córdoba-Venezuela": {
+  LOC: _shared\settlement_sources\raw\hdx_cod_ps\ven_admpop_adm2_2011_v3.csv: VE,Venezuela (República Bolivariana de),VE20,Táchira,Tachira,VE2006,Córdoba,Cordoba,33124,16085,17039,2838,2948,3076,3366,3304,3006,2529,2220,2084,18
+  LOC: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Córdoba",
+  LOC: _shared\settlement_sources\raw\nso_venezuela\ine_ven_2001_2011.json: "name": "Córdoba",
+  LOC: _shared\settlement_sources\raw\nso_venezuela\ven_2021_mun.csv: 23682;Córdoba;San José de Uré;13814;5;4286;3921;2915;2692
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_idacor_ariadne.json: "name": "BADACOR. Base de Datos Arqueológica de Córdoba",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_ign_wfs.json: "name": "Museo Histórico de la Universidad Nacional de Córdoba - Manzana Jesuítica",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_radiocarbon.json: "reference": "Córdoba. La Gruta de Candonga (Córdoba, Argentina).”",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_col14.json: "name": "MO33449 (Moñitos Córdoba)",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "citation": "John Freddy Restrepo Lotero (2017). Reconocimiento y prospección arqueológica para la concesión temporal QKN-08401, en 123 Ha, munic
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\summary_arch_northern_andes.json: "Aceneth Serna Martínez, Carmen Elisa Henao Jiménez, Fabio Ortiz Sánchez, Ricardo Mendoza Acosta, Alba Araque Campo y Wilmar Córdoba Díaz (2017
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\summary_arch_southern_cone.json: "citation": "IDACOR (CONICET / Universidad Nacional de Córdoba). Base de Datos Arqueológica de Córdoba (BADACOR) & Colección Alemandri via ARIAD
+  LOC: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "Córdoba",
+=== [86] Villa Basilio Nievas-Argentina | n=Villa Basilio Nievas | c=Argentina | r=arg_san_juan | ll=[-31.54855, -68.73082] | ey=1850 | ly=2010 | al=[] ===
+  WD: Q141716406 'Escuela de Educación Secundaria de Zonda' (0.18km) inc=None desc=escuela secundaria en Zonda Arriba, Argentina es=None en=None
+  WD: Q2052395 'Villa Basilio Nievas' (0.28km) inc=None desc=asentamiento en Argentina es=Villa Basilio Nievas en=None
+  WD: Q64337539 'Biblioteca Popular Legisladores Argentinos' (0.29km) inc=1930-11-02T00:00:00Z desc=biblioteca popular en Zonda , San Juan, Argentina es=None en=None
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Villa Basilio Nievas-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "name": "Villa Basilio Nievas",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "key": "Villa Basilio Nievas-Argentina",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Villa Basilio Nievas-Argentina",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "name": "Villa Basilio Nievas",
+=== [87] Huelquén-Chile | n=Huelquén | c=Chile | r=chl_region_metropolitana_de_santiago | ll=[-33.83282, -70.64198] | ey=1850 | ly=2017 | al=[] ===
+  WD: Q137299914 'Iglesia Santa Teresa de Ávila' (0.33km) inc=None desc=Templo parroquial católico de la comuna chilena de Paine, Región Metropolitana es=None en=None
+  WD: Q5391001 'Huelquén' (0.35km) inc=None desc=None es=Huelquén en=None
+  WD: Q66605063 'Memorial Cementerio La Rana de Huelquén' (1.03km) inc=None desc=None es=None en=None
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "Huelquén-Chile": {
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "name": "Huelquén",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "key": "Huelquén-Chile",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "Huelquén-Chile",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "name": "Huelquén",
+=== [88] Con-Chile | n=Con | c=Chile | r=sc_patagonia_tierra_del_fuego | ll=[-52.70072, -69.51233] | ey=1000 | ly=1500 | al=[] ===
+  WD: Q22461127 'Cerro Negro' (4.55km) inc=None desc=mountain in Magellan and the Chilean Antarctic Region, Chile; geonames ID = 3878881 es=None en=None
+  LOC: quipu_gazetteers.json5: "itinerary_title": "Pre-Columbian Southern Cone: Mapuche Araucanía, Diaguita Andes, Chaco, Pampas, and Patagonia (-10000BC-1500AD)",
+  LOC: quipu_gazetteers.json5: "itinerary_title": "Spanish Conquest and the Andean Demographic Collapse (1525-1650AD)",
+  LOC: quipu_itinerary.json5: // Andean South America, Southern Cone and South Atlantic Islands
+  LOC: quipu_itinerary.json5: root_subtitle: "QUIPU: Andean South America, the Southern Cone and South Atlantic Islands, 10000BC-2025",
+  LOC: quipu_itinerary.json5: itinerary_title: "Pre-Columbian Southern Cone",
+  LOC: quipu_itinerary.json5: itinerary_title: "Spanish Conquest and Demographic Collapse in the Andes",
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_settlements.json: "Contexto Arqueológico"
+  LOC: 1.pre_columbian\1.pre_columbian_northern_andes\pre_columbian_northern_andes_source_ledger.json5: "settlement_key": "Altos del Tío Conejo-Colombia",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Contiuyo",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Arqueológico Cerro Condor-Peru",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu.json5: "name": "Contisuyu (Southwestern Pacific Slope & Arequipa)",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Confluencia",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Alero Rocoso Confluencia-Chile",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_summary.json: "name": "Contisuyu (Southwestern Pacific Slope & Arequipa)",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone.json5: "title": "Pre-Columbian Southern Cone: Mapuche Araucanía, Diaguita Andes, Chaco, Pampas, and Patagonia (-10000BC-1500AD)",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_settlements.json: "Conchal Alfarero Challahue"
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_source_ledger.json5: "settlement_key": "Alero 1- Alero Con Morteros-Argentina",
+  LOC: 1.pre_columbian\4.pre_columbian_southern_cone\pre_columbian_southern_cone_summary.json: "itinerary_title": "Pre-Columbian Southern Cone",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse.json5: "title": "Spanish Conquest and the Andean Demographic Collapse (1525-1650AD)",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (B
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "name": "HGIS_de_las_Indias_Conquest_and_Early_Colonial_1525_1650",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_summary.json: "itinerary_title": "Spanish Conquest and Demographic Collapse in the Andes",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "Concepcion Apolobamba"
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "Conaica-Peru",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_summary.json: "unit_name": "Concepcion (CHL)",
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_settlements.json: "HGIS Primary: Hermes Tovar Pinzón, Convocatoria al poder del número. Censos y Estadísticas de la Nueva Granada, 1750-1830 (Bogotá 1994)"
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_source_ledger.json5: "settlement_key": "Buen Consejo del Mamon-Venezuela",
+  LOC: 2.colonial\3.viceroyalty_new_granada\viceroyalty_new_granada_summary.json: "Tovar Pinzón et al. (1994) Convocatoria al Poder del Número (1778)": 29,
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental.json5: "name": "Obispado de Concepción, Araucanía & Chiloé",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_settlements.json: "Conchali"
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_source_ledger.json5: "settlement_key": "Angol de los Confines-Chile",
+  LOC: 2.colonial\4.chile_rio_plata_banda_oriental\chile_rio_plata_banda_oriental_summary.json: "name": "Obispado de Concepción, Araucanía & Chiloé",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_settlements.json: "Brisas de Condina ( La Gramínea )",
+  LOC: 3.post_independence\1.colombia_after_independence\colombia_after_independence_source_ledger.json5: "Contraloría General de la República Censos 1918-1951"
+  LOC: 3.post_independence\1.colombia_after_independence\papers\papers_metadata.json: "Ivan Enrique Contreras Cala",
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_settlements.json: "Concepción (ven_trujillo)-Venezuela": {
+  LOC: 3.post_independence\2.venezuela_after_independence\venezuela_after_independence_source_ledger.json5: "settlement_key": "Concepción (ven_trujillo)-Venezuela",
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_settlements.json: "Concepción (ecu_esmeraldas)-Ecuador": {
+  LOC: 3.post_independence\3.ecuador_after_independence\ecuador_after_independence_source_ledger.json5: "settlement_key": "Concepción (ecu_esmeraldas)-Ecuador",
+  LOC: 3.post_independence\3.ecuador_after_independence\papers\papers_metadata.json: "title": "Conciliación Demográfica del Ecuador 1950-2022",
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_settlements.json: "Lanche Conga"
+  LOC: 3.post_independence\4.peru_after_independence\peru_after_independence_source_ledger.json5: "settlement_key": "Brisas de Concon-Peru",
+  LOC: 3.post_independence\4.peru_after_independence\papers\papers_metadata.json: "title": "Arquitectura religiosa e ideología a partir del Concilio Vaticano II en la periferia urbana de Lima",
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_settlements.json: "Central Coniri-Bolivia": {
+  LOC: 3.post_independence\5.andean_bolivia_independence\andean_bolivia_independence_source_ledger.json5: "settlement_key": "Central Coniri-Bolivia",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_settlements.json: "Conumo",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_source_ledger.json5: "settlement_key": "Concepción-Chile",
+  LOC: 3.post_independence\6.chile_after_independence\chile_after_independence_summary.json: "name": "Gran Concepción (Metro)",
+  LOC: 3.post_independence\6.chile_after_independence\papers\papers_metadata.json: "journal_or_publisher": "Atenea (Concepción)",
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_settlements.json: "Barra Concepción-Argentina": {
+  LOC: 3.post_independence\7.argentina_after_independence\argentina_after_independence_source_ledger.json5: "settlement_key": "Barra Concepción-Argentina",
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_settlements.json: "Conchillas-Uruguay": {
+  LOC: 3.post_independence\8.uruguay_after_independence\uruguay_after_independence_source_ledger.json5: "settlement_key": "Conchillas-Uruguay",
+  LOC: 3.post_independence\8.uruguay_after_independence\papers\papers_metadata.json: "title": "Condiciones de vida del adulto mayor en el ámbito doméstico: envejecimiento y transferencias en Montevideo-Uruguay",
+  LOC: _shared\mask_audit_signoff.json: "notes": "Re-inspected 7 HydroBASINS Southern Cone sub-regions (54,743 px): completely seamless across Araucanía, Atacama, NW Andes/Cuyo, Gran Chaco, Paraná-Uruguay Littoral, Pampas, and 
+  LOC: _shared\quipu_chapter_summaries.json: "name": "Contisuyu (Southwestern Pacific Slope & Arequipa)",
+  LOC: _shared\quipu_root_summary.json: "root_subtitle": "QUIPU: Andean South America, the Southern Cone and South Atlantic Islands, 10000BC-2025",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Concepcion del Pao",
+  LOC: _shared\settlement_sources\raw_setts_andean_bolivia.json: "Concepción"
+  LOC: _shared\settlement_sources\raw_setts_argentina.json: "Conlara-Argentina": {
+  LOC: _shared\settlement_sources\raw_setts_chile.json: "Concón-Chile": {
+  LOC: _shared\settlement_sources\raw_setts_colombia.json: "DANE / Contraloría Historical Censuses (1918-1973)"
+  LOC: _shared\settlement_sources\raw_setts_ecuador.json: "La Concordia-Ecuador": {
+  LOC: _shared\settlement_sources\raw_setts_peru.json: "Conila-Peru": {
+  LOC: _shared\settlement_sources\raw_setts_uruguay.json: "Villa San Cono-Uruguay": {
+  LOC: _shared\settlement_sources\raw_setts_venezuela.json: "Concepción-Venezuela": {
+  LOC: _shared\settlement_sources\wave1_harvest_summary.json: "DANE / Contraloría General de la República Historical Censuses (1918-1973)": 4
+  LOC: _shared\settlement_sources\raw\hdx_cod_ps\chl_admpop_adm3_2022.csv: 2022,CHL,Chile,CL,Región del Bío-Bío,Biobío,CL08,Arauco,Arauco,CL082,Contulmo,Contulmo,CL08204,3213,3133,6346,166,187,239,180,169,204,243,232,222,218,20
+  LOC: _shared\settlement_sources\raw\nso_chile\chile_ine_proyecciones_comuna_2002_2035.csv: "1429";5;"Valparaíso";51;"Valparaíso";5103;"Concón";2002;33491
+  LOC: _shared\settlement_sources\raw\nso_chile\chile_ine_proyeccion_2024.csv: "43";5;"Valparaíso";51;"Valparaíso";5103;"Concón";48171
+  LOC: _shared\settlement_sources\raw\nso_colombia\dane_cp_2005_2018.json: "name": "Caserío Conjunto Caña Fistula",
+  LOC: _shared\settlement_sources\raw\nso_ecuador\inec_towns_1990_2022.json: "name": "Condominio Supirosa",
+  LOC: _shared\settlement_sources\raw\nso_peru\inei_cp_2007_2017.json: "province": "Condorcanqui",
+  LOC: _shared\settlement_sources\raw\nso_peru\peru_ubigeo_distrito.csv: 021406,022005,ANCASH,OCROS,CONGAS,ANCASH,CENTRO,MACROREGION NORTE,PE-ANC,02,Congas,130.03,8.9133276936091708,3112,-10.3375,-77.4427777777778,0.56437981128
+  LOC: _shared\settlement_sources\raw\nso_venezuela\ine_ven_2001_2011.json: "name": "El Consejo",
+  LOC: _shared\settlement_sources\raw\nso_venezuela\ven_2021_mun.csv: 54206;Norte de Santander;Convención;19647;5;6336;5992;3705;3614
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_idacor_ariadne.json: "Confluencia (Departamento)",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_ign_wfs.json: "name": "Museo Histórico Conventual San Carlos",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_argentina_radiocarbon.json: "reference": "Flegenheimer N. & Zarate M. (1997). Considerations on radiocarbon and calibrated dates from Cerro La China and Cerro El Sombrero Ar
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_arkg.json: "name": "Los Conitos",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_acreditado.json: "name": "Parroquia La Purísima Concepción de Colina",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_no_validado.json: "reference": "Anexo 3, Informe Prospección Arqueológica DIA 'Proyecto Parque Solar Azapa'. Consultoria Tebal.",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_cmn_registros_complementarios.json: "name": "Parroquia La Purísima Concepción de Colina",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_chile_radiocarbon.json: "name": "Condominio 1",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_col14.json: "citation": "Cano Echeverri, M. (2001). Arqueologia de las cuencas de los rios Otun y Consota, Risaralda. Fundacion de Investigaciones Arqueologicas. Ba
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_icanh_sitios.json: "citation": "Mayra Constanza Cuellar Sánchez, (2015). Patrones de asentamiento en el valle medio del río Magdalena: Prospección arqueológica para
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_radiocarbon_syntheses.json: "citation": "Cano M. C. (2004). Los primeros habitantes de las Cuencas Medidas de los Rios Otun y Consota. In: Cambios ambientales en pe
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_colombia_tairona.json: "url": "https://github.com/luismiguelsoto/Conflict_And_Social_Centralization_In_Tairona_Chiefdom_Communities"
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_ecuador_radiocarbon_syntheses.json: "name": "Punta Concepcion",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_c14_dedup.csv: ISGS-272,670,120,-7.8333,-74.25,Contamanilla (L-10),,rxpand,315
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_cadb_wankarani_arkush.json: {"sources": [{"title": "Wankarani Settlement Dataset (Bolivian Altiplano)", "author": "Timothy L. McAndrews", "year": 2005, "url": 
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_loreto_figshare.json: {"source": "Archaeological sites in the Department of Loreto, Peruvian Amazon", "doi": "10.6084/m9.figshare.13547684.v1", "url": "https:/
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_p3k14c_2025.csv: people3k-p3k14c-99e8934/inst/p3k14c_scrubbed_fuzzed.csv,BETA-180008,1130,70,Organic sediment,Conde High Terrace,Peru,,South America,-17.323528
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_titicaca_marsh2019.json: {"source": "Temporal Inflection Points in Decorated Pottery: a Bayesian Refinement of the Late Formative Chronology in the Southern La
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_tiwanaku_figshare.json: {"source": "Tiwanaku radiocarbon dates (Marsh et al., PLOS ONE)", "doi": "10.1371/journal.pone.0288798.s001", "url": "https://figshare.
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_usgs_peru14c.csv: Sample,Site,Laboratory_Code,Material,Pre-treatment,Process,Method,14C_Age_(14C_yr_BP),14C_Age_Analytical_Error_(1Sigma_yr),F14C,F14C_Analytic
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_academic_xronos.json: {"source": "XRONOS Chronological Database (https://xronos.ch/api/v1/data)", "urls": ["https://xronos.ch/api/v1/data?query_country=PE", "https://xr
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_preta_frontier_buffer.json: {"source": "PRETA Operation Viscount Amazon/Brazil Catchment GeoJSONs + Individual Amazon-Andean Frontier Sites", "source_path": "f:\\Active Proj
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_uruguay_radiocarbon.json: "feature": "Contained primary inhumations, one of which accompanied by stone artefacts.",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\summary_arch_northern_andes.json: "Cano M. C. (2004). Los primeros habitantes de las Cuencas Medidas de los Rios Otun y Consota. In: Cambios ambientales en perspectiva historica
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\summary_arch_southern_cone.json: "region": "Southern Cone (Chile, Argentina, Uruguay)",
+  LOC: _shared\sites_quipu_andes_cone\config\documented_arch_sites.json: "name": "Concepción",
+  LOC: _shared\sites_quipu_andes_cone\config\sites_quipu_andes_cone.json5: "name_en": "Palaeoindian and Early Holocene Andes and Southern Cone",
+  LOC: _shared\sites_quipu_andes_cone\config\sites_quipu_andes_cone_geojson_metadata.json: "macro_scope": "Andean South America (Peru, Andean Bolivia, Ecuador, Colombia, Venezuela excl. Essequibo), Southern Cone (Chile excl. Ra
+=== [89] Yurumarca-Peru | n=Yurumarca | c=Peru | r=vp_intendencia_trujillo | ll=[-6.046, -77.804] | ey=0 | ly=1825 | al=['yurmarca', 'en proceso', 'Yurmarca'] ===
+  WD: Q31697389 'Cerro Golondrina' (3.96km) inc=None desc=montaña en Amazonas, Perú es=None en=None
+  WD: Q31697425 'Cerro Nimal' (4.38km) inc=None desc=montaña en Perú es=None en=None
+  WD: Q31697407 'Cerro Ochentas' (5.42km) inc=None desc=montaña en Perú es=None en=None
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "Yurumarca-Peru": {
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "name": "Yurumarca",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_settlements.json: "key": "Yurumarca-Peru",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "settlement_key": "Yurumarca-Peru",
+  LOC: 1.pre_columbian\2.pre_columbian_central_andes\pre_columbian_central_andes_source_ledger.json5: "name": "Yurumarca",
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_settlements.json: "Yurumarca"
+  LOC: 1.pre_columbian\3.inca_empire_tawantinsuyu\inca_empire_tawantinsuyu_source_ledger.json5: "settlement_key": "Yurumarca-Peru",
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_settlements.json: "Yurumarca-Peru": {
+  LOC: 2.colonial\1.spanish_conquest_andes_collapse\spanish_conquest_andes_collapse_source_ledger.json5: "settlement_key": "Yurumarca-Peru",
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_settlements.json: "Yurumarca-Peru": {
+  LOC: 2.colonial\2.viceroyalty_peru_upper_peru\viceroyalty_peru_upper_peru_source_ledger.json5: "settlement_key": "Yurumarca-Peru",
+  LOC: _shared\settlement_sources\hgis_indias_colonial_raw.json: "name": "Yurumarca",
+  LOC: _shared\sites_quipu_andes_cone\0.raw_sites\raw_peru_sigda_qhapaq_nan.json: {"source": "SIGDA Ministerio de Cultura del Peru - Qhapaq Nan (v_4/pqn_v4)", "url": "https://sigda.cultura.gob.pe/sigda/rest/services/v_4/pqn_v4/

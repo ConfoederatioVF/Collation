@@ -1,0 +1,1167 @@
+{
+  "batch_index": 1483,
+  "count": 30,
+  "is_indigenous_region": true,
+  "project": "JAGUAR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        19.25811,
+        -98.8632
+      ],
+      "country": "Mexico",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "-50.1.1",
+          "name": "Chalco Survey Site CH-CL-14"
+        },
+        {
+          "date": "-50.1.1",
+          "name": "Chalco Survey Site CH-LTAzI-44"
+        },
+        {
+          "date": "-50.1.1",
+          "name": "Chalco Survey Site CH-TF-10"
+        },
+        {
+          "date": "1400.1.1",
+          "name": "Cuauhtzinco"
+        },
+        {
+          "date": "1550.1.1",
+          "name": "San Gregorio Cuautzingo"
+        }
+      ],
+      "existing_meta_index": 148,
+      "existing_meta_name": "San Gregorio Cuautzingo",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-TF-4-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-TF-4",
+        "chalco survey ch-tf-4"
+      ],
+      "latest_year": 100,
+      "max_pop": 49,
+      "name": "Chalco Survey CH-TF-4",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -200,
+        -50,
+        100
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.34766,
+        -99.01596
+      ],
+      "country": "Mexico",
+      "earliest_year": 1,
+      "existing_historical_names": [
+        {
+          "date": "326.1.1",
+          "name": "Ixtapalapa Survey Site IX-CL-32"
+        },
+        {
+          "date": "1100.1.1",
+          "name": "Ixtapalapa Survey Site IX-LTAzI-22"
+        },
+        {
+          "date": "1435.1.1",
+          "name": "Ixtapalapa Survey Site IX-LA-62"
+        },
+        {
+          "date": "1435.1.1",
+          "name": "Ixtapalapa Survey Site IX-LA-60"
+        }
+      ],
+      "existing_meta_index": 205,
+      "existing_meta_name": "Ixtapalapa Survey Site IX-LTAzI-23",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ixtapalapa Survey IX-CL-32-Mexico",
+      "known_aliases": [
+        "Ixtapalapa Survey IX-CL-32",
+        "ixtapalapa survey ix-cl-32"
+      ],
+      "latest_year": 650,
+      "max_pop": 49,
+      "name": "Ixtapalapa Survey IX-CL-32",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        1,
+        326,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.4156,
+        -98.85658
+      ],
+      "country": "Mexico",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Texcoco Survey Site TX-LF-19"
+        }
+      ],
+      "existing_meta_index": 126,
+      "existing_meta_name": "Texcoco Survey Site TX-LA-95",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Texcoco Survey TX-LF-19-Mexico",
+      "known_aliases": [
+        "Texcoco Survey TX-LF-19",
+        "texcoco survey tx-lf-19"
+      ],
+      "latest_year": -100,
+      "max_pop": 49,
+      "name": "Texcoco Survey TX-LF-19",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -500,
+        -300,
+        -100
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.6387,
+        -99.24799
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-91-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-91",
+        "basin of mexico cu-az-91"
+      ],
+      "latest_year": 1519,
+      "max_pop": 48,
+      "name": "Basin of Mexico CU-AZ-91",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.67836,
+        -99.19081
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-112-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-112",
+        "basin of mexico cu-az-112"
+      ],
+      "latest_year": 1519,
+      "max_pop": 48,
+      "name": "Basin of Mexico CU-AZ-112",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.59688,
+        -99.15257
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-174-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-174",
+        "basin of mexico cu-az-174"
+      ],
+      "latest_year": 1519,
+      "max_pop": 48,
+      "name": "Basin of Mexico CU-AZ-174",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.23462,
+        -98.97999
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1025.1.1",
+          "name": "Chalco Survey Site CH-LTAzI-48"
+        },
+        {
+          "date": "1025.1.1",
+          "name": "Chalco Survey Site CH-LTAzI-49"
+        },
+        {
+          "date": "1025.1.1",
+          "name": "Chalco Survey Site CH-LTAzI-54"
+        },
+        {
+          "date": "1300.1.1",
+          "name": "Chalco Survey Site CH-EA-122"
+        },
+        {
+          "date": "1362.1.1",
+          "name": "Chalco Survey Site CH-EA-LA-103"
+        },
+        {
+          "date": "1412.1.1",
+          "name": "Chalco Survey Site CH-EA-LA-109"
+        },
+        {
+          "date": "1435.1.1",
+          "name": "Chalco Survey Site CH-LA-207"
+        }
+      ],
+      "existing_meta_index": 376,
+      "existing_meta_name": "Chalco Survey Site CH-LTAzI-120",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LTAzI-54-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LTAzI-54",
+        "chalco survey ch-ltazi-54"
+      ],
+      "latest_year": 1200,
+      "max_pop": 48,
+      "name": "Chalco Survey CH-LTAzI-54",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1025,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.21301,
+        -98.85032
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Chalco Survey Site CH-LTAzI-67"
+        },
+        {
+          "date": "1050.1.1",
+          "name": "Chalco Survey Site CH-LTAzI-70"
+        },
+        {
+          "date": "1412.1.1",
+          "name": "Chalco Survey Site CH-EA-LA-86"
+        },
+        {
+          "date": "1435.1.1",
+          "name": "Chalco Survey Site CH-LA-168"
+        },
+        {
+          "date": "1548.1.1",
+          "name": "Cocotitlán"
+        }
+      ],
+      "existing_meta_index": 385,
+      "existing_meta_name": "Cocotitlán",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LTAzI-67-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LTAzI-67",
+        "chalco survey ch-ltazi-67"
+      ],
+      "latest_year": 1200,
+      "max_pop": 48,
+      "name": "Chalco Survey CH-LTAzI-67",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1050,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.11009,
+        -98.88599
+      ],
+      "country": "Mexico",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-TF-54-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-TF-54",
+        "chalco survey ch-tf-54"
+      ],
+      "latest_year": 1,
+      "max_pop": 48,
+      "name": "Chalco Survey CH-TF-54",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -200,
+        -100,
+        1
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.14358,
+        -98.77597
+      ],
+      "country": "Mexico",
+      "earliest_year": 1,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-CL-35-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-CL-35",
+        "chalco survey ch-cl-35"
+      ],
+      "latest_year": 650,
+      "max_pop": 48,
+      "name": "Chalco Survey CH-CL-35",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        1,
+        326,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.20666,
+        -98.85731
+      ],
+      "country": "Mexico",
+      "earliest_year": 900,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco CH-LT-33-Mexico",
+      "known_aliases": [
+        "Chalco CH-LT-33",
+        "chalco ch-lt-33"
+      ],
+      "latest_year": 1150,
+      "max_pop": 48,
+      "name": "Chalco CH-LT-33",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        900,
+        1025,
+        1150
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.1148,
+        -98.81488
+      ],
+      "country": "Mexico",
+      "earliest_year": -300,
+      "existing_historical_names": [
+        {
+          "date": "1268.1.1",
+          "name": "Amaquemecan"
+        },
+        {
+          "date": "1547.1.1",
+          "name": "Amecameca"
+        }
+      ],
+      "existing_meta_index": 481,
+      "existing_meta_name": "Amecameca",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Amecameca CH-TF-44-Mexico",
+      "known_aliases": [
+        "Amecameca CH-TF-44",
+        "amecameca ch-tf-44"
+      ],
+      "latest_year": 100,
+      "max_pop": 48,
+      "name": "Amecameca CH-TF-44",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -300,
+        -100,
+        100
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.66574,
+        -99.23849
+      ],
+      "country": "Mexico",
+      "earliest_year": 900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-LT-61-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-LT-61",
+        "basin of mexico cu-lt-61"
+      ],
+      "latest_year": 1150,
+      "max_pop": 48,
+      "name": "Basin of Mexico CU-LT-61",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        900,
+        1025,
+        1150
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.68413,
+        -99.26714
+      ],
+      "country": "Mexico",
+      "earliest_year": -1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-MF-6-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-MF-6",
+        "basin of mexico cu-mf-6"
+      ],
+      "latest_year": -650,
+      "max_pop": 48,
+      "name": "Basin of Mexico CU-MF-6",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -1150,
+        -900,
+        -650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.74297,
+        -98.93319
+      ],
+      "country": "Mexico",
+      "earliest_year": 900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico TM-LT-23-Mexico",
+      "known_aliases": [
+        "Basin of Mexico TM-LT-23",
+        "basin of mexico tm-lt-23"
+      ],
+      "latest_year": 1150,
+      "max_pop": 48,
+      "name": "Basin of Mexico TM-LT-23",
+      "reason": "missing_entry",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        900,
+        1025,
+        1150
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        17.22389,
+        -93.16444
+      ],
+      "country": "Mexico",
+      "earliest_year": 1570,
+      "existing_historical_names": [
+        {
+          "date": "1990.3.12",
+          "name": "Ocotepec"
+        }
+      ],
+      "existing_meta_index": 3784,
+      "existing_meta_name": "Ocotepec",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Marcos Ocotepec-Mexico",
+      "known_aliases": [
+        "San Marcos Ocotepec",
+        "san marcos ocotepec"
+      ],
+      "latest_year": 1821,
+      "max_pop": 47,
+      "name": "San Marcos Ocotepec",
+      "reason": "under_covered_history",
+      "region": "viceroyalty_of_new_spain",
+      "sample_years": [
+        1570,
+        1700,
+        1790,
+        1821
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.64975,
+        -99.22893
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-102-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-102",
+        "basin of mexico cu-az-102"
+      ],
+      "latest_year": 1519,
+      "max_pop": 47,
+      "name": "Basin of Mexico CU-AZ-102",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.60918,
+        -99.14305
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-177-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-177",
+        "basin of mexico cu-az-177"
+      ],
+      "latest_year": 1519,
+      "max_pop": 47,
+      "name": "Basin of Mexico CU-AZ-177",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.63261,
+        -99.10492
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-191-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-191",
+        "basin of mexico cu-az-191"
+      ],
+      "latest_year": 1519,
+      "max_pop": 47,
+      "name": "Basin of Mexico CU-AZ-191",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.5879,
+        -99.05721
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico CU-AZ-260-Mexico",
+      "known_aliases": [
+        "Basin of Mexico CU-AZ-260",
+        "basin of mexico cu-az-260"
+      ],
+      "latest_year": 1519,
+      "max_pop": 47,
+      "name": "Basin of Mexico CU-AZ-260",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.70837,
+        -98.98092
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico TM-AZ-9-Mexico",
+      "known_aliases": [
+        "Basin of Mexico TM-AZ-9",
+        "basin of mexico tm-az-9"
+      ],
+      "latest_year": 1519,
+      "max_pop": 47,
+      "name": "Basin of Mexico TM-AZ-9",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.77328,
+        -98.84726
+      ],
+      "country": "Mexico",
+      "earliest_year": 1334,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Basin of Mexico TE-AZ-52-Mexico",
+      "known_aliases": [
+        "Basin of Mexico TE-AZ-52",
+        "basin of mexico te-az-52"
+      ],
+      "latest_year": 1519,
+      "max_pop": 47,
+      "name": "Basin of Mexico TE-AZ-52",
+      "reason": "missing_entry",
+      "region": "aztec_late_postclassic_mexico",
+      "sample_years": [
+        1334,
+        1500,
+        1519
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.30699,
+        -98.86764
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LTAzI-1-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LTAzI-1",
+        "chalco survey ch-ltazi-1"
+      ],
+      "latest_year": 1200,
+      "max_pop": 47,
+      "name": "Chalco Survey CH-LTAzI-1",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1050,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.12025,
+        -98.82167
+      ],
+      "country": "Mexico",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-350.1.1",
+          "name": "Chalco Survey Site CH-TF-45"
+        }
+      ],
+      "existing_meta_index": 111,
+      "existing_meta_name": "Chalco Survey Site CH-LF-32",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LF-32-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LF-32",
+        "chalco survey ch-lf-32"
+      ],
+      "latest_year": -200,
+      "max_pop": 47,
+      "name": "Chalco Survey CH-LF-32",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -500,
+        -350,
+        -200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.33729,
+        -98.8716
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Ixtapalapa Survey Site IX-LTAzI-48"
+        },
+        {
+          "date": "1435.1.1",
+          "name": "Ixtapalapa Survey Site IX-LA-28"
+        }
+      ],
+      "existing_meta_index": 389,
+      "existing_meta_name": "Ixtapalapa Survey Site IX-LA-27",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ixtapalapa Survey IX-LTAzI-48-Mexico",
+      "known_aliases": [
+        "Ixtapalapa Survey IX-LTAzI-48",
+        "ixtapalapa survey ix-ltazi-48"
+      ],
+      "latest_year": 1200,
+      "max_pop": 47,
+      "name": "Ixtapalapa Survey IX-LTAzI-48",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1050,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.19229,
+        -98.86671
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LTAzI-74-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LTAzI-74",
+        "chalco survey ch-ltazi-74"
+      ],
+      "latest_year": 1200,
+      "max_pop": 46,
+      "name": "Chalco Survey CH-LTAzI-74",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1025,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.22344,
+        -98.81706
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Chalco Atenco"
+        },
+        {
+          "date": "1521.8.13",
+          "name": "Chalco"
+        }
+      ],
+      "existing_meta_index": 399,
+      "existing_meta_name": "Chalco",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chalco Survey CH-LTAzI-62-Mexico",
+      "known_aliases": [
+        "Chalco Survey CH-LTAzI-62",
+        "chalco survey ch-ltazi-62"
+      ],
+      "latest_year": 1200,
+      "max_pop": 46,
+      "name": "Chalco Survey CH-LTAzI-62",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1050,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.29833,
+        -99.00784
+      ],
+      "country": "Mexico",
+      "earliest_year": 850,
+      "existing_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Ixtapalapa Survey Site IX-LTAzI-17"
+        }
+      ],
+      "existing_meta_index": 396,
+      "existing_meta_name": "Ixtapalapa Survey Site IX-LTAzI-17",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Ixtapalapa Survey IX-LTAzI-17-Mexico",
+      "known_aliases": [
+        "Ixtapalapa Survey IX-LTAzI-17",
+        "ixtapalapa survey ix-ltazi-17"
+      ],
+      "latest_year": 1200,
+      "max_pop": 46,
+      "name": "Ixtapalapa Survey IX-LTAzI-17",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        850,
+        1050,
+        1200
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.1051,
+        -98.88591
+      ],
+      "country": "Mexico",
+      "earliest_year": 150,
+      "existing_historical_names": [
+        {
+          "date": "1268.1.1",
+          "name": "Amaquemecan"
+        },
+        {
+          "date": "1547.1.1",
+          "name": "Amecameca"
+        }
+      ],
+      "existing_meta_index": 481,
+      "existing_meta_name": "Amecameca",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Amecameca CH-CL-26-Mexico",
+      "known_aliases": [
+        "Amecameca CH-CL-26",
+        "amecameca ch-cl-26"
+      ],
+      "latest_year": 650,
+      "max_pop": 46,
+      "name": "Amecameca CH-CL-26",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        150,
+        400,
+        650
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.10883,
+        -98.81033
+      ],
+      "country": "Mexico",
+      "earliest_year": -650,
+      "existing_historical_names": [
+        {
+          "date": "1268.1.1",
+          "name": "Amaquemecan"
+        },
+        {
+          "date": "1547.1.1",
+          "name": "Amecameca"
+        }
+      ],
+      "existing_meta_index": 481,
+      "existing_meta_name": "Amecameca",
+      "existing_shard_file": "12_jaguar.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Amecameca CH-LF-33-Mexico",
+      "known_aliases": [
+        "Amecameca CH-LF-33",
+        "amecameca ch-lf-33"
+      ],
+      "latest_year": -300,
+      "max_pop": 46,
+      "name": "Amecameca CH-LF-33",
+      "reason": "under_covered_history",
+      "region": "precolumbian_mesoamerica",
+      "sample_years": [
+        -650,
+        -475,
+        -300
+      ],
+      "sources": [
+        "JAGUAR"
+      ]
+    }
+  ]
+}

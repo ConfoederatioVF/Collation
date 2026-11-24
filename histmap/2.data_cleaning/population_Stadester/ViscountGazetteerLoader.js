@@ -298,6 +298,12 @@
           }
           if (Object.keys(clean_pop).length === 0) continue;
 
+          let raw_scope = String(raw_city.population_scope || raw_city.extent_type || "").toLowerCase();
+          let is_metro_cand = Boolean(
+            raw_scope === "metro" ||
+            raw_city.is_agglomeration === true ||
+            /\(metro\)|agglomeration|metropolitan/i.test(String(raw_city.name || city_key || ""))
+          );
           let candidate_city = {
             _raw_lapsed: Boolean(raw_city._raw_lapsed === true || clean_pop["-999"] === 0),
             coords: [lat, lng],
@@ -315,6 +321,16 @@
             viscount_project: proj.key,
             viscount_z_priority: proj.z_priority
           };
+          if (raw_scope) candidate_city.population_scope = raw_scope;
+          if (raw_city.extent_type) candidate_city.extent_type = raw_city.extent_type;
+          if (raw_city.metro_parent_key) candidate_city.metro_parent_key = raw_city.metro_parent_key;
+          if (raw_city.metro_key) candidate_city.metro_key = raw_city.metro_key;
+          if (raw_city.is_agglomeration_of) candidate_city.is_agglomeration_of = raw_city.is_agglomeration_of;
+          if (is_metro_cand) {
+            candidate_city.extent_type = "metro";
+            candidate_city.is_agglomeration = true;
+            candidate_city.population_scope = "metro";
+          }
           let raw_found = (raw_city["found.yr"] !== undefined) ? raw_city["found.yr"] : raw_city.foundation_year;
           if (raw_found !== undefined && Number.isFinite(Number(raw_found))) {
             let parsed_found = parseInt(raw_found, 10);
@@ -359,6 +375,13 @@
             let ex_key = candidate_pool[y];
             let ex_city = return_obj[ex_key];
             if (!ex_city) continue;
+            let is_metro_ex = Boolean(
+              ex_city.population_scope === "metro" ||
+              ex_city.extent_type === "metro" ||
+              ex_city.is_agglomeration === true ||
+              /\(metro\)|agglomeration|metropolitan/i.test(String(ex_city.name || ex_key || ""))
+            );
+            if (is_metro_ex !== is_metro_cand) continue;
 
             let dist_km = (typeof uud.haversineDistance === "function") ?
               uud.haversineDistance(ex_city.coords, candidate_city.coords) : 999999;

@@ -1,0 +1,3661 @@
+{
+  "Sierras Bayas-Argentina": {
+    "input": {
+      "key": "Sierras Bayas-Argentina",
+      "n": "Sierras Bayas",
+      "c": "Argentina",
+      "r": "arg_buenos_aires",
+      "ll": [
+        -36.84385,
+        -60.22903
+      ],
+      "ey": 1850,
+      "ly": 2010,
+      "p": 3849
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Borrero Ayerbe-Colombia": {
+    "input": {
+      "key": "Borrero Ayerbe-Colombia",
+      "n": "Borrero Ayerbe",
+      "c": "Colombia",
+      "r": "col_valle_del_cauca",
+      "ll": [
+        3.57229,
+        -76.64649
+      ],
+      "ey": 1850,
+      "ly": 2018,
+      "p": 3848
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Trenel-Argentina": {
+    "input": {
+      "key": "Trenel-Argentina",
+      "n": "Trenel",
+      "c": "Argentina",
+      "r": "arg_la_pampa",
+      "ll": [
+        -35.69832,
+        -64.13323
+      ],
+      "ey": 1900,
+      "ly": 2022,
+      "p": 3848
+    },
+    "local": [
+      {
+        "name": "43-41Pt. / Lítico / Alemandri",
+        "lat": -35.7,
+        "lon": -64.1333,
+        "country": "Argentina",
+        "period": "holoceno medio; holoceno tardío; meghalayan age; northgrippian age",
+        "source": "IDACOR (CONICET/UNC) - BADACOR & Collections via ARIADNEplus",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "b497f0b30096e8146d49634b15eca8de4375d275632f577bea89876ad6f2f8bd",
+        "place_names": [
+          "Argentina",
+          "Bonaerense (Región de Argentina)",
+          "La Pampa (Provincia)",
+          "Trenel (Localidad)",
+          "Trenel (Departamento)",
+          "Pampa",
+          "La Pampa",
+          "Pampeana (Región de Argentina)"
+        ],
+        "site_type": "bolas (projectile weapons)",
+        "publisher": "IDACOR (CONICET/UNC)",
+        "url": "https://portal.ariadne-infrastructure.eu/resource/b497f0b30096e8146d49634b15eca8de4375d275632f577bea89876ad6f2f8bd",
+        "_file": "0.raw_sites/raw_argentina_idacor_ariadne.json"
+      },
+      {
+        "name": "Museo Histórico Casa de la Cultura",
+        "lat": -35.698897,
+        "lon": -64.133813,
+        "country": "Argentina",
+        "period": "Historical / Heritage Site",
+        "source": "IGN Argentina WFS (cultura_y_religion_AL021)",
+        "source_tier": "tier_1_national_registry",
+        "record_id": "cultura_y_religion_AL021.17018",
+        "site_type": "Museo Histórico",
+        "reference": "SINCA",
+        "url": "https://wms.ign.gob.ar/geoserver/ows",
+        "_file": "0.raw_sites/raw_argentina_ign_wfs.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Tránsito-Argentina": {
+    "input": {
+      "key": "Tránsito-Argentina",
+      "n": "Tránsito",
+      "c": "Argentina",
+      "r": "arg_cordoba",
+      "ll": [
+        -31.42631,
+        -63.19515
+      ],
+      "ey": 80,
+      "ly": 2022,
+      "p": 3847,
+      "al": [
+        "transito"
+      ]
+    },
+    "local": [
+      {
+        "name": "Transito",
+        "lat": -31.425677,
+        "lon": -63.197569,
+        "country": "Argentina",
+        "period": "80 to 1620",
+        "source": "IDACOR (CONICET/UNC) - BADACOR & Collections via ARIADNEplus",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "420d10bd2d3e9b50ed527035655fa90b7ced755f83b0444132c273addb754885",
+        "place_names": [
+          "Argentina",
+          "San Francisco",
+          "Córdoba",
+          "Tránsito",
+          "San Justo"
+        ],
+        "site_type": "archaeological sites; prehistoric sites",
+        "publisher": "IDACOR (CONICET/UNC)",
+        "url": "https://portal.ariadne-infrastructure.eu/resource/420d10bd2d3e9b50ed527035655fa90b7ced755f83b0444132c273addb754885",
+        "_file": "0.raw_sites/raw_argentina_idacor_ariadne.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Cerro conejos-Colombia": {
+    "input": {
+      "key": "Cerro conejos-Colombia",
+      "n": "Cerro conejos",
+      "c": "Colombia",
+      "r": "na_magdalena_cauca_muisca",
+      "ll": [
+        5.81559,
+        -75.63823
+      ],
+      "ey": 0,
+      "ly": 1500,
+      "p": 3847
+    },
+    "local": [
+      {
+        "name": "Cerro conejos",
+        "lat": 5.81559,
+        "lon": -75.63823,
+        "country": "Colombia",
+        "department": "ANTIOQUIA",
+        "municipality": "FREDONIA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Universidad de Antioquia",
+        "citation": "Pertuz Angarita, Joyce E., Yezid Vélez Carvajal y Martha C. Cano Echeverri (2002). Estudio comparativo entre la cerámica localizada en la casa de la cultura Julio Cesar García del municipio de Fredonia y los estilos cerámicos reportados para la región.  Tesis de pregrado inédita, Departamento de Antropología, Universidad de Antioquia, Medellín.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Huachac-Peru": {
+    "input": {
+      "key": "Huachac-Peru",
+      "n": "Huachac",
+      "c": "Peru",
+      "r": "per_junin",
+      "ll": [
+        -12.02056,
+        -75.34111
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3846,
+      "al": [
+        "huáchac",
+        "manzanares",
+        "san miguel"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Pueblo Libertador-Argentina": {
+    "input": {
+      "key": "Pueblo Libertador-Argentina",
+      "n": "Pueblo Libertador",
+      "c": "Argentina",
+      "r": "arg_corrientes",
+      "ll": [
+        -30.22011,
+        -59.38979
+      ],
+      "ey": 1850,
+      "ly": 2022,
+      "p": 3846
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Nono-Ecuador": {
+    "input": {
+      "key": "Nono-Ecuador",
+      "n": "Nono",
+      "c": "Ecuador",
+      "r": "ecu_pichincha",
+      "ll": [
+        -0.05994,
+        -78.57493
+      ],
+      "ey": 1525,
+      "ly": 2025,
+      "p": 3845
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Unión Milagreña-Ecuador": {
+    "input": {
+      "key": "Unión Milagreña-Ecuador",
+      "n": "Unión Milagreña",
+      "c": "Ecuador",
+      "r": "ecu_orellana",
+      "ll": [
+        -0.36381,
+        -76.78347
+      ],
+      "ey": 1920,
+      "ly": 2025,
+      "p": 3844
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Basail-Argentina": {
+    "input": {
+      "key": "Basail-Argentina",
+      "n": "Basail",
+      "c": "Argentina",
+      "r": "arg_chaco",
+      "ll": [
+        -27.88763,
+        -59.28148
+      ],
+      "ey": 1900,
+      "ly": 2022,
+      "p": 3844
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "En Proceso (inca_collasuyu)-Peru": {
+    "input": {
+      "key": "En Proceso (inca_collasuyu)-Peru",
+      "n": "En Proceso",
+      "c": "Peru",
+      "r": "inca_collasuyu",
+      "ll": [
+        -14.78409,
+        -70.71862
+      ],
+      "ey": 1440,
+      "ly": 1532,
+      "p": 3844
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Jesus Nanzueras-Colombia": {
+    "input": {
+      "key": "Jesus Nanzueras-Colombia",
+      "n": "Jesus Nanzueras",
+      "c": "Colombia",
+      "r": "vng_antioquia_popayan_choco",
+      "ll": [
+        0.301,
+        -76.738
+      ],
+      "ey": 1693,
+      "ly": 1759,
+      "p": 3843,
+      "al": [
+        "nanqueros",
+        "nariguera",
+        "nazuera"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Ambargasta-Argentina_2": {
+    "input": {
+      "key": "Ambargasta-Argentina_2",
+      "n": "Ambargasta",
+      "c": "Argentina",
+      "r": "crp_gobernacion_tucuman",
+      "ll": [
+        -29.051,
+        -63.959
+      ],
+      "ey": 1536,
+      "ly": 1830,
+      "p": 3843
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "San Pedro De Los Cofánes-Ecuador": {
+    "input": {
+      "key": "San Pedro De Los Cofánes-Ecuador",
+      "n": "San Pedro De Los Cofánes",
+      "c": "Ecuador",
+      "r": "ecu_sucumbios",
+      "ll": [
+        -0.13862,
+        -76.85285
+      ],
+      "ey": 1920,
+      "ly": 2025,
+      "p": 3841
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Hinojo-Argentina": {
+    "input": {
+      "key": "Hinojo-Argentina",
+      "n": "Hinojo",
+      "c": "Argentina",
+      "r": "arg_buenos_aires",
+      "ll": [
+        -36.41291,
+        -60.67307
+      ],
+      "ey": 1850,
+      "ly": 2010,
+      "p": 3841
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Chaupin Qoyllur-Peru": {
+    "input": {
+      "key": "Chaupin Qoyllur-Peru",
+      "n": "Chaupin Qoyllur",
+      "c": "Peru",
+      "r": "inca_contisuyu",
+      "ll": [
+        -13.55487,
+        -74.19767
+      ],
+      "ey": 0,
+      "ly": 1530,
+      "p": 3840,
+      "al": [
+        "inkaraqay",
+        "Inkaraqay"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Concentración (inca_collasuyu_3)-Chile": {
+    "input": {
+      "key": "Concentración (inca_collasuyu_3)-Chile",
+      "n": "Concentración",
+      "c": "Chile",
+      "r": "inca_collasuyu",
+      "ll": [
+        -19.85559,
+        -69.45289
+      ],
+      "ey": -5000,
+      "ly": 1530,
+      "p": 3840,
+      "al": [
+        "estructuras",
+        "tarapacá viejo",
+        "tarapaca viejo"
+      ]
+    },
+    "local": [
+      {
+        "name": "S021 (Estructura)",
+        "lat": -19.858974,
+        "lon": -69.456041,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S000864",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q13081"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "S022 (Estructuras)",
+        "lat": -19.85599,
+        "lon": -69.453244,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S000865",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q13081"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "S023 (Concentración)",
+        "lat": -19.855593,
+        "lon": -69.452889,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S000866",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q13081"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "S024 (Estructura)",
+        "lat": -19.847448,
+        "lon": -69.443344,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S000867",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q13081"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "Geoglifo Quebrada de Tarapacá 04",
+        "lat": -19.86814,
+        "lon": -69.442864,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S010022",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q13081"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Zaña (inca_chinchaysuyu)-Peru": {
+    "input": {
+      "key": "Zaña (inca_chinchaysuyu)-Peru",
+      "n": "Zaña",
+      "c": "Peru",
+      "r": "inca_chinchaysuyu",
+      "ll": [
+        -7.17708,
+        -79.5232
+      ],
+      "ey": 500,
+      "ly": 1532,
+      "p": 3840,
+      "al": [
+        "callejon del inca",
+        "el potrero",
+        "huaca china"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "La Unión (per_junin)-Peru": {
+    "input": {
+      "key": "La Unión (per_junin)-Peru",
+      "n": "La Unión",
+      "c": "Peru",
+      "r": "per_junin",
+      "ll": [
+        -11.37722,
+        -75.75194
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3839,
+      "al": [
+        "leticia",
+        "Leticia"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Cocha Antonieta-Peru": {
+    "input": {
+      "key": "Cocha Antonieta-Peru",
+      "n": "Cocha Antonieta",
+      "c": "Peru",
+      "r": "inca_chinchaysuyu",
+      "ll": [
+        -3.51795,
+        -76.46986
+      ],
+      "ey": -2000,
+      "ly": 1530,
+      "p": 3838,
+      "al": [
+        "alianza cristiana",
+        "anatico",
+        "achuar anatico"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Yacimiento 1 Km. 15 +-Colombia": {
+    "input": {
+      "key": "Yacimiento 1 Km. 15 +-Colombia",
+      "n": "Yacimiento 1 Km. 15 +",
+      "c": "Colombia",
+      "r": "na_magdalena_cauca_muisca",
+      "ll": [
+        4.18088,
+        -74.69391
+      ],
+      "ey": -2000,
+      "ly": 1500,
+      "p": 3838
+    },
+    "local": [
+      {
+        "name": "Yacimiento 1 Km. 15 + 500",
+        "lat": 4.180878,
+        "lon": -74.693914,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "MELGAR",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Biblioteca ICANH",
+        "citation": "Claudia Isabel Ramón González (2003). Prospección y monitoreo Oleoducto Melgar - Chicoral.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Sitabamba-Peru": {
+    "input": {
+      "key": "Sitabamba-Peru",
+      "n": "Sitabamba",
+      "c": "Peru",
+      "r": "per_la_libertad",
+      "ll": [
+        -8.02222,
+        -77.73
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3837
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "San Joaquín-Colombia": {
+    "input": {
+      "key": "San Joaquín-Colombia",
+      "n": "San Joaquín",
+      "c": "Colombia",
+      "r": "col_santander",
+      "ll": [
+        6.42755,
+        -72.86764
+      ],
+      "ey": 1783,
+      "ly": 2025,
+      "p": 3833,
+      "al": [
+        "petaquero",
+        "Petaquero"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Dolores-Venezuela": {
+    "input": {
+      "key": "Dolores-Venezuela",
+      "n": "Dolores",
+      "c": "Venezuela",
+      "r": "ven_barinas",
+      "ll": [
+        8.31,
+        -69.54333
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3831
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "El Dorado-Ecuador": {
+    "input": {
+      "key": "El Dorado-Ecuador",
+      "n": "El Dorado",
+      "c": "Ecuador",
+      "r": "ecu_orellana",
+      "ll": [
+        -0.50223,
+        -76.95238
+      ],
+      "ey": 1920,
+      "ly": 2025,
+      "p": 3831
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Reporte HF SAR B-Colombia": {
+    "input": {
+      "key": "Reporte HF SAR B-Colombia",
+      "n": "Reporte HF SAR B",
+      "c": "Colombia",
+      "r": "na_magdalena_cauca_muisca",
+      "ll": [
+        3.90626,
+        -74.84993
+      ],
+      "ey": 1000,
+      "ly": 1500,
+      "p": 3829,
+      "al": [
+        "sar cubita",
+        "sar el tesoro",
+        "sar piedra fulgor"
+      ]
+    },
+    "local": [
+      {
+        "name": "Petroglifo 2",
+        "lat": 3.900406,
+        "lon": -74.858928,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "PURIFICACIÓN",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Yuri Romero Picón y Angelica Vivas (2006). Programa de exploración sísmica Pechui 2D - Fase II. informe final de prospección y monitoreo",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Reporte HF SAR B/ Vda. Campo Alegre/ Mcipio. Purificación, Tolima",
+        "lat": 3.906264,
+        "lon": -74.849932,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "PURIFICACIÓN",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Grupo de arqueología Caso 88 A?o 2024",
+        "citation": "Julián Eduardo Casta?eda Pérez (2024). Reporte HF SAR/ Vda. Campo Alegre/ Mcipio. Purificación, Tolima",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "SAR Cubita",
+        "lat": 3.913022,
+        "lon": -74.836169,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "PURIFICACIÓN",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Área de Arqueología",
+        "citation": "Dora Luz Padilla (2021). Reporte HF SAR Comunidad Indígena Las Poimas Purificación, Tolima",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "SAR Piedra Fulgor",
+        "lat": 3.912697,
+        "lon": -74.835433,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "PURIFICACIÓN",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Área de Arqueología",
+        "citation": "Dora Luz Padilla (2021). Reporte HF SAR Comunidad Indígena Las Poimas Purificación, Tolima",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "La Lucía-Venezuela": {
+    "input": {
+      "key": "La Lucía-Venezuela",
+      "n": "La Lucía",
+      "c": "Venezuela",
+      "r": "ven_portuguesa",
+      "ll": [
+        9.68543,
+        -69.25716
+      ],
+      "ey": 1850,
+      "ly": 2011,
+      "p": 3823
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Salcahuasi-Peru": {
+    "input": {
+      "key": "Salcahuasi-Peru",
+      "n": "Salcahuasi",
+      "c": "Peru",
+      "r": "per_huancavelica",
+      "ll": [
+        -12.10417,
+        -74.75167
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3821
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Tinco-Peru": {
+    "input": {
+      "key": "Tinco-Peru",
+      "n": "Tinco",
+      "c": "Peru",
+      "r": "per_ancash",
+      "ll": [
+        -9.27083,
+        -77.6775
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3821
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Mor-Cc-Colombia": {
+    "input": {
+      "key": "Mor-Cc-Colombia",
+      "n": "Mor-Cc",
+      "c": "Colombia",
+      "r": "na_magdalena_cauca_muisca",
+      "ll": [
+        6.21565,
+        -74.52415
+      ],
+      "ey": 0,
+      "ly": 1500,
+      "p": 3820,
+      "al": [
+        "mor-ba",
+        "Mor-Ba"
+      ]
+    },
+    "local": [
+      {
+        "name": "MOR-AB",
+        "lat": 6.206967,
+        "lon": -74.532653,
+        "country": "Colombia",
+        "department": "BOYACÁ",
+        "municipality": "PUERTO BOYACÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Maryam Angélica Hernández Venegas (2015). Programa de arqueología preventiva - fase de prospección arqueológica para la ampliación de las locaciones de campo moriche MOR-BB, MOR-CC, MOR-C, MOR-AB, MOR-AN, MOR-BL, MOR-CD, MOR-AU, MOR-BH, MOR-Y y MOR-BA",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "MOR-BA",
+        "lat": 6.212556,
+        "lon": -74.532567,
+        "country": "Colombia",
+        "department": "BOYACÁ",
+        "municipality": "PUERTO BOYACÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Maryam Angélica Hernández Venegas (2015). Programa de arqueología preventiva - fase de prospección arqueológica para la ampliación de las locaciones de campo moriche MOR-BB, MOR-CC, MOR-C, MOR-AB, MOR-AN, MOR-BL, MOR-CD, MOR-AU, MOR-BH, MOR-Y y MOR-BA",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "MOR-CC",
+        "lat": 6.215647,
+        "lon": -74.524147,
+        "country": "Colombia",
+        "department": "BOYACÁ",
+        "municipality": "PUERTO BOYACÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Maryam Angélica Hernández Venegas (2015). Programa de arqueología preventiva - fase de prospección arqueológica para la ampliación de las locaciones de campo moriche MOR-BB, MOR-CC, MOR-C, MOR-AB, MOR-AN, MOR-BL, MOR-CD, MOR-AU, MOR-BH, MOR-Y y MOR-BA",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Sondeo 74",
+        "lat": 6.2074,
+        "lon": -74.53485,
+        "country": "Colombia",
+        "department": "BOYACÁ",
+        "municipality": "PUERTO BOYACÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Janneth Panche Rodríguez (2010). Estudio para el plan de manejo ambiental para la perforación de los clusteres BS, AE y AZ, Campo Moriche, Puerto Boyacá. Geocol consultores S.A..Licencia N° 1704. 2010",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Sondeo 91",
+        "lat": 6.210844,
+        "lon": -74.534789,
+        "country": "Colombia",
+        "department": "BOYACÁ",
+        "municipality": "PUERTO BOYACÁ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Janneth Panche Rodríguez (2010). Estudio para el plan de manejo ambiental para la perforación de los clusteres BS, AE y AZ, Campo Moriche, Puerto Boyacá. Geocol consultores S.A..Licencia N° 1704. 2010",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Teyuna-Colombia": {
+    "input": {
+      "key": "Teyuna-Colombia",
+      "n": "Teyuna",
+      "c": "Colombia",
+      "r": "na_caribbean_maracaibo_tairona",
+      "ll": [
+        11.038,
+        -73.925
+      ],
+      "ey": 800,
+      "ly": 1500,
+      "p": 3820,
+      "al": [
+        "buritaca",
+        "buritaca 200",
+        "ciudad perdida"
+      ]
+    },
+    "local": [
+      {
+        "name": "Buritaca 200",
+        "lat": 11.038259,
+        "lon": -73.925176,
+        "country": "Colombia",
+        "period": "860 +/- 110 BP",
+        "c14_age_bp": 860.0,
+        "c14_sd": 110.0,
+        "lab_code": "Beta-9372",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Cadavid Camargo, G, & Groot de Mahecha, A. M. (1982). Buritaca 200. Arqueologia y conservacion de una poblacion precolombina (Sierra Nevada de Santa Marta). Beetrage zur Allgemeinen und Vergleichenden Archaologie. pp. 225-283.",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      },
+      {
+        "name": "Buritaca 200",
+        "lat": 11.038259,
+        "lon": -73.925176,
+        "country": "Colombia",
+        "period": "315 +/- 170 BP",
+        "c14_age_bp": 315.0,
+        "c14_sd": 170.0,
+        "lab_code": "IAN-117",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Groot de Mahecha, A. M. (1985). Arqueologia y conservacion de la localidad precolombina de Buritaca 200 en la Sierra Nevada de Santa Marta. Informes Antropologicos, (1), 55–102.",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      },
+      {
+        "name": "Buritaca 200",
+        "lat": 11.038259,
+        "lon": -73.925176,
+        "country": "Colombia",
+        "period": "400 +/- 50 BP",
+        "c14_age_bp": 400.0,
+        "c14_sd": 50.0,
+        "lab_code": "IAN-118",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Groot de Mahecha, A. M. (1985). Arqueologia y conservacion de la localidad precolombina de Buritaca 200 en la Sierra Nevada de Santa Marta. Informes Antropologicos, (1), 55–102.",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      },
+      {
+        "name": "Buritaca 200",
+        "lat": 11.038259,
+        "lon": -73.925176,
+        "country": "Colombia",
+        "period": "590 +/- 160 BP",
+        "c14_age_bp": 590.0,
+        "c14_sd": 160.0,
+        "lab_code": "IAN-86",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Herrera de Turbay, L. F. (1980). Buritaca-200: Estudio de polen arqueologico. Boletin Museo del Oro, 8, 1-20. https://publicaciones.banrepcultural.org/index.php/bmo/article/view/7329/7599",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      },
+      {
+        "name": "Buritaca 200",
+        "lat": 11.038259,
+        "lon": -73.925176,
+        "country": "Colombia",
+        "period": "950 +/- 70 BP",
+        "c14_age_bp": 950.0,
+        "c14_sd": 70.0,
+        "lab_code": "Beta-12994",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Oyuela, A. (1986). Excavacion de un basurero en Ciudad Perdida, Sierra Nevada de Santa Marta. Boletin de Arqueologia, 1(1), 28–37. Fundacion de Investigaciones Arqueologicas Nacionales, Banco de la Republica.",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Tulipe-Ecuador": {
+    "input": {
+      "key": "Tulipe-Ecuador",
+      "n": "Tulipe",
+      "c": "Ecuador",
+      "r": "ca_equatorial_sierra_canari",
+      "ll": [
+        0.095,
+        -78.778
+      ],
+      "ey": 800,
+      "ly": 1430,
+      "p": 3820,
+      "al": [
+        "yumbo",
+        "Yumbo"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Palma Roja-Ecuador": {
+    "input": {
+      "key": "Palma Roja-Ecuador",
+      "n": "Palma Roja",
+      "c": "Ecuador",
+      "r": "ecu_sucumbios",
+      "ll": [
+        0.1235,
+        -76.0535
+      ],
+      "ey": 1920,
+      "ly": 2025,
+      "p": 3818
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Arcata-Peru": {
+    "input": {
+      "key": "Arcata-Peru",
+      "n": "Arcata",
+      "c": "Peru",
+      "r": "per_arequipa",
+      "ll": [
+        -15.042,
+        -72.2758
+      ],
+      "ey": 1525,
+      "ly": 2017,
+      "p": 3817,
+      "al": [
+        "alcata",
+        "Alcata"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Nueve de Julio-Peru": {
+    "input": {
+      "key": "Nueve de Julio-Peru",
+      "n": "Nueve de Julio",
+      "c": "Peru",
+      "r": "per_junin",
+      "ll": [
+        -11.89778,
+        -75.31806
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3815,
+      "al": [
+        "santo domingo del prado",
+        "Santo Domingo del Prado"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Balneario-Argentina": {
+    "input": {
+      "key": "Balneario-Argentina",
+      "n": "Balneario",
+      "c": "Argentina",
+      "r": "sc_nw_andes_sierras_cuyo",
+      "ll": [
+        -31.66303,
+        -63.90333
+      ],
+      "ey": 450,
+      "ly": 1500,
+      "p": 3815
+    },
+    "local": [
+      {
+        "name": "Palacios",
+        "lat": -31.663732,
+        "lon": -63.907977,
+        "country": "Argentina",
+        "period": "80 to 1620",
+        "source": "IDACOR (CONICET/UNC) - BADACOR & Collections via ARIADNEplus",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "42a4b20d3c8257b070b2cab86f723f80a0fea426a2102b3c55b58fa19c9f6624",
+        "place_names": [
+          "Argentina",
+          "Pilar",
+          "Córdoba",
+          "Río Segundo"
+        ],
+        "site_type": "archaeological sites; burials; burial sites; prehistoric sites",
+        "publisher": "IDACOR (CONICET/UNC)",
+        "url": "https://portal.ariadne-infrastructure.eu/resource/42a4b20d3c8257b070b2cab86f723f80a0fea426a2102b3c55b58fa19c9f6624",
+        "_file": "0.raw_sites/raw_argentina_idacor_ariadne.json"
+      },
+      {
+        "name": "Balneario",
+        "lat": -31.663027,
+        "lon": -63.903334,
+        "country": "Argentina",
+        "period": "450 to 1650",
+        "source": "IDACOR (CONICET/UNC) - BADACOR & Collections via ARIADNEplus",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "3d7e8addd8557608dc00865b11c2a934973fe7fd8c405368064ec33a7ecede4f",
+        "place_names": [
+          "Argentina",
+          "Pilar",
+          "Córdoba",
+          "Río Segundo"
+        ],
+        "site_type": "archaeological sites; prehistoric sites",
+        "publisher": "IDACOR (CONICET/UNC)",
+        "url": "https://portal.ariadne-infrastructure.eu/resource/3d7e8addd8557608dc00865b11c2a934973fe7fd8c405368064ec33a7ecede4f",
+        "_file": "0.raw_sites/raw_argentina_idacor_ariadne.json"
+      },
+      {
+        "name": "Museo Arqueológico Provincial Aníbal Montes",
+        "lat": -31.651059,
+        "lon": -63.909732,
+        "country": "Argentina",
+        "period": "Historical / Heritage Site",
+        "source": "IGN Argentina WFS (cultura_y_religion_AL021)",
+        "source_tier": "tier_1_national_registry",
+        "record_id": "cultura_y_religion_AL021.17182",
+        "site_type": "Museo Arqueológico Provincial",
+        "reference": "SINCA",
+        "url": "https://wms.ign.gob.ar/geoserver/ows",
+        "_file": "0.raw_sites/raw_argentina_ign_wfs.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Huaca Sialupe Huamantanga-Peru": {
+    "input": {
+      "key": "Huaca Sialupe Huamantanga-Peru",
+      "n": "Huaca Sialupe Huamantanga",
+      "c": "Peru",
+      "r": "inca_chinchaysuyu",
+      "ll": [
+        -6.6281,
+        -79.88463
+      ],
+      "ey": 0,
+      "ly": 1530,
+      "p": 3813
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Latapuquio-Peru": {
+    "input": {
+      "key": "Latapuquio-Peru",
+      "n": "Latapuquio",
+      "c": "Peru",
+      "r": "per_huancavelica",
+      "ll": [
+        -13.0003,
+        -74.7142
+      ],
+      "ey": 1525,
+      "ly": 2017,
+      "p": 3812,
+      "al": [
+        "lircay",
+        "Lircay"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Reporte HF SAR 3 y-Colombia": {
+    "input": {
+      "key": "Reporte HF SAR 3 y-Colombia",
+      "n": "Reporte HF SAR 3 y",
+      "c": "Colombia",
+      "r": "na_magdalena_cauca_muisca",
+      "ll": [
+        3.95958,
+        -74.81398
+      ],
+      "ey": 1300,
+      "ly": 1500,
+      "p": 3811,
+      "al": [
+        "reporte hf sar",
+        "reporte hf sar 5 y",
+        "reporte hf cerámica"
+      ]
+    },
+    "local": [
+      {
+        "name": "Petroglifo 1",
+        "lat": 3.964214,
+        "lon": -74.824253,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "SUÁREZ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Yuri Romero Picón y Angelica Vivas (2006). Programa de exploración sísmica Pechui 2D - Fase II. informe final de prospección y monitoreo",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Reporte HF líticos, desechos de talla A /Vda California/ Mcipio. Suarez, Tolima",
+        "lat": 3.968647,
+        "lon": -74.801477,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "SUÁREZ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Grupo de arqueología Caso 88 A?o 2024",
+        "citation": "Julián Eduardo Casta?eda Pérez (2024). Reporte HF líticos, desechos de talla/ Vda. California/ Mcipio. Suarez, Tolima",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Reporte HF líticos, desechos de talla B/ Vda. California/ Mcpio. Suarez, Tolima",
+        "lat": 3.967114,
+        "lon": -74.806599,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "SUÁREZ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Grupo de arqueología Caso 88 A?o 2024",
+        "citation": "Julián Eduardo Casta?eda Pérez (2024). Reporte HF líticos, desechos de talla/ Vda. California/ Mcipio. Suarez, Tolima",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Reporte HF SAR 1/ Vda. Agua Blanca / Mcipio. Suárez, Tolima",
+        "lat": 3.957622,
+        "lon": -74.814054,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "SUÁREZ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Grupo de arqueología Caso 88 A?o 2024",
+        "citation": "Julián Eduardo Casta?eda Pérez (2024). Reporte HF SAR / Vda. Agua Blanca / Mcipio. Suárez, Tolima",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Reporte HF SAR 1/ Vda. Agua Blanca/ Mcipio. Suarez, Tolima",
+        "lat": 3.965095,
+        "lon": -74.819778,
+        "country": "Colombia",
+        "department": "TOLIMA",
+        "municipality": "SUÁREZ",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Grupo de arqueología Caso 88 A?o 2024",
+        "citation": "Julián Eduardo Casta?eda Pérez (2024). Reporte HF SAR / Vda. Agua Blanca/ Mcipio. Suarez, Tolima",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Uspallata-Argentina": {
+    "input": {
+      "key": "Uspallata-Argentina",
+      "n": "Uspallata",
+      "c": "Argentina",
+      "r": "arg_mendoza",
+      "ll": [
+        -32.59139,
+        -69.34443
+      ],
+      "ey": 1850,
+      "ly": 2010,
+      "p": 3810
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Campamento-Chile_2": {
+    "input": {
+      "key": "Campamento-Chile_2",
+      "n": "Campamento",
+      "c": "Chile",
+      "r": "sc_patagonia_tierra_del_fuego",
+      "ll": [
+        -52.97964,
+        -70.35634
+      ],
+      "ey": 1300,
+      "ly": 1500,
+      "p": 3810
+    },
+    "local": [
+      {
+        "name": "Campamento 1",
+        "lat": -52.979637,
+        "lon": -70.35634,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S002997",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q51120"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "Las Escapulas",
+        "lat": -52.987736,
+        "lon": -70.374457,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S003144",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q51120"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "Paulo 2",
+        "lat": -52.984578,
+        "lon": -70.368427,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S003146",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q51120"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "Paulo 3",
+        "lat": -52.983402,
+        "lon": -70.366737,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S003147",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q51120"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "Paulo 4",
+        "lat": -52.980639,
+        "lon": -70.359113,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S003148",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q51120"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "La Unión (ecu_esmeraldas)-Ecuador": {
+    "input": {
+      "key": "La Unión (ecu_esmeraldas)-Ecuador",
+      "n": "La Unión",
+      "c": "Ecuador",
+      "r": "ecu_esmeraldas",
+      "ll": [
+        0.74126,
+        -79.83271
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3809
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Piedra de Las Huellas-Colombia": {
+    "input": {
+      "key": "Piedra de Las Huellas-Colombia",
+      "n": "Piedra de Las Huellas",
+      "c": "Colombia",
+      "r": "na_magdalena_cauca_muisca",
+      "ll": [
+        4.50047,
+        -74.61683
+      ],
+      "ey": 500,
+      "ly": 1500,
+      "p": 3809,
+      "al": [
+        "piedra la alberca",
+        "piedra de san francisco",
+        "Piedra La Alberca"
+      ]
+    },
+    "local": [
+      {
+        "name": "Piedra de Las Huellas",
+        "lat": 4.500472,
+        "lon": -74.616825,
+        "country": "Colombia",
+        "department": "CUNDINAMARCA",
+        "municipality": "APULO",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Icanh",
+        "citation": "Botiva Contreras, Álvaro (2000). Arte rupestre en Cundinamarca: patrimonio cultural de la nación. ICANH, Gobernación de Cundinamarca, Bogotá.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Piedra de San Francisco",
+        "lat": 4.500464,
+        "lon": -74.602089,
+        "country": "Colombia",
+        "department": "CUNDINAMARCA",
+        "municipality": "APULO",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Icanh",
+        "citation": "Botiva Contreras, Álvaro (2000). Arte rupestre en Cundinamarca: patrimonio cultural de la nación. ICANH, Gobernación de Cundinamarca, Bogotá.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Piedra La Alberca",
+        "lat": 4.484989,
+        "lon": -74.616889,
+        "country": "Colombia",
+        "department": "CUNDINAMARCA",
+        "municipality": "TOCAIMA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Icanh",
+        "citation": "Botiva Contreras, Álvaro (2000). Arte rupestre en Cundinamarca: patrimonio cultural de la nación. ICANH, Gobernación de Cundinamarca, Bogotá.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Arroyo Feo-Argentina": {
+    "input": {
+      "key": "Arroyo Feo-Argentina",
+      "n": "Arroyo Feo",
+      "c": "Argentina",
+      "r": "sc_patagonia_tierra_del_fuego",
+      "ll": [
+        -46.9333,
+        -70.5
+      ],
+      "ey": -8752,
+      "ly": -834,
+      "p": 3808
+    },
+    "local": [
+      {
+        "name": "Arroyo Feo",
+        "lat": -46.9333,
+        "lon": -70.5,
+        "country": "Argentina",
+        "period": "5900 ± 50 BP",
+        "c14_bp": 5900.0,
+        "c14_sd": 50.0,
+        "lab_id": "CSIC 397",
+        "material": "charcoal",
+        "reference": "Orquera 1987",
+        "sub_source": "RirisArroyoKalin2019",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      },
+      {
+        "name": "Arroyo Feo",
+        "lat": -46.9333,
+        "lon": -70.5,
+        "country": "Argentina",
+        "period": "3330 ± 50 BP",
+        "c14_bp": 3330.0,
+        "c14_sd": 50.0,
+        "lab_id": "CSIC 398",
+        "material": "charcoal",
+        "reference": "Berberian and Calandra 1984",
+        "sub_source": "RirisArroyoKalin2019",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      },
+      {
+        "name": "Arroyo Feo",
+        "lat": -46.9333,
+        "lon": -70.5,
+        "country": "Argentina",
+        "period": "8410 ± 70 BP",
+        "c14_bp": 8410.0,
+        "c14_sd": 70.0,
+        "lab_id": "CSIC 516",
+        "material": "charcoal",
+        "reference": "Orquera 1987",
+        "sub_source": "Pratesetal2020; RirisArroyoKalin2019",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      },
+      {
+        "name": "Arroyo Feo",
+        "lat": -46.9333,
+        "lon": -70.5,
+        "country": "Argentina",
+        "period": "6000 ± 60 BP",
+        "c14_bp": 6000.0,
+        "c14_sd": 60.0,
+        "lab_id": "CSIC 518",
+        "material": "charcoal",
+        "reference": "Orquera 1987",
+        "sub_source": "RirisArroyoKalin2019",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      },
+      {
+        "name": "Arroyo Feo",
+        "lat": -46.9333,
+        "lon": -70.5,
+        "country": "Argentina",
+        "period": "5550 ± 50 BP",
+        "c14_bp": 5550.0,
+        "c14_sd": 50.0,
+        "lab_id": "CSIC 519",
+        "material": "charcoal",
+        "reference": "Orquera 1987",
+        "sub_source": "RirisArroyoKalin2019",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Lluta-Chile": {
+    "input": {
+      "key": "Lluta-Chile",
+      "n": "Lluta",
+      "c": "Chile",
+      "r": "inca_collasuyu",
+      "ll": [
+        -18.40652,
+        -70.21294
+      ],
+      "ey": -3135,
+      "ly": 1532,
+      "p": 3807,
+      "al": [
+        "and",
+        "quiani",
+        "And"
+      ]
+    },
+    "local": [
+      {
+        "name": "Lluta 13",
+        "lat": -18.406525,
+        "lon": -70.212943,
+        "country": "Chile",
+        "period": "470 ± 40 BP",
+        "c14_bp": 470.0,
+        "c14_sd": 40.0,
+        "lab_id": "Beta-234464",
+        "material": "Charcoal",
+        "reference": "Santoro et al 2011",
+        "sub_source": "SCAR",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_chile_radiocarbon.json"
+      },
+      {
+        "name": "Lluta 13",
+        "lat": -18.406525,
+        "lon": -70.212943,
+        "country": "Chile",
+        "period": "3935 ± 15 BP",
+        "c14_bp": 3935.0,
+        "c14_sd": 15.0,
+        "lab_id": "UCIAMS-145242",
+        "material": "Schinus seed",
+        "reference": "Fondecyt 1120454",
+        "sub_source": "SCAR",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_chile_radiocarbon.json"
+      },
+      {
+        "name": "Lluta 13",
+        "lat": -18.406525,
+        "lon": -70.212943,
+        "country": "Chile",
+        "period": "3910 ± 20 BP",
+        "c14_bp": 3910.0,
+        "c14_sd": 20.0,
+        "lab_id": "UCIAMS-145243",
+        "material": "Scirpus root",
+        "reference": "Fondecyt 1120454",
+        "sub_source": "SCAR",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_chile_radiocarbon.json"
+      },
+      {
+        "name": "Lluta 13",
+        "lat": -18.406525,
+        "lon": -70.212943,
+        "country": "Chile",
+        "period": "1290 ± 20 BP",
+        "c14_bp": 1290.0,
+        "c14_sd": 20.0,
+        "lab_id": "UCIAMS-145244",
+        "material": "Maize",
+        "reference": "Fondecyt 1120454",
+        "sub_source": "SCAR",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_chile_radiocarbon.json"
+      },
+      {
+        "name": "Lluta 13",
+        "lat": -18.406525,
+        "lon": -70.212943,
+        "country": "Chile",
+        "period": "1290 ± 20 BP",
+        "c14_bp": 1290.0,
+        "c14_sd": 20.0,
+        "lab_id": "UCIAMS-145245",
+        "material": "Equisetum stem",
+        "reference": "Fondecyt 1120454",
+        "sub_source": "SCAR",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_chile_radiocarbon.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Ranrapata-Peru": {
+    "input": {
+      "key": "Ranrapata-Peru",
+      "n": "Ranrapata",
+      "c": "Peru",
+      "r": "inca_chinchaysuyu",
+      "ll": [
+        -12.61018,
+        -74.89632
+      ],
+      "ey": 1438,
+      "ly": 1530,
+      "p": 3806,
+      "al": [
+        "chaqa ccechcca",
+        "llacctapata",
+        "llacta pata"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Morelia-Colombia": {
+    "input": {
+      "key": "Morelia-Colombia",
+      "n": "Morelia",
+      "c": "Colombia",
+      "r": "col_caqueta",
+      "ll": [
+        1.48661,
+        -75.72415
+      ],
+      "ey": 1770,
+      "ly": 2025,
+      "p": 3805,
+      "al": [
+        "santa barbara bodoquera",
+        "pescado",
+        "Santa Barbara Bodoquera"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "San Antonio ( Yurumanguí )-Colombia": {
+    "input": {
+      "key": "San Antonio ( Yurumanguí )-Colombia",
+      "n": "San Antonio ( Yurumanguí )",
+      "c": "Colombia",
+      "r": "col_valle_del_cauca",
+      "ll": [
+        3.26104,
+        -77.25917
+      ],
+      "ey": 1525,
+      "ly": 2018,
+      "p": 3804,
+      "al": [
+        "san antonio",
+        "naya",
+        "san antonio de yurumangui"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Coroma-Bolivia": {
+    "input": {
+      "key": "Coroma-Bolivia",
+      "n": "Coroma",
+      "c": "Bolivia",
+      "r": "bol_potosi",
+      "ll": [
+        -19.52905,
+        -66.81295
+      ],
+      "ey": 1525,
+      "ly": 2024,
+      "p": 3802
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Cerro Grande de la Isla de los Marinos-Argentina": {
+    "input": {
+      "key": "Cerro Grande de la Isla de los Marinos-Argentina",
+      "n": "Cerro Grande de la Isla de los Marinos",
+      "c": "Argentina",
+      "r": "sc_parana_uruguay_charrua",
+      "ll": [
+        -32.943,
+        -60.56
+      ],
+      "ey": 1104,
+      "ly": 1500,
+      "p": 3801
+    },
+    "local": [
+      {
+        "name": "Cerro Grande de la Isla de los Marinos",
+        "lat": -32.943,
+        "lon": -60.56,
+        "country": "Argentina",
+        "period": "460 ± 50 BP (Goya-Malabrigo; Goya-Malabrigo)",
+        "c14_bp": 460.0,
+        "c14_sd": 50.0,
+        "lab_id": "LP-2464",
+        "material": "Human bone",
+        "species": "Homo sapiens",
+        "feature": "A mound with an area of 47 x 58 m and 2.2 m height. Cremated burials with ochre were found.",
+        "reference": "Politis and Bonomo 2012; rxpand",
+        "record_id": "167365",
+        "source": "XRONOS Chronological Database (xronos.ch)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://xronos.ch/api/v1/data?query_country=AR",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      },
+      {
+        "name": "Cerro Grande de la Isla de los Marinos",
+        "lat": -32.943,
+        "lon": -60.56,
+        "country": "Argentina",
+        "period": "590 ± 60 BP (Goya-Malabrigo; Goya-Malabrigo)",
+        "c14_bp": 590.0,
+        "c14_sd": 60.0,
+        "lab_id": "LP-2437",
+        "material": "Human bone",
+        "species": "Homo sapiens",
+        "feature": "A mound with an area of 47 x 58 m and 2.2 m height. Cremated burials with ochre were found.",
+        "reference": "Politis and Bonomo 2012; rxpand",
+        "record_id": "167128",
+        "source": "XRONOS Chronological Database (xronos.ch)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://xronos.ch/api/v1/data?query_country=AR",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Medano de La Primera-Argentina": {
+    "input": {
+      "key": "Medano de La Primera-Argentina",
+      "n": "Medano de La Primera",
+      "c": "Argentina",
+      "r": "sc_pampas_salado_colorado",
+      "ll": [
+        -34.6955,
+        -64.945
+      ],
+      "ey": -2250,
+      "ly": 1500,
+      "p": 3800
+    },
+    "local": [
+      {
+        "name": "Medano de La Primera",
+        "lat": -34.6955,
+        "lon": -64.945,
+        "country": "Argentina",
+        "period": "-2250 to 1950",
+        "source": "IDACOR (CONICET/UNC) - BADACOR & Collections via ARIADNEplus",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "de0237a579b9dc03d6e7de88057918e3fd5c3e160afcd435f0c816448c4b4e63",
+        "place_names": [
+          "Cuero",
+          "Argentina",
+          "General Roca",
+          "Córdoba",
+          "La Nacional"
+        ],
+        "site_type": "archaeological sites; prehistoric sites",
+        "publisher": "IDACOR (CONICET/UNC)",
+        "url": "https://portal.ariadne-infrastructure.eu/resource/de0237a579b9dc03d6e7de88057918e3fd5c3e160afcd435f0c816448c4b4e63",
+        "_file": "0.raw_sites/raw_argentina_idacor_ariadne.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Pelluhuín Alto-Chile": {
+    "input": {
+      "key": "Pelluhuín Alto-Chile",
+      "n": "Pelluhuín Alto",
+      "c": "Chile",
+      "r": "sc_chile_central_araucania",
+      "ll": [
+        -41.4897,
+        -72.8935
+      ],
+      "ey": 1064,
+      "ly": 1500,
+      "p": 3800,
+      "al": [
+        "bosque fósil de punta pelluco",
+        "coihuin",
+        "conchal pelluco"
+      ]
+    },
+    "local": [
+      {
+        "name": "Pelluhuín Bajo",
+        "lat": -41.493989,
+        "lon": -72.893762,
+        "country": "Chile",
+        "period": "470 BP (14C)",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S000217",
+        "c14_bp": 470.0,
+        "c14_bp_max": 470.0,
+        "dating_count": 1,
+        "lab_ids": [
+          "Beta 156416"
+        ],
+        "admin_entities": [
+          "wd:Q2666561"
+        ],
+        "reference": "Muñoz and Pino 2002",
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "Pelluhuín Alto",
+        "lat": -41.489681,
+        "lon": -72.893545,
+        "country": "Chile",
+        "period": "630 BP (14C)",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S000244",
+        "c14_bp": 630.0,
+        "c14_bp_max": 630.0,
+        "dating_count": 1,
+        "lab_ids": [
+          "Beta 140444"
+        ],
+        "admin_entities": [
+          "wd:Q2666561"
+        ],
+        "reference": "Muñoz and Pino 2002",
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "Corral Pelluhuín 1",
+        "lat": -41.49914,
+        "lon": -72.882665,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S004907",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q23660601"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "Pelluhuin Alto",
+        "lat": -41.477136,
+        "lon": -72.904575,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S004911",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q23660601"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "Conchal Pelluco 1",
+        "lat": -41.491328,
+        "lon": -72.898659,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S004912",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q23660601"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "San Fernando-Peru": {
+    "input": {
+      "key": "San Fernando-Peru",
+      "n": "San Fernando",
+      "c": "Peru",
+      "r": "per_san_martin",
+      "ll": [
+        -5.90194,
+        -77.26944
+      ],
+      "ey": 1900,
+      "ly": 2025,
+      "p": 3799
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Santa Clara-Venezuela": {
+    "input": {
+      "key": "Santa Clara-Venezuela",
+      "n": "Santa Clara",
+      "c": "Venezuela",
+      "r": "ven_anzoategui",
+      "ll": [
+        8.50444,
+        -64.60833
+      ],
+      "ey": 1755,
+      "ly": 2025,
+      "p": 3797,
+      "al": [
+        "santa clara aribi",
+        "Santa Clara Aribi"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "El Encanto-Colombia": {
+    "input": {
+      "key": "El Encanto-Colombia",
+      "n": "El Encanto",
+      "c": "Colombia",
+      "r": "col_amazonas",
+      "ll": [
+        -1.74806,
+        -73.20711
+      ],
+      "ey": 1900,
+      "ly": 2025,
+      "p": 3796
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Área Depósito-Colombia": {
+    "input": {
+      "key": "Área Depósito-Colombia",
+      "n": "Área Depósito",
+      "c": "Colombia",
+      "r": "na_magdalena_cauca_muisca",
+      "ll": [
+        7.92327,
+        -75.57729
+      ],
+      "ey": 1300,
+      "ly": 1500,
+      "p": 3794
+    },
+    "local": [
+      {
+        "name": "Área 1",
+        "lat": 7.917325,
+        "lon": -75.566358,
+        "country": "Colombia",
+        "department": "CÓRDOBA",
+        "municipality": "PUERTO LIBERTADOR",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Archivo ICANH",
+        "citation": "Tatiana Santa Ríos (2016). Ejecución del plan de manejo arqueológico para el proyecto de expansión minera La Esmeralda, Cerro Matoso S.A.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Área 1",
+        "lat": 7.917325,
+        "lon": -75.566358,
+        "country": "Colombia",
+        "department": "CÓRDOBA",
+        "municipality": "PUERTO LIBERTADOR",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Archivo ICANH",
+        "citation": "Tatiana Santa Ríos (2016). Ejecución del plan de manejo arqueológico para el proyecto de expansión minera La Esmeralda, Cerro Matoso S.A.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Área 1",
+        "lat": 7.917325,
+        "lon": -75.566358,
+        "country": "Colombia",
+        "department": "CÓRDOBA",
+        "municipality": "PUERTO LIBERTADOR",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Archivo ICANH",
+        "citation": "Tatiana Santa Ríos (2016). Ejecución del plan de manejo arqueológico para el proyecto de expansión minera La Esmeralda, Cerro Matoso S.A.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Área 1",
+        "lat": 7.917325,
+        "lon": -75.566358,
+        "country": "Colombia",
+        "department": "CÓRDOBA",
+        "municipality": "PUERTO LIBERTADOR",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Archivo ICANH",
+        "citation": "Tatiana Santa Ríos (2016). Ejecución del plan de manejo arqueológico para el proyecto de expansión minera La Esmeralda, Cerro Matoso S.A.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Área 2",
+        "lat": 7.917308,
+        "lon": -75.565378,
+        "country": "Colombia",
+        "department": "CÓRDOBA",
+        "municipality": "PUERTO LIBERTADOR",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Archivo ICANH",
+        "citation": "Tatiana Santa Ríos (2016). Ejecución del plan de manejo arqueológico para el proyecto de expansión minera La Esmeralda, Cerro Matoso S.A.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Hermílio Valdizan-Peru": {
+    "input": {
+      "key": "Hermílio Valdizan-Peru",
+      "n": "Hermílio Valdizan",
+      "c": "Peru",
+      "r": "per_huanuco",
+      "ll": [
+        -9.20556,
+        -75.83583
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3793,
+      "al": [
+        "hermilio valdizán",
+        "Hermilio Valdizán"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Inriville-Argentina": {
+    "input": {
+      "key": "Inriville-Argentina",
+      "n": "Inriville",
+      "c": "Argentina",
+      "r": "arg_cordoba",
+      "ll": [
+        -32.94556,
+        -62.23082
+      ],
+      "ey": 1850,
+      "ly": 2022,
+      "p": 3793
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Calcha-Bolivia": {
+    "input": {
+      "key": "Calcha-Bolivia",
+      "n": "Calcha",
+      "c": "Bolivia",
+      "r": "vp_intendencia_charcas_potosi",
+      "ll": [
+        -20.369,
+        -65.465
+      ],
+      "ey": 1525,
+      "ly": 1825,
+      "p": 3791,
+      "al": [
+        "calccha",
+        "Calccha"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Tambo Pajonal-Peru": {
+    "input": {
+      "key": "Tambo Pajonal-Peru",
+      "n": "Tambo Pajonal",
+      "c": "Peru",
+      "r": "inca_contisuyu",
+      "ll": [
+        -16.50906,
+        -71.52088
+      ],
+      "ey": -1000,
+      "ly": 1530,
+      "p": 3789,
+      "al": [
+        "cerro antena",
+        "cerro lloron",
+        "cerro san ignacio"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "San José De Payamino-Ecuador": {
+    "input": {
+      "key": "San José De Payamino-Ecuador",
+      "n": "San José De Payamino",
+      "c": "Ecuador",
+      "r": "ecu_napo",
+      "ll": [
+        -0.49014,
+        -77.29376
+      ],
+      "ey": 1525,
+      "ly": 2025,
+      "p": 3788,
+      "al": [
+        "san jose de mote",
+        "payamino",
+        "San Jose de Mote"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Minas De Corrales-Uruguay": {
+    "input": {
+      "key": "Minas De Corrales-Uruguay",
+      "n": "Minas De Corrales",
+      "c": "Uruguay",
+      "r": "ury_rivera",
+      "ll": [
+        -31.57284,
+        -55.47108
+      ],
+      "ey": 1850,
+      "ly": 2023,
+      "p": 3788
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Tálag-Ecuador": {
+    "input": {
+      "key": "Tálag-Ecuador",
+      "n": "Tálag",
+      "c": "Ecuador",
+      "r": "ecu_napo",
+      "ll": [
+        -1.05091,
+        -78.11127
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3785
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Patazcachi-Bolivia": {
+    "input": {
+      "key": "Patazcachi-Bolivia",
+      "n": "Patazcachi",
+      "c": "Bolivia",
+      "r": "vp_intendencia_la_paz",
+      "ll": [
+        -15.433,
+        -68.95
+      ],
+      "ey": 1525,
+      "ly": 1825,
+      "p": 3784
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Los Berros-Argentina": {
+    "input": {
+      "key": "Los Berros-Argentina",
+      "n": "Los Berros",
+      "c": "Argentina",
+      "r": "arg_san_juan",
+      "ll": [
+        -31.95273,
+        -68.65427
+      ],
+      "ey": 1850,
+      "ly": 2010,
+      "p": 3783
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Concentración-Chile": {
+    "input": {
+      "key": "Concentración-Chile",
+      "n": "Concentración",
+      "c": "Chile",
+      "r": "inca_collasuyu",
+      "ll": [
+        -19.45351,
+        -68.64102
+      ],
+      "ey": 1300,
+      "ly": 1530,
+      "p": 3783
+    },
+    "local": [
+      {
+        "name": "S120 (Estructuras)",
+        "lat": -19.45128,
+        "lon": -68.641675,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S000933",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q3839"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "S121 (Concentración)",
+        "lat": -19.453511,
+        "lon": -68.641023,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S000934",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q3839"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "S124 (Sitio Abierto)",
+        "lat": -19.45766,
+        "lon": -68.641633,
+        "country": "Chile",
+        "period": "Undated / ArKG Archaeological Site",
+        "source": "ArKG Chile v1.10-extended (Campbell, Santana, Moya, Bravo / IMFD)",
+        "source_tier": "tier_1_academic_repository",
+        "record_id": "arkgs:S000935",
+        "dating_count": 0,
+        "admin_entities": [
+          "wd:Q3839"
+        ],
+        "url": "https://arkg.cl/",
+        "_file": "0.raw_sites/raw_chile_arkg.json"
+      },
+      {
+        "name": "S120 (Estructuras)",
+        "lat": -19.45128,
+        "lon": -68.641675,
+        "country": "Chile",
+        "period": "Prehispánico e Histórico",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "Registro_Arqueológico_Acreditado/FeatureServer/0 (MA_PUNTO)",
+        "record_id": "000689_MA_01",
+        "site_type": "Doméstico / habitacional",
+        "category": "Sitio Arqueológico",
+        "validation_status": "Validado",
+        "region": "Tarapacá",
+        "province": "Tamarugal",
+        "commune": "Colchane",
+        "author": "Labarca, R. 2017",
+        "reference": "Informe de prospección arqueológica superficial Proyecto Construcción Red Eléctrica a la comuna de Colchane.",
+        "year": "2017",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/Registro_Arqueol%C3%B3gico_Acreditado/FeatureServer/0",
+        "_file": "0.raw_sites/raw_chile_cmn_acreditado.json"
+      },
+      {
+        "name": "S121 (Concentración)",
+        "lat": -19.453511,
+        "lon": -68.641023,
+        "country": "Chile",
+        "period": "Prehispánico",
+        "source": "CMN Chile - Registro Arqueológico Acreditado",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "Registro_Arqueológico_Acreditado/FeatureServer/0 (MA_PUNTO)",
+        "record_id": "000690_MA_01",
+        "site_type": "Sitio Arqueológico",
+        "category": "Sitio Arqueológico",
+        "validation_status": "Validado",
+        "region": "Tarapacá",
+        "province": "Tamarugal",
+        "commune": "Colchane",
+        "author": "Labarca, R. 2017",
+        "reference": "Informe de prospección arqueológica superficial Proyecto Construcción Red Eléctrica a la comuna de Colchane.",
+        "year": "2017",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/Registro_Arqueol%C3%B3gico_Acreditado/FeatureServer/0",
+        "_file": "0.raw_sites/raw_chile_cmn_acreditado.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Luricocha-Peru_2": {
+    "input": {
+      "key": "Luricocha-Peru_2",
+      "n": "Luricocha",
+      "c": "Peru",
+      "r": "inca_chinchaysuyu",
+      "ll": [
+        -12.88062,
+        -74.43013
+      ],
+      "ey": 0,
+      "ly": 1532,
+      "p": 3783,
+      "al": [
+        "ccoñecc",
+        "chiccllao",
+        "chinchima"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Quichcapata-Peru": {
+    "input": {
+      "key": "Quichcapata-Peru",
+      "n": "Quichcapata",
+      "c": "Peru",
+      "r": "inca_chinchaysuyu",
+      "ll": [
+        -12.77695,
+        -74.71687
+      ],
+      "ey": 0,
+      "ly": 1530,
+      "p": 3783,
+      "al": [
+        "wichqana"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Ocumal-Peru": {
+    "input": {
+      "key": "Ocumal-Peru",
+      "n": "Ocumal",
+      "c": "Peru",
+      "r": "per_amazonas",
+      "ll": [
+        -6.2825,
+        -78.21083
+      ],
+      "ey": 1525,
+      "ly": 2025,
+      "p": 3781,
+      "al": [
+        "collonce",
+        "Collonce"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Río Colorado (arg_tucuman)-Argentina": {
+    "input": {
+      "key": "Río Colorado (arg_tucuman)-Argentina",
+      "n": "Río Colorado",
+      "c": "Argentina",
+      "r": "arg_tucuman",
+      "ll": [
+        -27.14968,
+        -65.35605
+      ],
+      "ey": 1850,
+      "ly": 2022,
+      "p": 3781
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Las Palmas-Colombia_2": {
+    "input": {
+      "key": "Las Palmas-Colombia_2",
+      "n": "Las Palmas",
+      "c": "Colombia",
+      "r": "na_magdalena_cauca_muisca",
+      "ll": [
+        8.75,
+        -74.99
+      ],
+      "ey": 1049,
+      "ly": 1500,
+      "p": 3781,
+      "al": [
+        "cogollo",
+        "las palmas sb pal",
+        "Cogollo"
+      ]
+    },
+    "local": [
+      {
+        "name": "Cogollo 5",
+        "lat": 8.75,
+        "lon": -74.99,
+        "country": "Colombia",
+        "period": "2080 +/- 200 BP",
+        "c14_age_bp": 2080.0,
+        "c14_sd": 200.0,
+        "lab_code": "Beta-4659",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Plazas, C., Falchetti, A., Saenz, J., & Archila, S. (1993). La sociedad hidraulica Zenu. Estudio arqueologico de 2000 anos de historia en las llanuras del Caribe colombiano.  Banco de la Republica.",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      },
+      {
+        "name": "Las Palmas 1",
+        "lat": 8.75,
+        "lon": -74.99,
+        "country": "Colombia",
+        "period": "310 +/- 50 BP",
+        "c14_age_bp": 310.0,
+        "c14_sd": 50.0,
+        "lab_code": "Beta-2896",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Plazas, C., Falchetti, A., Saenz, J., & Archila, S. (1993). La sociedad hidraulica Zenu. Estudio arqueologico de 2000 anos de historia en las llanuras del Caribe colombiano.  Banco de la Republica.",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      },
+      {
+        "name": "Las Palmas 1",
+        "lat": 8.75,
+        "lon": -74.99,
+        "country": "Colombia",
+        "period": "645 +/- 170 BP",
+        "c14_age_bp": 645.0,
+        "c14_sd": 170.0,
+        "lab_code": "IAN-124",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Plazas, C., Falchetti, A., Saenz, J., & Archila, S. (1993). La sociedad hidraulica Zenu. Estudio arqueologico de 2000 anos de historia en las llanuras del Caribe colombiano.  Banco de la Republica.",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      },
+      {
+        "name": "Las Palmas SB Pal 1",
+        "lat": 8.75,
+        "lon": -74.99,
+        "country": "Colombia",
+        "period": "535 +/- 50 BP",
+        "c14_age_bp": 535.0,
+        "c14_sd": 50.0,
+        "lab_code": "GrN-9243",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Plazas, C., Falchetti, A. M., & Saenz Obregon, J. (1980). Investigaciones arqueologicas en el rio San Jorge. Boletin Museo del Oro, (6), 1-18. https://publicaciones.banrepcultural.org/index.php/bmo/article/view/7339",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      },
+      {
+        "name": "Cogollo 5",
+        "lat": 8.750111,
+        "lon": -74.986083,
+        "country": "Colombia",
+        "department": "SUCRE",
+        "municipality": "SAN BENITO ABAD",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Plazas, Clemencia, Ana M. Falchetti, Juanita Sáenz y Sonia Archila (1993). La sociedad hidráulica Zenú.  Estudio arqueológico de 2000 a?os de historia en las llanuras del Caribe colombiano.  Banco de la República, Bogotá.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Anganoy-Colombia": {
+    "input": {
+      "key": "Anganoy-Colombia",
+      "n": "Anganoy",
+      "c": "Colombia",
+      "r": "col_narino",
+      "ll": [
+        1.21321,
+        -77.30178
+      ],
+      "ey": 1525,
+      "ly": 2018,
+      "p": 3780,
+      "al": [
+        "san juan de anganoy",
+        "San Juan de Anganoy"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Ampurca-Peru": {
+    "input": {
+      "key": "Ampurca-Peru",
+      "n": "Ampurca",
+      "c": "Peru",
+      "r": "inca_contisuyu",
+      "ll": [
+        -13.79785,
+        -75.23597
+      ],
+      "ey": -1000,
+      "ly": 1530,
+      "p": 3780,
+      "al": [
+        "aqo qasa",
+        "arqueológico andenes agricolas prehispanicos de balde rum",
+        "arqueológico terrazas agricolas prehispanicas de sanqayaico"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Agualinda-Colombia": {
+    "input": {
+      "key": "Agualinda-Colombia",
+      "n": "Agualinda",
+      "c": "Colombia",
+      "r": "na_pacific_equatorial_valdivia",
+      "ll": [
+        3.83,
+        -76.5
+      ],
+      "ey": -350,
+      "ly": 1500,
+      "p": 3778,
+      "al": [
+        "el dorado",
+        "la suiza",
+        "no reporta"
+      ]
+    },
+    "local": [
+      {
+        "name": "Agualinda",
+        "lat": 3.83,
+        "lon": -76.5,
+        "country": "Colombia",
+        "period": "2030 +/- 90 BP",
+        "c14_age_bp": 2030.0,
+        "c14_sd": 90.0,
+        "lab_code": "Beta-5100",
+        "context": null,
+        "source": "COL14: Compiled Radiocarbon Dataset for Colombia (Fajardo et al., MAPHSA)",
+        "source_tier": "academic_monograph",
+        "citation": "Bray, W., Herrera, L., & Cardale de Schrimpff, M. (1981). Report on the 1981 Field Season in Calima. Pro Calima 3, 2-30.",
+        "url": "https://github.com/sdfajardob/COL14",
+        "_file": "0.raw_sites/raw_colombia_col14.json"
+      },
+      {
+        "name": "Agualinda",
+        "lat": 3.831736,
+        "lon": -76.497722,
+        "country": "Colombia",
+        "department": "VALLE DEL CAUCA",
+        "municipality": "RESTREPO",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Bray, Warwick, Leonor Herrera y Marianne Cardale de Schrimpff (1981). Report on the 1981 Field Season in Calima.  Pro Calima 3: 2-30.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      },
+      {
+        "name": "Agualinda",
+        "lat": 3.831736,
+        "lon": -76.497722,
+        "country": "Colombia",
+        "department": "VALLE DEL CAUCA",
+        "municipality": "RESTREPO",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "ICANH",
+        "citation": "Bray, Warwick, Leonor Herrera y Marianne Cardale de Schrimpff (1981). Report on the 1981 Field Season in Calima.  Pro Calima 3: 2-30.",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Ronquín-Venezuela": {
+    "input": {
+      "key": "Ronquín-Venezuela",
+      "n": "Ronquín",
+      "c": "Venezuela",
+      "r": "na_orinoco_llanos_guayana",
+      "ll": [
+        7.817,
+        -65.819
+      ],
+      "ey": -269,
+      "ly": 1500,
+      "p": 3778
+    },
+    "local": [
+      {
+        "name": "Ronquín",
+        "lat": 7.817,
+        "lon": -65.819,
+        "country": "Venezuela",
+        "period": "1900 +/- 220 BP",
+        "c14_age_bp": 1900,
+        "c14_sd": 220,
+        "lab_code": "QC-444-E",
+        "material": "NA",
+        "source": "XRONOS Chronometric Database (country=VE)",
+        "source_tier": "academic_monograph",
+        "url": "https://xronos.ch/api/v1/data?query_country=VE",
+        "_file": "0.raw_sites/raw_venezuela_radiocarbon_syntheses.json"
+      },
+      {
+        "name": "Ronquín",
+        "lat": 7.817,
+        "lon": -65.819,
+        "country": "Venezuela",
+        "period": "1720 +/- 80 BP",
+        "c14_age_bp": 1720,
+        "c14_sd": 80,
+        "lab_code": "I-9233",
+        "material": "NA",
+        "source": "XRONOS Chronometric Database (country=VE)",
+        "source_tier": "academic_monograph",
+        "url": "https://xronos.ch/api/v1/data?query_country=VE",
+        "_file": "0.raw_sites/raw_venezuela_radiocarbon_syntheses.json"
+      },
+      {
+        "name": "Ronquín",
+        "lat": 7.817,
+        "lon": -65.819,
+        "country": "Venezuela",
+        "period": "1615 +/- 50 BP",
+        "c14_age_bp": 1615,
+        "c14_sd": 50,
+        "lab_code": "SI-1371",
+        "material": "NA",
+        "source": "XRONOS Chronometric Database (country=VE)",
+        "source_tier": "academic_monograph",
+        "url": "https://xronos.ch/api/v1/data?query_country=VE",
+        "_file": "0.raw_sites/raw_venezuela_radiocarbon_syntheses.json"
+      },
+      {
+        "name": "Ronquín",
+        "lat": 7.817,
+        "lon": -65.819,
+        "country": "Venezuela",
+        "period": "1515 +/- 80 BP",
+        "c14_age_bp": 1515,
+        "c14_sd": 80,
+        "lab_code": "I-8544",
+        "material": "NA",
+        "source": "XRONOS Chronometric Database (country=VE)",
+        "source_tier": "academic_monograph",
+        "url": "https://xronos.ch/api/v1/data?query_country=VE",
+        "_file": "0.raw_sites/raw_venezuela_radiocarbon_syntheses.json"
+      },
+      {
+        "name": "Ronquín",
+        "lat": 7.817,
+        "lon": -65.819,
+        "country": "Venezuela",
+        "period": "1450 +/- 75 BP",
+        "c14_age_bp": 1450,
+        "c14_sd": 75,
+        "lab_code": "QC-311-B",
+        "material": "NA",
+        "source": "XRONOS Chronometric Database (country=VE)",
+        "source_tier": "academic_monograph",
+        "url": "https://xronos.ch/api/v1/data?query_country=VE",
+        "_file": "0.raw_sites/raw_venezuela_radiocarbon_syntheses.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "San Juan (ven_zulia)-Venezuela": {
+    "input": {
+      "key": "San Juan (ven_zulia)-Venezuela",
+      "n": "San Juan",
+      "c": "Venezuela",
+      "r": "ven_zulia",
+      "ll": [
+        9.76514,
+        -70.81289
+      ],
+      "ey": 1850,
+      "ly": 2011,
+      "p": 3777
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Bolivar-Peru_2": {
+    "input": {
+      "key": "Bolivar-Peru_2",
+      "n": "Bolivar",
+      "c": "Peru",
+      "r": "inca_contisuyu",
+      "ll": [
+        -14.95886,
+        -74.99174
+      ],
+      "ey": 0,
+      "ly": 1532,
+      "p": 3777,
+      "al": [
+        "pampa porona",
+        "campo barrido y paraviento pampa poroma",
+        "cerro caracoles"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Guaseco-Colombia": {
+    "input": {
+      "key": "Guaseco-Colombia",
+      "n": "Guaseco",
+      "c": "Colombia",
+      "r": "vng_llanos_caguan",
+      "ll": [
+        6.103,
+        -72.027
+      ],
+      "ey": 1525,
+      "ly": 1748,
+      "p": 3776
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Fuerte Esperanza-Argentina": {
+    "input": {
+      "key": "Fuerte Esperanza-Argentina",
+      "n": "Fuerte Esperanza",
+      "c": "Argentina",
+      "r": "arg_chaco",
+      "ll": [
+        -25.1619,
+        -61.84197
+      ],
+      "ey": 1900,
+      "ly": 2022,
+      "p": 3775
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Majua-Ecuador": {
+    "input": {
+      "key": "Majua-Ecuador",
+      "n": "Majua",
+      "c": "Ecuador",
+      "r": "ecu_esmeraldas",
+      "ll": [
+        0.66315,
+        -79.50477
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3773
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "El Porvenir-Colombia_2": {
+    "input": {
+      "key": "El Porvenir-Colombia_2",
+      "n": "El Porvenir",
+      "c": "Colombia",
+      "r": "na_caribbean_maracaibo_tairona",
+      "ll": [
+        8.56964,
+        -75.93683
+      ],
+      "ey": 0,
+      "ly": 1500,
+      "p": 3773,
+      "al": [
+        "la floresta",
+        "La Floresta"
+      ]
+    },
+    "local": [
+      {
+        "name": "El Porvenir",
+        "lat": 8.569639,
+        "lon": -75.936833,
+        "country": "Colombia",
+        "department": "CÓRDOBA",
+        "municipality": "MONTERÍA",
+        "period": "Prehispanic / Archaeological (unspecified)",
+        "source": "ICANH - Sitios Arqueológicos de Colombia (datos.gov.co: 3kq2-tnay)",
+        "source_tier": "regional_register",
+        "source_ref": "Archivo ICANH",
+        "citation": "Luz Marina Mora González (1986). Reconocimiento arqueológico en el medio y bajo Sinú y la región costera entre Arboletes y San Bernardo del Viento",
+        "url": "https://www.datos.gov.co/Cultura/Sitios-Arqueol-gicos-de-Colombia/3kq2-tnay",
+        "_file": "0.raw_sites/raw_colombia_icanh_sitios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Cueva Marsicano-Argentina": {
+    "input": {
+      "key": "Cueva Marsicano-Argentina",
+      "n": "Cueva Marsicano",
+      "c": "Argentina",
+      "r": "sc_patagonia_tierra_del_fuego",
+      "ll": [
+        -47.86711,
+        -66.39506
+      ],
+      "ey": -5811,
+      "ly": -4717,
+      "p": 3773
+    },
+    "local": [
+      {
+        "name": "Cueva Marsicano",
+        "lat": -47.867114,
+        "lon": -66.395061,
+        "country": "Argentina",
+        "period": "6684 ± 48 BP",
+        "c14_bp": 6684.0,
+        "c14_sd": 48.0,
+        "lab_id": "AA80414",
+        "material": "charcoal",
+        "reference": "Zubimendi et al 2015",
+        "sub_source": "Goldberg_2016",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      },
+      {
+        "name": "Cueva Marsicano",
+        "lat": -47.867114,
+        "lon": -66.395061,
+        "country": "Argentina",
+        "period": "6853 ± 48 BP",
+        "c14_bp": 6853.0,
+        "c14_sd": 48.0,
+        "lab_id": "AA80415",
+        "material": "charcoal",
+        "reference": "Zubimendi et al 2015",
+        "sub_source": "Goldberg_2016",
+        "source": "p3k14c (Bird et al. 2022, Scientific Data)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://doi.org/10.1038/s41597-022-01118-7",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      },
+      {
+        "name": "Cueva Marsicano",
+        "lat": -47.867114,
+        "lon": -66.395061,
+        "country": "Argentina",
+        "period": "6684 ± 48 BP",
+        "c14_bp": 6684.0,
+        "c14_sd": 48.0,
+        "lab_id": "AA-80414",
+        "material": "charcoal",
+        "reference": "Zubimendi et al 2015; p3k14c",
+        "record_id": "176799",
+        "source": "XRONOS Chronological Database (xronos.ch)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://xronos.ch/api/v1/data?query_country=AR",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      },
+      {
+        "name": "Cueva Marsicano",
+        "lat": -47.867114,
+        "lon": -66.395061,
+        "country": "Argentina",
+        "period": "6853 ± 48 BP",
+        "c14_bp": 6853.0,
+        "c14_sd": 48.0,
+        "lab_id": "AA-80415",
+        "material": "charcoal",
+        "reference": "Zubimendi et al 2015; p3k14c",
+        "record_id": "176800",
+        "source": "XRONOS Chronological Database (xronos.ch)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://xronos.ch/api/v1/data?query_country=AR",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      },
+      {
+        "name": "Cueva Marsicano",
+        "lat": -47.867114,
+        "lon": -66.395061,
+        "country": "Argentina",
+        "period": "6684 ± 48 BP",
+        "c14_bp": 6684.0,
+        "c14_sd": 48.0,
+        "lab_id": "AA80414",
+        "material": "charcoal",
+        "dating_method": "14C",
+        "reference": "Zubimendi et al 2015",
+        "record_id": "4110",
+        "source": "SAAD South American Arid Diagonal (Timpson, Barberena, Méndez et al. 2021, Phil Trans B)",
+        "source_tier": "tier_2_academic_database",
+        "url": "https://github.com/UCL/ADMUR/blob/master/data/SAAD.RData",
+        "_file": "0.raw_sites/raw_argentina_radiocarbon.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Tinyash-Peru": {
+    "input": {
+      "key": "Tinyash-Peru",
+      "n": "Tinyash",
+      "c": "Peru",
+      "r": "inca_chinchaysuyu",
+      "ll": [
+        -8.94604,
+        -77.00055
+      ],
+      "ey": -1000,
+      "ly": 1530,
+      "p": 3772,
+      "al": [
+        "amapampa",
+        "atoj matan",
+        "boca de tinyash"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Ventanillas de Combayo-Peru_2": {
+    "input": {
+      "key": "Ventanillas de Combayo-Peru_2",
+      "n": "Ventanillas de Combayo",
+      "c": "Peru",
+      "r": "inca_chinchaysuyu",
+      "ll": [
+        -7.04877,
+        -78.40054
+      ],
+      "ey": 500,
+      "ly": 1530,
+      "p": 3770,
+      "al": [
+        "apalin alto",
+        "cargarloma",
+        "cerro la campana"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Rosal del Monte-Colombia": {
+    "input": {
+      "key": "Rosal del Monte-Colombia",
+      "n": "Rosal del Monte",
+      "c": "Colombia",
+      "r": "col_narino",
+      "ll": [
+        1.29021,
+        -77.17489
+      ],
+      "ey": 1525,
+      "ly": 2018,
+      "p": 3769,
+      "al": [
+        "el monte",
+        "El Monte"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Tienditas-Venezuela": {
+    "input": {
+      "key": "Tienditas-Venezuela",
+      "n": "Tienditas",
+      "c": "Venezuela",
+      "r": "ven_tachira",
+      "ll": [
+        7.88611,
+        -72.43944
+      ],
+      "ey": 1850,
+      "ly": 2011,
+      "p": 3769,
+      "al": [
+        "tienditas ii",
+        "Tienditas II"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "San Pablo De Tenta-Ecuador": {
+    "input": {
+      "key": "San Pablo De Tenta-Ecuador",
+      "n": "San Pablo De Tenta",
+      "c": "Ecuador",
+      "r": "ecu_loja",
+      "ll": [
+        -3.6082,
+        -79.28374
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3768
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "Sotaquí-Chile": {
+    "input": {
+      "key": "Sotaquí-Chile",
+      "n": "Sotaquí",
+      "c": "Chile",
+      "r": "chl_region_de_coquimbo",
+      "ll": [
+        -30.63439,
+        -71.11251
+      ],
+      "ey": 1525,
+      "ly": 2017,
+      "p": 3768,
+      "al": [
+        "sotaqui"
+      ]
+    },
+    "local": [
+      {
+        "name": "Iglesia del Niño Dios de Sotaquí",
+        "lat": -30.631505,
+        "lon": -71.120782,
+        "country": "Chile",
+        "period": "Monumento Histórico",
+        "source": "CMN Chile - Puntos_Oficiales_Monumentos_Nacionales_(Vista)",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "Puntos_Oficiales_Monumentos_Nacionales_(Vista)/FeatureServer/0 (Puntos_Oficiales_MN)",
+        "record_id": "01012_MH_04301",
+        "site_type": "Monumento Histórico",
+        "category": "Monumento Histórico",
+        "region": "Coquimbo",
+        "province": "Limarí",
+        "commune": "Ovalle",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/Puntos_Oficiales_Monumentos_Nacionales_%28Vista%29/FeatureServer/0",
+        "_file": "0.raw_sites/raw_chile_cmn_registros_complementarios.json"
+      },
+      {
+        "name": "Iglesia del Niño Dios de Sotaquí",
+        "lat": -30.631475,
+        "lon": -71.12087,
+        "country": "Chile",
+        "period": "Monumento Histórico",
+        "source": "CMN Chile - Polígonos_Oficiales_Monumentos_Nacionales_1",
+        "source_tier": "tier_1_national_registry",
+        "source_layer": "Polígonos_Oficiales_Monumentos_Nacionales_1/FeatureServer/0 (Poligonos_Oficiales_MN)",
+        "record_id": "01012_MH_04301",
+        "site_type": "Monumento Histórico",
+        "category": "Monumento Histórico",
+        "region": "Coquimbo",
+        "province": "Limarí",
+        "commune": "Ovalle",
+        "url": "https://services2.arcgis.com/mQ0T5ijzGExuCc9o/ArcGIS/rest/services/Pol%C3%ADgonos_Oficiales_Monumentos_Nacionales_1/FeatureServer/0",
+        "_file": "0.raw_sites/raw_chile_cmn_registros_complementarios.json"
+      }
+    ],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too Many Requests",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  },
+  "La Victoria (ecu_cotopaxi)-Ecuador": {
+    "input": {
+      "key": "La Victoria (ecu_cotopaxi)-Ecuador",
+      "n": "La Victoria",
+      "c": "Ecuador",
+      "r": "ecu_cotopaxi",
+      "ll": [
+        -0.9121,
+        -78.70009
+      ],
+      "ey": 1850,
+      "ly": 2025,
+      "p": 3766
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too Many Requests"
+  },
+  "Ciudad del Pescador-Peru": {
+    "input": {
+      "key": "Ciudad del Pescador-Peru",
+      "n": "Ciudad del Pescador",
+      "c": "Peru",
+      "r": "per_piura",
+      "ll": [
+        -5.7657,
+        -80.8545
+      ],
+      "ey": 1850,
+      "ly": 2017,
+      "p": 3766,
+      "al": [
+        "parachique - la bocana",
+        "Parachique - la Bocana"
+      ]
+    },
+    "local": [],
+    "es_geo": [],
+    "es_search": [],
+    "en_geo": [],
+    "extracts": {},
+    "es_geo_err": "HTTP Error 429: Too many requests (f061ab2)",
+    "es_search_err": "HTTP Error 429: Too many requests (f061ab2)"
+  }
+}

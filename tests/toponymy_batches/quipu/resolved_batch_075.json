@@ -1,0 +1,1391 @@
+{
+  "approved_by_auditor": true,
+  "batch_index": 75,
+  "count": 30,
+  "project": "QUIPU",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        9.27428,
+        -74.64598
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cicuco-Colombia",
+      "known_aliases": [
+        "Cicuco",
+        "cicuco"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16002,
+      "name": "Cicuco",
+      "reason": "missing_entry",
+      "region": "col_bolivar",
+      "sample_years": [
+        1850,
+        1970,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cicuco",
+      "historical_names": [
+        {
+          "date": "1994.1.1",
+          "date_source_note": "Creation of the municipality of Cicuco in Bolívar (1994)",
+          "name": "Cicuco"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.90167,
+        -76.66389
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa Eulalia-Peru",
+      "known_aliases": [
+        "Santa Eulalia",
+        "santa eulalia",
+        "santa olaya",
+        "Santa Olaya"
+      ],
+      "latest_year": 2025,
+      "max_pop": 16000,
+      "name": "Santa Eulalia",
+      "reason": "missing_entry",
+      "region": "per_lima",
+      "sample_years": [
+        1525,
+        1750,
+        1920,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Santa Eulalia",
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Pre-colonial Quechua settlement name (Acobamba) in Chaclla territory",
+          "name": "Aqupampa"
+        },
+        {
+          "date": "1586.1.1",
+          "date_source_note": "Spanish colonial reducción recorded in Huarochirí (1586)",
+          "name": "Santa Eulalia de Acobamba"
+        },
+        {
+          "date": "1857.1.2",
+          "date_source_note": "Creation of Santa Eulalia District in Huarochirí (2 January 1857)",
+          "name": "Santa Eulalia"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.13625,
+        -64.29652
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Salsipuedes-Argentina",
+      "known_aliases": [
+        "Salsipuedes",
+        "salsipuedes"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15997,
+      "name": "Salsipuedes",
+      "reason": "missing_entry",
+      "region": "arg_cordoba",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Salsipuedes",
+      "historical_names": [
+        {
+          "date": "2022.1.1",
+          "date_source_note": "2022 Argentine national census (INDEC)",
+          "name": "Salsipuedes"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.82135,
+        -76.52333
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Restrepo (col_valle_del_cauca)-Colombia",
+      "known_aliases": [
+        "Restrepo",
+        "restrepo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15994,
+      "name": "Restrepo",
+      "reason": "missing_entry",
+      "region": "col_valle_del_cauca",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Restrepo",
+      "historical_names": [
+        {
+          "date": "1913.12.1",
+          "date_source_note": "Foundation of Restrepo in Valle del Cauca (1 December 1913)",
+          "name": "Restrepo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.20587,
+        -65.34772
+      ],
+      "country": "Argentina",
+      "earliest_year": 1536,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Humahuaca-Argentina",
+      "known_aliases": [
+        "Humahuaca",
+        "humahuaca",
+        "omahuaca",
+        "umaguaca",
+        "Omahuaca",
+        "Umaguaca"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15992,
+      "name": "Humahuaca",
+      "reason": "missing_entry",
+      "region": "arg_jujuy",
+      "sample_years": [
+        1536,
+        1800,
+        1950,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Humahuaca",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial indigenous Omaguaca settlement in the Quebrada de Humahuaca",
+          "name": "Omaguaca"
+        },
+        {
+          "date": "1594.1.1",
+          "date_source_note": "Spanish colonial reducción and parish founded c. 1594",
+          "name": "San Antonio de Humahuaca"
+        },
+        {
+          "date": "1816.7.9",
+          "date_source_note": "Argentine independence and modern municipal name",
+          "name": "Humahuaca"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.45701,
+        -76.4681
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Juanchito-Colombia",
+      "known_aliases": [
+        "Juanchito",
+        "juanchito"
+      ],
+      "latest_year": 2018,
+      "max_pop": 15990,
+      "name": "Juanchito",
+      "reason": "missing_entry",
+      "region": "col_valle_del_cauca",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2018
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Juanchito",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Cauca River crossing; steamship river port c. 1887",
+          "name": "Juanchito"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -38.71662,
+        -61.28849
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Coronel Dorrego-Argentina",
+      "known_aliases": [
+        "Coronel Dorrego",
+        "coronel dorrego"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15968,
+      "name": "Coronel Dorrego",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Coronel Dorrego",
+      "historical_names": [
+        {
+          "date": "1890.4.9",
+          "date_source_note": "Foundation of the town of Coronel Dorrego (9 April 1890)",
+          "name": "Coronel Dorrego"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -34.17114,
+        -59.79361
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Capitán Sarmiento-Argentina",
+      "known_aliases": [
+        "Capitán Sarmiento",
+        "capitán sarmiento"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15965,
+      "name": "Capitán Sarmiento",
+      "reason": "missing_entry",
+      "region": "arg_buenos_aires",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Capitán Sarmiento",
+      "historical_names": [
+        {
+          "date": "1884.6.29",
+          "date_source_note": "Foundation of Capitán Sarmiento (29 June 1884)",
+          "name": "Capitán Sarmiento"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -1.44935,
+        -78.10701
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Mera-Ecuador",
+      "known_aliases": [
+        "Mera",
+        "mera"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15960,
+      "name": "Mera",
+      "reason": "missing_entry",
+      "region": "ecu_tungurahua",
+      "sample_years": [
+        1850,
+        1950,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Mera",
+      "historical_names": [
+        {
+          "date": "1967.4.11",
+          "date_source_note": "Cantonisation of Mera in Pastaza Province (11 April 1967)",
+          "name": "Mera"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.33188,
+        -79.10079
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Nabón-Ecuador",
+      "known_aliases": [
+        "Nabón",
+        "nabón",
+        "nabon",
+        "Nabon"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15929,
+      "name": "Nabón",
+      "reason": "missing_entry",
+      "region": "ecu_azuay",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Nabón",
+      "historical_names": [
+        {
+          "date": "1450.1.1",
+          "date_source_note": "Pre-colonial Cañari indigenous settlement in Azuay",
+          "name": "Nabón"
+        },
+        {
+          "date": "1575.1.1",
+          "date_source_note": "Spanish colonial doctrina and parish in Cuenca",
+          "name": "San Juan Bautista de Nabón"
+        },
+        {
+          "date": "1824.6.25",
+          "date_source_note": "Republican civil parish under Gran Colombia's Territorial Division Law (25 June 1824)",
+          "name": "Nabón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.56,
+        -78.938
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1962.1.1",
+          "name": "Cañar"
+        }
+      ],
+      "existing_meta_index": 118,
+      "existing_meta_name": "Cañar",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Cañar-Ecuador_2",
+      "known_aliases": [
+        "Cañar",
+        "cañar"
+      ],
+      "latest_year": 1830,
+      "max_pop": 15911,
+      "name": "Cañar",
+      "reason": "under_covered_history",
+      "region": "vng_audiencia_quito_sierra",
+      "sample_years": [
+        1525,
+        1600,
+        1780,
+        1830
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Cañar",
+      "historical_names": [
+        {
+          "date": "1200.1.1",
+          "date_source_note": "Pre-colonial Kañari and later Inca administrative center of Hatun Kañar.",
+          "name": "Hatun Kañar"
+        },
+        {
+          "date": "1572.1.1",
+          "date_source_note": "Spanish colonial reducción and parish of San Antonio de Hatun Cañar, attested in 18th-century Audiencia de Quito records.",
+          "name": "San Antonio de Hatun Cañar"
+        },
+        {
+          "date": "1824.6.25",
+          "date_source_note": "Elevated to canton under the name Cañar by the Gran Colombia Territorial Division Law of 25 June 1824.",
+          "name": "Cañar"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        2.04063,
+        -78.65836
+      ],
+      "country": "Colombia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Francisco Pizarro-Colombia",
+      "known_aliases": [
+        "Francisco Pizarro",
+        "francisco pizarro",
+        "san salvador salahonda",
+        "San Salvador Salahonda"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15906,
+      "name": "Francisco Pizarro",
+      "reason": "missing_entry",
+      "region": "col_narino",
+      "sample_years": [
+        1525,
+        1800,
+        1990,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Francisco Pizarro",
+      "historical_names": [
+        {
+          "date": "1985.1.1",
+          "date_source_note": "1985 Colombian national census (DANE)",
+          "name": "Francisco Pizarro"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.22111,
+        -70.60722
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "La Quebrada-Venezuela",
+      "known_aliases": [
+        "La Quebrada",
+        "la quebrada"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15906,
+      "name": "La Quebrada",
+      "reason": "missing_entry",
+      "region": "ven_trujillo",
+      "sample_years": [
+        1850,
+        1970,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "La Quebrada",
+      "historical_names": [
+        {
+          "date": "1676.1.1",
+          "date_source_note": "Colonial crossroads settlement in Trujillo Andes",
+          "name": "San Roque de La Quebrada"
+        },
+        {
+          "date": "1830.1.1",
+          "date_source_note": "Republican town and Urdaneta municipal seat",
+          "name": "La Quebrada"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -6.39306,
+        -75.11694
+      ],
+      "country": "Peru",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Sarayacu-Peru",
+      "known_aliases": [
+        "Sarayacu",
+        "sarayacu",
+        "dos de mayo",
+        "Dos de Mayo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15898,
+      "name": "Sarayacu",
+      "reason": "missing_entry",
+      "region": "per_loreto",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Sarayacu",
+      "historical_names": [
+        {
+          "date": "1791.1.1",
+          "date_source_note": "Franciscan mission founded by Fray Narciso Girbal on the Sarayacu River (1791)",
+          "name": "Sarayacu"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        4.99378,
+        -75.81192
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Belalcázar-Colombia",
+      "known_aliases": [
+        "Belalcázar",
+        "belalcázar"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15896,
+      "name": "Belalcázar",
+      "reason": "missing_entry",
+      "region": "col_risaralda",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Belalcázar",
+      "historical_names": [
+        {
+          "date": "1888.11.25",
+          "date_source_note": "Foundation during the Antioqueño colonisation (25 November 1888)",
+          "name": "Belalcázar"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        8.54333,
+        -68.05278
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Guadarrama-Venezuela",
+      "known_aliases": [
+        "Guadarrama",
+        "guadarrama"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15883,
+      "name": "Guadarrama",
+      "reason": "missing_entry",
+      "region": "ven_cojedes",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Guadarrama",
+      "historical_names": [
+        {
+          "date": "1810.4.29",
+          "date_source_note": "Founded on Portuguesa River by Juan Hernández",
+          "name": "Santo Tomás de Guadarrama"
+        },
+        {
+          "date": "1860.1.1",
+          "date_source_note": "Relocated during Federal War; modern parish name",
+          "name": "Guadarrama"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.02941,
+        -70.70399
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Vicuña"
+        }
+      ],
+      "existing_meta_index": 828,
+      "existing_meta_name": "Vicuña",
+      "existing_shard_file": "11_quipu.json",
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Vicuña (chl_region_de_coquimbo)-Chile",
+      "known_aliases": [
+        "Vicuña",
+        "vicuña",
+        "cutun",
+        "Cutun"
+      ],
+      "latest_year": 2017,
+      "max_pop": 15872,
+      "name": "Vicuña",
+      "reason": "under_covered_history",
+      "region": "chl_region_de_coquimbo",
+      "sample_years": [
+        1525,
+        1750,
+        1920,
+        2017
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Vicuña",
+      "historical_names": [
+        {
+          "date": "1821.2.22",
+          "date_source_note": "Villa founded by Joaquín Vicuña under O'Higgins decree",
+          "name": "San Isidro de Vicuña"
+        },
+        {
+          "date": "1872.5.11",
+          "date_source_note": "Elevated to city status and renamed; commune 1891",
+          "name": "Vicuña"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -1.92407,
+        -80.14272
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Isidro Ayora-Ecuador",
+      "known_aliases": [
+        "Isidro Ayora",
+        "isidro ayora"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15866,
+      "name": "Isidro Ayora",
+      "reason": "missing_entry",
+      "region": "ecu_guayas",
+      "sample_years": [
+        1850,
+        1950,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Isidro Ayora",
+      "historical_names": [
+        {
+          "date": "1938.11.22",
+          "date_source_note": "Elevated from recinto Soledad to rural parish Isidro Ayora on 22 November 1938; became an independent canton on 2 August 1996.",
+          "name": "Isidro Ayora"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.67887,
+        -78.64548
+      ],
+      "country": "Ecuador",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "San Juan De Pastocalle-Ecuador",
+      "known_aliases": [
+        "San Juan De Pastocalle",
+        "san juan de pastocalle"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15853,
+      "name": "San Juan De Pastocalle",
+      "reason": "missing_entry",
+      "region": "ecu_cotopaxi",
+      "sample_years": [
+        1850,
+        1950,
+        2010,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "San Juan de Pastocalle",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Pre-colonial Panzaleo estate territory in Latacunga",
+          "name": "Pastocalle"
+        },
+        {
+          "date": "1884.6.24",
+          "date_source_note": "Established as civil rural parish",
+          "name": "San Juan de Pastocalle"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        9.33111,
+        -70.94556
+      ],
+      "country": "Venezuela",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Santa María del Horcon-Venezuela",
+      "known_aliases": [
+        "Santa María del Horcon",
+        "santa maría del horcon"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15851,
+      "name": "Santa María del Horcon",
+      "reason": "missing_entry",
+      "region": "ven_trujillo",
+      "sample_years": [
+        1850,
+        1950,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Santa María del Horcón",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "date_source_note": "Traditional mountain parish seat in Monte Carmelo",
+          "name": "Casa de Tablas"
+        },
+        {
+          "date": "1995.1.30",
+          "date_source_note": "Civil parish ratified by Trujillo Official Gazette",
+          "name": "Santa María del Horcón"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.06266,
+        -75.87061
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Viterbo-Colombia",
+      "known_aliases": [
+        "Viterbo",
+        "viterbo"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15850,
+      "name": "Viterbo",
+      "reason": "missing_entry",
+      "region": "col_risaralda",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Viterbo",
+      "historical_names": [
+        {
+          "date": "1911.4.19",
+          "date_source_note": "Founded on 19 April 1911 during Antioquian colonisation in the Risaralda valley; erected as a municipality in 1966.",
+          "name": "Viterbo"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.83944,
+        -72.65167
+      ],
+      "country": "Peru",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Chuquibamba-Peru",
+      "known_aliases": [
+        "Chuquibamba",
+        "chuquibamba",
+        "acocra",
+        "atitirca",
+        "ayahuala",
+        "ayawala",
+        "ayrampuyoc",
+        "bodegayoc",
+        "cabracancha",
+        "carmen alto",
+        "itac",
+        "la rinconada",
+        "rinconada",
+        "jarampa",
+        "Acocra",
+        "Atitirca",
+        "Ayahuala",
+        "Ayawala",
+        "Ayrampuyoc",
+        "Bodegayoc",
+        "Cabracancha",
+        "Carmen Alto",
+        "La Rinconada",
+        "Rinconada"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15850,
+      "name": "Chuquibamba",
+      "reason": "missing_entry",
+      "region": "per_arequipa",
+      "sample_years": [
+        -1000,
+        1525,
+        1825,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Chuquibamba",
+      "historical_names": [
+        {
+          "date": "1460.1.1",
+          "date_source_note": "Pre-colonial Andean/Quechua toponym (chuqi pampa) in Condesuyos, Arequipa, aligned with the dataset's pre-Hispanic Inca horizon (c. 1460).",
+          "name": "Chuquibamba"
+        },
+        {
+          "date": "1572.1.1",
+          "date_source_note": "Colonial reducción and doctrina head established during Viceroy Francisco de Toledo's general visitation (c. 1571-1575) under the patronage of Santa Ana.",
+          "name": "Santa Ana de Chuquibamba"
+        },
+        {
+          "date": "1825.6.21",
+          "date_source_note": "Republican decree of 21 June 1825 creating Condesuyos Province with Chuquibamba as its capital (later elevated to Villa on 12 November 1827 and Ciudad on 24 December 1870).",
+          "name": "Chuquibamba"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.80028,
+        -71.53167
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Coporaque-Peru",
+      "known_aliases": [
+        "Coporaque",
+        "coporaque"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15838,
+      "name": "Coporaque",
+      "reason": "missing_entry",
+      "region": "per_cusco",
+      "sample_years": [
+        1525,
+        1750,
+        1920,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Coporaque",
+      "historical_names": [
+        {
+          "date": "1200.1.1",
+          "date_source_note": "Pre-colonial K'ana (Quechua) settlement of Kupuraqi in the upper Apurímac basin prior to Spanish colonial reduction.",
+          "name": "Kupuraqi"
+        },
+        {
+          "date": "1572.1.1",
+          "date_source_note": "Spanish colonial reducción of Coporaque established during Viceroy Toledo's general resettlement (c. 1572); later confirmed as a Peruvian district in 1834.",
+          "name": "Coporaque"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -33.49652,
+        -71.2054
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "María Pinto-Chile",
+      "known_aliases": [
+        "María Pinto",
+        "maría pinto",
+        "las mercedes",
+        "maria pinto",
+        "Las Mercedes"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15838,
+      "name": "María Pinto",
+      "reason": "missing_entry",
+      "region": "chl_region_metropolitana_de_santiago",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "María Pinto",
+      "historical_names": [
+        {
+          "date": "1891.12.22",
+          "date_source_note": "Comuna de María Pinto created by the Chilean Decreto de Creación de Municipalidades of 22 December 1891.",
+          "name": "María Pinto"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.24167,
+        -74.35417
+      ],
+      "country": "Peru",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Vinchos-Peru",
+      "known_aliases": [
+        "Vinchos",
+        "vinchos"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15836,
+      "name": "Vinchos",
+      "reason": "missing_entry",
+      "region": "per_huancavelica",
+      "sample_years": [
+        1525,
+        1750,
+        1950,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Vinchos",
+      "historical_names": [
+        {
+          "date": "1400.1.1",
+          "date_source_note": "Pre-colonial Quechua toponym Winchus in the Huamanga highlands of Ayacucho.",
+          "name": "Winchus"
+        },
+        {
+          "date": "1857.1.2",
+          "date_source_note": "District of Vinchos formally constituted by Peruvian national law of 2 January 1857 (following its colonial-era doctrina).",
+          "name": "Vinchos"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -32.7181,
+        -70.95391
+      ],
+      "country": "Chile",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Catemu-Chile",
+      "known_aliases": [
+        "Catemu",
+        "catemu"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15824,
+      "name": "Catemu",
+      "reason": "missing_entry",
+      "region": "chl_region_de_valparaiso",
+      "sample_years": [
+        1525,
+        1780,
+        1970,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Catemu",
+      "historical_names": [
+        {
+          "date": "1891.12.22",
+          "date_source_note": "Comuna de Catemu created by the Chilean Decreto de Creación de Municipalidades of 22 December 1891 (name derived from Mapudungun Katemu).",
+          "name": "Catemu"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -38.95395,
+        -67.92917
+      ],
+      "country": "Argentina",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "General Fernández Oro-Argentina",
+      "known_aliases": [
+        "General Fernández Oro",
+        "general fernández oro",
+        "barrio puente 83",
+        "Barrio Puente 83"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15808,
+      "name": "General Fernández Oro",
+      "reason": "missing_entry",
+      "region": "arg_neuquen",
+      "sample_years": [
+        1900,
+        1970,
+        2000,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "General Fernández Oro",
+      "historical_names": [
+        {
+          "date": "1899.6.1",
+          "date_source_note": "Ferrocarril del Sud railway station established at Kilómetro 1181 in the Alto Valle (Colonia Lucinda area) on 1 June 1899.",
+          "name": "Kilómetro 1181"
+        },
+        {
+          "date": "1931.5.19",
+          "date_source_note": "Town formally founded and station renamed General Fernández Oro on 19 May 1931.",
+          "name": "General Fernández Oro"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.89032,
+        -68.11256
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1525,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Calamarca-Bolivia",
+      "known_aliases": [
+        "Calamarca",
+        "calamarca",
+        "calamares",
+        "Calamares"
+      ],
+      "latest_year": 2026,
+      "max_pop": 15794,
+      "name": "Calamarca",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1525,
+        1846,
+        1960,
+        2026
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Calamarca",
+      "historical_names": [
+        {
+          "date": "1200.1.1",
+          "date_source_note": "Pre-colonial Aymara settlement of Qala Marka ('stone town') on the Altiplano.",
+          "name": "Qala Marka"
+        },
+        {
+          "date": "1572.1.1",
+          "date_source_note": "Spanish colonial reducción and doctrina of Calamarca established in the 1570s under Viceroy Toledo.",
+          "name": "Calamarca"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        5.10653,
+        -75.94236
+      ],
+      "country": "Colombia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Apía-Colombia",
+      "known_aliases": [
+        "Apía",
+        "apía"
+      ],
+      "latest_year": 2025,
+      "max_pop": 15783,
+      "name": "Apía",
+      "reason": "missing_entry",
+      "region": "col_risaralda",
+      "sample_years": [
+        1850,
+        1980,
+        2005,
+        2025
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Apía",
+      "historical_names": [
+        {
+          "date": "1883.8.15",
+          "date_source_note": "Founded on 15 August 1883 by Antioquian colonists; elevated to municipality in 1887.",
+          "name": "Apía"
+        }
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -31.42298,
+        -66.67416
+      ],
+      "country": "Argentina",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "existing_shard_file": null,
+      "is_capital": false,
+      "is_indigenous_region": true,
+      "key": "Rosario Vera Peñaloza-Argentina",
+      "known_aliases": [
+        "Rosario Vera Peñaloza",
+        "rosario vera peñaloza"
+      ],
+      "latest_year": 2022,
+      "max_pop": 15783,
+      "name": "Rosario Vera Peñaloza",
+      "reason": "missing_entry",
+      "region": "arg_la_rioja",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2022
+      ],
+      "sources": [
+        "QUIPU"
+      ],
+      "canonical_name": "Rosario Vera Peñaloza",
+      "historical_names": [
+        {
+          "date": "1886.1.1",
+          "date_source_note": "Department in southern La Rioja (seat at Chepes) created in the 1880s as Departamento General Roca.",
+          "name": "Departamento General Roca"
+        },
+        {
+          "date": "1961.1.1",
+          "date_source_note": "Renamed Departamento Rosario Vera Peñaloza in 1961 in honour of Argentine educator Rosario Vera Peñaloza (1873–1950).",
+          "name": "Rosario Vera Peñaloza"
+        }
+      ]
+    }
+  ]
+}
