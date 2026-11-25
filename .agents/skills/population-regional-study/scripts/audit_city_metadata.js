@@ -10,12 +10,14 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
     ARTICLE_INVERT_RE: /^.+,\s*(?:Al|El|As|Ash|Ar|Az|Ad|An|At|Le|La|Les|L'|Los|Las|Il|Lo|De|Den|Het|Der|Die|Das|The)$/i,
     FOREIGN_SCRIPT_RE: /[\u0400-\u04FF\u0600-\u06FF\u4E00-\u9FFF\u3040-\u30FF\uAC00-\uD7AF]/,
     MULTI_COMMA_ADDR_RE: /^[^,]+,\s*[^,]+,\s*[^,]+$/,
+    NON_LATIN_CANONICAL_RE: /(?:[\u0370-\u03B7\u03B9-\u03FF]|[\u0370-\u03FF]{2,}|[\u0400-\u052F\u0530-\u058F\u0590-\u05FF\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u0900-\u0DFF\u0E00-\u10FF\u1200-\u137F\u1780-\u17FF\u3040-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uAC00-\uD7AF])/,
     PAREN_RE: /\([^)]*\)/,
 
     /**
      * Audits partitioned `city_metadata/` (or legacy `city_metadata.json`) for structural integrity,
-     * unified capital-city naming, zero collisions, zero corruptions, zero intra-municipal district leaks,
-     * and optional toponymy auditor sign-off.
+     * unified capital-city naming, spatial bbox validity, Latin canonical transliteration, zero
+     * case-insensitive `.other_names` duplicates, zero collisions, zero intra-municipal district leaks,
+     * and optional 2-pass toponymy sign-off (`pass1/auditor_signoff.json` + `pass2/pass2_whg_geohack_report.json`).
      * @alias city_metadata_auditor.auditMetadata
      *
      * @param {Object} [arg0_options]
@@ -42,6 +44,8 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       let part_dir = path.join(stadester_dir, "city_metadata");
       let man_path = path.join(part_dir, "city_metadata_manifest.json");
       let mono_path = path.join(stadester_dir, "city_metadata.json");
+      let state_capitals_obj = this.loadStateCapitalsMap(dataview_root);
+      let states_map = this.loadStatesMap(dataview_root);
       let warnings = [];
 
       //Function body
@@ -88,31 +92,41 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         capitals_checked: capitals_records.length,
         capitals_missing_name: 0,
         collisions: 0,
+        duplicate_other_names: 0,
         foreign_script_spam: 0,
         inverted_articles: 0,
         multi_comma_addr: 0,
         municipal_leaks: 0,
+        non_latin_canonical: 0,
+        out_of_bbox_capitals: 0,
         parenthetical_names: 0,
-        records_checked: loaded_records.length
+        records_checked: loaded_records.length,
+        split_capitals: 0
       };
 
       let bad_samples = {
         backtick: [],
         collisions: [],
         dates: [],
+        dup_other: [],
         inverted: [],
         multi_comma: [],
         municipal: [],
-        paren: []
+        non_latin: [],
+        out_of_bbox: [],
+        paren: [],
+        split_cap: []
       };
 
+      let cap_grid = new Map();
       let grid = new Map();
       for (let i = 0; i < loaded_records.length; i++) {
         let rec = loaded_records[i].rec;
         let shard_fn = loaded_records[i].shard;
         if (!rec || typeof rec !== "object") continue;
 
-        let nm = String(rec.name || "").trim();
+        let hn = this.extractHistoricalEntries(rec);
+        let nm = this.extractDisplayName(rec, hn);
         let coords = Array.isArray(rec.coords) ? rec.coords : [];
         let lng = Number(coords[0]);
         let lat = Number(coords[1]);
@@ -123,13 +137,29 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             (rec.capital && typeof rec.capital === "object" && Object.keys(rec.capital).length > 0) ||
             (Array.isArray(rec.capital_records) && rec.capital_records.length > 0)
           );
-          if (!nm || !Array.isArray(rec.historical_names) || rec.historical_names.length === 0 || !has_cap_data)
+          if (!nm || hn.length === 0 || !has_cap_data)
             stats.capitals_missing_name++;
+
+          // Cross-continent out-of-bbox capital validation
+          if (Number.isFinite(lat) && Number.isFinite(lng) && states_map.size > 0) {
+            let cap_sids = this.collectCapitalStateIds(rec);
+            for (let x = 0; x < cap_sids.length; x++) {
+              if (!this.isValidCapitalBinding(lng, lat, rec.country || "", cap_sids[x], states_map, state_capitals_obj)) {
+                stats.out_of_bbox_capitals++;
+                if (bad_samples.out_of_bbox.length < 5)
+                  bad_samples.out_of_bbox.push(`${nm}(${rec.country || "?"})->state:${cap_sids[x]}`);
+              }
+            }
+          }
         }
 
         if (!nm || nm.includes("`") || nm.includes("?") || nm.includes("\uFFFD") || nm === "0" || nm === "Unknown") {
           stats.backtick_or_mojibake++;
           if (bad_samples.backtick.length < 5) bad_samples.backtick.push(`${shard_fn}:${nm}`);
+        }
+        if (nm && this.NON_LATIN_CANONICAL_RE.test(nm)) {
+          stats.non_latin_canonical++;
+          if (bad_samples.non_latin.length < 5) bad_samples.non_latin.push(`${shard_fn}:${nm}`);
         }
         if (this.ARTICLE_INVERT_RE.test(nm)) {
           stats.inverted_articles++;
@@ -153,8 +183,9 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           }
         }
 
-        // Check historical_names dates & clean strings
-        let hn = Array.isArray(rec.historical_names) ? rec.historical_names : [];
+        // Check historical_names / compact names dates, clean strings, and Latin script
+        let canonical_ci_set = new Set();
+        if (nm) canonical_ci_set.add(nm.toLowerCase());
         let prev_yr = -999999;
         for (let x = 0; x < hn.length; x++) {
           let h = hn[x];
@@ -169,14 +200,35 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             if (bad_samples.dates.length < 5) bad_samples.dates.push(`${nm}:unsorted(${prev_yr}->${yr})`);
           }
           prev_yr = yr;
-          let hname = String(h.name || "");
+          let hname = String(h.name || "").trim();
+          if (hname) canonical_ci_set.add(hname.toLowerCase());
           if (hname.includes("`") || hname.includes("?") || hname.includes("\uFFFD")) {
             stats.backtick_or_mojibake++;
             if (bad_samples.backtick.length < 5) bad_samples.backtick.push(`${nm}->${hname}`);
           }
+          if (hname && this.NON_LATIN_CANONICAL_RE.test(hname)) {
+            stats.non_latin_canonical++;
+            if (bad_samples.non_latin.length < 5) bad_samples.non_latin.push(`${nm}->${hname}`);
+          }
           if (this.PAREN_RE.test(hname)) {
             stats.parenthetical_names++;
             if (bad_samples.paren.length < 5) bad_samples.paren.push(`${nm}->${hname}`);
+          }
+        }
+
+        // Case-insensitive duplicate check in other_names (including repeats of name or historical_names)
+        if (Array.isArray(rec.other_names) && rec.other_names.length > 0) {
+          let seen_other_ci = new Set(canonical_ci_set);
+          for (let x = 0; x < rec.other_names.length; x++) {
+            let alias_str = String(rec.other_names[x] || "").trim();
+            let alias_low = alias_str.toLowerCase();
+            if (!alias_low || seen_other_ci.has(alias_low)) {
+              stats.duplicate_other_names++;
+              if (bad_samples.dup_other.length < 5)
+                bad_samples.dup_other.push(`${shard_fn}:${nm}[${alias_str}]`);
+            } else {
+              seen_other_ci.add(alias_low);
+            }
           }
         }
 
@@ -189,7 +241,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           }
         }
 
-        // Spatial collision check (<= 1.5 km same-stem or <= 0.15 km exact duplicate)
+        // Spatial collision check (<= 1,5 km same-stem or <= 0,15 km exact duplicate)
         if (Number.isFinite(lat) && Number.isFinite(lng)) {
           let stem = viscount_entity_audit.normaliseEntityStem(nm);
           let gx = Math.round(lat*20);
@@ -211,11 +263,59 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           let gk = `${gx},${gy}`;
           if (!grid.has(gk)) grid.set(gk, []);
           grid.get(gk).push({ lat: lat, lng: lng, name: nm, stem: stem });
+
+          // Split same-municipality capital duplicate check inside 00_capitals.json (<= 3,0 km)
+          if (is_cap_shard) {
+            let cap_sids = new Set(this.collectCapitalStateIds(rec));
+            let alias_stems = this.collectAllStems(rec, hn);
+            let cgx = Math.round(lat*10);
+            let cgy = Math.round(lng*10);
+            for (let dx = -1; dx <= 1; dx++) {
+              for (let dy = -1; dy <= 1; dy++) {
+                let cb = cap_grid.get(`${cgx + dx},${cgy + dy}`);
+                if (!cb) continue;
+                for (let z = 0; z < cb.length; z++) {
+                  let ot = cb[z];
+                  let d_km = viscount_audit_utils.haversineKm(lat, lng, ot.lat, ot.lng);
+                  if (d_km > 3.0) continue;
+                  let is_same_cap = d_km <= 0.35;
+                  if (!is_same_cap && stem && ot.stem && (stem === ot.stem || viscount_entity_audit.areEquivalentExonyms(nm, ot.name, profiles)))
+                    is_same_cap = true;
+                  if (!is_same_cap) {
+                    cap_sids.forEach(function (arg0_sid) {
+                      if (ot.cap_sids.has(arg0_sid)) is_same_cap = true;
+                    });
+                  }
+                  if (!is_same_cap) {
+                    alias_stems.forEach(function (arg0_st) {
+                      if (ot.alias_stems.has(arg0_st)) is_same_cap = true;
+                    });
+                  }
+                  if (is_same_cap) {
+                    stats.split_capitals++;
+                    if (bad_samples.split_cap.length < 5)
+                      bad_samples.split_cap.push(`${nm}<->${ot.name} (${d_km.toFixed(2)} km)`);
+                  }
+                }
+              }
+            }
+            let cgk = `${cgx},${cgy}`;
+            if (!cap_grid.has(cgk)) cap_grid.set(cgk, []);
+            cap_grid.get(cgk).push({ alias_stems: alias_stems, cap_sids: cap_sids, lat: lat, lng: lng, name: nm, stem: stem });
+          }
         }
       }
 
       if (stats.capitals_missing_name > 0)
         errors.push(`[CAPITALS] ${stats.capitals_missing_name} capital record(s) in 00_capitals.json lack clean name, historical_names or capital_records.`);
+      if (stats.out_of_bbox_capitals > 0)
+        errors.push(`[CAPITAL_BBOX] ${stats.out_of_bbox_capitals} cross-continent out-of-bbox capital binding(s) in 00_capitals.json: ${bad_samples.out_of_bbox.join(", ")}`);
+      if (stats.split_capitals > 0)
+        errors.push(`[SPLIT_CAPITALS] ${stats.split_capitals} split same-municipality capital duplicate(s) <= 3,0 km in 00_capitals.json: ${bad_samples.split_cap.join(", ")}`);
+      if (stats.duplicate_other_names > 0)
+        errors.push(`[DUP_OTHER_NAMES] ${stats.duplicate_other_names} case-insensitive duplicate or redundant .other_names entry/entries: ${bad_samples.dup_other.join(", ")}`);
+      if (stats.non_latin_canonical > 0)
+        errors.push(`[NON_LATIN_CANONICAL] ${stats.non_latin_canonical} non-Latin glyph(s) in canonical .name/.historical_names: ${bad_samples.non_latin.join(", ")}`);
       if (stats.backtick_or_mojibake > 0)
         errors.push(`[ENCODING] ${stats.backtick_or_mojibake} backtick/mojibake/placeholder name(s): ${bad_samples.backtick.join(", ")}`);
       if (stats.inverted_articles > 0)
@@ -236,21 +336,271 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       if (stats.foreign_script_spam > 0)
         warnings.push(`[FOREIGN_SCRIPT] ${stats.foreign_script_spam} foreign-script alias(es) in Latin-only countries.`);
 
-      // Optional separate toponymy_auditor sign-off check
+      // Optional 2-pass toponymy sign-off check (Pass 1 auditor + Pass 2 deterministic WHG/GeoHack report)
       if (opts.require_auditor_signoff) {
+        let batch_root = path.join(svea_root, "tests/toponymy_batches", project_key.toLowerCase() || "all_projects");
+        let pass1_signoff = path.join(batch_root, "pass1/auditor_signoff.json");
+        let legacy_signoff = path.join(batch_root, "auditor_signoff.json");
         let signoff_p = opts.signoff_path ? path.resolve(opts.signoff_path) :
-          path.join(svea_root, "tests/toponymy_batches", project_key.toLowerCase() || "all_projects", "auditor_signoff.json");
+          (fs.existsSync(pass1_signoff) ? pass1_signoff : legacy_signoff);
+
         if (!fs.existsSync(signoff_p)) {
-          errors.push(`[AUDITOR_SIGNOFF] Missing separate toponymy_auditor sign-off: ${signoff_p}`);
+          errors.push(`[AUDITOR_SIGNOFF] Missing separate Pass-1 toponymy_auditor sign-off: ${signoff_p}`);
         } else {
           let so = JSON.parse(fs.readFileSync(signoff_p, "utf8"));
           if (so.approved !== true || Number(so.errors_remaining || 0) !== 0)
-            errors.push(`[AUDITOR_SIGNOFF] toponymy_auditor rejected or left ${so.errors_remaining} unresolved historical error(s).`);
+            errors.push(`[AUDITOR_SIGNOFF] Pass-1 toponymy_auditor rejected or left ${so.errors_remaining} unresolved historical error(s).`);
+          if (so.max_concurrency !== undefined && Number(so.max_concurrency) > 24)
+            errors.push(`[AUDITOR_SIGNOFF] Pass-1 swarm exceeded n <= 24 concurrency cap (${so.max_concurrency}).`);
+        }
+
+        let pass2_residuals = path.join(batch_root, "pass2/residuals.json");
+        if (fs.existsSync(pass2_residuals)) {
+          let pass2_report = path.join(batch_root, "pass2/pass2_whg_geohack_report.json");
+          if (!fs.existsSync(pass2_report)) {
+            errors.push(`[PASS2_REPORT] Pass-2 residuals exist without deterministic WHG/GeoHack report: ${pass2_report}`);
+          } else {
+            let rep = JSON.parse(fs.readFileSync(pass2_report, "utf8"));
+            if (Number(rep.llm_agents_used || 0) !== 0)
+              errors.push(`[PASS2_REPORT] Pass-2 report logged non-zero LLM agents (${rep.llm_agents_used}); Pass 2 must use 0 LLM agents.`);
+          }
         }
       }
 
       //Return statement
       return { errors: errors, stats: stats, success: errors.length === 0, warnings: warnings };
+    },
+
+    /**
+     * Collects all normalised entity stems across a record's canonical name, historical timeline, and aliases.
+     * @alias city_metadata_auditor.collectAllStems
+     *
+     * @param {Object} arg0_rec
+     * @param {Array<{ date: string, name: string }>} arg1_hist_entries
+     *
+     * @returns {Set<string>}
+     */
+    collectAllStems (arg0_rec, arg1_hist_entries) {
+      //Convert from parameters
+      let hn = Array.isArray(arg1_hist_entries) ? arg1_hist_entries : [];
+      let rec = (arg0_rec && typeof arg0_rec === "object") ? arg0_rec : {};
+
+      //Declare local instance variables
+      let stems = new Set();
+
+      //Function body
+      let add_stem = function (arg0_str) {
+        let st = viscount_entity_audit.normaliseEntityStem(arg0_str);
+        if (st && st.length >= 3) stems.add(st);
+      };
+      add_stem(rec.name);
+      for (let i = 0; i < hn.length; i++) add_stem(hn[i].name);
+      if (Array.isArray(rec.other_names)) {
+        for (let i = 0; i < rec.other_names.length; i++) add_stem(rec.other_names[i]);
+      }
+
+      //Return statement
+      return stems;
+    },
+
+    /**
+     * Collects all distinct state_id keys bound to a capital record (`rec.capital` or `rec.capital_records`).
+     * @alias city_metadata_auditor.collectCapitalStateIds
+     *
+     * @param {Object} arg0_rec
+     *
+     * @returns {Array<string>}
+     */
+    collectCapitalStateIds (arg0_rec) {
+      //Convert from parameters
+      let rec = (arg0_rec && typeof arg0_rec === "object") ? arg0_rec : {};
+
+      //Declare local instance variables
+      let sids = new Set();
+
+      //Function body
+      if (rec.capital && typeof rec.capital === "object") {
+        let vals = Object.values(rec.capital);
+        for (let i = 0; i < vals.length; i++) {
+          if (vals[i] !== null && vals[i] !== undefined) sids.add(String(vals[i]));
+        }
+      }
+      if (Array.isArray(rec.capital_records)) {
+        for (let i = 0; i < rec.capital_records.length; i++) {
+          let cr = rec.capital_records[i];
+          if (cr && cr.state_id !== undefined && cr.state_id !== null)
+            sids.add(String(cr.state_id));
+        }
+      }
+
+      //Return statement
+      return Array.from(sids);
+    },
+
+    /**
+     * Resolves display name from either `rec.name` or the latest chronological entry of compact `rec.names`.
+     * @alias city_metadata_auditor.extractDisplayName
+     *
+     * @param {Object} arg0_rec
+     * @param {Array<{ date: string, name: string }>} arg1_hist_entries
+     *
+     * @returns {string}
+     */
+    extractDisplayName (arg0_rec, arg1_hist_entries) {
+      //Convert from parameters
+      let hn = Array.isArray(arg1_hist_entries) ? arg1_hist_entries : [];
+      let rec = (arg0_rec && typeof arg0_rec === "object") ? arg0_rec : {};
+
+      //Guard clauses
+      if (rec.name && String(rec.name).trim())
+        return String(rec.name).trim();
+      if (hn.length > 0 && hn[hn.length - 1] && hn[hn.length - 1].name)
+        return String(hn[hn.length - 1].name).trim();
+
+      //Return statement
+      return "";
+    },
+
+    /**
+     * Extracts historical timeline entries from EITHER Dataview `historical_names: [{ date, name }]`
+     * OR compact `names: { "yyyy.m.d": "Name" }` map.
+     * @alias city_metadata_auditor.extractHistoricalEntries
+     *
+     * @param {Object} arg0_rec
+     *
+     * @returns {Array<{ date: string, name: string }>}
+     */
+    extractHistoricalEntries (arg0_rec) {
+      //Convert from parameters
+      let rec = (arg0_rec && typeof arg0_rec === "object") ? arg0_rec : {};
+
+      //Guard clauses
+      if (Array.isArray(rec.historical_names))
+        return rec.historical_names;
+
+      //Function body
+      if (rec.names && typeof rec.names === "object" && !Array.isArray(rec.names)) {
+        let out = [];
+        let keys = Object.keys(rec.names);
+        for (let i = 0; i < keys.length; i++)
+          out.push({ date: String(keys[i]), name: String(rec.names[keys[i]] || "") });
+        out.sort(function (arg0_a, arg1_b) {
+          let pa = String(arg0_a.date || "").split(".").map(Number);
+          let pb = String(arg1_b.date || "").split(".").map(Number);
+          if ((pa[0] || 0) !== (pb[0] || 0)) return (pa[0] || 0) - (pb[0] || 0);
+          if ((pa[1] || 1) !== (pb[1] || 1)) return (pa[1] || 1) - (pb[1] || 1);
+          return (pa[2] || 1) - (pb[2] || 1);
+        });
+        return out;
+      }
+
+      //Return statement
+      return [];
+    },
+
+    /**
+     * Validates that a `[lng, lat]` coordinate lies inside a state's `states.json` bbox (3 deg margin)
+     * or matches an explicit country-consistent entry in `state_capitals.json`.
+     * @alias city_metadata_auditor.isValidCapitalBinding
+     *
+     * @param {number} arg0_lng
+     * @param {number} arg1_lat
+     * @param {string} arg2_country
+     * @param {string|number} arg3_state_id
+     * @param {Map<string, Object>} arg4_states_map
+     * @param {Object} arg5_state_capitals_obj
+     *
+     * @returns {boolean}
+     */
+    isValidCapitalBinding (arg0_lng, arg1_lat, arg2_country, arg3_state_id, arg4_states_map, arg5_state_capitals_obj) {
+      //Convert from parameters
+      let country_low = String(arg2_country || "").trim().toLowerCase();
+      let lat = Number(arg1_lat);
+      let lng = Number(arg0_lng);
+      let sid_str = String(arg3_state_id);
+      let state_capitals = arg5_state_capitals_obj || {};
+      let states_map = arg4_states_map;
+
+      //Function body
+      let st = states_map ? states_map.get(sid_str) : null;
+      if (!st || !Array.isArray(st.bbox) || st.bbox.length < 4)
+        return true;
+
+      let [x0, y0, x1, y1] = st.bbox;
+      if (lng >= x0 - 3.0 && lng <= x1 + 3.0 && lat >= y0 - 3.0 && lat <= y1 + 3.0)
+        return true;
+
+      let sc = state_capitals[sid_str];
+      if (sc && Array.isArray(sc.timeline) && country_low) {
+        for (let i = 0; i < sc.timeline.length; i++) {
+          let tk = String(sc.timeline[i].key || "").toLowerCase();
+          if (tk && (tk.endsWith("-" + country_low) || tk.includes("-" + country_low + "-")))
+            return true;
+        }
+      }
+
+      //Return statement
+      return false;
+    },
+
+    /**
+     * Loads `data/stadester/state_capitals.json` from Dataview if present.
+     * @alias city_metadata_auditor.loadStateCapitalsMap
+     *
+     * @param {string} arg0_dataview_root
+     *
+     * @returns {Object}
+     */
+    loadStateCapitalsMap (arg0_dataview_root) {
+      //Convert from parameters
+      let dataview_root = arg0_dataview_root;
+
+      //Declare local instance variables
+      let sc_path = path.join(dataview_root, "data/stadester/state_capitals.json");
+
+      //Guard clauses
+      if (!fs.existsSync(sc_path)) return {};
+
+      //Function body
+      try {
+        return JSON.parse(fs.readFileSync(sc_path, "utf8"));
+      } catch (e) {
+        return {};
+      }
+    },
+
+    /**
+     * Loads `data/atlas/temp/states.json` into a Map keyed by string `state_id`.
+     * @alias city_metadata_auditor.loadStatesMap
+     *
+     * @param {string} arg0_dataview_root
+     *
+     * @returns {Map<string, Object>}
+     */
+    loadStatesMap (arg0_dataview_root) {
+      //Convert from parameters
+      let dataview_root = arg0_dataview_root;
+
+      //Declare local instance variables
+      let out = new Map();
+      let st_path = path.join(dataview_root, "data/atlas/temp/states.json");
+
+      //Guard clauses
+      if (!fs.existsSync(st_path)) return out;
+
+      //Function body
+      try {
+        let arr = JSON.parse(fs.readFileSync(st_path, "utf8"));
+        if (Array.isArray(arr)) {
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i] && arr[i].id !== undefined)
+              out.set(String(arr[i].id), arr[i]);
+          }
+        }
+      } catch (e) {}
+
+      //Return statement
+      return out;
     },
 
     /**

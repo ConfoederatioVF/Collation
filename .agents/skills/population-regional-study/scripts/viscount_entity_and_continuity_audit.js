@@ -316,9 +316,70 @@ let path = require("path");
     },
 
     /**
-     * Audits Dataview `stadester_2.0/city_metadata.json` for regional settlement coverage,
+     * Extracts canonical display name from either `rec.name` or the latest chronological key of compact `rec.names`.
+     * @alias viscount_entity_audit.extractMetadataDisplayName
+     *
+     * @param {Object} arg0_rec
+     * @param {Array<{ date: string, name: string }>} [arg1_hist_entries]
+     *
+     * @returns {string}
+     */
+    extractMetadataDisplayName (arg0_rec, arg1_hist_entries) {
+      //Convert from parameters
+      let hn = Array.isArray(arg1_hist_entries) ? arg1_hist_entries : this.extractMetadataHistoricalNames(arg0_rec);
+      let rec = (arg0_rec && typeof arg0_rec === "object") ? arg0_rec : {};
+
+      //Guard clauses
+      if (rec.name && String(rec.name).trim())
+        return String(rec.name).trim();
+      if (hn.length > 0 && hn[hn.length - 1] && hn[hn.length - 1].name)
+        return String(hn[hn.length - 1].name).trim();
+
+      //Return statement
+      return "";
+    },
+
+    /**
+     * Extracts historical timeline entries from either Dataview `historical_names: [{ date, name }]`
+     * or compact `names: { "yyyy.m.d": "Name" }` map.
+     * @alias viscount_entity_audit.extractMetadataHistoricalNames
+     *
+     * @param {Object} arg0_rec
+     *
+     * @returns {Array<{ date: string, name: string }>}
+     */
+    extractMetadataHistoricalNames (arg0_rec) {
+      //Convert from parameters
+      let rec = (arg0_rec && typeof arg0_rec === "object") ? arg0_rec : {};
+
+      //Guard clauses
+      if (Array.isArray(rec.historical_names))
+        return rec.historical_names;
+
+      //Function body
+      if (rec.names && typeof rec.names === "object" && !Array.isArray(rec.names)) {
+        let out = [];
+        let keys = Object.keys(rec.names);
+        for (let i = 0; i < keys.length; i++)
+          out.push({ date: String(keys[i]), name: String(rec.names[keys[i]] || "") });
+        out.sort(function (arg0_a, arg1_b) {
+          let pa = String(arg0_a.date || "").split(".").map(Number);
+          let pb = String(arg1_b.date || "").split(".").map(Number);
+          if ((pa[0] || 0) !== (pb[0] || 0)) return (pa[0] || 0) - (pb[0] || 0);
+          if ((pa[1] || 1) !== (pb[1] || 1)) return (pa[1] || 1) - (pb[1] || 1);
+          return (pa[2] || 1) - (pb[2] || 1);
+        });
+        return out;
+      }
+
+      //Return statement
+      return [];
+    },
+
+    /**
+     * Audits Dataview `stadester_2.0/city_metadata/` (or legacy `city_metadata.json`) for regional settlement coverage,
      * historical date validity/earliest-year fallback alignment, suspicious temple/admin names,
-     * consecutive variant-spelling renames and near-duplicate metadata records.
+     * consecutive variant-spelling renames, case-insensitive `.other_names` duplicates, and near-duplicate records.
      * @alias viscount_entity_audit.verifyCityMetadataQuality
      *
      * @param {Object} arg0_proj
@@ -340,6 +401,7 @@ let path = require("path");
       //Declare local instance variables
       let bad_dates = [];
       let consec_variant_dups = [];
+      let dup_other_names = [];
       let earliest_gap_hits = [];
       let matched_major = 0;
       let matched_meta_indices = new Set();
@@ -371,7 +433,7 @@ let path = require("path");
         meta_arr = JSON.parse(fs.readFileSync(meta_path, "utf8"));
       }
       if (!Array.isArray(meta_arr) || meta_arr.length === 0 || shard_files.length === 0)
-        return { bad_dates: 0, coverage_pct: 100, near_dups: 0, pre1850_coverage_pct: 100, suspicious_names: 0 };
+        return { bad_dates: 0, coverage_pct: 100, dup_other_names: 0, near_dups: 0, pre1850_coverage_pct: 100, suspicious_names: 0 };
 
       //Function body
 
@@ -382,14 +444,14 @@ let path = require("path");
         let lng = Number(rec.coords[0]);
         if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
 
+        let hn = this.extractMetadataHistoricalNames(rec);
+        let disp_name = this.extractMetadataDisplayName(rec, hn);
         let stems = new Set();
-        let raw_names = [rec.name];
+        let raw_names = [disp_name];
         if (Array.isArray(rec.other_names)) raw_names = raw_names.concat(rec.other_names);
-        if (Array.isArray(rec.historical_names)) {
-          for (let x = 0; x < rec.historical_names.length; x++) {
-            if (rec.historical_names[x] && rec.historical_names[x].name)
-              raw_names.push(rec.historical_names[x].name);
-          }
+        for (let x = 0; x < hn.length; x++) {
+          if (hn[x] && hn[x].name)
+            raw_names.push(hn[x].name);
         }
         for (let x = 0; x < raw_names.length; x++) {
           let st = this.normaliseEntityStem(raw_names[x]);
@@ -399,11 +461,13 @@ let path = require("path");
         let gkey = `${Math.round(lat*2)},${Math.round(lng*2)}`;
         if (!spatial_grid.has(gkey)) spatial_grid.set(gkey, []);
         spatial_grid.get(gkey).push({
+          disp_name: disp_name,
+          hn: hn,
           idx: i,
           lat: lat,
           lng: lng,
           rec: rec,
-          stem: this.normaliseEntityStem(rec.name),
+          stem: this.normaliseEntityStem(disp_name),
           stems: stems
         });
       }
@@ -453,7 +517,7 @@ let path = require("path");
                 let cand = bucket[z];
                 let d_km = this.haversineKm(clat, clng, cand.lat, cand.lng);
                 if (d_km > 25.0) continue;
-                let name_hit = Boolean(c_stem && (cand.stems.has(c_stem) || this.areEquivalentExonyms(city.name || keys[x], cand.rec.name || "", profiles)));
+                let name_hit = Boolean(c_stem && (cand.stems.has(c_stem) || this.areEquivalentExonyms(city.name || keys[x], cand.disp_name || "", profiles)));
                 if (name_hit && d_km < best_d) {
                   best = cand;
                   best_d = d_km;
@@ -466,7 +530,7 @@ let path = require("path");
           matched_major++;
           matched_meta_indices.add(best.idx);
 
-          let hn = Array.isArray(best.rec.historical_names) ? best.rec.historical_names : [];
+          let hn = best.hn;
           if (earliest_yr < 1850) {
             matched_pre1850++;
             if (hn.length > 0 && this.isValidCalendarDate(hn[0].date)) {
@@ -482,41 +546,55 @@ let path = require("path");
         }
       }
 
-      // Inspect every matched regional city_metadata entry for date errors, variant dup renames, suspicious names & near-dups
+      // Inspect every matched regional city_metadata entry for date errors, variant dup renames, dup aliases, suspicious names & near-dups
       let matched_list = [];
       matched_meta_indices.forEach(function (arg0_idx) {
         let rec = meta_arr[arg0_idx];
         if (!rec) return;
         let lat = Number(rec.coords[1]);
         let lng = Number(rec.coords[0]);
-        matched_list.push({ idx: arg0_idx, lat: lat, lng: lng, rec: rec, stem: this.normaliseEntityStem(rec.name) });
+        let hn = this.extractMetadataHistoricalNames(rec);
+        let disp_name = this.extractMetadataDisplayName(rec, hn);
+        matched_list.push({ disp_name: disp_name, idx: arg0_idx, lat: lat, lng: lng, rec: rec, stem: this.normaliseEntityStem(disp_name) });
 
-        let susp = this.isSuspiciousToponym(rec.name, profiles);
+        let susp = this.isSuspiciousToponym(disp_name, profiles);
         if (susp && !rec.verified_settlement)
-          suspicious_names.push(`${rec.name} (${susp})`);
+          suspicious_names.push(`${disp_name} (${susp})`);
 
-        let hn = Array.isArray(rec.historical_names) ? rec.historical_names : [];
+        let seen_ci = new Set();
+        if (disp_name) seen_ci.add(disp_name.toLowerCase());
         let prev_yr = -999999;
         let prev_stem = "";
         for (let x = 0; x < hn.length; x++) {
           let item = hn[x];
           if (!item || !this.isValidCalendarDate(item.date)) {
-            bad_dates.push(`${rec.name}:${item ? item.date : "null"}`);
+            bad_dates.push(`${disp_name}:${item ? item.date : "null"}`);
             continue;
           }
           let yr = Number(String(item.date).split(".")[0]);
           if (yr < prev_yr)
-            bad_dates.push(`${rec.name}:unsorted(${prev_yr}->${yr})`);
+            bad_dates.push(`${disp_name}:unsorted(${prev_yr}->${yr})`);
           prev_yr = yr;
+          if (item.name) seen_ci.add(String(item.name).trim().toLowerCase());
 
           let h_susp = this.isSuspiciousToponym(item.name, profiles);
           if (h_susp && !rec.verified_settlement)
-            suspicious_names.push(`${rec.name}->${item.name} (${h_susp})`);
+            suspicious_names.push(`${disp_name}->${item.name} (${h_susp})`);
 
           let h_stem = this.normaliseEntityStem(item.name);
           if (prev_stem && h_stem && h_stem === prev_stem && item.name !== hn[x - 1].name)
-            consec_variant_dups.push(`${rec.name}:${hn[x - 1].name}->${item.name}`);
+            consec_variant_dups.push(`${disp_name}:${hn[x - 1].name}->${item.name}`);
           prev_stem = h_stem;
+        }
+
+        if (Array.isArray(rec.other_names)) {
+          for (let x = 0; x < rec.other_names.length; x++) {
+            let low = String(rec.other_names[x] || "").trim().toLowerCase();
+            if (!low || seen_ci.has(low))
+              dup_other_names.push(`${disp_name}[${rec.other_names[x]}]`);
+            else
+              seen_ci.add(low);
+          }
         }
       }, this);
 
@@ -528,8 +606,8 @@ let path = require("path");
           let b = matched_list[x];
           if (b.lat - a.lat > 0.16) break;
           let d_km = this.haversineKm(a.lat, a.lng, b.lat, b.lng);
-          if (d_km <= 1.5 || (d_km <= 15.0 && a.stem && b.stem && (a.stem === b.stem || this.areEquivalentExonyms(a.rec.name, b.rec.name, profiles))))
-            near_dups.push(`${a.rec.name}<->${b.rec.name} (${d_km.toFixed(1)} km)`);
+          if (d_km <= 1.5 || (d_km <= 15.0 && a.stem && b.stem && (a.stem === b.stem || this.areEquivalentExonyms(a.disp_name, b.disp_name, profiles))))
+            near_dups.push(`${a.disp_name}<->${b.disp_name} (${d_km.toFixed(1)} km)`);
         }
       }
 
@@ -537,23 +615,26 @@ let path = require("path");
       let pre1850_pct = (matched_pre1850 > 0) ? (100.0*pre1850_covered/matched_pre1850) : 100.0;
 
       if (total_major >= 20 && cov_pct < 95.0)
-        errors.push(`Regional city_metadata.json coverage for ${proj.key || "PROJECT"} is ${matched_major}/${total_major} (${cov_pct.toFixed(1)}% < 95.0% floor).`);
+        errors.push(`Regional city_metadata coverage for ${proj.key || "PROJECT"} is ${matched_major}/${total_major} (${cov_pct.toFixed(1)}% < 95.0% floor).`);
       if (matched_pre1850 >= 10 && pre1850_pct < 90.0)
         errors.push(`Pre-1850 historical_names earliest-year coverage for ${proj.key || "PROJECT"} is ${pre1850_covered}/${matched_pre1850} (${pre1850_pct.toFixed(1)}% < 90.0% floor): ${earliest_gap_hits.slice(0, 5).join(", ")}`);
       if (bad_dates.length > 0)
-        errors.push(`Invalid or unsorted historical_names dates in city_metadata.json (${bad_dates.length}): ${bad_dates.slice(0, 5).join(", ")}`);
+        errors.push(`Invalid or unsorted historical_names dates in city_metadata (${bad_dates.length}): ${bad_dates.slice(0, 5).join(", ")}`);
       if (consec_variant_dups.length > 0)
-        errors.push(`Spurious consecutive variant-spelling renames in city_metadata.json (${consec_variant_dups.length}): ${consec_variant_dups.slice(0, 5).join(", ")}`);
+        errors.push(`Spurious consecutive variant-spelling renames in city_metadata (${consec_variant_dups.length}): ${consec_variant_dups.slice(0, 5).join(", ")}`);
+      if (dup_other_names.length > 0)
+        errors.push(`Case-insensitive duplicate or redundant .other_names in city_metadata (${dup_other_names.length}): ${dup_other_names.slice(0, 5).join(", ")}`);
       if (suspicious_names.length > 0)
-        errors.push(`Suspicious temple/monument/admin names in city_metadata.json (${suspicious_names.length}): ${suspicious_names.slice(0, 5).join(", ")}`);
+        errors.push(`Suspicious temple/monument/admin names in city_metadata (${suspicious_names.length}): ${suspicious_names.slice(0, 5).join(", ")}`);
       if (near_dups.length > 0)
-        errors.push(`Near-duplicate city_metadata.json records (${near_dups.length}): ${near_dups.slice(0, 5).join(", ")}`);
+        errors.push(`Near-duplicate city_metadata records (${near_dups.length}): ${near_dups.slice(0, 5).join(", ")}`);
 
       //Return statement
       return {
         bad_dates: bad_dates.length,
         consec_variant_dups: consec_variant_dups.length,
         coverage_pct: Number(cov_pct.toFixed(2)),
+        dup_other_names: dup_other_names.length,
         near_dups: near_dups.length,
         pre1850_coverage_pct: Number(pre1850_pct.toFixed(2)),
         suspicious_names: suspicious_names.length
@@ -713,7 +794,7 @@ let path = require("path");
         for (let i = 0; i < meta_arr.length; i++) {
           let rec = meta_arr[i];
           if (!rec || typeof rec !== "object") continue;
-          let nm = String(rec.name || "");
+          let nm = this.extractMetadataDisplayName(rec);
           if (!nm || nm.includes("\uFFFD")) bad_meta++;
           let c_str = String(rec.country || "").trim().toLowerCase();
           let k_str = String(rec.key || "");

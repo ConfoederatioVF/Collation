@@ -8,6 +8,8 @@ let { viscount_audit_utils } = require("./viscount_audit_utils");
 {
   let shell_and_scripts_auditor = {
     DIRECT_STADESTER_RE: /\b(?:population_Stadester|population_Velkscala)\.js\b/,
+    HARD_SUBAGENT_CAP: 24,
+    PY_AGENT_CALL_RE: /\b(?:agent|invoke_subagent|generate_content|chat\.completions\.create|messages\.create)\s*\(/,
     PY_BROWSER_CLOSE_RE: /\.(?:quit|close)\s*\(/,
     PY_BROWSER_LAUNCH_RE: /\bwebdriver\.(?:Chrome|Edge|Firefox)\s*\(|\basync_playwright\s*\(|\bsync_playwright\s*\(/,
     SKIP_DIRS: new Set([".git", ".Rproj.user", "__pycache__", "_gis_cache", "archive", "diagnostics_visual", "figures", "node_modules", "papers"]),
@@ -15,7 +17,7 @@ let { viscount_audit_utils } = require("./viscount_audit_utils");
 
     /**
      * Audits an ad-hoc Node.js script via Acorn AST + static rules for detached spawns, unclosed Puppeteer browsers,
-     * uncapped `os.cpus().length`, heap bloat and unguarded pipeline invocations.
+     * uncapped `os.cpus().length`, heap bloat, uncapped subagent concurrency (`> 24`), and unguarded pipeline invocations.
      * @alias shell_and_scripts_auditor.auditJsScript
      *
      * @param {string} arg0_source
@@ -108,6 +110,15 @@ let { viscount_audit_utils } = require("./viscount_audit_utils");
       if (/os\.cpus\(\)\.length/.test(source) && !/Math\.min\s*\([^)]*os\.cpus\(\)\.length/.test(source))
         errors.push(`[${label}] Uses uncapped \`os.cpus().length\` for worker concurrency; clamp via \`Math.min(4, os.cpus().length)\`.`);
 
+      // Check JS subagent/LLM concurrency cap (<= 24)
+      let js_cap_re = /\b(?:MAX_CONCURRENT_SUBAGENTS|HARD_MAX_CONCURRENCY|max_concurrency)\s*[:=]\s*(\d+)\b/g;
+      let jcm = null;
+      for (let iter = 0; (jcm = js_cap_re.exec(source)) !== null && iter < 20; iter++) {
+        let cap_n = Number(jcm[1]);
+        if (cap_n > this.HARD_SUBAGENT_CAP)
+          errors.push(`[${label}] Sets concurrency cap to ${cap_n} (> ${this.HARD_SUBAGENT_CAP} hard subagent ceiling).`);
+      }
+
       let base = path.basename(label).toLowerCase();
       if (base !== "population_stadester.js" && base !== "population_velkscala.js") {
         if (this.DIRECT_STADESTER_RE.test(source) && source.includes("spawn") &&
@@ -121,7 +132,9 @@ let { viscount_audit_utils } = require("./viscount_audit_utils");
     },
 
     /**
-     * Audits an ad-hoc Python script for uncapped worker pools, detached spawns, heap bloat and unclosed browsers.
+     * Audits an ad-hoc Python script for uncapped worker pools, uncapped `parallel()`/`asyncio.gather()`
+     * over `agent()` (`n > 24`), LLM calls on Pass-2 residuals or bulk geocoding, detached spawns,
+     * heap bloat, and unclosed browsers.
      * @alias shell_and_scripts_auditor.auditPythonScript
      *
      * @param {string} arg0_source
@@ -135,28 +148,34 @@ let { viscount_audit_utils } = require("./viscount_audit_utils");
       let source = String(arg0_source || "");
 
       //Declare local instance variables
+      let code_no_docstrings = this.stripPythonDocstrings(source);
       let errors = [];
-      let lines = source.split(/\r?\n/);
+      let lines = code_no_docstrings.split(/\r?\n/);
       let warnings = [];
 
       //Function body
-      let has_browser_launch = this.PY_BROWSER_LAUNCH_RE.test(source);
-      let has_browser_close = this.PY_BROWSER_CLOSE_RE.test(source);
-      let has_try_finally = /^\s*finally\s*:/m.test(source);
-      let has_with_stmt = /^\s*(?:async\s+)?with\b/m.test(source);
+      let has_browser_launch = this.PY_BROWSER_LAUNCH_RE.test(code_no_docstrings);
+      let has_browser_close = this.PY_BROWSER_CLOSE_RE.test(code_no_docstrings);
+      let has_try_finally = /^\s*finally\s*:/m.test(code_no_docstrings);
+      let has_with_stmt = /^\s*(?:async\s+)?with\b/m.test(code_no_docstrings);
 
       if (has_browser_launch && !(has_browser_close && (has_try_finally || has_with_stmt)))
         errors.push(`[${label}] Launches Selenium/Playwright browser without \`try...finally\` (or \`with\`) teardown calling \`.quit()\`/\`.close()\`; risks orphaned browser processes.`);
 
       let hm = null;
       this.UNBOUNDED_NODE_HEAP_RE.lastIndex = 0;
-      for (let iter = 0; (hm = this.UNBOUNDED_NODE_HEAP_RE.exec(source)) !== null && iter < 20; iter++) {
+      for (let iter = 0; (hm = this.UNBOUNDED_NODE_HEAP_RE.exec(code_no_docstrings)) !== null && iter < 20; iter++) {
         let mb = Number(hm[1]);
         if (mb > 8192)
           errors.push(`[${label}] Spawns Node with \`--max-old-space-size=${mb}\` (> 8.192 MiB cap; align with \`geopng_compute.json5\`).`);
       }
 
-      let has_popen_wait = /\.(?:wait|communicate|terminate|kill)\s*\(/.test(source);
+      let has_agent_call = this.PY_AGENT_CALL_RE.test(code_no_docstrings);
+      let has_capped_semaphore = false;
+      let has_popen_wait = /\.(?:wait|communicate|terminate|kill)\s*\(/.test(code_no_docstrings);
+      let has_wave_slicing = /\brange\s*\(\s*0\s*,\s*[^,]+,\s*(?:min\s*\(|(?:HARD_MAX_CONCURRENCY|max_concurrency|wave_size|batch_cap)\b|(?:[1-9]|1\d|2[0-4])\b)/.test(code_no_docstrings);
+
+      // Scan line-by-line (comments stripped) for pool caps, Semaphore caps, uncapped parallel/gather, Pass-2 / geocoding LLM bans
       for (let i = 0; i < lines.length; i++) {
         let line_no = i + 1;
         let ln = lines[i].replace(/#.*$/, "");
@@ -195,9 +214,44 @@ let { viscount_audit_utils } = require("./viscount_audit_utils");
           if (!has_popen_wait)
             warnings.push(`[${label}] line ${line_no}: \`subprocess.Popen\` called without visible \`.wait()\`/\`.communicate()\`/\`.terminate()\` cleanup.`);
         }
+
+        // Semaphore / subagent concurrency cap checks (hard n <= 24)
+        let sem_m = ln.match(/\b(?:asyncio\.)?Semaphore\s*\(([^)]*)\)/);
+        if (sem_m) {
+          let s_arg = sem_m[1].trim();
+          let s_num = s_arg.match(/^(\d+)$/);
+          if (s_num && Number(s_num[1]) > this.HARD_SUBAGENT_CAP)
+            errors.push(`[${label}] line ${line_no}: \`Semaphore(${s_num[1]})\` exceeds Operation Viscount hard subagent cap (<= ${this.HARD_SUBAGENT_CAP}).`);
+          else if (s_arg)
+            has_capped_semaphore = true;
+        }
+
+        let cap_assign_m = ln.match(/\b(?:HARD_MAX_CONCURRENCY|MAX_CONCURRENT_SUBAGENTS|MAX_CONCURRENCY|max_concurrency)\s*=\s*(\d+)\b/);
+        if (cap_assign_m && Number(cap_assign_m[1]) > this.HARD_SUBAGENT_CAP)
+          errors.push(`[${label}] line ${line_no}: concurrency cap \`${cap_assign_m[0]}\` exceeds hard ceiling (<= ${this.HARD_SUBAGENT_CAP}).`);
+
+        // Pass-2 residual settlements LLM ban (ignore safety guards that raise/reject pass2/residuals)
+        if (has_agent_call && /\b(?:residuals\.json|pass2)\b/i.test(ln)) {
+          let is_guard_line = /\b(?:raise|ValueError|RuntimeError|sys\.exit|return\s+\{[^}]*error|continue|skip|reject|ban|forbid|not\s+in)\b/i.test(ln) ||
+            /^\s*if\b.*\b(?:residuals|pass2)\b/i.test(ln);
+          if (!is_guard_line && /\b(?:open|read|load|glob|listdir|path\.join|batch_dir|input_file)\b/i.test(ln))
+            errors.push(`[${label}] line ${line_no}: loads Pass-2 residual settlements inside an LLM/agent script; Pass 2 must use deterministic \`resolve_residual_toponymy_whg_geohack.js\` (0 LLM agents).`);
+        }
+
+        // Bulk geocoding LLM ban
+        if (has_agent_call && /\b(?:geocode_batch|bulk_geocode|geocode_all|geocode_cities|geocod(?:e|ing)_(?:worker|agent|swarm))\b/i.test(ln))
+          errors.push(`[${label}] line ${line_no}: spawns LLM agents for bulk geocoding; use deterministic ETL or strictly bounded <= ${this.HARD_SUBAGENT_CAP} lookups.`);
       }
 
-      if (this.DIRECT_STADESTER_RE.test(source) && !source.includes("run_bounded.js") && !source.includes("run_bounded.py"))
+      // Check uncapped parallel(...) / asyncio.gather(...) over agent() calls
+      if (has_agent_call) {
+        let uses_parallel = /\bparallel\s*\(/.test(code_no_docstrings);
+        let uses_gather = /\basyncio\.gather\s*\(/.test(code_no_docstrings);
+        if ((uses_parallel || uses_gather) && !has_capped_semaphore && !has_wave_slicing)
+          errors.push(`[${label}] Uses uncapped \`${uses_parallel ? "parallel()" : "asyncio.gather()"}\` over \`agent()\`/LLM calls without a global \`asyncio.Semaphore(<= ${this.HARD_SUBAGENT_CAP})\` or \`<= ${this.HARD_SUBAGENT_CAP}\` wave slicing.`);
+      }
+
+      if (this.DIRECT_STADESTER_RE.test(code_no_docstrings) && !code_no_docstrings.includes("run_bounded.js") && !code_no_docstrings.includes("run_bounded.py"))
         errors.push(`[${label}] Invokes \`population_Stadester.js\`/\`population_Velkscala.js\` directly without \`run_bounded.js --lock stadester_velkscala\` mutex.`);
 
       //Return statement
@@ -277,6 +331,28 @@ let { viscount_audit_utils } = require("./viscount_audit_utils");
 
       //Return statement
       return out;
+    },
+
+    /**
+     * Strips triple-quoted Python docstrings/multiline string literals while preserving line count
+     * so static AST/line checks ignore prose comments and prompt rulebook blocks.
+     * @alias shell_and_scripts_auditor.stripPythonDocstrings
+     *
+     * @param {string} arg0_source
+     *
+     * @returns {string}
+     */
+    stripPythonDocstrings (arg0_source) {
+      //Convert from parameters
+      let src = String(arg0_source || "");
+
+      //Function body
+      let cleaned = src.replace(/"""[\s\S]*?"""|'''[\s\S]*?'''/g, function (arg0_match) {
+        return arg0_match.replace(/[^\r\n]/g, " ");
+      });
+
+      //Return statement
+      return cleaned;
     }
   };
 

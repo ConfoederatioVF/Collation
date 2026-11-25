@@ -1428,12 +1428,15 @@ def build_precolumbian_chapters(cfgs, guard, spatial, sampler):
         "pre_columbian_southern_cone": 0.36,
     }
 
+    only_ch = set(ch.strip() for ch in os.environ.get("QUIPU_ONLY_CHAPTERS", "").split(",") if ch.strip())
     for ch_id in [
         "pre_columbian_northern_andes",
         "pre_columbian_central_andes",
         "inca_empire_tawantinsuyu",
         "pre_columbian_southern_cone",
     ]:
+        if only_ch and ch_id not in only_ch:
+            continue
         ch_cfg = cfgs[ch_id]
         mask_idx = ChapterMaskIndex(ch_cfg["json5_path"], ch_cfg["mask_path"])
         dmin, dmax = ch_cfg["domain"]
@@ -1579,6 +1582,15 @@ def build_precolumbian_chapters(cfgs, guard, spatial, sampler):
             eval_years = sorted(set(y for y in eval_years if dmin <= y <= dmax))
 
         nuc_share = nuc_share_by_ch[ch_id]
+        southern_cone_nuc_shares = {
+            "sc_patagonia_tierra_del_fuego": 0.27,
+            "sc_pampas_salado_colorado": 0.28,
+            "sc_atacama_norte_grande": 0.62,
+            "sc_gran_chaco_pilcomayo": 0.36,
+            "sc_parana_uruguay_charrua": 0.38,
+            "sc_nw_andes_sierras_cuyo": 0.46,
+            "sc_chile_central_araucania": 0.44,
+        }
         reg_meta = mask_idx.regions
 
         for rid, recs in by_reg.items():
@@ -1592,14 +1604,26 @@ def build_precolumbian_chapters(cfgs, guard, spatial, sampler):
                 c_vals = list(cr["population"].values())
                 if c_vals:
                     cur_sum_ref += max(c_vals)
-            # Target sum of nucleated habitation catchments in this sub-region (authentic Andean/Muisca/Cone hierarchy)
-            target_sum_ref = max(len(recs) * 1450.0, reg_tot_ref * nuc_share - cur_sum_ref * 0.35)
-            max_plausible = len(recs) * (3200.0 if ch_id != "pre_columbian_southern_cone" else 2100.0)
-            target_sum_ref = min(target_sum_ref, max_plausible)
+            if ch_id == "pre_columbian_southern_cone":
+                ns_reg = southern_cone_nuc_shares.get(rid, nuc_share)
+                # Strict biophysical sub-regional carrying-capacity budget (never inflate hunter-gatherer sites!)
+                reg_budget = max(reg_tot_ref * ns_reg * 0.48, reg_tot_ref * ns_reg - cur_sum_ref * 0.65)
+                if rid == "sc_patagonia_tierra_del_fuego":
+                    target_sum_ref = min(reg_budget, len(recs) * 52.0)
+                elif rid == "sc_pampas_salado_colorado":
+                    target_sum_ref = min(reg_budget, len(recs) * 280.0)
+                elif rid == "sc_atacama_norte_grande":
+                    target_sum_ref = min(reg_budget, len(recs) * 140.0)
+                else:
+                    target_sum_ref = min(reg_budget, len(recs) * 1150.0)
+            else:
+                # Target sum of nucleated habitation catchments in this sub-region (authentic Andean/Muisca/Cone hierarchy)
+                target_sum_ref = max(len(recs) * 1450.0, reg_tot_ref * nuc_share - cur_sum_ref * 0.35)
+                max_plausible = len(recs) * 3200.0
+                target_sum_ref = min(target_sum_ref, max_plausible)
 
             # Rank-order + continuous Stage B kriged/area weight blend to preserve authentic Zipf-lognormal
-            # settlement size hierarchy (hamlets ~220-500, villages ~550-2200, regional centres ~2500-7500)
-            # without any hard flat floor/ceiling clamps!
+            # settlement size hierarchy without any hard flat floor/ceiling clamps!
             ranked = sorted(range(len(recs)), key=lambda idx: float(recs[idx]["_raw_weight"]))
             n_r = len(recs)
             weights = [0.0] * n_r
@@ -1608,12 +1632,18 @@ def build_precolumbian_chapters(cfgs, guard, spatial, sampler):
                 if r.get("_direct_peak_pop"):
                     weights[idx] = float(r["_direct_peak_pop"])
                 else:
-                    # Smooth Zipf quantile factor (0.35..4.6) multiplied by continuous kriged/area weight^0.32
+                    # Smooth Zipf quantile factor multiplied by continuous kriged/area weight^0.32
                     u = (pos + 0.5) / float(max(1, n_r))
-                    zipf_scale = math.exp(-0.95 + 2.55 * (u ** 1.18))
+                    if ch_id == "pre_columbian_southern_cone" and rid == "sc_patagonia_tierra_del_fuego":
+                        zipf_scale = math.exp(-0.55 + 1.45 * (u ** 1.12))
+                    elif ch_id == "pre_columbian_southern_cone" and rid == "sc_atacama_norte_grande":
+                        zipf_scale = math.exp(-0.60 + 1.65 * (u ** 1.15))
+                    else:
+                        zipf_scale = math.exp(-0.95 + 2.55 * (u ** 1.18))
                     weights[idx] = zipf_scale * (float(r["_raw_weight"]) ** 0.32)
             w_sum = sum(weights) or 1.0
 
+            r_ref_pop = max(1.0, interp_region_pop(r_pop_curve, ref_yr))
             for r, wi in zip(recs, weights):
                 y0, y1 = r["_span"]
                 lat, lon = r["coords"]
@@ -1621,8 +1651,14 @@ def build_precolumbian_chapters(cfgs, guard, spatial, sampler):
                     site_peak_ref = float(r["_direct_peak_pop"])
                 else:
                     site_peak_ref = target_sum_ref * (wi / w_sum)
-                # Soft log-taper above 7500 (never creates a flat shelf!)
-                if site_peak_ref > 7500.0:
+                # Soft log-taper (never creates a flat shelf!)
+                if ch_id == "pre_columbian_southern_cone" and rid == "sc_patagonia_tierra_del_fuego":
+                    if site_peak_ref > 135.0:
+                        site_peak_ref = 135.0 + 32.0 * math.log1p((site_peak_ref - 135.0) / 32.0)
+                elif ch_id == "pre_columbian_southern_cone" and rid == "sc_pampas_salado_colorado":
+                    if site_peak_ref > 620.0:
+                        site_peak_ref = 620.0 + 180.0 * math.log1p((site_peak_ref - 620.0) / 180.0)
+                elif site_peak_ref > 7500.0:
                     site_peak_ref = 7500.0 + 1800.0 * math.log1p((site_peak_ref - 7500.0) / 1800.0)
 
                 s_yrs = [y for y in eval_years if y0 <= y <= y1]
@@ -1632,16 +1668,29 @@ def build_precolumbian_chapters(cfgs, guard, spatial, sampler):
                     s_yrs.append(y1)
                 s_yrs = sorted(set(y for y in s_yrs if dmin <= y <= dmax))
 
-                d_end = max(0.05, sampler.sample_pop_density(lat, lon, s_yrs[-1]))
-                r_end = max(1.0, interp_region_pop(r_pop_curve, s_yrs[-1]))
-                pop_series = {}
-                for yr in s_yrs:
-                    d_t = max(0.02, sampler.sample_pop_density(lat, lon, yr))
-                    r_t = max(1.0, interp_region_pop(r_pop_curve, yr))
-                    rel_growth = ((d_t / d_end) ** 0.50) * ((r_t / r_end) ** 0.50)
-                    rel_growth = max(0.08, min(1.30, rel_growth))
-                    val = max(18, int(round(site_peak_ref * rel_growth)))
-                    pop_series[str(yr)] = val
+                if ch_id == "pre_columbian_southern_cone":
+                    # Reference strictly to ref_yr (1500 AD) so Early/Mid Holocene camps scale down authentically
+                    # without piling up on a hard floor clamp!
+                    d_ref = max(0.05, sampler.sample_pop_density(lat, lon, ref_yr))
+                    pop_series = {}
+                    for yr in s_yrs:
+                        d_t = max(0.015, sampler.sample_pop_density(lat, lon, yr))
+                        r_t = max(1.0, interp_region_pop(r_pop_curve, yr))
+                        rel_growth = ((d_t / d_ref) ** 0.25) * ((r_t / r_ref_pop) ** 0.44)
+                        rel_growth = max(0.14, min(1.18, rel_growth))
+                        val = max(5, int(round(site_peak_ref * rel_growth)))
+                        pop_series[str(yr)] = val
+                else:
+                    d_end = max(0.05, sampler.sample_pop_density(lat, lon, s_yrs[-1]))
+                    r_end = max(1.0, interp_region_pop(r_pop_curve, s_yrs[-1]))
+                    pop_series = {}
+                    for yr in s_yrs:
+                        d_t = max(0.02, sampler.sample_pop_density(lat, lon, yr))
+                        r_t = max(1.0, interp_region_pop(r_pop_curve, yr))
+                        rel_growth = ((d_t / d_end) ** 0.50) * ((r_t / r_end) ** 0.50)
+                        rel_growth = max(0.08, min(1.30, rel_growth))
+                        val = max(18, int(round(site_peak_ref * rel_growth)))
+                        pop_series[str(yr)] = val
 
                 r["population"] = sanitise_population_dict(pop_series, dmin, dmax)
 
@@ -2214,9 +2263,11 @@ def main():
     spatial = SpatialBoundsValidator()
     sampler = RasterSubstratumSampler()
 
+    only_ch = set(ch.strip() for ch in os.environ.get("QUIPU_ONLY_CHAPTERS", "").split(",") if ch.strip())
     build_precolumbian_chapters(cfgs, guard, spatial, sampler)
-    build_colonial_chapters(cfgs, guard, spatial, sampler)
-    print("[QUIPU ENRICHMENT] Completed Chapters 1-8 successfully.")
+    if not only_ch or any(c not in ("pre_columbian_northern_andes", "pre_columbian_central_andes", "inca_empire_tawantinsuyu", "pre_columbian_southern_cone") for c in only_ch):
+        build_colonial_chapters(cfgs, guard, spatial, sampler)
+    print("[QUIPU ENRICHMENT] Completed requested chapters successfully.")
 
 
 if __name__ == "__main__":

@@ -177,6 +177,24 @@ viscount_table <- function (arg0_df, arg1_caption = NULL, arg2_col_names = NULL,
   for (nm in setdiff(names(extra), c("caption", "col_names", "col.names"))) {
     if (is.null(opts[[nm]])) opts[[nm]] <- extra[[nm]]
   }
+  max_display_rows <- if (!is.null(opts$max_rows)) as.integer(opts$max_rows) else 45L
+  if (is.data.frame(df_clean) && !isTRUE(opts$allow_unbounded) && nrow(df_clean) > max_display_rows) {
+    total_n <- nrow(df_clean)
+    keep_n <- min(40L, max_display_rows)
+    rem_n <- total_n - keep_n
+    df_clean <- df_clean[seq_len(keep_n), , drop = FALSE]
+    tail_row <- as.list(rep("-", ncol(df_clean)))
+    names(tail_row) <- names(df_clean)
+    tail_row[[1]] <- paste0("... plus ", viscount_fmt_number(rem_n, 0L), " additional assessed settlements (complete ledger in JSON)")
+    df_clean <- rbind(df_clean, as.data.frame(tail_row, check.names = FALSE, stringsAsFactors = FALSE))
+    rownames(df_clean) <- NULL
+    if (!is.null(arg1_caption) && nzchar(arg1_caption) && !grepl("leading|top ", arg1_caption, ignore.case = TRUE)) {
+      arg1_caption <- paste0(
+        sub("\\.$", "", arg1_caption),
+        " (top ", keep_n, " of ", viscount_fmt_number(total_n, 0L), " entries; full dataset archived in chapter JSON)."
+      )
+    }
+  }
   if (!is.null(opts$label)) opts$label <- gsub("_", "-", as.character(opts$label))
   opts$caption <- arg1_caption
   if (!is.null(arg2_col_names)) opts$col_names <- arg2_col_names
@@ -218,4 +236,130 @@ viscount_figure <- function (arg0_file_path, arg1_caption = NULL, arg2_label = N
     return(render_figure_template(arg0_file_path, opts))
   }
   cat(sprintf("\n![%s](%s)\n\n", arg1_caption, arg0_file_path))
+}
+
+
+#' Safe ISO-3 lookup that falls back cleanly without throwing subscript-out-of-bounds
+#'
+#' @param arg0_country Country name string
+#' @param arg1_map Optional named character vector of Country -> ISO3
+#' @return 3-letter ISO code
+viscount_iso3 <- function (arg0_country, arg1_map = NULL) {
+  cn <- as.character(arg0_country)
+  if (!is.null(arg1_map) && cn %in% names(arg1_map)) {
+    val <- unname(arg1_map[[cn]])
+    if (!is.null(val) && !is.na(val) && nzchar(val)) return(val)
+  }
+  canon <- c(
+    "Angola" = "AGO", "Benin" = "BEN", "Botswana" = "BWA", "British Indian Ocean Territory" = "IOT",
+    "Burkina Faso" = "BFA", "Burundi" = "BDI", "Cabo Verde" = "CPV", "Cameroon" = "CMR",
+    "Central African Republic" = "CAF", "Chad" = "TCD", "Comoros" = "COM",
+    "Democratic Republic of the Congo" = "COD", "Djibouti" = "DJI", "Equatorial Guinea" = "GNQ",
+    "Eritrea" = "ERI", "Ethiopia" = "ETH", "French Southern and Antarctic Lands" = "ATF",
+    "Gabon" = "GAB", "Gambia" = "GMB", "Ghana" = "GHA", "Guinea" = "GIN", "Guinea-Bissau" = "GNB",
+    "Ivory Coast" = "CIV", "Kenya" = "KEN", "Lesotho" = "LSO", "Liberia" = "LBR",
+    "Madagascar" = "MDG", "Malawi" = "MWI", "Mali" = "MLI", "Mauritania" = "MRT",
+    "Mauritius" = "MUS", "Mayotte" = "MYT", "Mozambique" = "MOZ", "Namibia" = "NAM",
+    "Niger" = "NER", "Nigeria" = "NGA", "Republic of the Congo" = "COG", "Reunion" = "REU",
+    "Rwanda" = "RWA", "Saint Helena" = "SHN", "Sao Tome and Principe" = "STP", "Senegal" = "SEN",
+    "Seychelles" = "SYC", "Sierra Leone" = "SLE", "Somalia" = "SOM", "Somaliland" = "SML",
+    "South Africa" = "ZAF", "South Sudan" = "SSD", "Sudan" = "SDN", "Togo" = "TGO",
+    "Uganda" = "UGA", "United Republic of Tanzania" = "TZA", "Zambia" = "ZMB",
+    "Zimbabwe" = "ZWE", "eSwatini" = "SWZ"
+  )
+  if (cn %in% names(canon)) return(unname(canon[[cn]]))
+  toupper(substr(gsub("[^A-Za-z]", "", cn), 1L, 3L))
+}
+
+
+#' Dynamically assigns every settlement entry to a chapter sub-region ID using
+#' an optional legacy key lookup plus the chapter areal mask PNG (with -5:5 search
+#' and nearest-assigned fallback so newly enriched settlements never throw out-of-bounds).
+#'
+#' @param arg0_entries List of settlement entries with `$key` and `$coords`
+#' @param arg1_summary_cache Parsed `<stem>_summary_cache.json` list containing `$subregions`
+#' @param arg2_mask_png Path to `<stem>_areal_mask.png`
+#' @param arg3_legacy_lookup Optional named character vector `key -> subregion_id`
+#' @return Named character vector `key -> subregion_id` covering all entries
+viscount_resolve_subregion_keys <- function (arg0_entries, arg1_summary_cache, arg2_mask_png, arg3_legacy_lookup = NULL) {
+  sub_list <- arg1_summary_cache$subregions
+  sub_ids <- vapply(sub_list, function (x) as.character(x$id), character(1))
+  all_keys <- vapply(arg0_entries, function (e) as.character(e$key), character(1))
+  out <- setNames(rep(NA_character_, length(all_keys)), all_keys)
+
+  if (!is.null(arg3_legacy_lookup) && length(arg3_legacy_lookup) > 0L) {
+    hits <- intersect(all_keys, names(arg3_legacy_lookup))
+    if (length(hits) > 0L) {
+      vals <- unname(arg3_legacy_lookup[hits])
+      valid_v <- !is.na(vals) & nzchar(vals)
+      out[hits[valid_v]] <- vals[valid_v]
+    }
+  }
+
+  need_idx <- which(is.na(out))
+  if (length(need_idx) > 0L && requireNamespace("png", quietly = TRUE) && file.exists(arg2_mask_png)) {
+    mask_img <- png::readPNG(arg2_mask_png)
+    h_px <- dim(mask_img)[1]
+    w_px <- dim(mask_img)[2]
+    rgb_keys <- vapply(sub_list, function (sr) paste(as.integer(sr$rgb), collapse = "_"), character(1))
+    rgb_map <- as.list(setNames(sub_ids, rgb_keys))
+    for (i in need_idx) {
+      e <- arg0_entries[[i]]
+      lat <- as.numeric(e$coords[[1]])
+      lon <- as.numeric(e$coords[[2]])
+      r_idx <- min(max(as.integer(floor((90 - lat) * h_px / 180)) + 1L, 1L), h_px)
+      c_idx <- min(max(as.integer(floor((lon + 180) * w_px / 360)) + 1L, 1L), w_px)
+      px_key <- paste(
+        as.integer(round(mask_img[r_idx, c_idx, 1] * 255)),
+        as.integer(round(mask_img[r_idx, c_idx, 2] * 255)),
+        as.integer(round(mask_img[r_idx, c_idx, 3] * 255)),
+        sep = "_"
+      )
+      sid <- rgb_map[[px_key]]
+      if (is.null(sid) || is.na(sid)) {
+        best_d <- 1e9
+        for (dr in -5:5) {
+          for (dc in -5:5) {
+            rr <- min(max(r_idx + dr, 1L), h_px)
+            cc <- min(max(c_idx + dc, 1L), w_px)
+            p2 <- paste(
+              as.integer(round(mask_img[rr, cc, 1] * 255)),
+              as.integer(round(mask_img[rr, cc, 2] * 255)),
+              as.integer(round(mask_img[rr, cc, 3] * 255)),
+              sep = "_"
+            )
+            cand <- rgb_map[[p2]]
+            if (!is.null(cand) && !is.na(cand)) {
+              d <- dr * dr + dc * dc
+              if (d < best_d) {
+                best_d <- d
+                sid <- cand
+              }
+            }
+          }
+        }
+      }
+      if (!is.null(sid) && !is.na(sid)) out[[i]] <- sid
+    }
+  }
+
+  # Nearest-neighbour geographic fallback for any remaining offshore edge point
+  still_na <- which(is.na(out))
+  if (length(still_na) > 0L) {
+    ok_idx <- which(!is.na(out))
+    if (length(ok_idx) > 0L) {
+      ok_lats <- vapply(arg0_entries[ok_idx], function (e) as.numeric(e$coords[[1]]), numeric(1))
+      ok_lons <- vapply(arg0_entries[ok_idx], function (e) as.numeric(e$coords[[2]]), numeric(1))
+      ok_sids <- unname(out[ok_idx])
+      for (i in still_na) {
+        lat <- as.numeric(arg0_entries[[i]]$coords[[1]])
+        lon <- as.numeric(arg0_entries[[i]]$coords[[2]])
+        d2 <- (ok_lats - lat)^2 + (ok_lons - lon)^2
+        out[[i]] <- ok_sids[which.min(d2)]
+      }
+    } else {
+      out[still_na] <- sub_ids[1L]
+    }
+  }
+  out
 }

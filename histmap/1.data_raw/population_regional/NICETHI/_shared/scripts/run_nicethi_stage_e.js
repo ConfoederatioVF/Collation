@@ -190,6 +190,11 @@ let include_handbook_seam = process.argv.includes("--include-handbook");
           dropped_placeholders++;
           continue;
         }
+        if (/^(?:Church|Tomb|Pillar Tomb|Diani Kongo Mosque|Fäqi Däbbis Mosque|Goze Mosque|Kimana Sanctuary|Yekka-Mikaël Church|Napoleon Gulf - Jinja)$/i.test(cname)) {
+          delete nicethi_obj[k];
+          dropped_placeholders++;
+          continue;
+        }
         if (/^(?:jinja|sabon-machi)$/i.test(cname)) {
           c.verified_settlement = true;
           tagged_verified++;

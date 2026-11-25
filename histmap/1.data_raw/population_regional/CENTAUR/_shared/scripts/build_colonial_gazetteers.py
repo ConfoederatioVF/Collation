@@ -87,7 +87,10 @@ def strip_us_suffix(name):
 
 
 def norm_key(raw_s):
-  return re.sub(r"[^a-z0-9]+", "", clean_name(raw_s).lower())
+  s = clean_name(raw_s).lower()
+  s = s.replace("æ", "ae").replace("ø", "oe").replace("å", "aa").replace("ð", "d").replace("þ", "th")
+  s = re.sub(r"\([^)]*\)", "", s)
+  return re.sub(r"[^a-z0-9]+", "", s)
 
 
 class ColonialMask:
@@ -269,6 +272,8 @@ def main():
       ex_path = mod.dir / f"{mod.stem}_settlements.json"
       if ex_path.exists():
         for x in json.loads(ex_path.read_text(encoding="utf-8")).values():
+          if "1763" in mod.stem and clean_name(x.get("country")).lower() == "greenland":
+            continue
           xc = dict(x)
           xc["name"] = re.sub(r"\s*\(-?\d+\.\d+,\s*-?\d+\.\d+\)$", "", str(x.get("name") or "")).strip()
           if not NON_HABITATION_RE.search(xc["name"]):
@@ -287,6 +292,8 @@ def main():
       ex_path = mod.dir / f"{mod.stem}_settlements.json"
       if ex_path.exists():
         for x in json.loads(ex_path.read_text(encoding="utf-8")).values():
+          if "1763" in mod.stem and clean_name(x.get("country")).lower() == "greenland":
+            continue
           xc = dict(x)
           xc["name"] = re.sub(r"\s*\(-?\d+\.\d+,\s*-?\d+\.\d+\)$", "", str(x.get("name") or "")).strip()
           if not NON_HABITATION_RE.search(xc["name"]):
@@ -304,9 +311,12 @@ def main():
               add_item(x, 2, "CENTAUR Pre-Columbian & Protohistoric Indigenous Registry")
     return cands
 
+  only_mods = set(s.strip() for s in os.environ.get("CENTAUR_ONLY_MODULES", "").split(",") if s.strip())
   print("\n--- Colonial Module Assembly Summary ---")
   total_col = 0
   for mod in modules:
+    if only_mods and mod.stem not in only_mods:
+      continue
     cands = collect_candidates_for(mod)
     cands.sort(key=lambda c: (c["wave"], -len(c["population"]), -max(c["population"].values())))
     kept = {}

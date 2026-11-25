@@ -766,16 +766,34 @@
             let loc_latest_yr = loc_pop_yrs.length > 0 ? Math.max.apply(null, loc_pop_yrs) : -Infinity;
             let act_peak = population_Stadester_uud.getPeakPopulation(actual_city.population);
             let loc_peak = population_Stadester_uud.getPeakPopulation(local_city.population);
-            let can_take_canonical_identity = Boolean(is_primary_label_same || (loc_latest_yr >= act_latest_yr && loc_peak >= act_peak*0.5));
+            let act_is_cap = Boolean(actual_city.is_capital || actual_city.capital);
+            let loc_is_cap = Boolean(local_city.is_capital || local_city.capital);
+            let can_take_canonical_identity = Boolean(
+              (loc_is_cap && !act_is_cap) ||
+              ((!act_is_cap || loc_is_cap) && (is_primary_label_same || (loc_latest_yr >= act_latest_yr && loc_peak >= act_peak*0.5)))
+            );
 
+            if (loc_is_cap) actual_city.is_capital = true;
             if (local_city.name && actual_city.name !== local_city.name) {
               if (!actual_city.other_names) actual_city.other_names = [];
               if (can_take_canonical_identity) {
-                if (!actual_city.other_names.includes(actual_city.name)) actual_city.other_names.push(actual_city.name);
+                actual_city.other_names.push(actual_city.name);
                 actual_city.name = local_city.name;
               } else {
-                if (!actual_city.other_names.includes(local_city.name)) actual_city.other_names.push(local_city.name);
+                actual_city.other_names.push(local_city.name);
               }
+            }
+            if (Array.isArray(actual_city.other_names) && actual_city.other_names.length > 0) {
+              let seen_low = new Set([String(actual_city.name || "").trim().toLowerCase()]);
+              let dedup_o = [];
+              for (let oi = 0; oi < actual_city.other_names.length; oi++) {
+                let s = String(actual_city.other_names[oi] || "").trim();
+                let lo = s.toLowerCase();
+                if (!s || seen_low.has(lo)) continue;
+                seen_low.add(lo);
+                dedup_o.push(s);
+              }
+              actual_city.other_names = dedup_o;
             }
             if (actual_city.name_peaks && local_city.name && can_take_canonical_identity)
               actual_city.name_peaks[local_city.name] = 1e12;

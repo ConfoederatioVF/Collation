@@ -169,16 +169,21 @@
     require_evidence_basis_for_historical: true
   },
 
-  // Stage C: Municipal-limits non-decomposition vs extra-municipal suburb preservation
+  // Stage C: Municipal-boundary merging (city proper) vs extra-municipal suburb preservation
   municipal_decomposition_rules: {
     capital_overrides_largest_population: true,
+    forbid_metro_area_municipality_collapse: true,
     intra_municipal_suffix_regexes: [
       "\\b(?:arrondissement|borough|ward|stadtbezirk|bezirk|okrug|shiyakha|qism|kism|markaz|mahalle|alcaldia|delegacion|sub-?district)\\b",
       "\\b(?:raion|rayon)\\s*(?:of\\s+)?(?:baku|yerevan|tbilisi|moscow|kyiv|minsk|almaty|tashkent)?$",
       "\\(mod_uk\\)$",
       "-(?:ku|gu|dong|quận)$",
-      "^\\d+(?:er|e|st|nd|rd|th)\\s+arrondissement\\b"
+      "^\\d+(?:er|e|st|nd|rd|th)\\s+arrondissement\\b",
+      "^paris\\s+\\d{2}\\b"
     ],
+    merge_same_municipal_boundary_points: true,
+    municipal_coord_snap_km: 2.5,
+    prefer_boundary_polygon_over_radius: true,
     preserve_extra_municipal_suburbs: true
   },
 
@@ -231,21 +236,74 @@
     min_regional_arch_share: 0.50
   },
 
-  // Stage F: Regions & territories requiring mandatory pre-colonial / indigenous endonym checks
+  // Stage F: 2-Pass Toponymy Pipeline, Compact Batching & Hard Subagent Concurrency Cap
+  toponymy_pipeline_policy: {
+    batch_schema_version: "3.0_compact_coord_map",
+    case_insensitive_dedup_other_names: true,
+    drop_other_names_matching_canonical_or_history: true,
+    max_concurrent_subagents: 24,
+    on_disk_shard_schema: "dataview_v2_compatible",
+    pass1_max_batch_size: 200,
+    pass1_min_batch_size: 40,
+    pass1_min_peak_pop: 10000,
+    pass1_target_batches_per_wave: 24,
+    pass2_allow_llm_agents: false,
+    pass2_geohack_max_dist_km: 8.0,
+    pass2_max_http_workers: 4,
+    pass2_mode: "whg_geohack_deterministic",
+    pass2_whg_max_dist_km: 10.0
+  },
+
+  // Stage F: Structural Rules for Toponyms (Occupying Authority Contemporaneous Latin Transliteration)
+  toponymy_naming_policy: {
+    de_facto_authority_lang_hints: {
+      austro_hungarian: ["de", "hu"],
+      british_empire: ["en"],
+      chinese_dynastic_prc: ["zh", "en"],
+      danish_realm: ["da", "en"],
+      dutch_empire: ["nl", "en"],
+      french_empire: ["fr", "en"],
+      german_empire: ["de", "en"],
+      japanese_empire: ["ja", "en"],
+      ottoman_empire: ["tr", "en"],
+      polish_lithuanian: ["pl", "en"],
+      portuguese_empire: ["pt", "en"],
+      russian_soviet: ["ru", "en"],
+      spanish_empire: ["es", "en"]
+    },
+    forbid_non_latin_in_canonical_or_history: true,
+    rule_1_occupying_authority: "Always use the name preferred by the de facto ruling or occupying authority for each period, rendered in the contemporaneous English-language Latin transliteration.",
+    rule_2_period_accuracy: "Use historically contemporaneous names per era rather than retrofitting modern names onto earlier periods.",
+    rule_3_capital_override: "Settlements identified as capital cities must always carry the capital city's canonical contemporaneous name even when underlying population records carry another label."
+  },
+
+  // Stage F & Dataview: Persistent Spatial Point Overlay Binding Policy
+  overlay_binding_policy: {
+    capital_max_radius_km: 15.0,
+    capital_split_merge_radius_km: 3.0,
+    capital_tier0_lock: true,
+    default_max_radius_km: 10.0,
+    dense_cluster_radius_km: 2.5,
+    forbid_distant_homonym_snap: true,
+    mode: "nearest_point_overlay",
+    prefer_city_proper_over_metro: true
+  },
+
+  // Stage F: Regions & territories requiring pre-colonial ruling-authority checks prior to colonial rule
   indigenous_endonym_regions: [
     "CENTAUR", "PRETA", "QUIPU", "JAGUAR", "AUSTRAL", "NICETHI", "CASTLE", "POLARIS", "MAGNETIC"
   ],
 
   endonym_transliteration_standards: {
-    arabic_persian: "ALA-LC / BGN-PCGN endonymic Latin (no comma-inverted Al-/El-)",
-    chinese: "Hanyu Pinyin without tone numbers",
-    cyrillic_slavic: "National/BGN-PCGN endonymic Latin (Kyiv, Chernihiv, Baranavichy; zero ASCII backtick haceks)",
-    greek: "ELOT 743 / ISO 843 endonymic Latin",
-    indic: "IAST / standard Indian endonymic Latin",
-    indigenous_precolonial: "Attested Indigenous endonym with Unicode diacritics (Nuuk/Nûk, Tāmaki Makaurau, Warrane, Utqiaġvik, Qosqo, Tenochtitlan)",
-    japanese: "Modified Hepburn",
-    korean: "Revised Romanization of Korean",
-    turkic: "Official modern Latin endonym (İstanbul, Bakı, Samarqand, Toshkent/Tashkent; zero UE/AE/OE ASCII digraphs)"
+    arabic_persian: "Contemporaneous English-language Latin transliteration (ALA-LC / BGN-PCGN; no comma-inverted Al-/El-)",
+    chinese: "Contemporaneous English-language Latin transliteration of ruling authority (Hanyu Pinyin without tone numbers for PRC; Wade-Giles/Postal where historically contemporaneous)",
+    cyrillic_slavic: "Contemporaneous English-language Latin transliteration of de facto ruling authority (e.g. Kiev under Russian/Soviet rule -> Kyiv 1991.8.24; zero ASCII backtick haceks)",
+    greek: "Contemporaneous English-language Latin transliteration (Classical/Byzantine Latin-English forms historically; ELOT 743 / standard English modern)",
+    indic: "Contemporaneous English-language Latin transliteration of ruling authority (e.g. Bombay/Calcutta/Madras under British Raj -> Mumbai/Kolkata/Chennai on official rename)",
+    indigenous_precolonial: "Attested pre-colonial ruling-authority name in Latin script prior to colonial occupation (Tenochtitlan, Qosqo, Tamaki Makaurau, Warrane, Nuuk, Utqiagvik)",
+    japanese: "Modified Hepburn / contemporaneous English-language Latin transliteration (Edo -> Tokyo 1868.9.3; Keijo in Korea 1910-1945 -> Seoul 1945.8.15)",
+    korean: "Contemporaneous English-language Latin transliteration (Hanseong -> Keijo 1910.8.29 -> Seoul 1945.8.15; Revised Romanisation modern)",
+    turkic: "Contemporaneous English-language Latin transliteration of ruling authority (Constantinople -> Istanbul 1930.3.28; zero UE/AE/OE ASCII digraphs)"
   },
 
   // Countries/jurisdictions across the 14 Viscount regions where indigenous, official or historical

@@ -596,6 +596,21 @@
           city._raw_min_year = (rem_yrs.length > 0) ? rem_yrs[0] : null;
         }
       }
+
+      // Case-insensitive deduplication of .other_names (drop exact duplicates and exact matches to .name)
+      if (Array.isArray(city.other_names)) {
+        let seen_other = new Set([String(city.name || "").trim().toLowerCase()]);
+        let clean_other = [];
+        for (let oi = 0; oi < city.other_names.length; oi++) {
+          let s = String(city.other_names[oi] || "").trim();
+          let lo = s.toLowerCase();
+          if (!s || seen_other.has(lo)) continue;
+          seen_other.add(lo);
+          clean_other.push(s);
+        }
+        if (clean_other.length > 0) city.other_names = clean_other;
+        else delete city.other_names;
+      }
     }
 
     //Return statement

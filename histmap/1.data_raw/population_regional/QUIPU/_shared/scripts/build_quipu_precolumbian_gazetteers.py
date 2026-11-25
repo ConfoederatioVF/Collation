@@ -502,25 +502,25 @@ def get_ch4_southern_cone_sites():
         _site("Montevideo Charrúa", "Uruguay", -34.884, -56.182, {400: 390, 1000: 1180, 1450: 1960}, s_lit),
 
         # --- Humid & Dry Pampas (sc_pampas_salado_colorado) ---
-        _site("Arroyo Seco", "Argentina", -38.362, -60.244, {-9000: 48, -6000: 96, -2000: 240, 1000: 780, 1450: 1260}, s_lit),
-        _site("Cerro La China", "Argentina", -37.947, -58.618, {-8500: 36, -5000: 82, 500: 420, 1400: 940}, s_lit),
-        _site("La Guillerma Salado", "Argentina", -35.814, -57.826, {400: 460, 1000: 1240, 1450: 2040}, s_lit, ["Querandí"]),
-        _site("Luján Querandí", "Argentina", -34.570, -59.105, {600: 680, 1100: 1780, 1450: 2940}, s_lit),
-        _site("Río Colorado Pampas", "Argentina", -38.993, -64.095, {400: 340, 1000: 880, 1450: 1460}, s_lit, ["Het"]),
+        _site("Arroyo Seco", "Argentina", -38.362, -60.244, {-9000: 26, -6000: 48, -2000: 115, 1000: 265, 1450: 390}, s_lit),
+        _site("Cerro La China", "Argentina", -37.947, -58.618, {-8500: 22, -5000: 42, 500: 145, 1400: 275}, s_lit),
+        _site("La Guillerma Salado", "Argentina", -35.814, -57.826, {400: 185, 1000: 410, 1450: 620}, s_lit, ["Querandí"]),
+        _site("Luján Querandí", "Argentina", -34.570, -59.105, {600: 235, 1100: 540, 1450: 790}, s_lit),
+        _site("Río Colorado Pampas", "Argentina", -38.993, -64.095, {400: 120, 1000: 280, 1450: 430}, s_lit, ["Het"]),
 
         # --- Patagonia, Magallanes & Tierra del Fuego (sc_patagonia_tierra_del_fuego) ---
-        _site("Negro Muerto", "Argentina", -39.812, -65.285, {400: 380, 1000: 960, 1450: 1580}, s_pat, ["Choele Choel Tehuelche"]),
-        _site("Piedra Parada", "Argentina", -42.658, -70.097, {-4000: 44, -1000: 165, 800: 540, 1450: 920}, s_pat),
-        _site("Punta Pardelas Valdés", "Argentina", -42.622, -64.254, {-3000: 68, 0: 220, 1000: 640, 1450: 1080}, s_pat),
-        _site("Cueva de las Manos", "Argentina", -47.155, -70.655, {-7300: 42, -4000: 94, -1000: 210, 700: 480, 1400: 760}, s_pat, ["Río Pinturas"]),
-        _site("Piedra Museo", "Argentina", -47.889, -67.876, {-9500: 32, -6000: 64, -2000: 148, 1000: 420}, s_pat),
-        _site("Los Toldos", "Argentina", -47.372, -68.926, {-10000: 35, -7000: 72, -2000: 175, 1000: 490}, s_pat),
-        _site("Cerro de los Indios", "Argentina", -47.589, -71.751, {-2000: 88, 0: 245, 1000: 560, 1450: 840}, s_pat, ["Lago Posadas"]),
-        _site("Cueva Fell", "Chile", -52.043, -70.056, {-9000: 34, -5000: 78, -1000: 195, 1000: 520, 1450: 880}, s_pat, ["Pali Aike"]),
-        _site("Cueva del Milodón", "Chile", -51.565, -72.620, {-9500: 28, -5000: 62, 500: 310, 1400: 580}, s_pat, ["Última Esperanza"]),
-        _site("Bahía Inútil Marazzi", "Chile", -53.471, -69.313, {-7500: 36, -3000: 112, 500: 360, 1450: 740}, s_pat, ["Selk'nam"]),
-        _site("Túnel Beagle Channel", "Argentina", -54.822, -68.158, {-5000: 64, -2000: 185, 500: 480, 1450: 960}, s_pat, ["Imiwaia", "Yaghan"]),
-        _site("Cabo San Pablo", "Argentina", -54.294, -66.711, {-2000: 92, 500: 340, 1450: 680}, s_pat, ["Haush-Selk'nam"]),
+        _site("Negro Muerto", "Argentina", -39.812, -65.285, {400: 78, 1000: 132, 1450: 185}, s_pat, ["Choele Choel Tehuelche"]),
+        _site("Piedra Parada", "Argentina", -42.658, -70.097, {-4000: 18, -1000: 42, 800: 74, 1450: 112}, s_pat),
+        _site("Punta Pardelas Valdés", "Argentina", -42.622, -64.254, {-3000: 26, 0: 54, 1000: 98, 1450: 142}, s_pat),
+        _site("Cueva de las Manos", "Argentina", -47.155, -70.655, {-7300: 18, -4000: 31, -1000: 48, 700: 68, 1400: 84}, s_pat, ["Río Pinturas"]),
+        _site("Piedra Museo", "Argentina", -47.889, -67.876, {-9500: 14, -6000: 22, -2000: 35, 1000: 52}, s_pat),
+        _site("Los Toldos", "Argentina", -47.372, -68.926, {-10000: 16, -7000: 25, -2000: 38, 1000: 58}, s_pat),
+        _site("Cerro de los Indios", "Argentina", -47.589, -71.751, {-2000: 28, 0: 52, 1000: 78, 1450: 106}, s_pat, ["Lago Posadas"]),
+        _site("Cueva Fell", "Chile", -52.043, -70.056, {-9000: 18, -5000: 28, -1000: 46, 1000: 72, 1450: 94}, s_pat, ["Pali Aike"]),
+        _site("Cueva del Milodón", "Chile", -51.565, -72.620, {-9500: 14, -5000: 24, 500: 48, 1400: 66}, s_pat, ["Última Esperanza"]),
+        _site("Bahía Inútil Marazzi", "Chile", -53.471, -69.313, {-7500: 16, -3000: 32, 500: 62, 1450: 88}, s_pat, ["Selk'nam"]),
+        _site("Túnel Beagle Channel", "Argentina", -54.822, -68.158, {-5000: 24, -2000: 46, 500: 84, 1450: 128}, s_pat, ["Imiwaia", "Yaghan"]),
+        _site("Cabo San Pablo", "Argentina", -54.294, -66.711, {-2000: 24, 500: 54, 1450: 79}, s_pat, ["Haush-Selk'nam"]),
     ]
 
 

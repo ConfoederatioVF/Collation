@@ -161,6 +161,14 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
         aliases.push(base);
         base = "Madziwa";
       }
+      //Strip trailing archaeological uncertainty question marks (e.g. Pleiades "Pnups?", "Berenice Panchrysos?")
+      if (/\?+$/.test(base)) {
+        base = base.replace(/\?+$/g, "").trim();
+      }
+      if (base === "Gezira Dabarosa/Tamania") {
+        aliases.push("Tamania");
+        base = "Gezira Dabarosa";
+      }
 
       //Split Africapolis compound twin-town "A & B" names to primary municipality name
       if (/\s+&\s+/.test(base)) {
@@ -289,6 +297,13 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
       let global_exclusions = [];
 
       //Function body
+      //Helper: safe check for non-null finite numeric year (prevents JS Number(null) === 0 corruption)
+      let parseOptionalYear = function (arg0_val) {
+        if (arg0_val === null || arg0_val === undefined || arg0_val === "") return null;
+        let num = Number(arg0_val);
+        return Number.isFinite(num) ? num : null;
+      };
+
       //Helper: merge source entity b into target entity a
       let mergeInto = function (arg0_target, arg1_src, arg2_prefer_src_pop) {
         let tgt = arg0_target;
@@ -327,9 +342,10 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
             tgt.population[yk] = pv;
         }
 
-        if (Number.isFinite(Number(src.foundation_year))) {
-          let sfy = Number(src.foundation_year);
-          if (!Number.isFinite(Number(tgt.foundation_year)) || sfy < Number(tgt.foundation_year))
+        let sfy = parseOptionalYear(src.foundation_year);
+        if (sfy !== null) {
+          let tfy = parseOptionalYear(tgt.foundation_year);
+          if (tfy === null || sfy < tfy)
             tgt.foundation_year = sfy;
         }
         if (src.is_capital) tgt.is_capital = true;
@@ -460,7 +476,7 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
           let rec = {
             coords: [lat, lon],
             country: e.country || "",
-            foundation_year: Number.isFinite(Number(e.foundation_year)) ? Number(e.foundation_year) : null,
+            foundation_year: parseOptionalYear(e.foundation_year),
             is_capital: Boolean(e.is_capital),
             name: cleaned.clean_name,
             other_names: (Array.isArray(e.other_names) ? e.other_names.slice() : []).concat(cleaned.aliases),
@@ -526,41 +542,127 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
         });
       }
 
-      //Deduplicate Wave-3 internally (same country <= 1.5 km OR same stem/exonym <= 25 km)
+      //Ingest Wave-4 pre-modern (<1950AD) literature/census swarm packs AND primary archaeological/PDF corpora
+      //Strict precedence: curated Wave-3 > Wave-4C scraped colonial/early-modern swarms > Wave-4B expanded PDFs > Wave-4A primary archaeology
+      let w4_dirs = [
+        { dir: path.join(base_dir, "_shared/settlement_sources/wave4_premodern_swarms"), wave_id: 3 },
+        { dir: path.join(base_dir, "_shared/settlement_sources/wave4_premodern_arch"), wave_id: 2 }
+      ];
+      let w4_loaded = 0;
+      for (let di = 0; di < w4_dirs.length; di++) {
+        let wd = w4_dirs[di].dir;
+        let w_id = w4_dirs[di].wave_id;
+        if (!fs.existsSync(wd)) continue;
+        let w4_files = fs.readdirSync(wd).filter(function (arg0_f) { return arg0_f.endsWith(".json"); }).sort(function (arg0_a, arg1_b) {
+          //Put expanded PDF observations before general archaeological kriged corpus
+          let pa = arg0_a.includes("pdf") ? 0 : 1;
+          let pb = arg1_b.includes("pdf") ? 0 : 1;
+          if (pa !== pb) return pa - pb;
+          return arg0_a.localeCompare(arg1_b);
+        });
+        for (let fi = 0; fi < w4_files.length; fi++) {
+          let d = JSON.parse(fs.readFileSync(path.join(wd, w4_files[fi]), "utf8"));
+          let setts = d.settlements || d;
+          let entries = Array.isArray(setts) ? setts : Object.keys(setts).map(function (arg0_k) {
+            return Object.assign({ key: arg0_k }, setts[arg0_k]);
+          });
+          for (let x = 0; x < entries.length; x++) {
+            let e = entries[x];
+            if (!Array.isArray(e.coords) || e.coords.length < 2) continue;
+            let lat = Number(e.coords[0]);
+            let lon = Number(e.coords[1]);
+            if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+            let srcs = filterValidSources(e.sources);
+            if (srcs.length === 0) continue;
+            let cleaned = this.cleanDisplayName(e.name || e.key, "city_proper");
+            if (!cleaned.clean_name) continue;
+            //Exclude generic non-toponym archaeological feature and monument labels from raw excavation atlases
+            if (/^(?:Settlement|Temple|Cemetery|Cairns|Mosque|Church|Tomb|Pillar Tomb|Enclosures|Arab Settlement|Buhen Temple|Diani Kongo Mosque|Fäqi Däbbis Mosque|Goze Mosque|Kimana Sanctuary|Yekka-Mikaël Church|Napoleon Gulf - Jinja|Are VF|M\d+|Locus\s+\d+.*|Site\s+[A-Z]\b.*)$/i.test(cleaned.clean_name)) continue;
+            let pop_clean = {};
+            let pkeys = Object.keys(e.population || {});
+            for (let y = 0; y < pkeys.length; y++) {
+              let yi = Number(pkeys[y]);
+              let pv = Math.round(Number(e.population[pkeys[y]] || 0));
+              if (Number.isFinite(yi) && yi !== 0 && yi <= 1955 && pv > 0) pop_clean[String(yi)] = pv;
+            }
+            if (Object.keys(pop_clean).length === 0) continue;
+            let rec = {
+              coords: [lat, lon],
+              country: e.country || "",
+              foundation_year: parseOptionalYear(e.foundation_year),
+              is_capital: Boolean(e.is_capital),
+              name: cleaned.clean_name,
+              other_names: (Array.isArray(e.other_names) ? e.other_names.slice() : []).concat(cleaned.aliases),
+              population: pop_clean,
+              population_scope: "city_proper",
+              sources: srcs,
+              verified_settlement: true,
+              waves: new Set([w_id])
+            };
+            normaliseGeo(rec);
+            if (rec.country) {
+              w3_raw.push(rec);
+              w4_loaded++;
+            }
+          }
+        }
+      }
+      console.log(`[NICETHI Assembly] Loaded ${w4_loaded} Wave-4 pre-modern settlement records (swarms + PDF + primary archaeology).`);
+
+      //Deduplicate Wave-3/Wave-4 internally using spatial grid (same country <= 1.5 km OR same stem/exonym <= 25 km)
       let w3_merged = [];
+      let w3_grid = new Map();
+      let indexW3 = function (arg0_item) {
+        let gk = `${Math.floor(arg0_item.coords[0]*2)},${Math.floor(arg0_item.coords[1]*2)}`;
+        if (!w3_grid.has(gk)) w3_grid.set(gk, []);
+        w3_grid.get(gk).push({
+          country: arg0_item.country.toLowerCase(),
+          item: arg0_item,
+          lat: arg0_item.coords[0],
+          lon: arg0_item.coords[1],
+          stem: viscount_entity_audit.normaliseEntityStem(arg0_item.name)
+        });
+      };
       for (let i = 0; i < w3_raw.length; i++) {
         let cand = w3_raw[i];
         let c_stem = viscount_entity_audit.normaliseEntityStem(cand.name);
         let c_ctry = cand.country.toLowerCase();
-        let match_idx = -1;
+        let gx = Math.floor(cand.coords[0]*2);
+        let gy = Math.floor(cand.coords[1]*2);
+        let matched = null;
 
-        for (let x = 0; x < w3_merged.length; x++) {
-          let ex = w3_merged[x];
-          let d = viscount_audit_utils.haversineKm(cand.coords[0], cand.coords[1], ex.coords[0], ex.coords[1]);
-          if (d > 25.0) continue;
-          let ex_stem = viscount_entity_audit.normaliseEntityStem(ex.name);
-          let same_ctry = (ex.country.toLowerCase() === c_ctry);
-          let stem_eq = Boolean(c_stem && ex_stem && (c_stem === ex_stem || viscount_entity_audit.areEquivalentExonyms(cand.name, ex.name, profiles)));
-          let arch_pair = d <= 1.5 && same_ctry;
-          if (arch_pair || (stem_eq && d <= 25.0)) {
-            match_idx = x;
-            break;
+        for (let dx = -1; dx <= 1 && !matched; dx++) {
+          for (let dy = -1; dy <= 1 && !matched; dy++) {
+            let nb = w3_grid.get(`${gx + dx},${gy + dy}`);
+            if (!nb) continue;
+            for (let x = 0; x < nb.length; x++) {
+              let ex = nb[x];
+              if (Math.abs(cand.coords[0] - ex.lat) > 0.25 || Math.abs(cand.coords[1] - ex.lon) > 0.45) continue;
+              let d = viscount_audit_utils.haversineKm(cand.coords[0], cand.coords[1], ex.lat, ex.lon);
+              if (d > 25.0) continue;
+              let same_ctry = (ex.country === c_ctry);
+              let stem_eq = Boolean(c_stem && ex.stem && (c_stem === ex.stem || viscount_entity_audit.areEquivalentExonyms(cand.name, ex.item.name, profiles)));
+              let arch_pair = d <= 1.5 && same_ctry;
+              if (arch_pair || (stem_eq && d <= 25.0)) {
+                matched = ex.item;
+                break;
+              }
+            }
           }
         }
-        if (match_idx >= 0) {
-          let target = w3_merged[match_idx];
-          //Keep cleaner non-redundant name (prefer existing if it has more datapoints or cleaner name)
-          mergeInto(target, cand, false);
+        if (matched) {
+          mergeInto(matched, cand, false);
           global_exclusions.push({
             coords: cand.coords,
             country: cand.country,
-            justification: `Merged duplicate Wave-3 historical record into canonical settlement "${target.name}" (${target.country}).`,
+            justification: `Merged duplicate Wave-3/4 historical record into canonical settlement "${matched.name}" (${matched.country}).`,
             name: cand.name,
             reason: "duplicate_alias",
             years: Object.keys(cand.population).map(Number)
           });
         } else {
           w3_merged.push(cand);
+          indexW3(cand);
         }
       }
 
@@ -992,12 +1094,17 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
           let rec = arg0_list[i];
           let stem = viscount_entity_audit.normaliseEntityStem(rec.name);
           let guard_yr = guard_by_stem.get(stem);
+          let cur_fy = parseOptionalYear(rec.foundation_year);
           if (guard_yr !== undefined) {
-            if (!Number.isFinite(Number(rec.foundation_year)) || Number(rec.foundation_year) < guard_yr)
+            if (cur_fy === null || cur_fy < guard_yr) {
               rec.foundation_year = guard_yr;
+              cur_fy = guard_yr;
+            }
+          } else {
+            rec.foundation_year = cur_fy;
           }
-          if (Number.isFinite(Number(rec.foundation_year))) {
-            let fy = Number(rec.foundation_year);
+          if (cur_fy !== null) {
+            let fy = cur_fy;
             let ykeys = Object.keys(rec.population);
             for (let y = 0; y < ykeys.length; y++) {
               let yi = Number(ykeys[y]);
@@ -1012,6 +1119,26 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
 
       cp_dedup = enforceFoundationGuards(cp_dedup);
       metro_dedup = enforceFoundationGuards(metro_dedup);
+
+      //Enforce clean pre-modern (<1950) termination on standalone Wave-3/4 records lacking modern Wave-1 (>=1956) continuity so 1950-1956 never exhibits artificial extinction cliffs
+      let clipped_post50_stubs = 0;
+      for (let i = 0; i < cp_dedup.length; i++) {
+        let rec = cp_dedup[i];
+        if (rec.waves && rec.waves.has(1)) continue;
+        let ys = Object.keys(rec.population).map(Number).filter(function (arg0_y) {
+          return Number.isFinite(arg0_y) && Number(rec.population[arg0_y]) > 0;
+        }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+        if (ys.length === 0) continue;
+        let max_y = ys[ys.length - 1];
+        if (max_y >= 1950 && max_y <= 1955 && ys[0] <= 1949) {
+          for (let y = 0; y < ys.length; y++) {
+            if (ys[y] >= 1950) delete rec.population[String(ys[y])];
+          }
+          clipped_post50_stubs++;
+        }
+      }
+      if (clipped_post50_stubs > 0)
+        console.log(`[NICETHI Assembly] Trimmed ${clipped_post50_stubs} unanchored 1950-1955 Wave-4 stubs to <=1949 for seamless 1950-2025 continuity.`);
 
       //Assign unique canonical keys
       let assignKeys = function (arg0_list) {
@@ -1165,7 +1292,8 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
           //Keep 1 nearest pre-window boundary anchor within 15 years for post-1950 chapters (never pre-foundation)
           if (y0 >= 1950 && pre_win.length > 0) {
             let anc = pre_win[pre_win.length - 1];
-            let fy = Number.isFinite(Number(rec.foundation_year)) ? Number(rec.foundation_year) : -99999;
+            let rec_fy = parseOptionalYear(rec.foundation_year);
+            let fy = rec_fy !== null ? rec_fy : -99999;
             if (anc >= y0 - 15 && anc >= fy)
               ch_pop[String(anc)] = rec.population[String(anc)];
           }
@@ -1203,7 +1331,8 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
             population_scope: rec.population_scope,
             sources: rec.sources
           };
-          if (Number.isFinite(Number(rec.foundation_year))) entry.foundation_year = Number(rec.foundation_year);
+          let rec_fy_out = parseOptionalYear(rec.foundation_year);
+          if (rec_fy_out !== null) entry.foundation_year = rec_fy_out;
           if (rec.is_capital) entry.is_capital = true;
           if (rec.verified_settlement) entry.verified_settlement = true;
           if (rec.metro_parent_key) entry.metro_parent_key = rec.metro_parent_key;
@@ -1368,7 +1497,8 @@ let { viscount_entity_audit } = require("../../../../../../.agents/skills/popula
           population_scope: r.population_scope,
           sources: r.sources
         };
-        if (Number.isFinite(Number(r.foundation_year))) rec_out.foundation_year = Number(r.foundation_year);
+        let r_fy_out = parseOptionalYear(r.foundation_year);
+        if (r_fy_out !== null) rec_out.foundation_year = r_fy_out;
         if (r.is_capital) rec_out.is_capital = true;
         if (r.verified_settlement) rec_out.verified_settlement = true;
         if (r.metro_parent_key) rec_out.metro_parent_key = r.metro_parent_key;

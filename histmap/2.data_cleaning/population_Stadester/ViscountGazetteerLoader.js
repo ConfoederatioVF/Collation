@@ -29,6 +29,51 @@
    */
   global.ViscountGazetteerLoader = class {
     /**
+     * Deduplicates `.other_names` case-insensitively and drops any exact match to `arg0_canonical_name`.
+     * @alias ViscountGazetteerLoader.deduplicateOtherNamesCI
+     *
+     * @param {string} arg0_canonical_name
+     * @param {Array<string>} arg1_aliases
+     *
+     * @returns {Array<string>}
+     */
+    static deduplicateOtherNamesCI (arg0_canonical_name, arg1_aliases) {
+      //Convert from parameters
+      let aliases = Array.isArray(arg1_aliases) ? arg1_aliases : [];
+      let canonical_low = String(arg0_canonical_name || "").trim().toLowerCase();
+
+      //Declare local instance variables
+      let best_by_low = new Map();
+      let order = [];
+      let out = [];
+      let scoreCase = function (arg0_str) {
+        let has_upper = /[A-Z\u00C0-\u00DE]/.test(arg0_str);
+        let has_lower = /[a-z\u00DF-\u00FF]/.test(arg0_str);
+        let has_diacritic = /[\u00C0-\u024F]/.test(arg0_str);
+        return (has_upper && has_lower ? 4 : (has_upper ? 1 : 2)) + (has_diacritic ? 1 : 0);
+      };
+
+      //Function body
+      for (let i = 0; i < aliases.length; i++) {
+        let s = String(aliases[i] || "").trim();
+        let low = s.toLowerCase();
+        if (!s || (canonical_low && low === canonical_low)) continue;
+        if (!best_by_low.has(low)) {
+          best_by_low.set(low, s);
+          order.push(low);
+        } else if (scoreCase(s) > scoreCase(best_by_low.get(low))) {
+          best_by_low.set(low, s);
+        }
+      }
+      for (let i = 0; i < order.length; i++)
+        out.push(best_by_low.get(order[i]));
+
+      //Return statement
+      return out;
+    }
+
+
+    /**
      * Loads and deduplicates all active Viscount regional settlement gazetteers in descending `z_priority` (`14 -> 1`).
      * @alias ViscountGazetteerLoader.getViscountRegionalObject
      *
@@ -308,10 +353,11 @@
             _raw_lapsed: Boolean(raw_city._raw_lapsed === true || clean_pop["-999"] === 0),
             coords: [lat, lng],
             country: raw_city.country || gaz_entry.default_country || proj.default_country || "Russia",
+            is_capital: Boolean(raw_city.is_capital || raw_city.capital),
             key: city_key,
             name: raw_city.name || city_key.split("-")[0],
             original_names: [],
-            other_names: Array.isArray(raw_city.other_names) ? raw_city.other_names.slice() : [],
+            other_names: this.deduplicateOtherNamesCI(raw_city.name || city_key.split("-")[0], raw_city.other_names),
             polaris_priority: gaz_entry.priority || 1,
             polaris_source: gaz_id,
             population: clean_pop,
@@ -472,9 +518,17 @@
                   ex_city._war_displacement_years.push(w_yr);
               }
             }
-            for (let y = 0; y < candidate_city.other_names.length; y++)
-              if (!ex_city.other_names.includes(candidate_city.other_names[y]))
-                ex_city.other_names.push(candidate_city.other_names[y]);
+            if (candidate_city.is_capital && !ex_city.is_capital) {
+              ex_city.is_capital = true;
+              if (candidate_city.name && candidate_city.name !== ex_city.name) {
+                ex_city.other_names.push(ex_city.name);
+                ex_city.name = candidate_city.name;
+              }
+            }
+            ex_city.other_names = this.deduplicateOtherNamesCI(
+              ex_city.name,
+              (Array.isArray(ex_city.other_names) ? ex_city.other_names : []).concat(candidate_city.other_names || []).concat(candidate_city.name ? [candidate_city.name] : [])
+            );
             for (let y = 0; y < candidate_city.original_names.length; y++)
               if (!ex_city.original_names.includes(candidate_city.original_names[y]))
                 ex_city.original_names.push(candidate_city.original_names[y]);
