@@ -1137,10 +1137,11 @@
 
               if (!touches_viscount) continue;
               let same_exact_name = Boolean(a.norm_name && a.norm_name === b.norm_name);
-              let max_lat_d = same_exact_name ? 0.16 : 0.02;
-              let max_lng_d = same_exact_name ? 0.20 : 0.06;
+              if (!same_exact_name) continue;
+              let max_lat_d = 0.16;
+              let max_lng_d = 0.20;
               if (Math.abs(a.city.coords[0] - b.city.coords[0]) > max_lat_d || Math.abs(a.city.coords[1] - b.city.coords[1]) > max_lng_d) continue;
-              let max_twin_km = same_exact_name ? 15.0 : 1.5;
+              let max_twin_km = 15.0;
               let overlaps = false;
 
               b.active_ge1850.forEach(function (arg0_yr) {
@@ -1374,6 +1375,283 @@
     }
     if (jaguar_merged > 0)
       console.log(`- Reconciled ${jaguar_merged} JAGUAR same-country same-stem variant/twin record(s).`);
+
+    //Return statement
+    return stadester_obj;
+  };
+
+  /**
+   * Flattens intra-municipal subdivisions up to top-level municipalities (capital status overriding largest population),
+   * repairs Riga/Valletta/Naples/Athens coordinate/aggregation defects, strips statistical boundaries, and normalises name casing/haceks.
+   * @alias population_Stadester_uud.flattenToMunicipalityLevelAndCleanNames
+   *
+   * @param {Object} arg0_stadester_obj
+   *
+   * @returns {Object}
+   */
+  population_Stadester_uud.flattenToMunicipalityLevelAndCleanNames = function (arg0_stadester_obj) {
+    //Convert from parameters
+    let stadester_obj = arg0_stadester_obj;
+
+    //Guard clauses
+    if (!stadester_obj || typeof stadester_obj !== "object") return stadester_obj;
+
+    //Declare local instance variables
+    let collapsed_count = 0;
+    let dropped_junk = 0;
+    let normaliser = global.stadester_name_normaliser || null;
+    let renamed_count = 0;
+
+    if (!normaliser) {
+      let norm_path = path.join(__dirname, "stadester_name_normaliser.js");
+      if (fs.existsSync(norm_path))
+        normaliser = require(norm_path).stadester_name_normaliser;
+    }
+
+    //Function body
+    // 1. Repair explicit coordinate/aggregation defects (Riga [56.95, 21.1] typo, Greater Valletta, Naples centroid)
+    let all_keys_pre = Object.keys(stadester_obj);
+    let has_proper_valletta = false;
+    for (let i = 0; i < all_keys_pre.length; i++) {
+      let c = stadester_obj[all_keys_pre[i]];
+      if (!c || !Array.isArray(c.coords)) continue;
+      let nm_low = String(c.name || "").trim().toLowerCase();
+      let ctry_low = String(c.country || "").trim().toLowerCase();
+      if (ctry_low === "latvia" && nm_low === "riga" && Math.abs(Number(c.coords[1]) - 21.1) < 0.2) {
+        c.coords = [56.946, 24.10589];
+      } else if (ctry_low === "malta" && nm_low === "valletta" && Math.abs(Number(c.coords[0]) - 35.89924) < 0.02) {
+        has_proper_valletta = true;
+        c.is_capital = true;
+      } else if (ctry_low === "italy" && (nm_low === "napoli" || nm_low === "naples") && Number(c.coords[0]) > 40.89 && Number(c.coords[1]) < 14.23) {
+        c.coords = [40.85177, 14.26812];
+        c.name = "Naples";
+        c.is_capital = true;
+      }
+    }
+
+    if (!has_proper_valletta) {
+      let val_rec = {
+        coords: [35.89924, 14.5141],
+        country: "Malta",
+        "found.yr": 1566,
+        foundation_year: 1566,
+        is_capital: true,
+        key: "Valletta-Malta",
+        name: "Valletta",
+        other_names: ["La Vallette", "Il-Belt Valletta"],
+        population: {
+          1580: 4000, 1600: 10000, 1650: 15000, 1700: 18000, 1750: 21000,
+          1800: 23000, 1851: 24500, 1901: 22768, 1911: 24423, 1921: 22392,
+          1931: 22779, 1948: 18666, 1957: 18202, 1967: 15279, 1985: 9340,
+          1995: 7184, 2005: 6315, 2011: 6444, 2021: 5157
+        },
+        sources: ["MAGNETIC"],
+        viscount_project: "MAGNETIC",
+        viscount_z_priority: 10
+      };
+      stadester_obj["Valletta-Malta"] = val_rec;
+    }
+
+    for (let i = 0; i < all_keys_pre.length; i++) {
+      let k = all_keys_pre[i];
+      let c = stadester_obj[k];
+      if (!c) continue;
+      if (String(c.country || "").trim().toLowerCase() === "malta" && /^greater valletta$/i.test(String(c.name || "").trim())) {
+        delete stadester_obj[k];
+        dropped_junk++;
+      }
+    }
+
+    // 2. Clean names, drop non-habitation junk/survey codes, and resolve intra-municipal parents
+    let all_keys = Object.keys(stadester_obj);
+    let parent_index = new Map();
+
+    for (let i = 0; i < all_keys.length; i++) {
+      let k = all_keys[i];
+      let c = stadester_obj[k];
+      if (!c || !c.name) continue;
+
+      if (normaliser && normaliser.isJunkOrSurveyCode(c.name)) {
+        delete stadester_obj[k];
+        dropped_junk++;
+        continue;
+      }
+
+      if (normaliser) {
+        let norm_res = normaliser.normaliseCityName(c.name, c.country);
+        if (norm_res.name && norm_res.name !== c.name) {
+          if (!Array.isArray(c.other_names)) c.other_names = [];
+          if (!c.other_names.includes(c.name) && !/`|^[A-Z\s]{4,}$|^[a-z\s]{4,}$/.test(c.name))
+            c.other_names.push(c.name);
+          for (let a = 0; a < norm_res.extra_aliases.length; a++)
+            if (!c.other_names.includes(norm_res.extra_aliases[a]))
+              c.other_names.push(norm_res.extra_aliases[a]);
+          c.name = norm_res.name;
+          renamed_count++;
+        }
+      }
+
+      let ctry_low = String(c.country || "").trim().toLowerCase();
+      let nm_fold = normaliser ? normaliser.foldAscii(c.name) : String(c.name || "").trim().toLowerCase();
+      let idx_key = `${ctry_low}|${nm_fold}`;
+      if (!parent_index.has(idx_key)) parent_index.set(idx_key, []);
+      parent_index.get(idx_key).push(k);
+    }
+
+    // Helper to merge child into parent without double-counting metro totals
+    let mergeIntoParent = function (arg0_parent_key, arg1_child_key, arg2_parent_meta) {
+      let p_city = stadester_obj[arg0_parent_key];
+      let c_city = stadester_obj[arg1_child_key];
+      if (!p_city || !c_city || arg0_parent_key === arg1_child_key) return false;
+
+      if (!Array.isArray(p_city.other_names)) p_city.other_names = [];
+      if (c_city.name && c_city.name !== p_city.name && !p_city.other_names.includes(c_city.name))
+        p_city.other_names.push(c_city.name);
+      if (Array.isArray(c_city.other_names)) {
+        for (let a = 0; a < c_city.other_names.length; a++)
+          if (c_city.other_names[a] && c_city.other_names[a] !== p_city.name && !p_city.other_names.includes(c_city.other_names[a]))
+            p_city.other_names.push(c_city.other_names[a]);
+      }
+
+      if (!p_city.population) p_city.population = {};
+      let c_yrs = Object.keys(c_city.population || {});
+      for (let y = 0; y < c_yrs.length; y++) {
+        let yk = c_yrs[y];
+        let cv = Number(c_city.population[yk] || 0);
+        let pv = Number(p_city.population[yk] || 0);
+        if (cv > pv) p_city.population[yk] = cv;
+      }
+
+      if (arg2_parent_meta && arg2_parent_meta.is_capital_override)
+        p_city.is_capital = true;
+      if (arg2_parent_meta && Array.isArray(arg2_parent_meta.parent_coords))
+        p_city.coords = arg2_parent_meta.parent_coords.slice();
+      if (c_city.is_capital) p_city.is_capital = true;
+
+      if (typeof population_Stadester_uud.appendCitySources === "function")
+        population_Stadester_uud.appendCitySources(p_city, c_city.sources || c_city.type);
+
+      delete stadester_obj[arg1_child_key];
+      collapsed_count++;
+      return true;
+    };
+
+    // 3. Consolidate intra-municipal districts into top-level municipalities
+    let keys_after_clean = Object.keys(stadester_obj);
+    for (let i = 0; i < keys_after_clean.length; i++) {
+      let k = keys_after_clean[i];
+      let c = stadester_obj[k];
+      if (!c || !normaliser) continue;
+      if (Number.isFinite(c._annexation_year)) continue;
+
+      let p_meta = normaliser.resolveParentMunicipality(c.name, c.country, c.coords);
+      if (!p_meta) continue;
+      if (Number.isFinite(p_meta.effective_from_year) && c.population) {
+        let local_max_yr = -Infinity;
+        let pop_keys = Object.keys(c.population);
+        for (let z = 0; z < pop_keys.length; z++) {
+          let yr_num = parseInt(pop_keys[z], 10);
+          if (Number.isFinite(yr_num) && Number(c.population[pop_keys[z]]) > 0 && yr_num > local_max_yr)
+            local_max_yr = yr_num;
+        }
+        if (local_max_yr > -Infinity && local_max_yr < p_meta.effective_from_year) continue;
+      }
+
+      let ctry_low = String(c.country || "").trim().toLowerCase();
+      let target_fold = normaliser.foldAscii(p_meta.parent_name);
+      let cands = parent_index.get(`${ctry_low}|${target_fold}`) || [];
+      let best_parent = null;
+      let best_score = -Infinity;
+
+      for (let x = 0; x < cands.length; x++) {
+        let pk = cands[x];
+        if (!stadester_obj[pk] || pk === k) continue;
+        let pc = stadester_obj[pk];
+        let peak = (typeof population_Stadester_uud.getPeakPopulation === "function") ?
+          population_Stadester_uud.getPeakPopulation(pc.population) : 0;
+        let sc = (pc.is_capital ? 1e12 : 0) + peak;
+        if (sc > best_score) {
+          best_score = sc;
+          best_parent = pk;
+        }
+      }
+
+      if (best_parent) {
+        mergeIntoParent(best_parent, k, p_meta);
+      } else {
+        c.name = p_meta.parent_name;
+        if (p_meta.is_capital_override) c.is_capital = true;
+        if (Array.isArray(p_meta.parent_coords)) c.coords = p_meta.parent_coords.slice();
+        if (!parent_index.has(`${ctry_low}|${target_fold}`))
+          parent_index.set(`${ctry_low}|${target_fold}`, [k]);
+      }
+    }
+
+    // 4. Final same-country semantic/exonym deduplication within 15 km (catches Riga, Warsaw, Naples, Sofia, Kėdainiai, etc.)
+    let audit_mod_path = path.resolve(__dirname, "../../../.agents/skills/population-regional-study/scripts/viscount_entity_and_continuity_audit.js");
+    let entity_audit = fs.existsSync(audit_mod_path) ? require(audit_mod_path).viscount_entity_audit : null;
+    let profiles = entity_audit ? entity_audit.loadSkillProfiles() : null;
+    let grid = new Map();
+    let final_keys = Object.keys(stadester_obj);
+
+    final_keys.sort(function (arg0_a, arg1_b) {
+      let ca = stadester_obj[arg0_a];
+      let cb = stadester_obj[arg1_b];
+      let sa = (ca && ca.is_capital ? 1e12 : 0) + ((typeof population_Stadester_uud.getPeakPopulation === "function") ? population_Stadester_uud.getPeakPopulation(ca.population) : 0);
+      let sb = (cb && cb.is_capital ? 1e12 : 0) + ((typeof population_Stadester_uud.getPeakPopulation === "function") ? population_Stadester_uud.getPeakPopulation(cb.population) : 0);
+      return sb - sa;
+    });
+
+    for (let i = 0; i < final_keys.length; i++) {
+      let k = final_keys[i];
+      let c = stadester_obj[k];
+      if (!c || !Array.isArray(c.coords) || c.coords.length < 2) continue;
+      let lat = Number(c.coords[0]);
+      let lng = Number(c.coords[1]);
+      if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+
+      let gx = Math.floor(lat*4);
+      let gy = Math.floor(lng*4);
+      let dup_parent = null;
+
+      for (let dx = -1; dx <= 1 && !dup_parent; dx++) {
+        for (let dy = -1; dy <= 1 && !dup_parent; dy++) {
+          let bucket = grid.get(`${gx + dx},${gy + dy}`);
+          if (!bucket) continue;
+          for (let b = 0; b < bucket.length; b++) {
+            let pk = bucket[b];
+            let pc = stadester_obj[pk];
+            if (!pc) continue;
+            if (String(pc.country || "").toLowerCase() !== String(c.country || "").toLowerCase()) continue;
+            let d_km = (typeof population_Stadester_uud.haversineDistance === "function") ?
+              population_Stadester_uud.haversineDistance(pc.coords, c.coords) : 999999;
+            if (d_km > 15.0) continue;
+            if (typeof population_Stadester_uud.canMergeMunicipalities === "function") {
+              let gate = population_Stadester_uud.canMergeMunicipalities(pc, c, { max_semantic_km: 15.0 });
+              if (!gate.allow) continue;
+            } else {
+              let is_match = (typeof population_Stadester_uud.checkExactNameMatch === "function") ?
+                population_Stadester_uud.checkExactNameMatch(pc, c) : false;
+              if (!is_match && entity_audit && profiles)
+                is_match = entity_audit.areEquivalentExonyms(pc.name, c.name, profiles);
+              if (!is_match) continue;
+            }
+            dup_parent = pk;
+            break;
+          }
+        }
+      }
+
+      if (dup_parent) {
+        mergeIntoParent(dup_parent, k, null);
+      } else {
+        let gk = `${gx},${gy}`;
+        if (!grid.has(gk)) grid.set(gk, []);
+        grid.get(gk).push(k);
+      }
+    }
+
+    console.log(`- [MunicipalityFlattening] Renamed ${renamed_count}, collapsed ${collapsed_count} intra-municipal/duplicate entries, dropped ${dropped_junk} junk/survey entries.`);
 
     //Return statement
     return stadester_obj;

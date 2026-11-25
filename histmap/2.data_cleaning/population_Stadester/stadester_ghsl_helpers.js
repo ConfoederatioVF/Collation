@@ -481,6 +481,19 @@
     ) {
       return false;
     }
+    if (
+      (Number.isFinite(entry_a.city._annexation_year) && entry_a.city._annexation_year <= 1975) ||
+      (Number.isFinite(entry_b.city._annexation_year) && entry_b.city._annexation_year <= 1975)
+    ) {
+      return false;
+    }
+    if (
+      typeof population_Stadester_uud !== "undefined" &&
+      typeof population_Stadester_uud.canMergeMunicipalities === "function"
+    ) {
+      let mun_gate = population_Stadester_uud.canMergeMunicipalities(entry_a.city, entry_b.city, { max_semantic_km: 25.0 });
+      if (!mun_gate.allow) return false;
+    }
     
     //Function body
     c_a = String(entry_a.city.country || "");

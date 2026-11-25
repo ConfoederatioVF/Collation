@@ -694,7 +694,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
                 if (d > max_match_km) continue;
                 let c_norm = this.normaliseName(cand.entry.name);
                 let stems_match = Boolean(rec_norm && c_norm && (c_norm === rec_norm || viscount_entity_audit.areEquivalentExonyms(clean_modern, cand.entry.name, profiles)));
-                let qualifies = (d <= snap_km) || (d <= max_match_km && stems_match);
+                let qualifies = (d <= 0.08) || (d <= max_match_km && stems_match);
                 if (!qualifies) continue;
 
                 if ((cand.is_cap_shard && !best_is_cap && d <= snap_km) || (cand.is_cap_shard === best_is_cap && d < best_dist)) {

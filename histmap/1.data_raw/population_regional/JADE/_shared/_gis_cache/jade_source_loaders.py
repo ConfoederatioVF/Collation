@@ -1195,11 +1195,13 @@ def load_traditional_villages():
 
 
 def load_domm_mongolian_monasteries():
-  """Loads 937 pre-1912 georeferenced Mongolian monasteries (khuree/khiid) from Arts Council of Mongolia DOMM."""
-  fp = os.path.join(HARVEST_DIR, "domm_mongolian_monasteries.json")
+  """Loads pre-1912 georeferenced Mongolian monasteries from Arts Council of Mongolia DOMM with primary monk counts."""
+  enriched_fp = os.path.join(HARVEST_DIR, "domm_mongolian_monasteries_enriched.json")
+  fp = enriched_fp if os.path.exists(enriched_fp) else os.path.join(HARVEST_DIR, "domm_mongolian_monasteries.json")
   if not os.path.exists(fp):
     return []
   raw = json.load(open(fp, encoding="utf-8"))
+  homoglyph_tr = str.maketrans({"А": "A", "В": "B", "Е": "E", "К": "K", "М": "M", "Н": "H", "О": "O", "Р": "P", "С": "C", "Т": "T", "Х": "X", "а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "х": "x"})
   out = []
   for r in raw:
     try:
@@ -1208,10 +1210,11 @@ def load_domm_mongolian_monasteries():
       continue
     if not (87.5 <= lo <= 120.0 and 41.5 <= la <= 52.2):
       continue
-    nm_raw = str(r.get("name") or "").strip()
-    nm_short = re.sub(r"\s+(?:khuree|khüree|khiid|dugana|dugan|sum|süm|jas|monastery|temple)$", "", nm_raw, flags=re.I).strip() or nm_raw
-    nm = clean_name(nm_short)
-    if not nm or len(nm) < 3 or len(nm) > 26:
+    nm_raw = str(r.get("name") or "").strip().translate(homoglyph_tr)
+    nm = clean_name(nm_raw)
+    if not nm or len(nm) < 3 or len(nm) > 34:
+      continue
+    if any(rk in nm.lower() for rk in ("destroyed", "ruin", "unnamed", "unknown")):
       continue
     is_major = any(k in nm_raw.lower() for k in ("khuree", "khüree", "khiid"))
     out.append({
@@ -1220,6 +1223,11 @@ def load_domm_mongolian_monasteries():
       "lat": la,
       "lon": lo,
       "is_major": is_major,
+      "monks_count": r.get("monks_count"),
+      "temple_type": r.get("temple_type") or "",
+      "established_year": r.get("established_year"),
+      "closed_year": r.get("closed_year"),
+      "url": r.get("url") or "",
     })
   return out
 
@@ -1260,7 +1268,7 @@ def load_wikidata_and_osm_jade():
       nm = clean_name(lbl)
       if not nm or len(nm) < 3 or len(nm) > 26:
         continue
-      if any(rk in nm.lower() for rk in ("tomb", "mausoleum", "grave", "stele", "statue", "buddha", "pagoda", "museum", "school", "university", "station", "bridge", "church", "cathedral", "former residence", "headquarters", "memorial")):
+      if any(rk in nm.lower() for rk in ("tomb", "mausoleum", "grave", "stele", "statue", "buddha", "pagoda", "museum", "school", "university", "station", "bridge", "church", "cathedral", "former residence", "headquarters", "memorial", "khirigsuur", "kurgan", "burial", "cemetery", "petroglyph", "deer stone", "gol mod", "tsatsyn ereg", "tavan tolgoi", "tsaram", "ulaan uushig", "noyon uul", "burkhan tolgoi")):
         continue
       inc_s = (r.get("inception") or {}).get("value", "")
       ym = yr_re.match(inc_s)
@@ -1322,8 +1330,13 @@ def load_wikidata_and_osm_jade():
       nm = clean_name(nm_s) if re.search(r"[A-Za-z]", nm_s) else clean_name(zh_to_pinyin(nm_s))
       if not nm or len(nm) < 3 or len(nm) > 24:
         continue
-      if any(rk in nm.lower() for rk in ("tomb", "grave", "cemetery", "museum", "park", "gate", "tower", "bridge", "wall", "statue", "stele", "memorial")):
+      if any(rk in nm.lower() for rk in ("tomb", "grave", "cemetery", "museum", "park", "gate", "tower", "bridge", "wall", "statue", "stele", "memorial", "petroglyph", "khirigsuur", "kurgan", "barrow", "burial", "deer stone", "rock art", "rock painting", "complex", "destroyed", "ruin", "gol mod", "tsatsyn ereg", "tavan tolgoi", "tsaram", "ulaan uushig", "noyon uul", "burkhan tolgoi")):
         continue
+      if def_ctry == "Mongolia":
+        hist_v = str(tags.get("historic") or "").lower()
+        site_v = str(tags.get("site_type") or "").lower()
+        if hist_v in ("archaeological_site", "ruins", "memorial", "monument", "tomb", "wayside_shrine") or site_v in ("tumulus", "necropolis", "megalith", "petroglyph", "burial_mound"):
+          continue
       ctry = def_ctry
       if ctry == "China":
         if 113.8 <= lo <= 114.45 and 22.15 <= la <= 22.56:

@@ -334,6 +334,41 @@ def fix_mojibake(text):
   return s
 
 
+LITHUANIA_SAVIVALDYBE_MAP = {
+  "akmenes rajono savivaldybe": "Naujoji Akmenė",
+  "alytus miesto savivaldybe": "Alytus", "alytus rajono savivaldybe": "Alytus",
+  "anyksciu rajono savivaldybe": "Anykščiai", "birstono savivaldybe": "Birštonas",
+  "birzu rajono savivaldybe": "Biržai", "druskininku savivaldybe": "Druskininkai",
+  "elektrenu savivaldybe": "Elektrėnai", "ignalinos rajono savivaldybe": "Ignalina",
+  "jonavos rajono savivaldybe": "Jonava", "joniskio rajono savivaldybe": "Joniškis",
+  "jurbarko rajono savivaldybe": "Jurbarkas", "kaisiadoriu rajono savivaldybe": "Kaišiadorys",
+  "kalvarijos savivaldybe": "Kalvarija", "kauno miesto savivaldybe": "Kaunas",
+  "kauno rajono savivaldybe": "Kaunas", "kazlu rudos savivaldybe": "Kazlų Rūda",
+  "kedainiu rajono savivaldybe": "Kėdainiai", "kelmes rajono savivaldybe": "Kelmė",
+  "klaipedos miesto savivaldybe": "Klaipėda", "klaipedos rajono savivaldybe": "Gargždai",
+  "kretingos rajono savivaldybe": "Kretinga", "kupiskio rajono savivaldybe": "Kupiškis",
+  "lazdiju rajono savivaldybe": "Lazdijai", "marijampoles savivaldybe": "Marijampolė",
+  "mazeikiu rajono savivaldybe": "Mažeikiai", "moletu rajono savivaldybe": "Molėtai",
+  "neringos savivaldybe": "Nida", "pagegiu savivaldybe": "Pagėgiai",
+  "pakruojo rajono savivaldybe": "Pakruojis", "palangos miesto savivaldybe": "Palanga",
+  "panevezio miesto savivaldybe": "Panevėžys", "panevezio rajono savivaldybe": "Panevėžys",
+  "pasvalio rajono savivaldybe": "Pasvalys", "plunges rajono savivaldybe": "Plungė",
+  "prienu rajono savivaldybe": "Prienai", "radviliskio rajono savivaldybe": "Radviliškis",
+  "raseiniu rajono savivaldybe": "Raseiniai", "rietavo savivaldybe": "Rietavas",
+  "rokiskio rajono savivaldybe": "Rokiškis", "sakiu rajono savivaldybe": "Šakiai",
+  "salcininku rajono savivaldybe": "Šalčininkai", "siauliu miesto savivaldybe": "Šiauliai",
+  "siauliu rajono savivaldybe": "Šiauliai", "silales rajono savivaldybe": "Šilalė",
+  "silutes rajono savivaldybe": "Šilutė", "sirvintu rajono savivaldybe": "Širvintos",
+  "skuodo rajono savivaldybe": "Skuodas", "svencioniu rajono savivaldybe": "Švenčionys",
+  "taurages rajono savivaldybe": "Tauragė", "telsiu rajono savivaldybe": "Telšiai",
+  "traku rajono savivaldybe": "Trakai", "ukmerges rajono savivaldybe": "Ukmergė",
+  "utenos rajono savivaldybe": "Utena", "varenos rajono savivaldybe": "Varėna",
+  "vilkaviskio rajono savivaldybe": "Vilkaviškis", "vilniaus miesto savivaldybe": "Vilnius",
+  "vilniaus rajono savivaldybe": "Vilnius", "visagino savivaldybe": "Visaginas",
+  "zarasu rajono savivaldybe": "Zarasai",
+}
+
+
 def clean_lau_name(raw_name, cc):
   """Normalises official Eurostat GISCO LAU municipal titles into clean settlement names."""
   nm = fix_mojibake(raw_name).strip()
@@ -343,7 +378,23 @@ def clean_lau_name(raw_name, cc):
     nm = nm.split(",")[0].strip()
     nm = re.sub(r"\s+(?:Stadt|Markt|Flecken|Gemeinde|Landeshauptstadt|Hansestadt)$", "", nm, flags=re.I).strip()
   elif cc == "RO":
-    nm = re.sub(r"^(?:Municipiul|Ora[şș]ul?|Comuna)\s+", "", nm, flags=re.I).strip()
+    nm = re.sub(r"^(?:Municipiul|Ora[şș]ul?|Oras|Comuna)\s+", "", nm, flags=re.I).strip()
+  elif cc == "LT":
+    nf = unicodedata.normalize("NFD", nm.lower())
+    nf = "".join(ch for ch in nf if unicodedata.category(ch) != "Mn").replace("ł", "l")
+    if nf in LITHUANIA_SAVIVALDYBE_MAP:
+      nm = LITHUANIA_SAVIVALDYBE_MAP[nf]
+    else:
+      nm = re.sub(r"\s+(?:rajono|miesto)?\s*savivaldyb[eė]$", "", nm, flags=re.I).strip()
+  elif cc == "EE":
+    nm = re.sub(r"\s+(?:linn|vald|alev|alevik)$", "", nm, flags=re.I).strip()
+  elif cc == "AL":
+    nm = re.sub(r"^Bashkia\s+", "", nm, flags=re.I).strip()
+    if nm.isupper():
+      nm = nm.title()
+  elif cc == "MT":
+    if "greater valletta" in nm.lower():
+      return None
   elif cc == "HR":
     nm = re.sub(r"^(?:Grad|Općina)\s+", "", nm, flags=re.I).strip()
   elif cc == "PT":
@@ -487,7 +538,9 @@ def build_name_sanitizer():
     nm = fix_mojibake(raw_name)
     nm = re.sub(r"\s+", " ", nm)
     nm = re.sub(r"\s*\([^)]*(?:CDP|balance|urban area|agglomeration|municipality|commune|district|greater city)[^)]*\)?", "", nm, flags=re.I).strip()
-    nm = nm.replace("`", "'").replace('"', "").strip(" ,;-/")
+    for bk, bv in (("`C", "Č"), ("`c", "č"), ("`S", "Š"), ("`s", "š"), ("`Z", "Ž"), ("`z", "ž"), ("`R", "Ř"), ("`r", "ř"), ("`E", "Ě"), ("`e", "ě"), ("`N", "Ň"), ("`n", "ň"), ("`D", "Ď"), ("`d", "ď"), ("`T", "Ť"), ("`t", "ť")):
+      nm = nm.replace(bk, bv)
+    nm = nm.replace("`", "").replace('"', "").strip(" ,;-/")
     if not nm or len(nm) < 2 or len(nm) > 75:
       return None
     if nm.lower() in ("nd", "n.d.", "na", "n/a", "none", "null", "unknown", "unnamed", "no name", "site", "unidentified"):
@@ -891,6 +944,8 @@ def load_primary_corpora(clean_name, sov_polys):
       nm = clean_name(r.get("city"))
       if not nm:
         continue
+      if nm.lower() == "riga" and lon < 22.0:
+        lat, lon = 56.946, 24.10589
       k = (norm_stem(nm), round(lat, 2), round(lon, 2))
       if k not in buringh_acc:
         ctry = lookup_country(lat, lon, sov_polys)
@@ -932,6 +987,8 @@ def load_primary_corpora(clean_name, sov_polys):
   eurostat_cities = []
   for code, pop in urb_pop.items():
     nm_raw, lat, lon, ctry_hint = urau_coords[code]
+    if code == "MT001C1" or "greater valletta" in str(nm_raw or "").lower():
+      continue
     nm = clean_name(nm_raw)
     if not nm:
       continue
@@ -1663,6 +1720,76 @@ def load_primary_corpora(clean_name, sov_polys):
     for rec in pool_l:
       assign_first_yr(rec)
 
+  # 8E. Pale of Settlement & East Prussia Scholarly Enrichment (GeoNames Country Dumps + Wikidata + Zenodo GDL 1323-1654)
+  pale_gn_p = os.path.join(SDIR, "pale_east_prussia", "enriched_magnetic_pale_prussia.json")
+  pale_seen = {(norm_stem(r["name"]), round(float(r["lat"]), 1), round(float(r["lon"]), 1)) for r in nat_census_pool}
+  if os.path.isfile(pale_gn_p):
+    pale_added = 0
+    for gr in json.load(open(pale_gn_p, encoding="utf-8")):
+      ctry = gr.get("country", "")
+      if not ctry or ctry not in COUNTRY_TO_JURISDICTION:
+        continue
+      la, lo, pop_v = float(gr["lat"]), float(gr["lon"]), int(gr.get("pop") or 0)
+      if pop_v < 200:
+        continue
+      nm = clean_name(gr.get("name"))
+      if not nm:
+        continue
+      sk = (norm_stem(nm), round(la, 1), round(lo, 1))
+      if sk in pale_seen:
+        continue
+      pale_seen.add(sk)
+      rec_p = {
+        "name": nm,
+        "other_names": [fix_mojibake(a) for a in (gr.get("alts") or []) if fix_mojibake(a) and fix_mojibake(a) != nm][:3],
+        "lat": la,
+        "lon": lo,
+        "country": ctry,
+        "pop_2020": pop_v,
+        "source": gr.get("source") or f"National_Statistical_Census_{ctry.replace(' ', '_')}",
+        "is_crowd": False,
+      }
+      if gr.get("first_yr"):
+        rec_p["first_yr"] = int(gr["first_yr"])
+        rec_p["attested_archival"] = True
+      else:
+        assign_first_yr(rec_p)
+      nat_census_pool.append(rec_p)
+      pale_added += 1
+    print(f"  Pale/East Prussia full enrichment: +{pale_added} settlements", flush=True)
+
+  gdl_p = os.path.join(HRAW, "scraped_plc_baltics", "zenodo_gdl_towns_1323_1654.csv")
+  if os.path.isfile(gdl_p):
+    gdl_added = 0
+    with open(gdl_p, encoding="utf-8", errors="replace") as fh:
+      for r in csv.DictReader(fh):
+        try:
+          la, lo = float(r["latitude"]), float(r["longitude"])
+        except Exception:
+          continue
+        ctry = lookup_country(la, lo, sov_polys)
+        if not ctry or ctry not in COUNTRY_TO_JURISDICTION:
+          continue
+        nm = clean_name(r.get("name_en") or r.get("name_pl"))
+        if not nm:
+          continue
+        try:
+          fy = int(r.get("year_from") or 1550)
+        except Exception:
+          fy = 1550
+        sk = (norm_stem(nm), round(la, 1), round(lo, 1))
+        if sk in pale_seen:
+          continue
+        pale_seen.add(sk)
+        alts = [x for x in (r.get("name_pl"), r.get("name_be")) if x and x != nm][:3]
+        nat_census_pool.append({
+          "name": nm, "other_names": alts, "lat": la, "lon": lo, "country": ctry,
+          "pop_2020": 1800, "first_yr": max(1300, min(1654, fy)), "attested_archival": True,
+          "source": "Zenodo_GDL_Towns_1323_1654", "is_crowd": False,
+        })
+        gdl_added += 1
+    print(f"  Zenodo GDL Towns (1323-1654): +{gdl_added} Baltic/PLC settlements", flush=True)
+
   return {
     "cm": cm_cities,
     "devries": devries_cities,
@@ -2187,6 +2314,12 @@ def build_chapter_gazetteer(ch, pools, sov_polys):
     recs.sort(key=lambda r: -(max(r["pop"].values()) if r.get("pop") else 0))
     for r in recs:
       nm = r["name"]
+      nm_lower = nm.lower()
+      if any(rk in nm_lower for rk in (
+        "hal-saflieni", "hypogeum", "ghar-dalam", "brochtorff", "fairlop quarry",
+        "kazifin", "nymphs cave", "kurgan", "tumulus", "necropolis", "dolmen", "menhir",
+      )) or nm_lower == "agora":
+        continue
       ctry = r["country"]
       lat, lon = round(float(r["lat"]), 5), round(float(r["lon"]), 5)
       if not (-85.0 <= lat <= 85.0 and -180.0 <= lon <= 180.0) or (abs(lat) < 0.01 and abs(lon) < 0.01):
@@ -2194,7 +2327,6 @@ def build_chapter_gazetteer(ch, pools, sov_polys):
       st = norm_stem(nm)
       skey = f"{nm}-{ctry}"
       dup_key = None
-      close_key = None
       gx, gy = int(math.floor(lat * 4.0)), int(math.floor(lon * 4.0))
       for dx in (-1, 0, 1):
         if dup_key:
@@ -2209,8 +2341,6 @@ def build_chapter_gazetteer(ch, pools, sov_polys):
             if dkm <= 25.0 and stems_are_variant_dup(st, pst):
               dup_key = pk
               break
-            if dkm <= 2.0 and close_key is None:
-              close_key = pk
       if dup_key:
         ex = included[dup_key]
         ex_mf = get_modern_foundation_floor(ex["name"], ex["country"])
@@ -2226,14 +2356,6 @@ def build_chapter_gazetteer(ch, pools, sov_polys):
             "settlement_key": skey, "name": nm, "country": ctry,
             "status": "excluded", "reason": "duplicate_alias",
             "justification": f"Merged duplicate/variant spelling within 25 km into primary settlement {dup_key}.",
-          })
-        continue
-      if close_key:
-        if len(excluded_ledger) < 2000:
-          excluded_ledger.append({
-            "settlement_key": skey, "name": nm, "country": ctry,
-            "status": "excluded", "reason": "subordinate_suburb_merged",
-            "justification": f"Subordinate settlement within 2,0 km consolidated into primary urban core {close_key}.",
           })
         continue
       if skey in included:

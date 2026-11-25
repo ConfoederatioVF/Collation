@@ -163,6 +163,7 @@
     //2. Group Stadestér settlements by GHSL cluster ID across 1975..2025
     for (let i = 0; i < city_entries.length; i++) {
       let ce = city_entries[i];
+      if (ce.city && Number.isFinite(ce.city._annexation_year) && ce.city._annexation_year <= 1975) continue;
       for (let x = 0; x < epochs.length; x++) {
         let uc_id = ce.epoch_cluster[epochs[x]];
         if (uc_id) {
@@ -257,33 +258,36 @@
         }
       }
       
-      primary_candidates.sort((a, b) =>
-        population_Stadester_ghsl.getModernReferencePopulation({ population: b.raw_pop }) -
-        population_Stadester_ghsl.getModernReferencePopulation({ population: a.raw_pop })
-      );
-      token_candidates.sort((a, b) =>
-        population_Stadester_ghsl.getModernReferencePopulation({ population: b.raw_pop }) -
-        population_Stadester_ghsl.getModernReferencePopulation({ population: a.raw_pop })
-      );
-      earliest_pool.sort((a, b) =>
-        population_Stadester_ghsl.getModernReferencePopulation({ population: b.raw_pop }) -
-        population_Stadester_ghsl.getModernReferencePopulation({ population: a.raw_pop })
-      );
+      let sortByCapAndPop = function (arg0_a, arg1_b) {
+        let cap_a = Boolean(arg0_a.city && (arg0_a.city.is_capital || arg0_a.city.capital || arg0_a.city._mun_is_capital));
+        let cap_b = Boolean(arg1_b.city && (arg1_b.city.is_capital || arg1_b.city.capital || arg1_b.city._mun_is_capital));
+        if (cap_a !== cap_b) return cap_a ? -1 : 1;
+        return population_Stadester_ghsl.getModernReferencePopulation({ population: arg1_b.raw_pop }) -
+          population_Stadester_ghsl.getModernReferencePopulation({ population: arg0_a.raw_pop });
+      };
+      primary_candidates.sort(sortByCapAndPop);
+      token_candidates.sort(sortByCapAndPop);
+      earliest_pool.sort(sortByCapAndPop);
       
       let chosen_list = primary_candidates;
       if (token_candidates.length > 0) {
         let best_tok_pop = population_Stadester_ghsl.getModernReferencePopulation({ population: token_candidates[0].raw_pop });
         let best_pri_pop = (chosen_list.length > 0) ?
           population_Stadester_ghsl.getModernReferencePopulation({ population: chosen_list[0].raw_pop }) : 0;
-        if (chosen_list.length === 0 || best_tok_pop > best_pri_pop*1.5)
+        let pri_is_cap = Boolean(chosen_list.length > 0 && chosen_list[0].city && (chosen_list[0].city.is_capital || chosen_list[0].city._mun_is_capital));
+        if (chosen_list.length === 0 || (!pri_is_cap && best_tok_pop > best_pri_pop*1.5))
           chosen_list = token_candidates;
       }
       if (chosen_list.length === 0) {
         chosen_list = earliest_pool;
       } else if (earliest_pool.length > 0) {
+        let best_chosen = chosen_list[0];
+        let chosen_is_cap_or_exact = Boolean(
+          best_chosen.city && (best_chosen.city.is_capital || best_chosen.city.capital || best_chosen.city._mun_is_capital)
+        ) || primary_candidates.includes(best_chosen);
         let best_pool_pop = population_Stadester_ghsl.getModernReferencePopulation({ population: earliest_pool[0].raw_pop });
-        let best_chosen_pop = population_Stadester_ghsl.getModernReferencePopulation({ population: chosen_list[0].raw_pop });
-        if (best_pool_pop > best_chosen_pop*2.0)
+        let best_chosen_pop = population_Stadester_ghsl.getModernReferencePopulation({ population: best_chosen.raw_pop });
+        if (!chosen_is_cap_or_exact && best_pool_pop > best_chosen_pop*2.0)
           chosen_list = earliest_pool;
       }
       

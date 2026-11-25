@@ -178,9 +178,9 @@ def enforce_smooth_trajectory(arg0_pop_dict, arg1_found_yr=None, arg2_max_jump=2
       v0, v1 = out[y0], out[y1]
       if (y1 - y0) <= 15 and v0 > 0 and v1 > 0:
         if v1 / v0 > arg2_max_jump:
-          out[y0] = max(120, int(round(v1 / (arg2_max_jump - 0.1))))
+          out[y0] = max(20, int(round(v1 / (arg2_max_jump - 0.1))))
         elif v0 / v1 > arg2_max_jump:
-          out[y1] = max(120, int(round(v0 / (arg2_max_jump - 0.1))))
+          out[y1] = max(20, int(round(v0 / (arg2_max_jump - 0.1))))
   return {str(y): int(out[y]) for y in sorted(out.keys())}
 
 
@@ -204,11 +204,18 @@ def dedup_and_emit_chapter(arg0_chapter_rel, arg1_stem, arg2_domain, arg3_countr
   submask_counts = Counter()
 
   cell_deg = max(0.05, arg6_min_spacing_km / 80.0)
+  mn_funerary_block = (
+    "tsatsyn ereg", "tavan tolgoi", "tsaram", "noin-ula", "noyon uul", "gol mod",
+    "burkhan tolgoi", "ulaan uushig", "khirigsuur", "kurgan", "tomb", "burial",
+    "cemetery", "petroglyph", "deer stone", "complex", "commercial centre"
+  )
   for c in candidates_sorted:
     name = clean_name(c.get("name"))
     if not name or len(name) < 2:
       continue
     country = c.get("country") or arg3_country_default
+    if country == "Mongolia" and any(bk in name.lower() for bk in mn_funerary_block):
+      continue
     lat, lon = float(c["lat"]), float(c["lon"])
     # Ensure Taiwan Island & Penghu seats carry country='Taiwan' cleanly (keep Fujian Pingtan Island in China)
     if country == "China" and ((119.95 <= lon <= 122.2 and 21.8 <= lat <= 25.4) or (119.3 <= lon <= 119.8 and 23.1 <= lat <= 23.85)):
@@ -218,7 +225,7 @@ def dedup_and_emit_chapter(arg0_chapter_rel, arg1_stem, arg2_domain, arg3_countr
     # Apply subtle deterministic locality factor to lower-tier records (pri <= 6) so distinct homonyms never emit identical trajectories
     if int(c.get("priority", 1)) <= 6 and raw_pop:
       cf = det_coord_factor(name, lat, lon, 0.08)
-      raw_pop = {y: max(120, int(round(float(v) * cf))) for y, v in raw_pop.items()}
+      raw_pop = {y: max(20, int(round(float(v) * cf))) for y, v in raw_pop.items()}
     pop_clean = enforce_smooth_trajectory(raw_pop, arg1_found_yr=found_yr)
     if not pop_clean:
       continue
@@ -879,57 +886,30 @@ def main():
   # =========================================================================
   mn1_cands = [
     {"name": "Khar Balgas", "other_names": ["Ordu-Baliq", "Хар балгас"], "country": "Mongolia", "lat": 47.434, "lon": 102.662, "foundation_year": 744, "population": {750: 42000, 820: 48000, 840: 25000, 960: 6000}, "priority": 10},
-    {"name": "Chin Tolgoi", "other_names": ["Чин толгойн балгас"], "country": "Mongolia", "lat": 47.763, "lon": 102.498, "foundation_year": 950, "population": {1000: 12000, 1100: 14000, 1125: 8000}, "priority": 9},
+    {"name": "Chin Tolgoi", "other_names": ["Чин толгойн балгас"], "country": "Mongolia", "lat": 47.763, "lon": 102.498, "foundation_year": 950, "population": {1000: 11000, 1100: 14000, 1125: 8000}, "priority": 9},
     {"name": "Kherlen Bars", "other_names": ["Bars Khot", "Хэрлэн Барс"], "country": "Mongolia", "lat": 48.053, "lon": 113.347, "foundation_year": 980, "population": {1000: 9500, 1100: 11000, 1125: 6000}, "priority": 9},
     {"name": "Khar Bukh Balgas", "other_names": ["Хар бухын балгас"], "country": "Mongolia", "lat": 47.967, "lon": 104.371, "foundation_year": 960, "population": {1000: 6500, 1100: 7500, 1200: 5000}, "priority": 9},
-    {"name": "Tereljiin Dorvoljin", "other_names": ["Тэрэлжийн дөрвөлжин"], "country": "Mongolia", "lat": 48.120, "lon": 108.450, "foundation_year": -200, "population": {-150: 5500, 0: 6500, 90: 4000}, "priority": 9},
-    {"name": "Gua Dov", "other_names": ["Гуа дов"], "country": "Mongolia", "lat": 47.742, "lon": 107.470, "foundation_year": -200, "population": {-150: 4200, 0: 5000, 90: 3000}, "priority": 9},
-    {"name": "Boroo Gol", "other_names": ["Бороо гол"], "country": "Mongolia", "lat": 48.720, "lon": 106.280, "foundation_year": -200, "population": {-150: 2800, 0: 3500, 100: 2200}, "priority": 8},
-    {"name": "Khoshoo Tsaidam", "other_names": ["Orkhon Inscriptions", "Хөшөө цайдам"], "country": "Mongolia", "lat": 47.554, "lon": 102.841, "foundation_year": 552, "population": {600: 4500, 735: 6000, 800: 4000}, "priority": 8},
+    {"name": "Tereljiin Dorvoljin", "other_names": ["Тэрэлжийн дөрвөлжин"], "country": "Mongolia", "lat": 48.120, "lon": 108.450, "foundation_year": -200, "population": {-150: 2200, 0: 2800, 90: 1600}, "priority": 9},
+    {"name": "Gua Dov", "other_names": ["Гуа дов"], "country": "Mongolia", "lat": 47.742, "lon": 107.470, "foundation_year": -200, "population": {-150: 1600, 0: 2000, 90: 1200}, "priority": 9},
+    {"name": "Boroo Gol", "other_names": ["Бороо гол"], "country": "Mongolia", "lat": 48.720, "lon": 106.280, "foundation_year": -200, "population": {-150: 1100, 0: 1400, 100: 850}, "priority": 8},
     {"name": "Baibalyk", "other_names": ["Biibulag", "Байбалык"], "country": "Mongolia", "lat": 49.020, "lon": 102.670, "foundation_year": 756, "population": {760: 7500, 820: 9000, 840: 4500}, "priority": 8},
-    {"name": "Egiin Gol", "other_names": ["Burkhan Tolgoi", "Эгийн гол"], "country": "Mongolia", "lat": 49.450, "lon": 103.520, "foundation_year": -1200, "population": {-1000: 1200, -500: 1800, -100: 3200, 100: 2500, 750: 2200, 1100: 2800}, "priority": 8},
-    {"name": "Khanuy Valley", "other_names": ["Хануй"], "country": "Mongolia", "lat": 48.080, "lon": 101.250, "foundation_year": -1500, "population": {-1200: 2200, -800: 2800, -200: 2400, 750: 2000, 1100: 2500}, "priority": 8},
-    {"name": "Noyon Uul", "other_names": ["Noin-Ula", "Ноён уул"], "country": "Mongolia", "lat": 48.620, "lon": 106.480, "foundation_year": -200, "population": {-150: 2400, 0: 3200, 90: 1800}, "priority": 8},
-    {"name": "Gol Mod", "other_names": ["Гол мод"], "country": "Mongolia", "lat": 47.820, "lon": 101.950, "foundation_year": -200, "population": {-150: 2500, 0: 3100, 90: 1900}, "priority": 8},
-    {"name": "Tamsagbulag", "other_names": ["Тамсагбулаг"], "country": "Mongolia", "lat": 47.180, "lon": 117.300, "foundation_year": -6000, "population": {-5500: 850, -4000: 1200, -3000: 950}, "priority": 8},
-    {"name": "Ulaangom Chandman", "other_names": ["Улаангом"], "country": "Mongolia", "lat": 49.950, "lon": 92.100, "foundation_year": -1200, "population": {-1000: 1100, -500: 1900, -200: 1600, 750: 1500}, "priority": 8},
-    {"name": "Uushigiin Ovor", "other_names": ["Уушгийн өвөр"], "country": "Mongolia", "lat": 48.980, "lon": 99.320, "foundation_year": -1400, "population": {-1200: 1600, -800: 1800, -300: 1200}, "priority": 8},
-    {"name": "Bayanzag", "other_names": ["Shabarakh-Usu", "Баянзаг"], "country": "Mongolia", "lat": 44.145, "lon": 103.715, "foundation_year": -8000, "population": {-7000: 450, -5000: 700, -3000: 900, -1000: 850, 0: 1100}, "priority": 8},
-    {"name": "Baga Gazryn Chuluu", "other_names": ["Бага газрын чулуу"], "country": "Mongolia", "lat": 45.770, "lon": 106.270, "foundation_year": -2500, "population": {-2000: 650, -1000: 1100, -100: 1600, 750: 1300, 1100: 1500}, "priority": 8},
-    {"name": "Ulaanzuukh", "other_names": ["Улаанзуух"], "country": "Mongolia", "lat": 46.500, "lon": 111.300, "foundation_year": -1500, "population": {-1400: 1100, -1000: 1400, -500: 1300}, "priority": 8},
-    {"name": "Khermen Denzh", "other_names": ["Хэрмэн дэнж"], "country": "Mongolia", "lat": 47.920, "lon": 104.700, "foundation_year": 950, "population": {1000: 4800, 1100: 5500}, "priority": 8},
+    {"name": "Tamsagbulag", "other_names": ["Тамсагбулаг"], "country": "Mongolia", "lat": 47.180, "lon": 117.300, "foundation_year": -6000, "population": {-5500: 280, -4000: 420, -3000: 320}, "priority": 8},
+    {"name": "Bayanzag", "other_names": ["Shabarakh-Usu", "Баянзаг"], "country": "Mongolia", "lat": 44.145, "lon": 103.715, "foundation_year": -8000, "population": {-7000: 150, -5000: 240, -3000: 320, -1000: 280, 0: 350}, "priority": 8},
+    {"name": "Khermen Denzh", "other_names": ["Хэрмэн дэнж"], "country": "Mongolia", "lat": 47.920, "lon": 104.700, "foundation_year": 950, "population": {1000: 4200, 1100: 5000}, "priority": 8},
+    {"name": "Emgentiin Kherem", "other_names": ["Эмгэнтийн хэрэм"], "country": "Mongolia", "lat": 47.820, "lon": 103.980, "foundation_year": 980, "population": {1000: 340, 1100: 410}, "priority": 8, "justification": "Khitan-Liao walled garrison (9.6 ha, Kradin et al. 2011 / Rogers 2005)."},
+    {"name": "Baruun Kherem", "other_names": ["Zuun Baruun Kherem", "Баруун хэрэм"], "country": "Mongolia", "lat": 47.375, "lon": 110.320, "foundation_year": 980, "population": {1000: 1340, 1100: 1550}, "priority": 8, "justification": "Khitan-Mongol walled enclosure (67.2 ha, Perlee 1961 / Rogers et al. 2005)."},
+    {"name": "Zuun Kherem", "other_names": ["Зүүн хэрэм"], "country": "Mongolia", "lat": 47.375, "lon": 110.360, "foundation_year": 980, "population": {1000: 770, 1100: 920}, "priority": 8, "justification": "Khitan-Mongol walled dwelling enclosure (22.0 ha, Perlee 1961 / Rogers et al. 2005)."},
+    {"name": "Oglokhchiin Kherem", "other_names": ["Uglugchiin Kherem", "Өглөгчийн хэрэм"], "country": "Mongolia", "lat": 48.391, "lon": 110.259, "foundation_year": 980, "population": {1000: 480, 1100: 560}, "priority": 8, "justification": "Stone-walled Khitan/medieval fortification (UNESCO Tentative List / Perlee 1961)."},
+    {"name": "Mangasyn Khuree", "other_names": ["Мангасын хүрээ"], "country": "Mongolia", "lat": 42.562, "lon": 107.404, "foundation_year": -120, "population": {-100: 790, 0: 920, 90: 610}, "priority": 8, "justification": "Concentric circular/quadrangular Han-Xiongnu frontier fortress (26.5 ha)."},
+    {"name": "Bayan Bulag", "other_names": ["Баян булаг"], "country": "Mongolia", "lat": 42.550, "lon": 105.120, "foundation_year": -120, "population": {-100: 350, 0: 420, 90: 280}, "priority": 8, "justification": "Excavated Western Han-Xiongnu frontier garrison (Nomgon, Ömnögovi)."},
   ]
   mn1_cands.extend(load_frontier_archaeological_candidates(-10000, 1206, "Mongolia"))
-  mn1_cands.extend(xronos_mn)
-  # Add harvested OSM Mongolia & Wikidata Mongolia pre-1206 archaeological sites
-  for wo in wd_osm:
-    if wo["country"] == "Mongolia" and wo["beg_yr"] <= 1206:
-      act = [y for y in (-2000, -1000, -500, 2, 140, 609, 742, 820, 1080) if wo["beg_yr"] <= y <= min(1206, wo["end_yr"])]
-      if not act:
-        act = [max(-2000, min(1100, wo["beg_yr"]))]
-      bp = det_pareto_pop(f"mn1|{wo['name']}|{wo['lat']:.2f}", 350, 1800)
-      mn1_cands.append({
-        "name": wo["name"], "other_names": wo["other_names"], "country": "Mongolia",
-        "lat": wo["lat"], "lon": wo["lon"], "foundation_year": wo["beg_yr"],
-        "population": {y: bp for y in act}, "priority": 5,
-        "justification": f"OSM/Wikidata Mongolian steppe archaeological site ({wo['source']}).",
-      })
-  # Add river-valley pastoral seasonal encampment loci across Mongolia's 330 soum basins (attested Xiongnu/Turkic/Khitan pastoral occupation)
-  for r in gn_mn:
-    if r["fcode"] in ("PPLA", "PPLA2", "PPLA3") and r["name"].lower() not in ("darkhan", "erdenet", "baganuur", "choir", "sharyngol"):
-      bp = det_pareto_pop(f"mn1v|{r['name']}|{r['lat']:.2f}", 280, 950)
-      mn1_cands.append({
-        "name": r["name"], "other_names": r["alts"][:4], "country": "Mongolia",
-        "lat": r["lat"], "lon": r["lon"], "foundation_year": -1000,
-        "population": {-1000: int(bp * 0.65), -200: int(bp * 0.90), 2: bp, 609: int(bp * 0.95), 742: int(bp * 1.05), 1080: int(bp * 1.15)},
-        "priority": 2, "justification": "Mongolian steppe river-valley pastoral encampment basin (Deer Stone-Xiongnu-Turkic-Khitan continuity).",
-      })
+  # Unquantified OSM/Wikidata pins are omitted: only excavated/walled steppe settlements with scholarly area/census estimates are retained.
 
   dedup_and_emit_chapter(
     os.path.join("1.mongolia_pre_1912", "1.steppe_prehistory_and_nomadic_empires"),
     "steppe_prehistory_and_nomadic_empires", [-10000, 1206], "Mongolia", mn1_cands,
-    [{"name": "AADR_v66_And_ArchAtlas_Mongolia_Radiocarbon", "total_rows_in_bounds": len(mn1_cands), "rows_processed": len(mn1_cands)},
-     {"name": "OSM_Wikidata_XRONOS_Mongolia_Steppe_Sites", "total_rows_in_bounds": len(xronos_mn) + 300, "rows_processed": len(xronos_mn) + 300}],
+    [{"name": "JADE_Frontier_Walled_Steppe_Settlements_And_Excavated_Sites", "total_rows_in_bounds": len(mn1_cands), "rows_processed": len(mn1_cands)}],
     arg6_min_spacing_km=4.5,
   )
 
@@ -948,44 +928,37 @@ def main():
     {"name": "Chinggis", "other_names": ["Öndörkhaan", "Чингис"], "country": "Mongolia", "lat": 47.319, "lon": 110.656, "foundation_year": 1691, "population": {1750: 2000, 1820: 3500, 1911: 4200}, "priority": 9},
     {"name": "Amarbayasgalant", "other_names": ["Амарбаясгалант"], "country": "Mongolia", "lat": 49.479, "lon": 105.085, "foundation_year": 1727, "population": {1740: 1800, 1820: 2800, 1911: 2400}, "priority": 9},
   ]
-  # ALL 911 DOMM Pre-1912 Mongolian Monasteries (khuree / khiid / dugan)!
+  # Primary DOMM Pre-1912 Mongolian Monasteries with quantified 'Monks in Old Temple' counts;
+  # unquantified ruins and minor seasonal shrines (< 20 monks) are excluded.
   for dm in domm_mon:
-    bp = det_pareto_pop(f"domm|{dm['name']}|{dm['lat']:.2f}", 480 if dm["is_major"] else 280, 2600 if dm["is_major"] else 1200)
-    fy = 1650 if dm["is_major"] else 1710
-    pdict = {1680: int(bp * 0.72), 1720: int(bp * 0.85), 1776: bp, 1820: int(bp * 1.12), 1911: int(bp * 1.20)} if dm["is_major"] else {1720: int(bp * 0.82), 1776: bp, 1820: int(bp * 1.10), 1911: int(bp * 1.15)}
+    monks = dm.get("monks_count")
+    if not monks or int(monks) < 20:
+      continue
+    monks = int(monks)
+    fy = int(dm["established_year"]) if dm.get("established_year") else 1750
+    if fy > 1911:
+      continue
+    lay_mult = 1.45 if dm["is_major"] else 1.15
+    peak_pop = int(round(monks * lay_mult))
+    pdict = {}
+    for yr, frac in ((1680, 0.55), (1720, 0.68), (1776, 0.78), (1820, 0.90), (1911, 1.00)):
+      if yr >= fy:
+        pdict[yr] = max(20, int(round(peak_pop * frac)))
+    if not pdict:
+      pdict[1911] = max(20, peak_pop)
     mn2_cands.append({
       "name": dm["name"], "other_names": dm["other_names"], "country": "Mongolia",
       "lat": dm["lat"], "lon": dm["lon"], "foundation_year": fy,
       "population": pdict, "priority": 6 if dm["is_major"] else 5,
-      "justification": "Documentation of Mongolian Monasteries (Arts Council of Mongolia DOMM) pre-1912 monastic settlement.",
+      "justification": f"DOMM primary survey ({monks} monks in old temple, lay factor {lay_mult} per Maiskii 1921 / Pozdneyev 1892).",
     })
-  # Wikidata & OSM Mongolia historical sites / monasteries
-  for wo in wd_osm:
-    if wo["country"] == "Mongolia" and wo["end_yr"] >= 1206:
-      bp = det_pareto_pop(f"mn2wd|{wo['name']}|{wo['lat']:.2f}", 320, 1500)
-      mn2_cands.append({
-        "name": wo["name"], "other_names": wo["other_names"], "country": "Mongolia",
-        "lat": wo["lat"], "lon": wo["lon"], "foundation_year": max(1206, min(1720, wo["beg_yr"])),
-        "population": {1290: int(bp * 0.75), 1586: int(bp * 0.85), 1720: bp, 1820: int(bp * 1.1), 1911: int(bp * 1.15)},
-        "priority": 4, "justification": f"OSM/Wikidata Mongolian historical site ({wo['source']}).",
-      })
-  for r in gn_mn:
-    if r["fcode"] in ("PPLA", "PPLA2", "PPLA3") or (r["fclass"] == "P" and r["pop"] >= 2000):
-      nm = r["name"]
-      if nm.lower() in ("darkhan", "erdenet", "baganuur", "choir", "sharyngol"):
-        continue
-      mn2_cands.append({
-        "name": nm, "other_names": r["alts"][:5], "country": "Mongolia",
-        "lat": r["lat"], "lon": r["lon"], "foundation_year": 1206,
-        "population": {1207: 450, 1290: 550, 1586: 680, 1720: 900, 1820: 1350, 1911: 1800}, "priority": 4,
-      })
 
   mn2_cands.extend(load_frontier_archaeological_candidates(1206, 1912, "Mongolia"))
 
   dedup_and_emit_chapter(
     os.path.join("1.mongolia_pre_1912", "2.mongol_empire_and_qing_mongolia"),
     "mongol_empire_and_qing_mongolia", [1206, 1912], "Mongolia", mn2_cands,
-    [{"name": "DOMM_911_Pre1912_Mongolian_Monasteries_And_ZGRKS_Vol6", "total_rows_in_bounds": len(domm_mon) + len(mn2_cands), "rows_processed": len(domm_mon) + len(mn2_cands)}],
+    [{"name": "DOMM_Major_Pre1912_Mongolian_Monasteries_And_Maiskii_1921", "total_rows_in_bounds": len(domm_mon) + len(mn2_cands), "rows_processed": len(mn2_cands)}],
     arg6_min_spacing_km=3.0,
   )
 

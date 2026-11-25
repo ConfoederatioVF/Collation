@@ -94,14 +94,6 @@ FRONTIER_HISTORICAL_CITIES = [
    {280: 3500, 464: 4800, 609: 5200, 742: 6000, 820: 3000}, [(200, "Dandan Oilik")]),
   ("Endere", ["安迪尔"], "China", 37.817, 83.683, 100,
    {140: 3200, 280: 3800, 609: 4200, 742: 4500, 1080: 2800}, [(100, "Endere")]),
-  ("Xiaohe", ["小河墓地"], "China", 40.336, 88.671, -2000,
-   {-2000: 1400, -1500: 1800}, [(-2000, "Xiaohe")]),
-  ("Gumugou", ["古墓沟"], "China", 40.633, 88.917, -2000,
-   {-2000: 1200, -1500: 1400}, [(-2000, "Gumugou")]),
-  ("Yanghai", ["洋海"], "China", 42.811, 89.660, -1200,
-   {-1000: 2200, -500: 2800, 2: 2400}, [(-1200, "Yanghai")]),
-  ("Chawuhu", ["察吾呼"], "China", 42.450, 86.267, -1000,
-   {-1000: 2600, -500: 3200}, [(-1000, "Chawuhu")]),
   ("Adunqiaolu", ["阿敦乔鲁"], "China", 45.055, 80.938, -1900,
    {-1800: 1500, -1500: 1800, -1000: 1400}, [(-1900, "Adunqiaolu")]),
   ("Jirentai Goukou", ["吉仁台沟口"], "China", 43.835, 82.838, -1600,
@@ -421,12 +413,14 @@ def load_frontier_archaeological_candidates(arg0_d_start, arg1_d_end, arg2_count
         "justification": f"Primary historical frontier city/oasis ({nm}, founded {fy}).",
       })
 
-  # 2. AADR v66 (300 C14-dated ancient-DNA sites across Xinjiang, Tibet, Gansu, Qinghai, Inner Mongolia, Mongolia, Manchuria!)
-  aadr_reject = ("burial", "cemetery", "cemeteries", "tomb", "grave", "cave", "site", "kurgan", "barrow", "mound", "sample", "unknown", "unnamed", "province", "district", "region")
+  # 2. AADR v66 (ancient-DNA skeletal/burial database — exclude Mongolia kurgans/burials and all funerary sites!)
+  aadr_reject = ("burial", "cemetery", "cemeteries", "tomb", "grave", "cave", "site", "kurgan", "barrow", "mound", "sample", "unknown", "unnamed", "province", "district", "region", "khirigsuur", "slab")
   aadr_p = os.path.join(CENSUS_DIR, "aadr_jade_frontier_sites.json")
   if os.path.exists(aadr_p):
     for r in json.load(open(aadr_p, encoding="utf-8")):
       ctry = r.get("country", "China")
+      if ctry == "Mongolia":
+        continue
       if arg2_country_filter and ctry != arg2_country_filter:
         continue
       lo, la = float(r["lon"]), float(r["lat"])
@@ -474,23 +468,27 @@ def load_frontier_archaeological_candidates(arg0_d_start, arg1_d_end, arg2_count
     "cliff", "hill", "mountain", "lake", "river", "valley", "pass", "wall", "gate", "tower",
     "farm", "ranch", "bridge", "company", "hotel", "building", "hall", "court", "office",
     "district", "sector", "section", "zone", "area", "north ", "south ", "east ", "west ",
+    "khirigsuur", "slab", "deer stone", "sacrificial", "stele", "bilge", "kherlen-bars",
   )
   aa_p = os.path.join(CENSUS_DIR, "arch_atlas_jade_frontier.json")
   if os.path.exists(aa_p):
     for r in json.load(open(aa_p, encoding="utf-8")):
       la, lo = float(r["lat"]), float(r["lon"])
       ctry = "Mongolia" if (87.8 <= lo <= 119.5 and 42.5 <= la <= 52.0 and not (lo > 115.0 and la < 46.5)) else "China"
+      if ctry == "Mongolia":
+        # Arch Atlas Mongolia entries are unquantified archaeological/funerary pins; do not stamp synthetic 2200 pop.
+        continue
       if arg2_country_filter and ctry != arg2_country_filter:
         continue
       raw_nm = str(r["name"] or "")
-      if any(rk in raw_nm.lower() for rk in aa_reject):
+      desc = str(r.get("desc_hint") or "").lower()
+      if any(rk in raw_nm.lower() for rk in aa_reject) or any(rk in desc for rk in aa_reject):
         continue
       raw_nm = re.sub(r"\s+(?:Gucheng|Yizhi|Chengzhi|Tuchengzi|Tucheng|Chengzi|Fort|City|Town|Village|I|II|III|IV|V|\d+)$", "", raw_nm, flags=re.I)
       raw_nm = re.sub(r"(?:gucheng|yizhi|chengzhi|tuchengzi|tucheng|chengzi)$", "", raw_nm, flags=re.I)
       nm = clean_name(raw_nm)
       if not nm or len(nm) < 3 or len(nm) > 17 or len(nm.split()) > 2 or re.search(r"\d", nm):
         continue
-      desc = str(r.get("desc_hint") or "").lower()
       if any(k in desc for k in ("neolithic", "yangshao", "majiayao", "qijia", "hongshan", "bronze", "xiajiadian", "karuo", "andronovo", "afanasievo", "tarim")):
         y0, y1 = -2500, -500
       elif any(k in desc for k in ("xiongnu", "han ", "silk road", "stein", "hedin", "kucha", "khotan", "loulan", "niya", "turfan", "dunhuang", "juyan", "tarim")):
@@ -505,7 +503,12 @@ def load_frontier_archaeological_candidates(arg0_d_start, arg1_d_end, arg2_count
       act = [y for y in b_yrs if max(y0, arg0_d_start) <= y <= min(y1, arg1_d_end)]
       if not act:
         continue
-      base = 2200 if (lo < 97.0 or la > 42.0) else 2800
+      if any(k in desc for k in ("capital", "commandery", "prefecture", "dufu")):
+        base = 1800
+      elif any(k in desc for k in ("gucheng", "chengzhi", "walled", "fort", "garrison")):
+        base = 1100
+      else:
+        base = 650
       out.append({
         "name": nm,
         "other_names": [r["zh"]] if r.get("zh") else [],

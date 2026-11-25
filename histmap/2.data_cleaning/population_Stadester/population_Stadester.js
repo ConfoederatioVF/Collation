@@ -9,6 +9,8 @@
         require(path.join(cur_dir, "config", "stadester_config.js"));
       if (!global.StadesterPartitionIO && fs.existsSync(path.join(cur_dir, "StadesterPartitionIO.js")))
         require(path.join(cur_dir, "StadesterPartitionIO.js"));
+      if (!global.stadester_name_normaliser && fs.existsSync(path.join(cur_dir, "stadester_name_normaliser.js")))
+        require(path.join(cur_dir, "stadester_name_normaliser.js"));
       if (!global.ViscountGazetteerLoader && fs.existsSync(path.join(cur_dir, "ViscountGazetteerLoader.js")))
         require(path.join(cur_dir, "ViscountGazetteerLoader.js"));
       if ((!global.population_Stadester_uud || !global.population_Stadester_uud.initialiseUUD) && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
@@ -185,6 +187,8 @@
       });
       if (typeof population_Stadester_uud.reconcileCloseSameCountryTwins === "function")
         stadester_obj = population_Stadester_uud.reconcileCloseSameCountryTwins(stadester_obj);
+      if (typeof population_Stadester_uud.flattenToMunicipalityLevelAndCleanNames === "function")
+        stadester_obj = population_Stadester_uud.flattenToMunicipalityLevelAndCleanNames(stadester_obj);
       if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
         population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
       

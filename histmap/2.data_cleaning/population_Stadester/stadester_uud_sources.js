@@ -312,6 +312,138 @@
   };
   
   /**
+   * Lazily builds and caches the global exonym group lookup from `viscount_skill_profiles.json5`.
+   * @alias population_Stadester_uud.getExonymLookup
+   *
+   * @returns {{ audit: Object|null, stem_to_group: Map<string, number> }}
+   */
+  population_Stadester_uud.getExonymLookup = function () {
+    //Function body
+    if (global._cached_uud_exonym_lookup !== undefined)
+      return global._cached_uud_exonym_lookup;
+
+    let audit_mod = null;
+    let stem_to_group = new Map();
+
+    try {
+      let audit_mod_path = path.resolve(__dirname, "../../../.agents/skills/population-regional-study/scripts/viscount_entity_and_continuity_audit.js");
+      audit_mod = fs.existsSync(audit_mod_path) ? require(audit_mod_path).viscount_entity_audit : null;
+      let profiles = (audit_mod) ? audit_mod.loadSkillProfiles() : null;
+      let groups = (profiles && Array.isArray(profiles.romanisation_equivalences)) ? profiles.romanisation_equivalences : [];
+      for (let i = 0; i < groups.length; i++) {
+        let grp = groups[i];
+        if (!Array.isArray(grp)) continue;
+        for (let x = 0; x < grp.length; x++) {
+          let item = String(grp[x] || "");
+          if (item) stem_to_group.set(item, i);
+        }
+      }
+    } catch (e) {
+      audit_mod = null;
+    }
+
+    global._cached_uud_exonym_lookup = { audit: audit_mod, stem_to_group: stem_to_group };
+
+    //Return statement
+    return global._cached_uud_exonym_lookup;
+  };
+
+
+  /**
+   * Builds and memoises a non-enumerable name/stem/exonym index on a city object for O(1) matching.
+   * @alias population_Stadester_uud.getCityNameIndex
+   *
+   * @param {Object} arg0_city
+   *
+   * @returns {Object}
+   */
+  population_Stadester_uud.getCityNameIndex = function (arg0_city) {
+    //Convert from parameters
+    let city = arg0_city;
+
+    //Guard clauses
+    if (!city || typeof city !== "object") {
+      return {
+        comp_set: null,
+        entity_stems: null,
+        exonym_groups: null,
+        name_set: new Set(),
+        names: [],
+        prim: "",
+        sig: "",
+        slavic_set: null,
+        west_set: null
+      };
+    }
+
+    //Declare local instance variables
+    let other_len = Array.isArray(city.other_names) ? city.other_names.length : 0;
+    let orig_len = Array.isArray(city.original_names) ? city.original_names.length : 0;
+    let sig = `${city.name || ""}|${city.country || ""}|${other_len}|${orig_len}`;
+
+    if (city._uud_name_idx && city._uud_name_idx.sig === sig)
+      return city._uud_name_idx;
+
+    let name_set = new Set();
+    let names = [];
+    let raw_list = [];
+
+    //Function body
+    if (city.name) {
+      let norm_res = (global.stadester_name_normaliser) ?
+        global.stadester_name_normaliser.normaliseCityName(city.name, city.country) :
+        { extra_aliases: [], name: city.name };
+      if (norm_res.name) raw_list.push(norm_res.name);
+      raw_list.push(city.name);
+      if (norm_res.extra_aliases.length > 0) raw_list = raw_list.concat(norm_res.extra_aliases);
+    }
+    if (other_len > 0) raw_list = raw_list.concat(city.other_names);
+    if (orig_len > 0) raw_list = raw_list.concat(city.original_names);
+
+    for (let k = 0; k < raw_list.length; k++) {
+      let decoded = (global.stadester_name_normaliser) ?
+        global.stadester_name_normaliser.decodeHaceksAndQuotes(raw_list[k], city.country) : raw_list[k];
+      let stat_clean = (global.stadester_name_normaliser) ?
+        global.stadester_name_normaliser.cleanStatisticalWrapper(decoded, city.country) : decoded;
+      let proc = population_Stadester_uud.processCityName(stat_clean || raw_list[k]);
+      if (proc && !name_set.has(proc)) {
+        name_set.add(proc);
+        names.push(proc);
+      }
+      if (decoded && decoded !== stat_clean) {
+        let proc_dec = population_Stadester_uud.processCityName(decoded);
+        if (proc_dec && !name_set.has(proc_dec)) {
+          name_set.add(proc_dec);
+          names.push(proc_dec);
+        }
+      }
+    }
+
+    let idx = {
+      comp_set: null,
+      entity_stems: null,
+      exonym_groups: null,
+      name_set: name_set,
+      names: names,
+      prim: city.name ? population_Stadester_uud.processCityName(city.name) : "",
+      sig: sig,
+      slavic_set: null,
+      west_set: null
+    };
+
+    Object.defineProperty(city, "_uud_name_idx", {
+      configurable: true,
+      enumerable: false,
+      value: idx,
+      writable: true
+    });
+
+    //Return statement
+    return idx;
+  };
+
+
+  /**
    * Extracts all processed name variants for a city entry.
    * @alias population_Stadester_uud.getAllCityNames
    * 
@@ -320,29 +452,11 @@
    * @returns {Array<string>}
    */
   population_Stadester_uud.getAllCityNames = function (arg0_city) {
-    //Convert from parameters
-    let city = arg0_city;
-    
-    //Declare local instance variables
-    let names = [];
-    let raw_list = [];
-    
-    //Guard clauses
-    if (!city) return [];
-    
-    //Function body
-    if (city.name) raw_list.push(city.name);
-    if (Array.isArray(city.other_names)) raw_list = raw_list.concat(city.other_names);
-    if (Array.isArray(city.original_names)) raw_list = raw_list.concat(city.original_names);
-    for (let k = 0; k < raw_list.length; k++) {
-      let proc = population_Stadester_uud.processCityName(raw_list[k]);
-      if (proc && !names.includes(proc)) names.push(proc);
-    }
-    
     //Return statement
-    return names;
+    return population_Stadester_uud.getCityNameIndex(arg0_city).names;
   };
-  
+
+
   /**
    * Checks if two cities have any matching processed name variants.
    * @alias population_Stadester_uud.checkExactNameMatch
@@ -356,20 +470,17 @@
     //Convert from parameters
     let city_a = arg0_city_a;
     let city_b = arg1_city_b;
-    
+
+    //Guard clauses
+    if (!city_a || !city_b) return false;
+
     //Declare local instance variables
-    let c_a = (city_a && city_a.country) ? String(city_a.country).toLowerCase().trim() : "";
-    let c_b = (city_b && city_b.country) ? String(city_b.country).toLowerCase().trim() : "";
-    let key_a = (city_a && city_a.key) ? String(city_a.key).toLowerCase() : "";
-    let key_b = (city_b && city_b.key) ? String(city_b.key).toLowerCase() : "";
-    let name_a_prim = (city_a && city_a.name) ? population_Stadester_uud.processCityName(city_a.name) : "";
-    let name_b_prim = (city_b && city_b.name) ? population_Stadester_uud.processCityName(city_b.name) : "";
-    let names_a = population_Stadester_uud.getAllCityNames(city_a);
-    let names_b = population_Stadester_uud.getAllCityNames(city_b);
-    let slavic_countries = [
-      "belarus", "bulgaria", "estonia", "finland", "kazakhstan", "latvia",
-      "lithuania", "moldova", "poland", "russia", "serbia", "ukraine", "ussr"
-    ];
+    let idx_a = population_Stadester_uud.getCityNameIndex(city_a);
+    let idx_b = population_Stadester_uud.getCityNameIndex(city_b);
+    let key_a = city_a.key ? String(city_a.key).toLowerCase() : "";
+    let key_b = city_b.key ? String(city_b.key).toLowerCase() : "";
+    let name_a_prim = idx_a.prim;
+    let name_b_prim = idx_b.prim;
 
     //Guard clauses: Brooklyn-New York is a distinct historical entity before 1898 and must NEVER match New York
     if (
@@ -380,14 +491,25 @@
     ) {
       return false;
     }
-    
-    //Function body
-    for (let x = 0; x < names_a.length; x++)
-      for (let y = 0; y < names_b.length; y++)
-        if (names_a[x] && names_a[x] === names_b[y]) return true;
 
-    if (c_a && c_a === c_b && slavic_countries.includes(c_a)) {
-      let alias_pairs = [
+    //Function body: 1. O(1) Set intersection on exact processed names
+    let small_set = (idx_a.name_set.size <= idx_b.name_set.size) ? idx_a.name_set : idx_b.name_set;
+    let large_set = (idx_a.name_set.size <= idx_b.name_set.size) ? idx_b.name_set : idx_a.name_set;
+    for (let nm of small_set) {
+      if (nm && large_set.has(nm)) return true;
+    }
+
+    let c_a = city_a.country ? String(city_a.country).toLowerCase().trim() : "";
+    let c_b = city_b.country ? String(city_b.country).toLowerCase().trim() : "";
+
+    if (!global._uud_slavic_countries_set) {
+      global._uud_slavic_countries_set = new Set([
+        "belarus", "bulgaria", "estonia", "finland", "kazakhstan", "latvia",
+        "lithuania", "moldova", "poland", "russia", "serbia", "ukraine", "ussr"
+      ]);
+    }
+    if (!global._uud_slavic_alias_pairs_norm) {
+      let raw_pairs = [
         ["Dymytrov", "Myrnohrad"],
         ["Krasnoarmijs'k", "Pokrovsk"],
         ["Stachanov", "Kadiivka"],
@@ -410,28 +532,52 @@
         ["Charkiv", "Kharkiv"],
         ["Borovi`'ci", "Borovichi"]
       ];
+      global._uud_slavic_alias_pairs_norm = raw_pairs.map(function (arg0_p) {
+        return [
+          population_Stadester_uud.normaliseSlavicName(arg0_p[0]),
+          population_Stadester_uud.normaliseSlavicName(arg0_p[1])
+        ];
+      });
+    }
+
+    if (c_a && c_a === c_b && global._uud_slavic_countries_set.has(c_a)) {
+      if (!idx_a.slavic_set) {
+        let s_set = new Set();
+        for (let i = 0; i < idx_a.names.length; i++) {
+          let ns = population_Stadester_uud.normaliseSlavicName(idx_a.names[i]);
+          if (ns.length >= 4) s_set.add(ns);
+        }
+        idx_a.slavic_set = s_set;
+      }
+      if (!idx_b.slavic_set) {
+        let s_set = new Set();
+        for (let i = 0; i < idx_b.names.length; i++) {
+          let ns = population_Stadester_uud.normaliseSlavicName(idx_b.names[i]);
+          if (ns.length >= 4) s_set.add(ns);
+        }
+        idx_b.slavic_set = s_set;
+      }
+      for (let sn of idx_a.slavic_set) {
+        if (idx_b.slavic_set.has(sn)) return true;
+      }
       let has_close_coords = Boolean(
-        city_a && city_b && Array.isArray(city_a.coords) && Array.isArray(city_b.coords) &&
+        Array.isArray(city_a.coords) && Array.isArray(city_b.coords) &&
         typeof population_Stadester_uud.haversineDistance === "function" &&
         population_Stadester_uud.haversineDistance(city_a.coords, city_b.coords) <= 18
       );
-      let s_a = names_a.map(population_Stadester_uud.normaliseSlavicName).filter(function (arg0_s) { return arg0_s.length >= 4; });
-      let s_b = names_b.map(population_Stadester_uud.normaliseSlavicName).filter(function (arg0_s) { return arg0_s.length >= 4; });
-      for (let x = 0; x < s_a.length; x++)
-        for (let y = 0; y < s_b.length; y++)
-          if (s_a[x] === s_b[y]) return true;
       if (has_close_coords) {
-        for (let i = 0; i < alias_pairs.length; i++) {
-          let p0 = population_Stadester_uud.normaliseSlavicName(alias_pairs[i][0]);
-          let p1 = population_Stadester_uud.normaliseSlavicName(alias_pairs[i][1]);
-          if ((s_a.includes(p0) && s_b.includes(p1)) || (s_a.includes(p1) && s_b.includes(p0)))
+        let pairs = global._uud_slavic_alias_pairs_norm;
+        for (let i = 0; i < pairs.length; i++) {
+          let p0 = pairs[i][0];
+          let p1 = pairs[i][1];
+          if ((idx_a.slavic_set.has(p0) && idx_b.slavic_set.has(p1)) || (idx_a.slavic_set.has(p1) && idx_b.slavic_set.has(p0)))
             return true;
         }
       }
     }
 
     let west_dist_km = (
-      city_a && city_b && Array.isArray(city_a.coords) && Array.isArray(city_b.coords) &&
+      Array.isArray(city_a.coords) && Array.isArray(city_b.coords) &&
       typeof population_Stadester_uud.haversineDistance === "function"
     ) ? population_Stadester_uud.haversineDistance(city_a.coords, city_b.coords) : Infinity;
     let has_west_close_coords = (west_dist_km <= 25);
@@ -446,25 +592,86 @@
       (
         typeof population_Stadester_ghsl !== "undefined" &&
         typeof population_Stadester_ghsl.areCompatibleTwinCountries === "function" &&
-        population_Stadester_ghsl.areCompatibleTwinCountries(city_a && city_a.country, city_b && city_b.country)
+        population_Stadester_ghsl.areCompatibleTwinCountries(city_a.country, city_b.country)
       )
     );
     if (has_west_close_coords && is_compat_west_country) {
-      let w_a = names_a.map(population_Stadester_uud.normaliseWesternName).filter(function (arg0_s) { return arg0_s.length >= 3; });
-      let w_b = names_b.map(population_Stadester_uud.normaliseWesternName).filter(function (arg0_s) { return arg0_s.length >= 3; });
-      for (let x = 0; x < w_a.length; x++)
-        for (let y = 0; y < w_b.length; y++)
-          if (w_a[x] === w_b[y]) return true;
-
+      if (!idx_a.west_set) {
+        let w_set = new Set();
+        let c_set = new Set();
+        for (let i = 0; i < idx_a.names.length; i++) {
+          let nw = population_Stadester_uud.normaliseWesternName(idx_a.names[i]);
+          if (nw.length >= 3) {
+            w_set.add(nw);
+            let cw = nw.replace(/\s+/g, "").replace(/(.)\1+/g, "$1");
+            if (cw.length >= 5) c_set.add(cw);
+          }
+        }
+        idx_a.west_set = w_set;
+        idx_a.comp_set = c_set;
+      }
+      if (!idx_b.west_set) {
+        let w_set = new Set();
+        let c_set = new Set();
+        for (let i = 0; i < idx_b.names.length; i++) {
+          let nw = population_Stadester_uud.normaliseWesternName(idx_b.names[i]);
+          if (nw.length >= 3) {
+            w_set.add(nw);
+            let cw = nw.replace(/\s+/g, "").replace(/(.)\1+/g, "$1");
+            if (cw.length >= 5) c_set.add(cw);
+          }
+        }
+        idx_b.west_set = w_set;
+        idx_b.comp_set = c_set;
+      }
+      for (let wn of idx_a.west_set) {
+        if (idx_b.west_set.has(wn)) return true;
+      }
       if (west_dist_km <= 2.5) {
-        let comp_a = w_a.map(function (arg0_s) { return arg0_s.replace(/\s+/g, "").replace(/(.)\1+/g, "$1"); }).filter(function (arg0_s) { return arg0_s.length >= 5; });
-        let comp_b = w_b.map(function (arg0_s) { return arg0_s.replace(/\s+/g, "").replace(/(.)\1+/g, "$1"); }).filter(function (arg0_s) { return arg0_s.length >= 5; });
-        for (let x = 0; x < comp_a.length; x++)
-          for (let y = 0; y < comp_b.length; y++)
-            if (comp_a[x] === comp_b[y]) return true;
+        for (let cn of idx_a.comp_set) {
+          if (idx_b.comp_set.has(cn)) return true;
+        }
+      }
+
+      let ex_lookup = population_Stadester_uud.getExonymLookup();
+      if (ex_lookup && ex_lookup.audit) {
+        if (!idx_a.entity_stems) {
+          let es = new Set();
+          let eg = new Set();
+          for (let i = 0; i < idx_a.names.length; i++) {
+            let st = ex_lookup.audit.normaliseEntityStem(idx_a.names[i]);
+            if (st) {
+              es.add(st);
+              let grp = ex_lookup.stem_to_group.get(st);
+              if (grp !== undefined) eg.add(grp);
+            }
+          }
+          idx_a.entity_stems = es;
+          idx_a.exonym_groups = eg;
+        }
+        if (!idx_b.entity_stems) {
+          let es = new Set();
+          let eg = new Set();
+          for (let i = 0; i < idx_b.names.length; i++) {
+            let st = ex_lookup.audit.normaliseEntityStem(idx_b.names[i]);
+            if (st) {
+              es.add(st);
+              let grp = ex_lookup.stem_to_group.get(st);
+              if (grp !== undefined) eg.add(grp);
+            }
+          }
+          idx_b.entity_stems = es;
+          idx_b.exonym_groups = eg;
+        }
+        for (let st of idx_a.entity_stems) {
+          if (idx_b.entity_stems.has(st)) return true;
+        }
+        for (let grp of idx_a.exonym_groups) {
+          if (idx_b.exonym_groups.has(grp)) return true;
+        }
       }
     }
-    
+
     //Return statement
     return false;
   };
@@ -982,6 +1189,10 @@
             continue;
           }
           if (!population_Stadester_uud.checkExactNameMatch(actual_city, peer)) continue;
+          if (typeof population_Stadester_uud.canMergeMunicipalities === "function") {
+            let twin_gate = population_Stadester_uud.canMergeMunicipalities(actual_city, peer, { max_semantic_km: max_twin_dist });
+            if (!twin_gate.allow) continue;
+          }
           if (!actual_city.other_names) actual_city.other_names = [];
           if (peer.name && peer.name !== actual_city.name && !actual_city.other_names.includes(peer.name))
             actual_city.other_names.push(peer.name);
@@ -1152,6 +1363,420 @@
 
     //Return statement
     return uud_obj;
+  };
+
+  /**
+   * Loads `stadester_name_normaliser` lazily and returns it.
+   * @alias population_Stadester_uud.getNameNormaliser
+   *
+   * @returns {Object|null}
+   */
+  population_Stadester_uud.getNameNormaliser = function () {
+    //Function body
+    if (!global.stadester_name_normaliser && typeof require !== "undefined") {
+      try {
+        require(path.join(__dirname, "stadester_name_normaliser.js"));
+      } catch (e) {}
+    }
+
+    //Return statement
+    return global.stadester_name_normaliser || null;
+  };
+
+  /**
+   * Assigns official `urban_city_proper` municipal boundary metadata (`_mun_id`, `_mun_scope`, `_mun_is_capital`),
+   * Class 2 intra-municipal parent metadata, and Class 3 historical annexation metadata onto a settlement record.
+   * @alias population_Stadester_uud.assignMunicipalMetadata
+   *
+   * @param {Object} arg0_city
+   *
+   * @returns {Object}
+   */
+  population_Stadester_uud.assignMunicipalMetadata = function (arg0_city) {
+    //Convert from parameters
+    let city = arg0_city;
+
+    //Guard clauses
+    if (!city || typeof city !== "object") return city;
+    if (city._mun_checked === true) return city;
+
+    //Declare local instance variables
+    let is_metro = Boolean(
+      city.population_scope === "metro" ||
+      city.extent_type === "metro" ||
+      city.is_agglomeration === true ||
+      /\(metro\)|agglomeration|metropolitan/i.test(String(city.name || city.key || ""))
+    );
+    let norm = population_Stadester_uud.getNameNormaliser();
+
+    //Function body
+    city._mun_checked = true;
+    if (is_metro || !norm) {
+      city._mun_id = "";
+      city._mun_scope = "";
+      return city;
+    }
+
+    let lat = Array.isArray(city.coords) ? Number(city.coords[0]) : NaN;
+    let lng = Array.isArray(city.coords) ? Number(city.coords[1]) : NaN;
+    let p_meta = norm.resolveParentMunicipality(city.name, city.country, city.coords);
+    let h_meta = norm.resolveHistoricalAmalgamation(city.name, city.country, city.coords);
+    let poly_hit = (Number.isFinite(lat) && Number.isFinite(lng)) ?
+      norm.resolveMunicipalBoundary(lat, lng, city.country) : null;
+
+    if (poly_hit && poly_hit.id) {
+      city._mun_scope = poly_hit.boundary_scope || "urban_city_proper";
+      if (city._mun_scope === "urban_city_proper") {
+        city._mun_id = poly_hit.id;
+        city._mun_name = poly_hit.name;
+        city._mun_is_capital = Boolean(poly_hit.is_capital);
+      } else {
+        city._mun_id = "";
+      }
+    } else {
+      city._mun_id = "";
+      city._mun_scope = "";
+    }
+
+    if (p_meta && p_meta.parent_name) {
+      let c_norm = norm.normaliseCountryName(city.country);
+      city._parent_mun_meta = p_meta;
+      city._subdiv_id = `subdiv:${c_norm}:${norm.foldAscii(p_meta.parent_name)}`;
+      let cur_fold = norm.foldAscii(city.name);
+      let par_fold = norm.foldAscii(p_meta.parent_name);
+      if (cur_fold && par_fold && cur_fold !== par_fold)
+        city._is_intra_district = true;
+      if (!city._mun_id) {
+        city._mun_name = p_meta.parent_name;
+        city._mun_is_capital = Boolean(p_meta.is_capital_override);
+      }
+    }
+    if (h_meta && h_meta.parent_name)
+      city._hist_amalg_meta = h_meta;
+
+    //Return statement
+    return city;
+  };
+
+  /**
+   * Enforces the Global 4-Class Epoch-Aware Same-Municipality Merge Gate across UUD, GazetteerLoader, and GHSL.
+   * Cross-municipality proximity merges and blind polygon-containment collapses are strictly forbidden.
+   * @alias population_Stadester_uud.canMergeMunicipalities
+   *
+   * @param {Object} arg0_city_a
+   * @param {Object} arg1_city_b
+   * @param {Object} [arg2_options]
+   *
+   * @returns {{ allow: boolean, dist_km: number, reason: string }}
+   */
+  population_Stadester_uud.canMergeMunicipalities = function (arg0_city_a, arg1_city_b, arg2_options) {
+    //Convert from parameters
+    let city_a = arg0_city_a;
+    let city_b = arg1_city_b;
+    let options = (arg2_options) ? arg2_options : {};
+
+    //Guard clauses
+    if (!city_a || !city_b) return { allow: false, dist_km: Infinity, reason: "invalid_city" };
+
+    //Declare local instance variables
+    let dist_km = (Array.isArray(city_a.coords) && Array.isArray(city_b.coords) && typeof population_Stadester_uud.haversineDistance === "function") ?
+      population_Stadester_uud.haversineDistance(city_a.coords, city_b.coords) : Infinity;
+    let norm = population_Stadester_uud.getNameNormaliser();
+
+    //Function body
+    if (norm && norm.isProtectedDistinctPair(city_a.name, city_b.name))
+      return { allow: false, dist_km: dist_km, reason: "protected_distinct_neighbours" };
+
+    let is_agg_a = Boolean(city_a.population_scope === "metro" || city_a.extent_type === "metro" || city_a.is_agglomeration);
+    let is_agg_b = Boolean(city_b.population_scope === "metro" || city_b.extent_type === "metro" || city_b.is_agglomeration);
+    if (is_agg_a !== is_agg_b)
+      return { allow: false, dist_km: dist_km, reason: "metro_vs_city_proper_mismatch" };
+
+    //Class 3 Temporal Anti-Anachronism Guard: pre-annexation historical municipalities NEVER merge into parent
+    let has_pre_annex_a = Number.isFinite(city_a._annexation_year);
+    let has_pre_annex_b = Number.isFinite(city_b._annexation_year);
+    if (has_pre_annex_a || has_pre_annex_b) {
+      let fold_a = norm ? norm.foldAscii(city_a.name) : String(city_a.name || "").toLowerCase();
+      let fold_b = norm ? norm.foldAscii(city_b.name) : String(city_b.name || "").toLowerCase();
+      if (fold_a !== fold_b)
+        return { allow: false, dist_km: dist_km, reason: "blocked_pre_annexation_historic_municipality" };
+    }
+
+    population_Stadester_uud.assignMunicipalMetadata(city_a);
+    population_Stadester_uud.assignMunicipalMetadata(city_b);
+
+    //Class 2 Intra-Municipal Subdivision check
+    if (norm && city_a._subdiv_id && city_b._subdiv_id && city_a._subdiv_id === city_b._subdiv_id)
+      return { allow: true, dist_km: dist_km, reason: "intra_municipal_subdivision" };
+    if (norm) {
+      let fa = norm.foldAscii(city_a.name);
+      let fb = norm.foldAscii(city_b.name);
+      let c_norm_a = norm.normaliseCountryName(city_a.country);
+      let c_norm_b = norm.normaliseCountryName(city_b.country);
+      if (c_norm_a && c_norm_a === c_norm_b) {
+        if (city_a._parent_mun_meta && norm.foldAscii(city_a._parent_mun_meta.parent_name) === fb && !city_a._parent_mun_meta.effective_from_year)
+          return { allow: true, dist_km: dist_km, reason: "intra_municipal_subdivision" };
+        if (city_b._parent_mun_meta && norm.foldAscii(city_b._parent_mun_meta.parent_name) === fa && !city_b._parent_mun_meta.effective_from_year)
+          return { allow: true, dist_km: dist_km, reason: "intra_municipal_subdivision" };
+      }
+    }
+
+    let mun_a = (city_a._mun_scope === "urban_city_proper") ? (city_a._mun_id || "") : "";
+    let mun_b = (city_b._mun_scope === "urban_city_proper") ? (city_b._mun_id || "") : "";
+    let is_exact_name = (typeof population_Stadester_uud.checkExactNameMatch === "function") ?
+      population_Stadester_uud.checkExactNameMatch(city_a, city_b) : false;
+
+    //Different urban_city_proper polygons -> HARD BLOCK unless coarse legacy pin snap of exact same city
+    if (mun_a && mun_b && mun_a !== mun_b) {
+      let one_legacy = (
+        typeof population_Stadester_uud.hasViscountSource === "function" &&
+        (!population_Stadester_uud.hasViscountSource(city_a) || !population_Stadester_uud.hasViscountSource(city_b))
+      );
+      if (is_exact_name && one_legacy && dist_km <= 10.0)
+        return { allow: true, dist_km: dist_km, reason: "semantic_legacy_pin_snap" };
+      return { allow: false, dist_km: dist_km, reason: "blocked_cross_municipality" };
+    }
+
+    //Same urban_city_proper polygon OR outside polygon coverage OR broad_rural_amalgamation:
+    //ZERO blind polygon-containment or proximity-only merges — require semantic/exonym match!
+    if (!is_exact_name)
+      return { allow: false, dist_km: dist_km, reason: "blocked_no_semantic_or_subdivision_basis" };
+
+    let max_sem_km = Number.isFinite(options.max_semantic_km) ? Number(options.max_semantic_km) : 15.0;
+    if (dist_km <= max_sem_km)
+      return { allow: true, dist_km: dist_km, reason: "same_settlement_semantic_match" };
+
+    //Return statement
+    return { allow: false, dist_km: dist_km, reason: "blocked_distance_exceeded" };
+  };
+
+  /**
+   * Normalises names, drops non-habitation features/statistical shells, splits Class 3 historical annexations
+   * at `annexation_year` (INV-13), and flattens Class 2 intra-municipal subdivisions BEFORE UUD merging.
+   * @alias population_Stadester_uud.prepareAndFlattenSourceDB
+   *
+   * @param {Object} arg0_db_obj
+   * @param {string} [arg1_db_key]
+   *
+   * @returns {Object}
+   */
+  population_Stadester_uud.prepareAndFlattenSourceDB = function (arg0_db_obj, arg1_db_key) {
+    //Convert from parameters
+    let db_key = String(arg1_db_key || "");
+    let db_obj = arg0_db_obj;
+
+    //Guard clauses
+    if (!db_obj || typeof db_obj !== "object") return {};
+
+    //Declare local instance variables
+    let all_keys = Object.keys(db_obj);
+    let collapsed = {};
+    let is_viscount_db = (db_key === "viscount_regional");
+    let norm = population_Stadester_uud.getNameNormaliser();
+    let passthrough = {};
+
+    let pushParentBucket = function (arg0_parent_name, arg1_parent_coords, arg2_parent_cap, arg3_city, arg4_key, arg5_is_district) {
+      let c_norm = norm ? norm.normaliseCountryName(arg3_city.country) : String(arg3_city.country || "").toLowerCase();
+      let p_fold = norm ? norm.foldAscii(arg0_parent_name) : String(arg0_parent_name || "").toLowerCase();
+      let group_tag = is_viscount_db ?
+        `${c_norm}|${p_fold}|${arg3_city.viscount_project || "VISCOUNT"}` :
+        `${c_norm}|${p_fold}`;
+      if (!collapsed[group_tag]) collapsed[group_tag] = [];
+      collapsed[group_tag].push({
+        city: arg3_city,
+        is_district: Boolean(arg5_is_district),
+        key: arg4_key,
+        parent_coords: arg1_parent_coords,
+        parent_is_capital: Boolean(arg2_parent_cap),
+        parent_name: arg0_parent_name
+      });
+    };
+
+    //Function body
+    for (let i = 0; i < all_keys.length; i++) {
+      let k = all_keys[i];
+      let city = db_obj[k];
+      if (!city || typeof city !== "object") continue;
+
+      let raw_name = String(city.name || k.split("-")[0] || "").trim();
+      if (norm && norm.isNonHabitationFeature(raw_name)) continue;
+
+      if (Array.isArray(city.coords) && city.coords.length >= 2) {
+        let la = Number(city.coords[0]);
+        let lo = Number(city.coords[1]);
+        if (String(city.country || "").toLowerCase() === "latvia" && /riga/i.test(raw_name) && lo < 22.0)
+          city.coords = [56.946, 24.10589];
+        if (String(city.country || "").toLowerCase() === "italy" && /^(?:napoli|naples)$/i.test(raw_name) && la > 40.89 && lo < 14.23)
+          city.coords = [40.85177, 14.26812];
+      }
+
+      if (norm) {
+        let nr = norm.normaliseCityName(raw_name, city.country);
+        if (nr.name && nr.name !== city.name) {
+          if (!Array.isArray(city.other_names)) city.other_names = [];
+          if (city.name && !city.other_names.includes(city.name) && !/`|^[A-Z\s]{4,}$|^[a-z\s]{4,}$/.test(city.name))
+            city.other_names.push(city.name);
+          for (let a = 0; a < nr.extra_aliases.length; a++)
+            if (!city.other_names.includes(nr.extra_aliases[a])) city.other_names.push(nr.extra_aliases[a]);
+          city.name = nr.name;
+        }
+      }
+
+      population_Stadester_uud.assignMunicipalMetadata(city);
+
+      let is_metro = Boolean(city.population_scope === "metro" || city.extent_type === "metro" || city.is_agglomeration);
+      if (is_metro) {
+        passthrough[k] = city;
+        continue;
+      }
+
+      //Class 3: Historical Municipal Amalgamation (split pre-annexation vs post-annexation at annexation_year)
+      let h_meta = city._hist_amalg_meta;
+      if (h_meta && Number.isFinite(h_meta.annexation_year) && city.population) {
+        let t_annex = Number(h_meta.annexation_year);
+        let pre_pop = {};
+        let post_pop = {};
+        let pyrs = Object.keys(city.population);
+        for (let y = 0; y < pyrs.length; y++) {
+          let yk = pyrs[y];
+          let yn = parseInt(yk, 10);
+          let val = city.population[yk];
+          if (Number.isFinite(yn) && yn < t_annex) pre_pop[yk] = val;
+          else post_pop[yk] = val;
+        }
+        if (Object.keys(pre_pop).length > 0) {
+          let pre_city = Object.assign({}, city, {
+            _annexation_year: t_annex,
+            _annexed_into: h_meta.parent_name,
+            _raw_lapsed: true,
+            population: pre_pop
+          });
+          passthrough[k] = pre_city;
+        }
+        if (Object.keys(post_pop).length > 0) {
+          let post_city = Object.assign({}, city, {
+            _is_intra_district: true,
+            population: post_pop
+          });
+          pushParentBucket(h_meta.parent_name, h_meta.parent_coords, h_meta.parent_is_capital, post_city, `${k}__post${t_annex}`, true);
+        }
+        continue;
+      }
+
+      //Class 2: Pure Intra-Municipal Subdivision (respect optional effective_from_year)
+      let p_meta = city._parent_mun_meta;
+      if (p_meta && p_meta.parent_name) {
+        if (Number.isFinite(p_meta.effective_from_year) && city.population) {
+          let t_eff = Number(p_meta.effective_from_year);
+          let pre_pop = {};
+          let post_pop = {};
+          let pyrs = Object.keys(city.population);
+          for (let y = 0; y < pyrs.length; y++) {
+            let yk = pyrs[y];
+            let yn = parseInt(yk, 10);
+            if (Number.isFinite(yn) && yn < t_eff) pre_pop[yk] = city.population[yk];
+            else post_pop[yk] = city.population[yk];
+          }
+          if (Object.keys(pre_pop).length > 0) {
+            passthrough[k] = Object.assign({}, city, { _annexation_year: t_eff, _raw_lapsed: true, population: pre_pop });
+          }
+          if (Object.keys(post_pop).length > 0) {
+            let post_city = Object.assign({}, city, { _is_intra_district: true, population: post_pop });
+            pushParentBucket(p_meta.parent_name, p_meta.parent_coords, p_meta.is_capital_override, post_city, k, true);
+          }
+        } else {
+          let is_self_parent = norm ? (norm.foldAscii(city.name) === norm.foldAscii(p_meta.parent_name)) : false;
+          pushParentBucket(p_meta.parent_name, p_meta.parent_coords, p_meta.is_capital_override, city, k, !is_self_parent);
+        }
+        continue;
+      }
+
+      //Check if this city itself is a parent target of Class 2/3 buckets in the same DB
+      if (norm) {
+        let c_norm = norm.normaliseCountryName(city.country);
+        let c_fold = norm.foldAscii(city.name);
+        let m_cfg = norm.loadMetroSubdivisions();
+        let h_cfg = norm.loadHistoricalAmalgamations();
+        let is_known_parent = Boolean(
+          (m_cfg && m_cfg.intra_municipal_parents && m_cfg.intra_municipal_parents[c_norm] && m_cfg.intra_municipal_parents[c_norm][c_fold]) ||
+          (h_cfg && Array.isArray(h_cfg.amalgamations) && h_cfg.amalgamations.some(function (arg0_a) {
+            return norm.normaliseCountryName(arg0_a.country) === c_norm && norm.foldAscii(arg0_a.parent_name) === c_fold;
+          }))
+        );
+        if (is_known_parent) {
+          pushParentBucket(city.name, city.coords, Boolean(city.is_capital || city.capital || city._mun_is_capital), city, k, false);
+          continue;
+        }
+      }
+
+      passthrough[k] = city;
+    }
+
+    let g_keys = Object.keys(collapsed);
+    for (let i = 0; i < g_keys.length; i++) {
+      let grp = collapsed[g_keys[i]];
+      if (grp.length === 1 && !grp[0].is_district) {
+        passthrough[grp[0].key] = grp[0].city;
+        continue;
+      }
+
+      grp.sort(function (arg0_a, arg1_b) {
+        let ca = arg0_a.city;
+        let cb = arg1_b.city;
+        if (arg0_a.is_district !== arg1_b.is_district) return arg0_a.is_district ? 1 : -1;
+        let cap_a = Boolean(ca.is_capital || ca.capital || ca._mun_is_capital || arg0_a.parent_is_capital);
+        let cap_b = Boolean(cb.is_capital || cb.capital || cb._mun_is_capital || arg1_b.parent_is_capital);
+        if (cap_a !== cap_b) return cap_a ? -1 : 1;
+        return population_Stadester_uud.getPeakPopulation(cb.population) - population_Stadester_uud.getPeakPopulation(ca.population);
+      });
+
+      let lead_item = grp[0];
+      let lead = lead_item.city;
+      if (lead_item.parent_name && lead.name !== lead_item.parent_name) {
+        if (!Array.isArray(lead.other_names)) lead.other_names = [];
+        if (lead.name && !lead.other_names.includes(lead.name)) lead.other_names.push(lead.name);
+        lead.name = lead_item.parent_name;
+      }
+      if (lead_item.parent_is_capital || lead._mun_is_capital) lead.is_capital = true;
+      if (lead_item.is_district && Array.isArray(lead_item.parent_coords)) lead.coords = lead_item.parent_coords.slice();
+
+      let has_unified_lead = !lead_item.is_district;
+      if (!lead.population) lead.population = {};
+      let unified_years = new Set(has_unified_lead ? Object.keys(lead.population).filter(function (arg0_y) { return Number(lead.population[arg0_y]) > 0; }) : []);
+
+      for (let x = 1; x < grp.length; x++) {
+        let sub_item = grp[x];
+        let sub = sub_item.city;
+        if (!Array.isArray(lead.other_names)) lead.other_names = [];
+        if (sub.name && sub.name !== lead.name && !lead.other_names.includes(sub.name))
+          lead.other_names.push(sub.name);
+        if (Array.isArray(sub.other_names)) {
+          for (let on = 0; on < sub.other_names.length; on++)
+            if (sub.other_names[on] && sub.other_names[on] !== lead.name && !lead.other_names.includes(sub.other_names[on]))
+              lead.other_names.push(sub.other_names[on]);
+        }
+        if (sub.population) {
+          let syrs = Object.keys(sub.population);
+          for (let y = 0; y < syrs.length; y++) {
+            let yk = syrs[y];
+            let sv = Number(sub.population[yk] || 0);
+            if (!(sv > 0)) continue;
+            if (unified_years.has(yk)) continue;
+            if (!sub_item.is_district) {
+              if (!(Number(lead.population[yk]) > 0)) lead.population[yk] = sv;
+            } else if (!has_unified_lead) {
+              lead.population[yk] = Math.round(Number(lead.population[yk] || 0) + sv);
+            }
+          }
+        }
+        population_Stadester_uud.appendCitySources(lead, sub.sources || sub.type);
+      }
+
+      passthrough[lead_item.key] = lead;
+    }
+
+    //Return statement
+    return passthrough;
   };
 
   /**

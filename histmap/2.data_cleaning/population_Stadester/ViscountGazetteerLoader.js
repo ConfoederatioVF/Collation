@@ -99,7 +99,7 @@
       let return_obj = {};
       let root_dir = (options.project_root) ? options.project_root : ((fs.existsSync("./histmap/1.data_raw")) ?
         path.resolve(".") : path.resolve(__dirname, "../../.."));
-      let spatial_step_deg = 0.5;
+      let spatial_step_deg = 0.25;
       let total_gazetteer_files = 0;
 
       //Function body
@@ -190,6 +190,9 @@
                 if (!peer || peer === city || peer.viscount_project !== "POLARIS" || peer.polaris_priority !== 3)
                   continue;
                 if (peer.country !== city.country) continue;
+                let is_name_match = (typeof uud_ref.checkExactNameMatch === "function") ?
+                  uud_ref.checkExactNameMatch(city, peer) : (city.name === peer.name);
+                if (!is_name_match) continue;
                 let dist_km = (typeof uud_ref.haversineDistance === "function") ?
                   uud_ref.haversineDistance(city.coords, peer.coords) : 999999;
                 if (dist_km <= best_dist) {
@@ -397,6 +400,10 @@
 
           let candidate_names = (typeof uud.getAllCityNames === "function") ? uud.getAllCityNames(candidate_city) : [candidate_city.name];
           candidate_city.original_names = candidate_names.slice();
+          let norm_helper = (typeof uud.getNameNormaliser === "function") ? uud.getNameNormaliser() : null;
+          if (norm_helper && norm_helper.isNonHabitationFeature(candidate_city.name)) continue;
+          if (typeof uud.assignMunicipalMetadata === "function")
+            uud.assignMunicipalMetadata(candidate_city);
 
           let cand_yr_nums = Object.keys(candidate_city.population).map(Number).filter(function (arg0_n) { return !isNaN(arg0_n); }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
           let cand_max_yr = cand_yr_nums[cand_yr_nums.length - 1];
@@ -417,10 +424,14 @@
           }
 
           let matched_key = undefined;
+          let max_dlat = haversine_name_match_km/111.0 + 0.02;
+          let max_dlng = max_dlat*2.5;
           for (let y = 0; y < candidate_pool.length; y++) {
             let ex_key = candidate_pool[y];
             let ex_city = return_obj[ex_key];
-            if (!ex_city) continue;
+            if (!ex_city || !Array.isArray(ex_city.coords)) continue;
+            if (Math.abs(ex_city.coords[0] - lat) > max_dlat || Math.abs(ex_city.coords[1] - lng) > max_dlng)
+              continue;
             let is_metro_ex = Boolean(
               ex_city.population_scope === "metro" ||
               ex_city.extent_type === "metro" ||
@@ -434,10 +445,16 @@
             if (dist_km > haversine_name_match_km) continue;
 
             let is_cross_project = ex_city.viscount_project !== candidate_city.viscount_project;
-            let is_name_match = (typeof uud.checkExactNameMatch === "function") ?
-              uud.checkExactNameMatch(ex_city, candidate_city) : (ex_city.name === candidate_city.name);
+            let mun_gate = (typeof uud.canMergeMunicipalities === "function") ?
+              uud.canMergeMunicipalities(ex_city, candidate_city, { max_semantic_km: haversine_name_match_km }) :
+              { allow: false, reason: "no_gate" };
+            if (!mun_gate.allow) continue;
+            let is_name_match = (mun_gate.reason === "intra_municipal_subdivision") || (
+              (typeof uud.checkExactNameMatch === "function") ?
+                uud.checkExactNameMatch(ex_city, candidate_city) : (ex_city.name === candidate_city.name)
+            );
 
-            if (is_name_match || (is_cross_project && dist_km <= exact_coord_match_km)) {
+            if (is_name_match) {
               let ex_yr_nums = Object.keys(ex_city.population).map(Number).filter(function (arg0_n) { return !isNaN(arg0_n); }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
               let ex_max_yr = ex_yr_nums[ex_yr_nums.length - 1];
               let ex_min_yr = ex_yr_nums[0];
@@ -448,8 +465,6 @@
                 (dist_km <= 0.5 || (proj.key === "INDUS" && dist_km <= 8.0))
               );
 
-              if (!is_same_project_exact_site && !is_cross_project && ex_city.polaris_priority === 3 && candidate_city.polaris_priority === 3 && ex_city.key !== candidate_city.key && dist_km > 0.3)
-                continue;
               if (!is_same_project_exact_site && dist_km > 1.0 && !is_pre1815_bridge && !this.hasCompatiblePopulationScale(ex_city.population, candidate_city.population))
                 continue;
               let is_temporally_compatible = true;

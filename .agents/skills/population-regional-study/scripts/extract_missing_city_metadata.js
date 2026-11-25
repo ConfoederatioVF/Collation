@@ -159,6 +159,10 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       if (s.includes("`")) return false;
       if (this.ARTICLE_INVERT_RE.test(s)) return false;
       if ((s.match(/,/g) || []).length >= 2 && /\d{3,}/.test(s)) return false;
+      if (s.length >= 4 && /[A-Z\u00C0-\u00DE]/.test(s) && !/[a-z\u00DF-\u00FF]/.test(s)) return false;
+      if (s.length >= 3 && /[a-z\u00DF-\u00FF]/.test(s) && !/[A-Z\u00C0-\u00DE]/.test(s)) return false;
+      if (/\b(?:savivaldybė|savivaldybe|linn|vald|municipiul|oraş|oras|comuna|bashkia|dimos|stolichna)\b|^greater\s+/i.test(s)) return false;
+      if (/'[cszCSZ](?:$|[a-z])|(?:s'k|l's'k|pil'|vs'kyj|r'z|r'g)/i.test(s)) return false;
 
       //Return statement
       return true;
@@ -570,6 +574,10 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
               has_suspicious = true;
             prev_stem = h_stem;
           }
+          let stuck_ancient_re = /^(?:aquincum|vindobona|serdica|byzantium|lutetia|londinium|mediolanum|gazi|agora)$/i;
+          if (consolidated_dates.length === 1 && latest_yr !== null && latest_yr >= 1800 && stuck_ancient_re.test(consolidated_names_map[consolidated_dates[0]]))
+            has_suspicious = true;
+
           if (has_corrupt) {
             reason = "corrupted_names";
             counts.corrupted_names++;
@@ -579,18 +587,21 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           } else if (is_capital && consolidated_dates.length === 1 && consolidated_dates[0] === "1900.1.1") {
             reason = "capital_audit";
             counts.capital_audit++;
-          } else if (earliest_yr !== null && earliest_yr < 1850) {
-            let first_h_yr = this.parseDateTuple(consolidated_dates[0])[0];
-            if (!Number.isFinite(first_h_yr) || first_h_yr > earliest_yr + 100 || (consolidated_dates.length === 1 && (latest_yr - earliest_yr) >= 200)) {
-              reason = "under_covered_history";
-              counts.under_covered_history++;
+          } else {
+            if (earliest_yr !== null && earliest_yr < 1850) {
+              let first_h_yr = this.parseDateTuple(consolidated_dates[0])[0];
+              if (!Number.isFinite(first_h_yr) || first_h_yr > earliest_yr + 100 || (consolidated_dates.length === 1 && (latest_yr - earliest_yr) >= 200)) {
+                reason = "under_covered_history";
+                counts.under_covered_history++;
+              }
             }
-          } else if (consolidated_dates.length === 1 && is_indig_project && max_pop > pass1_min_pop && consolidated_dates[0] === "1900.1.1") {
-            reason = "indigenous_stub";
-            counts.indigenous_stub++;
-          } else if (consolidated_dates.length === 1 && max_pop > pass1_min_pop && consolidated_dates[0] === "1900.1.1") {
-            reason = "single_entry_major_stub";
-            counts.single_entry_major_stub++;
+            if (!reason && consolidated_dates.length === 1 && is_indig_project && max_pop > pass1_min_pop && consolidated_dates[0] === "1900.1.1") {
+              reason = "indigenous_stub";
+              counts.indigenous_stub++;
+            } else if (!reason && consolidated_dates.length === 1 && max_pop > pass1_min_pop && consolidated_dates[0] === "1900.1.1") {
+              reason = "single_entry_major_stub";
+              counts.single_entry_major_stub++;
+            }
           }
         }
 
