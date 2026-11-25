@@ -93,6 +93,7 @@
       //Declare local instance variables
       let active_projects = [];
       let city_spatial_grid = new Map();
+      let city_token_index = new Map();
       let exact_coord_match_km = 2.5;
       let haversine_name_match_km = 15.0;
       let loaded_count_by_project = {};
@@ -148,13 +149,15 @@
         total_gazetteer_files += gazetteers.length;
 
         this.mergeProjectGazetteers(return_obj, city_spatial_grid, {
+          bboxes: options.bboxes,
           exact_coord_match_km: proj_exact_km,
           gazetteers: gazetteers,
           haversine_name_match_km: proj_name_km,
           loaded_count_by_project: loaded_count_by_project,
           proj: proj,
           root_dir: root_dir,
-          spatial_step_deg: spatial_step_deg
+          spatial_step_deg: spatial_step_deg,
+          token_index: city_token_index
         });
       }
 
@@ -302,6 +305,7 @@
       let proj = options.proj;
       let root_dir = options.root_dir;
       let spatial_step_deg = options.spatial_step_deg || 0.5;
+      let token_index = options.token_index || new Map();
       let uud = global.population_Stadester_uud || {};
 
       //Function body
@@ -317,7 +321,16 @@
         }
 
         try {
-          raw_json = JSON5.parse(fs.readFileSync(gaz_path, "utf8"));
+          let raw_text = fs.readFileSync(gaz_path, "utf8");
+          if (gaz_path.endsWith(".json")) {
+            try {
+              raw_json = JSON.parse(raw_text);
+            } catch (json_err) {
+              raw_json = JSON5.parse(raw_text);
+            }
+          } else {
+            raw_json = JSON5.parse(raw_text);
+          }
         } catch (e) {
           console.error(`[ViscountGazetteerLoader] Failed to parse ${gaz_path}:`, e);
           continue;
@@ -333,6 +346,17 @@
           let lng = parseFloat(raw_city.coords[1]);
           if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
           if (lat < -90 || lat > 90 || lng < -180 || lng > 180) continue;
+          if (Array.isArray(options.bboxes) && options.bboxes.length > 0) {
+            let in_any_bbox = false;
+            for (let b = 0; b < options.bboxes.length; b++) {
+              let bb = options.bboxes[b];
+              if (lat >= bb.lat_min && lat <= bb.lat_max && lng >= bb.lng_min && lng <= bb.lng_max) {
+                in_any_bbox = true;
+                break;
+              }
+            }
+            if (!in_any_bbox) continue;
+          }
 
           let clean_pop = {};
           if (raw_city.population && typeof raw_city.population === "object") {
@@ -402,6 +426,8 @@
           candidate_city.original_names = candidate_names.slice();
           let norm_helper = (typeof uud.getNameNormaliser === "function") ? uud.getNameNormaliser() : null;
           if (norm_helper && norm_helper.isNonHabitationFeature(candidate_city.name)) continue;
+          if (norm_helper && norm_helper.resolveHistoricalAmalgamation(candidate_city.name, candidate_city.country, candidate_city.coords))
+            candidate_city._is_class3_candidate = true;
           if (typeof uud.assignMunicipalMetadata === "function")
             uud.assignMunicipalMetadata(candidate_city);
 
@@ -409,16 +435,31 @@
           let cand_max_yr = cand_yr_nums[cand_yr_nums.length - 1];
           let cand_min_yr = cand_yr_nums[0];
 
-          //Collect spatial bucket keys within 1 degree of candidate
+          //Collect lossless candidate pool via inverted semantic/subdivision token index (or fallback to spatial grid)
           let base_gx = Math.floor(lng/spatial_step_deg);
           let base_gy = Math.floor(lat/spatial_step_deg);
+          let cand_tokens = (typeof uud.getCityMatchTokens === "function") ? uud.getCityMatchTokens(candidate_city) : null;
           let candidate_pool = [];
-          for (let dx = -1; dx <= 1; dx++) {
-            for (let dy = -1; dy <= 1; dy++) {
-              let bucket = spatial_grid.get(`${base_gx + dx},${base_gy + dy}`);
-              if (bucket) {
-                for (let b = 0; b < bucket.length; b++)
-                  candidate_pool.push(bucket[b]);
+          if (cand_tokens && cand_tokens.length > 0) {
+            let seen_pool = new Set();
+            for (let t = 0; t < cand_tokens.length; t++) {
+              let hits = token_index.get(cand_tokens[t]);
+              if (!hits) continue;
+              for (let h = 0; h < hits.length; h++) {
+                if (!seen_pool.has(hits[h])) {
+                  seen_pool.add(hits[h]);
+                  candidate_pool.push(hits[h]);
+                }
+              }
+            }
+          } else {
+            for (let dx = -1; dx <= 1; dx++) {
+              for (let dy = -1; dy <= 1; dy++) {
+                let bucket = spatial_grid.get(`${base_gx + dx},${base_gy + dy}`);
+                if (bucket) {
+                  for (let b = 0; b < bucket.length; b++)
+                    candidate_pool.push(bucket[b]);
+                }
               }
             }
           }
@@ -445,6 +486,8 @@
             if (dist_km > haversine_name_match_km) continue;
 
             let is_cross_project = ex_city.viscount_project !== candidate_city.viscount_project;
+            if ((ex_city._is_class3_candidate || candidate_city._is_class3_candidate) && norm_helper && norm_helper.foldAscii(ex_city.name) !== norm_helper.foldAscii(candidate_city.name))
+              continue;
             let mun_gate = (typeof uud.canMergeMunicipalities === "function") ?
               uud.canMergeMunicipalities(ex_city, candidate_city, { max_semantic_km: haversine_name_match_km }) :
               { allow: false, reason: "no_gate" };
@@ -500,7 +543,15 @@
               } else if (gaz_id === "russian_invasion_of_ukraine" || ex_city.population[yr] === undefined) {
                 ex_city.population[yr] = candidate_city.population[yr];
               } else if (ex_city.polaris_priority === candidate_city.polaris_priority) {
-                ex_city.population[yr] = Math.round(Math.sqrt(ex_city.population[yr]*candidate_city.population[yr]));
+                let ev = Number(ex_city.population[yr] || 0);
+                let cv = Number(candidate_city.population[yr] || 0);
+                let ratio = (ev > 0 && cv > 0) ? Math.max(ev, cv)/Math.min(ev, cv) : 1;
+                if (candidate_city._is_intra_district === true || ratio >= 5.0)
+                  ex_city.population[yr] = Math.max(ev, cv);
+                else
+                  ex_city.population[yr] = Math.round(Math.sqrt(ev*cv));
+              } else if (candidate_city._is_intra_district !== true && Number(ex_city.population[yr] || 0) > 0 && Number(candidate_city.population[yr] || 0) >= Number(ex_city.population[yr] || 0)*5.0) {
+                ex_city.population[yr] = candidate_city.population[yr];
               }
             }
 
@@ -554,6 +605,17 @@
               if (proj.key && !ex_city.sources.includes(proj.key))
                 ex_city.sources.push(proj.key);
             }
+            if (cand_tokens && cand_tokens.length > 0) {
+              for (let t = 0; t < cand_tokens.length; t++) {
+                let tok = cand_tokens[t];
+                let list = token_index.get(tok);
+                if (!list) {
+                  token_index.set(tok, [matched_key]);
+                } else if (!list.includes(matched_key)) {
+                  list.push(matched_key);
+                }
+              }
+            }
           } else {
             let target_key = city_key;
             if (return_obj[target_key]) {
@@ -573,6 +635,17 @@
             if (!spatial_grid.has(grid_key))
               spatial_grid.set(grid_key, []);
             spatial_grid.get(grid_key).push(target_key);
+            if (cand_tokens && cand_tokens.length > 0) {
+              for (let t = 0; t < cand_tokens.length; t++) {
+                let tok = cand_tokens[t];
+                let list = token_index.get(tok);
+                if (!list) {
+                  token_index.set(tok, [target_key]);
+                } else {
+                  list.push(target_key);
+                }
+              }
+            }
           }
         }
       }

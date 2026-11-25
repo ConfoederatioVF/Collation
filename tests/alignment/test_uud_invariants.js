@@ -108,5 +108,53 @@ let path = require("path");
   assert.strictEqual(norm.isNonHabitationFeature("Greater Valletta"), true);
   assert.strictEqual(norm.isNonHabitationFeature("Bilge Qagan"), false);
 
+  //5. Post-review regression checks (parent_creation_year, Paris 13e, Tund`'za, Skopje pin snap)
+  assert.strictEqual(norm.resolveAmalgamationParentFloor("London", "United Kingdom"), null);
+  assert.strictEqual(norm.resolveAmalgamationParentFloor("Berlin", "Germany"), null);
+  assert.strictEqual(norm.resolveAmalgamationParentFloor("Hamburg", "Germany"), null);
+  assert.strictEqual(norm.resolveAmalgamationParentFloor("Istanbul", "Turkey"), null);
+  assert.strictEqual(norm.resolveAmalgamationParentFloor("Budapest", "Hungary"), 1873);
+  assert.strictEqual(norm.resolveAmalgamationParentFloor("Wuhan", "China"), 1949);
+  assert.strictEqual(norm.decodeHaceksAndQuotes("Tund`'za", "Bulgaria"), "Tundža");
+  let paris_13 = norm.resolveParentMunicipality("Paris 13e Arrondissement", "France", [48.83, 2.36]);
+  assert.ok(paris_13 && paris_13.parent_name === "Paris", "Paris 13e Arrondissement MUST flatten into Paris");
+  let skopje_a = { name: "Skopje", country: "North Macedonia", coords: [41.9981, 21.4254], population: { 2021: 526502 } };
+  let skopje_b = { name: "Skopje", country: "North Macedonia", coords: [41.98, 21.43], population: { 2021: 541832 } };
+  assert.strictEqual(uud.canMergeMunicipalities(skopje_a, skopje_b).allow, true, "Two Skopje records 2 km apart MUST merge");
+
+  //6. Alignment steerer regressions (Devlet Mah, Ba'albak - Al-Harmal, Ghajnsielem, Mestre/Venice separation, Alibeyköyü)
+  assert.strictEqual(norm.isNonHabitationFeature("Devlet Mah"), true);
+  assert.strictEqual(norm.isNonHabitationFeature("Ba'albak - Al-Harmal"), true);
+  assert.strictEqual(norm.normaliseCityName("Ghajnsielem and Comino", "Malta").name, "Ghajnsielem");
+  assert.strictEqual(norm.resolveParentMunicipality("Mestre", "Italy", [45.49, 12.24]), null);
+  let alibey = norm.resolveParentMunicipality("Alibeyköyü", "Turkey", [41.08, 28.94]);
+  assert.ok(alibey && alibey.parent_name === "Istanbul", "Alibeyköyü MUST flatten into Istanbul");
+
+  //7. Cross-frontier sovereign-transfer deduplication (Konigsberg/Kaliningrad & Weisbaden/Wiesbaden)
+  let mock_frontier = {
+    "Konigsberg-Germany": {
+      key: "Konigsberg-Germany", name: "Konigsberg", country: "Germany",
+      coords: [54.70649, 20.51095], population: { 1500: 10000, 1800: 59000 }
+    },
+    "Kaliningrad-Russia": {
+      key: "Kaliningrad-Russia", name: "Kaliningrad", country: "Russia",
+      coords: [54.70639, 20.51102], population: { 1950: 145000, 2025: 488690 }, viscount_project: "POLARIS"
+    },
+    "Weisbaden-Germany": {
+      key: "Weisbaden-Germany", name: "Weisbaden", country: "Germany",
+      coords: [50.06308, 8.24334], population: { 1800: 96500, 2025: 280000 }
+    },
+    "Wiesbaden-Germany": {
+      key: "Wiesbaden-Germany", name: "Wiesbaden", country: "Germany",
+      coords: [50.07219, 8.25329], population: { 1800: 8650, 2025: 339176 }
+    }
+  };
+  require("../../histmap/2.data_cleaning/population_Stadester/stadester_uud_fixes.js");
+  uud.flattenToMunicipalityLevelAndCleanNames(mock_frontier);
+  assert.ok(!mock_frontier["Konigsberg-Germany"] && mock_frontier["Kaliningrad-Russia"], "Konigsberg MUST merge into Kaliningrad");
+  assert.strictEqual(mock_frontier["Kaliningrad-Russia"].population[1800], 59000, "Kaliningrad MUST retain Konigsberg 1800 pop");
+  assert.ok(!mock_frontier["Weisbaden-Germany"] && mock_frontier["Wiesbaden-Germany"], "Weisbaden MUST merge into Wiesbaden");
+  assert.strictEqual(mock_frontier["Wiesbaden-Germany"].population[1800], 8650, "Wiesbaden MUST NOT keep Chandler Weisbaden 1800 spike");
+
   console.log("[test_uud_invariants] PASS: All INV-01, INV-02, INV-13, INV-14 assertions succeeded.");
 }

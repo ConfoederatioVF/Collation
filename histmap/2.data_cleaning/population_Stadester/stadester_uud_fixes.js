@@ -288,19 +288,6 @@
           m_city.population = population_Stadester_uud.linearInterpolationObject(m_city.population, { years: missing_yrs });
       }
 
-      if (stadester_obj["Cardiff-United Kingdom"] && stadester_obj["Rhondda-United Kingdom"]) {
-        let cardiff_city = stadester_obj["Cardiff-United Kingdom"];
-        let rhondda_city = stadester_obj["Rhondda-United Kingdom"];
-        let swap_pop = JSON.parse(JSON.stringify(cardiff_city.population));
-        let swap_max = cardiff_city._raw_max_year;
-        let swap_min = cardiff_city._raw_min_year;
-        cardiff_city.population = JSON.parse(JSON.stringify(rhondda_city.population));
-        cardiff_city._raw_max_year = rhondda_city._raw_max_year;
-        cardiff_city._raw_min_year = rhondda_city._raw_min_year;
-        rhondda_city.population = swap_pop;
-        rhondda_city._raw_max_year = swap_max;
-        rhondda_city._raw_min_year = swap_min;
-      }
       delete stadester_obj["Minneapolis-United States of America"];
 
       //Taipei anachronistic antiquity & Maydanets archaeological lapse cleanup
@@ -640,7 +627,7 @@
     //Function body
     //Deduplicate and merge population first
     stadester_obj = population_Stadester_uud.removeStadesterDuplicates(stadester_obj);
-    if (do_not_flatten_metros) return stadester_obj;
+    if (do_not_flatten_metros === true) return stadester_obj;
 
     //Use the unified 3-Phase Spatiotemporally Agnostic Metropolitan Reconciler
     let MetroRec = global.StadesterMetroReconciler;
@@ -1416,16 +1403,39 @@
       let c = stadester_obj[all_keys_pre[i]];
       if (!c || !Array.isArray(c.coords)) continue;
       let nm_low = String(c.name || "").trim().toLowerCase();
-      let ctry_low = String(c.country || "").trim().toLowerCase();
+      let ctry_low = normaliser ? normaliser.normaliseCountryName(c.country) : String(c.country || "").trim().toLowerCase();
       if (ctry_low === "latvia" && nm_low === "riga" && Math.abs(Number(c.coords[1]) - 21.1) < 0.2) {
         c.coords = [56.946, 24.10589];
-      } else if (ctry_low === "malta" && nm_low === "valletta" && Math.abs(Number(c.coords[0]) - 35.89924) < 0.02) {
+      } else if (ctry_low === "malta" && nm_low === "valletta" && Math.abs(Number(c.coords[0]) - 35.89924) < 0.05) {
         has_proper_valletta = true;
+        c.coords = [35.89924, 14.5141];
         c.is_capital = true;
+        c.population = {
+          1580: 4000, 1600: 10000, 1650: 15000, 1700: 18000, 1750: 21000,
+          1800: 23000, 1851: 24500, 1901: 22768, 1911: 24423, 1921: 22392,
+          1931: 22779, 1948: 18666, 1957: 18202, 1967: 15279, 1985: 9340,
+          1995: 7184, 2005: 6315, 2011: 6444, 2021: 5157, 2025: 5157
+        };
+        c.sources = ["manual", "MAGNETIC"];
       } else if (ctry_low === "italy" && (nm_low === "napoli" || nm_low === "naples") && Number(c.coords[0]) > 40.89 && Number(c.coords[1]) < 14.23) {
         c.coords = [40.85177, 14.26812];
         c.name = "Naples";
         c.is_capital = true;
+      } else if (ctry_low === "south africa" && (nm_low === "johannesburg" || nm_low === "pretoria")) {
+        c.population_scope = "city_proper";
+        delete c.extent_type;
+        delete c.is_agglomeration;
+        if (c.population && typeof c.population === "object") {
+          let p2011 = Number(c.population[2011] || 0);
+          if (p2011 > 0 && !(Number(c.population[2025] || 0) > 0))
+            c.population[2025] = Math.round(p2011*1.25);
+          if (nm_low === "johannesburg" && Number(c.population[2025] || 0) < 1000000) {
+            c.population[2000] = Math.max(Number(c.population[2000] || 0), 3225810);
+            c.population[2011] = Math.max(Number(c.population[2011] || 0), 4434827);
+            c.population[2020] = Math.max(Number(c.population[2020] || 0), 5635127);
+            c.population[2025] = 5926668;
+          }
+        }
       }
     }
 
@@ -1443,9 +1453,9 @@
           1580: 4000, 1600: 10000, 1650: 15000, 1700: 18000, 1750: 21000,
           1800: 23000, 1851: 24500, 1901: 22768, 1911: 24423, 1921: 22392,
           1931: 22779, 1948: 18666, 1957: 18202, 1967: 15279, 1985: 9340,
-          1995: 7184, 2005: 6315, 2011: 6444, 2021: 5157
+          1995: 7184, 2005: 6315, 2011: 6444, 2021: 5157, 2025: 5157
         },
-        sources: ["MAGNETIC"],
+        sources: ["manual", "MAGNETIC"],
         viscount_project: "MAGNETIC",
         viscount_z_priority: 10
       };
@@ -1471,6 +1481,41 @@
       let c = stadester_obj[k];
       if (!c || !c.name) continue;
 
+      if (/\\[^\\]+\\/.test(String(c.name))) {
+        delete stadester_obj[k];
+        dropped_junk++;
+        continue;
+      }
+      let stripped_lead = String(c.name).replace(/^[`"']+/, "").trim();
+      if (stripped_lead && stripped_lead !== c.name) c.name = stripped_lead;
+      if (/^weisbaden$/i.test(String(c.name || "").trim())) {
+        c.name = "Wiesbaden";
+        if (c.population) {
+          let wb_yrs = Object.keys(c.population);
+          for (let wy = 0; wy < wb_yrs.length; wy++) {
+            let wyn = parseInt(wb_yrs[wy], 10);
+            if (Number.isFinite(wyn) && wyn <= 1850 && Number(c.population[wb_yrs[wy]]) > 25000)
+              delete c.population[wb_yrs[wy]];
+          }
+        }
+      }
+      if (/^(?:katowice|kattowitz)$/i.test(String(c.name || "").trim()) && c.population) {
+        let kw_yrs = Object.keys(c.population);
+        for (let ky = 0; ky < kw_yrs.length; ky++) {
+          let kyn = parseInt(kw_yrs[ky], 10);
+          if (Number.isFinite(kyn) && kyn < 1865 && Number(c.population[kw_yrs[ky]]) > 1500)
+            delete c.population[kw_yrs[ky]];
+        }
+      }
+      if (/^chemnitz$/i.test(String(c.name || "").trim()) && c.population) {
+        let cm_yrs = Object.keys(c.population);
+        for (let cy = 0; cy < cm_yrs.length; cy++) {
+          let cyn = parseInt(cm_yrs[cy], 10);
+          if (Number.isFinite(cyn) && cyn < 1830 && Number(c.population[cm_yrs[cy]]) > 20000)
+            delete c.population[cm_yrs[cy]];
+        }
+      }
+
       if (normaliser && normaliser.isJunkOrSurveyCode(c.name)) {
         delete stadester_obj[k];
         dropped_junk++;
@@ -1489,9 +1534,48 @@
           c.name = norm_res.name;
           renamed_count++;
         }
+        let parent_floor = (typeof normaliser.resolveAmalgamationParentFloor === "function") ?
+          normaliser.resolveAmalgamationParentFloor(c.name, c.country) : null;
+        if (Number.isFinite(parent_floor) && c.population && typeof c.population === "object") {
+          let p_yrs = Object.keys(c.population);
+          let kept_any = false;
+          for (let py = 0; py < p_yrs.length; py++) {
+            let yn = parseInt(p_yrs[py], 10);
+            if (Number.isFinite(yn) && yn < parent_floor) {
+              delete c.population[p_yrs[py]];
+            } else if (Number.isFinite(yn) && Number(c.population[p_yrs[py]]) > 0) {
+              kept_any = true;
+            }
+          }
+          if (!kept_any) {
+            delete stadester_obj[k];
+            continue;
+          }
+          if (Number.isFinite(Number(c.foundation_year)) && Number(c.foundation_year) < parent_floor)
+            c.foundation_year = parent_floor;
+          if (Number.isFinite(Number(c["found.yr"])) && Number(c["found.yr"]) < parent_floor)
+            c["found.yr"] = parent_floor;
+        }
+        if (Number.isFinite(c._annexation_year) && c.population && typeof c.population === "object") {
+          let t_annex = Number(c._annexation_year);
+          let a_yrs = Object.keys(c.population);
+          let kept_pre = false;
+          for (let ay = 0; ay < a_yrs.length; ay++) {
+            let yn = parseInt(a_yrs[ay], 10);
+            if (Number.isFinite(yn) && yn >= t_annex) {
+              delete c.population[a_yrs[ay]];
+            } else if (Number.isFinite(yn) && Number(c.population[a_yrs[ay]]) > 0) {
+              kept_pre = true;
+            }
+          }
+          if (!kept_pre) {
+            delete stadester_obj[k];
+            continue;
+          }
+        }
       }
 
-      let ctry_low = String(c.country || "").trim().toLowerCase();
+      let ctry_low = normaliser ? normaliser.normaliseCountryName(c.country) : String(c.country || "").trim().toLowerCase();
       let nm_fold = normaliser ? normaliser.foldAscii(c.name) : String(c.name || "").trim().toLowerCase();
       let idx_key = `${ctry_low}|${nm_fold}`;
       if (!parent_index.has(idx_key)) parent_index.set(idx_key, []);
@@ -1514,9 +1598,13 @@
       }
 
       if (!p_city.population) p_city.population = {};
+      let p_floor = (normaliser && typeof normaliser.resolveAmalgamationParentFloor === "function") ?
+        normaliser.resolveAmalgamationParentFloor(p_city.name, p_city.country) : null;
       let c_yrs = Object.keys(c_city.population || {});
       for (let y = 0; y < c_yrs.length; y++) {
         let yk = c_yrs[y];
+        let yn = parseInt(yk, 10);
+        if (Number.isFinite(p_floor) && Number.isFinite(yn) && yn < p_floor) continue;
         let cv = Number(c_city.population[yk] || 0);
         let pv = Number(p_city.population[yk] || 0);
         if (cv > pv) p_city.population[yk] = cv;
@@ -1545,6 +1633,22 @@
       if (Number.isFinite(c._annexation_year)) continue;
 
       let p_meta = normaliser.resolveParentMunicipality(c.name, c.country, c.coords);
+      if (!p_meta) {
+        let h_meta = normaliser.resolveHistoricalAmalgamation(c.name, c.country, c.coords);
+        if (h_meta && Number.isFinite(h_meta.annexation_year) && c.population) {
+          let h_yrs = Object.keys(c.population).map(Number).filter(function (arg0_n) { return Number.isFinite(arg0_n) && Number(c.population[arg0_n]) > 0; });
+          let h_min = (h_yrs.length > 0) ? Math.min.apply(null, h_yrs) : Infinity;
+          let h_max = (h_yrs.length > 0) ? Math.max.apply(null, h_yrs) : -Infinity;
+          if (h_min >= h_meta.annexation_year && h_max >= h_meta.annexation_year) {
+            p_meta = {
+              effective_from_year: h_meta.annexation_year,
+              is_capital_override: Boolean(h_meta.parent_is_capital),
+              parent_coords: h_meta.parent_coords,
+              parent_name: h_meta.parent_name
+            };
+          }
+        }
+      }
       if (!p_meta) continue;
       if (Number.isFinite(p_meta.effective_from_year) && c.population) {
         let local_max_yr = -Infinity;
@@ -1557,7 +1661,7 @@
         if (local_max_yr > -Infinity && local_max_yr < p_meta.effective_from_year) continue;
       }
 
-      let ctry_low = String(c.country || "").trim().toLowerCase();
+      let ctry_low = normaliser ? normaliser.normaliseCountryName(c.country) : String(c.country || "").trim().toLowerCase();
       let target_fold = normaliser.foldAscii(p_meta.parent_name);
       let cands = parent_index.get(`${ctry_low}|${target_fold}`) || [];
       let best_parent = null;
@@ -1591,15 +1695,19 @@
     let audit_mod_path = path.resolve(__dirname, "../../../.agents/skills/population-regional-study/scripts/viscount_entity_and_continuity_audit.js");
     let entity_audit = fs.existsSync(audit_mod_path) ? require(audit_mod_path).viscount_entity_audit : null;
     let profiles = entity_audit ? entity_audit.loadSkillProfiles() : null;
-    let grid = new Map();
+    let token_index = new Map();
     let final_keys = Object.keys(stadester_obj);
+    let score_map = new Map();
+
+    for (let i = 0; i < final_keys.length; i++) {
+      let fk = final_keys[i];
+      let fc = stadester_obj[fk];
+      let sc = (fc && fc.is_capital ? 1e12 : 0) + ((typeof population_Stadester_uud.getPeakPopulation === "function" && fc) ? population_Stadester_uud.getPeakPopulation(fc.population) : 0);
+      score_map.set(fk, sc);
+    }
 
     final_keys.sort(function (arg0_a, arg1_b) {
-      let ca = stadester_obj[arg0_a];
-      let cb = stadester_obj[arg1_b];
-      let sa = (ca && ca.is_capital ? 1e12 : 0) + ((typeof population_Stadester_uud.getPeakPopulation === "function") ? population_Stadester_uud.getPeakPopulation(ca.population) : 0);
-      let sb = (cb && cb.is_capital ? 1e12 : 0) + ((typeof population_Stadester_uud.getPeakPopulation === "function") ? population_Stadester_uud.getPeakPopulation(cb.population) : 0);
-      return sb - sa;
+      return score_map.get(arg1_b) - score_map.get(arg0_a);
     });
 
     for (let i = 0; i < final_keys.length; i++) {
@@ -1610,44 +1718,258 @@
       let lng = Number(c.coords[1]);
       if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
 
-      let gx = Math.floor(lat*4);
-      let gy = Math.floor(lng*4);
-      let dup_parent = null;
-
-      for (let dx = -1; dx <= 1 && !dup_parent; dx++) {
-        for (let dy = -1; dy <= 1 && !dup_parent; dy++) {
-          let bucket = grid.get(`${gx + dx},${gy + dy}`);
-          if (!bucket) continue;
-          for (let b = 0; b < bucket.length; b++) {
-            let pk = bucket[b];
-            let pc = stadester_obj[pk];
-            if (!pc) continue;
-            if (String(pc.country || "").toLowerCase() !== String(c.country || "").toLowerCase()) continue;
-            let d_km = (typeof population_Stadester_uud.haversineDistance === "function") ?
-              population_Stadester_uud.haversineDistance(pc.coords, c.coords) : 999999;
-            if (d_km > 15.0) continue;
-            if (typeof population_Stadester_uud.canMergeMunicipalities === "function") {
-              let gate = population_Stadester_uud.canMergeMunicipalities(pc, c, { max_semantic_km: 15.0 });
-              if (!gate.allow) continue;
-            } else {
-              let is_match = (typeof population_Stadester_uud.checkExactNameMatch === "function") ?
-                population_Stadester_uud.checkExactNameMatch(pc, c) : false;
-              if (!is_match && entity_audit && profiles)
-                is_match = entity_audit.areEquivalentExonyms(pc.name, c.name, profiles);
-              if (!is_match) continue;
-            }
-            dup_parent = pk;
-            break;
+      if (typeof population_Stadester_uud.assignMunicipalMetadata === "function")
+        population_Stadester_uud.assignMunicipalMetadata(c);
+      let cand_tokens = (typeof population_Stadester_uud.getCityMatchTokens === "function") ?
+        population_Stadester_uud.getCityMatchTokens(c) : [];
+      let candidate_pool = [];
+      let seen_pool = new Set();
+      for (let t = 0; t < cand_tokens.length; t++) {
+        let hits = token_index.get(cand_tokens[t]);
+        if (!hits) continue;
+        for (let h = 0; h < hits.length; h++) {
+          if (!seen_pool.has(hits[h])) {
+            seen_pool.add(hits[h]);
+            candidate_pool.push(hits[h]);
           }
         }
       }
 
+      let dup_parent = null;
+      for (let b = 0; b < candidate_pool.length; b++) {
+        let pk = candidate_pool[b];
+        let pc = stadester_obj[pk];
+        if (!pc) continue;
+        let pc_ctry = normaliser ? normaliser.normaliseCountryName(pc.country) : String(pc.country || "").toLowerCase();
+        let c_ctry = normaliser ? normaliser.normaliseCountryName(c.country) : String(c.country || "").toLowerCase();
+        if (pc_ctry !== c_ctry) continue;
+        let d_km = (typeof population_Stadester_uud.haversineDistance === "function") ?
+          population_Stadester_uud.haversineDistance(pc.coords, c.coords) : 999999;
+        let same_folded_name = Boolean(
+          normaliser &&
+          normaliser.foldAscii(pc.name) &&
+          normaliser.foldAscii(pc.name) === normaliser.foldAscii(c.name)
+        );
+        let max_d_km = same_folded_name ? 30.0 : 15.0;
+        if (d_km > max_d_km) continue;
+        let is_agg_pc = Boolean(pc.population_scope === "metro" || pc.extent_type === "metro" || pc.is_agglomeration);
+        let is_agg_c = Boolean(c.population_scope === "metro" || c.extent_type === "metro" || c.is_agglomeration);
+        if (same_folded_name && (is_agg_pc !== is_agg_c)) {
+          if (is_agg_c && !pc.metro_population) {
+            pc.metro_population = JSON.parse(JSON.stringify(c.population || {}));
+          } else if (is_agg_pc && !is_agg_c) {
+            let c_post50 = 0;
+            if (c.population) {
+              let c_yks = Object.keys(c.population);
+              for (let yy = 0; yy < c_yks.length; yy++) {
+                let yyn = parseInt(c_yks[yy], 10);
+                if (Number.isFinite(yyn) && yyn >= 1950 && Number(c.population[c_yks[yy]]) > 0) c_post50++;
+              }
+            }
+            if (c_post50 >= 2) {
+              if (!pc.metro_population) pc.metro_population = JSON.parse(JSON.stringify(pc.population || {}));
+              pc.population = JSON.parse(JSON.stringify(c.population || {}));
+            } else if (pc.population) {
+              let p2011 = Number(pc.population[2011] || 0);
+              if (p2011 > 0 && !(Number(pc.population[2025] || 0) > 0))
+                pc.population[2025] = Math.round(p2011*1.25);
+              if (/^johannesburg$/i.test(String(pc.name || "").trim()) && Number(pc.population[2025] || 0) < 1000000) {
+                pc.population[2000] = Math.max(Number(pc.population[2000] || 0), 3225810);
+                pc.population[2011] = Math.max(Number(pc.population[2011] || 0), 4434827);
+                pc.population[2020] = Math.max(Number(pc.population[2020] || 0), 5635127);
+                pc.population[2025] = 5926668;
+              }
+            }
+            pc.population_scope = "city_proper";
+            delete pc.extent_type;
+            delete pc.is_agglomeration;
+          }
+          dup_parent = pk;
+          break;
+        }
+        if (typeof population_Stadester_uud.canMergeMunicipalities === "function") {
+          let gate = population_Stadester_uud.canMergeMunicipalities(pc, c, { max_semantic_km: max_d_km });
+          if (!gate.allow) continue;
+        } else {
+          let is_match = (typeof population_Stadester_uud.checkExactNameMatch === "function") ?
+            population_Stadester_uud.checkExactNameMatch(pc, c) : false;
+          if (!is_match && entity_audit && profiles)
+            is_match = entity_audit.areEquivalentExonyms(pc.name, c.name, profiles);
+          if (!is_match) continue;
+        }
+        dup_parent = pk;
+        break;
+      }
+
       if (dup_parent) {
         mergeIntoParent(dup_parent, k, null);
+        for (let t = 0; t < cand_tokens.length; t++) {
+          let tok = cand_tokens[t];
+          let list = token_index.get(tok);
+          if (!list) {
+            token_index.set(tok, [dup_parent]);
+          } else if (!list.includes(dup_parent)) {
+            list.push(dup_parent);
+          }
+        }
       } else {
-        let gk = `${gx},${gy}`;
-        if (!grid.has(gk)) grid.set(gk, []);
-        grid.get(gk).push(k);
+        for (let t = 0; t < cand_tokens.length; t++) {
+          let tok = cand_tokens[t];
+          let list = token_index.get(tok);
+          if (!list) {
+            token_index.set(tok, [k]);
+          } else {
+            list.push(k);
+          }
+        }
+      }
+    }
+
+    // 5. Cross-country historical sovereign-transfer deduplication (East Prussia, Kresy, Alsace, Pomerania/Silesia, etc.)
+    let transfer_pairs = new Set([
+      "germany|russia", "russia|germany",
+      "germany|poland", "poland|germany",
+      "germany|lithuania", "lithuania|germany",
+      "poland|belarus", "belarus|poland",
+      "poland|ukraine", "ukraine|poland",
+      "poland|lithuania", "lithuania|poland",
+      "austria|poland", "poland|austria",
+      "austria|ukraine", "ukraine|austria",
+      "austria|czechia", "czechia|austria",
+      "hungary|slovakia", "slovakia|hungary",
+      "hungary|romania", "romania|hungary",
+      "romania|moldova", "moldova|romania",
+      "romania|ukraine", "ukraine|romania",
+      "russia|lithuania", "lithuania|russia",
+      "russia|latvia", "latvia|russia",
+      "russia|estonia", "estonia|russia",
+      "russia|finland", "finland|russia",
+      "russia|poland", "poland|russia",
+      "russia|belarus", "belarus|russia",
+      "russia|ukraine", "ukraine|russia",
+      "germany|france", "france|germany",
+      "germany|denmark", "denmark|germany",
+      "italy|croatia", "croatia|italy",
+      "italy|slovenia", "slovenia|italy"
+    ]);
+    let exonym_groups = [
+      ["konigsberg", "kaliningrad", "krolewiec", "karaliaucius"],
+      ["tilsit", "sovetsk"],
+      ["insterburg", "chernyakhovsk", "cernjachovsk"],
+      ["gumbinnen", "gusev"],
+      ["pillau", "baltiysk", "baltiisk"],
+      ["ragnit", "neman", "ragaine"],
+      ["labiau", "polessk"],
+      ["tapiau", "gvardeysk", "gvardeisk"],
+      ["wehlau", "znamensk"],
+      ["heiligenbeil", "mamonovo"],
+      ["preussisch eylau", "pr eylau", "bagrationovsk"],
+      ["stalluponen", "nesterov"],
+      ["pillkallen", "dobrovolsk"],
+      ["darkehmen", "ozersk", "ozyorsk"],
+      ["friedland", "pravdinsk"],
+      ["gerdauen", "zheleznodorozhny", "zheleznodorozhnyy"],
+      ["allenburg", "druzhba"],
+      ["domnau", "domnovo"],
+      ["zinten", "kornevo"],
+      ["cranz", "zelenogradsk"],
+      ["rauschen", "svetlogorsk"],
+      ["fischhausen", "primorsk"],
+      ["palmnicken", "yantarnyy", "yantarny"],
+      ["memel", "klaipeda"],
+      ["heydekrug", "silute"],
+      ["allenstein", "olsztyn"],
+      ["braunsberg", "braniewo"],
+      ["bartenstein", "bartoszyce"],
+      ["heilsberg", "lidzbark warminski"],
+      ["lyck", "elk"],
+      ["lotzen", "gizycko"],
+      ["rastenburg", "ketrzyn"],
+      ["osterode", "ostroda"],
+      ["lemberg", "lviv", "lwow", "lvov"],
+      ["wilna", "vilnius", "vilna", "wilno"],
+      ["kowno", "kaunas"],
+      ["dunaburg", "daugavpils"],
+      ["libau", "liepaja"],
+      ["mitau", "jelgava"],
+      ["brest-litovsk", "brest", "brzesc"],
+      ["grodno", "hrodna"]
+    ];
+    let exonym_group_id = new Map();
+    for (let gi = 0; gi < exonym_groups.length; gi++) {
+      for (let gj = 0; gj < exonym_groups[gi].length; gj++)
+        exonym_group_id.set(exonym_groups[gi][gj], gi);
+    }
+    let getMinMaxYr = function (arg0_pop) {
+      let mn = Infinity;
+      let mx = -Infinity;
+      if (!arg0_pop || typeof arg0_pop !== "object") return [mn, mx];
+      let yks = Object.keys(arg0_pop);
+      for (let y = 0; y < yks.length; y++) {
+        let yn = parseInt(yks[y], 10);
+        if (Number.isFinite(yn) && Number(arg0_pop[yks[y]]) > 0) {
+          if (yn < mn) mn = yn;
+          if (yn > mx) mx = yn;
+        }
+      }
+      return [mn, mx];
+    };
+    let transfer_grid = new Map();
+    let t_keys = Object.keys(stadester_obj);
+    for (let ti = 0; ti < t_keys.length; ti++) {
+      let tk = t_keys[ti];
+      let tc = stadester_obj[tk];
+      if (!tc || !Array.isArray(tc.coords) || tc.coords.length < 2) continue;
+      let la = Number(tc.coords[0]);
+      let lo = Number(tc.coords[1]);
+      if (!Number.isFinite(la) || !Number.isFinite(lo)) continue;
+      let gkey = `${Math.floor(la*20)},${Math.floor(lo*20)}`;
+      if (!transfer_grid.has(gkey)) transfer_grid.set(gkey, []);
+      transfer_grid.get(gkey).push(tk);
+    }
+    for (let ti = 0; ti < t_keys.length; ti++) {
+      let tk = t_keys[ti];
+      let tc = stadester_obj[tk];
+      if (!tc || !Array.isArray(tc.coords) || tc.coords.length < 2) continue;
+      let tc_ctry = normaliser ? normaliser.normaliseCountryName(tc.country) : String(tc.country || "").toLowerCase();
+      let tc_mm = getMinMaxYr(tc.population);
+      let tc_fold = normaliser ? normaliser.foldAscii(tc.name) : String(tc.name || "").toLowerCase();
+      let tc_gid = exonym_group_id.has(tc_fold) ? exonym_group_id.get(tc_fold) : -1;
+      let la = Number(tc.coords[0]);
+      let lo = Number(tc.coords[1]);
+      let gx = Math.floor(la*20);
+      let gy = Math.floor(lo*20);
+      let cands_t = [];
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+          let arr = transfer_grid.get(`${gx + dx},${gy + dy}`);
+          if (arr) {
+            for (let ai = 0; ai < arr.length; ai++) cands_t.push(arr[ai]);
+          }
+        }
+      }
+      for (let ci = 0; ci < cands_t.length; ci++) {
+        let pk = cands_t[ci];
+        if (pk === tk || !stadester_obj[pk] || !stadester_obj[tk]) continue;
+        let pc = stadester_obj[pk];
+        let pc_ctry = normaliser ? normaliser.normaliseCountryName(pc.country) : String(pc.country || "").toLowerCase();
+        if (pc_ctry === tc_ctry || !transfer_pairs.has(`${pc_ctry}|${tc_ctry}`)) continue;
+        let d_km = (typeof population_Stadester_uud.haversineDistance === "function") ?
+          population_Stadester_uud.haversineDistance(pc.coords, tc.coords) : 999999;
+        if (d_km > 5.0) continue;
+        let pc_mm = getMinMaxYr(pc.population);
+        let pc_fold = normaliser ? normaliser.foldAscii(pc.name) : String(pc.name || "").toLowerCase();
+        let pc_gid = exonym_group_id.has(pc_fold) ? exonym_group_id.get(pc_fold) : -2;
+        let exonym_hit = (tc_gid >= 0 && tc_gid === pc_gid);
+        let comp_1945 = (d_km <= 1.2) && ((pc_mm[1] <= 1945 && tc_mm[0] >= 1945) || (tc_mm[1] <= 1945 && pc_mm[0] >= 1945));
+        if (!exonym_hit && !comp_1945) continue;
+        let keep_tc = (tc_mm[1] > pc_mm[1]) || (tc_mm[1] === pc_mm[1] && String(tc.viscount_project || "") === "POLARIS");
+        if (keep_tc) {
+          mergeIntoParent(tk, pk, null);
+        } else {
+          mergeIntoParent(pk, tk, null);
+          break;
+        }
       }
     }
 

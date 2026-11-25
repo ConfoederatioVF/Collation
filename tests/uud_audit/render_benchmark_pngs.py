@@ -87,21 +87,43 @@ def fmt_pop(arg0_val):
 
 
 def get_pop_at_year(arg0_city, arg1_yr):
-  """Gets population at exact year or nearest year within +/- 25 years."""
+  """Gets population at exact year or nearest year without smearing across annexation or foundation boundaries."""
+  annex_yr = arg0_city.get("_annexation_year")
+  if annex_yr is not None:
+    try:
+      if arg1_yr >= int(annex_yr):
+        return 0.0
+    except Exception:
+      pass
   pop = arg0_city.get("population") or {}
   sk = str(arg1_yr)
   if sk in pop and pop[sk] is not None and float(pop[sk]) > 0:
     return float(pop[sk])
-  best_d = 9999
-  best_v = 0.0
+  pos_yrs = []
   for k, v in pop.items():
     try:
       yk = int(k)
       fv = float(v)
     except Exception:
       continue
-    if fv > 0 and abs(yk - arg1_yr) <= 25 and abs(yk - arg1_yr) < best_d:
-      best_d = abs(yk - arg1_yr)
+    if fv > 0:
+      pos_yrs.append((yk, fv))
+  if not pos_yrs:
+    return 0.0
+  min_y = min(yk for yk, _ in pos_yrs)
+  max_y = max(yk for yk, _ in pos_yrs)
+  if arg1_yr >= 1800:
+    if arg1_yr < min_y or arg1_yr > max_y:
+      return 0.0
+    tol = 10
+  else:
+    tol = 25
+  best_d = 9999
+  best_v = 0.0
+  for yk, fv in pos_yrs:
+    d = abs(yk - arg1_yr)
+    if d <= tol and d < best_d:
+      best_d = d
       best_v = fv
   return best_v
 
@@ -126,8 +148,8 @@ def render_map(arg0_title, arg1_out_path, arg2_bbox, arg3_pts, arg4_coast, arg5_
     ax.scatter(xs, ys, s=sizes, c=colors, alpha=0.78, edgecolors="#ffffff", linewidths=0.5, zorder=4)
 
   placed = []
-  dx_tol = (xmax - xmin)*0.055
-  dy_tol = (ymax - ymin)*0.028
+  dx_tol = (xmax - xmin)*0.075
+  dy_tol = (ymax - ymin)*0.032
   labels_drawn = 0
   for lat, lon, pop, name, is_merged in pts_sorted:
     if labels_drawn >= arg6_max_labels:

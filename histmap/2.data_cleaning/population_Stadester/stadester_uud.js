@@ -431,6 +431,8 @@
       viscount_regional: { data: population_Stadester_uud.getViscountRegionalObject(options), is_polaris: true, precision: 0.05, semantic_precision: 0.25 }
     };
     let audit_log = Array.isArray(options.audit_log_array) ? options.audit_log_array : null;
+    let blocked_log_count = 0;
+    let token_index = new Map();
     
     let cannot_be_merged_pairs = cannot_be_merged.map(function (arg0_p) {
       return [
@@ -457,6 +459,19 @@
       let cell = `${Math.floor(Number(city.coords[0])/grid_step)},${Math.floor(Number(city.coords[1])/grid_step)}`;
       if (!city_grid.has(cell)) city_grid.set(cell, new Set());
       city_grid.get(cell).add(city.key);
+      if (typeof population_Stadester_uud.assignMunicipalMetadata === "function")
+        population_Stadester_uud.assignMunicipalMetadata(city);
+      if (typeof population_Stadester_uud.getCityMatchTokens === "function") {
+        let toks = population_Stadester_uud.getCityMatchTokens(city);
+        for (let t = 0; t < toks.length; t++) {
+          let list = token_index.get(toks[t]);
+          if (!list) {
+            token_index.set(toks[t], [city.key]);
+          } else if (!list.includes(city.key)) {
+            list.push(city.key);
+          }
+        }
+      }
     }
     
     function isAgglomeration(city) {
@@ -548,12 +563,22 @@
         if (has_valid_coords) {
           let search_radius = Math.max(local_db.precision || 0, max_explicit_precision);
           let semantic_radius = Math.max(search_radius, local_db.semantic_precision || 0);
-          let cells_to_check = getGridCells(local_city.coords, semantic_radius);
+          if (typeof population_Stadester_uud.assignMunicipalMetadata === "function")
+            population_Stadester_uud.assignMunicipalMetadata(local_city);
           let candidate_keys = new Set();
-          
-          for (let c = 0; c < cells_to_check.length; c++) {
-            let keys_in_cell = city_grid.get(cells_to_check[c]);
-            if (keys_in_cell) keys_in_cell.forEach(k => candidate_keys.add(k));
+          if (typeof population_Stadester_uud.getCityMatchTokens === "function") {
+            let local_toks = population_Stadester_uud.getCityMatchTokens(local_city);
+            for (let t = 0; t < local_toks.length; t++) {
+              let hits = token_index.get(local_toks[t]);
+              if (!hits) continue;
+              for (let h = 0; h < hits.length; h++) candidate_keys.add(hits[h]);
+            }
+          } else {
+            let cells_to_check = getGridCells(local_city.coords, semantic_radius);
+            for (let c = 0; c < cells_to_check.length; c++) {
+              let keys_in_cell = city_grid.get(cells_to_check[c]);
+              if (keys_in_cell) keys_in_cell.forEach(k => candidate_keys.add(k));
+            }
           }
           
           let candidate_array = Array.from(candidate_keys);
@@ -582,7 +607,8 @@
               { allow: false, dist_km: Infinity, reason: "no_gate" };
             let is_exact_name = population_Stadester_uud.checkExactNameMatch(local_uud_city, local_city);
             if (!mun_gate.allow) {
-              if (audit_log && mun_gate.dist_km <= 5.0) {
+              if (audit_log && mun_gate.dist_km <= 5.0 && blocked_log_count < 50000) {
+                blocked_log_count++;
                 audit_log.push({
                   action: "blocked",
                   a_key: local_uud_city.key,

@@ -168,7 +168,7 @@ def load_historical_geometries():
   dm_raw = np.asarray(Image.open(DOMAIN_MASK_PNG).convert("RGBA"), dtype=np.uint8)
   domain_mask = (dm_raw[:, :, 3] > 0) & (dm_raw[:, :, :3].sum(axis=2) > 0)
 
-  # 1. MAGNETIC sovereign land union (used strictly for outer domain clipping & Regime III post-1945!)
+  # 1. MAGNETIC sovereign land union (modern post-1945) + pre-1945 union incl. full East Prussia (Königsberg/Gumbinnen/Allenstein)
   c_gj = json.load(open(os.path.join(MAG_GIS, "magnetic_countries.geojson"), encoding="utf-8"))
   countries = {}
   for feat in c_gj["features"]:
@@ -177,6 +177,18 @@ def load_historical_geometries():
     if g is not None:
       countries[nm] = g
   mag_union = u_geoms(list(countries.values()))
+  de14_gj = json.load(open(os.path.join(HGIS_RAW, "eu_hist_germany_1914.geojson"), encoding="utf-8"))
+  raw_east_prussia_parts = []
+  for f in de14_gj["features"]:
+    rn = norm_str(fix_mojibake(f["properties"].get("REG_NAME") or ""))
+    if any(k in rn for k in ("konigsberg", "gumbinnen", "allenstein")):
+      rg = safe_geom(shape(f["geometry"]))
+      if rg is not None:
+        raw_east_prussia_parts.append(rg)
+  raw_east_prussia_1914 = u_geoms(raw_east_prussia_parts)
+  mag_union_pre1945 = u_geoms([mag_union, raw_east_prussia_1914])
+  ep_rgba, _ = rasterise_zones_cv2(np.ones((GRID_H, GRID_W), dtype=bool), [{"id": "ep", "geom": raw_east_prussia_1914, "rgb": [255, 255, 255]}], full_domain=False)
+  domain_mask_pre1945 = domain_mask | (ep_rgba[:, :, 0] > 0)
 
   # Island & geographic natural coastlines (purely physical/geographical, NOT modern borders!)
   adm1 = defaultdict(list)
@@ -222,7 +234,7 @@ def load_historical_geometries():
       bb = sr.shape.bbox
       if bb[2] < -32.0 or bb[0] > 35.0 or bb[3] < 27.0 or bb[1] > 82.0:
         continue
-      g = clip_mag(shape(sr.shape.__geo_interface__), mag_union)
+      g = clip_mag(shape(sr.shape.__geo_interface__), mag_union_pre1945)
       if g is None or g.area < 0.001:
         continue
       rp = g.representative_point()
@@ -268,10 +280,9 @@ def load_historical_geometries():
   print(f"  HistoGIS: HRE circles={ {k: len(v) for k, v in hre_circles.items()} } | AH 1910={len(ah_1910)} | AH 1867={len(ah_1850)}", flush=True)
 
   # 5. HGIS Germany 1914 (Prussia + Southern States + Alsace-Lorraine + authentic East Prussia for Teutonic Prussia!)
-  de14_gj = json.load(open(os.path.join(HGIS_RAW, "eu_hist_germany_1914.geojson"), encoding="utf-8"))
   de14_north, de14_south, de14_all, east_prussia_parts = [], [], [], []
   for f in de14_gj["features"]:
-    g = clip_mag(shape(f["geometry"]), mag_union)
+    g = clip_mag(shape(f["geometry"]), mag_union_pre1945)
     if g is None:
       continue
     st = norm_str(fix_mojibake(f["properties"].get("STAAT_NAME") or ""))
@@ -293,7 +304,7 @@ def load_historical_geometries():
       y0, y1 = int(str(p.get("From", ""))[:4]), int(str(p.get("To", ""))[:4])
     except Exception:
       continue
-    g = clip_mag(shape(f["geometry"]), mag_union)
+    g = clip_mag(shape(f["geometry"]), mag_union_pre1945)
     if g is None:
       continue
     nk = norm_str(p.get("Name") or "")
@@ -398,7 +409,7 @@ def load_historical_geometries():
   transleithania_1910 = u_geoms([v for k, v in ah_1910.items() if any(t in k for t in ("ungarn", "kroatien", "fiume", "bosnien"))])
 
   return {
-    "domain_mask": domain_mask, "mag_union": mag_union, "countries": countries, "geo": geo, "adm1": adm1,
+    "domain_mask": domain_mask, "domain_mask_pre1945": domain_mask_pre1945, "mag_union": mag_union, "mag_union_pre1945": mag_union_pre1945, "countries": countries, "geo": geo, "adm1": adm1,
     "basins": basins, "dare": dare, "roman_union": roman_union,
     "hre_circles": hre_circles, "ah_1910": ah_1910, "ah_1850": ah_1850,
     "hungary_crown_hist": hungary_crown_hist, "bohemian_crown_hist": bohemian_crown_hist,
@@ -564,11 +575,14 @@ def write_chapter_assets(ch_meta, zones_spec, D, basemap_hist, basemap_mod, full
     if os.path.exists(src_f) and not os.path.exists(dst_f):
       shutil.copy2(src_f, dst_f)
 
-  # Strictly clip EVERY zone geometry to mag_union & make mutually non-overlapping cleanly!
+  # Strictly clip EVERY zone geometry to pre-1945 or modern union & make mutually non-overlapping cleanly!
+  is_pre1945 = (ch_meta["index"] < 19)
+  clip_target = D["mag_union_pre1945"] if is_pre1945 else D["mag_union"]
+  dmask_target = D["domain_mask_pre1945"] if is_pre1945 else D["domain_mask"]
   claimed_vec = None
   clean_zones = []
   for idx, z in enumerate(zones_spec):
-    g = clip_mag(z.get("geom"), D["mag_union"])
+    g = clip_mag(z.get("geom"), clip_target)
     if g is not None and claimed_vec is not None:
       g = diff_geom(g, claimed_vec)
     if g is not None:
@@ -578,7 +592,7 @@ def write_chapter_assets(ch_meta, zones_spec, D, basemap_hist, basemap_mod, full
     z2["rgb"] = PALETTE[idx % len(PALETTE)]
     clean_zones.append(z2)
 
-  rgba, px_counts = rasterise_zones_cv2(D["domain_mask"], clean_zones, full_domain=full_domain)
+  rgba, px_counts = rasterise_zones_cv2(dmask_target, clean_zones, full_domain=full_domain)
 
   stem = ch_meta["key"]
   Image.fromarray(rgba, mode="RGBA").save(os.path.join(ch_dir, f"{stem}_areal_mask.png"))
@@ -734,7 +748,7 @@ def main():
   # EXACT COMPLEMENT OF ROMAN EUROPE (MAGNETIC - ROMAN EMPIRE) ON ORGANIC HYDROBASINS L6 WATERSHEDS!
   # =========================================================================
   # Keep ONLY genuine non-Roman northern/eastern Barbaricum (> 46.5N or Hibernia/Caledonia/North Atlantic, drop tiny Mediterranean coastal slivers!)
-  barbaricum_raw = diff_geom(D["mag_union"], u_geoms([D["roman_union"], G["Spain_Canaries"], G["Portugal_Islands"]]))
+  barbaricum_raw = diff_geom(D["mag_union_pre1945"], u_geoms([D["roman_union"], G["Spain_Canaries"], G["Portugal_Islands"]]))
   barbaricum = safe_geom(barbaricum_raw.intersection(u_geoms([box(-76.0, 51.0, 35.0, 84.5), box(5.0, 44.5, 32.0, 56.0)])))
   def clf_barb(lat, lon, pfaf):
     if lon < -1.0: return "hibernia_north_atlantic"
@@ -915,7 +929,7 @@ def main():
   lusatia_fill = safe_geom(diff_geom(H48.get("kreisfreies gebiet"), D["bohemian_crown_hist"]).intersection(box(12.5, 50.5, 16.5, 52.5))) if H48.get("kreisfreies gebiet") else None
   hre48_north = u_geoms([H48.get(k) for k in H48 if any(t in k for t in ("obersach", "niedersach", "niederrhein"))] + [lusatia_fill])
   hre48_south = diff_geom(u_geoms([H48.get(k) for k in H48 if any(t in k for t in ("bayer", "schwab", "frankisch", "kurrhein", "oberrhein"))]), box(4.5, 43.8, 9.5, 46.8))
-  plc_1648 = diff_geom(u_geoms([C["Poland"], C["Estonia"], C["Latvia"], C["Lithuania"]]), u_geoms([hre48_north, D["bohemian_crown_hist"]]))
+  plc_1648 = diff_geom(u_geoms([C["Poland"], C["Estonia"], C["Latvia"], C["Lithuania"], D["east_prussia_hist"]]), u_geoms([hre48_north, D["bohemian_crown_hist"]]))
   ch13_zones = [
     {"id": "em_germany_north", "name": "Northern HRE Circles (Brandenburg-Pomerania, Saxony & Westphalia)", "geom": hre48_north, "population": {"1500": 5600000, "1600": 7400000, "1650": 5400000, "1700": 7100000, "1750": 8600000}},
     {"id": "em_germany_south", "name": "Southern & Rhenish HRE Circles (Bavaria, Swabia, Franconia & Rhine)", "geom": hre48_south, "population": {"1500": 5200000, "1600": 6800000, "1650": 4600000, "1700": 6400000, "1750": 7800000}},

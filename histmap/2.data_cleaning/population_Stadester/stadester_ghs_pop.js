@@ -200,7 +200,7 @@
       return { is_lapsed: true, raw_max_year: null, raw_min_year: null };
     
     //Function body
-    if (city._raw_lapsed === true || Number(city.population["-999"]) === 0)
+    if (city._raw_lapsed === true || Number.isFinite(city._annexation_year) || Number(city.population["-999"]) === 0)
       is_lapsed = true;
     
     if (Number.isFinite(city._raw_min_year) && Number.isFinite(city._raw_max_year)) {

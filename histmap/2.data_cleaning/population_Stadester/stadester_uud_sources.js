@@ -627,7 +627,7 @@
       for (let wn of idx_a.west_set) {
         if (idx_b.west_set.has(wn)) return true;
       }
-      if (west_dist_km <= 2.5) {
+      if (west_dist_km <= 15.0) {
         for (let cn of idx_a.comp_set) {
           if (idx_b.comp_set.has(cn)) return true;
         }
@@ -674,6 +674,109 @@
 
     //Return statement
     return false;
+  };
+
+  /**
+   * Computes lossless inverted-index tokens covering all exact, western, Slavic, exonym,
+   * and Class 2 subdivision conditions under which `canMergeMunicipalities()` can allow a merge.
+   * @alias population_Stadester_uud.getCityMatchTokens
+   *
+   * @param {Object} arg0_city
+   *
+   * @returns {Array<string>}
+   */
+  population_Stadester_uud.getCityMatchTokens = function (arg0_city) {
+    //Convert from parameters
+    let city = arg0_city;
+
+    //Guard clauses
+    if (!city || typeof city !== "object") return [];
+
+    //Declare local instance variables
+    let idx = population_Stadester_uud.getCityNameIndex(city);
+    let norm = population_Stadester_uud.getNameNormaliser();
+    let tokens = new Set();
+
+    //Function body
+    for (let nm of idx.name_set)
+      if (nm) tokens.add(`nm:${nm}`);
+
+    if (!idx.west_set) {
+      let w_set = new Set();
+      let c_set = new Set();
+      for (let i = 0; i < idx.names.length; i++) {
+        let nw = population_Stadester_uud.normaliseWesternName(idx.names[i]);
+        if (nw.length >= 3) {
+          w_set.add(nw);
+          let cw = nw.replace(/\s+/g, "").replace(/(.)\1+/g, "$1");
+          if (cw.length >= 5) c_set.add(cw);
+        }
+      }
+      idx.west_set = w_set;
+      idx.comp_set = c_set;
+    }
+    for (let wn of idx.west_set) tokens.add(`ws:${wn}`);
+    for (let cn of idx.comp_set) tokens.add(`cs:${cn}`);
+
+    let c_low = city.country ? String(city.country).toLowerCase().trim() : "";
+    if (!global._uud_slavic_countries_set) {
+      global._uud_slavic_countries_set = new Set([
+        "belarus", "bulgaria", "estonia", "finland", "kazakhstan", "latvia",
+        "lithuania", "moldova", "poland", "russia", "serbia", "ukraine", "ussr"
+      ]);
+    }
+    if (c_low && global._uud_slavic_countries_set.has(c_low)) {
+      if (!idx.slavic_set) {
+        let s_set = new Set();
+        for (let i = 0; i < idx.names.length; i++) {
+          let ns = population_Stadester_uud.normaliseSlavicName(idx.names[i]);
+          if (ns.length >= 4) s_set.add(ns);
+        }
+        idx.slavic_set = s_set;
+      }
+      for (let sn of idx.slavic_set) tokens.add(`sl:${sn}`);
+      if (global._uud_slavic_alias_pairs_norm) {
+        let pairs = global._uud_slavic_alias_pairs_norm;
+        for (let i = 0; i < pairs.length; i++) {
+          if (idx.slavic_set.has(pairs[i][0])) tokens.add(`sl:${pairs[i][1]}`);
+          if (idx.slavic_set.has(pairs[i][1])) tokens.add(`sl:${pairs[i][0]}`);
+        }
+      }
+    }
+
+    let ex_lookup = population_Stadester_uud.getExonymLookup();
+    if (ex_lookup && ex_lookup.audit) {
+      if (!idx.entity_stems) {
+        let es = new Set();
+        let eg = new Set();
+        for (let i = 0; i < idx.names.length; i++) {
+          let st = ex_lookup.audit.normaliseEntityStem(idx.names[i]);
+          if (st) {
+            es.add(st);
+            let grp = ex_lookup.stem_to_group.get(st);
+            if (grp !== undefined) eg.add(grp);
+          }
+        }
+        idx.entity_stems = es;
+        idx.exonym_groups = eg;
+      }
+      for (let st of idx.entity_stems) tokens.add(`es:${st}`);
+      for (let grp of idx.exonym_groups) tokens.add(`eg:${grp}`);
+    }
+
+    if (city._subdiv_id) tokens.add(`sd:${city._subdiv_id}`);
+    if (norm) {
+      let c_norm = norm.normaliseCountryName(city.country);
+      let cur_fold = norm.foldAscii(city.name);
+      if (c_norm && cur_fold) tokens.add(`pn:${c_norm}:${cur_fold}`);
+      if (c_norm && city._parent_mun_meta && city._parent_mun_meta.parent_name) {
+        let par_fold = norm.foldAscii(city._parent_mun_meta.parent_name);
+        if (par_fold) tokens.add(`pn:${c_norm}:${par_fold}`);
+      }
+    }
+
+    //Return statement
+    return Array.from(tokens);
   };
   
   /**
@@ -795,6 +898,8 @@
       target_city["found.yr"] = source_city["found.yr"];
     if (source_city._raw_lapsed === true)
       target_city._raw_lapsed = true;
+    if (Number.isFinite(source_city._annexation_year) && !Number.isFinite(target_city._annexation_year))
+      target_city._annexation_year = source_city._annexation_year;
     if (Array.isArray(source_city.original_names)) {
       for (let i = 0; i < source_city.original_names.length; i++)
         if (source_city.original_names[i] && !target_city.original_names.includes(source_city.original_names[i]))
@@ -808,10 +913,82 @@
     }
     if (typeof population_Stadester_uud.appendCitySources === "function")
       population_Stadester_uud.appendCitySources(target_city, source_city.sources || source_city.type);
-    if (source_city.population)
-      target_city.population = is_metro ?
-        population_Stadester_uud.mergeCityPopulations(source_city.population, target_city.population) :
-        population_Stadester_uud.mergeCityPopulations(target_city.population, source_city.population);
+    if (source_city.population) {
+      if (target_city._from_districts_only === true && source_city._from_districts_only !== true && source_city._is_intra_district !== true) {
+        target_city._from_districts_only = false;
+        if (!target_city.population) target_city.population = {};
+        let s_peak = population_Stadester_uud.getPeakPopulation(source_city.population);
+        let t_yrs = Object.keys(target_city.population);
+        for (let i = 0; i < t_yrs.length; i++) {
+          let yk = t_yrs[i];
+          let yn = parseInt(yk, 10);
+          let tv = Number(target_city.population[yk] || 0);
+          if (Number.isFinite(yn) && yn >= 1900 && s_peak > 0 && tv < 0.05*s_peak)
+            delete target_city.population[yk];
+        }
+        let s_yrs = Object.keys(source_city.population);
+        for (let i = 0; i < s_yrs.length; i++) {
+          let yk = s_yrs[i];
+          let yn = parseInt(yk, 10);
+          let sv = Number(source_city.population[yk] || 0);
+          let tv = Number(target_city.population[yk] || 0);
+          if (sv > 0 && (!(tv > 0) || (Number.isFinite(yn) && yn >= 1900 && sv > tv)))
+            target_city.population[yk] = sv;
+        }
+      } else if (source_city._from_districts_only === true || source_city._is_intra_district === true) {
+        if (!target_city.population) target_city.population = {};
+        let s_yrs = Object.keys(source_city.population);
+        for (let i = 0; i < s_yrs.length; i++) {
+          let yk = s_yrs[i];
+          let sv = Number(source_city.population[yk] || 0);
+          let tv = Number(target_city.population[yk] || 0);
+          if (sv > 0 && (!(tv > 0) || sv > tv))
+            target_city.population[yk] = sv;
+        }
+      } else if (is_metro) {
+        if (!target_city.population) target_city.population = {};
+        if (!target_city.metro_population) target_city.metro_population = {};
+        if (!Array.isArray(target_city._metro_only_years)) target_city._metro_only_years = [];
+        let s_yrs = Object.keys(source_city.population);
+        for (let i = 0; i < s_yrs.length; i++) {
+          let yk = s_yrs[i];
+          let yn = parseInt(yk, 10);
+          let sv = Number(source_city.population[yk] || 0);
+          if (!(sv > 0)) continue;
+          if (Number.isFinite(yn) && yn >= 1900) {
+            target_city.metro_population[yk] = sv;
+            if (!(Number(target_city.population[yk]) > 0)) {
+              target_city.population[yk] = sv;
+              if (!target_city._metro_only_years.includes(yk)) target_city._metro_only_years.push(yk);
+            }
+          } else {
+            let cur = target_city.population[yk];
+            if (Array.isArray(cur)) cur.push(sv);
+            else if (cur !== undefined) target_city.population[yk] = [cur, sv];
+            else target_city.population[yk] = sv;
+          }
+        }
+      } else {
+        if (Array.isArray(target_city._metro_only_years) && target_city._metro_only_years.length > 0 && target_city.population) {
+          let s_yrs = Object.keys(source_city.population);
+          for (let i = 0; i < s_yrs.length; i++) {
+            let yk = s_yrs[i];
+            if (Number(source_city.population[yk]) > 0 && target_city._metro_only_years.includes(yk))
+              delete target_city.population[yk];
+          }
+        }
+        target_city.population = population_Stadester_uud.mergeCityPopulations(target_city.population, source_city.population);
+      }
+    }
+    if (Number.isFinite(target_city._annexation_year) && target_city.population) {
+      let t_annex = Number(target_city._annexation_year);
+      let t_yrs = Object.keys(target_city.population);
+      for (let i = 0; i < t_yrs.length; i++) {
+        let yn = parseInt(t_yrs[i], 10);
+        if (Number.isFinite(yn) && yn >= t_annex)
+          delete target_city.population[t_yrs[i]];
+      }
+    }
     
     //Return statement
     return target_city;
@@ -1062,6 +1239,48 @@
       let k = all_wcp_keys[i];
       let entry = wcp_obj[k];
       if (!entry) continue;
+      if (/^(?:gelibolu|gallipoli)$/i.test(String(entry.name || "").trim()) && entry.population) {
+        let g_yrs = Object.keys(entry.population);
+        for (let y = 0; y < g_yrs.length; y++) {
+          let yn = parseInt(g_yrs[y], 10);
+          if (Number.isFinite(yn) && yn < 1400) delete entry.population[g_yrs[y]];
+        }
+      }
+      if (/^(?:gliwice|gleiwitz)$/i.test(String(entry.name || "").trim()) && entry.population) {
+        let gl_yrs = Object.keys(entry.population);
+        for (let y = 0; y < gl_yrs.length; y++) {
+          let yn = parseInt(gl_yrs[y], 10);
+          if (Number.isFinite(yn) && yn <= 1900 && Number(entry.population[gl_yrs[y]]) > 100000)
+            delete entry.population[gl_yrs[y]];
+        }
+      }
+      if (/^weisbaden$/i.test(String(entry.name || "").trim())) {
+        entry.name = "Wiesbaden";
+        if (entry.population) {
+          let w_yrs = Object.keys(entry.population);
+          for (let y = 0; y < w_yrs.length; y++) {
+            let yn = parseInt(w_yrs[y], 10);
+            if (Number.isFinite(yn) && yn <= 1850 && Number(entry.population[w_yrs[y]]) > 25000)
+              delete entry.population[w_yrs[y]];
+          }
+        }
+      }
+      if (/^(?:katowice|kattowitz)$/i.test(String(entry.name || "").trim()) && entry.population) {
+        let kt_yrs = Object.keys(entry.population);
+        for (let y = 0; y < kt_yrs.length; y++) {
+          let yn = parseInt(kt_yrs[y], 10);
+          if (Number.isFinite(yn) && yn < 1865 && Number(entry.population[kt_yrs[y]]) > 1500)
+            delete entry.population[kt_yrs[y]];
+        }
+      }
+      if (/^chemnitz$/i.test(String(entry.name || "").trim()) && entry.population) {
+        let ch_yrs = Object.keys(entry.population);
+        for (let y = 0; y < ch_yrs.length; y++) {
+          let yn = parseInt(ch_yrs[y], 10);
+          if (Number.isFinite(yn) && yn < 1830 && Number(entry.population[ch_yrs[y]]) > 20000)
+            delete entry.population[ch_yrs[y]];
+        }
+      }
       let ov = wcp_overrides[k] || (entry.country ? wcp_overrides[`${entry.country}.${k}`] : null);
       if (!ov) continue;
       if (ov.resolution === "non_settlement") { delete wcp_obj[k]; continue; }
@@ -1450,6 +1669,29 @@
         city._mun_name = p_meta.parent_name;
         city._mun_is_capital = Boolean(p_meta.is_capital_override);
       }
+    } else {
+      let c_norm = norm.normaliseCountryName(city.country);
+      let cur_fold = norm.foldAscii(city.name);
+      let cfg = norm.loadMetroSubdivisions();
+      let c_parents = (cfg && cfg.intra_municipal_parents) ? cfg.intra_municipal_parents[c_norm] : null;
+      let p_obj = (c_parents && cur_fold) ? c_parents[cur_fold] : null;
+      if (!p_obj && c_parents && cur_fold) {
+        let p_keys = Object.keys(c_parents);
+        for (let i = 0; i < p_keys.length; i++) {
+          if (norm.foldAscii(c_parents[p_keys[i]].canonical_name) === cur_fold) {
+            p_obj = c_parents[p_keys[i]];
+            break;
+          }
+        }
+      }
+      if (p_obj) {
+        let within_r = (!Number.isFinite(lat) || !Number.isFinite(lng) || !Array.isArray(p_obj.coords) || !Number.isFinite(p_obj.max_radius_km)) ?
+          true : (norm.haversineKm([lat, lng], p_obj.coords) <= p_obj.max_radius_km);
+        if (within_r) {
+          city._subdiv_id = `subdiv:${c_norm}:${norm.foldAscii(p_obj.canonical_name)}`;
+          if (!city._mun_name) city._mun_name = p_obj.canonical_name;
+        }
+      }
     }
     if (h_meta && h_meta.parent_name)
       city._hist_amalg_meta = h_meta;
@@ -1514,9 +1756,9 @@
       let c_norm_a = norm.normaliseCountryName(city_a.country);
       let c_norm_b = norm.normaliseCountryName(city_b.country);
       if (c_norm_a && c_norm_a === c_norm_b) {
-        if (city_a._parent_mun_meta && norm.foldAscii(city_a._parent_mun_meta.parent_name) === fb && !city_a._parent_mun_meta.effective_from_year)
+        if (city_a._parent_mun_meta && norm.foldAscii(city_a._parent_mun_meta.parent_name) === fb && (!city_a._parent_mun_meta.effective_from_year || city_a._is_intra_district === true))
           return { allow: true, dist_km: dist_km, reason: "intra_municipal_subdivision" };
-        if (city_b._parent_mun_meta && norm.foldAscii(city_b._parent_mun_meta.parent_name) === fa && !city_b._parent_mun_meta.effective_from_year)
+        if (city_b._parent_mun_meta && norm.foldAscii(city_b._parent_mun_meta.parent_name) === fa && (!city_b._parent_mun_meta.effective_from_year || city_b._is_intra_district === true))
           return { allow: true, dist_km: dist_km, reason: "intra_municipal_subdivision" };
       }
     }
@@ -1526,8 +1768,11 @@
     let is_exact_name = (typeof population_Stadester_uud.checkExactNameMatch === "function") ?
       population_Stadester_uud.checkExactNameMatch(city_a, city_b) : false;
 
-    //Different urban_city_proper polygons -> HARD BLOCK unless coarse legacy pin snap of exact same city
+    //Different urban_city_proper polygons -> HARD BLOCK unless exact same folded name <= 20 km OR coarse legacy pin snap
     if (mun_a && mun_b && mun_a !== mun_b) {
+      let same_folded_name = Boolean(norm && norm.foldAscii(city_a.name) && norm.foldAscii(city_a.name) === norm.foldAscii(city_b.name));
+      if (same_folded_name && dist_km <= 20.0)
+        return { allow: true, dist_km: dist_km, reason: "same_settlement_semantic_match" };
       let one_legacy = (
         typeof population_Stadester_uud.hasViscountSource === "function" &&
         (!population_Stadester_uud.hasViscountSource(city_a) || !population_Stadester_uud.hasViscountSource(city_b))
@@ -1543,6 +1788,8 @@
       return { allow: false, dist_km: dist_km, reason: "blocked_no_semantic_or_subdivision_basis" };
 
     let max_sem_km = Number.isFinite(options.max_semantic_km) ? Number(options.max_semantic_km) : 15.0;
+    if (norm && norm.foldAscii(city_a.name) && norm.foldAscii(city_a.name) === norm.foldAscii(city_b.name))
+      max_sem_km = Math.max(max_sem_km, 30.0);
     if (dist_km <= max_sem_km)
       return { allow: true, dist_km: dist_km, reason: "same_settlement_semantic_match" };
 
@@ -1578,9 +1825,7 @@
     let pushParentBucket = function (arg0_parent_name, arg1_parent_coords, arg2_parent_cap, arg3_city, arg4_key, arg5_is_district) {
       let c_norm = norm ? norm.normaliseCountryName(arg3_city.country) : String(arg3_city.country || "").toLowerCase();
       let p_fold = norm ? norm.foldAscii(arg0_parent_name) : String(arg0_parent_name || "").toLowerCase();
-      let group_tag = is_viscount_db ?
-        `${c_norm}|${p_fold}|${arg3_city.viscount_project || "VISCOUNT"}` :
-        `${c_norm}|${p_fold}`;
+      let group_tag = `${c_norm}|${p_fold}`;
       if (!collapsed[group_tag]) collapsed[group_tag] = [];
       collapsed[group_tag].push({
         city: arg3_city,
@@ -1601,13 +1846,42 @@
       let raw_name = String(city.name || k.split("-")[0] || "").trim();
       if (norm && norm.isNonHabitationFeature(raw_name)) continue;
 
+      let parent_floor = norm ? norm.resolveAmalgamationParentFloor(raw_name, city.country) : null;
+      if (Number.isFinite(parent_floor) && city.population && typeof city.population === "object") {
+        let p_yrs = Object.keys(city.population);
+        let kept_any = false;
+        for (let py = 0; py < p_yrs.length; py++) {
+          let yn = parseInt(p_yrs[py], 10);
+          if (Number.isFinite(yn) && yn < parent_floor) {
+            delete city.population[p_yrs[py]];
+          } else if (Number.isFinite(yn) && Number(city.population[p_yrs[py]]) > 0) {
+            kept_any = true;
+          }
+        }
+        if (!kept_any) continue;
+        if (Number.isFinite(Number(city.foundation_year)) && Number(city.foundation_year) < parent_floor)
+          city.foundation_year = parent_floor;
+        if (Number.isFinite(Number(city["found.yr"])) && Number(city["found.yr"]) < parent_floor)
+          city["found.yr"] = parent_floor;
+      }
+
       if (Array.isArray(city.coords) && city.coords.length >= 2) {
         let la = Number(city.coords[0]);
         let lo = Number(city.coords[1]);
-        if (String(city.country || "").toLowerCase() === "latvia" && /riga/i.test(raw_name) && lo < 22.0)
+        let ctry_l = String(city.country || "").toLowerCase();
+        let fold_r = norm ? norm.foldAscii(raw_name) : raw_name.toLowerCase();
+        if (ctry_l === "latvia" && /riga/i.test(raw_name) && lo < 22.0)
           city.coords = [56.946, 24.10589];
-        if (String(city.country || "").toLowerCase() === "italy" && /^(?:napoli|naples)$/i.test(raw_name) && la > 40.89 && lo < 14.23)
+        if (ctry_l === "italy" && /^(?:napoli|naples)$/i.test(raw_name) && la > 40.89 && lo < 14.23)
           city.coords = [40.85177, 14.26812];
+        if (ctry_l === "greece" && fold_r === "larisa" && la < 39.0 && lo >= 22.0 && lo <= 23.0)
+          city.coords = [39.63902, 22.41913];
+        if (ctry_l === "denmark" && fold_r === "altona" && la > 55.0) {
+          city.country = "Germany";
+          city.coords = [53.55, 9.93333];
+        }
+        if (ctry_l === "turkey" && fold_r === "bayrampasa" && lo > 35.0 && population_Stadester_uud.getPeakPopulation(city.population) >= 100000)
+          city.coords = [41.045, 28.902];
       }
 
       if (norm) {
@@ -1741,6 +2015,7 @@
       if (lead_item.is_district && Array.isArray(lead_item.parent_coords)) lead.coords = lead_item.parent_coords.slice();
 
       let has_unified_lead = !lead_item.is_district;
+      if (!has_unified_lead) lead._from_districts_only = true;
       if (!lead.population) lead.population = {};
       let unified_years = new Set(has_unified_lead ? Object.keys(lead.population).filter(function (arg0_y) { return Number(lead.population[arg0_y]) > 0; }) : []);
 
@@ -1770,6 +2045,20 @@
           }
         }
         population_Stadester_uud.appendCitySources(lead, sub.sources || sub.type);
+      }
+
+      let lead_floor = norm ? norm.resolveAmalgamationParentFloor(lead.name, lead.country) : null;
+      if (Number.isFinite(lead_floor) && lead.population && typeof lead.population === "object") {
+        let lyrs = Object.keys(lead.population);
+        for (let y = 0; y < lyrs.length; y++) {
+          let yn = parseInt(lyrs[y], 10);
+          if (Number.isFinite(yn) && yn < lead_floor)
+            delete lead.population[lyrs[y]];
+        }
+        if (Number.isFinite(Number(lead.foundation_year)) && Number(lead.foundation_year) < lead_floor)
+          lead.foundation_year = lead_floor;
+        if (Number.isFinite(Number(lead["found.yr"])) && Number(lead["found.yr"]) < lead_floor)
+          lead["found.yr"] = lead_floor;
       }
 
       passthrough[lead_item.key] = lead;

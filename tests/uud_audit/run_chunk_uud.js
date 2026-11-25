@@ -111,7 +111,7 @@ let path = require("path");
       chandler_modelski: { data: filterSourceDB(uud_mod.getWorldcitypopObject(raw_folder)), is_metro: true, precision: 0.1, semantic_precision: 1 },
       devries: { data: filterSourceDB(uud_mod.getDeVriesCitiesObject(raw_folder)), precision: 0.1, semantic_precision: 1 },
       buringh: { data: filterSourceDB(uud_mod.getBuringhObject(raw_folder)), precision: 0.05, semantic_precision: 1 },
-      viscount_regional: { data: filterSourceDB(uud_mod.getViscountRegionalObject({ raw_folder: raw_folder })), is_polaris: true, precision: 0.05, semantic_precision: 0.25 }
+      viscount_regional: { data: filterSourceDB(uud_mod.getViscountRegionalObject({ raw_folder: raw_folder, bboxes: buffered_bboxes })), is_polaris: true, precision: 0.05, semantic_precision: 0.25 }
     };
     console.log(`[run_chunk_uud] Source DBs filtered: populstat=${Object.keys(source_dbs.populstat.data).length}, chandler=${Object.keys(source_dbs.chandler_modelski.data).length}, devries=${Object.keys(source_dbs.devries.data).length}, buringh=${Object.keys(source_dbs.buringh.data).length}, viscount=${Object.keys(source_dbs.viscount_regional.data).length}`);
 
@@ -120,17 +120,26 @@ let path = require("path");
       raw_folder: raw_folder,
       source_dbs: source_dbs
     });
+    source_dbs = null;
+    if (typeof global.gc === "function") global.gc();
+
+    if (typeof uud_mod.flattenToMunicipalityLevelAndCleanNames === "function") {
+      uud_obj = uud_mod.flattenToMunicipalityLevelAndCleanNames(uud_obj, {
+        audit_log_array: audit_log_array
+      });
+    }
 
     uud_obj = uud_mod.interpolateUUD(uud_obj, {
       raw_folder: raw_folder
     });
+    if (typeof global.gc === "function") global.gc();
 
     let chunk_obj = uud_mod.parseUUDToStadester(uud_obj);
+    uud_obj = null;
+    if (typeof global.gc === "function") global.gc();
     console.log(`[run_chunk_uud] Parsed ${Object.keys(chunk_obj).length} chunk settlements.`);
 
-    chunk_obj = uud_mod.flattenStadesterMetros(chunk_obj, {
-      audit_log_array: audit_log_array
-    });
+    chunk_obj = uud_mod.flattenStadesterMetros(chunk_obj, false);
     chunk_obj = uud_mod.fixStadesterErrors(chunk_obj, {
       audit_log_array: audit_log_array
     });
@@ -143,17 +152,17 @@ let path = require("path");
         audit_log_array: audit_log_array
       });
     }
-    if (typeof uud_mod.flattenToMunicipalityLevelAndCleanNames === "function") {
-      chunk_obj = uud_mod.flattenToMunicipalityLevelAndCleanNames(chunk_obj, {
-        audit_log_array: audit_log_array
-      });
-    }
     if (global.population_Stadester_ghs_pop && typeof global.population_Stadester_ghs_pop.cleanTransientMetadata === "function")
       global.population_Stadester_ghs_pop.cleanTransientMetadata(chunk_obj);
 
     let out_dir = __dirname;
     if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir, { recursive: true });
-    fs.writeFileSync(path.join(out_dir, "chunk_stadester.json"), JSON.stringify(chunk_obj));
+    let chunk_out_path = path.join(out_dir, "chunk_stadester.json");
+    if (global.population_Stadester_ghs_pop && typeof global.population_Stadester_ghs_pop.writeJSONSafe === "function") {
+      global.population_Stadester_ghs_pop.writeJSONSafe(chunk_out_path, chunk_obj);
+    } else {
+      fs.writeFileSync(chunk_out_path, JSON.stringify(chunk_obj));
+    }
     fs.writeFileSync(path.join(out_dir, "merge_audit_log.json"), JSON.stringify(audit_log_array, null, 2));
     console.log(`[run_chunk_uud] Wrote ${Object.keys(chunk_obj).length} settlements and ${audit_log_array.length} audit log events.`);
   };

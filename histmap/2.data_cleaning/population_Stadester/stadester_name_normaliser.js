@@ -22,6 +22,7 @@
     "scotland": "united kingdom",
     "skorea": "south korea",
     "the netherlands": "netherlands",
+    "turkey-in-europe": "turkey",
     "turkiye": "turkey",
     "uk": "united kingdom",
     "united states": "united states of america",
@@ -160,9 +161,24 @@
         s = s.replace(/\s+(?:miska|selyshchna|silska)\s+hromada$/i, "").trim();
       if (country_low === "russia" || country_low === "belarus" || country_low === "kazakhstan")
         s = s.replace(/^(?:Gorodskoy\s+okrug|Gorod|PGT)\s+/i, "").trim();
+      if (country_low === "germany" || country_low === "austria" || country_low === "switzerland")
+        s = s.replace(/\ba\.\s*d\.\s*/gi, "an der ").trim();
+      if (country_low === "malta")
+        s = s.replace(/\s+and\s+comino$/i, "").trim();
+      if (country_low === "turkey") {
+        s = s
+          .replace(/\bguengoeren\b/gi, "Güngören")
+          .replace(/\bcengelkoey\b/gi, "Çengelköy")
+          .replace(/\bkuecuek\b/gi, "Küçük")
+          .replace(/goeren\b/gi, "gören")
+          .replace(/koey\b/gi, "köy")
+          .replace(/uefer\b/gi, "üfer")
+          .replace(/uerpinar\b/gi, "ürpınar");
+      }
 
       s = s.replace(/^Greater\s+(?=[A-Z])/i, "");
-      s = s.replace(/\s*\((?:CDP|CCD|MSA|UA|OG|LGA|UCL|SUA|CSD|CMA|balance|urban area|agglomeration|municipality|commune|district|greater city)\)\s*$/i, "").trim();
+      s = s.replace(/\s*\[(?:stad|agglom\.?|city|urban area|metro)\]\s*$/i, "").trim();
+      s = s.replace(/\s*\((?:CDP|CCD|MSA|UA|OG|LGA|UCL|SUA|CSD|CMA|balance|urban area|agglomeration|municipality|commune|district|greater city|metro|city)\)\s*$/i, "").trim();
       s = s.replace(/\s+(?:Central Business District|Metropolitan Borough|District Municipality|Metropolitan Municipality|Local Municipality|Municipal Corporation|Census Town|Nagar Panchayat|Cantonment Board|Urban Area|Unincorporated|CDP|CCD)$/i, "").trim();
 
       //Return statement
@@ -196,6 +212,7 @@
       if (country_low === "united kingdom" || country_low === "ireland")
         s = s.replace(/^'+([A-Z])/, "$1");
 
+      s = s.replace(/`/g, "");
       let is_slavic_hacek = (!country_low || HACEK_APOSTROPHE_COUNTRIES.has(country_low));
       if (is_slavic_hacek) {
         s = s
@@ -207,6 +224,7 @@
           .replace(/([A-Za-z])'s(?=[a-z]|$)/g, "$1š")
           .replace(/([A-Za-z])'z(?=[a-z]|$)/g, "$1ž")
           .replace(/([A-Za-z])'r(?=[a-z]|$)/g, "$1ř");
+        s = s.replace(/d'z/gi, "dž");
         if (country_low === "ukraine" || country_low === "russia" || country_low === "belarus" || country_low === "ussr") {
           s = s
             .replace(/s'k\b/gi, "sk")
@@ -303,7 +321,10 @@
 
       //Function body
       let low = s.toLowerCase();
-      if (/^(?:teste\d*|unknown|unnamed|vanished|none|null|petroglyph|rock_painting|geoglifo(?:\s+\d+)?|greater valletta)$/i.test(low))
+      let fold_low = this.foldAscii(s);
+      if (/^(?:teste\d*|unknown|unnamed|vanished|none|null|petroglyph|rock_painting|geoglifo(?:\s+\d+)?|greater valletta|rabat-sale|ruhr|hatay|northern beaches|lubnan ash-shamali|arzhan|mugur-sargol|lekoa)$/i.test(fold_low))
+        return true;
+      if (/\b(?:marz|meng|shire|pisanitsa|megaliths?|circuit wall|kurgan|tumulus|dolmen|menhir|arzhan(?:[- ]\d+)?|mura\s+dell|al-malikeyyeh|borinage)\b|\bmah\.?$|\bba'?albak\s*-\s*al-harmal\b|\ben omgewing$/i.test(fold_low))
         return true;
       if (/^(?:[A-Z]{1,4}[- ]?\d{2,4}(?:[-/]\d+)?|\d{1,3}[A-Z]{1,3}[- ]?\d*|[A-Z]\.\d+\.\d+|[A-Z]-\w{1,4})$/.test(s))
         return true;
@@ -705,13 +726,17 @@
       if (c_parents) {
         let p_keys = Object.keys(c_parents);
         for (let i = 0; i < p_keys.length; i++) {
-          let p_obj = c_parents[p_keys[i]];
+          let p_key = p_keys[i];
+          let p_obj = c_parents[p_key];
           let dists = Array.isArray(p_obj.districts) ? p_obj.districts : [];
           let matched_dist = dists.includes(fold) ||
-            (country_low === "north macedonia" && fold.startsWith("skopje - ")) ||
-            (country_low === "france" && /^paris\s+\d{1,2}\b/i.test(fold)) ||
-            (country_low === "france" && /^lyon\s+\d{1,2}\b/i.test(fold)) ||
-            (country_low === "france" && /^marseille\s+\d{1,2}\b/i.test(fold));
+            (p_key === "skopje" && country_low === "north macedonia" && fold.startsWith("skopje - ")) ||
+            (p_key === "paris" && country_low === "france" && /^paris\s+\d{1,2}(?:e|er|eme)?\b/i.test(fold)) ||
+            (p_key === "lyon" && country_low === "france" && /^lyon\s+\d{1,2}(?:e|er|eme)?\b/i.test(fold)) ||
+            (p_key === "marseille" && country_low === "france" && /^marseille\s+\d{1,2}(?:e|er|eme)?\b/i.test(fold)) ||
+            (p_key === "berlin" && country_low === "germany" && /^berlin[\s-]/i.test(fold)) ||
+            (p_key === "hamburg" && country_low === "germany" && /^(?:hamburg|altona)[\s-]/i.test(fold)) ||
+            (p_key === "budapest" && country_low === "hungary" && /^csepel[\s-]/i.test(fold));
 
           if (!matched_dist) continue;
           if (Number.isFinite(lat) && Number.isFinite(lng) && Array.isArray(p_obj.coords) && Number.isFinite(p_obj.max_radius_km)) {
@@ -729,6 +754,39 @@
 
       //Return statement
       return null;
+    },
+
+    /**
+     * Returns the earliest legal unification year for an amalgamated parent city (e.g. Budapest 1873, Wuhan 1949), or null.
+     * @alias stadester_name_normaliser.resolveAmalgamationParentFloor
+     *
+     * @param {string} arg0_name
+     * @param {string} [arg1_country]
+     *
+     * @returns {number|null}
+     */
+    resolveAmalgamationParentFloor (arg0_name, arg1_country) {
+      //Convert from parameters
+      let country_low = this.normaliseCountryName(arg1_country);
+      let fold = this.foldAscii(arg0_name);
+
+      //Guard clauses
+      if (!fold) return null;
+
+      //Function body
+      let cfg = this.loadHistoricalAmalgamations();
+      let list = (cfg && Array.isArray(cfg.amalgamations)) ? cfg.amalgamations : [];
+      let min_yr = Infinity;
+      for (let i = 0; i < list.length; i++) {
+        let item = list[i];
+        if (country_low && this.normaliseCountryName(item.country) !== country_low) continue;
+        if (this.foldAscii(item.parent_name) === fold && Number.isFinite(Number(item.parent_creation_year))) {
+          if (Number(item.parent_creation_year) < min_yr) min_yr = Number(item.parent_creation_year);
+        }
+      }
+
+      //Return statement
+      return Number.isFinite(min_yr) ? min_yr : null;
     },
 
     /**

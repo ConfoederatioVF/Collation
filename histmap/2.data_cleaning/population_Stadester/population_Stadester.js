@@ -108,6 +108,8 @@
         raw_folder: this.raw_folder,
         ...options
       });
+      if (typeof population_Stadester_uud.flattenToMunicipalityLevelAndCleanNames === "function")
+        uud_obj = population_Stadester_uud.flattenToMunicipalityLevelAndCleanNames(uud_obj, options);
       
       //Ensure output directory exists
       let parent_dir = path.dirname(path.resolve(this.file_uud_cities));
@@ -187,8 +189,6 @@
       });
       if (typeof population_Stadester_uud.reconcileCloseSameCountryTwins === "function")
         stadester_obj = population_Stadester_uud.reconcileCloseSameCountryTwins(stadester_obj);
-      if (typeof population_Stadester_uud.flattenToMunicipalityLevelAndCleanNames === "function")
-        stadester_obj = population_Stadester_uud.flattenToMunicipalityLevelAndCleanNames(stadester_obj);
       if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
         population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
       

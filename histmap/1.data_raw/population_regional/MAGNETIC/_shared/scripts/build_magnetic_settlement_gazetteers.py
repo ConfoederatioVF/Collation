@@ -122,7 +122,7 @@ MODERN_NEW_TOWN_FOUNDATION = {
   ("wolfsburg", "Germany"): 1938, ("eisenhuttenstadt", "Germany"): 1950, ("salzgitter", "Germany"): 1942,
   ("karlsruhe", "Germany"): 1715, ("ludwigsburg", "Germany"): 1704, ("mannheim", "Germany"): 1606,
   ("freudenstadt", "Germany"): 1599, ("wilhelmshaven", "Germany"): 1869, ("bremerhaven", "Germany"): 1827,
-  ("gdynia", "Poland"): 1920, ("nowa huta", "Poland"): 1949, ("tychy", "Poland"): 1951,
+  ("gdynia", "Poland"): 1920, ("nowa huta", "Poland"): 1949, ("tychy", "Poland"): 1951, ("katowice", "Poland"): 1865,
   ("lelystad", "Netherlands"): 1967, ("almere", "Netherlands"): 1975, ("dronten", "Netherlands"): 1960,
   ("zeewolde", "Netherlands"): 1979, ("emmeloord", "Netherlands"): 1943, ("zoetermeer", "Netherlands"): 1962,
   ("milton keynes", "United Kingdom"): 1967, ("middlesbrough", "United Kingdom"): 1829,
@@ -144,6 +144,13 @@ MODERN_NEW_TOWN_FOUNDATION = {
   ("kristiansand", "Norway"): 1641, ("helsinki", "Finland"): 1550, ("oulu", "Finland"): 1605,
   ("vaasa", "Finland"): 1606, ("pori", "Finland"): 1558,
   ("tres cantos", "Spain"): 1971, ("la carolina", "Spain"): 1767,
+  ("becontree", "United Kingdom"): 1921, ("canning town", "United Kingdom"): 1846,
+  ("thamesmead", "United Kingdom"): 1968, ("rhondda", "United Kingdom"): 1855,
+  ("thrakomakedones", "Greece"): 1961, ("falkenhagener feld", "Germany"): 1962,
+  ("hafencity", "Germany"): 2000, ("wekerletelep", "Hungary"): 1908,
+  ("pestujhely", "Hungary"): 1910, ("novi beograd", "Serbia"): 1948,
+  ("south dublin", "Ireland"): 1994,
+  ("ujpest", "Hungary"): 1840, ("kispest", "Hungary"): 1871, ("pesterzsebet", "Hungary"): 1870,
 }
 
 
@@ -643,6 +650,10 @@ def load_primary_corpora(clean_name, sov_polys):
                 pop[yr] = v
             except Exception:
               pass
+        if nm.lower() in ("gelibolu", "gallipoli"):
+          pop = {y: v for y, v in pop.items() if y >= 1400}
+        if nm.lower() in ("gliwice", "gleiwitz"):
+          pop = {y: v for y, v in pop.items() if not (y <= 1900 and v > 100000)}
         if not pop:
           continue
         ctry = lookup_country(lat, lon, sov_polys)
@@ -2236,40 +2247,213 @@ def build_chapter_gazetteer(ch, pools, sov_polys):
 
   else:
     # Industrial (1750-1914), World Wars/Interwar (1914-1945), & Contemporary Post-1945 (1945-2026) Chapters 16-21
-    # Wave 1: Primary National & European Official Censuses (Eurostat Urban Audit, INSEE, INE, ISTAT/DEMOPAST, Eurostat LAU 2021, ONS UK BUA 2022, StatGL Greenland, Buringh, Chandler, de Vries)
-    for pool_list in (pools["eurostat"], pools["insee"], pools["spain"], pools["italy"], pools["statgl"], pools["buringh"], pools["cm"], pools["devries"]):
+    # Wave 1: For Ch 16-18 (<=1945) prioritise historical corpora; for Ch 19-21 (>=1945) put municipal censuses in Wave 1 and metro/historical corpora in Wave 2
+    paris_insee_aggregated = False
+    if d1 > 1945:
+      paris_arr_pop = {}
+      for rec in pools["insee"]:
+        if re.match(r"^Paris\s+\d{2}\b", rec["name"]):
+          p_rec = interpolate_pop_to_domain(rec["pop"], d0, d1, grid_yrs)
+          for yk, yv in p_rec.items():
+            paris_arr_pop[yk] = paris_arr_pop.get(yk, 0) + yv
+      if paris_arr_pop:
+        paris_rid = sample_region_id(48.85661, 2.35222, mask_arr, rgb_to_reg)
+        if paris_rid:
+          wave_records[1].append({
+            "name": "Paris", "other_names": ["Paris Commune"], "lat": 48.85661, "lon": 2.35222,
+            "country": "France", "source": "INSEE_France_Communes_Aggregated", "is_crowd": False,
+            "region_id": paris_rid, "pop": paris_arr_pop, "found_yr": 1850,
+          })
+          paris_insee_aggregated = True
+
+    w1_pools = (
+      (pools["buringh"], pools["cm"], pools["devries"], pools["insee"], pools["spain"], pools["italy"], pools["statgl"], pools["eurostat"])
+      if d1 <= 1945 else
+      (pools["insee"], pools["spain"], pools["italy"], pools["statgl"], pools["eurostat_lau"], pools["ons_uk"])
+    )
+    for pool_list in w1_pools:
       for rec in pool_list:
+        if paris_insee_aggregated and re.match(r"^Paris\s+\d{2}\b", rec["name"]):
+          continue
         rid = sample_region_id(rec["lat"], rec["lon"], mask_arr, rgb_to_reg)
         if not rid:
+          continue
+        r_name = "Sofia" if (rec["name"] == "Stolichna" and rec["country"] == "Bulgaria") else rec["name"]
+        mf = get_modern_foundation_floor(r_name, rec["country"])
+        if mf and mf > d1:
           continue
         pop = interpolate_pop_to_domain(rec["pop"], d0, d1, grid_yrs)
         if not pop and d1 >= 1945:
           best_y = min(rec["pop"].keys(), key=lambda y: abs(y - 1990))
           if abs(best_y - 1990) <= 120:
             pop = project_series(rec["pop"][best_y], best_y, grid_yrs)
-        elif not pop and d1 <= 1945 and min(rec["pop"].keys()) <= 2025:
+        elif not pop and d1 <= 1945 and min(rec["pop"].keys()) <= d1 + 60:
           best_y = min(rec["pop"].keys(), key=lambda y: abs(y - 1930))
           if abs(best_y - 1930) <= 120:
             pop = project_series(rec["pop"][best_y], best_y, grid_yrs)
+        if pop and mf:
+          pop = {yk: yv for yk, yv in pop.items() if int(yk) >= mf}
+        if pop and r_name == "Valletta" and rec["country"] == "Malta":
+          pop = {yk: min(yv, 23000 if int(yk) <= 1850 else (18666 if int(yk) <= 1970 else 6500)) for yk, yv in pop.items()}
         if pop:
-          wave_records[1].append({**rec, "region_id": rid, "pop": pop, "found_yr": min(min(int(y) for y in pop), 1850)})
+          wave_records[1].append({**rec, "name": r_name, "region_id": rid, "pop": pop, "found_yr": max(mf or -10000, min(min(int(y) for y in pop), 1850))})
 
-    # Wave 1B / 2: Official Eurostat GISCO LAU (34 countries) + ONS UK Built-Up Areas 2022 (official primary census units!)
-    for rec in pools["eurostat_lau"] + pools["ons_uk"]:
+    if d1 > 1945:
+      for pool_list in (pools["buringh"], pools["cm"], pools["eurostat"]):
+        for rec in pool_list:
+          rid = sample_region_id(rec["lat"], rec["lon"], mask_arr, rgb_to_reg)
+          if not rid:
+            continue
+          r_name = "Sofia" if (rec["name"] == "Stolichna" and rec["country"] == "Bulgaria") else rec["name"]
+          mf = get_modern_foundation_floor(r_name, rec["country"])
+          if mf and mf > d1:
+            continue
+          pop = interpolate_pop_to_domain(rec["pop"], d0, d1, grid_yrs)
+          if not pop:
+            best_y = min(rec["pop"].keys(), key=lambda y: abs(y - 1990))
+            if abs(best_y - 1990) <= 120:
+              pop = project_series(rec["pop"][best_y], best_y, grid_yrs)
+          if pop and mf:
+            pop = {yk: yv for yk, yv in pop.items() if int(yk) >= mf}
+          if pop and r_name == "Valletta" and rec["country"] == "Malta":
+            pop = {yk: min(yv, 23000 if int(yk) <= 1850 else (18666 if int(yk) <= 1970 else 6500)) for yk, yv in pop.items()}
+          if pop:
+            wave_records[2].append({**rec, "name": r_name, "region_id": rid, "pop": pop, "found_yr": max(mf or -10000, min(min(int(y) for y in pop), 1850))})
+
+    # Wave 1C: Pale of Settlement & East Prussia Scholarly Empirical Datasets (zero synthetic back-projections)
+    scholarly_dir = os.path.join(SDIR, "pale_east_prussia_scholarly")
+    if "pale_scholarly" not in pools:
+      cached_srows = []
+      if os.path.isdir(scholarly_dir):
+        for sfname in sorted(os.listdir(scholarly_dir)):
+          if not sfname.endswith(".json"):
+            continue
+          sfp = os.path.join(scholarly_dir, sfname)
+          sraw = json.load(open(sfp, encoding="utf-8"))
+          if isinstance(sraw, list):
+            srows = sraw
+          elif isinstance(sraw, dict) and isinstance(sraw.get("settlements"), list):
+            srows = sraw["settlements"]
+          elif isinstance(sraw, dict) and isinstance(sraw.get("settlements"), dict):
+            srows = list(sraw["settlements"].values())
+          elif isinstance(sraw, dict):
+            srows = [v for v in sraw.values() if isinstance(v, dict)]
+          else:
+            srows = []
+          for sr in srows:
+            if not isinstance(sr, dict):
+              continue
+            sctry = str(sr.get("country") or "").strip()
+            if sctry in COUNTRY_TO_JURISDICTION or (sfname in ("east_prussia_warmia_kaliningrad.json", "east_prussia_historical_1250_1945.json") and sctry == "Russia"):
+              sr["_sfname"] = sfname
+              cached_srows.append(sr)
+      pools["pale_scholarly"] = cached_srows
+    for sr in pools["pale_scholarly"]:
+      sctry = str(sr.get("country") or "").strip()
+      is_pre1945_ep_ru = (sctry == "Russia" and sr.get("_sfname") in ("east_prussia_warmia_kaliningrad.json", "east_prussia_historical_1250_1945.json"))
+      if is_pre1945_ep_ru and d0 >= 1945:
+        continue
+      scoords = sr.get("coords")
+      if not isinstance(scoords, list) or len(scoords) < 2:
+        continue
+      sla, slo = float(scoords[0]), float(scoords[1])
+      srid = sample_region_id(sla, slo, mask_arr, rgb_to_reg)
+      if not srid:
+        continue
+      eff_ctry = "Germany" if is_pre1945_ep_ru else sctry
+      y_max_cap = min(d1, 1945) if is_pre1945_ep_ru else d1
+      spop_in = sr.get("population") or {}
+      all_emp = []
+      spop = {}
+      for syk, spv in spop_in.items():
+        try:
+          syi = int(syk)
+          sfv = int(round(float(spv)))
+        except Exception:
+          continue
+        if sfv > 0:
+          all_emp.append((syi, sfv))
+          if d0 <= syi <= y_max_cap:
+            spop[str(syi)] = sfv
+      all_emp.sort()
+      fm_raw = sr.get("first_mention_year")
+      fm_yr = None
+      if fm_raw is not None:
+        try:
+          fm_yr = int(fm_raw)
+        except Exception:
+          fm_yr = None
+      pre45_emp = [(y, v) for y, v in all_emp if y <= 1939 and v >= 300]
+      if pre45_emp and fm_yr is not None and fm_yr <= y_max_cap:
+        anchor_yr, anchor_pop = pre45_emp[0]
+        bridge_start = max(fm_yr, 1000, d0)
+        bridge_end = min(y_max_cap, d1, anchor_yr)
+        if bridge_start <= bridge_end:
+          target_gys = [gy for gy in grid_yrs if bridge_start <= gy <= bridge_end and str(gy) not in spop]
+          if target_gys:
+            proj = project_series(anchor_pop, anchor_yr, target_gys)
+            for gy_s, gv in proj.items():
+              gy_i = int(gy_s)
+              cap_v = 3500 if gy_i < 1850 else (8000 if gy_i < 1900 else anchor_pop)
+              spop[gy_s] = max(120, min(gv, cap_v))
+      if not spop:
+        continue
+      if max(int(y) for y in spop.keys()) >= 1850 and max(spop.values()) < 400 and not (pre45_emp and fm_yr is not None):
+        continue
+      snm = fix_mojibake(str(sr.get("name") or "").strip())
+      if not snm:
+        continue
+      scite = str(sr.get("source_citation") or f"Scholarly_{sr.get('_sfname', 'pale')}").strip()
+      wave_records[1].append({
+        "name": snm,
+        "other_names": [fix_mojibake(a) for a in (sr.get("other_names") or []) if fix_mojibake(a) and fix_mojibake(a) != snm][:4],
+        "lat": sla,
+        "lon": slo,
+        "country": eff_ctry,
+        "source": scite,
+        "is_crowd": False,
+        "region_id": srid,
+        "pop": spop,
+        "found_yr": min(int(y) for y in spop.keys()),
+      })
+
+    # Wave 1B / 2: Official Eurostat GISCO LAU (34 countries) + ONS UK Built-Up Areas 2022 (already in Wave 1 for d1 > 1945)
+    for rec in ([] if d1 > 1945 else (pools["eurostat_lau"] + pools["ons_uk"])):
       rid = sample_region_id(rec["lat"], rec["lon"], mask_arr, rgb_to_reg)
       if not rid:
         continue
+      r_name = "Sofia" if (rec["name"] == "Stolichna" and rec["country"] == "Bulgaria") else rec["name"]
+      mf = get_modern_foundation_floor(r_name, rec["country"])
+      if mf and mf > d1:
+        continue
       anchor_y = max(rec["pop"].keys())
       pop = project_series(rec["pop"][anchor_y], anchor_y, grid_yrs)
-      wave_records[2].append({**rec, "region_id": rid, "pop": pop, "found_yr": min(min(int(y) for y in pop), 1850)})
+      if anchor_y >= 1990:
+        pop = {yk: min(yv, 12000 if int(yk) <= 1830 else (25000 if int(yk) < 1900 else yv)) for yk, yv in pop.items()}
+      if mf:
+        pop = {yk: yv for yk, yv in pop.items() if int(yk) >= mf}
+      if r_name == "Valletta" and rec["country"] == "Malta":
+        pop = {yk: min(yv, 23000 if int(yk) <= 1850 else (18666 if int(yk) <= 1970 else 6500)) for yk, yv in pop.items()}
+      if pop:
+        wave_records[2].append({**rec, "name": r_name, "region_id": rid, "pop": pop, "found_yr": max(mf or -10000, min(min(int(y) for y in pop), 1850))})
 
     for rec in pools["nat_pool"]:
       rid = sample_region_id(rec["lat"], rec["lon"], mask_arr, rgb_to_reg)
       if not rid:
         continue
+      r_name = "Sofia" if (rec["name"] == "Stolichna" and rec["country"] == "Bulgaria") else rec["name"]
+      mf = get_modern_foundation_floor(r_name, rec["country"])
+      if mf and mf > d1:
+        continue
       pop = project_series(rec["pop_2020"], 2020, grid_yrs)
-      w_idx = 2 if not rec["is_crowd"] else 3
-      wave_records[w_idx].append({**rec, "region_id": rid, "pop": pop, "found_yr": min(min(int(y) for y in pop), 1850)})
+      pop = {yk: min(yv, 12000 if int(yk) <= 1830 else (25000 if int(yk) < 1900 else yv)) for yk, yv in pop.items()}
+      if mf:
+        pop = {yk: yv for yk, yv in pop.items() if int(yk) >= mf}
+      if r_name == "Valletta" and rec["country"] == "Malta":
+        pop = {yk: min(yv, 23000 if int(yk) <= 1850 else (18666 if int(yk) <= 1970 else 6500)) for yk, yv in pop.items()}
+      if pop:
+        w_idx = 2 if not rec["is_crowd"] else 3
+        wave_records[w_idx].append({**rec, "name": r_name, "region_id": rid, "pop": pop, "found_yr": max(mf or -10000, min(min(int(y) for y in pop), 1850))})
 
   # Wave 4: Gap-Hunter sweep guaranteeing EVERY RGB sub-region in `<stem>_areal_mask.png` has >= 5 settlements!
   reg_counts_pre = defaultdict(int)
@@ -2315,6 +2499,8 @@ def build_chapter_gazetteer(ch, pools, sov_polys):
     for r in recs:
       nm = r["name"]
       nm_lower = nm.lower()
+      if d0 >= 700 and nm_lower == "lutetia":
+        continue
       if any(rk in nm_lower for rk in (
         "hal-saflieni", "hypogeum", "ghar-dalam", "brochtorff", "fairlop quarry",
         "kazifin", "nymphs cave", "kurgan", "tumulus", "necropolis", "dolmen", "menhir",

@@ -352,10 +352,15 @@
       let area_interp = population_Stadester_ghsl.interpolateGHSLSeries(ghsl_city.area);
       
       let g0 = pop_interp.values[first_active_ep] || 0;
-      let r_pri = population_Stadester_ghsl.getClusterEntryReferenceWeight(primary_entry.raw_pop, first_active_ep);
+      let r_pri_ep = population_Stadester_ghsl.getClusterEntryReferenceWeight(primary_entry.raw_pop, first_active_ep);
+      let r_pri_mod = population_Stadester_ghsl.getModernReferencePopulation({ population: primary_entry.raw_pop });
+      let use_modern_weights = (r_pri_mod > r_pri_ep*3.0);
+      let r_pri = use_modern_weights ? r_pri_mod : r_pri_ep;
       let r_sum_grp = 0;
       for (let x = 0; x < primary_group.length; x++)
-        r_sum_grp += population_Stadester_ghsl.getClusterEntryReferenceWeight(primary_group[x].raw_pop, first_active_ep);
+        r_sum_grp += use_modern_weights ?
+          population_Stadester_ghsl.getModernReferencePopulation({ population: primary_group[x].raw_pop }) :
+          population_Stadester_ghsl.getClusterEntryReferenceWeight(primary_group[x].raw_pop, first_active_ep);
       
       let w_primary = (primary_group.length > 1 && r_pri < 0.5*Math.min(g0, r_sum_grp)) ?
         Math.min(g0, r_sum_grp) : r_pri;
@@ -365,7 +370,9 @@
       for (let x = 0; x < members.length; x++) {
         let m = members[x];
         if (m.locked_primary_uc_id) continue;
-        let sub_w = population_Stadester_ghsl.getClusterEntryReferenceWeight(m.raw_pop, first_active_ep);
+        let sub_w = use_modern_weights ?
+          population_Stadester_ghsl.getModernReferencePopulation({ population: m.raw_pop }) :
+          population_Stadester_ghsl.getClusterEntryReferenceWeight(m.raw_pop, first_active_ep);
         if (sub_w > 0)
           sub_entries.push({ sub: m, w_ref: sub_w });
       }
@@ -427,6 +434,12 @@
         primary_entry.ucdb_weight_by_year[yr] = alpha;
         primary_entry.ucdb_pop_by_year[yr] = p_ghsl;
         
+        let pri_is_manual = Boolean(preserve_manual && population_Stadester_uud.hasCitySource(primary_entry.city, "manual"));
+        let pri_is_agg_only = Boolean(
+          (primary_entry.city.population_scope === "metro" || primary_entry.city.is_agglomeration === true) &&
+          primary_entry.city.metro_population &&
+          sub_entries.length >= 3
+        );
         if (alpha >= 1 - 1e-9) {
           let g_pop_int = Math.round(g_pop);
           let sub_int_total = 0;
@@ -447,7 +460,8 @@
             sub.ghsl_area_sum[yr] = (sub.ghsl_area_sum[yr] || 0) + a_sub;
           }
           
-          primary_entry.city.population[yr] = Math.max(0, g_pop_int - sub_int_total);
+          if (!pri_is_manual && !pri_is_agg_only)
+            primary_entry.city.population[yr] = Math.max(0, g_pop_int - sub_int_total);
           if (a_ghsl > 0) primary_entry.city._ghsl_area[yr] = a_ghsl;
           
           for (let x = 0; x < primary_group.length; x++) {
