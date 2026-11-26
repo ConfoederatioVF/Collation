@@ -27,6 +27,8 @@ DATE_RE = re.compile(r"^-?\d+\.\d+\.\d+$")
 NON_LATIN_RE = re.compile(r"[\u0370-\u03FF\u0400-\u04FF\u0530-\u058F\u0590-\u05FF\u0600-\u06FF\u0900-\u097F\u0E00-\u0E7F\u10A0-\u10FF\u3040-\u30FF\u4E00-\u9FFF\uAC00-\uD7AF]")
 ARTICLE_INVERT_RE = re.compile(r"^.+,\s*(?:Al|El|As|Ash|Ar|Az|Ad|An|At|Le|La|Les|L'|Los|Las|Il|Lo|De|Den|Het|Der|Die|Das|The)$", re.I)
 INTRA_DISTRICT_RE = re.compile(r"(?:\b(?:arrondissement|borough|ward|stadtbezirk|bezirk|okrug|shiyakha|qism|kism|markaz|mahalle|alcaldia|delegacion|sub-?district)\b|^paris\s+\d{2}\b|\(mod_uk\)$|-(?:ku|gu|dong|quận)$)", re.I)
+ENGLISH_EXONYM_OR_ASCII_RE = re.compile(r"^(?:Vienna|Munich|Muenchen|Munchen|Nuremberg|Cologne|Dusseldorf|Wurzburg|Luneburg|Lunen|Grunberg|Butow|Koslin|Prague|Warsaw|Cracow|Florence|Naples|Copenhagen|Gorzow Wielkopolski|Poznan|Wroclaw|Miedzyrzecz|Wrzesnia|Srem|Nowy Tomysl|Miedzychod|Ostrow Wielkopolski|Bytow|Zielona Gora)$", re.I)
+GIS_ARCH_JUNK_RE = re.compile(r"(?:_wfl|_none|proyecto_|cmn_|SitioNN_Fase_|\b(?:petroglifos|petroglyph|parcela\s+[a-z0-9]|dhibi|rockshelter)\b|\\|\s\+\s|\b(?:a\.d\.|b\.Pr\.|i\.d\.OPf\.|v\.d\.|s\.r\.o\.|uniwersytet)\b|^(?:universitäts- und hansestadt|hansestadt|kreisfreie stadt|landeshauptstadt|bergstadt|stadt\s))", re.I)
 
 WORKER_SCHEMA_ENTRIES = {
   "type": "object",
@@ -114,20 +116,24 @@ AUDITOR_SCHEMA = {
 }
 
 STRUCTURAL_RULEBOOK = """STRUCTURAL HISTORICAL TOPONYMY RULES (PASS 1 — KNOWLEDGE BASE, ZERO TOLERANCE):
-1. Occupying / De Facto Ruling Authority Rule:
-   - Always use the name preferred by the de facto ruling or occupying authority for that period, rendered in the Latin script using the contemporaneous English-language transliteration for that time (e.g. `Keijo` under Japanese rule 1910-1945 -> `Seoul` 1945.8.15; `Kiev` under Russian/Soviet rule -> `Kyiv` 1991.8.24; `Constantinople` -> `Istanbul` 1930.3.28; `Danzig` -> `Gdansk` 1945.3.30; `Bombay` -> `Mumbai` 1995.11.4; `Batavia` -> `Jakarta` 1942.12.8; `Godthaab` -> `Nuuk` 1979.5.1; `Edo` -> `Tokyo` 1868.9.3; `Tenochtitlan` -> `Mexico City` 1521.8.13).
+1. Occupying / De Facto Ruling Authority & Endonymic Latin-Script Diacritics Standard (`SC-01`, `SC-02`):
+   - Always use the name preferred by the de facto ruling or occupying authority for that period, rendered in the Latin script with FULL native diacritics (NOT English exonyms or stripped ASCII!):
+     - Germany/Austria/Switzerland: `Wien` (NOT `Vienna`), `München` (NOT `Munchen`/`Munich`), `Nürnberg` (NOT `Nuremberg`), `Köln` (NOT `Cologne`), `Düsseldorf`, `Würzburg`, `Lüneburg`, `Lünen`, `Zürich`.
+     - Poland/Prussia/Partitions (`SC-01`): `Landsberg an der Warthe` -> `1945.5.8: Gorzów Wielkopolski` (NOT `Gorzow Wielkopolski`), `Rummelsburg` -> `1945.5.8: Miastko`, `Breslau` -> `1945.5.6: Wrocław`, `Posen` <-> `Poznań`, `Meseritz` -> `1945.1.1: Międzyrzecz`, `Schrimm` -> `1919.1.1: Śrem`, `Wreschen` -> `1919.1.1: Września`, `Grünberg` -> `1945.5.8: Zielona Góra`, `Köslin` -> `1945.5.8: Koszalin`, `Bütow` -> `1945.3.8: Bytów`, `Ostrowo` -> `1919.1.1: Ostrów Wielkopolski`, `Warszawa` (NOT `Warsaw`), `Kraków`.
+     - Europe: `Praha` (NOT `Prague`), `Firenze` (NOT `Florence`), `Napoli` (NOT `Naples`), `København` (NOT `Copenhagen`), `Genève`, `Orléans`, `Nîmes`.
+     - Global transfers: `Keijo` -> `Seoul` 1945.8.15; `Kiev` -> `Kyiv` 1991.8.24; `Constantinople` -> `Istanbul` 1930.3.28; `Danzig` -> `Gdańsk` 1945.3.30; `Bombay` -> `Mumbai` 1995.11.4; `Batavia` -> `Jakarta` 1942.12.8; `Edo` -> `Tokyo` 1868.9.3; `Tenochtitlan` -> `Ciudad de México` / `Mexico City` 1521.8.13.
    - Pure Latin script ONLY (zero Cyrillic, Arabic, Greek, CJK, Hangul, Devanagari, Thai glyphs; zero ASCII backtick haceks `` ` ``; zero comma-inverted articles like `Mans, Le`; zero parentheticals like `(Russia)`).
-2. Historical Period Accuracy Rule:
-   - Use names historically accurate to each era rather than retrofitting modern names into earlier centuries. Pre-colonial settlements must carry their attested pre-colonial ruling-authority name prior to colonial founding/occupation.
-3. Capital City Precedence Rule (`"cap": true`):
-   - Any settlement flagged `"cap": true` MUST always carry the canonical contemporaneous name of that capital city across its full history (even if the seed/underlying record carries a ward, quarter, or sub-district name such as `Paris 05 Panthéon`, `Al-Dawâwîn`, `Kepos`, or `City of London`).
-4. Full-History Simplification at `[lng, lat]`:
-   - Take the ENTIRE existing `names` map at `[lng, lat]` into account and simplify it into one clean chronological timeline. Strip intra-municipal wards/arrondissements/districts (`5e Arrondissement`, `Paris 05 Panthéon`, `Shiyakha`, `-ku`), collapse orthographic/spelling-only consecutive duplicates, and preserve genuine historical renames.
+2. Historical Period Accuracy, Ancient Sunset (`SC-04`) & Colonial Floor (`SC-05`) Rules:
+   - Ancient names MUST sunset at their historical transition (`Bagdata` -> `Baghdad` by `762.7.30`; `Birtha` -> `Tikrīt` by `637.1.1`; `Seleucia on the Tigris` -> `Ctesiphon` `-140.1.1` -> `Al-Mada'in` `637.1.1` -> `Salman Pak` `1700.1.1`; `Pataliputra` -> `Patna` by `1541.1.1`). Never leave Pleiades ancient names until `1900.1.1`.
+   - Never backproject colonial/modern names (`Canning`, `Charfasson`, `English Bazar`, `Bakerganj`, `Berhampore`, `Mymensingh Sadar`, `Gaibandha Sadar`, `Bhola Sadar`) onto pre-colonial eras (`1400 AD`).
+3. Capital City Precedence & Zero Suburb-Hijacking (`SC-03`):
+   - Any settlement flagged `"cap": true` MUST always carry the canonical contemporaneous name of that capital city across its full history; strip suburbs/quarters (`Sotteville-lès-Rouen`, `Sainte-Foy-lès-Lyon`, `Weststadt`, `Montigny-lès-Metz`, `Delicias`, `Meckenbeuren`).
+4. Zero GIS, Rock-Art, Survey, Title, or Abbreviation Junk (`SC-06`):
+   - Never emit `_wfl`, `_none`, `Petroglifos`, `Parcela`, `Dhibi`, `\`, ` + `, `a.d.`, `b.Pr.`, `i.d.OPf.`, `v.d.`, `s.r.o.`, `Uniwersytet`, `Universitäts- und Hansestadt`, or ` Sadar`.
 5. Date Key Schema (`yyyy.m.d`):
-   - Keys MUST match `^-?\\d+\\.\\d+\\.\\d+$` (`-10000 <= Y <= 2026`, `Y != 0`, `1 <= M <= 12`, `1 <= D <= 31`), ascending chronologically. Never fabricate generic `1900.1.1`/`1950.1.1` renames when authentic historical dates are known.
+   - Keys MUST match `^-?\\d+\\.\\d+\\.\\d+$` (`-10000 <= Y <= 2026`, `Y != 0`, `1 <= M <= 12`, `1 <= D <= 31`), ascending chronologically.
 6. Knowledge-Base First:
-   - Code historical timelines directly from your historical knowledge base without per-city web search loops (only verify an uncertain major capital rename date if genuinely unsure). Do NOT call `run_command` or `read_file`.
-"""
+   - Code historical timelines directly from your historical knowledge base without per-city web search loops. Do NOT call `run_command` or `read_file`."""
 
 
 def coord_key (coords):
@@ -236,6 +242,15 @@ def programmatic_validate (input_items, resolved_by_ck):
       if INTRA_DISTRICT_RE.search(nm):
         errors.append({"coord_key": ck, "rule": "INTRA_MUNICIPAL", "detail": f"Intra-municipal ward/district name {nm!r}.", "fix": "Replace with parent municipal/capital city name."})
         break
+      if ENGLISH_EXONYM_OR_ASCII_RE.match(nm):
+        ctry_orig = str(orig.get("country") or "")
+        is_us_ca_au = bool(re.search(r"^(?:United States|United States of America|Canada|Australia|Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming)$", ctry_orig, re.I))
+        if not is_us_ca_au:
+          errors.append({"coord_key": ck, "rule": "NON_ENDONYMIC_OR_ASCII", "detail": f"English exonym or stripped-ASCII name {nm!r}.", "fix": "Cast to native endonymic Latin orthography with full diacritics (e.g. Wien, München, Praha, Warszawa, Wrocław, Gorzów Wielkopolski, Firenze, Napoli, København)."})
+          break
+      if GIS_ARCH_JUNK_RE.search(nm):
+        errors.append({"coord_key": ck, "rule": "GIS_OR_ARCH_JUNK", "detail": f"GIS/arch/title/abbreviation junk {nm!r}.", "fix": "Use clean municipality name without titles, abbreviations, or GIS/arch suffixes."})
+        break
       if prev_low and nm.lower() == prev_low:
         errors.append({"coord_key": ck, "rule": "CONSECUTIVE_DUP", "detail": f"Consecutive duplicate name {nm!r}.", "fix": "Remove consecutive identical name entry."})
         break
@@ -313,8 +328,15 @@ def build_worker_prompt (batch_idx, items, prior_errors=None, prior_draft=None):
   )
 
 
-def build_auditor_prompt (batch_idx, orig_items, proposed_items):
+def build_auditor_prompt (batch_idx, orig_items, proposed_items, prior_errors=None):
   """Builds the strictly separate read-only zero-tolerance auditor prompt."""
+  prior_block = ""
+  if prior_errors:
+    prior_block = (
+      "\nPRIOR AUDIT DIRECTIVE (do not contradict previous ruling-authority fixes if addressed):\n"
+      + json.dumps(prior_errors, ensure_ascii=False, separators=(",", ":"))
+      + "\n\n"
+    )
   return (
     f"Viscount Pass-1 Toponymy Auditor (ZERO-TOLERANCE) — Batch {batch_idx:03d} ({len(proposed_items)} cities)\n\n"
     "You are an independent read-only historical toponymy auditor. Do NOT modify files or run commands.\n"
@@ -322,6 +344,7 @@ def build_auditor_prompt (batch_idx, orig_items, proposed_items):
     "Audit EVERY coordinate's `names` map against the rules above. Set `approved: false` and list every offending `coord_key` "
     "(`lng.toFixed(5),lat.toFixed(5)`) if even ONE historical, occupying-authority, capital-name, period-accuracy, Latin-script, "
     "or date error exists. Set `approved: true, errors: []` ONLY when 100% of items pass.\n\n"
+    f"{prior_block}"
     f"INPUT:\n{json.dumps(orig_items, ensure_ascii=False, separators=(',', ':'))}\n\n"
     f"PROPOSED:\n{json.dumps(proposed_items, ensure_ascii=False, separators=(',', ':'))}\n"
   )
@@ -341,7 +364,10 @@ async def process_and_audit_batch (batch_path, sem):
   if not items:
     return {"approved": True, "batch_index": batch_idx, "batch_path": out_path, "count": 0, "errors_remaining": 0, "rounds": 0}
 
-  # Resume-skip if already auditor-approved
+  # Resume-skip if already auditor-approved, or surgical resume for partial remaining_errors
+  seed_resolved = {}
+  seed_errors = None
+  active_items = items
   if os.path.exists(out_path):
     try:
       prev = json.load(open(out_path, "r", encoding="utf-8"))
@@ -355,38 +381,48 @@ async def process_and_audit_batch (batch_path, sem):
           "resumed": True,
           "rounds": 0,
         }
+      rem_errs = prev.get("remaining_errors") or []
+      if prev.get("approved_by_auditor") is False and len(prev.get("cities", [])) == len(items) and len(rem_errs) > 0:
+        bad_cks = set(str(e.get("coord_key") or "").strip() for e in rem_errs if e.get("coord_key"))
+        for c_entry in prev.get("cities", []):
+          ck = coord_key(c_entry["coords"])
+          seed_resolved[ck] = c_entry
+        failed_subset = [it for it in items if coord_key(it["coords"]) in bad_cks]
+        if failed_subset:
+          active_items = failed_subset
+          seed_errors = rem_errs
+          log(f"[surgical-resume] Batch {batch_idx:03d}: resuming {len(failed_subset)} failed coord(s) out of {len(items)}.")
     except Exception:
       pass
 
   primary_model = args.get("model", "flash")
-  escalate_model = args.get("escalate_model", "pro")
+  escalate_model = args.get("escalate_model", "flash")
   auditor_model = args.get("auditor_model", "inherit")
-  max_rounds = int(args.get("max_audit_rounds", 3))
-  sub_chunk_size = max(1, int(args.get("sub_chunk_size", 60)))
-  sub_chunks = [items[i:i + sub_chunk_size] for i in range(0, len(items), sub_chunk_size)]
+  max_rounds = int(args.get("max_audit_rounds", 5))
+  sub_chunk_size = max(1, int(args.get("sub_chunk_size", 50)))
+  sub_chunks = [active_items[i:i + sub_chunk_size] for i in range(0, len(active_items), sub_chunk_size)]
 
   async def run_sub_chunk (sub_idx, sub_items):
     orig_by_ck = {coord_key(it["coords"]): it for it in sub_items}
     pending_cks = [coord_key(it["coords"]) for it in sub_items]
-    resolved_by_ck = {}
-    prior_errors = None
+    resolved_by_ck = {ck: seed_resolved[ck] for ck in pending_cks if ck in seed_resolved} if seed_errors else {}
+    prior_errors = seed_errors
     sub_approved = False
     last_errors = []
     sub_rounds = 0
     tag = f"b{batch_idx:03d}" if len(sub_chunks) == 1 else f"b{batch_idx:03d}s{sub_idx + 1}"
 
     for sub_rounds in range(1, max_rounds + 1):
-      use_pro = sub_rounds >= 3
-      w_models = [escalate_model, "inherit", primary_model] if use_pro else [primary_model, primary_model, "inherit"]
+      w_models = [primary_model, primary_model, primary_model]
       req_items = [orig_by_ck[ck] for ck in pending_cks]
-      prev_draft = [resolved_by_ck[ck] for ck in pending_cks if ck in resolved_by_ck] if sub_rounds > 1 else None
+      prev_draft = [resolved_by_ck[ck] for ck in pending_cks if ck in resolved_by_ck] if (sub_rounds > 1 or seed_errors) else None
       w_prompt = build_worker_prompt(batch_idx, req_items, prior_errors, prev_draft)
 
       w_res = await invoke_agent_bounded(
         sem=sem,
         prompt=w_prompt,
         schema=WORKER_SCHEMA_ENTRIES,
-        role=f"Pass1 {'Pro' if use_pro else 'Flash'} {tag} r{sub_rounds} ({len(req_items)})",
+        role=f"Pass1 Flash {tag} r{sub_rounds} ({len(req_items)})",
         type_name="self",
         models=w_models,
         fallback_schema=WORKER_SCHEMA_PAIRS,
@@ -414,14 +450,14 @@ async def process_and_audit_batch (batch_path, sem):
       # Strictly separate read-only auditor checks only pending_cks
       aud_orig = [orig_by_ck[ck] for ck in pending_cks]
       aud_prop = [resolved_by_ck[ck] for ck in pending_cks]
-      aud_prompt = build_auditor_prompt(batch_idx, aud_orig, aud_prop)
+      aud_prompt = build_auditor_prompt(batch_idx, aud_orig, aud_prop, prior_errors)
       aud_res = await invoke_agent_bounded(
         sem=sem,
         prompt=aud_prompt,
         schema=AUDITOR_SCHEMA,
         role=f"Pass1 Auditor {tag} r{sub_rounds} ({len(pending_cks)})",
         type_name="research",
-        models=[auditor_model, auditor_model, primary_model],
+        models=[auditor_model, primary_model, auditor_model, primary_model],
       )
       aud_errs = list(aud_res.get("errors") or [])
       if aud_res.get("approved") is True and len(aud_errs) == 0:
@@ -448,7 +484,7 @@ async def process_and_audit_batch (batch_path, sem):
     }
 
   sub_results = await asyncio.gather(*(run_sub_chunk(idx, sc) for idx, sc in enumerate(sub_chunks)))
-  merged_resolved = {}
+  merged_resolved = dict(seed_resolved) if seed_errors else {}
   all_sub_errors = []
   max_sub_round = 0
   approved = True
@@ -471,6 +507,7 @@ async def process_and_audit_batch (batch_path, sem):
       "count": len(final_cities),
       "errors_remaining": len(last_errors),
       "pass": 1,
+      "remaining_errors": last_errors,
       "schema_version": "3.0_compact_coord_map",
     }, fh, ensure_ascii=False, separators=(",", ":"))
 
@@ -483,6 +520,26 @@ async def process_and_audit_batch (batch_path, sem):
     "expected": len(items),
     "rounds": round_num,
   }
+
+
+async def safe_process_batch (bp, sem):
+  """Crash-isolated batch wrapper so one transient error never aborts sibling batches."""
+  m_idx = re.search(r"batch_(\d+)\.json$", os.path.basename(bp), re.IGNORECASE)
+  batch_idx = int(m_idx.group(1)) if m_idx else 1
+  out_path = os.path.join(os.path.dirname(bp), "resolved_" + os.path.basename(bp))
+  try:
+    return await process_and_audit_batch(bp, sem)
+  except Exception as err:
+    log(f"[batch-error] Batch {batch_idx:03d} failed: {str(err)[:200]}")
+    return {
+      "approved": False,
+      "batch_index": batch_idx,
+      "batch_path": out_path,
+      "count": 0,
+      "error": str(err)[:200],
+      "errors_remaining": 1,
+      "rounds": 0,
+    }
 
 
 phase("Discover Pass-1 compact batches")
@@ -500,7 +557,7 @@ log(f"Found {len(batch_files)} Pass-1 compact batch file(s) in {batch_dir}; hard
 
 phase(f"Run Pass-1 Flash + Read-Only Auditor swarm (capped at n={max_concurrency} concurrent)")
 sem = asyncio.Semaphore(max_concurrency)
-results = await asyncio.gather(*(process_and_audit_batch(bp, sem) for bp in batch_files))
+results = await asyncio.gather(*(safe_process_batch(bp, sem) for bp in batch_files))
 results.sort(key=lambda r: r.get("batch_index", 0))
 
 total_resolved = sum(r.get("count", 0) for r in results)

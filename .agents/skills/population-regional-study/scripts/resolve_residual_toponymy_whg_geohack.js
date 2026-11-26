@@ -9,6 +9,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 {
   let residual_toponymy_resolver = {
     ARTICLE_INVERT_RE: /^(.+?),\s*(Al|El|As|Ash|Ar|Az|Ad|An|At|Le|La|Les|L'|Los|Las|Il|Lo|De|Den|Het|Der|Die|Das|The)$/i,
+    EXCEL_ERROR_RE: /#(?:N\/A|REF!|VALUE!|DIV\/0!|NAME\?|NUM!|NULL!)\b/i,
     CYRILLIC_MAP: {
       "А": "A", "Б": "B", "В": "V", "Г": "G", "Д": "D", "Е": "E", "Ё": "Yo", "Ж": "Zh", "З": "Z", "И": "I",
       "Й": "Y", "К": "K", "Л": "L", "М": "M", "Н": "N", "О": "O", "П": "P", "Р": "R", "С": "S", "Т": "T",
@@ -43,10 +44,25 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       let raw = String(arg0_raw || "").trim();
 
       //Guard clauses
-      if (!raw) return "";
+      if (!raw || this.EXCEL_ERROR_RE.test(raw) || /^&nbsp;$/i.test(raw)) return "";
 
       //Function body
-      let s = raw.replace(/\s*\([^)]*\)/g, "").replace(/`/g, "").trim();
+      let s = raw
+        .replace(/andapos;|&apos;|&#39;/gi, "'")
+        .replace(/&amp;/gi, "&")
+        .replace(/&nbsp;/gi, " ")
+        .split(";")[0]
+        .replace(/\s*\([^)]*\)/g, "")
+        .replace(/`/g, "")
+        .trim();
+      if (!/^'s-/i.test(s)) {
+        s = s
+          .replace(/'s'c/g, "shch").replace(/'S'c/g, "Shch")
+          .replace(/'sč/g, "shch").replace(/'Sč/g, "Shch")
+          .replace(/(^|[\s-])'C/g, "$1Č").replace(/(^|[\s-])'c/g, "$1č")
+          .replace(/(^|[\s-])'S/g, "$1Š").replace(/(^|[\s-])'s/g, "$1š")
+          .replace(/(^|[\s-])'Z/g, "$1Ž").replace(/(^|[\s-])'z/g, "$1ž");
+      }
       let inv = s.match(this.ARTICLE_INVERT_RE);
       if (inv) {
         let base = inv[1].trim();
@@ -243,11 +259,13 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         dataview_root: "",
         in_file: "",
         limit: 0,
+        max_live_queries: 0,
         max_workers: 4,
         offline: false,
         out_file: "",
         project: "",
-        svea_root: ""
+        svea_root: "",
+        target_live_hits: 0
       };
 
       //Function body
@@ -260,6 +278,8 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         else if (tok.startsWith("--svea-root=")) args.svea_root = tok.slice(12).trim();
         else if (tok.startsWith("--dataview-root=")) args.dataview_root = tok.slice(16).trim();
         else if (tok.startsWith("--limit=")) args.limit = Math.max(0, Number(tok.slice(8)) || 0);
+        else if (tok.startsWith("--max-live-queries=")) args.max_live_queries = Math.max(0, Number(tok.slice(19)) || 0);
+        else if (tok.startsWith("--target-live-hits=")) args.target_live_hits = Math.max(0, Number(tok.slice(19)) || 0);
         else if (tok.startsWith("--max-workers=")) args.max_workers = Math.max(1, Math.min(4, Number(tok.slice(14)) || 4));
         else if (tok === "--offline") args.offline = true;
       }
@@ -288,7 +308,8 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       let lat = Number(item.coords[1]);
       let lng = Number(item.coords[0]);
       let radius_m = Math.min(10000, Math.round(max_dist_km*1000));
-      let target_stem = viscount_entity_audit.normaliseEntityStem(item.name || "");
+      let clean_item_nm = this.cleanToLatin(item.name || "");
+      let target_stem = viscount_entity_audit.normaliseEntityStem(clean_item_nm || item.name || "");
       let timeline = {};
 
       //Function body
@@ -477,9 +498,35 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         deterministic_fallback: 0,
         geohack_wikidata_hits: 0,
         llm_agents_used: 0,
+        source_breakdown: {},
         total_processed: 0,
         whg_hits: 0
       };
+      let live_added = 0;
+      let live_eligible = null;
+      if (!options.offline && Number(options.max_live_queries) > 0) {
+        let cap_live = Number(options.max_live_queries);
+        let uncached = [];
+        for (let i = 0; i < items.length; i++) {
+          let it = items[i];
+          if (!it || !Array.isArray(it.coords) || it.coords.length < 2) continue;
+          if (it.is_capital || Number(it.max_pop || 0) > (Number(topo_policy.pass1_min_peak_pop) || 10000)) continue;
+          let ck = `${Number(it.coords[0]).toFixed(5)},${Number(it.coords[1]).toFixed(5)}|${String(it.name || "").toLowerCase()}`;
+          if (cache[ck] && cache[ck].names && Object.keys(cache[ck].names).length > 0) continue;
+          uncached.push({
+            ey: Number.isFinite(Number(it.earliest_year)) ? Number(it.earliest_year) : 2025,
+            idx: i,
+            mp: Number(it.max_pop || 0),
+            nl: this.NON_LATIN_RE.test(String(it.name || "")) ? 1 : 0
+          });
+        }
+        uncached.sort(function (arg0_a, arg1_b) {
+          if (arg1_b.nl !== arg0_a.nl) return arg1_b.nl - arg0_a.nl;
+          if (arg1_b.mp !== arg0_a.mp) return arg1_b.mp - arg0_a.mp;
+          return arg0_a.ey - arg1_b.ey;
+        });
+        live_eligible = new Set(uncached.slice(0, cap_live).map(function (arg0_u) { return arg0_u.idx; }));
+      }
       let cities_out = new Array(items.length);
       let cursor = 0;
       let that = this;
@@ -501,12 +548,16 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           if (cache[ckey] && cache[ckey].names && Object.keys(cache[ckey].names).length > 0) {
             resolved_names = Object.assign({}, cache[ckey].names);
             stats.cache_hits++;
-          } else if (!options.offline) {
+            let src_k = String(cache[ckey].source || "cache_unknown");
+            stats.source_breakdown[src_k] = (stats.source_breakdown[src_k] || 0) + 1;
+          } else if (!options.offline && (!live_eligible || live_eligible.has(idx)) &&
+                     (!options.target_live_hits || (stats.whg_hits + stats.geohack_wikidata_hits) < Number(options.target_live_hits))) {
             let combined = {};
             let whg_r = await that.queryWhg(it, whg_max_km);
             if (whg_r.hit) {
               Object.assign(combined, whg_r.names);
               stats.whg_hits++;
+              stats.source_breakdown.whg_live = (stats.source_breakdown.whg_live || 0) + 1;
             }
             let gh_r = await that.queryGeoHackWikidata(it, geohack_max_km, states_index);
             if (gh_r.hit) {
@@ -515,10 +566,12 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
                 if (!combined[gkeys[g]]) combined[gkeys[g]] = gh_r.names[gkeys[g]];
               }
               stats.geohack_wikidata_hits++;
+              stats.source_breakdown.geohack_wikidata_live = (stats.source_breakdown.geohack_wikidata_live || 0) + 1;
             }
             if (Object.keys(combined).length > 0) {
               resolved_names = combined;
               cache[ckey] = { names: combined, source: whg_r.hit ? "whg" : "geohack_wikidata" };
+              live_added++;
             }
           }
 
@@ -605,8 +658,10 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       let report_path = path.join(path.dirname(out_file), "pass2_whg_geohack_report.json");
       fs.writeFileSync(report_path, JSON.stringify(report, null, 2), "utf8");
 
-      fs.mkdirSync(path.dirname(cache_path), { recursive: true });
-      fs.writeFileSync(cache_path, JSON.stringify(cache), "utf8");
+      if (live_added > 0 || !fs.existsSync(cache_path)) {
+        fs.mkdirSync(path.dirname(cache_path), { recursive: true });
+        fs.writeFileSync(cache_path, JSON.stringify(cache), "utf8");
+      }
 
       console.log(
         `[resolve_residual_toponymy_whg_geohack] Resolved ${final_cities.length} Pass-2 residual(s) ` +

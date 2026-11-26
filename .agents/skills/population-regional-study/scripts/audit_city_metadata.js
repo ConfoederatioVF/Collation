@@ -87,13 +87,19 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       // Audit individual records
       let stats = {
+        ancient_name_persistence: 0,
+        apostrophe_hacek: 0,
         backtick_or_mojibake: 0,
         bad_dates: 0,
         capitals_checked: capitals_records.length,
         capitals_missing_name: 0,
         collisions: 0,
         duplicate_other_names: 0,
+        english_or_ascii_exonym: 0,
+        excel_errors: 0,
         foreign_script_spam: 0,
+        gis_or_arch_junk: 0,
+        html_entities: 0,
         inverted_articles: 0,
         multi_comma_addr: 0,
         municipal_leaks: 0,
@@ -101,22 +107,40 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         out_of_bbox_capitals: 0,
         parenthetical_names: 0,
         records_checked: loaded_records.length,
-        split_capitals: 0
+        semicolon_spam: 0,
+        split_capitals: 0,
+        suburb_hijacks: 0
       };
 
       let bad_samples = {
+        ancient_persist: [],
+        apost_hacek: [],
         backtick: [],
         collisions: [],
         dates: [],
         dup_other: [],
+        exonym: [],
+        excel: [],
+        gis_junk: [],
+        html_ent: [],
         inverted: [],
         multi_comma: [],
         municipal: [],
         non_latin: [],
         out_of_bbox: [],
         paren: [],
-        split_cap: []
+        semi: [],
+        split_cap: [],
+        suburb_hijack: []
       };
+
+      let excel_re = /#(?:N\/A|REF!|VALUE!|DIV\/0!|NAME\?|NUM!|NULL!)\b/i;
+      let html_ent_re = /&nbsp;|&apos;|&#39;|andapos;/i;
+      let apost_hacek_re = /(?:^|[\s\-])['\u2019]{1,2}(?:[CcSsZz][aeoiuyhklmnprstvčšž]|s['\u2019]c)|[a-z]['\u2019]{1,2}[csz]['\u2019]{1,2}[csz]|[a-z]['\u2019]{1,2}[sS][čšž]|['\u2019]{1,2}[CcSsZz][čšž]|''[CcSsZz]|`'[CcSsZz]/;
+      let english_ascii_exonym_re = /^(?:Vienna|Munich|Muenchen|Munchen|Nuremberg|Cologne|Dusseldorf|Wurzburg|Luneburg|Lunen|Grunberg|Butow|Koslin|Prague|Warsaw|Cracow|Florence|Naples|Copenhagen|Gorzow Wielkopolski|Poznan|Wroclaw|Miedzyrzecz|Wrzesnia|Srem|Nowy Tomysl|Miedzychod|Ostrow Wielkopolski|Bytow|Zielona Gora)$/i;
+      let gis_arch_junk_re = /_wfl|_none|proyecto_|cmn_|SitioNN_Fase_|\b(?:petroglifos|petroglyph|parcela\s+[a-z0-9]|dhibi|rockshelter|borough high street|royal opera house|transport museum|boulevard périphérique)\b|\\|\s\+\s|\b(?:a\.d\.|b\.Pr\.|i\.d\.OPf\.|v\.d\.|s\.r\.o\.|uniwersytet)\b|^(?:universitäts- und hansestadt|hansestadt|kreisfreie stadt|landeshauptstadt|bergstadt|stadt\s)/i;
+      let suburb_hijack_re = /-l[eè]s-|\b\d{2}\b|weststadt|oststadt|nordstadt|südstadt/i;
+      let ancient_persist_re = /^(?:Bagdata|Birtha|Seleucia on the Tigris|Ctesiphon|Pataliputra)$/i;
 
       let cap_grid = new Map();
       let grid = new Map();
@@ -153,9 +177,31 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           }
         }
 
-        if (!nm || nm.includes("`") || nm.includes("?") || nm.includes("\uFFFD") || nm === "0" || nm === "Unknown") {
+        if (!nm || nm.includes("`") || nm.includes("?") || nm.includes("\uFFFD") || nm === "0" || /^0[-_a-zA-Z\s]/.test(nm) || nm === "Unknown") {
           stats.backtick_or_mojibake++;
           if (bad_samples.backtick.length < 5) bad_samples.backtick.push(`${shard_fn}:${nm}`);
+        }
+        let all_str_checks = [nm].concat(hn.map(function (arg0_h) { return String(arg0_h && arg0_h.name || ""); })).concat(Array.isArray(rec.other_names) ? rec.other_names.map(String) : []);
+        for (let sc_i = 0; sc_i < all_str_checks.length; sc_i++) {
+          let sv = String(all_str_checks[sc_i] || "").trim();
+          if (!sv) continue;
+          if (excel_re.test(sv)) {
+            stats.excel_errors++;
+            if (bad_samples.excel.length < 5) bad_samples.excel.push(`${shard_fn}:${nm}=>${sv}`);
+          }
+          if (html_ent_re.test(sv)) {
+            stats.html_entities++;
+            if (bad_samples.html_ent.length < 5) bad_samples.html_ent.push(`${shard_fn}:${nm}=>${sv}`);
+          }
+          if (sv.includes(";")) {
+            stats.semicolon_spam++;
+            if (bad_samples.semi.length < 5) bad_samples.semi.push(`${shard_fn}:${nm}=>${sv}`);
+          }
+          let is_tib = (rec.country === "China" && /'(?:brog|brong|char)/i.test(sv));
+          if (apost_hacek_re.test(sv) && !/^'s-/.test(sv) && !is_tib) {
+            stats.apostrophe_hacek++;
+            if (bad_samples.apost_hacek.length < 5) bad_samples.apost_hacek.push(`${shard_fn}:${nm}=>${sv}`);
+          }
         }
         if (nm && this.NON_LATIN_CANONICAL_RE.test(nm)) {
           stats.non_latin_canonical++;
@@ -172,6 +218,39 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         if (this.PAREN_RE.test(nm)) {
           stats.parenthetical_names++;
           if (bad_samples.paren.length < 5) bad_samples.paren.push(`${shard_fn}:${nm}`);
+        }
+        let us_ca_au_re = /^(?:United States|United States of America|Canada|Australia|Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming)$/i;
+        let rec_ctry = String(rec.country || "").trim();
+        let is_exonym_defect = english_ascii_exonym_re.test(nm) && !us_ca_au_re.test(rec_ctry) &&
+          shard_fn !== "01_centaur.json" && shard_fn !== "13_austral.json" &&
+          !(/^Cologne$/i.test(nm) && !/Germany/i.test(rec_ctry)) &&
+          !(/^Srem$/i.test(nm) && !/Poland|Germany/i.test(rec_ctry)) &&
+          !(/^Munich$/i.test(nm) && !/Germany|Austria|Switzerland/i.test(rec_ctry));
+        if (is_exonym_defect) {
+          stats.english_or_ascii_exonym++;
+          if (bad_samples.exonym.length < 5) bad_samples.exonym.push(`${shard_fn}:${nm}(${rec.country || "?"})`);
+        }
+        if (gis_arch_junk_re.test(nm)) {
+          stats.gis_or_arch_junk++;
+          if (bad_samples.gis_junk.length < 5) bad_samples.gis_junk.push(`${shard_fn}:${nm}`);
+        }
+        if (is_cap_shard) {
+          for (let h_s = 0; h_s < hn.length; h_s++) {
+            let h_snm = String(hn[h_s].name || "");
+            if (suburb_hijack_re.test(h_snm)) {
+              stats.suburb_hijacks++;
+              if (bad_samples.suburb_hijack.length < 5) bad_samples.suburb_hijack.push(`${nm}=>${h_snm}`);
+              break;
+            }
+          }
+        }
+        for (let h_a = 0; h_a < hn.length; h_a++) {
+          let h_yr = Number(String(hn[h_a].date || "").split(".")[0]);
+          let h_anm = String(hn[h_a].name || "");
+          if (h_yr >= 800 && ancient_persist_re.test(h_anm)) {
+            stats.ancient_name_persistence++;
+            if (bad_samples.ancient_persist.length < 5) bad_samples.ancient_persist.push(`${nm}:${hn[h_a].date}=${h_anm}`);
+          }
         }
         if (!rec.verified_settlement) {
           for (let m = 0; m < mun_regexes.length; m++) {
@@ -318,6 +397,14 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         errors.push(`[NON_LATIN_CANONICAL] ${stats.non_latin_canonical} non-Latin glyph(s) in canonical .name/.historical_names: ${bad_samples.non_latin.join(", ")}`);
       if (stats.backtick_or_mojibake > 0)
         errors.push(`[ENCODING] ${stats.backtick_or_mojibake} backtick/mojibake/placeholder name(s): ${bad_samples.backtick.join(", ")}`);
+      if (stats.excel_errors > 0)
+        errors.push(`[EXCEL_ERROR] ${stats.excel_errors} Excel error token(s): ${bad_samples.excel.join(", ")}`);
+      if (stats.html_entities > 0)
+        errors.push(`[HTML_ENTITY] ${stats.html_entities} unescaped HTML/XML entity name(s): ${bad_samples.html_ent.join(", ")}`);
+      if (stats.apostrophe_hacek > 0)
+        errors.push(`[APOSTROPHE_HACEK] ${stats.apostrophe_hacek} apostrophe-hacek corruption(s): ${bad_samples.apost_hacek.join(", ")}`);
+      if (stats.semicolon_spam > 0)
+        errors.push(`[SEMICOLON_SPAM] ${stats.semicolon_spam} semicolon-delimited spam/merged name(s): ${bad_samples.semi.join(", ")}`);
       if (stats.inverted_articles > 0)
         errors.push(`[INVERTED_ARTICLE] ${stats.inverted_articles} comma-inverted article name(s): ${bad_samples.inverted.join(", ")}`);
       if (stats.multi_comma_addr > 0)
@@ -326,6 +413,14 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         errors.push(`[PARENTHETICAL] ${stats.parenthetical_names} parenthetical name(s): ${bad_samples.paren.join(", ")}`);
       if (stats.bad_dates > 0)
         errors.push(`[BAD_DATES] ${stats.bad_dates} invalid or unsorted historical_names date(s): ${bad_samples.dates.join(", ")}`);
+      if (stats.suburb_hijacks > 0)
+        errors.push(`[SUBURB_HIJACK] ${stats.suburb_hijacks} suburb/quarter-hijacked capital timeline(s): ${bad_samples.suburb_hijack.join(", ")}`);
+      if (stats.english_or_ascii_exonym > 0)
+        errors.push(`[ENGLISH_EXONYM_OR_STRIPPED_DIACRITIC] ${stats.english_or_ascii_exonym} non-endonymic/stripped-ASCII name(s): ${bad_samples.exonym.join(", ")}`);
+      if (stats.ancient_name_persistence > 0)
+        errors.push(`[ANCIENT_NAME_PERSISTENCE] ${stats.ancient_name_persistence} ancient name(s) persisting >= 800 AD: ${bad_samples.ancient_persist.join(", ")}`);
+      if (stats.gis_or_arch_junk > 0)
+        errors.push(`[GIS_OR_ARCH_JUNK] ${stats.gis_or_arch_junk} GIS/arch/title/abbreviation junk name(s): ${bad_samples.gis_junk.join(", ")}`);
       if (stats.collisions > 0)
         errors.push(`[COLLISIONS] ${stats.collisions} coordinate/stem duplicate collision(s) <= 1,5 km: ${bad_samples.collisions.join(", ")}`);
       if (stats.municipal_leaks > 0) {

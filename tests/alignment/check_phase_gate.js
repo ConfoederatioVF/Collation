@@ -328,8 +328,19 @@ let path = require("path");
             errors.push(`Missing Pass-2 report for ${pk}`);
           } else {
             let rp = JSON.parse(fs.readFileSync(p2_rp, "utf8"));
-            if (Number(rp.llm_agents_used) !== 0)
+            let p2_st = rp.stats || {};
+            if (Number(p2_st.llm_agents_used !== undefined ? p2_st.llm_agents_used : rp.llm_agents_used) !== 0)
               errors.push(`Pass-2 used LLM agents for ${pk} (forbidden)`);
+            if (rp.mode !== "whg_geohack_deterministic")
+              errors.push(`Pass-2 mode for ${pk} must be 'whg_geohack_deterministic' (got '${rp.mode || "missing"}')`);
+            let whg_h = Number(p2_st.whg_hits || 0);
+            let gh_h = Number(p2_st.geohack_wikidata_hits || 0);
+            let ca_h = Number(p2_st.cache_hits || 0);
+            let tot_p = Number(p2_st.total_processed || 0);
+            if (tot_p > 0 && (whg_h + gh_h) === 0)
+              errors.push(`Pass-2 for ${pk} has 0 live WHG/GeoHack hits (INV-09)`);
+            if (tot_p > 0 && ((whg_h + gh_h + ca_h)/tot_p) < 0.05)
+              errors.push(`Pass-2 deterministic gazetteer coverage for ${pk} is below 5% (${((whg_h + gh_h + ca_h)*100/tot_p).toFixed(2)}%)`);
           }
           let chk = child_process.spawnSync(process.execPath, [audit_script, `--project=${pk}`], { encoding: "utf8" });
           if (chk.status !== 0)

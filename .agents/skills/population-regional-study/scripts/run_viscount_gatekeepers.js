@@ -96,7 +96,8 @@ let { viscount_audit_utils } = require("./viscount_audit_utils");
       //Declare local instance variables
       let proj_dir = path.join(svea_root, "histmap/1.data_raw/population_regional", project);
       let results = [];
-      let wants = function (arg0_s) { return stage === "ALL" || stage === arg0_s; };
+      let stage_set = new Set(stage.split(",").map(function (arg0_t) { return arg0_t.trim(); }).filter(Boolean));
+      let wants = function (arg0_s) { return stage === "ALL" || stage_set.has(arg0_s); };
 
       //Guard clauses
       if (!project || !fs.existsSync(proj_dir)) {

@@ -145,6 +145,18 @@
             return end_b - end_a;
           }) : [];
 
+        let pre_annex_dir = path.join(root_dir, "histmap/1.data_raw/population_regional", proj.key, "_shared/settlement_sources/pre_annexation_towns");
+        if (fs.existsSync(pre_annex_dir)) {
+          let pa_files = fs.readdirSync(pre_annex_dir).filter(function (arg0_f) { return arg0_f.endsWith(".json"); });
+          for (let pa_i = 0; pa_i < pa_files.length; pa_i++) {
+            gazetteers.push({
+              id: `pre_annexation_${pa_files[pa_i].replace(/\.json$/, "")}`,
+              path: path.join(pre_annex_dir, pa_files[pa_i]),
+              priority: 50
+            });
+          }
+        }
+
         loaded_count_by_project[proj.key] = 0;
         total_gazetteer_files += gazetteers.length;
 
@@ -336,6 +348,20 @@
           continue;
         }
 
+        if (Array.isArray(raw_json)) {
+          let dict_obj = {};
+          for (let pa_x = 0; pa_x < raw_json.length; pa_x++) {
+            let item = raw_json[pa_x];
+            if (!item || !item.name || !Array.isArray(item.coords)) continue;
+            let k_base = `${String(item.name).trim()}-${String(item.country || "Unknown").trim()}`;
+            let k_use = k_base;
+            let k_idx = 2;
+            while (dict_obj[k_use]) k_use = `${k_base}_${k_idx++}`;
+            dict_obj[k_use] = item;
+          }
+          raw_json = dict_obj;
+        }
+
         let all_keys = Object.keys(raw_json);
         for (let x = 0; x < all_keys.length; x++) {
           let city_key = all_keys[x];
@@ -358,17 +384,35 @@
             if (!in_any_bbox) continue;
           }
 
+          let annex_yr = (raw_city.annexation_year !== undefined && raw_city.annexation_year !== null) ?
+            parseInt(raw_city.annexation_year, 10) : NaN;
+          let first_yr = (raw_city.first_attested_year !== undefined && raw_city.first_attested_year !== null) ?
+            parseInt(raw_city.first_attested_year, 10) : NaN;
           let clean_pop = {};
           if (raw_city.population && typeof raw_city.population === "object") {
             let pop_years = Object.keys(raw_city.population);
             for (let y = 0; y < pop_years.length; y++) {
               let yr = parseInt(pop_years[y], 10);
               let val = Number(raw_city.population[pop_years[y]]);
-              if (Number.isFinite(yr) && Number.isFinite(val) && val > 0)
+              if (Number.isFinite(yr) && Number.isFinite(val) && val > 0) {
+                if (Number.isFinite(annex_yr) && yr >= annex_yr) continue;
                 clean_pop[yr] = Math.round(val);
+              }
             }
           }
           if (Object.keys(clean_pop).length === 0) continue;
+
+          let extra_hist_aliases = Array.isArray(raw_city.other_names) ? raw_city.other_names.slice() : [];
+          if (Array.isArray(raw_city.historical_names)) {
+            for (let hi = 0; hi < raw_city.historical_names.length; hi++)
+              if (typeof raw_city.historical_names[hi] === "string")
+                extra_hist_aliases.push(raw_city.historical_names[hi]);
+          } else if (raw_city.historical_names && typeof raw_city.historical_names === "object") {
+            let hvals = Object.values(raw_city.historical_names);
+            for (let hi = 0; hi < hvals.length; hi++)
+              if (typeof hvals[hi] === "string")
+                extra_hist_aliases.push(hvals[hi]);
+          }
 
           let raw_scope = String(raw_city.population_scope || raw_city.extent_type || "").toLowerCase();
           let is_metro_cand = Boolean(
@@ -384,7 +428,7 @@
             key: city_key,
             name: raw_city.name || city_key.split("-")[0],
             original_names: [],
-            other_names: this.deduplicateOtherNamesCI(raw_city.name || city_key.split("-")[0], raw_city.other_names),
+            other_names: this.deduplicateOtherNamesCI(raw_city.name || city_key.split("-")[0], extra_hist_aliases),
             polaris_priority: gaz_entry.priority || 1,
             polaris_source: gaz_id,
             population: clean_pop,
@@ -394,6 +438,7 @@
             viscount_project: proj.key,
             viscount_z_priority: proj.z_priority
           };
+          if (Number.isFinite(annex_yr)) candidate_city._annexation_year = annex_yr;
           if (raw_scope) candidate_city.population_scope = raw_scope;
           if (raw_city.extent_type) candidate_city.extent_type = raw_city.extent_type;
           if (raw_city.metro_parent_key) candidate_city.metro_parent_key = raw_city.metro_parent_key;
@@ -404,7 +449,8 @@
             candidate_city.is_agglomeration = true;
             candidate_city.population_scope = "metro";
           }
-          let raw_found = (raw_city["found.yr"] !== undefined) ? raw_city["found.yr"] : raw_city.foundation_year;
+          let raw_found = (raw_city["found.yr"] !== undefined) ? raw_city["found.yr"] :
+            (raw_city.foundation_year !== undefined ? raw_city.foundation_year : (Number.isFinite(first_yr) ? first_yr : undefined));
           if (raw_found !== undefined && Number.isFinite(Number(raw_found))) {
             let parsed_found = parseInt(raw_found, 10);
             candidate_city["found.yr"] = parsed_found;
@@ -557,6 +603,15 @@
 
             let prev_max_yr = Number.isFinite(ex_city._matched_max_yr) ? ex_city._matched_max_yr : -Infinity;
             delete ex_city._matched_max_yr;
+            if (Number.isFinite(candidate_city._annexation_year)) {
+              ex_city._annexation_year = candidate_city._annexation_year;
+              let ex_pop_keys_a = Object.keys(ex_city.population);
+              for (let ay = 0; ay < ex_pop_keys_a.length; ay++) {
+                let yr_num_a = parseInt(ex_pop_keys_a[ay], 10);
+                if (Number.isFinite(yr_num_a) && yr_num_a >= candidate_city._annexation_year)
+                  delete ex_city.population[ex_pop_keys_a[ay]];
+              }
+            }
             let cand_found = Number(candidate_city["found.yr"] !== undefined ? candidate_city["found.yr"] : candidate_city.foundation_year);
             if (Number.isFinite(cand_found) && (ex_city["found.yr"] === undefined || cand_found < Number(ex_city["found.yr"]))) {
               ex_city["found.yr"] = cand_found;

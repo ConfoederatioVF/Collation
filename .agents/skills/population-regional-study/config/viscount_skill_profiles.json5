@@ -174,10 +174,12 @@
     capital_overrides_largest_population: true,
     forbid_metro_area_municipality_collapse: true,
     intra_municipal_suffix_regexes: [
-      "\\b(?:arrondissement|borough|ward|stadtbezirk|bezirk|okrug|shiyakha|qism|kism|markaz|mahalle|alcaldia|delegacion|sub-?district)\\b",
+      "\\b(?:arrondissement|stadtbezirk|bezirk|okrug|shiyakha|qism|kism|markaz|mahalle|alcaldia|delegacion|sub-?district)\\b",
+      "\\bborough\\s+of\\b",
+      "\\b(?:ward\\s+\\d+|\\d+(?:st|nd|rd|th)?\\s+ward)\\b",
       "\\b(?:raion|rayon)\\s*(?:of\\s+)?(?:baku|yerevan|tbilisi|moscow|kyiv|minsk|almaty|tashkent)?$",
       "\\(mod_uk\\)$",
-      "-(?:ku|gu|dong|quận)$",
+      "^(?!Ban\\s).+-(?:ku|gu|dong|quận)$",
       "^\\d+(?:er|e|st|nd|rd|th)\\s+arrondissement\\b",
       "^paris\\s+\\d{2}\\b"
     ],

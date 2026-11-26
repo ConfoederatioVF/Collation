@@ -833,9 +833,14 @@
             let loc_peak = population_Stadester_uud.getPeakPopulation(local_city.population);
             let act_is_cap = Boolean(actual_city.is_capital || actual_city.capital);
             let loc_is_cap = Boolean(local_city.is_capital || local_city.capital);
+            let act_mun_locked = Boolean(
+              actual_city._mun_checked && actual_city._mun_name &&
+              population_Stadester_uud.processCityName(actual_city.name || "") === population_Stadester_uud.processCityName(actual_city._mun_name)
+            );
             let can_take_canonical_identity = Boolean(
               (loc_is_cap && !act_is_cap) ||
-              ((!act_is_cap || loc_is_cap) && (is_primary_label_same || (loc_latest_yr >= act_latest_yr && loc_peak >= act_peak*0.5)))
+              ((!act_is_cap || loc_is_cap) && (!act_mun_locked || is_primary_label_same) &&
+                (is_primary_label_same || (loc_latest_yr >= act_latest_yr && loc_peak >= act_peak*0.5)))
             );
 
             if (loc_is_cap) actual_city.is_capital = true;

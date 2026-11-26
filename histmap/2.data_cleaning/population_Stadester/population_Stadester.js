@@ -64,7 +64,7 @@
     static file_flattened_stadester = `${this.bf}uud/flattened_stadester_cities.json`;
     static file_processed_stadester = `${this.bf}uud/processed_stadester_cities.json`;
     static file_stadester_final = `${this.transform_stadester_folder}`;
-    static file_stadester_vis = `${(typeof h5 !== "undefined") ? h5 : "./histmap/5.data_visualisation/"}stadester/stadester_2.0`;
+    static file_stadester_vis = path.join((typeof h5 !== "undefined") ? h5 : "./histmap/5.data_visualisation", "stadester/stadester_2.0");
     
     static antiquity_years = Array.from({ length: 101 }, (_, i) => -10000 + i * 100);
     static urban_antiquity_years = Array.from({ length: 31 }, (_, i) => -3000 + i * 100);

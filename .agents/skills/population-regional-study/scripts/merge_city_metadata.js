@@ -10,7 +10,67 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 {
   let city_metadata_merger = {
     ARTICLE_INVERT_RE: /^.+,\s*(?:Al|El|As|Ash|Ar|Az|Ad|An|At|Le|La|Les|L'|Los|Las|Il|Lo|De|Den|Het|Der|Die|Das|The)$/i,
+    EXCEL_ERROR_RE: /#(?:N\/A|REF!|VALUE!|DIV\/0!|NAME\?|NUM!|NULL!)\b/i,
     NON_LATIN_RE: /[\u0370-\u03FF\u0400-\u04FF\u0530-\u058F\u0590-\u05FF\u0600-\u06FF\u0900-\u097F\u0E00-\u0E7F\u10A0-\u10FF\u3040-\u30FF\u4E00-\u9FFF\uAC00-\uD7AF]/,
+    SURVEY_DESC_SEMI_RE: /(?:site:|near\b|munitions|capital\b|port\b|hub\b|assr\b|ao\b|incl\.|^\s*\d+[A-Z]{2}\d+|^\s*\d+$|^\s*IX\b|^\s*[A-Z]$|^\s*\d+\s*m\.\s*p\.)/i,
+
+    /**
+     * Cleans HTML entities, apostrophe-hacek defects, UTF-8 mojibake, and semicolon descriptor spam into clean alias tokens.
+     * @alias city_metadata_merger.cleanAliasTokens
+     *
+     * @param {string} arg0_raw
+     * @param {string} [arg1_country]
+     *
+     * @returns {Array<string>}
+     */
+    cleanAliasTokens (arg0_raw, arg1_country) {
+      //Convert from parameters
+      let country = String(arg1_country || "").trim();
+      let raw = String(arg0_raw || "").trim();
+
+      //Guard clauses
+      if (!raw || this.EXCEL_ERROR_RE.test(raw) || /^&nbsp;$/i.test(raw)) return [];
+
+      //Function body
+      let s = raw
+        .replace(/andapos;|&apos;|&#39;/gi, "'")
+        .replace(/&amp;/gi, "&")
+        .replace(/&quot;/gi, "\"")
+        .replace(/&nbsp;/gi, " ")
+        .replace(/Ã¶/g, "ö").replace(/Ã¤/g, "ä").replace(/Ã¼/g, "ü")
+        .replace(/Ã©/g, "é").replace(/Ã¸/g, "ø").replace(/Ã¥/g, "å")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      let parts = s.includes(";") ? s.split(";") : [s];
+      let out = [];
+      for (let i = 0; i < parts.length; i++) {
+        let p = String(parts[i] || "").trim();
+        if (!p) continue;
+        if (i > 0 && (this.SURVEY_DESC_SEMI_RE.test(p) || /^\d+[A-Za-z]?$/.test(p))) continue;
+        p = p.replace(/^'(.+)'$/, "$1").trim();
+        let is_tibetan = (country === "China" && /'(?:brog|brong|char)/i.test(p));
+        if (!/^'s-/i.test(p) && !is_tibetan) {
+          p = p
+            .replace(/'s'c/g, "shch").replace(/'S'c/g, "Shch")
+            .replace(/'sč/g, "shch").replace(/'Sč/g, "Shch")
+            .replace(/([a-z])'s'([a-z])/gi, "$1shch$2")
+            .replace(/(^|[\s\-])'C/g, "$1Č").replace(/(^|[\s\-])'c/g, "$1č")
+            .replace(/(^|[\s\-])'S/g, "$1Š").replace(/(^|[\s\-])'s/g, "$1š")
+            .replace(/(^|[\s\-])'Z/g, "$1Ž").replace(/(^|[\s\-])'z/g, "$1ž")
+            .replace(/([a-z])'([csz])'/gi, "$1$2")
+            .replace(/([a-z])'([čšž])/gi, "$1$2")
+            .replace(/l'([aeiou])/gi, "lj$1");
+        }
+        if (country === "United Kingdom")
+          p = p.replace(/^'([A-Z])/, "$1");
+        p = this.stripParenthetical(p);
+        if (p && !this.isCorruptedCityName(p)) out.push(p);
+      }
+
+      //Return statement
+      return out;
+    },
 
     /**
      * Converts a `date: string` map or `[{ date, name }]` array into a validated array of `{ date, name }` objects.
@@ -150,16 +210,19 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       }
 
       for (let i = 0; i < raw_aliases.length; i++) {
-        let a_str = this.stripParenthetical(raw_aliases[i]);
-        if (!a_str || this.isCorruptedCityName(a_str)) continue;
-        if (this.isForeignScriptNoiseForCountry(a_str, country, coords_lat_lng)) continue;
-        let low = a_str.toLowerCase();
-        if (excluded_low.has(low)) continue;
-        if (!best_by_low.has(low)) {
-          best_by_low.set(low, a_str);
-          order.push(low);
-        } else if (scoreCase(a_str) > scoreCase(best_by_low.get(low))) {
-          best_by_low.set(low, a_str);
+        let tokens = this.cleanAliasTokens(raw_aliases[i], country);
+        for (let t = 0; t < tokens.length; t++) {
+          let a_str = tokens[t];
+          if (!a_str || this.isCorruptedCityName(a_str)) continue;
+          if (this.isForeignScriptNoiseForCountry(a_str, country, coords_lat_lng)) continue;
+          let low = a_str.toLowerCase();
+          if (excluded_low.has(low)) continue;
+          if (!best_by_low.has(low)) {
+            best_by_low.set(low, a_str);
+            order.push(low);
+          } else if (scoreCase(a_str) > scoreCase(best_by_low.get(low))) {
+            best_by_low.set(low, a_str);
+          }
         }
       }
 
@@ -223,6 +286,8 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       let trimmed = raw_name.trim();
       if (trimmed.length === 0) return true;
       if (trimmed === "0" || trimmed === "Unknown" || trimmed === "Settlement") return true;
+      if (this.EXCEL_ERROR_RE.test(trimmed) || /^&nbsp;$/i.test(trimmed)) return true;
+      if (/:\s*see\s+/i.test(trimmed) || /^\d+\s*m\.\s*p\./i.test(trimmed)) return true;
       if (/^[?\s\-_.,]+$/.test(trimmed)) return true;
       if (trimmed.includes("?") || trimmed.includes("\uFFFD") || trimmed.includes("\u00EF\u00BF\u00BD")) return true;
       if (trimmed.includes("`")) return true;

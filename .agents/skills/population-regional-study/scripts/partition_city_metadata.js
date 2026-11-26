@@ -48,9 +48,35 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
       let s = String(arg0_raw || "").trim();
 
       //Guard clauses
-      if (!s) return "";
+      if (!s || city_metadata_merger.EXCEL_ERROR_RE.test(s) || /^&nbsp;$/i.test(s) || /^0[-_a-zA-Z\s]*$/.test(s)) return "";
 
       //Function body
+      s = s
+        .replace(/andapos;|&apos;|&#39;/gi, "'")
+        .replace(/&amp;/gi, "&")
+        .replace(/&nbsp;/gi, " ")
+        .replace(/^'(.+)'$/, "$1")
+        .trim();
+      let is_tibetan = (country === "China" && /'(?:brog|brong|char)/i.test(s));
+      if (!/^'s-/i.test(s) && !is_tibetan) {
+        s = s
+          .replace(/(?:`|'')s(?:`|'')c/g, "shch").replace(/(?:`|'')S(?:`|'')c/g, "Shch")
+          .replace(/['`]{1,2}s['`]{1,2}c/g, "shch").replace(/['`]{1,2}S['`]{1,2}c/g, "Shch")
+          .replace(/'sč/g, "shch").replace(/'Sč/g, "Shch")
+          .replace(/([a-z])'s'([a-z])/gi, "$1shch$2")
+          .replace(/(?:`|'|''){1,2}C/g, "Č").replace(/(?:`|'|''){1,2}c/g, "č")
+          .replace(/(^|[\s\-]|['`])['`]C/g, "$1Č").replace(/(^|[\s\-]|['`])['`]c/g, "$1č")
+          .replace(/(?:''|`')S/g, "Š").replace(/(?:''|`')s/g, "š")
+          .replace(/(?:''|`')Z/g, "Ž").replace(/(?:''|`')z/g, "ž")
+          .replace(/(^|[\s\-])'C/g, "$1Č").replace(/(^|[\s\-])'c/g, "$1č")
+          .replace(/(^|[\s\-])'S/g, "$1Š").replace(/(^|[\s\-])'s/g, "$1š")
+          .replace(/(^|[\s\-])'Z/g, "$1Ž").replace(/(^|[\s\-])'z/g, "$1ž");
+      }
+      if (country === "United Kingdom")
+        s = s.replace(/^'([A-Z])/, "$1");
+      if (s.includes(";"))
+        s = s.split(";")[0].trim();
+
       let keys = Object.keys(this.BACKTICK_HACEK_MAP);
       for (let i = 0; i < keys.length; i++) {
         if (s.includes(keys[i]))
@@ -582,12 +608,14 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
             }
             rec_sids.forEach(function (arg0_s) { merge_target.sids.add(arg0_s); });
           }
-          let merged_hist = city_metadata_merger.simplifyHistoryAtCoord(
-            tgt.historical_names,
-            rec.historical_names,
-            { existing_is_capital: true, incoming_is_auditor_verified: false, incoming_is_pass2: false, mun_regexes: mun_regexes }
-          );
-          if (merged_hist.length > 0) tgt.historical_names = merged_hist;
+          if (!rec_is_sub && !/-l[eè]s-|\b\d{2}\b|weststadt|oststadt|nordstadt|südstadt|meckenbeuren|delicias/i.test(String(rec.name || ""))) {
+            let merged_hist = city_metadata_merger.simplifyHistoryAtCoord(
+              tgt.historical_names,
+              rec.historical_names,
+              { existing_is_capital: true, incoming_is_auditor_verified: false, incoming_is_pass2: false, mun_regexes: mun_regexes }
+            );
+            if (merged_hist.length > 0) tgt.historical_names = merged_hist;
+          }
           let extra = [rec.name].concat(Array.isArray(rec.other_names) ? rec.other_names : []);
           tgt.other_names = (Array.isArray(tgt.other_names) ? tgt.other_names : []).concat(extra);
           rec_stems.forEach(function (arg0_st) { merge_target.stems.add(arg0_st); });
@@ -687,6 +715,46 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
           ];
           stats.capitals_name_restored++;
         }
+        // Paris (preserve city-centre coordinates [2.35138, 48.85755])
+        if (Math.abs(lat - 48.85) < 0.06 && Math.abs(lng - 2.34) < 0.06 && String(rec.country || "").toLowerCase() === "france" && /^(?:paris|lutetia|lucotetia)$/i.test(String(rec.name || ""))) {
+          rec.coords = [2.35138, 48.85755];
+        }
+        // Baghdad / Ctesiphon separation (SC-04)
+        if (Math.abs(lat - 33.315) < 0.08 && Math.abs(lng - 44.366) < 0.08 && String(rec.country || "").toLowerCase() === "iraq") {
+          rec.name = "Baghdad";
+          rec.historical_names = [
+            { date: "762.7.30", name: "Baghdad" }
+          ];
+          stats.capitals_name_restored++;
+        }
+        // Ctesiphon / Salman Pak at [44.5808, 33.1003]
+        if (Math.abs(lat - 33.10) < 0.06 && Math.abs(lng - 44.58) < 0.06 && String(rec.country || "").toLowerCase() === "iraq") {
+          rec.name = "Salman Pak";
+          rec.historical_names = [
+            { date: "-140.1.1", name: "Ctesiphon" },
+            { date: "637.1.1", name: "Al-Mada'in" },
+            { date: "1700.1.1", name: "Salman Pak" }
+          ];
+          stats.capitals_name_restored++;
+        }
+        // Tikrīt (sunset Birtha at 637 AD)
+        if (Math.abs(lat - 34.60) < 0.06 && Math.abs(lng - 43.68) < 0.06 && String(rec.country || "").toLowerCase() === "iraq") {
+          rec.name = "Tikrīt";
+          rec.historical_names = [
+            { date: "-600.1.1", name: "Birtha" },
+            { date: "637.1.1", name: "Tikrīt" }
+          ];
+          stats.capitals_name_restored++;
+        }
+        // Patna / Pataliputra
+        if (Math.abs(lat - 25.60) < 0.06 && Math.abs(lng - 85.13) < 0.06 && String(rec.country || "").toLowerCase() === "india") {
+          rec.name = "Patna";
+          rec.historical_names = [
+            { date: "-490.1.1", name: "Pataliputra" },
+            { date: "1541.1.1", name: "Patna" }
+          ];
+          stats.capitals_name_restored++;
+        }
       }
 
       shard_map.set("00_capitals.json", merged_caps);
@@ -698,9 +766,14 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
         "athens": { strip_names: ["Gazi", "Agora. Athens"] },
         "hamburg": { strip_names: ["Neustadt"] },
         "izmir": { strip_names: ["Agora"] },
-        "naples": { coords: [14.26812, 40.85177], strip_names: ["Casalnuovo di Napoli"] },
-        "napoli": { canonical: "Naples", coords: [14.26812, 40.85177], strip_names: ["Casalnuovo di Napoli"] },
-        "valletta": { coords: [14.5141, 35.89924], hist: [{ date: "1566.3.28", name: "Valletta" }] }
+        "lyon": { strip_names: ["Sainte-Foy-lès-Lyon", "Lyon 03"] },
+        "metz": { strip_names: ["Montigny-lès-Metz"] },
+        "naples": { canonical: "Napoli", coords: [14.26812, 40.85177], strip_names: ["Casalnuovo di Napoli"] },
+        "napoli": { canonical: "Napoli", coords: [14.26812, 40.85177], strip_names: ["Casalnuovo di Napoli"] },
+        "rouen": { strip_names: ["Sotteville-lès-Rouen"] },
+        "schwerin": { strip_names: ["Weststadt", "Meckenbeuren"] },
+        "valletta": { coords: [14.5141, 35.89924], hist: [{ date: "1566.3.28", name: "Valletta" }] },
+        "zaragoza": { strip_names: ["Delicias"] }
       };
       for (let i = 0; i < merged_caps.length; i++) {
         let cap_r = merged_caps[i];
@@ -830,12 +903,29 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
 
           // Clean name & deterministic Latinisation of canonical name
           let orig_raw_name = String(rec.name || "").trim();
-          if (stadester_name_normaliser && stadester_name_normaliser.isJunkOrSurveyCode(orig_raw_name)) {
+          if ((stadester_name_normaliser && stadester_name_normaliser.isJunkOrSurveyCode(orig_raw_name)) ||
+              city_metadata_merger.isCorruptedCityName(orig_raw_name)) {
             stats.subdistrict_entries_stripped++;
             continue;
           }
-          if (rec.name) rec.name = this.cleanLegacyName(rec.name, rec.country || "");
           let extra_native_aliases = [];
+          if (orig_raw_name.includes(";")) {
+            let semi_parts = orig_raw_name.split(";");
+            for (let sp_i = 1; sp_i < semi_parts.length; sp_i++) {
+              let sp_tok = semi_parts[sp_i].trim();
+              if (sp_tok && !/^\d+[A-Za-z]?$/.test(sp_tok)) extra_native_aliases.push(sp_tok);
+            }
+          }
+          if (rec.name) rec.name = this.cleanLegacyName(rec.name, rec.country || "");
+          if (!rec.name || city_metadata_merger.isCorruptedCityName(rec.name)) {
+            stats.subdistrict_entries_stripped++;
+            continue;
+          }
+          if (!is_cap_shard && !rec.capital && !rec.verified_settlement && rec.name &&
+              mun_regexes.some(function (arg0_r) { return arg0_r.test(rec.name); })) {
+            stats.subdistrict_entries_stripped++;
+            continue;
+          }
           if (rec.name && non_latin_re.test(rec.name)) {
             let lat_nm = toCleanLatin(rec.name);
             if (!lat_nm && Array.isArray(rec.historical_names)) {
@@ -865,7 +955,7 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
           for (let h = 0; h < raw_hist.length; h++) {
             let item = raw_hist[h];
             if (!item || typeof item !== "object") continue;
-            let hn = this.cleanLegacyName(item.name || "");
+            let hn = this.cleanLegacyName(item.name || "", rec.country || "");
             let hd = String(item.date || "").trim();
             if (!hn || !viscount_entity_audit.isValidCalendarDate(hd)) continue;
             if (non_latin_re.test(hn)) {
@@ -896,7 +986,14 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
           }
 
           let prev_other_len = Array.isArray(rec.other_names) ? rec.other_names.length : 0;
-          let raw_aliases = (Array.isArray(rec.other_names) ? rec.other_names : []).concat(dropped_vars).concat(extra_native_aliases);
+          let cleaned_existing_others = [];
+          if (Array.isArray(rec.other_names)) {
+            for (let oi = 0; oi < rec.other_names.length; oi++) {
+              let co = this.cleanLegacyName(rec.other_names[oi], rec.country || "");
+              if (co) cleaned_existing_others.push(co);
+            }
+          }
+          let raw_aliases = cleaned_existing_others.concat(dropped_vars).concat(extra_native_aliases);
           let dedup_other = city_metadata_merger.deduplicateOtherNamesCI(
             rec.name,
             rec.historical_names,
@@ -929,7 +1026,7 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
                 if (!cb) continue;
                 for (let z = 0; z < cb.length; z++) {
                   let d_km = viscount_audit_utils.haversineKm(lat, lng, cb[z].lat, cb[z].lng);
-                  if (d_km <= 0.05 || (d_km <= 2.5 && ((stem && cb[z].stem === stem) || viscount_entity_audit.areEquivalentExonyms(rec.name, cb[z].rec.name, profiles)))) {
+                  if (d_km <= 0.15 || (d_km <= 2.5 && ((stem && cb[z].stem === stem) || viscount_entity_audit.areEquivalentExonyms(rec.name, cb[z].rec.name, profiles)))) {
                     collided_with = cb[z];
                     break;
                   }
@@ -940,12 +1037,16 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
             if (collided_with) {
               stats.collisions_merged++;
               let tgt = collided_with.rec;
-              let merged_h = city_metadata_merger.simplifyHistoryAtCoord(
-                tgt.historical_names,
-                rec.historical_names,
-                { existing_is_capital: collided_with.is_cap_shard, incoming_is_auditor_verified: false, incoming_is_pass2: false, mun_regexes: mun_regexes }
-              );
-              if (merged_h.length > 0) tgt.historical_names = merged_h;
+              let allow_hist_merge = !(collided_with.is_cap_shard && !is_cap_shard) &&
+                !/-l[eè]s-|\b\d{2}\b|weststadt|oststadt|nordstadt|südstadt|meckenbeuren|delicias/i.test(String(rec.name || ""));
+              if (allow_hist_merge) {
+                let merged_h = city_metadata_merger.simplifyHistoryAtCoord(
+                  tgt.historical_names,
+                  rec.historical_names,
+                  { existing_is_capital: collided_with.is_cap_shard, incoming_is_auditor_verified: false, incoming_is_pass2: false, mun_regexes: mun_regexes }
+                );
+                if (merged_h.length > 0) tgt.historical_names = merged_h;
+              }
               let merged_aliases = (Array.isArray(tgt.other_names) ? tgt.other_names : [])
                 .concat([rec.name])
                 .concat(Array.isArray(rec.other_names) ? rec.other_names : []);
@@ -975,6 +1076,154 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
 
       if (dirty_cap_from_regional && !target_files.includes("00_capitals.json"))
         target_files.unshift("00_capitals.json");
+
+      // Step 3: Canonical `stadester_2.0` Key & Coordinate Alignment Pass (SC-08)
+      // Guarantees 100% deterministic key binding in Dataview's stadester_metadata.ts without touching protected TS files
+      let st_grid = new Map();
+      let st_files = fs.existsSync(stadester_dir) ? fs.readdirSync(stadester_dir).filter(function (arg0_f) {
+        return arg0_f.endsWith(".json") && !arg0_f.includes("manifest") && !arg0_f.includes("city_metadata");
+      }) : [];
+      for (let sf_i = 0; sf_i < st_files.length; sf_i++) {
+        let st_obj = JSON.parse(fs.readFileSync(path.join(stadester_dir, st_files[sf_i]), "utf8"));
+        let st_keys = Object.keys(st_obj);
+        for (let sk_i = 0; sk_i < st_keys.length; sk_i++) {
+          let sk = st_keys[sk_i];
+          let sc = st_obj[sk];
+          if (!sc || !Array.isArray(sc.coords) || sc.coords.length < 2) continue;
+          let s_lat = Number(sc.coords[0]);
+          let s_lng = Number(sc.coords[1]);
+          if (!Number.isFinite(s_lat) || !Number.isFinite(s_lng)) continue;
+          let max_p = 0;
+          if (sc.population && typeof sc.population === "object") {
+            let pvals = Object.values(sc.population);
+            for (let pv_i = 0; pv_i < pvals.length; pv_i++) {
+              let pv = Number(pvals[pv_i] || 0);
+              if (pv > max_p) max_p = pv;
+            }
+          }
+          let s_stems = new Set();
+          let add_s = function (arg0_n) {
+            let ns = viscount_entity_audit.normaliseEntityStem(arg0_n || "");
+            if (ns && ns.length >= 2) s_stems.add(ns);
+          };
+          add_s(sc.name);
+          if (Array.isArray(sc.other_names)) {
+            for (let on_i = 0; on_i < sc.other_names.length; on_i++) add_s(sc.other_names[on_i]);
+          }
+          let is_agg = Boolean(sc.is_agglomeration || sc.population_scope === "metro" || /\(agglomeration\??\)|\(metro\)/i.test(String(sc.name || sk || "")));
+          let sgx = Math.round(s_lat*4);
+          let sgy = Math.round(s_lng*4);
+          let sgk = `${sgx},${sgy}`;
+          if (!st_grid.has(sgk)) st_grid.set(sgk, []);
+          st_grid.get(sgk).push({
+            country: String(sc.country || ""),
+            is_agg: is_agg,
+            is_capital: Boolean(sc.is_capital),
+            key: sc.key || sk,
+            lat: s_lat,
+            lng: s_lng,
+            max_pop: max_p,
+            name: String(sc.name || ""),
+            stems: s_stems
+          });
+        }
+      }
+
+      if (st_grid.size > 0) {
+        let claimed_st_keys = new Map();
+        for (let f_i = 0; f_i < target_files.length; f_i++) {
+          let sf = target_files[f_i];
+          let is_cap_shard = sf === "00_capitals.json";
+          let arr = shard_map.get(sf) || [];
+          let aligned_arr = [];
+
+          for (let i = 0; i < arr.length; i++) {
+            let rec = arr[i];
+            if (!rec || !Array.isArray(rec.coords) || rec.coords.length < 2) {
+              aligned_arr.push(rec);
+              continue;
+            }
+            let r_lng = Number(rec.coords[0]);
+            let r_lat = Number(rec.coords[1]);
+            let r_stems = new Set();
+            let r_main_stem = viscount_entity_audit.normaliseEntityStem(rec.name || "");
+            if (r_main_stem) r_stems.add(r_main_stem);
+            if (Array.isArray(rec.historical_names)) {
+              for (let h_i = 0; h_i < rec.historical_names.length; h_i++) {
+                let hs = viscount_entity_audit.normaliseEntityStem(rec.historical_names[h_i] ? rec.historical_names[h_i].name : "");
+                if (hs) r_stems.add(hs);
+              }
+            }
+
+            let rec_ctry_norm = stadester_name_normaliser ? stadester_name_normaliser.normaliseCountryName(rec.country || "") : String(rec.country || "").trim().toLowerCase();
+            let sgx = Math.round(r_lat*4);
+            let sgy = Math.round(r_lng*4);
+            let best_st = null;
+            let best_score = -Infinity;
+            let best_dist = 999999;
+
+            for (let dx = -1; dx <= 1; dx++) {
+              for (let dy = -1; dy <= 1; dy++) {
+                let sb = st_grid.get(`${sgx + dx},${sgy + dy}`);
+                if (!sb) continue;
+                for (let s_i = 0; s_i < sb.length; s_i++) {
+                  let st = sb[s_i];
+                  let st_ctry_norm = stadester_name_normaliser ? stadester_name_normaliser.normaliseCountryName(st.country || "") : String(st.country || "").trim().toLowerCase();
+                  if (rec_ctry_norm && st_ctry_norm && rec_ctry_norm !== st_ctry_norm) continue;
+                  let d_km = viscount_audit_utils.haversineKm(r_lat, r_lng, st.lat, st.lng);
+                  if (d_km > 12.0) continue;
+
+                  let stem_hit = Boolean(
+                    (r_main_stem && st.stems.has(r_main_stem)) ||
+                    viscount_entity_audit.areEquivalentExonyms(rec.name || "", st.name, profiles)
+                  );
+                  if (!stem_hit) {
+                    r_stems.forEach(function (arg0_rs) {
+                      if (st.stems.has(arg0_rs)) stem_hit = true;
+                    });
+                  }
+                  if (!stem_hit && !(is_cap_shard && d_km <= 3.0)) continue;
+
+                  let sc_val = (stem_hit ? 1e9 : 0) +
+                    (!st.is_agg ? 1e8 : 0) +
+                    (st.is_capital ? 1e7 : 0) +
+                    Math.min(1e6, st.max_pop/100) -
+                    d_km*1000;
+                  if (sc_val > best_score) {
+                    best_score = sc_val;
+                    best_st = st;
+                    best_dist = d_km;
+                  }
+                }
+              }
+            }
+
+            if (best_st) {
+              if (claimed_st_keys.has(best_st.key)) {
+                let prev_rec = claimed_st_keys.get(best_st.key);
+                let comb_aliases = (Array.isArray(prev_rec.other_names) ? prev_rec.other_names : [])
+                  .concat([rec.name])
+                  .concat(Array.isArray(rec.other_names) ? rec.other_names : []);
+                let dedup_a = city_metadata_merger.deduplicateOtherNamesCI(
+                  prev_rec.name,
+                  prev_rec.historical_names,
+                  comb_aliases,
+                  prev_rec.country || "",
+                  Array.isArray(prev_rec.coords) ? [Number(prev_rec.coords[1]), Number(prev_rec.coords[0])] : []
+                );
+                if (dedup_a.length > 0) prev_rec.other_names = dedup_a;
+                stats.collisions_merged++;
+                continue;
+              }
+              rec.key = best_st.key;
+              claimed_st_keys.set(best_st.key, rec);
+            }
+            aligned_arr.push(rec);
+          }
+
+          shard_map.set(sf, aligned_arr);
+        }
+      }
 
       for (let f_i = 0; f_i < target_files.length; f_i++) {
         let sf = target_files[f_i];

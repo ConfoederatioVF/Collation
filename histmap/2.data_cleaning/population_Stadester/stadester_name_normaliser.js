@@ -161,8 +161,26 @@
         s = s.replace(/\s+(?:miska|selyshchna|silska)\s+hromada$/i, "").trim();
       if (country_low === "russia" || country_low === "belarus" || country_low === "kazakhstan")
         s = s.replace(/^(?:Gorodskoy\s+okrug|Gorod|PGT)\s+/i, "").trim();
-      if (country_low === "germany" || country_low === "austria" || country_low === "switzerland")
-        s = s.replace(/\ba\.\s*d\.\s*/gi, "an der ").trim();
+      if (country_low === "germany" || country_low === "austria" || country_low === "switzerland") {
+        s = s
+          .replace(/^(?:Universitäts-\s*und\s*Hansestadt|Freie\s+und\s+Hansestadt|Hansestadt|Kreisfreie\s+Stadt|Landeshauptstadt|Große\s+Kreisstadt|Bergstadt|Kurstadt|Stadt)\s+/i, "")
+          .replace(/\ba\.\s*d\.\s*/gi, "an der ")
+          .replace(/\bb\.\s*Pr\./gi, "bei Prag")
+          .replace(/\bb\.\s*München/gi, "bei München")
+          .replace(/\bv\.\s*d\.\s*Höhe/gi, "vor der Höhe")
+          .replace(/\bi\.\s*d\.\s*OPf\./gi, "in der Oberpfalz")
+          .replace(/\ba\.\s*M\./gi, "am Main")
+          .replace(/\ba\.\s*Lech/gi, "am Lech")
+          .trim();
+      }
+      if (country_low === "czech republic" || country_low === "czechia") {
+        s = s
+          .replace(/\ba\.\s*d\.\s*Moldau/gi, "nad Vltavou")
+          .replace(/\bb\.\s*Pr\./gi, "bei Prag")
+          .trim();
+      }
+      if (country_low === "bangladesh" || country_low === "india")
+        s = s.replace(/\s+(?:Adarsha\s+Sadar|Sadar\s+Dakshin|Sadar)$/i, "").trim();
       if (country_low === "malta")
         s = s.replace(/\s+and\s+comino$/i, "").trim();
       if (country_low === "turkey") {
@@ -212,7 +230,7 @@
       if (country_low === "united kingdom" || country_low === "ireland")
         s = s.replace(/^'+([A-Z])/, "$1");
 
-      s = s.replace(/`/g, "");
+      s = s.replace(/`/g, "").replace(/\\/g, " ").trim();
       let is_slavic_hacek = (!country_low || HACEK_APOSTROPHE_COUNTRIES.has(country_low));
       if (is_slavic_hacek) {
         s = s
@@ -322,13 +340,27 @@
       //Function body
       let low = s.toLowerCase();
       let fold_low = this.foldAscii(s);
-      if (/^(?:teste\d*|unknown|unnamed|vanished|none|null|petroglyph|rock_painting|geoglifo(?:\s+\d+)?|greater valletta|rabat-sale|ruhr|hatay|northern beaches|lubnan ash-shamali|arzhan|mugur-sargol|lekoa)$/i.test(fold_low))
+      if (/^(?:teste\d*|unknown|unnamed|vanished|none|null|petroglyph|rock_painting|geoglifo(?:\s+\d+)?|greater valletta|rabat-sale|ruhr|hatay|northern beaches|lubnan ash-shamali|arzhan|mugur-sargol|lekoa|latgale)$/i.test(fold_low))
         return true;
-      if (/\b(?:marz|meng|shire|pisanitsa|megaliths?|circuit wall|kurgan|tumulus|dolmen|menhir|arzhan(?:[- ]\d+)?|mura\s+dell|al-malikeyyeh|borinage)\b|\bmah\.?$|\bba'?albak\s*-\s*al-harmal\b|\ben omgewing$/i.test(fold_low))
+      if (/_wfl|_none|proyecto_|cmn_|sitionn_fase_/i.test(low))
+        return true;
+      if (/\b(?:marz|meng|shire|pisanitsa|megaliths?|circuit wall|kurgan|tumulus|dolmen|menhir|arzhan(?:[- ]\d+)?|mura\s+dell|al-malikeyyeh|borinage|petroglifos|petroglyph|dhibi|rockshelter)\b|\bmah\.?$|\bba'?albak\s*-\s*al-harmal\b|\ben omgewing$/i.test(fold_low))
+        return true;
+      if (/\b(?:parcela\s+[a-z0-9]|sector\s+[a-z0-9]|antler mattock|roman city wall of|boulevard p[eé]riph[eé]rique|transport museum|opera house|uniwersytet)\b|s\.r\.o\.|\b[A-Z]\d{3}\b/i.test(s))
+        return true;
+      if (/^\d+[-–]?\d*\s+.*(?:street|road|lane|avenue|house|terrace)\b/i.test(s) || /^(?:Rue|Quai|ZAC|Ilot)\s+/i.test(s))
+        return true;
+      if (/^(?:Gorz[oó]w Wielkopolski|Inowroc[lł]aw-M[aą]twy|[SŚ]rem)\s+\d+$/i.test(s))
         return true;
       if (/^(?:[A-Z]{1,4}[- ]?\d{2,4}(?:[-/]\d+)?|\d{1,3}[A-Z]{1,3}[- ]?\d*|[A-Z]\.\d+\.\d+|[A-Z]-\w{1,4})$/.test(s))
         return true;
       if (/^[A-Z]\.[A-Z]\.\d+/.test(s))
+        return true;
+      if (/^bom\s+/i.test(s) || /^basin\s+of\s+mexico\b/i.test(s) || /\bsurvey(?:\s+site)?\b/i.test(s) || /\b(?:CU|TE|TM|TX|IX|CH|ZU|XO)(?:-[A-Z]{1,3}){1,3}-\d+\b/i.test(s))
+        return true;
+      if (/^(?:oficina salitrera|ruinas de|rejon placu|osiedle\s+|camino\s+in[ck]a\b)/i.test(s) || /^(?:estructuras|sba)$/i.test(s) || /^[A-Z]{2}\d{2}\s*-\s*/.test(s))
+        return true;
+      if (/\b(?:settlement|survey|region)$/i.test(s) || /\b(?:sewage treatment|waste treatment|playing fields|development zones?|interchange and library)\b/i.test(s) || /\blake\s+(?:north|south|east|west)\b/i.test(s) || /^cerro\s+de\s+/i.test(s))
         return true;
 
       if (this._cached_non_hab_res === undefined) {
@@ -546,9 +578,41 @@
       }
 
       working = working.replace(/\s*\(mod_[a-z0-9_]+\)\s*/gi, " ").trim();
+      working = working.replace(/\bv\.d\.\s*/g, "vor der ").replace(/\ba\.d\.\s*/g, "an der ").replace(/\bi\.d\.OPf\.\s*/g, "in der Oberpfalz ");
+      working = working.replace(/^(?:a|de)\s+(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽŁŚŹŻ])/, "").trim();
+      if (/^Brandeis Elbe\s*\+\s*Altbunzlau$/i.test(working))
+        working = "Brandýs nad Labem-Stará Boleslav";
+      else if (/\s+\+\s+/.test(working))
+        working = working.split(/\s+\+\s+/)[0].trim();
       working = this.decodeHaceksAndQuotes(working, country);
       working = this.cleanStatisticalWrapper(working, country);
       working = this.toLocaleTitleCase(working);
+
+      let c_low = this.normaliseCountryName(country);
+      let w_low = working.toLowerCase();
+      if ((c_low === "austria" || c_low === "austria and czechoslovakia") && w_low === "vienna") working = "Wien";
+      else if (c_low === "germany" && (w_low === "munich" || w_low === "munchen" || w_low === "muenchen")) working = "München";
+      else if (c_low === "germany" && w_low === "nuremberg") working = "Nürnberg";
+      else if (c_low === "germany" && w_low === "cologne") working = "Köln";
+      else if (c_low === "germany" && w_low === "dusseldorf") working = "Düsseldorf";
+      else if (c_low === "germany" && w_low === "wurzburg") working = "Würzburg";
+      else if (c_low === "germany" && w_low === "luneburg") working = "Lüneburg";
+      else if (c_low === "germany" && w_low === "lunen") working = "Lünen";
+      else if ((c_low === "czech republic" || c_low === "czechia" || c_low === "austria and czechoslovakia") && w_low === "prague") working = "Praha";
+      else if (c_low === "poland" && w_low === "warsaw") working = "Warszawa";
+      else if (c_low === "poland" && w_low === "cracow") working = "Kraków";
+      else if (c_low === "poland" && w_low === "gorzow wielkopolski") working = "Gorzów Wielkopolski";
+      else if (c_low === "poland" && w_low === "poznan") working = "Poznań";
+      else if (c_low === "poland" && w_low === "wroclaw") working = "Wrocław";
+      else if (c_low === "poland" && w_low === "miedzyrzecz") working = "Międzyrzecz";
+      else if (c_low === "poland" && w_low === "wrzesnia") working = "Września";
+      else if (c_low === "poland" && w_low === "srem") working = "Śrem";
+      else if (c_low === "poland" && w_low === "koslin") working = "Köslin";
+      else if (c_low === "poland" && w_low === "butow") working = "Bütow";
+      else if (c_low === "italy" && w_low === "florence") working = "Firenze";
+      else if (c_low === "italy" && w_low === "naples") working = "Napoli";
+      else if (c_low === "italy" && w_low === "rome") working = "Roma";
+      else if (c_low === "denmark" && w_low === "copenhagen") working = "København";
 
       //Return statement
       return { extra_aliases: extra_aliases, name: working };

@@ -1530,6 +1530,41 @@
         continue;
       }
 
+      if (/^austria and czechoslovakia$/i.test(String(c.country || "").trim()) && Array.isArray(c.coords)) {
+        c.country = (Number(c.coords[0]) >= 48.9) ? "Czech Republic" : "Austria";
+      }
+
+      // SC-04: Enforce documented abandonment ceilings on ancient ruins
+      let ruin_max_year = null;
+      let nm_low_sc = String(c.name || "").trim().toLowerCase();
+      if (nm_low_sc === "seleucia on the tigris") ruin_max_year = 300;
+      else if (nm_low_sc === "simurrum") ruin_max_year = -1500;
+      else if (nm_low_sc === "deru") ruin_max_year = 600;
+      else if (nm_low_sc === "wāsiṭ" || nm_low_sc === "wasit") ruin_max_year = 1600;
+      else if (nm_low_sc === "pandu rajar dhibi") ruin_max_year = -500;
+      if (ruin_max_year !== null && c.population && typeof c.population === "object") {
+        let r_yrs = Object.keys(c.population);
+        for (let ry = 0; ry < r_yrs.length; ry++) {
+          let ryn = parseInt(r_yrs[ry], 10);
+          if (Number.isFinite(ryn) && ryn > ruin_max_year) delete c.population[r_yrs[ry]];
+        }
+      }
+
+      // SC-05: Enforce documented colonial/modern foundation floors (prevent 1400 AD backprojection)
+      let col_min_year = null;
+      if (nm_low_sc === "canning" && /india/i.test(String(c.country || ""))) col_min_year = 1858;
+      else if (/^char\s*fasson$/i.test(nm_low_sc)) col_min_year = 1885;
+      else if (nm_low_sc === "berhampore" || nm_low_sc === "baharampur") col_min_year = 1757;
+      else if (nm_low_sc === "bakerganj") col_min_year = 1741;
+      else if (nm_low_sc === "english bazar") col_min_year = 1680;
+      if (col_min_year !== null && c.population && typeof c.population === "object") {
+        let c_yrs = Object.keys(c.population);
+        for (let cy = 0; cy < c_yrs.length; cy++) {
+          let cyn = parseInt(c_yrs[cy], 10);
+          if (Number.isFinite(cyn) && cyn < col_min_year) delete c.population[c_yrs[cy]];
+        }
+      }
+
       if (normaliser) {
         let norm_res = normaliser.normaliseCityName(c.name, c.country);
         if (norm_res.name && norm_res.name !== c.name) {
@@ -1638,7 +1673,7 @@
       let k = keys_after_clean[i];
       let c = stadester_obj[k];
       if (!c || !normaliser) continue;
-      if (Number.isFinite(c._annexation_year)) continue;
+      if (Number.isFinite(c._annexation_year) && !normaliser.resolveParentMunicipality(c.name, c.country, c.coords)) continue;
 
       let p_meta = normaliser.resolveParentMunicipality(c.name, c.country, c.coords);
       if (!p_meta) {

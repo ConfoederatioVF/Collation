@@ -572,6 +572,21 @@
       population_Stadester_ghs_pop.restoreEmpiricalPolarisTrajectories(city_entries, options, stadester_obj);
     population_Stadester_ghs_pop.restoreManualEntries(city_entries, options);
     population_Stadester_ghs_pop.restoreWarDisplacementYears(city_entries, options);
+
+    //3E. Re-enforce endonymic Latin-script & abbreviation normalisation after GHSL cluster name integration
+    if (typeof stadester_name_normaliser !== "undefined" && typeof stadester_name_normaliser.normaliseCityName === "function") {
+      let post_keys = Object.keys(stadester_obj);
+      for (let i = 0; i < post_keys.length; i++) {
+        let city = stadester_obj[post_keys[i]];
+        if (!city || !city.name) continue;
+        let norm_res = stadester_name_normaliser.normaliseCityName(city.name, city.country);
+        if (norm_res && norm_res.name && norm_res.name !== city.name) {
+          if (!Array.isArray(city.other_names)) city.other_names = [];
+          if (!city.other_names.includes(city.name)) city.other_names.push(city.name);
+          city.name = norm_res.name;
+        }
+      }
+    }
     
     //Return statement
     return stadester_obj;
