@@ -232,6 +232,120 @@ let path = require("path");
           if (so.code_sha256 !== code_sha)
             errors.push(`Stale auditor_signoff.json SHA-256 (${so.code_sha256} !== ${code_sha})`);
         }
+      } else if (phase === 5) {
+        let signoff_p = path.join(root_dir, "tests/uud_audit/auditor_signoff.json");
+        if (!fs.existsSync(signoff_p)) {
+          errors.push("INV-07: Missing tests/uud_audit/auditor_signoff.json");
+        } else {
+          let so = JSON.parse(fs.readFileSync(signoff_p, "utf8"));
+          if (!so.approved || Number(so.defects_found) !== 0)
+            errors.push("INV-07: uud_visual_auditor signoff not approved with 0 defects");
+          if (so.code_sha256 !== code_sha)
+            errors.push(`INV-07: Stale auditor_signoff.json SHA-256 (${so.code_sha256} !== ${code_sha})`);
+        }
+        if (fs.existsSync(path.join(root_dir, "histmap/5.data_visualisationstadester")))
+          errors.push("Accidental misnamed directory exists: histmap/5.data_visualisationstadester");
+        let dv_base = "F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_2.0";
+        let shard_dirs = [
+          path.join(root_dir, "histmap/3.data_transform/population_Stadester.transform/stadester"),
+          path.join(root_dir, "histmap/5.data_visualisation/stadester/stadester_2.0"),
+          dv_base
+        ];
+        let ref_manifest = null;
+        for (let s = 0; s < shard_dirs.length; s++) {
+          let sdir = shard_dirs[s];
+          if (!fs.existsSync(sdir)) {
+            errors.push(`Missing Stadester shard directory: ${sdir}`);
+            continue;
+          }
+          let man_p = path.join(sdir, "stadester_manifest.json");
+          if (!fs.existsSync(man_p)) {
+            errors.push(`Missing stadester_manifest.json in ${sdir}`);
+          } else {
+            let man = JSON.parse(fs.readFileSync(man_p, "utf8"));
+            let tot = Number(man.total_cities || man.total_entries || 0);
+            if (tot < 600000)
+              errors.push(`Manifest total_cities < 600000 (${tot}) in ${sdir}`);
+            if (!ref_manifest) {
+              ref_manifest = { dir: sdir, man: man };
+            } else {
+              let ref_tot = Number(ref_manifest.man.total_cities || ref_manifest.man.total_entries || 0);
+              if (tot !== ref_tot)
+                errors.push(`Manifest total_cities mismatch (${tot} in ${sdir} !== ${ref_tot} in ${ref_manifest.dir})`);
+              let r1 = Array.isArray(ref_manifest.man.regions) ? ref_manifest.man.regions : [];
+              let r2 = Array.isArray(man.regions) ? man.regions : [];
+              if (r1.length !== r2.length) {
+                errors.push(`Manifest region count mismatch in ${sdir}`);
+              } else {
+                for (let ri = 0; ri < r1.length; ri++) {
+                  if (r1[ri].key !== r2[ri].key || Number(r1[ri].count) !== Number(r2[ri].count) || JSON.stringify(r1[ri].files) !== JSON.stringify(r2[ri].files))
+                    errors.push(`Manifest mismatch for ${r1[ri].key} between ${ref_manifest.dir} and ${sdir}`);
+                }
+              }
+            }
+          }
+          let files = fs.readdirSync(sdir).filter(function (arg0_f) { return arg0_f.endsWith(".json"); });
+          if (files.length === 0)
+            errors.push(`No .json shard files in ${sdir}`);
+          for (let fi = 0; fi < files.length; fi++) {
+            let st = fs.statSync(path.join(sdir, files[fi]));
+            if (st.size > 200*1024*1024)
+              errors.push(`Shard exceeds 200 MB limit (${Math.round(st.size/(1024*1024))} MB): ${path.join(sdir, files[fi])}`);
+          }
+        }
+        let cm_dir = path.join(dv_base, "city_metadata");
+        let req_cm = [
+          "city_metadata_manifest.json", "00_capitals.json", "01_centaur.json", "02_polaris.json",
+          "03_preta.json", "04_jade.json", "05_indus.json", "06_castle.json", "07_mandala.json",
+          "08_saray.json", "09_handbook.json", "10_magnetic.json", "11_quipu.json", "12_jaguar.json",
+          "13_austral.json", "14_nicethi.json"
+        ];
+        for (let i = 0; i < req_cm.length; i++) {
+          let cp = path.join(cm_dir, req_cm[i]);
+          if (!fs.existsSync(cp) || fs.statSync(cp).size < 10)
+            errors.push(`Missing or empty city_metadata shard: ${cp}`);
+        }
+      } else if (phase === 6) {
+        let projects = contract.canonical_macro_regions || [
+          "CENTAUR", "POLARIS", "PRETA", "JADE", "INDUS", "CASTLE", "MANDALA",
+          "SARAY", "HANDBOOK", "MAGNETIC", "QUIPU", "JAGUAR", "AUSTRAL", "NICETHI"
+        ];
+        let audit_script = path.join(root_dir, ".agents/skills/population-regional-study/scripts/audit_city_metadata.js");
+        for (let i = 0; i < projects.length; i++) {
+          let pk = String(projects[i]);
+          let slug = pk.toLowerCase();
+          let bdir = path.join(root_dir, "tests/toponymy_batches", slug);
+          let p1_so = path.join(bdir, "pass1/auditor_signoff.json");
+          let p2_rp = path.join(bdir, "pass2/pass2_whg_geohack_report.json");
+          if (!fs.existsSync(p1_so)) {
+            errors.push(`Missing Pass-1 auditor_signoff.json for ${pk}`);
+          } else {
+            let so = JSON.parse(fs.readFileSync(p1_so, "utf8"));
+            if (!so.approved || Number(so.errors_remaining) !== 0)
+              errors.push(`Pass-1 auditor_signoff.json not approved for ${pk}`);
+          }
+          if (!fs.existsSync(p2_rp)) {
+            errors.push(`Missing Pass-2 report for ${pk}`);
+          } else {
+            let rp = JSON.parse(fs.readFileSync(p2_rp, "utf8"));
+            if (Number(rp.llm_agents_used) !== 0)
+              errors.push(`Pass-2 used LLM agents for ${pk} (forbidden)`);
+          }
+          let chk = child_process.spawnSync(process.execPath, [audit_script, `--project=${pk}`], { encoding: "utf8" });
+          if (chk.status !== 0)
+            errors.push(`audit_city_metadata.js failed for ${pk}: ${(chk.stderr || chk.stdout || "").slice(0, 200)}`);
+        }
+      } else if (phase === 7) {
+        let rb_script = path.join(root_dir, ".agents/skills/population-regional-study/scripts/run_bounded.js");
+        let orph = child_process.spawnSync(process.execPath, [rb_script, "--audit-orphans"], { encoding: "utf8" });
+        if (orph.status !== 0)
+          errors.push(`run_bounded.js --audit-orphans failed: ${orph.stderr || orph.stdout}`);
+        let dv_dist = "F:/Active Projects/Project 1436 - Dataview/dist";
+        if (!fs.existsSync(dv_dist) || fs.readdirSync(dv_dist).length === 0)
+          errors.push("Missing Dataview dist/ build output");
+        let intellte_sync_dir = "E:/Active Projects/Project 1746 - Intellte";
+        if (!fs.existsSync(intellte_sync_dir))
+          errors.push("Missing Intellte root directory");
       }
 
       //Return statement

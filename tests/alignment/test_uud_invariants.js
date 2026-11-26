@@ -147,6 +147,14 @@ let path = require("path");
     "Wiesbaden-Germany": {
       key: "Wiesbaden-Germany", name: "Wiesbaden", country: "Germany",
       coords: [50.07219, 8.25329], population: { 1800: 8650, 2025: 339176 }
+    },
+    "Gross Legitten-Germany": {
+      key: "Gross Legitten-Germany", name: "Groß Legitten", other_names: ["Turgenevo"], country: "Germany",
+      coords: [54.82, 20.92], population: { 1910: 420, 1939: 510 }
+    },
+    "Turgenevo-Russia": {
+      key: "Turgenevo-Russia", name: "Turgenevo", country: "Russia",
+      coords: [54.8205, 20.9205], population: { 1959: 480, 2021: 650 }, viscount_project: "POLARIS"
     }
   };
   require("../../histmap/2.data_cleaning/population_Stadester/stadester_uud_fixes.js");
@@ -155,6 +163,8 @@ let path = require("path");
   assert.strictEqual(mock_frontier["Kaliningrad-Russia"].population[1800], 59000, "Kaliningrad MUST retain Konigsberg 1800 pop");
   assert.ok(!mock_frontier["Weisbaden-Germany"] && mock_frontier["Wiesbaden-Germany"], "Weisbaden MUST merge into Wiesbaden");
   assert.strictEqual(mock_frontier["Wiesbaden-Germany"].population[1800], 8650, "Wiesbaden MUST NOT keep Chandler Weisbaden 1800 spike");
+  assert.ok(!mock_frontier["Gross Legitten-Germany"] && mock_frontier["Turgenevo-Russia"], "other_names cross-frontier match MUST merge into Turgenevo");
+  assert.strictEqual(mock_frontier["Turgenevo-Russia"].population[1910], 420, "Turgenevo MUST retain pre-1945 population");
 
   console.log("[test_uud_invariants] PASS: All INV-01, INV-02, INV-13, INV-14 assertions succeeded.");
 }

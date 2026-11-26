@@ -1515,6 +1515,14 @@
             delete c.population[cm_yrs[cy]];
         }
       }
+      if (/^frankenthal$/i.test(String(c.name || "").trim()) && c.population) {
+        let fk_yrs = Object.keys(c.population);
+        for (let fy = 0; fy < fk_yrs.length; fy++) {
+          let fyn = parseInt(fk_yrs[fy], 10);
+          if (Number.isFinite(fyn) && fyn < 1850 && Number(c.population[fk_yrs[fy]]) > 15000)
+            delete c.population[fk_yrs[fy]];
+        }
+      }
 
       if (normaliser && normaliser.isJunkOrSurveyCode(c.name)) {
         delete stadester_obj[k];
@@ -1961,8 +1969,11 @@
         let pc_fold = normaliser ? normaliser.foldAscii(pc.name) : String(pc.name || "").toLowerCase();
         let pc_gid = exonym_group_id.has(pc_fold) ? exonym_group_id.get(pc_fold) : -2;
         let exonym_hit = (tc_gid >= 0 && tc_gid === pc_gid);
-        let comp_1945 = (d_km <= 1.2) && ((pc_mm[1] <= 1945 && tc_mm[0] >= 1945) || (tc_mm[1] <= 1945 && pc_mm[0] >= 1945));
-        if (!exonym_hit && !comp_1945) continue;
+        let semantic_hit = exonym_hit || (
+          typeof population_Stadester_uud.checkExactNameMatch === "function" &&
+          population_Stadester_uud.checkExactNameMatch(pc, tc)
+        );
+        if (!semantic_hit) continue;
         let keep_tc = (tc_mm[1] > pc_mm[1]) || (tc_mm[1] === pc_mm[1] && String(tc.viscount_project || "") === "POLARIS");
         if (keep_tc) {
           mergeIntoParent(tk, pk, null);

@@ -1281,6 +1281,14 @@
             delete entry.population[ch_yrs[y]];
         }
       }
+      if (/^frankenthal$/i.test(String(entry.name || "").trim()) && entry.population) {
+        let fr_yrs = Object.keys(entry.population);
+        for (let y = 0; y < fr_yrs.length; y++) {
+          let yn = parseInt(fr_yrs[y], 10);
+          if (Number.isFinite(yn) && yn < 1850 && Number(entry.population[fr_yrs[y]]) > 15000)
+            delete entry.population[fr_yrs[y]];
+        }
+      }
       let ov = wcp_overrides[k] || (entry.country ? wcp_overrides[`${entry.country}.${k}`] : null);
       if (!ov) continue;
       if (ov.resolution === "non_settlement") { delete wcp_obj[k]; continue; }

@@ -2320,7 +2320,46 @@ def build_chapter_gazetteer(ch, pools, sov_polys):
           if pop:
             wave_records[2].append({**rec, "name": r_name, "region_id": rid, "pop": pop, "found_yr": max(mf or -10000, min(min(int(y) for y in pop), 1850))})
 
-    # Wave 1C: Pale of Settlement & East Prussia Scholarly Empirical Datasets (zero synthetic back-projections)
+    # Wave 1B / 2: Official Eurostat GISCO LAU (34 countries) + ONS UK Built-Up Areas 2022 (already in Wave 1 for d1 > 1945)
+    for rec in ([] if d1 > 1945 else (pools["eurostat_lau"] + pools["ons_uk"])):
+      rid = sample_region_id(rec["lat"], rec["lon"], mask_arr, rgb_to_reg)
+      if not rid:
+        continue
+      r_name = "Sofia" if (rec["name"] == "Stolichna" and rec["country"] == "Bulgaria") else rec["name"]
+      mf = get_modern_foundation_floor(r_name, rec["country"])
+      if mf and mf > d1:
+        continue
+      anchor_y = max(rec["pop"].keys())
+      pop = project_series(rec["pop"][anchor_y], anchor_y, grid_yrs)
+      if anchor_y >= 1990:
+        pop = {yk: min(yv, 12000 if int(yk) <= 1830 else (25000 if int(yk) < 1900 else yv)) for yk, yv in pop.items()}
+      if mf:
+        pop = {yk: yv for yk, yv in pop.items() if int(yk) >= mf}
+      if r_name == "Valletta" and rec["country"] == "Malta":
+        pop = {yk: min(yv, 23000 if int(yk) <= 1850 else (18666 if int(yk) <= 1970 else 6500)) for yk, yv in pop.items()}
+      if pop:
+        wave_records[2].append({**rec, "name": r_name, "region_id": rid, "pop": pop, "found_yr": max(mf or -10000, min(min(int(y) for y in pop), 1850))})
+
+    for rec in pools["nat_pool"]:
+      rid = sample_region_id(rec["lat"], rec["lon"], mask_arr, rgb_to_reg)
+      if not rid:
+        continue
+      r_name = "Sofia" if (rec["name"] == "Stolichna" and rec["country"] == "Bulgaria") else rec["name"]
+      mf = get_modern_foundation_floor(r_name, rec["country"])
+      if mf and mf > d1:
+        continue
+      pop = project_series(rec["pop_2020"], 2020, grid_yrs)
+      pop = {yk: min(yv, 12000 if int(yk) <= 1830 else (25000 if int(yk) < 1900 else yv)) for yk, yv in pop.items()}
+      if mf:
+        pop = {yk: yv for yk, yv in pop.items() if int(yk) >= mf}
+      if r_name == "Valletta" and rec["country"] == "Malta":
+        pop = {yk: min(yv, 23000 if int(yk) <= 1850 else (18666 if int(yk) <= 1970 else 6500)) for yk, yv in pop.items()}
+      if pop:
+        w_idx = 2 if not rec["is_crowd"] else 3
+        wave_records[w_idx].append({**rec, "name": r_name, "region_id": rid, "pop": pop, "found_yr": max(mf or -10000, min(min(int(y) for y in pop), 1850))})
+
+  # Wave 1C (All d1 >= 1000 chapters): Pale of Settlement & East Prussia Scholarly Empirical Datasets
+  if d1 >= 1000:
     scholarly_dir = os.path.join(SDIR, "pale_east_prussia_scholarly")
     if "pale_scholarly" not in pools:
       cached_srows = []
@@ -2416,44 +2455,6 @@ def build_chapter_gazetteer(ch, pools, sov_polys):
         "pop": spop,
         "found_yr": min(int(y) for y in spop.keys()),
       })
-
-    # Wave 1B / 2: Official Eurostat GISCO LAU (34 countries) + ONS UK Built-Up Areas 2022 (already in Wave 1 for d1 > 1945)
-    for rec in ([] if d1 > 1945 else (pools["eurostat_lau"] + pools["ons_uk"])):
-      rid = sample_region_id(rec["lat"], rec["lon"], mask_arr, rgb_to_reg)
-      if not rid:
-        continue
-      r_name = "Sofia" if (rec["name"] == "Stolichna" and rec["country"] == "Bulgaria") else rec["name"]
-      mf = get_modern_foundation_floor(r_name, rec["country"])
-      if mf and mf > d1:
-        continue
-      anchor_y = max(rec["pop"].keys())
-      pop = project_series(rec["pop"][anchor_y], anchor_y, grid_yrs)
-      if anchor_y >= 1990:
-        pop = {yk: min(yv, 12000 if int(yk) <= 1830 else (25000 if int(yk) < 1900 else yv)) for yk, yv in pop.items()}
-      if mf:
-        pop = {yk: yv for yk, yv in pop.items() if int(yk) >= mf}
-      if r_name == "Valletta" and rec["country"] == "Malta":
-        pop = {yk: min(yv, 23000 if int(yk) <= 1850 else (18666 if int(yk) <= 1970 else 6500)) for yk, yv in pop.items()}
-      if pop:
-        wave_records[2].append({**rec, "name": r_name, "region_id": rid, "pop": pop, "found_yr": max(mf or -10000, min(min(int(y) for y in pop), 1850))})
-
-    for rec in pools["nat_pool"]:
-      rid = sample_region_id(rec["lat"], rec["lon"], mask_arr, rgb_to_reg)
-      if not rid:
-        continue
-      r_name = "Sofia" if (rec["name"] == "Stolichna" and rec["country"] == "Bulgaria") else rec["name"]
-      mf = get_modern_foundation_floor(r_name, rec["country"])
-      if mf and mf > d1:
-        continue
-      pop = project_series(rec["pop_2020"], 2020, grid_yrs)
-      pop = {yk: min(yv, 12000 if int(yk) <= 1830 else (25000 if int(yk) < 1900 else yv)) for yk, yv in pop.items()}
-      if mf:
-        pop = {yk: yv for yk, yv in pop.items() if int(yk) >= mf}
-      if r_name == "Valletta" and rec["country"] == "Malta":
-        pop = {yk: min(yv, 23000 if int(yk) <= 1850 else (18666 if int(yk) <= 1970 else 6500)) for yk, yv in pop.items()}
-      if pop:
-        w_idx = 2 if not rec["is_crowd"] else 3
-        wave_records[w_idx].append({**rec, "name": r_name, "region_id": rid, "pop": pop, "found_yr": max(mf or -10000, min(min(int(y) for y in pop), 1850))})
 
   # Wave 4: Gap-Hunter sweep guaranteeing EVERY RGB sub-region in `<stem>_areal_mask.png` has >= 5 settlements!
   reg_counts_pre = defaultdict(int)

@@ -28,7 +28,7 @@ NON_LATIN_RE = re.compile(r"[\u0370-\u03FF\u0400-\u04FF\u0530-\u058F\u0590-\u05F
 ARTICLE_INVERT_RE = re.compile(r"^.+,\s*(?:Al|El|As|Ash|Ar|Az|Ad|An|At|Le|La|Les|L'|Los|Las|Il|Lo|De|Den|Het|Der|Die|Das|The)$", re.I)
 INTRA_DISTRICT_RE = re.compile(r"(?:\b(?:arrondissement|borough|ward|stadtbezirk|bezirk|okrug|shiyakha|qism|kism|markaz|mahalle|alcaldia|delegacion|sub-?district)\b|^paris\s+\d{2}\b|\(mod_uk\)$|-(?:ku|gu|dong|quận)$)", re.I)
 
-WORKER_SCHEMA_MAP = {
+WORKER_SCHEMA_ENTRIES = {
   "type": "object",
   "properties": {
     "cities": {
@@ -43,8 +43,15 @@ WORKER_SCHEMA_MAP = {
             "maxItems": 2,
           },
           "names": {
-            "type": "object",
-            "additionalProperties": {"type": "string"},
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {"type": "string"},
+                "name": {"type": "string"},
+              },
+              "required": ["date", "name"],
+            },
           },
         },
         "required": ["coords", "names"],
@@ -255,7 +262,7 @@ async def invoke_agent_bounded (sem, prompt, schema, role, type_name, models, fa
             type_name=type_name,
             model=m,
           ),
-          timeout=int(args.get("agent_timeout_s", 240)),
+          timeout=int(args.get("agent_timeout_s", 360)),
         )
     except Exception as err:
       last_err = err
@@ -283,9 +290,17 @@ def build_worker_prompt (batch_idx, items, prior_errors=None, prior_draft=None):
       + "\n"
     )
   if prior_draft:
+    formatted_draft = []
+    for dr in prior_draft:
+      nm_raw = dr.get("names")
+      if isinstance(nm_raw, dict):
+        nm_list = [{"date": k, "name": v} for k, v in nm_raw.items()]
+      else:
+        nm_list = nm_raw
+      formatted_draft.append({"coords": dr["coords"], "names": nm_list})
     fix_block += (
       "\nPREVIOUS DRAFT FOR REJECTED COORDINATES:\n"
-      + json.dumps(prior_draft, ensure_ascii=False, separators=(",", ":"))
+      + json.dumps(formatted_draft, ensure_ascii=False, separators=(",", ":"))
       + "\n"
     )
 
@@ -293,7 +308,7 @@ def build_worker_prompt (batch_idx, items, prior_errors=None, prior_draft=None):
     f"Viscount Pass-1 Toponymy Worker — Batch {batch_idx:03d} ({len(items)} cities)\n\n"
     f"{STRUCTURAL_RULEBOOK}\n"
     f"{fix_block}\n"
-    f"Return 1-to-1 entries in `cities` preserving exact `[lng, lat]` `coords` and simplified chronological `names` (`yyyy.m.d`: string map).\n"
+    f"Return 1-to-1 entries in `cities` preserving exact `[lng, lat]` `coords` and simplified chronological `names` as an array of `{{\"date\":\"yyyy.m.d\",\"name\":\"Name\"}}` objects.\n"
     f"INPUT:\n{json.dumps(items, ensure_ascii=False, separators=(',', ':'))}\n"
   )
 
@@ -347,81 +362,107 @@ async def process_and_audit_batch (batch_path, sem):
   escalate_model = args.get("escalate_model", "pro")
   auditor_model = args.get("auditor_model", "inherit")
   max_rounds = int(args.get("max_audit_rounds", 3))
+  sub_chunk_size = max(1, int(args.get("sub_chunk_size", 60)))
+  sub_chunks = [items[i:i + sub_chunk_size] for i in range(0, len(items), sub_chunk_size)]
 
-  orig_by_ck = {coord_key(it["coords"]): it for it in items}
-  pending_cks = [coord_key(it["coords"]) for it in items]
-  resolved_by_ck = {}
-  prior_errors = None
-  approved = False
-  last_errors = []
-  round_num = 0
+  async def run_sub_chunk (sub_idx, sub_items):
+    orig_by_ck = {coord_key(it["coords"]): it for it in sub_items}
+    pending_cks = [coord_key(it["coords"]) for it in sub_items]
+    resolved_by_ck = {}
+    prior_errors = None
+    sub_approved = False
+    last_errors = []
+    sub_rounds = 0
+    tag = f"b{batch_idx:03d}" if len(sub_chunks) == 1 else f"b{batch_idx:03d}s{sub_idx + 1}"
 
-  for round_num in range(1, max_rounds + 1):
-    use_pro = round_num >= 3
-    w_models = [escalate_model, "inherit", primary_model] if use_pro else [primary_model, primary_model, "inherit"]
-    req_items = [orig_by_ck[ck] for ck in pending_cks]
-    prev_draft = [resolved_by_ck[ck] for ck in pending_cks if ck in resolved_by_ck] if round_num > 1 else None
-    w_prompt = build_worker_prompt(batch_idx, req_items, prior_errors, prev_draft)
+    for sub_rounds in range(1, max_rounds + 1):
+      use_pro = sub_rounds >= 3
+      w_models = [escalate_model, "inherit", primary_model] if use_pro else [primary_model, primary_model, "inherit"]
+      req_items = [orig_by_ck[ck] for ck in pending_cks]
+      prev_draft = [resolved_by_ck[ck] for ck in pending_cks if ck in resolved_by_ck] if sub_rounds > 1 else None
+      w_prompt = build_worker_prompt(batch_idx, req_items, prior_errors, prev_draft)
 
-    w_res = await invoke_agent_bounded(
-      sem=sem,
-      prompt=w_prompt,
-      schema=WORKER_SCHEMA_MAP,
-      role=f"Pass1 {'Pro' if use_pro else 'Flash'} b{batch_idx:03d} r{round_num} ({len(req_items)})",
-      type_name="self",
-      models=w_models,
-      fallback_schema=WORKER_SCHEMA_PAIRS,
-    )
+      w_res = await invoke_agent_bounded(
+        sem=sem,
+        prompt=w_prompt,
+        schema=WORKER_SCHEMA_ENTRIES,
+        role=f"Pass1 {'Pro' if use_pro else 'Flash'} {tag} r{sub_rounds} ({len(req_items)})",
+        type_name="self",
+        models=w_models,
+        fallback_schema=WORKER_SCHEMA_PAIRS,
+      )
 
-    for city in (w_res.get("cities") or []):
-      if not isinstance(city, dict) or not isinstance(city.get("coords"), list) or len(city["coords"]) < 2:
+      for city in (w_res.get("cities") or []):
+        if not isinstance(city, dict) or not isinstance(city.get("coords"), list) or len(city["coords"]) < 2:
+          continue
+        ck = coord_key(city["coords"])
+        if ck not in orig_by_ck:
+          continue
+        clean_map = normalise_names_map(city.get("names"))
+        resolved_by_ck[ck] = {"coords": orig_by_ck[ck]["coords"], "names": clean_map}
+
+      # Zero-cost programmatic pre-audit
+      prog_errs = programmatic_validate(req_items, resolved_by_ck)
+      if prog_errs:
+        bad_cks = sorted(set(e["coord_key"] for e in prog_errs if e["coord_key"] in orig_by_ck))
+        pending_cks = bad_cks if bad_cks else pending_cks
+        prior_errors = prog_errs
+        last_errors = prog_errs
+        log(f"[precheck] Batch {tag} r{sub_rounds}: {len(prog_errs)} schema error(s) on {len(pending_cks)} coord(s).")
         continue
-      ck = coord_key(city["coords"])
-      if ck not in orig_by_ck:
-        continue
-      clean_map = normalise_names_map(city.get("names"))
-      resolved_by_ck[ck] = {"coords": orig_by_ck[ck]["coords"], "names": clean_map}
 
-    # Zero-cost programmatic pre-audit
-    prog_errs = programmatic_validate(req_items, resolved_by_ck)
-    if prog_errs:
-      bad_cks = sorted(set(e["coord_key"] for e in prog_errs if e["coord_key"] in orig_by_ck))
-      pending_cks = bad_cks if bad_cks else pending_cks
-      prior_errors = prog_errs
-      last_errors = prog_errs
-      log(f"[precheck] Batch {batch_idx:03d} r{round_num}: {len(prog_errs)} schema error(s) on {len(pending_cks)} coord(s).")
-      continue
+      # Strictly separate read-only auditor checks only pending_cks
+      aud_orig = [orig_by_ck[ck] for ck in pending_cks]
+      aud_prop = [resolved_by_ck[ck] for ck in pending_cks]
+      aud_prompt = build_auditor_prompt(batch_idx, aud_orig, aud_prop)
+      aud_res = await invoke_agent_bounded(
+        sem=sem,
+        prompt=aud_prompt,
+        schema=AUDITOR_SCHEMA,
+        role=f"Pass1 Auditor {tag} r{sub_rounds} ({len(pending_cks)})",
+        type_name="research",
+        models=[auditor_model, auditor_model, primary_model],
+      )
+      aud_errs = list(aud_res.get("errors") or [])
+      if aud_res.get("approved") is True and len(aud_errs) == 0:
+        sub_approved = True
+        last_errors = []
+        break
 
-    # Strictly separate read-only auditor checks only pending_cks
-    aud_orig = [orig_by_ck[ck] for ck in pending_cks]
-    aud_prop = [resolved_by_ck[ck] for ck in pending_cks]
-    aud_prompt = build_auditor_prompt(batch_idx, aud_orig, aud_prop)
-    aud_res = await invoke_agent_bounded(
-      sem=sem,
-      prompt=aud_prompt,
-      schema=AUDITOR_SCHEMA,
-      role=f"Pass1 Auditor b{batch_idx:03d} r{round_num} ({len(pending_cks)})",
-      type_name="research",
-      models=[auditor_model, auditor_model, primary_model],
-    )
-    aud_errs = list(aud_res.get("errors") or [])
-    if aud_res.get("approved") is True and len(aud_errs) == 0:
-      approved = True
-      last_errors = []
-      break
+      bad_cks = []
+      for e in aud_errs:
+        ek = str(e.get("coord_key") or "").strip()
+        if ek in orig_by_ck and ek not in bad_cks:
+          bad_cks.append(ek)
+      if bad_cks:
+        pending_cks = bad_cks
+      prior_errors = aud_errs
+      last_errors = aud_errs
+      log(f"[auditor] Batch {tag} r{sub_rounds} rejected {len(aud_errs)} error(s) across {len(pending_cks)} coord(s); patching surgically.")
 
-    bad_cks = []
-    for e in aud_errs:
-      ek = str(e.get("coord_key") or "").strip()
-      if ek in orig_by_ck and ek not in bad_cks:
-        bad_cks.append(ek)
-    if bad_cks:
-      pending_cks = bad_cks
-    prior_errors = aud_errs
-    last_errors = aud_errs
-    log(f"[auditor] Batch {batch_idx:03d} r{round_num} rejected {len(aud_errs)} error(s) across {len(pending_cks)} coord(s); patching surgically.")
+    return {
+      "approved": sub_approved,
+      "errors": last_errors,
+      "resolved_by_ck": resolved_by_ck,
+      "rounds": sub_rounds,
+    }
 
-  final_cities = [resolved_by_ck[coord_key(it["coords"])] for it in items if coord_key(it["coords"]) in resolved_by_ck]
+  sub_results = await asyncio.gather(*(run_sub_chunk(idx, sc) for idx, sc in enumerate(sub_chunks)))
+  merged_resolved = {}
+  all_sub_errors = []
+  max_sub_round = 0
+  approved = True
+  for sr in sub_results:
+    merged_resolved.update(sr["resolved_by_ck"])
+    all_sub_errors.extend(sr["errors"])
+    if sr["rounds"] > max_sub_round:
+      max_sub_round = sr["rounds"]
+    if not sr["approved"] or len(sr["errors"]) > 0:
+      approved = False
+
+  last_errors = all_sub_errors
+  round_num = max_sub_round
+  final_cities = [merged_resolved[coord_key(it["coords"])] for it in items if coord_key(it["coords"]) in merged_resolved]
   with open(out_path, "w", encoding="utf-8") as fh:
     json.dump({
       "approved_by_auditor": approved,
