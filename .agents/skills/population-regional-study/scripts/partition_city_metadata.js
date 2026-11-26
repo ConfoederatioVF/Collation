@@ -49,12 +49,18 @@ let stadester_name_normaliser = fs.existsSync(normaliser_path) ? require(normali
 
       //Guard clauses
       if (!s || city_metadata_merger.EXCEL_ERROR_RE.test(s) || /^&nbsp;$/i.test(s) || /^0[-_a-zA-Z\s]*$/.test(s)) return "";
+      if (/^\d+(?:[-./]\d+)*$/.test(s) || /^(?:sambaqui\b|hf\s+sar\s+pictograf|cr\d{3}\b|abrigo\s+toca\b|archeological\s+site\b|cueva\s+de\s+|arqueol[oó]gico\b)/i.test(s)) return "";
+      if (/\b(?:zodme|recolecci[oó]n\s+superficial|muestreo|entidad\s+arqueol[oó]gica|mal\s+ubicado|no\s+reporta|no\s+informa|area\s+de\s+exploraci[oó]n|punto\s+de\s+torre|ap-por|lv\s*-\s*sar|reporte\s+hf|sua\s+ii|kilo\.ant|pre-inca|yacimiento|trinchera|colecci[oó]n|afloramiento\s+rocoso|ciudadela\s+estudiantil|el\s+tugurio)\b/i.test(s)) return "";
+      if (/(?:iseki|chousa|ch[oō]sa|dai\d+ji|kofun|kaizuka|goindol|jiseokmyo|paechong|gobun|jouato|j[oō]ato|\bsite$)/i.test(s)) return "";
+      if (/\b(?:city\s+wall|dervish\s+of|readaptaci[oó]n\s+social|barekamut'yan|nature\s+reserve|irrigation\s+core)\b|^karenni\s+states?$|^chin\s+(?:state|hills)$|^kayah\s+state$/i.test(s)) return "";
 
       //Function body
       s = s
         .replace(/andapos;|&apos;|&#39;/gi, "'")
         .replace(/&amp;/gi, "&")
         .replace(/&nbsp;/gi, " ")
+        .replace(/â€“/g, "–")
+        .replace(/["\u201C\u201D]/g, "")
         .replace(/^'(.+)'$/, "$1")
         .trim();
       let is_tibetan = (country === "China" && /'(?:brog|brong|char)/i.test(s));

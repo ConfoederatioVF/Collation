@@ -292,6 +292,25 @@ let path = require("path");
             if (st.size > 200*1024*1024)
               errors.push(`Shard exceeds 200 MB limit (${Math.round(st.size/(1024*1024))} MB): ${path.join(sdir, files[fi])}`);
           }
+          if (fs.existsSync(man_p)) {
+            let man = JSON.parse(fs.readFileSync(man_p, "utf8"));
+            let regs = Array.isArray(man.regions) ? man.regions : [];
+            let sum_reg_counts = 0;
+            for (let ri = 0; ri < regs.length; ri++) {
+              let reg = regs[ri];
+              sum_reg_counts += Number(reg.count || 0);
+              let actual_bytes = 0;
+              let rfiles = Array.isArray(reg.files) ? reg.files : [];
+              for (let rfi = 0; rfi < rfiles.length; rfi++) {
+                let fp = path.join(sdir, rfiles[rfi]);
+                if (fs.existsSync(fp)) actual_bytes += fs.statSync(fp).size;
+              }
+              if (actual_bytes !== Number(reg.bytes))
+                errors.push(`Stale manifest bytes for ${reg.key} in ${sdir} (${reg.bytes} !== ${actual_bytes})`);
+            }
+            if (sum_reg_counts !== Number(man.total_cities) || sum_reg_counts !== Number(man.total_entries))
+              errors.push(`Manifest total mismatch in ${sdir}: sum=${sum_reg_counts}, total_cities=${man.total_cities}, total_entries=${man.total_entries}`);
+          }
         }
         let cm_dir = path.join(dv_base, "city_metadata");
         let req_cm = [
@@ -304,6 +323,24 @@ let path = require("path");
           let cp = path.join(cm_dir, req_cm[i]);
           if (!fs.existsSync(cp) || fs.statSync(cp).size < 10)
             errors.push(`Missing or empty city_metadata shard: ${cp}`);
+        }
+        let cm_man_p = path.join(cm_dir, "city_metadata_manifest.json");
+        if (fs.existsSync(cm_man_p)) {
+          let cm_man = JSON.parse(fs.readFileSync(cm_man_p, "utf8"));
+          let cm_shards = Array.isArray(cm_man.shards) ? cm_man.shards : [];
+          let sum_cm = 0;
+          for (let ci = 0; ci < cm_shards.length; ci++) {
+            let cs = cm_shards[ci];
+            sum_cm += Number(cs.count || 0);
+            let cp = path.join(cm_dir, cs.file);
+            if (fs.existsSync(cp) && cs.sha256) {
+              let actual_sha = crypto.createHash("sha256").update(fs.readFileSync(cp)).digest("hex");
+              if (actual_sha !== cs.sha256)
+                errors.push(`Stale city_metadata_manifest.json sha256 for ${cs.file}`);
+            }
+          }
+          if (sum_cm !== Number(cm_man.total_entries))
+            errors.push(`city_metadata_manifest.json total_entries mismatch (${sum_cm} !== ${cm_man.total_entries})`);
         }
       } else if (phase === 6) {
         let projects = contract.canonical_macro_regions || [

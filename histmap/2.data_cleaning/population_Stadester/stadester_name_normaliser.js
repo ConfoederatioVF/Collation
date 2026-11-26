@@ -194,6 +194,10 @@
           .replace(/uerpinar\b/gi, "ürpınar");
       }
 
+      if (/^City and County of the City of London$/i.test(s)) return "City of London";
+      s = s.replace(/^(?:City|Town|Village|Borough|Municipality|Region)\s+of\s+(?!London\b|Rocks\b|the Dalles\b|Refuge\b)/i, "").trim();
+      s = s.replace(/^(?:Kingdom|Empire|Sultanate|Principality|Duchy|Republic|Khanate|Emirate|Caliphate|Confederacy|Protectorate|Viceroyalty)\s+of\s+/i, "").trim();
+      s = s.replace(/\s+(?:Sultanate|Kingdom|Irrigation Core)$/i, "").trim();
       s = s.replace(/^Greater\s+(?=[A-Z])/i, "");
       s = s.replace(/\s*\[(?:stad|agglom\.?|city|urban area|metro)\]\s*$/i, "").trim();
       s = s.replace(/\s*\((?:CDP|CCD|MSA|UA|OG|LGA|UCL|SUA|CSD|CMA|balance|urban area|agglomeration|municipality|commune|district|greater city|metro|city)\)\s*$/i, "").trim();
@@ -230,7 +234,7 @@
       if (country_low === "united kingdom" || country_low === "ireland")
         s = s.replace(/^'+([A-Z])/, "$1");
 
-      s = s.replace(/`/g, "").replace(/\\/g, " ").trim();
+      s = s.replace(/`/g, "").replace(/["\u201C\u201D]/g, "").replace(/\\/g, " ").trim();
       let is_slavic_hacek = (!country_low || HACEK_APOSTROPHE_COUNTRIES.has(country_low));
       if (is_slavic_hacek) {
         s = s
@@ -344,7 +348,7 @@
         return true;
       if (/_wfl|_none|proyecto_|cmn_|sitionn_fase_/i.test(low))
         return true;
-      if (/\b(?:marz|meng|shire|pisanitsa|megaliths?|circuit wall|kurgan|tumulus|dolmen|menhir|arzhan(?:[- ]\d+)?|mura\s+dell|al-malikeyyeh|borinage|petroglifos|petroglyph|dhibi|rockshelter)\b|\bmah\.?$|\bba'?albak\s*-\s*al-harmal\b|\ben omgewing$/i.test(fold_low))
+      if (/\b(?:marz|meng|shire|pisanitsa|megaliths?|circuit wall|kurgan|tumulus|dolmen|menhir|arzhan(?:[- ]\d+)?|mura\s+dell|al-malikeyyeh|borinage|petroglifos?|geoglifos?|petroglyph|dhibi|rockshelter)\b|\bmah\.?$|\bba'?albak\s*-\s*al-harmal\b|\ben omgewing$/i.test(fold_low))
         return true;
       if (/\b(?:parcela\s+[a-z0-9]|sector\s+[a-z0-9]|antler mattock|roman city wall of|boulevard p[eé]riph[eé]rique|transport museum|opera house|uniwersytet)\b|s\.r\.o\.|\b[A-Z]\d{3}\b/i.test(s))
         return true;
@@ -359,6 +363,16 @@
       if (/^bom\s+/i.test(s) || /^basin\s+of\s+mexico\b/i.test(s) || /\bsurvey(?:\s+site)?\b/i.test(s) || /\b(?:CU|TE|TM|TX|IX|CH|ZU|XO)(?:-[A-Z]{1,3}){1,3}-\d+\b/i.test(s))
         return true;
       if (/^(?:oficina salitrera|ruinas de|rejon placu|osiedle\s+|camino\s+in[ck]a\b)/i.test(s) || /^(?:estructuras|sba)$/i.test(s) || /^[A-Z]{2}\d{2}\s*-\s*/.test(s))
+        return true;
+      if (/\b(?:arte rupestre|pinturas? rupestres?|abrigo rocoso|camino\s+(?:in[ck]a|pre-?hisp[aá]nico|qp\b)|qhapaq\s+[ñn]an|segmento\s+de\s+camino|puente\s+y\s+camino|sitio\s+arqueol[oó]gico|zona\s+arqueol[oó]gica|variante\s+tol[uú])\b|^\s*(?:t\.\s*camino|tramo\s+[a-z0-9]|osiedle\s+|torre\s+\d+[a-z]?\.\s*sitio)/i.test(s))
+        return true;
+      if (/^\d+(?:[-./]\d+)*$/.test(s) || /^(?:sambaqui\b|hf\s+sar\s+pictograf|cr\d{3}\b|abrigo\s+toca\b|archeological\s+site\b|cueva\s+de\s+|arqueol[oó]gico\b)/i.test(s))
+        return true;
+      if (/(?:^|[\s(])(?:zodme|recolecci[oó]n|muestreo|entidad\s+(?:arqueol[oó]gica|hist[oó]rica)|concentraci[oó]n\s+(?:de\s+|l[ií]tica|cer[aá]mica|\d+$)|clúster|burial\s+cluster|medical\s+cluster|abrigo\s+del\s+arco|humedal\s+costero|l[ií]nea\s+transmisi[oó]n|mano\s+de\s+moler|mal\s+ubicado|no\s+reporta|no\s+informa|[aá]rea\s+(?:de\s+)?(?:exploraci[oó]n|perforaci[oó]n|arqueol[oó]gica|dep[oó]sito|inter[eé]s)|punto\s+de\s+(?:torre|observaci[oó]n)|sobreancho\s+torre|ap-por|lv\s*-\s*sar|reporte\s+hf|sua\s+ii|kilo\.|pre-inca|yacimiento|trinchera|colecci[oó]n|afloramiento\s+rocoso|ciudadela\s+estudiantil|el\s+tugurio|plaza\s+del\s+mundo|cueva\s+en\s+el\s+paramo|reducto\s+de\s+paya|almacaf[eé]|terraza\s+(?:norte|chumbe)|acac[ií]as\s+zona|zona\s+norte|colina\s+moravia|medell[ií]n-la\s+virginia|boyaca\s+giralda|sitio\s+\d+|cemiterio|cemit[eé]rio|paradero\s+ind[ií]gena|ro[cç]a\s+do)(?:$|[\s),.:;])/i.test(s))
+        return true;
+      if (/^(?:sar\s+|hf(?:\s+|-)(?:estructura|ceramica|liticos|sar)|hf_|cl_\d|rs\s+|cueva\s+\d|perfil\s+\d+|campamento\s+revenidero|localidad$|gps$|sab$|pdn$|slp$|er-sls$|mor-ha$|m\.a\.\s+|butant[aá]n$|piedra\s+la\s+cueva$|recolecci[oó]n\b|ps\d+|torre$|torres\s+\d|torre\s+\d|poste$|punto$|campo$|loc$|arq$|phc$|uia$|pii$|pst$|sa-ns$|ciat$|umg$|aia\b|arq\d|a\.m\.i\.|a2pp|bz\d|sector[ivx0-9]{2,}|reporte\s+mano_moler|pozo\s*#|se\s+purnio\s+torre$|[a-z]{2}-[a-z]{2}-\d+$|pe-\d+-cm$|tam-\d+$|alunorte$|contexto\s+(?:arqueol[oó]gico|\d)|estructuras?\s+(?:piedra|circulares)|mina\s+(?:la\s+guacamaya|de\s+los\s+cerros\s+negros)|tres\s+ha$|sitios?\s+\d|talleres\s+del\s+|hacha\s+gigante\s+de\s+piedra$|entidad\s+de\s+car[aá]cter|zona\s+oriental$|reasentamiento\b|campo\s+marte\s+\d+|combate\s+|piii\s+oi$|termocauca$|(?:yac|pvi|llsj|mfsa|ptf)$|chin\s+(?:state|hills)$|kayah\s+state$|karenni\s+states?$)/i.test(s) || /(?:_vda_|_mcpio\b|\bvda\.\s+|\bsitio\s+(?:torre|uno|dos)\b|\s-\s*sitio$|complejo\s+(?:arqueol[oó]gico|pictogr[aá]fico)|residencial\s+interlagos|caparu\s+phase|[aá]rea\s+de\s+rs|\bfinca\s+(?:santa\s+cruz|el\s+silo|everth\s+lomelin)|\d+per\b|-arq$)/i.test(s) || /\s+(?:ps(?:\s+\d+)?|ump|aie|jrs)$/i.test(s))
+        return true;
+      if (/(?:iseki|chousa|ch[oō]sa|dai\d+ji|kofun|kaizuka|goindol|jiseokmyo|paechong|gobun|jouato|j[oō]ato|\bsite$|[（(].*chousa)/i.test(s) || /\b(?:city\s+wall|dervish\s+of|readaptaci[oó]n\s+social|barekamut'yan|nature\s+reserve|irrigation\s+core)\b/i.test(s))
         return true;
       if (/\b(?:settlement|survey|region)$/i.test(s) || /\b(?:sewage treatment|waste treatment|playing fields|development zones?|interchange and library)\b/i.test(s) || /\blake\s+(?:north|south|east|west)\b/i.test(s) || /^cerro\s+de\s+/i.test(s))
         return true;
@@ -612,6 +626,8 @@
       else if (c_low === "italy" && w_low === "florence") working = "Firenze";
       else if (c_low === "italy" && w_low === "naples") working = "Napoli";
       else if (c_low === "italy" && w_low === "rome") working = "Roma";
+      else if (c_low === "italy" && w_low === "venice") working = "Venezia";
+      else if (c_low === "turkey" && w_low === "istanbul") working = "İstanbul";
       else if (c_low === "denmark" && w_low === "copenhagen") working = "København";
 
       //Return statement

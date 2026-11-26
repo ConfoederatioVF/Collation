@@ -2019,6 +2019,59 @@
       }
     }
 
+    // 6. Enforce canonical historic-centre coordinates (SC-11) and founding-year floors (SC-13/SC-15)
+    try {
+      let hc_path = require("path").join(__dirname, "config", "historic_city_centres.json5");
+      if (require("fs").existsSync(hc_path)) {
+        let j5 = global.JSON5 || require("json5");
+        let hc_cfg = j5.parse(require("fs").readFileSync(hc_path, "utf8"));
+        let hc_map = (hc_cfg && hc_cfg.centres) ? hc_cfg.centres : {};
+        let hc_keys = Object.keys(hc_map);
+        for (let hi = 0; hi < hc_keys.length; hi++) {
+          let hk = hc_keys[hi];
+          if (stadester_obj[hk] && Array.isArray(hc_map[hk]))
+            stadester_obj[hk].coords = hc_map[hk].slice();
+        }
+      }
+    } catch (e) {
+      console.error("[stadester_uud_fixes] Failed to enforce historic_city_centres.json5:", e);
+    }
+    if (stadester_obj["City and County of the City of London-United Kingdom"])
+      stadester_obj["City and County of the City of London-United Kingdom"].name = "City of London";
+
+    let founding_floors = {
+      "Mandalay-Myanmar": 1857,
+      "Goiânia-Brazil": 1933,
+      "Belterra-Brazil": 1934,
+      "Marabá-Brazil": 1898,
+      "Petrolina-Brazil": 1870,
+      "Porto Nacional-Brazil": 1738,
+      "Boa Vista-Brazil": 1830,
+      "Alenquer-Brazil": 1758,
+      "Almeirim-Brazil": 1758,
+      "Borba-Brazil": 1756,
+      "Lábrea-Brazil": 1871,
+      "Alvorada-Brazil": 1965,
+      "Mazagão Velho-Brazil": 1770,
+      "São Miguel-Brazil": 1632,
+      "Cartagena-Colombia": 1533,
+      "Buenos Aires-Argentina": 1536,
+      "Puerto Santander-Colombia": 1926,
+      "La Pintada-Colombia": 1815
+    };
+    let ff_keys = Object.keys(founding_floors);
+    for (let fi = 0; fi < ff_keys.length; fi++) {
+      let fk = ff_keys[fi];
+      let f_city = stadester_obj[fk];
+      if (!f_city || !f_city.population) continue;
+      let f_yr = founding_floors[fk];
+      let p_keys = Object.keys(f_city.population);
+      for (let pi = 0; pi < p_keys.length; pi++) {
+        let py = parseInt(p_keys[pi], 10);
+        if (Number.isFinite(py) && py < f_yr) delete f_city.population[p_keys[pi]];
+      }
+    }
+
     console.log(`- [MunicipalityFlattening] Renamed ${renamed_count}, collapsed ${collapsed_count} intra-municipal/duplicate entries, dropped ${dropped_junk} junk/survey entries.`);
 
     //Return statement

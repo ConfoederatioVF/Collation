@@ -1,0 +1,12 @@
+{
+  "hollinger-indicator-stop-hook": {
+    "enabled": true,
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node ./hooks/hollinger_stop_hook.js",
+        "timeout": 15
+      }
+    ]
+  }
+}

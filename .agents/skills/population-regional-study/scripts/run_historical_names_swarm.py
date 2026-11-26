@@ -126,10 +126,12 @@ STRUCTURAL_RULEBOOK = """STRUCTURAL HISTORICAL TOPONYMY RULES (PASS 1 — KNOWLE
 2. Historical Period Accuracy, Ancient Sunset (`SC-04`) & Colonial Floor (`SC-05`) Rules:
    - Ancient names MUST sunset at their historical transition (`Bagdata` -> `Baghdad` by `762.7.30`; `Birtha` -> `Tikrīt` by `637.1.1`; `Seleucia on the Tigris` -> `Ctesiphon` `-140.1.1` -> `Al-Mada'in` `637.1.1` -> `Salman Pak` `1700.1.1`; `Pataliputra` -> `Patna` by `1541.1.1`). Never leave Pleiades ancient names until `1900.1.1`.
    - Never backproject colonial/modern names (`Canning`, `Charfasson`, `English Bazar`, `Bakerganj`, `Berhampore`, `Mymensingh Sadar`, `Gaibandha Sadar`, `Bhola Sadar`) onto pre-colonial eras (`1400 AD`).
-3. Capital City Precedence & Zero Suburb-Hijacking (`SC-03`):
-   - Any settlement flagged `"cap": true` MUST always carry the canonical contemporaneous name of that capital city across its full history; strip suburbs/quarters (`Sotteville-lès-Rouen`, `Sainte-Foy-lès-Lyon`, `Weststadt`, `Montigny-lès-Metz`, `Delicias`, `Meckenbeuren`).
-4. Zero GIS, Rock-Art, Survey, Title, or Abbreviation Junk (`SC-06`):
-   - Never emit `_wfl`, `_none`, `Petroglifos`, `Parcela`, `Dhibi`, `\`, ` + `, `a.d.`, `b.Pr.`, `i.d.OPf.`, `v.d.`, `s.r.o.`, `Uniwersytet`, `Universitäts- und Hansestadt`, or ` Sadar`.
+3. Capital City Precedence & Zero Suburb-Hijacking (`SC-03`, `SC-16`):
+   - Any settlement flagged `"cap": true` MUST always carry the canonical contemporaneous name of that capital city across its full history; strip suburbs/quarters (`Sotteville-lès-Rouen`, `Sainte-Foy-lès-Lyon`, `Weststadt`, `Montigny-lès-Metz`, `Delicias`, `Meckenbeuren`, `Nishijin` for `Kyōto`, `Bustan az Zahrah` for `Halab`, `Butantã` for `São Paulo`).
+4. Zero GIS, Rock-Art, Survey, Polity, Formal Title, or Verbose Charter Junk (`SC-06`, `SC-12`, `SC-14`, `SC-15`, `SC-17`):
+   - Never emit `_wfl`, `_none`, `Petroglifos`, `Parcela`, `Dhibi`, `\`, ` + `, `a.d.`, `b.Pr.`, `i.d.OPf.`, `v.d.`, `s.r.o.`, `Uniwersytet`, `Universitäts- und Hansestadt`, ` Sadar`, ICANH survey codes, East Asian `iseki`/`chousa`/`kofun`/`kaizuka`/`goindol`/`Site`, polity wrappers (`Kingdom of ...`, `... Sultanate`, `Karenni States`), or formal titles (`City of Manila`, `City of Baguio`, `Municipality of ...`).
+   - Use concise everyday contemporaneous city names (NEVER verbose 16th-c Spanish/Portuguese founding charters like `São Salvador da Bahia de Todos os Santos` -> use `Salvador`; `San Juan de Vera de las Siete Corrientes` -> `Corrientes`; `Krung Thep Maha Nakhon` -> `Krung Thep`).
+   - Remediate `yr0 >= 1850` backprojections (`Zhanjiang` `1600: Suixi` -> `1899: Fort-Bayard`; `Istanbul` `1453.5.29: Konstantiniyye` -> `1930.3.28: İstanbul`; `Venice` -> `Venezia`).
 5. Date Key Schema (`yyyy.m.d`):
    - Keys MUST match `^-?\\d+\\.\\d+\\.\\d+$` (`-10000 <= Y <= 2026`, `Y != 0`, `1 <= M <= 12`, `1 <= D <= 31`), ascending chronologically.
 6. Knowledge-Base First:

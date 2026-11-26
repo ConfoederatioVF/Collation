@@ -49,7 +49,7 @@ Methods reports currently lag several versions behind where they should be. For 
   - [[Stadestér] (Datavault)](https://datavault.confoederatio.org/s/QcXSrmcA7qYSmR6) | [Stadestér 1.0/Velkscala 0.7 (Methodology)](https://doi.org/10.5281/zenodo.17180328)
 - Velkscala: (Raster/Vector) - Aggregate population estimates, land use, and ALCC from 10000BC-2025AD. Urban data can be found under <ins>Stadestér</ins>.
   - [[Velkscala 1.0] (Datavault)](https://datavault.confoederatio.org/s/44Pfgt7ya8wE77b) | [Velkscala 1.0 Modelling Report](https://confoederatio.org/papers/Velkscala%20Modelling%20Report%20-%208%20October%202026.pdf) | [Stadestér 1.0/Velkscala 0.7 (Methodology)](https://doi.org/10.5281/zenodo.17180328)
-  - [[Hollinger] (Github)](https://github.com/ConfoederatioVF/Hollinger) - Natural land-cover change from 10000BC-2025AD.
+  - [[Hollinger] (Github)](https://github.com/ConfoederatioVF/Hollinger) - Natural land-cover, palaeoclimate, and anthrome change from 10000BC-2025AD.
  
 <div align = "center">
   <img src = "https://i.postimg.cc/VkhQL7Cp/17-velkscala.png" width = "50%"><br><br>

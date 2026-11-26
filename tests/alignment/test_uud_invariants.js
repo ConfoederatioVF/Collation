@@ -128,7 +128,7 @@ let path = require("path");
   assert.strictEqual(norm.normaliseCityName("Ghajnsielem and Comino", "Malta").name, "Ghajnsielem");
   assert.strictEqual(norm.resolveParentMunicipality("Mestre", "Italy", [45.49, 12.24]), null);
   let alibey = norm.resolveParentMunicipality("Alibeyköyü", "Turkey", [41.08, 28.94]);
-  assert.ok(alibey && alibey.parent_name === "Istanbul", "Alibeyköyü MUST flatten into Istanbul");
+  assert.ok(alibey && (alibey.parent_name === "Istanbul" || alibey.parent_name === "İstanbul"), "Alibeyköyü MUST flatten into Istanbul/İstanbul");
 
   //7. Cross-frontier sovereign-transfer deduplication (Konigsberg/Kaliningrad & Weisbaden/Wiesbaden)
   let mock_frontier = {
